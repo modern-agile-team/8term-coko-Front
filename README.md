@@ -44,14 +44,14 @@
   ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)  &nbsp;
   ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)  &nbsp;
   ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)  &nbsp;
-  ![Notion](https://img.shields.io/badge/notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)  &nbsp;
+  ![Notion](https://img.shields.io/badge/notion-%23FFFFFF.svg?style=for-the-badge&logo=notion&logoColor=black)  &nbsp;
   ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 </div>
 
 ***
 
 ## 커밋 메시지 컨벤션
-    git commit -m "feature(#123):커밋 내용"
+    git commit -m "✨ Feature(#123): 커밋 내용"
 
 | Type             | Description       |
 | ---------------- | ----------------- |
