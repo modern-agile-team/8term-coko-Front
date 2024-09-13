@@ -1,4 +1,4 @@
-name: Create-Issue-Branch
+name: Create Issue Branch
  on:
    issues:
      types: [assigned]
