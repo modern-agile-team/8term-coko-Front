@@ -1,4 +1,4 @@
-branchName: '/${issue.title[0,25]}/#${issue.number}'
+branchName: '${issue.title[0,25]}/#${issue.number}'
 gitSafeReplacementChar: '_'
 defaultBranch: 'develop'
 autoCloseIssue: true
