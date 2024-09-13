@@ -1,27 +1,26 @@
-branchName: '${issue.title[0,25]}/#${issue.number}'
-gitSafeReplacementChar: '_'
-defaultBranch: 'develop'
-autoCloseIssue: true
-commentMessage: 'Branch ${branchName} created for issue: ${issue.title}'
-
+mode: auto
+silent: false
+branchName: '${issue.number}-${issue.title}'
 branches:
-  - label: 🌏 Deploy
-    prefix: deploy/
-  - label: ⚙ Setting
-    prefix: Setting/
-  - label: 🐞 BugFix	
-    prefix: BugFix/
-  - label: 💻 CrossBrowsing
-    prefix: CrossBrowsing/
-  - label: 📃 Docs
-    prefix: Docs/
-  - label: ✨ Feature
+  - label: '✨ Feature'
     prefix: feature/
-  - label: 📬 API
-    prefix: API/
-  - label: 📝 Modify
-    prefix: Modify/
-  - label: 🔨 Refactor
-    prefix: Refactor/
-  - label: 🎨 Publish
-    prefix: Publish/
+  - label: '🐞 BugFix'
+    prefix: bugfix/
+  - label: '📃 Docs'
+    prefix: docs/
+  - label: '🔨 Refactor'
+    prefix: refactor/
+  - label: '🎨 Publish'
+    prefix: publish/
+  - label: '📬 API'
+    prefix: api/
+  - label: '📝 Modify'
+    prefix: modify/
+  - label: '💻 CrossBrowsing'
+    prefix: cross-browsing/
+  - label: '⚙ Setting'
+    prefix: setting/
+  - label: '🌏 Deploy'
+    prefix: deploy/
+  - label: '*'
+    prefix: issue/
