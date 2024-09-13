@@ -1,6 +1,5 @@
-branchName: '${issue.title[0,25]}/#${issue.number}'
+branchName: '#${issue.number}/${issue.title}'
 gitSafeReplacementChar: '_'
-defaultBranch: 'develop'
 autoCloseIssue: true
 commentMessage: 'Branch ${branchName} created for issue: ${issue.title}'
 
@@ -8,22 +7,26 @@ branches:
   - label: 🌏 Deploy
     prefix: deploy/
   - label: ⚙ Setting
-    prefix: Setting/
-  - label: 🐞 BugFix   
-    prefix: BugFix/
+    prefix: setting/
+  - label: 🐞 BugFix
+    prefix: bugFix/
   - label: 💻 CrossBrowsing
-    prefix: CrossBrowsing/
+    prefix: crossBrowsing/
   - label: 📃 Docs
-    prefix: Docs/
+    prefix: docs/
   - label: ✨ Feature
     prefix: feature/
   - label: 📬 API
     prefix: API/
   - label: 📝 Modify
-    prefix: Modify/
+    prefix: modify/
   - label: 🔨 Refactor
-    prefix: Refactor/
+    prefix: refactor/
   - label: 🎨 Publish
-    prefix: Publish/
+    prefix: publish/
   - label: '*'
     prefix: issue/
+
+copyIssueLabelsToPR: true
+copyIssueAssigneeToPR: true
+copyIssueProjectsToPR: true
