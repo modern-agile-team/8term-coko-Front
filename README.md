@@ -1,6 +1,6 @@
 # 8term-main-front
 
-8기 메인 프로젝트 프론트엔드 레포지토리입니다
+8기 메인 프로젝트 프론트엔드 레포지토리입니다.
 
 ## 기술 스택
 <div align="left">
@@ -46,3 +46,18 @@
   ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)  &nbsp;
   ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 </div>
+
+## Commit Type
+
+| Type             | Description       |
+| ---------------- | ----------------- |
+| 🌏 deploy        | 배포 관련         |
+| ⚙ Setting        | 개발 환경 셋팅    |
+| 🐞 BugFix        | 버그 수정         |
+| 💻 CrossBrowsing | 브라우저 호환성   |
+| 📃 Docs          | 문서 작성 및 수정 |
+| ✨ Feature       | 기능 개발         |
+| 📬 API           | API 통신          |
+| 📝 Modify        | 기능, 코드 수정   |
+| 🔨 Refactor      | 코드 리팩토링     |
+| 🎨 Publish       | 마크업 & 스타일링 |
