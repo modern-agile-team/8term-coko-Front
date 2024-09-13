@@ -18,7 +18,9 @@
   ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)  &nbsp;
   ![React Router DOM](https://img.shields.io/badge/react%20router%20dom-CA4245.svg?style=for-the-badge&logo=react-router&logoColor=%2361DAFB)  &nbsp;
   ![Axios](https://img.shields.io/badge/axios-%235A29E4.svg?style=for-the-badge&logo=axios&logoColor=white)  &nbsp;
-  ![Styled-components](https://img.shields.io/badge/styled--components-%23DB7093.svg?style=for-the-badge&logo=styled-components&logoColor=white)
+  ![Styled-components](https://img.shields.io/badge/styled--components-%23DB7093.svg?style=for-the-badge&logo=styled-components&logoColor=white)  &nbsp;
+  ![SweetAlert2](https://img.shields.io/badge/SweetAlert2-5A67D8?style=for-the-badge&logo=SweetAlert2&logoColor=white) &nbsp;
+  ![React-Icons](https://img.shields.io/badge/React--Icons-61DBFB?style=for-the-badge&logo=react&logoColor=white)
 
   
   <h4>Global-State:</h4>
