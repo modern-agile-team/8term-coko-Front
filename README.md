@@ -47,7 +47,10 @@
   ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 </div>
 
-## Commit Type
+***
+
+## 커밋 메시지 컨벤션
+    git commit -m "feature(#123):커밋 내용"
 
 | Type             | Description       |
 | ---------------- | ----------------- |
