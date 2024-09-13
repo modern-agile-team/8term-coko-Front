@@ -1,8 +1,8 @@
-branchName: "chistock-#${issue.number}"
+branchName: '/${issue.title[0,25]}/#${issue.number}'
+gitSafeReplacementChar: '_'
+defaultBranch: 'develop'
 autoCloseIssue: true
-openDraftPR: true
-copyIssueLabelsToPR: true
-copyIssueAssigneeToPR: true
+commentMessage: 'Branch ${branchName} created for issue: ${issue.title}'
 
 branches:
   - label: 🌏 Deploy
