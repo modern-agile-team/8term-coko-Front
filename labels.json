@@ -43,5 +43,10 @@
     "name": "🔨 Refactor",
     "color": "f29a4e",
     "description": "코드 리팩토링"
+  },
+  {
+    "name": "📝 Modify",
+    "color": "5319e7",
+    "description": "기능, 코드 수정"
   }
 ]
