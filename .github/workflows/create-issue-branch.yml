@@ -1,6 +1,6 @@
 on:
   issues:
-    types: [ assigned ]
+    types: [ opened ]
   pull_request:
     types: [ closed ]
 
