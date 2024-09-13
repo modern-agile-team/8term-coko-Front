@@ -99,7 +99,7 @@ on:
   issue_comment:
     types: [created]
   pull_request:
-    types: [closed]
+    types: [opened, closed]
 
 jobs:
   create_issue_branch_job:
