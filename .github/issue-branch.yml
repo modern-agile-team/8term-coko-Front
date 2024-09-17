@@ -3,6 +3,10 @@ gitSafeReplacementChar: '_'
 autoCloseIssue: true
 commentMessage: 'Branch ${branchName} created for issue: ${issue.title}'
 
+copyIssueLabelsToPR: true
+copyIssueAssigneeToPR: true
+copyIssueProjectsToPR: true
+
 branches:
   - label: 🌏 Deploy
     prefix: deploy/
@@ -26,7 +30,3 @@ branches:
     prefix: publish/
   - label: '*'
     prefix: issue/
-
-copyIssueLabelsToPR: true
-copyIssueAssigneeToPR: true
-copyIssueProjectsToPR: true
