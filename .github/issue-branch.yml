@@ -2,11 +2,9 @@ branchName: '#${issue.number}/${issue.title}'
 gitSafeReplacementChar: '_'
 defaultBranch: 'develop'
 autoCloseIssue: true
-commentMessage: 'Branch ${branchName} created for issue: ${issue.title}'
-
-copyIssueLabelsToPR: true
-copyIssueAssigneeToPR: true
-copyIssueProjectsToPR: true
+commentMessage: |
+  git fetch origin
+  git checkout ${branchName}
 
 branches:
   - label: 🌏 Deploy
