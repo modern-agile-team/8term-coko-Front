@@ -3,8 +3,28 @@ import { LayOutDiv, FeatureDiv } from './style';
 export default function Main() {
   return (
     <GridDiv>
-      <LayOutDiv $marginTop="50px" $height="739px">
-        사이드바
+      <LayOutDiv $height="739px">
+        <FeatureDiv
+          $width="200px"
+          $height="35px"
+          $backGroundColor="#FFFFFF"
+          $marginTop="50px"
+        >
+          로고
+        </FeatureDiv>
+        {['learining', 'Ranking', 'quest', 'store', 'profile', 'setting'].map(
+          (value, index) => (
+            <FeatureDiv
+              $width="197px"
+              $height="53px"
+              $backGroundColor="#FFFFFF"
+              $marginTop="46px"
+              key={index}
+            >
+              {value}
+            </FeatureDiv>
+          )
+        )}
       </LayOutDiv>
       <LayOutDiv $height="100vh ">
         <FeatureDiv
