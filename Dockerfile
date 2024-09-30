@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:20-alpine
 
 # 작업 디렉토리 설정
 WORKDIR /app
