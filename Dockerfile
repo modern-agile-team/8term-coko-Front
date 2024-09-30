@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # Vite 기본 포트 노출
-EXPOSE 5173
+EXPOSE 3000
 
 # Vite 개발 서버 실행
 CMD ["npm", "run", "dev"]
