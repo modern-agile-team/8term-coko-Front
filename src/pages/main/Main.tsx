@@ -1,6 +1,12 @@
 import { GridDiv } from '../../style/gridSystem';
 import { LayOutDiv, FeatureDiv } from './style';
+import axiosConfig from '../../apis/instance.ts';
 export default function Main() {
+  const getUserDate = async () => {
+    const data = await axiosConfig.get('/users');
+    console.log(data);
+  };
+  getUserDate();
   return (
     <GridDiv>
       <LayOutDiv $height="739px">
