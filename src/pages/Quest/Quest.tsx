@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom';
 import {
-  GridContainer,
   AlignCenter,
+  GridContainer,
   LayOutDiv,
   FeatureDiv,
 } from '../../style/LayOut';
-export default function Main() {
+import { Link } from 'react-router-dom';
+export default function Quest() {
   return (
     <AlignCenter>
       <GridContainer>
-        <LayOutDiv $height="100vh">
+        <LayOutDiv>
           <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
             로고
           </FeatureDiv>
@@ -27,24 +27,17 @@ export default function Main() {
             )
           )}
         </LayOutDiv>
-        <LayOutDiv $height="100vh ">
-          <FeatureDiv $width="666px" $height="45px" $marginTop="98px">
-            진행도
+        <LayOutDiv>
+          <FeatureDiv $width="666px" $height="381px" $marginTop="98px">
+            오늘의 퀘스트 칸
           </FeatureDiv>
-          <FeatureDiv $width="666px" $height="105px" $marginTop="25px">
-            챕터 선택
-          </FeatureDiv>
-          <FeatureDiv $width="666px" $height="468px" $marginTop="25px">
-            챕터
+          <FeatureDiv $width="666px" $height="283px" $marginTop="24px">
+            메인 퀘스트 칸
           </FeatureDiv>
         </LayOutDiv>
-
-        <LayOutDiv $height="100vh">
+        <LayOutDiv>
           <FeatureDiv $width="294px" $height="42px" $marginTop="42px">
             생명력/프로필
-          </FeatureDiv>
-          <FeatureDiv $width="274px" $height="158px" $marginTop="47px">
-            일일 퀘스트
           </FeatureDiv>
         </LayOutDiv>
       </GridContainer>
