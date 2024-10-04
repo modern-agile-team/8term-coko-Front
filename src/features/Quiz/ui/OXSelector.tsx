@@ -1,10 +1,12 @@
-import { OXButton, CharacterBox } from '../styles';
+import { OXButton, CharacterBox, ResponseBoxSection } from '../styles';
 export default function OXSelector() {
   return (
     <>
-      <OXButton></OXButton>
-      <CharacterBox>캐릭터 들어갈예정</CharacterBox>
-      <OXButton></OXButton>
+      <ResponseBoxSection>
+        <OXButton></OXButton>
+        <CharacterBox>캐릭터 들어갈예정</CharacterBox>
+        <OXButton></OXButton>
+      </ResponseBoxSection>
     </>
   );
 }

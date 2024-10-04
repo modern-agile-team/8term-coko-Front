@@ -11,7 +11,7 @@ function App() {
           <Route path="/" element={<Main />}></Route>
           <Route path="/quest" element={<Quest />}></Route>
           <Route path="/Ranking" element={<Ranking />}></Route>
-          <Route path="/Quiz" element={<Quiz />}></Route>
+          <Route path="/Quiz/:section/:part" element={<Quiz />}></Route>
         </Routes>
       </BrowserRouter>
     </>

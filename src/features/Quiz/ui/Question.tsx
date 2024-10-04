@@ -1,8 +1,14 @@
 import { QuestionSection } from './../styles';
-export default function Question() {
+interface questiontype {
+  title: string;
+  question: string;
+}
+export default function Question({ title, question }: questiontype) {
   return (
     <>
-      <QuestionSection>문제 칸</QuestionSection>
+      <QuestionSection>
+        {title} {question}
+      </QuestionSection>
     </>
   );
 }
