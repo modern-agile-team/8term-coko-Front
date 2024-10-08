@@ -1,17 +1,14 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Main from './pages/main/Main';
-import Quest from './pages/Quest/Quest';
-import Ranking from './pages/Ranking/Ranking';
+import Router from './route/router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 function App() {
+  const queryClient = new QueryClient();
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/quest" element={<Quest />}></Route>
-          <Route path="/Ranking" element={<Ranking />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <Router />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
     </>
   );
 }
