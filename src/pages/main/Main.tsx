@@ -5,6 +5,8 @@ import {
   LayOutDiv,
   FeatureDiv,
 } from '../../style/LayOut';
+import SelectSection from '../../common/layout/SelectSection';
+
 export default function Main() {
   return (
     <AlignCenter>
@@ -29,10 +31,10 @@ export default function Main() {
         </LayOutDiv>
         <LayOutDiv $height="100vh ">
           <FeatureDiv $width="666px" $height="45px" $marginTop="98px">
-            진행도
+            {/* 진행도 */}
           </FeatureDiv>
           <FeatureDiv $width="666px" $height="105px" $marginTop="25px">
-            챕터 선택
+            <SelectSection />
           </FeatureDiv>
           <FeatureDiv $width="666px" $height="468px" $marginTop="25px">
             챕터
