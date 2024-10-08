@@ -7,7 +7,8 @@ export default function Question({ title, question }: questiontype) {
   return (
     <>
       <QuestionSection>
-        {title} {question}
+        <div>title: {title} </div>
+        <div>question: {question}</div>
       </QuestionSection>
     </>
   );

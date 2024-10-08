@@ -1,5 +1,6 @@
 import { OXButton, CharacterBox, ResponseBoxSection } from '../styles';
 export default function OXSelector() {
+  //OX버튼을 눌러 답을 제출함
   return (
     <>
       <ResponseBoxSection>
