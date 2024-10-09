@@ -4,3 +4,6 @@ export interface InputBoxStyle {
 export interface LabelStyle {
   $marginLeft?: string;
 }
+export interface SelectBoxStyle {
+  $marginRight?: string;
+}
