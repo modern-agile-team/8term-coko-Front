@@ -3,4 +3,5 @@ export interface LayOut {
   $height?: string;
   $width?: string;
   $backGroundColor?: string;
+  $gridColumn?: string;
 }

@@ -1,20 +1,16 @@
 import { Link } from 'react-router-dom';
 import {
-  GridContainer,
   AlignCenter,
+  GridContainer,
   LayOutDiv,
   FeatureDiv,
 } from '../../style/LayOut';
-export default function Main() {
-  const getUserDate = async () => {
-    const data = await axiosConfig.get('/users');
-    console.log(data);
-  };
-  getUserDate();
+
+export default function Ranking() {
   return (
     <AlignCenter>
       <GridContainer>
-        <LayOutDiv $height="100vh">
+        <LayOutDiv>
           <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
             로고
           </FeatureDiv>
@@ -32,24 +28,20 @@ export default function Main() {
             )
           )}
         </LayOutDiv>
-        <LayOutDiv $height="100vh ">
-          <FeatureDiv $width="666px" $height="45px" $marginTop="98px">
-            진행도
+        <LayOutDiv>
+          <FeatureDiv $width="666px" $height="338px" $marginTop="98px">
+            내 랭킹 칸
           </FeatureDiv>
-          <FeatureDiv $width="666px" $height="105px" $marginTop="25px">
-            챕터 선택
+          <FeatureDiv $width="666px" $height="28px" $marginTop="22px">
+            정렬기준
           </FeatureDiv>
-          <FeatureDiv $width="666px" $height="468px" $marginTop="25px">
-            챕터
+          <FeatureDiv $width="666px" $height="338px" $marginTop="22px">
+            다른 사람들 랭킹
           </FeatureDiv>
         </LayOutDiv>
-
-        <LayOutDiv $height="100vh">
+        <LayOutDiv>
           <FeatureDiv $width="294px" $height="42px" $marginTop="42px">
             생명력/프로필
-          </FeatureDiv>
-          <FeatureDiv $width="274px" $height="158px" $marginTop="47px">
-            일일 퀘스트
           </FeatureDiv>
         </LayOutDiv>
       </GridContainer>
