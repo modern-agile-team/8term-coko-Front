@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import {
   GridContainer,
   AlignCenter,
@@ -6,8 +5,9 @@ import {
   FeatureDiv,
 } from '../../style/LayOut';
 import SelectSection from '../../common/layout/SelectSection';
+import MenuBar from '../../common/layout/MenuBar';
 
-export default function Main() {
+export default function Learn() {
   return (
     <AlignCenter>
       <GridContainer>
@@ -15,19 +15,7 @@ export default function Main() {
           <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
             로고
           </FeatureDiv>
-          {['', 'Ranking', 'quest', 'store', 'profile', 'setting'].map(
-            (value, index) => (
-              <FeatureDiv
-                $width="176px"
-                $height="42px"
-                $marginTop="40px"
-                key={index}
-              >
-                {value}
-                <Link to={`/${value}`}>이동</Link>
-              </FeatureDiv>
-            )
-          )}
+          <MenuBar />
         </LayOutDiv>
         <LayOutDiv $height="100vh ">
           <FeatureDiv $width="666px" $height="45px" $marginTop="98px">
@@ -40,7 +28,6 @@ export default function Main() {
             챕터
           </FeatureDiv>
         </LayOutDiv>
-
         <LayOutDiv $height="100vh">
           <FeatureDiv $width="294px" $height="42px" $marginTop="42px">
             생명력/프로필

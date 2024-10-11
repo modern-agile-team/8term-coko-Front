@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
 import {
   AlignCenter,
   GridContainer,
   LayOutDiv,
   FeatureDiv,
 } from '../../style/LayOut';
+import MenuBar from '../../common/layout/MenuBar';
 
 export default function Ranking() {
   return (
@@ -14,19 +14,7 @@ export default function Ranking() {
           <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
             로고
           </FeatureDiv>
-          {['', 'Ranking', 'quest', 'store', 'profile', 'setting'].map(
-            (value, index) => (
-              <FeatureDiv
-                $width="176px"
-                $height="42px"
-                $marginTop="40px"
-                key={index}
-              >
-                {value}
-                <Link to={`/${value}`}>이동</Link>
-              </FeatureDiv>
-            )
-          )}
+          <MenuBar />
         </LayOutDiv>
         <LayOutDiv>
           <FeatureDiv $width="666px" $height="338px" $marginTop="98px">

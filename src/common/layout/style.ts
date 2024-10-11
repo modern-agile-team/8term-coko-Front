@@ -7,3 +7,10 @@ export const SelectSectionBox = styled.section`
   width: 666px;
   height: 105px;
 `;
+
+export const MenuBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+`;

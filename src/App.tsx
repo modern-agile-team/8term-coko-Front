@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Main from './pages/main/Main';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import Learn from './pages/learn/Learn';
 import Quest from './pages/Quest/Quest';
 import Ranking from './pages/Ranking/Ranking';
 function App() {
@@ -7,9 +7,10 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />}></Route>
+          <Route path="/" element={<Navigate to="/learn" />} />
+          <Route path="/learn" element={<Learn />} />
           <Route path="/quest" element={<Quest />}></Route>
-          <Route path="/Ranking" element={<Ranking />}></Route>
+          <Route path="/ranking" element={<Ranking />}></Route>
         </Routes>
       </BrowserRouter>
     </>

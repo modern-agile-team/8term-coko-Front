@@ -4,7 +4,8 @@ import {
   LayOutDiv,
   FeatureDiv,
 } from '../../style/LayOut';
-import { Link } from 'react-router-dom';
+import MenuBar from '../../common/layout/MenuBar';
+
 export default function Quest() {
   return (
     <AlignCenter>
@@ -13,19 +14,7 @@ export default function Quest() {
           <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
             로고
           </FeatureDiv>
-          {['', 'Ranking', 'quest', 'store', 'profile', 'setting'].map(
-            (value, index) => (
-              <FeatureDiv
-                $width="176px"
-                $height="42px"
-                $marginTop="40px"
-                key={index}
-              >
-                {value}
-                <Link to={`/${value}`}>이동</Link>
-              </FeatureDiv>
-            )
-          )}
+          <MenuBar />
         </LayOutDiv>
         <LayOutDiv>
           <FeatureDiv $width="666px" $height="381px" $marginTop="98px">
