@@ -1,11 +1,15 @@
+import Quiz from '../../../types/Quiz';
 import { MultipleChoiceQuestionButton, ResponseBoxSection } from '../styles';
-export default function MultipleChoice() {
+export default function MultipleChoice({
+  answerChoice,
+}: Pick<Quiz, 'answerChoice'>) {
   return (
     <ResponseBoxSection $gapColumn="20px" $gridColumn="2/5">
-      <MultipleChoiceQuestionButton>1</MultipleChoiceQuestionButton>
-      <MultipleChoiceQuestionButton>2</MultipleChoiceQuestionButton>
-      <MultipleChoiceQuestionButton>3</MultipleChoiceQuestionButton>
-      <MultipleChoiceQuestionButton>4</MultipleChoiceQuestionButton>
+      {answerChoice.map((value, index) => (
+        <MultipleChoiceQuestionButton key={index}>
+          {index + 1} : {value}
+        </MultipleChoiceQuestionButton>
+      ))}
     </ResponseBoxSection>
   );
 }

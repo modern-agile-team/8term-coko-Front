@@ -5,7 +5,7 @@ export default function OXSelector() {
     <>
       <ResponseBoxSection>
         <OXButton></OXButton>
-        <CharacterBox>캐릭터 들어갈예정</CharacterBox>
+        <CharacterBox $margin="0px 102px">캐릭터 들어갈예정</CharacterBox>
         <OXButton></OXButton>
       </ResponseBoxSection>
     </>

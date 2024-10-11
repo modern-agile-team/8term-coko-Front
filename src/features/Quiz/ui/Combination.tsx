@@ -1,20 +1,14 @@
+import Quiz from '../../../types/Quiz';
 import { CombinationUl, TextBlockLi } from '../styles';
 
-export default function Combination() {
+export default function Combination({
+  answerChoice,
+}: Pick<Quiz, 'answerChoice'>) {
   return (
     <CombinationUl>
-      <TextBlockLi>asdsadasdassd</TextBlockLi>
-      <TextBlockLi>asdsadaasdasdsdsa</TextBlockLi>
-      <TextBlockLi>asdsadaasdasdsdsa</TextBlockLi>
-      <TextBlockLi>asdsadasdsa</TextBlockLi>
-      <TextBlockLi>asdsadasdasdsadsadasdasdasdsa</TextBlockLi>
-      <TextBlockLi>asdsadasdsa</TextBlockLi>
-      <TextBlockLi>asdsadasdsa</TextBlockLi>
-      <TextBlockLi>asdsadasdsasdaaaaaaaaaaaaaaaaa</TextBlockLi>
-      <TextBlockLi>asdsadasdsasdaa</TextBlockLi>
-      <TextBlockLi>asdsadasdsasdasdsaddaa</TextBlockLi>
-      <TextBlockLi>asdsadasdsasdasdsaddaa</TextBlockLi>
-      <TextBlockLi>asdsadasdsasdasdsaddaa</TextBlockLi>
+      {answerChoice.map(value => (
+        <TextBlockLi>{value}</TextBlockLi>
+      ))}
     </CombinationUl>
   );
 }

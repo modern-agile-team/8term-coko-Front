@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ResponseBoxUi from '../../types/ResponseBoxUi';
+
 //문제(Quiz)의 제목(title)과 문항(question)이 들어갈 공간
 export const QuestionSection = styled.section`
   display: flex;
@@ -13,9 +13,15 @@ export const QuestionSection = styled.section`
   font-size: 1rem;
 `;
 //답을 적거나 클릭하는 영역을 잡는 스타일
-export const ResponseBoxSection = styled.section<ResponseBoxUi>`
+interface ResponseBoxProps {
+  $gapColumn?: string;
+  $gridColumn?: string;
+  $justifyContent?: string;
+}
+
+export const ResponseBoxSection = styled.section<ResponseBoxProps>`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ $justifyContent }) => $justifyContent || 'center'};
   align-items: center;
   flex-wrap: wrap;
   background: #efeff0;
@@ -26,11 +32,16 @@ export const ResponseBoxSection = styled.section<ResponseBoxUi>`
   column-gap: ${({ $gapColumn }) => $gapColumn || '0px'};
 `;
 //캐릭터가 들어갈 박스
-export const CharacterBox = styled.div`
+interface CharacterBoxProps {
+  $margin: string;
+}
+
+export const CharacterBox = styled.div<CharacterBoxProps>`
   width: 176px;
   height: 115.757px;
   border: 2px solid #afb1b6;
   background: #efeff0;
+  margin: ${({ $margin }) => $margin || '0'};
   border-radius: 8px;
 `;
 //ox유형에서 ox버튼
@@ -77,3 +88,8 @@ export const TextBlockLi = styled.li`
   height: 26px;
 `;
 //화면 하단의
+export const ResponseButton = styled.button`
+  width: 94px;
+  height: 26px;
+  border-radius: 24px;
+`;

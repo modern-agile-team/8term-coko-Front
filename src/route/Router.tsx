@@ -12,8 +12,8 @@ export default function Router() {
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/quest" element={<Quest />}></Route>
-          <Route path="/Ranking" element={<Ranking />}></Route>
-          <Route path="/Quiz/:section/:part" element={<Quiz />}></Route>
+          <Route path="/ranking" element={<Ranking />}></Route>
+          <Route path="/quiz/:section/:part" element={<Quiz />}></Route>
           {/*어드민 페이지 부분 문제조회/추가 이외에 규모 확장 시 레포 분리 */}
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/create-quiz" element={<CreateQuiz />}></Route>

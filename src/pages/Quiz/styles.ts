@@ -3,13 +3,12 @@ import styled from 'styled-components';
 export const GridContainer = styled.div`
   display: grid;
   width: 1280px;
-  grid-template-columns: 98px 98px 764px 196px;
+  grid-template-columns: 98px 98px 764px 98px 98px;
   column-gap: 20px;
 `;
 //헤더 영역잡기용 나중에 헤더 생기면 지우기
 export const HeaderSection = styled.section`
   display: flex;
-  position: sticky;
   grid-column: 2/6;
   top: 0;
   margin-top: 42px;

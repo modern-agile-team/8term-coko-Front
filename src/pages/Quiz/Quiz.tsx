@@ -1,6 +1,5 @@
-import { useParams } from 'react-router-dom';
 import Question from '../../features/Quiz/ui/Question';
-import ResponseBox from '../../features/Quiz/ui/ResponseBox';
+
 import { AlignCenter } from '../../style/LayOut';
 import {
   GridContainer,
@@ -9,12 +8,17 @@ import {
   FooterSection,
 } from './styles';
 import type Quiz from '../../types/Quiz';
-import SkipButton from '../../features/Quiz/ui/SkipButton';
-import ConfirmButton from '../../features/Quiz/ui/ConfirmButton';
+import { useClientQuizStore } from '../../store/useQuizStore';
+import Button from '../../features/Quiz/ui/Button';
+import Combination from '../../features/Quiz/ui/Combination';
+import MultipleChoice from '../../features/Quiz/ui/MultipleChoice';
+import OXSelector from '../../features/Quiz/ui/OXSelector';
+import ShortAnswer from '../../features/Quiz/ui/ShortAnswer';
+
 //퀴즈페이지
 export default function Quiz() {
-  const { section, part } = useParams();
-  console.log(section, part);
+  // const { section, part } = useParams();
+  const { currentPage, handleNextPage } = useClientQuizStore();
   //대충 가져온 문제들
   const quiz: Quiz[] = [
     //예시 1섹션 1파트에 문제 4개
@@ -63,6 +67,17 @@ export default function Quiz() {
       answerChoice: ['console', '1+2', 'function', '어쩌구저쩌구', '두두두두'],
     },
   ];
+  const { title, question, category, answer, answerChoice } = quiz[currentPage];
+  const QuizCategoryComponentMapping: Record<Quiz['category'], JSX.Element> = {
+    //조합식
+    Combination: <Combination answerChoice={answerChoice} />,
+    //객관식
+    MultipleChoice: <MultipleChoice answerChoice={answerChoice} />,
+    //ox
+    OXSelector: <OXSelector />,
+    //단답형
+    ShortAnswer: <ShortAnswer />,
+  };
 
   return (
     <AlignCenter>
@@ -72,11 +87,11 @@ export default function Quiz() {
           <div>돈-??-프사 </div>
         </HeaderSection>
         <ProgressSection>진행도</ProgressSection>
-        <Question title={quiz[3].title} question={quiz[3].question}></Question>
-        <ResponseBox category={quiz[3].category}></ResponseBox>
+        <Question title={title} question={question}></Question>
+        {QuizCategoryComponentMapping[category]}
         <FooterSection>
-          <SkipButton />
-          <ConfirmButton />
+          <Button buttonName={'스킵버튼'} handleClick={handleNextPage} />
+          <Button buttonName={'답 제출'} handleClick={handleNextPage} />
         </FooterSection>
       </GridContainer>
     </AlignCenter>
