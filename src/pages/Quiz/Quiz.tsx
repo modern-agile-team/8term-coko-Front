@@ -1,15 +1,8 @@
 import Question from '../../features/Quiz/ui/Question';
-
 import { AlignCenter } from '../../style/LayOut';
-import {
-  GridContainer,
-  HeaderSection,
-  ProgressSection,
-  FooterSection,
-} from './styles';
+import { GridContainer, HeaderSection, ProgressSection } from './styles';
 import type Quiz from '../../types/Quiz';
 import { useClientQuizStore } from '../../store/useQuizStore';
-import Button from '../../features/Quiz/ui/Button';
 import Combination from '../../features/Quiz/ui/Combination';
 import MultipleChoice from '../../features/Quiz/ui/MultipleChoice';
 import OXSelector from '../../features/Quiz/ui/OXSelector';
@@ -19,9 +12,10 @@ import componentMapping from '../../utils/componentMap';
 //퀴즈페이지
 export default function Quiz() {
   // const { section, part } = useParams();
-  const { currentPage, handleNextPage } = useClientQuizStore();
+  const { currentPage, reset } = useClientQuizStore();
+
   //대충 가져온 문제들
-  const quiz: Quiz[] = [
+  const quizzes: Quiz[] = [
     //예시 1섹션 1파트에 문제 4개
     //단답형
     {
@@ -68,16 +62,21 @@ export default function Quiz() {
       answerChoice: ['console', '1+2', 'function', '어쩌구저쩌구', '두두두두'],
     },
   ];
-  const { title, question, category, answer, answerChoice } = quiz[currentPage];
+  if (quizzes.length <= currentPage) {
+    return (
+      <button onClick={() => reset()}>
+        퀴즈 다 풀었을때 페이지 바로 결과페이지나 그런곳으로 상태를
+        넘겨야할거같은데요 어떻게할까요?
+      </button>
+    );
+  }
 
-  const { choice } = componentMapping<Pick<Quiz, 'answerChoice'>>({
-    //조합식
+  const { title, question, category, answerChoice } = quizzes[currentPage];
+
+  const { ComponentChoice } = componentMapping<Pick<Quiz, 'answerChoice'>>({
     Combination,
-    //객관식
     MultipleChoice,
-    //ox
     OXSelector,
-    //단답형
     ShortAnswer,
   });
   return (
@@ -88,12 +87,8 @@ export default function Quiz() {
           <div>돈-??-프사 </div>
         </HeaderSection>
         <ProgressSection>진행도</ProgressSection>
-        <Question title={title} question={question}></Question>
-        {choice(category, { answerChoice })}
-        <FooterSection>
-          <Button buttonName={'스킵버튼'} handleClick={handleNextPage} />
-          <Button buttonName={'답 제출'} handleClick={handleNextPage} />
-        </FooterSection>
+        <Question title={title} question={question} />
+        {ComponentChoice(category, { answerChoice })}
       </GridContainer>
     </AlignCenter>
   );

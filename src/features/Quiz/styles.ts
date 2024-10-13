@@ -18,7 +18,7 @@ interface ResponseBoxProps {
   $gridColumn?: string;
   $justifyContent?: string;
 }
-
+1;
 export const ResponseBoxSection = styled.section<ResponseBoxProps>`
   display: flex;
   justify-content: ${({ $justifyContent }) => $justifyContent || 'center'};
@@ -45,17 +45,28 @@ export const CharacterBox = styled.div<CharacterBoxProps>`
   border-radius: 8px;
 `;
 //ox유형에서 ox버튼
-export const OXButton = styled.button`
+interface OXButtonProps {
+  $backGroundColor: boolean;
+}
+export const OXButton = styled.button<OXButtonProps>`
+  cursor: pointer;
+  background: ${({ $backGroundColor }) =>
+    $backGroundColor ? 'red' : '#19191b'};
   width: 110px;
   height: 108px;
   border-radius: 10px;
 `;
 //객관식에서 각 문항 버튼
-export const MultipleChoiceQuestionButton = styled.button`
+interface MultipleChoiceQuestionButtonProps {
+  $backGroundColor: boolean;
+}
+export const MultipleChoiceQuestionButton = styled.button<MultipleChoiceQuestionButtonProps>`
+  cursor: pointer;
   width: 372px;
   height: 26px;
   border-radius: 8px;
-  background: #19191b;
+  background: ${({ $backGroundColor }) =>
+    $backGroundColor ? 'red' : '#19191b'};
   color: #ffffff;
   margin-top: 13px;
 `;
@@ -80,6 +91,7 @@ export const CombinationUl = styled.ul`
 
 //블럭유형에서 각 텍스트에 해당하는 리스트 스타일
 export const TextBlockLi = styled.li`
+  cursor: pointer;
   border-radius: 8px;
   background: #19191b;
   color: #ffffff;
@@ -92,4 +104,13 @@ export const ResponseButton = styled.button`
   width: 94px;
   height: 26px;
   border-radius: 24px;
+  cursor: pointer;
+`;
+export const SubmitSection = styled.section`
+  display: flex;
+  height: 108px;
+  align-items: center;
+  justify-content: space-between;
+  grid-column: 3;
+  margin-top: 19px;
 `;
