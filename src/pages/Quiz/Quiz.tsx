@@ -14,6 +14,7 @@ import Combination from '../../features/Quiz/ui/Combination';
 import MultipleChoice from '../../features/Quiz/ui/MultipleChoice';
 import OXSelector from '../../features/Quiz/ui/OXSelector';
 import ShortAnswer from '../../features/Quiz/ui/ShortAnswer';
+import componentMapping from '../../utils/componentMap';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -68,17 +69,17 @@ export default function Quiz() {
     },
   ];
   const { title, question, category, answer, answerChoice } = quiz[currentPage];
-  const QuizCategoryComponentMapping: Record<Quiz['category'], JSX.Element> = {
-    //조합식
-    Combination: <Combination answerChoice={answerChoice} />,
-    //객관식
-    MultipleChoice: <MultipleChoice answerChoice={answerChoice} />,
-    //ox
-    OXSelector: <OXSelector />,
-    //단답형
-    ShortAnswer: <ShortAnswer />,
-  };
 
+  const { choice } = componentMapping<Pick<Quiz, 'answerChoice'>>({
+    //조합식
+    Combination,
+    //객관식
+    MultipleChoice,
+    //ox
+    OXSelector,
+    //단답형
+    ShortAnswer,
+  });
   return (
     <AlignCenter>
       <GridContainer>
@@ -88,7 +89,7 @@ export default function Quiz() {
         </HeaderSection>
         <ProgressSection>진행도</ProgressSection>
         <Question title={title} question={question}></Question>
-        {QuizCategoryComponentMapping[category]}
+        {choice(category, { answerChoice })}
         <FooterSection>
           <Button buttonName={'스킵버튼'} handleClick={handleNextPage} />
           <Button buttonName={'답 제출'} handleClick={handleNextPage} />
