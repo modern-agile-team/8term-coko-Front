@@ -14,3 +14,12 @@ export const MenuBox = styled.div`
   gap: 40px;
   margin-top: 40px;
 `;
+
+export const HeaderBox = styled.header`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 294px;
+  height: 42px;
+  margin-top: 42px;
+`;

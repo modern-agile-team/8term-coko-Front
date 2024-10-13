@@ -19,3 +19,12 @@ export const MenuButton = styled.button`
   width: 176px;
   height: 42px;
 `;
+
+export const HeaderIcon = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+export const HeaderIconNumber = styled.span`
+  font-size: 18px;
+`;

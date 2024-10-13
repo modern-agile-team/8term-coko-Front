@@ -6,6 +6,7 @@ import {
 } from '../../style/LayOut';
 import SelectSection from '../../common/layout/SelectSection';
 import MenuBar from '../../common/layout/MenuBar';
+import Header from './../../common/layout/Header';
 
 export default function Learn() {
   return (
@@ -17,7 +18,7 @@ export default function Learn() {
           </FeatureDiv>
           <MenuBar />
         </LayOutDiv>
-        <LayOutDiv $height="100vh ">
+        <LayOutDiv $height="100vh">
           <FeatureDiv $width="666px" $height="45px" $marginTop="98px">
             {/* 진행도 */}
           </FeatureDiv>
@@ -29,9 +30,7 @@ export default function Learn() {
           </FeatureDiv>
         </LayOutDiv>
         <LayOutDiv $height="100vh">
-          <FeatureDiv $width="294px" $height="42px" $marginTop="42px">
-            생명력/프로필
-          </FeatureDiv>
+          <Header />
           <FeatureDiv $width="274px" $height="158px" $marginTop="47px">
             일일 퀘스트
           </FeatureDiv>

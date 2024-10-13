@@ -4,7 +4,6 @@ import { LayOut } from '../types/LayOut';
 export const GridContainer = styled.div`
   display: grid;
   width: 1280px;
-  margin: 0 62px;
   grid-template-columns: 2fr 7fr 3fr;
   column-gap: 20px;
 `;
