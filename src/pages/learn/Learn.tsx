@@ -6,7 +6,7 @@ import {
 } from '../../style/LayOut';
 import SelectSection from '../../common/layout/SelectSection';
 import MenuBar from '../../common/layout/MenuBar';
-import Header from './../../common/layout/Header';
+import Header from '../../common/layout/Header';
 
 export default function Learn() {
   return (
