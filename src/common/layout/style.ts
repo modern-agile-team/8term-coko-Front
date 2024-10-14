@@ -6,6 +6,8 @@ export const SelectSectionBox = styled.section`
   place-items: center;
   width: 666px;
   height: 105px;
+  margin-top: 25px;
+  border: 1px solid;
 `;
 
 export const MenuBox = styled.div`

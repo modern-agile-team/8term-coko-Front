@@ -7,6 +7,7 @@ import {
 import SelectSection from '../../common/layout/SelectSection';
 import MenuBar from '../../common/layout/MenuBar';
 import Header from '../../common/layout/Header';
+import DailyQuest from '../../features/Quest/ui/DailyQuest';
 
 export default function Learn() {
   return (
@@ -22,18 +23,14 @@ export default function Learn() {
           <FeatureDiv $width="666px" $height="45px" $marginTop="98px">
             {/* 진행도 */}
           </FeatureDiv>
-          <FeatureDiv $width="666px" $height="105px" $marginTop="25px">
-            <SelectSection />
-          </FeatureDiv>
+          <SelectSection />
           <FeatureDiv $width="666px" $height="468px" $marginTop="25px">
             챕터
           </FeatureDiv>
         </LayOutDiv>
         <LayOutDiv $height="100vh">
           <Header />
-          <FeatureDiv $width="274px" $height="158px" $marginTop="47px">
-            일일 퀘스트
-          </FeatureDiv>
+          <DailyQuest />
         </LayOutDiv>
       </GridContainer>
     </AlignCenter>

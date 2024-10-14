@@ -5,6 +5,7 @@ import {
   FeatureDiv,
 } from '../../style/LayOut';
 import MenuBar from '../../common/layout/MenuBar';
+import DailyQuest from '../../features/Quest/ui/DailyQuest';
 
 export default function Quest() {
   return (
@@ -17,9 +18,7 @@ export default function Quest() {
           <MenuBar />
         </LayOutDiv>
         <LayOutDiv>
-          <FeatureDiv $width="666px" $height="381px" $marginTop="98px">
-            오늘의 퀘스트 칸
-          </FeatureDiv>
+          <DailyQuest />
           <FeatureDiv $width="666px" $height="283px" $marginTop="24px">
             메인 퀘스트 칸
           </FeatureDiv>
