@@ -1,6 +1,6 @@
 export default interface Quiz {
   id?: number;
-  part: string;
+  part: 'EASY' | 'NORAML' | 'HARD' | 'VERY_HARD';
   sectionId: number;
   title: string;
   question: string;
