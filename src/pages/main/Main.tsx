@@ -5,12 +5,11 @@ import {
   LayOutDiv,
   FeatureDiv,
 } from '../../style/LayOut';
+import QUIZ from '../../apis/quiz';
 export default function Main() {
-  const getUserDate = async () => {
-    const data = await axiosConfig.get('/users');
-    console.log(data);
-  };
-  getUserDate();
+  const { data: quizzes, isLoading } = QUIZ.getQuizzes(1, 'EASY');
+  if (isLoading) return <div>asdasdasd</div>;
+  console.log(quizzes);
   return (
     <AlignCenter>
       <GridContainer>
