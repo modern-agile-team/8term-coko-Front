@@ -3,7 +3,7 @@ import { OXButton, CharacterBox, ResponseBoxSection } from '../styles';
 import Submit from './Submit';
 export default function OXSelector() {
   //OX버튼을 눌러 답을 제출함
-  const [clientChoice, setClientChoice] = useState<string>('');
+  const [clientChoice, setClientChoice] = useState<string | null>(null);
   return (
     <>
       <ResponseBoxSection>
@@ -17,7 +17,7 @@ export default function OXSelector() {
           $backGroundColor={clientChoice === 'X'}
         />
       </ResponseBoxSection>
-      <Submit userSubmitAnswer={[clientChoice]}></Submit>
+      <Submit userSubmitAnswer={clientChoice ? [clientChoice] : null} />
     </>
   );
 }

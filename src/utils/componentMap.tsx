@@ -14,7 +14,7 @@ const componentMapping = <T,>(mappingTable: ComponentMappingParam) => {
     if (!Component) {
       return null;
     }
-    return <Component {...props} />;
+    return <Component {...props}></Component>;
   };
   return { ComponentChoice };
 };

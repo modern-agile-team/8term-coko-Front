@@ -1,22 +1,28 @@
 import Quiz from '../../../types/Quiz';
-import { CombinationUl, TextBlockLi } from '../styles';
+import { CombinationUl, TextBlockButton } from '../styles';
 import Submit from './Submit';
-import useCombinationController from '../service/useCombinationController';
+import { useClientQuizStore } from '../../../store/useQuizStore';
 
 export default function Combination({
   answerChoice,
 }: Pick<Quiz, 'answerChoice'>) {
-  const [choiceList, handleChoiceList] = useCombinationController();
+  const { userChoiceCombination, choiceListPush } = useClientQuizStore();
+  const currentChoices = userChoiceCombination || [];
   return (
     <>
       <CombinationUl>
-        {answerChoice.map(value => (
-          <TextBlockLi onClick={() => handleChoiceList(value)}>
+        {answerChoice.map((value, index) => (
+          <TextBlockButton
+            key={index}
+            onClick={() => choiceListPush(value)}
+            $selected={currentChoices.includes(value)}
+            disabled={userChoiceCombination?.includes(value)}
+          >
             {value}
-          </TextBlockLi>
+          </TextBlockButton>
         ))}
       </CombinationUl>
-      <Submit userSubmitAnswer={choiceList}></Submit>
+      <Submit userSubmitAnswer={userChoiceCombination} />
     </>
   );
 }

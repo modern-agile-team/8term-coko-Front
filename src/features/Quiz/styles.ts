@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 //문제(Quiz)의 제목(title)과 문항(question)이 들어갈 공간
 export const QuestionSection = styled.section`
@@ -90,7 +90,10 @@ export const CombinationUl = styled.ul`
 `;
 
 //블럭유형에서 각 텍스트에 해당하는 리스트 스타일
-export const TextBlockLi = styled.li`
+interface TextBlockLiProps {
+  $selected?: boolean;
+}
+export const TextBlockButton = styled.button<TextBlockLiProps>`
   cursor: pointer;
   border-radius: 8px;
   background: #19191b;
@@ -98,6 +101,13 @@ export const TextBlockLi = styled.li`
   list-style-type: none;
   padding: 0 20px;
   height: 26px;
+  ${({ $selected }) =>
+    $selected &&
+    css`
+      background: gray;
+      color: gray;
+      cursor: default;
+    `}
 `;
 //화면 하단의
 export const ResponseButton = styled.button`
@@ -113,4 +123,14 @@ export const SubmitSection = styled.section`
   justify-content: space-between;
   grid-column: 3;
   margin-top: 19px;
+`;
+
+export const QuestionDiv = styled.div`
+  display: flex;
+`;
+export const EmptyDiv = styled.div`
+  width: 100px;
+  height: 20px;
+  background-color: gray;
+  border-radius: 15px;
 `;

@@ -5,7 +5,7 @@ import Submit from './Submit';
 export default function MultipleChoice({
   answerChoice,
 }: Pick<Quiz, 'answerChoice'>) {
-  const [clientChoice, setClientChoice] = useState<string>('');
+  const [clientChoice, setClientChoice] = useState<string | null>(null);
   return (
     <>
       <ResponseBoxSection $gapColumn="20px" $gridColumn="2/5">
@@ -19,7 +19,7 @@ export default function MultipleChoice({
           </MultipleChoiceQuestionButton>
         ))}
       </ResponseBoxSection>
-      <Submit userSubmitAnswer={[clientChoice]}></Submit>
+      <Submit userSubmitAnswer={clientChoice ? [clientChoice] : null} />
     </>
   );
 }

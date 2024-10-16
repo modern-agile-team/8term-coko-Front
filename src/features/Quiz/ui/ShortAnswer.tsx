@@ -16,7 +16,7 @@ export default function ShortAnswer() {
         ></ShortAnswerInput>
         <CharacterBox $margin="0px 0px 0px 118px" />
       </ResponseBoxSection>
-      <Submit userSubmitAnswer={[inputValue]} />
+      <Submit userSubmitAnswer={inputValue ? [inputValue] : null} />
     </>
   );
 }
