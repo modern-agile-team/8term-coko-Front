@@ -9,10 +9,12 @@ import OXSelector from '../../features/Quiz/ui/OXSelector';
 import ShortAnswer from '../../features/Quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
 import useRefreshWaringAlert from '../../hooks/useRefreshWaringAlert';
+import Score from '../../features/Quiz/ui/Score';
+import arraysEqual from '../../utils/arraysEqual';
 //퀴즈페이지
 export default function Quiz() {
   // const { section, part } = useParams();
-  const { currentPage, reset } = useClientQuizStore();
+  const { currentPage, reset, userResponseAnswer } = useClientQuizStore();
   useRefreshWaringAlert();
   const quizzes: Quiz[] = [
     //예시 1섹션 1파트에 문제 4개
@@ -58,7 +60,7 @@ export default function Quiz() {
       question: '#empty#.log(#empty#)',
       answer: ['console', '1+3'],
       category: 'Combination',
-      answerChoice: ['console', '1+2', 'function', '어쩌구저쩌구', '두두두두'],
+      answerChoice: ['console', '1+3', 'function', '어쩌구저쩌구', '두두두두'],
     },
   ];
   if (quizzes.length <= currentPage) {
@@ -70,7 +72,8 @@ export default function Quiz() {
     );
   }
 
-  const { title, question, category, answerChoice } = quizzes[currentPage];
+  const { title, question, category, answerChoice, answer } =
+    quizzes[currentPage];
 
   const { ComponentChoice } = componentMapping<Pick<Quiz, 'answerChoice'>>({
     Combination,
@@ -85,6 +88,11 @@ export default function Quiz() {
           <div>로고</div>
           <div>돈-??-프사 </div>
         </HeaderSection>
+        <Score
+          result={
+            userResponseAnswer ? arraysEqual(answer, userResponseAnswer) : null
+          }
+        ></Score>
         <ProgressSection>진행도</ProgressSection>
         <Question
           title={title}

@@ -31,6 +31,7 @@ export default function Question({ title, question, category }: questiontype) {
           유저가 고른거:
           {userChoiceCombination?.map((item, index) => (
             <TextBlockButton
+              key={index}
               onClick={() => {
                 removeMyChoice(item);
               }}

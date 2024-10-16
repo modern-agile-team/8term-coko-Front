@@ -134,3 +134,20 @@ export const EmptyDiv = styled.div`
   background-color: gray;
   border-radius: 15px;
 `;
+export const ScoreSection = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  width: 1280px;
+  height: 25%;
+  position: fixed;
+  bottom: 0;
+`;
+export const ScoreBackGroundDiv = styled.div`
+  position: fixed;
+  bottom: 0;
+  height: 700px;
+  z-index: 10;
+  background-color: red;
+`;

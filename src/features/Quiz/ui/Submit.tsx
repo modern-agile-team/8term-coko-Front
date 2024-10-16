@@ -5,12 +5,14 @@ interface submitProps {
   userSubmitAnswer: string[] | null;
 }
 export default function Submit({ userSubmitAnswer }: submitProps) {
-  const { handleNextPage } = useClientQuizStore();
-  console.log(userSubmitAnswer);
+  const { handleNextPage, setUserResponseAnswer } = useClientQuizStore();
   return (
     <SubmitSection>
       <ResponseButton onClick={handleNextPage}>스킵</ResponseButton>
-      <ResponseButton disabled={!userSubmitAnswer} onClick={handleNextPage}>
+      <ResponseButton
+        disabled={!userSubmitAnswer}
+        onClick={() => setUserResponseAnswer(userSubmitAnswer)}
+      >
         답제출
       </ResponseButton>
     </SubmitSection>
