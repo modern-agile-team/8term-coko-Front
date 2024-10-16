@@ -26,8 +26,7 @@ export default function CreateQuiz() {
   const mutation = useMutation({
     mutationFn: QUIZ.postQuiz,
   });
-  const { data } = QUIZ.getQuizzes(0, 'EASY');
-  console.log(data);
+
   const handelQuizChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -56,6 +55,7 @@ export default function CreateQuiz() {
           <input type="text" placeholder="섹션추가" ref={sectionRef}></input>
           <button
             onClick={() => {
+              //api 생기면 기능 추가
               console.log(sectionRef.current?.value);
             }}
           >
@@ -116,7 +116,6 @@ export default function CreateQuiz() {
 
         <button
           onClick={() => {
-            console.log(quiz);
             mutation.mutate(quiz);
           }}
         >
