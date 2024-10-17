@@ -18,7 +18,7 @@ export default function Question({ title, question, category }: questiontype) {
   return category === 'Combination' ? (
     <>
       <QuestionSection>
-        <div>title: {title} </div>
+        <h1> {title} </h1>
         <QuestionDiv>
           question:
           {questionArray.map((item, index) =>
@@ -45,8 +45,8 @@ export default function Question({ title, question, category }: questiontype) {
   ) : (
     <>
       <QuestionSection>
-        <div>title: {title} </div>
-        <div>question: {question}</div>
+        <h1>{title} </h1>
+        <pre>question: {question}</pre>
       </QuestionSection>
     </>
   );

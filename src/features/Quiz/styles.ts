@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 //문제(Quiz)의 제목(title)과 문항(question)이 들어갈 공간
 export const QuestionSection = styled.section`
@@ -134,20 +134,33 @@ export const EmptyDiv = styled.div`
   background-color: gray;
   border-radius: 15px;
 `;
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 export const ScoreSection = styled.section`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  width: 1280px;
+  justify-content: space-around;
+  background-color: gray;
+  width: 100vw;
   height: 25%;
   position: fixed;
   bottom: 0;
+
+  animation: ${fadeIn} 0.7s ease-out;
 `;
 export const ScoreBackGroundDiv = styled.div`
-  position: fixed;
+  position: absolute;
+  right: 0;
   bottom: 0;
-  height: 700px;
-  z-index: 10;
-  background-color: red;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.001);
 `;

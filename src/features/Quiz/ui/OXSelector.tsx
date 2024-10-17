@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OXButton, CharacterBox, ResponseBoxSection } from '../styles';
 import Submit from './Submit';
+import { useClientQuizStore } from '../../../store/useQuizStore';
 export default function OXSelector() {
   //OX버튼을 눌러 답을 제출함
   const [clientChoice, setClientChoice] = useState<string | null>(null);
+  const { userResponseAnswer } = useClientQuizStore();
+  useEffect(() => {
+    setClientChoice(null);
+  }, [userResponseAnswer]);
   return (
     <>
       <ResponseBoxSection>

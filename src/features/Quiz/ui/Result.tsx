@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
 import { useClientQuizStore } from '../../../store/useQuizStore';
-import arraysEqual from '../../../utils/arraysEqual';
 import { ScoreBackGroundDiv, ScoreSection } from '../styles';
 interface ScoreProps {
-  result: boolean | null;
+  result: boolean;
 }
-export default function Score({ result }: ScoreProps) {
-  const { handleNextPage, resetUserResponseAnswer } = useClientQuizStore();
-  if (result === null) {
-    return <></>;
-  }
+export default function Result({ result }: ScoreProps) {
+  const { handleNextPage, resetUserResponseAnswer, setTotalResults } =
+    useClientQuizStore();
   return (
     <ScoreBackGroundDiv>
       <ScoreSection>
@@ -17,6 +13,7 @@ export default function Score({ result }: ScoreProps) {
         <button
           onClick={() => {
             resetUserResponseAnswer();
+            setTotalResults(result);
             handleNextPage();
           }}
         >

@@ -1,9 +1,14 @@
+import { useClientQuizStore } from '../../../store/useQuizStore';
 import { ResponseBoxSection, ShortAnswerInput } from '../styles';
 import { CharacterBox } from '../styles';
 import Submit from './Submit';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 export default function ShortAnswer() {
   const [inputValue, setInputValue] = useState<string>('');
+  const { userResponseAnswer } = useClientQuizStore();
+  useEffect(() => {
+    setInputValue('');
+  }, [userResponseAnswer]);
   return (
     <>
       <ResponseBoxSection $justifyContent="flex-end">

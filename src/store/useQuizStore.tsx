@@ -3,17 +3,20 @@ interface quizState {
   currentPage: number;
   userChoiceCombination: string[] | null;
   userResponseAnswer: string[] | null;
+  totalResults: boolean[];
   handleNextPage: () => void;
   choiceListPush: (choice: string) => void;
   setUserResponseAnswer: (userResposne: string[] | null) => void;
   removeMyChoice: (choice: string) => void;
   resetUserResponseAnswer: () => void;
+  setTotalResults: (result: boolean) => void;
   reset: () => void;
 }
 export const useClientQuizStore = create<quizState>(set => ({
   currentPage: 0,
   userChoiceCombination: null,
   userResponseAnswer: null,
+  totalResults: [],
   handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
   choiceListPush: choice =>
     set(state => {
@@ -44,5 +47,7 @@ export const useClientQuizStore = create<quizState>(set => ({
   reset: () => {
     set(() => ({ currentPage: 0, userResponse: [''] }));
   },
+  setTotalResults: result =>
+    set(state => ({ totalResults: [...state.totalResults, result] })),
   submitUserResponse: () => {},
 }));

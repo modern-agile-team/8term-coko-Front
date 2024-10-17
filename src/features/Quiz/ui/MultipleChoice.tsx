@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Quiz from '../../../types/Quiz';
 import { MultipleChoiceQuestionButton, ResponseBoxSection } from '../styles';
 import Submit from './Submit';
+import { useClientQuizStore } from '../../../store/useQuizStore';
 export default function MultipleChoice({
   answerChoice,
 }: Pick<Quiz, 'answerChoice'>) {
   const [clientChoice, setClientChoice] = useState<string | null>(null);
+  const { userResponseAnswer } = useClientQuizStore();
+  useEffect(() => {
+    setClientChoice(null);
+  }, [userResponseAnswer]);
   return (
     <>
       <ResponseBoxSection $gapColumn="20px" $gridColumn="2/5">

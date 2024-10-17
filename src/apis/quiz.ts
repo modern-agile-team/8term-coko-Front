@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import Quiz from '../admin/types/Quiz';
+import Quiz from '../types/Quiz';
 import api from './axios/instance';
 
 const QUIZ = {
-  getQuizzes: (sectionId: number, part: Quiz['part']) => {
-    return useQuery({
+  getQuizzes: (sectionId: string | null, part: string | null) => {
+    return useQuery<Quiz[]>({
       queryKey: ['quizzes', { sectionId, part }],
-      queryFn: () => api.get(`/quizzes?sectionId=${sectionId}&part=${part}`),
+      queryFn: () =>
+        api
+          .get(`/quizzes?sectionId=${sectionId}&part=${part}`)
+          .then(response => response.data),
       gcTime: 5 * 60 * 1000, // 5분
       staleTime: 1 * 60 * 1000, // 1분
     });
