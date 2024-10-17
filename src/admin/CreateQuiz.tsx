@@ -8,18 +8,25 @@ import {
   SelectBox,
 } from './style';
 import Quiz from './types/Quiz';
+import QUIZ from '../apis/quiz';
+import { useMutation } from '@tanstack/react-query';
 
 export default function CreateQuiz() {
   //퀴즈의 정보를 저장하는 상태
   const [quiz, setQuiz] = useState<Quiz>({
-    sectionId: 0,
-    part: 'Easy',
+    sectionId: 1,
+    part: 'EASY',
     title: '',
     question: '',
     answer: [],
-    category: 'MultipleChoice',
+    category: 'MULTIPLE_CHOICE',
+    answerChoice: [],
   });
   const sectionRef = useRef<HTMLInputElement>(null);
+  const mutation = useMutation({
+    mutationFn: QUIZ.postQuiz,
+  });
+
   const handelQuizChange = (
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -41,23 +48,24 @@ export default function CreateQuiz() {
         </div>
         <div>
           <SelectBox id="sectionId" onChange={handelQuizChange}>
-            <option value="0">변수</option>
-            <option value="1">자료형</option>
+            <option value="1">변수</option>
+            <option value="2">자료형</option>
             <option>등등..</option>
           </SelectBox>
           <input type="text" placeholder="섹션추가" ref={sectionRef}></input>
           <button
             onClick={() => {
+              //api 생기면 기능 추가
               console.log(sectionRef.current?.value);
             }}
           >
             섹션추가
           </button>
           <SelectBox id="part" onChange={handelQuizChange}>
-            <option value="Easy">Easy</option>
-            <option value="Normal">Normal</option>
-            <option value="Hard">Hard</option>
-            <option value="Very Hard">Very Hard</option>
+            <option value="EASY">Easy</option>
+            <option value="NORMAL">Normal</option>
+            <option value="HARD">Hard</option>
+            <option value="VERY_HARD">Very Hard</option>
           </SelectBox>
         </div>
         <Label>문제 지문 입력(title)</Label>
@@ -94,10 +102,10 @@ export default function CreateQuiz() {
             $marginRight="125px"
             onChange={handelQuizChange}
           >
-            <option value="MultipleChoice">객관식</option>
-            <option value="Combination">조합식</option>
-            <option value="OXSelector">O/X</option>
-            <option value="ShortAnswer">단답형</option>
+            <option value="MULTIPLE_CHOICE">객관식</option>
+            <option value="COMBINATION">조합식</option>
+            <option value="OX_SELECTOR">O/X</option>
+            <option value="SHORT_ANSWER">단답형</option>
           </SelectBox>
           <InputBox
             id="answerChoice"
@@ -106,7 +114,13 @@ export default function CreateQuiz() {
           ></InputBox>
         </FlexDiv>
 
-        <button onClick={() => console.log(quiz)}>확인</button>
+        <button
+          onClick={() => {
+            mutation.mutate(quiz);
+          }}
+        >
+          확인
+        </button>
       </LayOut>
     </AlignCenter>
   );
