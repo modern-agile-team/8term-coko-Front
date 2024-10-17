@@ -1,4 +1,4 @@
-import { CircleButton } from './style';
+import { CircleButton } from '../../../common/ui/style';
 
 export default function SectionNavigateButton() {
   return (

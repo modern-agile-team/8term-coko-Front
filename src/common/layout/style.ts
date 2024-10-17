@@ -25,3 +25,13 @@ export const HeaderBox = styled.header`
   height: 42px;
   margin-top: 42px;
 `;
+
+export const LogoBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 176px;
+  height: 42px;
+  margin-top: 50px;
+  border: 1px solid;
+`;

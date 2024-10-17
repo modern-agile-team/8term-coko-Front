@@ -28,3 +28,8 @@ export const HeaderIcon = styled.img`
 export const HeaderIconNumber = styled.span`
   font-size: 18px;
 `;
+
+export const LogoImg = styled.img`
+  width: 30px;
+  height: 30px;
+`;

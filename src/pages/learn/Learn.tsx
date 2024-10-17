@@ -8,15 +8,14 @@ import SelectSection from '../../common/layout/SelectSection';
 import MenuBar from '../../common/layout/MenuBar';
 import Header from '../../common/layout/Header';
 import DailyQuest from '../../features/Quest/ui/DailyQuest';
+import CokoLogo from '../../common/layout/CokoLogo';
 
 export default function Learn() {
   return (
     <AlignCenter>
       <GridContainer>
         <LayOutDiv $height="100vh">
-          <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
-            로고
-          </FeatureDiv>
+          <CokoLogo />
           <MenuBar />
         </LayOutDiv>
         <LayOutDiv $height="100vh">
