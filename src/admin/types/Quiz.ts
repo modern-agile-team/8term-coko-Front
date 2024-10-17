@@ -1,10 +1,10 @@
 export default interface Quiz {
   id?: number;
-  part: string;
+  part: 'EASY' | 'NORAML' | 'HARD' | 'VERY_HARD';
   sectionId: number;
   title: string;
   question: string;
   answer: string[];
-  category: 'Combination' | 'MultipleChoice' | 'OXSelector' | 'ShortAnswer';
+  category: 'COMBINATION' | 'MULTIPLE_CHOICE' | 'OXSELECTOR' | 'SHORTANSWER';
   answerChoice?: string[];
 }

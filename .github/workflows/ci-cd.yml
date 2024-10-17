@@ -18,13 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # github repository에서 checkout
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # docker build 수행
       - name: Set up docker buildx
         id: buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       - name: Cache docker layers
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ env.VERSION }}
@@ -36,7 +36,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -56,7 +56,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor  }}
-          password: ${{ secrets.GHCR_TOKEN }}
+          password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
       # 3000 -> 80 포트로 수행하도록 지정
       - name: Docker run
         run: |
