@@ -1,53 +1,47 @@
 import { create } from 'zustand';
 interface quizState {
   currentPage: number;
-  userChoiceCombination: string[] | null;
-  userResponseAnswer: string[] | null;
+  userResponseAnswer: string[];
   totalResults: boolean[];
   handleNextPage: () => void;
-  choiceListPush: (choice: string) => void;
-  setUserResponseAnswer: (userResposne: string[] | null) => void;
-  removeMyChoice: (choice: string) => void;
+  setUserResponseAnswer: (userResposne: string) => void;
+  pushUserResponseAnswer: (userResponse: string) => void;
+  spliceUserResponseAnswer: (choiceIndex: number) => void;
+  swapUserResponseAnswer: (index1: number, index2: number) => void;
   resetUserResponseAnswer: () => void;
-  setTotalResults: (result: boolean) => void;
+  pushTotalResults: (result: boolean) => void;
   reset: () => void;
 }
 export const useClientQuizStore = create<quizState>(set => ({
   currentPage: 0,
-  userChoiceCombination: null,
-  userResponseAnswer: null,
+  userResponseAnswer: [],
   totalResults: [],
   handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
-  choiceListPush: choice =>
+  spliceUserResponseAnswer: choiceIndex =>
     set(state => {
-      if (state.userChoiceCombination === null) {
-        return { userChoiceCombination: [choice] };
-      }
-      return {
-        userChoiceCombination: [...state.userChoiceCombination, choice],
-      };
+      const copyArray = [...state.userResponseAnswer];
+      copyArray.splice(choiceIndex, 1);
+      return { userResponseAnswer: copyArray };
     }),
-  removeMyChoice: choice => {
+  setUserResponseAnswer: userResposne =>
+    set(() => ({ userResponseAnswer: [userResposne] })),
+  pushUserResponseAnswer: userResponse =>
+    set(state => ({
+      userResponseAnswer: [...state.userResponseAnswer, userResponse],
+    })),
+  resetUserResponseAnswer: () => set(() => ({ userResponseAnswer: [] })),
+  swapUserResponseAnswer: (index1, index2) =>
     set(state => {
-      if (state.userChoiceCombination === null) {
-        return state;
-      }
-      return {
-        userChoiceCombination: state.userChoiceCombination.filter(
-          item => item !== choice
-        ),
-      };
-    });
-  },
-  setUserResponseAnswer: userResposne => {
-    set(() => ({ userResponseAnswer: userResposne }));
-  },
-  resetUserResponseAnswer: () => set(() => ({ userResponseAnswer: null })),
-
+      const copyArray = [...state.userResponseAnswer];
+      [copyArray[index1], copyArray[index2]] = [
+        copyArray[index2],
+        copyArray[index1],
+      ];
+      return { userResponseAnswer: copyArray };
+    }),
   reset: () => {
     set(() => ({ currentPage: 0, userResponse: [''] }));
   },
-  setTotalResults: result =>
+  pushTotalResults: result =>
     set(state => ({ totalResults: [...state.totalResults, result] })),
-  submitUserResponse: () => {},
 }));

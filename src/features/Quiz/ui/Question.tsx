@@ -1,11 +1,13 @@
 import {
   EmptyDiv,
+  LineChangeDiv,
   QuestionDiv,
   QuestionSection,
   TextBlockButton,
 } from './../styles';
 import { useClientQuizStore } from '../../../store/useQuizStore';
 import textChangeToArray from '../service/textChangeToArray';
+import { useRef } from 'react';
 interface questiontype {
   title: string;
   question: string;
@@ -13,28 +15,56 @@ interface questiontype {
   answerChoice: string[];
 }
 export default function Question({ title, question, category }: questiontype) {
-  const { userChoiceCombination, removeMyChoice } = useClientQuizStore();
+  const {
+    userResponseAnswer,
+    spliceUserResponseAnswer,
+    swapUserResponseAnswer,
+  } = useClientQuizStore();
   const questionArray = textChangeToArray(question);
-  return category === 'Combination' ? (
+  const dragItem = useRef<number | null>(null);
+  const dragOverItem = useRef<number | null>(null);
+
+  //드레그 시작할 때
+  const dragStart = (position: number) => {
+    dragItem.current = position;
+  };
+  //드레그 포개졌을 때
+  const dragEnter = (position: number) => {
+    dragOverItem.current = position;
+  };
+  const drop = () => {
+    if (dragItem.current !== null && dragOverItem.current !== null) {
+      swapUserResponseAnswer(dragItem.current, dragOverItem.current);
+    }
+  };
+
+  return category === 'COMBINATION' ? (
     <>
       <QuestionSection>
         <h1> {title} </h1>
+        <br></br>
         <QuestionDiv>
-          question:
-          {questionArray.map((item, index) =>
-            item === 'empty' ? (
-              <EmptyDiv key={index} />
-            ) : (
-              <div key={index}>{item}</div>
-            )
-          )}
-          유저가 고른거:
-          {userChoiceCombination?.map((item, index) => (
+          {questionArray.map((item, index) => {
+            if (item === '#empty#') {
+              return <EmptyDiv key={index} />;
+            } else if (item === 'br') {
+              return <LineChangeDiv key={index} />;
+            }
+            return <div key={index}>{item}</div>;
+          })}
+          <LineChangeDiv />
+          선택 리스트:
+          {userResponseAnswer.map((item, index) => (
             <TextBlockButton
               key={index}
               onClick={() => {
-                removeMyChoice(item);
+                spliceUserResponseAnswer(index);
               }}
+              draggable
+              onDragStart={() => dragStart(index)}
+              onDragEnter={() => dragEnter(index)}
+              onDragEnd={drop}
+              onDragOver={e => e.preventDefault()}
             >
               {item}
             </TextBlockButton>
@@ -46,7 +76,8 @@ export default function Question({ title, question, category }: questiontype) {
     <>
       <QuestionSection>
         <h1>{title} </h1>
-        <pre>question: {question}</pre>
+        <br />
+        <pre>{question}</pre>
       </QuestionSection>
     </>
   );

@@ -1,28 +1,25 @@
 import Quiz from '../../../types/Quiz';
 import { CombinationUl, TextBlockButton } from '../styles';
-import Submit from './Submit';
 import { useClientQuizStore } from '../../../store/useQuizStore';
 
 export default function Combination({
   answerChoice,
 }: Pick<Quiz, 'answerChoice'>) {
-  const { userChoiceCombination, choiceListPush } = useClientQuizStore();
-  const currentChoices = userChoiceCombination || [];
+  const { userResponseAnswer, pushUserResponseAnswer } = useClientQuizStore();
   return (
     <>
       <CombinationUl>
-        {answerChoice.map((value, index) => (
+        {answerChoice.map((choice, index) => (
           <TextBlockButton
             key={index}
-            onClick={() => choiceListPush(value)}
-            $selected={currentChoices.includes(value)}
-            disabled={userChoiceCombination?.includes(value)}
+            onClick={() => pushUserResponseAnswer(choice)}
+            $selected={userResponseAnswer.includes(choice)}
+            disabled={userResponseAnswer.includes(choice)}
           >
-            {value}
+            {choice}
           </TextBlockButton>
         ))}
       </CombinationUl>
-      <Submit userSubmitAnswer={userChoiceCombination} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-export default interface Quiz {
+export default interface QuizAdmin {
   id?: number;
   part: 'EASY' | 'NORAML' | 'HARD' | 'VERY_HARD';
   sectionId: number;

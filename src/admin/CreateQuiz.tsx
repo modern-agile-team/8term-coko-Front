@@ -7,13 +7,13 @@ import {
   LayOut,
   SelectBox,
 } from './style';
-import Quiz from './types/Quiz';
-import QUIZ from '../apis/quiz';
+import type QuizAdmin from './types/Quiz';
 import { useMutation } from '@tanstack/react-query';
+import api from '../apis/axios/instance';
 
 export default function CreateQuiz() {
   //퀴즈의 정보를 저장하는 상태
-  const [quiz, setQuiz] = useState<Quiz>({
+  const [quiz, setQuiz] = useState<QuizAdmin>({
     sectionId: 1,
     part: 'EASY',
     title: '',
@@ -24,7 +24,7 @@ export default function CreateQuiz() {
   });
   const sectionRef = useRef<HTMLInputElement>(null);
   const mutation = useMutation({
-    mutationFn: QUIZ.postQuiz,
+    mutationFn: (quiz: QuizAdmin) => api.post(`/quizzes`, quiz),
   });
 
   const handelQuizChange = (
