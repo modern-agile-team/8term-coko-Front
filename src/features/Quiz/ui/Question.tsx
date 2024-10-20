@@ -6,13 +6,12 @@ import {
   TextBlockButton,
 } from './../styles';
 import { useClientQuizStore } from '../../../store/useQuizStore';
-import textChangeToArray from '../service/textChangeToArray';
+import questionChangeToArray from '../service/questionChangeToArray';
 import { useRef } from 'react';
 interface questiontype {
   title: string;
   question: string;
   category: string;
-  answerChoice: string[];
 }
 export default function Question({ title, question, category }: questiontype) {
   const {
@@ -20,7 +19,7 @@ export default function Question({ title, question, category }: questiontype) {
     spliceUserResponseAnswer,
     swapUserResponseAnswer,
   } = useClientQuizStore();
-  const questionArray = textChangeToArray(question);
+  const questionArray = questionChangeToArray(question);
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
 

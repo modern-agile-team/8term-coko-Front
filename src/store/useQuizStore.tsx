@@ -1,21 +1,8 @@
 import { create } from 'zustand';
-interface quizState {
-  currentPage: number;
-  userResponseAnswer: string[];
-  totalResults: boolean[];
-  handleNextPage: () => void;
-  setUserResponseAnswer: (userResposne: string) => void;
-  pushUserResponseAnswer: (userResponse: string) => void;
-  spliceUserResponseAnswer: (choiceIndex: number) => void;
-  swapUserResponseAnswer: (index1: number, index2: number) => void;
-  resetUserResponseAnswer: () => void;
-  pushTotalResults: (result: boolean) => void;
-  reset: () => void;
-}
-export const useClientQuizStore = create<quizState>(set => ({
+import type ClientquizStoreTypes from '../types/ClientquizStoreTypes';
+export const useClientQuizStore = create<ClientquizStoreTypes>(set => ({
+  /** 페이지 전역상태*/
   currentPage: 0,
-  userResponseAnswer: [],
-  totalResults: [],
   handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
   spliceUserResponseAnswer: choiceIndex =>
     set(state => {
@@ -23,6 +10,8 @@ export const useClientQuizStore = create<quizState>(set => ({
       copyArray.splice(choiceIndex, 1);
       return { userResponseAnswer: copyArray };
     }),
+  /**유저 응답 전역상태 */
+  userResponseAnswer: [],
   setUserResponseAnswer: userResposne =>
     set(() => ({ userResponseAnswer: [userResposne] })),
   pushUserResponseAnswer: userResponse =>
@@ -39,9 +28,8 @@ export const useClientQuizStore = create<quizState>(set => ({
       ];
       return { userResponseAnswer: copyArray };
     }),
-  reset: () => {
-    set(() => ({ currentPage: 0, userResponse: [''] }));
-  },
+  /**정답 전역상태 */
+  totalResults: [],
   pushTotalResults: result =>
     set(state => ({ totalResults: [...state.totalResults, result] })),
 }));

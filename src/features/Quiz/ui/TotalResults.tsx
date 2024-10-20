@@ -1,8 +1,8 @@
-import Quiz from '../../../types/Quiz';
-
+import type Quiz from '../../../types/Quiz';
+import type ClientquizStoreTypes from '../../../types/ClientquizStoreTypes';
 interface TotalResultsProps {
   quizzes: Quiz[];
-  totalResults: boolean[];
+  totalResults: ClientquizStoreTypes['totalResults'];
 }
 export default function TotalResults({
   quizzes,
