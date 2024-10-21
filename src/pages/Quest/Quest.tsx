@@ -6,15 +6,15 @@ import {
 } from '../../style/LayOut';
 import MenuBar from '../../common/layout/MenuBar';
 import DailyQuest from '../../features/Quest/ui/DailyQuest';
+import CokoLogo from '../../common/layout/CokoLogo';
+import Header from '../../common/layout/Header';
 
 export default function Quest() {
   return (
     <AlignCenter>
       <GridContainer>
         <LayOutDiv>
-          <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
-            로고
-          </FeatureDiv>
+          <CokoLogo />
           <MenuBar />
         </LayOutDiv>
         <LayOutDiv>
@@ -24,9 +24,7 @@ export default function Quest() {
           </FeatureDiv>
         </LayOutDiv>
         <LayOutDiv>
-          <FeatureDiv $width="294px" $height="42px" $marginTop="42px">
-            생명력/프로필
-          </FeatureDiv>
+          <Header />
         </LayOutDiv>
       </GridContainer>
     </AlignCenter>

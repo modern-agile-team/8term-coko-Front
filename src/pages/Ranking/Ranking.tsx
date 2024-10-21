@@ -5,15 +5,15 @@ import {
   FeatureDiv,
 } from '../../style/LayOut';
 import MenuBar from '../../common/layout/MenuBar';
+import Header from '../../common/layout/Header';
+import CokoLogo from '../../common/layout/CokoLogo';
 
 export default function Ranking() {
   return (
     <AlignCenter>
       <GridContainer>
         <LayOutDiv>
-          <FeatureDiv $width="176px" $height="42px" $marginTop="50px">
-            로고
-          </FeatureDiv>
+          <CokoLogo />
           <MenuBar />
         </LayOutDiv>
         <LayOutDiv>
@@ -28,9 +28,7 @@ export default function Ranking() {
           </FeatureDiv>
         </LayOutDiv>
         <LayOutDiv>
-          <FeatureDiv $width="294px" $height="42px" $marginTop="42px">
-            생명력/프로필
-          </FeatureDiv>
+          <Header />
         </LayOutDiv>
       </GridContainer>
     </AlignCenter>

@@ -1,9 +1,5 @@
-import {
-  GridContainer,
-  AlignCenter,
-  LayOutDiv,
-  FeatureDiv,
-} from '../../style/LayOut';
+import { AlignCenter, GridContainer, Layout } from './style';
+import { FeatureDiv } from '../../style/LayOut';
 import SelectSection from '../../common/layout/SelectSection';
 import MenuBar from '../../common/layout/MenuBar';
 import Header from '../../common/layout/Header';
@@ -14,11 +10,11 @@ export default function Learn() {
   return (
     <AlignCenter>
       <GridContainer>
-        <LayOutDiv $height="100vh">
+        <Layout>
           <CokoLogo />
           <MenuBar />
-        </LayOutDiv>
-        <LayOutDiv $height="100vh">
+        </Layout>
+        <Layout>
           <FeatureDiv $width="666px" $height="45px" $marginTop="98px">
             {/* 진행도 */}
           </FeatureDiv>
@@ -26,11 +22,11 @@ export default function Learn() {
           <FeatureDiv $width="666px" $height="468px" $marginTop="25px">
             챕터
           </FeatureDiv>
-        </LayOutDiv>
-        <LayOutDiv $height="100vh">
+        </Layout>
+        <Layout>
           <Header />
           <DailyQuest />
-        </LayOutDiv>
+        </Layout>
       </GridContainer>
     </AlignCenter>
   );
