@@ -93,3 +93,10 @@ export const ResponseButton = styled.button`
   height: 26px;
   border-radius: 24px;
 `;
+// Learn 페이지 퀴즈들 감싸는 박스
+export const QuizBox = styled.div`
+  width: 666px;
+  height: 468px;
+  margin-top: 25px;
+  border: 1px solid;
+`;
