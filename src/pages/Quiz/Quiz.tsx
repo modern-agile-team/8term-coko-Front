@@ -54,7 +54,7 @@ export default function Quiz() {
   }
   const { title, question, category, answerChoice, answer } =
     quizzes[currentPage];
-  const { ComponentChoice } = componentMapping<Pick<Quiz, 'answerChoice'>>({
+  const componentChoice = componentMapping<Pick<Quiz, 'answerChoice'>>({
     COMBINATION: Combination,
     MULTIPLE_CHOICE: MultipleChoice,
     OX_SELECTOR: OXSelector,
@@ -70,7 +70,7 @@ export default function Quiz() {
         <ProgressSection>진행도</ProgressSection>
         <>
           <Question title={title} question={question} category={category} />
-          {ComponentChoice(category, { answerChoice })}
+          {componentChoice(category, { answerChoice })}
           <SubmitSection>
             <ResponseButton
               onClick={() => {
@@ -83,7 +83,7 @@ export default function Quiz() {
             <ResponseButton
               disabled={userResponseAnswer.length === 0}
               onClick={() => {
-                setResult(arraysEqual(userResponseAnswer, answer));
+                setResult(arraysEqual<string>(userResponseAnswer, answer));
                 setIsResultModal(true);
               }}
             >
