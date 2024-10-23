@@ -30,7 +30,6 @@ export default function Quiz() {
   const [isResultModal, setIsResultModal] = useState<boolean>(false);
   useRefreshWaringAlert();
   const { data: quizzes, isLoading } = QUIZ.getQuizzes(section, part);
-  console.log(quizzes);
   if (isLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
   if (quizzes.length === totalResults.length) {
@@ -54,7 +53,9 @@ export default function Quiz() {
   }
   const { title, question, category, answerChoice, answer } =
     quizzes[currentPage];
-  const componentChoice = componentMapping<Pick<Quiz, 'answerChoice'>>({
+  const componentChoice = componentMapping<
+    Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
+  >({
     COMBINATION: Combination,
     MULTIPLE_CHOICE: MultipleChoice,
     OX_SELECTOR: OXSelector,
@@ -70,7 +71,7 @@ export default function Quiz() {
         <ProgressSection>진행도</ProgressSection>
         <>
           <Question title={title} question={question} category={category} />
-          {componentChoice(category, { answerChoice })}
+          {componentChoice(category, { answerChoice, answer })}
           <SubmitSection>
             <ResponseButton
               onClick={() => {

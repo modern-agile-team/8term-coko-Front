@@ -1,3 +1,4 @@
+import JsxParser from 'react-jsx-parser';
 import styled, { css, keyframes } from 'styled-components';
 
 //문제(Quiz)의 제목(title)과 문항(question)이 들어갈 공간
@@ -168,4 +169,8 @@ export const ScoreBackGroundDiv = styled.div`
 export const LineChangeDiv = styled.div`
   flex-basis: 100%;
   height: 10px;
+`;
+export const JsxParserDiv = styled(JsxParser)`
+  display: flex;
+  justify-content: flex-start;
 `;
