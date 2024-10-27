@@ -1,4 +1,4 @@
-import Question from '../../features/Quiz/ui/Question';
+import Question from '../../features/quiz/ui/Question';
 import { AlignCenter } from '../../style/LayOut';
 import {
   GridContainer,
@@ -8,16 +8,16 @@ import {
 } from './styles';
 import type Quiz from '../../types/Quiz';
 import { useClientQuizStore } from '../../store/useQuizStore';
-import Combination from '../../features/Quiz/ui/Combination';
-import MultipleChoice from '../../features/Quiz/ui/MultipleChoice';
-import OXSelector from '../../features/Quiz/ui/OXSelector';
-import ShortAnswer from '../../features/Quiz/ui/ShortAnswer';
+import Combination from '../../features/quiz/ui/Combination';
+import MultipleChoice from '../../features/quiz/ui/MultipleChoice';
+import OXSelector from '../../features/quiz/ui/OXSelector';
+import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
 import useRefreshWaringAlert from '../../hooks/useRefreshWaringAlert';
 import QUIZ from '../../apis/quiz';
-import ResultModal from '../../features/Quiz/ui/ResultModal';
+import ResultModal from '../../features/quiz/ui/ResultModal';
 import useQueryParams from '../../hooks/useQueryParams';
-import TotalResults from '../../features/Quiz/ui/TotalResults';
+import TotalResults from '../../features/quiz/ui/TotalResults';
 import { SubmitSection, ResponseButton } from '../../features/Quiz/styles';
 import { useState } from 'react';
 import arraysEqual from '../../utils/arraysEqual';

@@ -5,12 +5,12 @@ export const useClientQuizStore = create<ClientquizStoreTypes>(set => ({
   currentPage: 0,
   handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
 
-  /**유저 응답 전역상태 */
+  /**유저  응답 전역상태 */
   userResponseAnswer: [],
-  //유저 응답 추가
+  //유저의 응답을 추가(단답형, OX, 객관식 )
   setUserResponseAnswer: userResposne =>
     set(() => ({ userResponseAnswer: [userResposne] })),
-  //유저 응답 누적
+  //유저 응답 누적 (조합형, 답이 여러개인 것)
   pushUserResponseAnswer: userResponse =>
     set(state => {
       const copyArray = [...state.userResponseAnswer];
@@ -28,7 +28,6 @@ export const useClientQuizStore = create<ClientquizStoreTypes>(set => ({
   //유저 응답 순서 교환
   swapUserResponseAnswer: (index1, index2) =>
     set(state => {
-      console.log(index1, index2);
       const copyArray = [...state.userResponseAnswer];
       [copyArray[index1], copyArray[index2]] = [
         copyArray[index2],

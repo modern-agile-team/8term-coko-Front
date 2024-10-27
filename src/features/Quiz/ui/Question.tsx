@@ -1,12 +1,12 @@
 import { QuestionDiv, QuestionSection } from './../styles';
 import { useClientQuizStore } from '../../../store/useQuizStore';
-
 import TextBlock from './TextBlock';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import '../styles.css';
 import emptyChangeToDiv from '../service/emptyChangeToDiv';
 import lineChanger from '../service/lineChanger';
 import { useRef } from 'react';
+import Dompurify from 'dompurify';
 interface questiontype {
   title: string;
   question: string;
@@ -35,8 +35,11 @@ export default function Question({ title, question }: questiontype) {
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
+      //class명이 empty인(빈칸) 을 찾음
       if (domNode instanceof Element && domNode.attribs.class === 'empty') {
+        //그 노드의 id 저장
         const id = Number(domNode.attribs.id);
+        //응답 배열에서 해당 id의 값 가져와서 빈칸을 TextBlock 컴포넌트로 변경 해당 인덱스가 빈칸이면 그대로 domNod
         return userResponseAnswer[id] ? (
           <TextBlock
             index={id}
@@ -55,7 +58,9 @@ export default function Question({ title, question }: questiontype) {
     <QuestionSection>
       <h1> {title} </h1>
       <br></br>
-      <QuestionDiv> {parse(nonEmptyQuestion, options)}</QuestionDiv>
+      <QuestionDiv>
+        {parse(Dompurify.sanitize(nonEmptyQuestion), options)}
+      </QuestionDiv>
     </QuestionSection>
   );
 }
