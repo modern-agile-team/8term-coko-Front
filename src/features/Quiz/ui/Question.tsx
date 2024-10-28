@@ -1,6 +1,5 @@
-import { QuestionDiv, QuestionSection } from './../styles';
+import { QuestionDiv, QuestionSection, TextBlockButton } from './../styles';
 import { useClientQuizStore } from '../../../store/useQuizStore';
-import TextBlock from './TextBlock';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import '../styles.css';
 import emptyChangeToDiv from '../service/emptyChangeToDiv';
@@ -13,7 +12,11 @@ interface questiontype {
   category: string;
 }
 export default function Question({ title, question }: questiontype) {
-  const { userResponseAnswer, swapUserResponseAnswer } = useClientQuizStore();
+  const {
+    userResponseAnswer,
+    swapUserResponseAnswer,
+    spliceUserResponseAnswer,
+  } = useClientQuizStore();
   const lineChangeQuestion = lineChanger(question);
   const dragItem = useRef<null | number>(null); // 드래그할 아이템의 인덱스
   const dragOverItem = useRef<null | number>(null); // 드랍할 위치의 아이템의 인덱스
@@ -22,7 +25,6 @@ export default function Question({ title, question }: questiontype) {
   const dragStart = (position: number) => {
     dragItem.current = position;
   };
-
   // 드래그중인 대상이 위로 포개졌을 때
   const dragEnter = (position: number) => {
     dragOverItem.current = position;
@@ -41,12 +43,18 @@ export default function Question({ title, question }: questiontype) {
         const id = Number(domNode.attribs.id);
         //응답 배열에서 해당 id의 값 가져와서 빈칸을 TextBlock 컴포넌트로 변경 해당 인덱스가 빈칸이면 그대로 domNod
         return userResponseAnswer[id] ? (
-          <TextBlock
-            index={id}
-            dragStart={dragStart}
-            dragEnter={dragEnter}
-            drop={drop}
-          />
+          <TextBlockButton
+            onClick={() => spliceUserResponseAnswer(id)}
+            draggable
+            onDragStart={() => dragStart(id)}
+            onDragEnter={() => dragEnter(id)}
+            onDragEnd={() => {
+              drop();
+            }}
+            onDragOver={e => e.preventDefault()}
+          >
+            {userResponseAnswer[id]}
+          </TextBlockButton>
         ) : (
           domNode
         );
@@ -59,6 +67,7 @@ export default function Question({ title, question }: questiontype) {
       <h1> {title} </h1>
       <br></br>
       <QuestionDiv>
+        {/* Dompurify를 이용한 xss공격 방어 */}
         {parse(Dompurify.sanitize(nonEmptyQuestion), options)}
       </QuestionDiv>
     </QuestionSection>

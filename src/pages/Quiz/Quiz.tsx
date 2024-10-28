@@ -18,9 +18,9 @@ import QUIZ from '../../apis/quiz';
 import ResultModal from '../../features/quiz/ui/ResultModal';
 import useQueryParams from '../../hooks/useQueryParams';
 import TotalResults from '../../features/quiz/ui/TotalResults';
-import { SubmitSection, ResponseButton } from '../../features/Quiz/styles';
 import { useState } from 'react';
 import arraysEqual from '../../utils/arraysEqual';
+import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
 //퀴즈페이지
 export default function Quiz() {
   const { currentPage, totalResults, userResponseAnswer } =
@@ -66,7 +66,7 @@ export default function Quiz() {
       <GridContainer>
         <HeaderSection>
           <div>로고</div>
-          <div>돈-??-프사 </div>
+          <div>돈-??-프사</div>
         </HeaderSection>
         <ProgressSection>진행도</ProgressSection>
         <>
@@ -82,7 +82,7 @@ export default function Quiz() {
               스킵
             </ResponseButton>
             <ResponseButton
-              disabled={userResponseAnswer.length === 0}
+              disabled={userResponseAnswer[0] === ''}
               onClick={() => {
                 setResult(arraysEqual<string>(userResponseAnswer, answer));
                 setIsResultModal(true);

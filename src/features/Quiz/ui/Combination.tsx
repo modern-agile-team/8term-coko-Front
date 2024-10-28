@@ -21,6 +21,7 @@ export default function Combination({
               key={index}
               onClick={() => {
                 if (
+                  //답 수랑 내가 선택한 답 (공백빼고) 갯수 비교 정답보다 선택한게 많으면 안되니
                   answer.length > userResponseAnswer.filter(item => item).length
                 ) {
                   pushUserResponseAnswer(choice);
