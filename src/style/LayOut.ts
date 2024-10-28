@@ -17,7 +17,7 @@ export const LayOutDiv = styled.div<LayOut>`
   flex-direction: column;
   align-items: center;
   margin-top: ${({ $marginTop }) => $marginTop || '0px'};
-  height: ${({ $height }) => $height || '100vh'};
+  height: ${({ $height }) => $height};
   background-color: ${({ $backGroundColor }) => $backGroundColor || '#fffff'};
 `;
 export const FeatureDiv = styled.div<LayOut>`

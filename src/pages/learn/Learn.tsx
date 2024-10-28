@@ -6,6 +6,7 @@ import CokoLogo from '../../common/layout/CokoLogo';
 import ProgressSquare from '../../features/Progress/ui/ProgressSquare';
 import SelectSection from '../../common/layout/SelectSection';
 import QuizSection from '../../features/Quiz/ui/QuizSection';
+import PartNavButton from '../../features/Quiz/ui/PartNavButton';
 
 export default function Learn() {
   return (
@@ -18,7 +19,9 @@ export default function Learn() {
         <Layout>
           <ProgressSquare />
           <SelectSection />
-          <QuizSection />
+          <QuizSection>
+            <PartNavButton />
+          </QuizSection>
         </Layout>
         <Layout>
           <Header />

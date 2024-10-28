@@ -1,5 +1,10 @@
+import { ReactNode } from 'react';
 import { QuizBox } from '../styles';
 
-export default function QuizSection() {
-  return <QuizBox>섹션 칸</QuizBox>;
+interface QuizSectionProps {
+  children: ReactNode;
+}
+
+export default function QuizSection({ children }: QuizSectionProps) {
+  return <QuizBox>{children}</QuizBox>;
 }
