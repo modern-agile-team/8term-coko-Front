@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import Quiz from '../admin/types/Quiz';
 import api from './axios/instance';
+import Quiz from '../types/Quiz';
 
 const QUIZ = {
-  getQuizzes: (sectionId: number, part: Quiz['part']) => {
+  getQuizzes: (sectionId: Quiz['sectionId'], part: Quiz['part']) => {
     return useQuery({
       queryKey: ['quizzes', { sectionId, part }],
       queryFn: () => api.get(`/quizzes?sectionId=${sectionId}&part=${part}`),
@@ -13,6 +13,5 @@ const QUIZ = {
       staleTime: 1 * 60 * 1000,
     });
   },
-  postQuiz: (quiz: Quiz) => api.post(`/quizzes`, quiz),
 };
 export default QUIZ;
