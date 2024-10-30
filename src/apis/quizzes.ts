@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import Quiz from '../types/Quiz';
 import api from './axios/instance';
+import Quiz from '../types/Quiz';
 
 const QuizzesApi = {
   get: (sectionId: Quiz['sectionId'], part: Quiz['part']) => {
-    return useQuery<Quiz[]>({
+    return useQuery({
       queryKey: ['quizzes', { sectionId, part }],
       queryFn: () =>
         api
