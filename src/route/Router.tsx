@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../pages/main/Main';
 import Quest from '../pages/Quest/Quest';
 import Ranking from '../pages/Ranking/Ranking';
-import Quiz from '../pages/Quiz/Quiz';
+import Quiz from '../pages/quiz/Quiz';
 import Admin from '../admin/Admin';
 import CreateQuiz from '../admin/CreateQuiz';
 import Login from '../pages/login/Login';

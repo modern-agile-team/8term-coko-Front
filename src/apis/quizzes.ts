@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import Quiz from '../types/Quiz';
 import api from './axios/instance';
 
-const QUIZ = {
-  getQuizzes: (sectionId: string | null, part: string | null) => {
+const QuizzesApi = {
+  get: (sectionId: Quiz['sectionId'], part: Quiz['part']) => {
     return useQuery<Quiz[]>({
       queryKey: ['quizzes', { sectionId, part }],
       queryFn: () =>
@@ -17,4 +17,4 @@ const QUIZ = {
     });
   },
 };
-export default QUIZ;
+export default QuizzesApi;

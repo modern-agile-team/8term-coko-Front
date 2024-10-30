@@ -1,6 +1,6 @@
 export default interface Quiz {
   id: number;
-  partId: number;
+  part: string;
   sectionId: number;
   title: string;
   question: string;

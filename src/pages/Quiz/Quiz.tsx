@@ -5,7 +5,7 @@ import {
   HeaderSection,
   ProgressSection,
   TotalResultsSection,
-} from './styles';
+} from '../quiz/styles';
 import type Quiz from '../../types/Quiz';
 import { useClientQuizStore } from '../../store/useQuizStore';
 import Combination from '../../features/quiz/ui/Combination';
@@ -14,13 +14,13 @@ import OXSelector from '../../features/quiz/ui/OXSelector';
 import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
 import useRefreshWaringAlert from '../../hooks/useRefreshWaringAlert';
-import QUIZ from '../../apis/quiz';
 import ResultModal from '../../features/quiz/ui/ResultModal';
 import useQueryParams from '../../hooks/useQueryParams';
 import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
 import arraysEqual from '../../utils/arraysEqual';
 import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
+import QuizzesApi from './../../apis/quizzes';
 //퀴즈페이지
 export default function Quiz() {
   const { currentPage, totalResults, userResponseAnswer } =
@@ -29,7 +29,10 @@ export default function Quiz() {
   const [result, setResult] = useState<boolean>(false);
   const [isResultModal, setIsResultModal] = useState<boolean>(false);
   useRefreshWaringAlert();
-  const { data: quizzes, isLoading } = QUIZ.getQuizzes(section, part);
+  if (section === null || part === null) {
+    return <div>404</div>;
+  }
+  const { data: quizzes, isLoading } = QuizzesApi.get(Number(section), part);
   if (isLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
   if (quizzes.length === totalResults.length) {

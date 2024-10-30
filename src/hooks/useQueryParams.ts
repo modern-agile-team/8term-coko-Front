@@ -12,7 +12,6 @@ function useQueryParams(params: string[]): (string | null)[] {
   params.forEach(param => {
     result.push(queryParams.get(param));
   });
-
   return result;
 }
 
