@@ -1,4 +1,4 @@
-interface ClientquizStoreTypes {
+interface ClientQuizStoreTypes {
   currentPage: number;
   userResponseAnswer: string[];
   totalResults: boolean[];
@@ -10,4 +10,4 @@ interface ClientquizStoreTypes {
   resetUserResponseAnswer: () => void;
   pushTotalResults: (result: boolean) => void;
 }
-export default ClientquizStoreTypes;
+export default ClientQuizStoreTypes;

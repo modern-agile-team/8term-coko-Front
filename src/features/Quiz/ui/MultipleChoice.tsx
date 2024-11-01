@@ -1,9 +1,10 @@
 import Quiz from '../../../types/Quiz';
 import { MultipleChoiceQuestionButton, ResponseBoxSection } from '../styles';
 import { useClientQuizStore } from '../../../store/useQuizStore';
-export default function MultipleChoice({
-  answerChoice,
-}: Pick<Quiz, 'answerChoice'>) {
+interface MultipleChoiceProps {
+  answerChoice: Quiz['answerChoice'];
+}
+export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
   const { userResponseAnswer, setUserResponseAnswer } = useClientQuizStore();
   return (
     <>

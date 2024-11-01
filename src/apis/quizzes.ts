@@ -3,12 +3,12 @@ import api from './axios/instance';
 import Quiz from '../types/Quiz';
 
 const QuizzesApi = {
-  get: (sectionId: Quiz['sectionId'], part: Quiz['part']) => {
+  get: (sectionId: Quiz['sectionId'], partId: Quiz['partId']) => {
     return useQuery({
-      queryKey: ['quizzes', { sectionId, part }],
+      queryKey: ['quizzes', { sectionId, partId }],
       queryFn: () =>
         api
-          .get(`/quizzes?sectionId=${sectionId}&part=${part}`)
+          .get(`/quizzes?sectionId=${sectionId}&partId=${partId}`)
           .then(response => response.data),
       //gcTime : 캐시에 남아있는 시간 5분
       gcTime: 5 * 60 * 1000,

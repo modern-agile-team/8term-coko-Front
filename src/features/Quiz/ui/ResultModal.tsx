@@ -1,10 +1,13 @@
 import { useClientQuizStore } from '../../../store/useQuizStore';
 import { ScoreBackGroundDiv, ScoreSection } from '../styles';
-interface ScoreProps {
+interface ResultModalProps {
   result: boolean;
   setIsResultModal: (parameter: boolean) => void;
 }
-export default function ResultModal({ result, setIsResultModal }: ScoreProps) {
+export default function ResultModal({
+  result,
+  setIsResultModal,
+}: ResultModalProps) {
   const { handleNextPage, resetUserResponseAnswer, pushTotalResults } =
     useClientQuizStore();
 

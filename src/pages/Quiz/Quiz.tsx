@@ -1,11 +1,6 @@
 import Question from '../../features/quiz/ui/Question';
 import { AlignCenter } from '../../style/LayOut';
-import {
-  GridContainer,
-  HeaderSection,
-  ProgressSection,
-  TotalResultsSection,
-} from '../quiz/styles';
+import { GridContainer, HeaderSection, ProgressSection } from '../quiz/styles';
 import type Quiz from '../../types/Quiz';
 import { useClientQuizStore } from '../../store/useQuizStore';
 import Combination from '../../features/quiz/ui/Combination';
@@ -25,32 +20,23 @@ import QuizzesApi from './../../apis/quizzes';
 export default function Quiz() {
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
-  const [section, part] = useQueryParams(['section-id', 'part']);
+  const [section, partId] = useQueryParams(['section-id', 'part-id']);
   const [result, setResult] = useState<boolean>(false);
   const [isResultModal, setIsResultModal] = useState<boolean>(false);
   useRefreshWaringAlert();
-  if (section === null || part === null) {
+  if (section === null || partId === null) {
     return <div>404</div>;
   }
-  const { data: quizzes, isLoading } = QuizzesApi.get(Number(section), part);
+  const { data: quizzes, isLoading } = QuizzesApi.get(
+    Number(section),
+    Number(partId)
+  );
   if (isLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
   if (quizzes.length === totalResults.length) {
     return (
       <>
-        <AlignCenter>
-          <GridContainer>
-            <HeaderSection>
-              <div>로고</div>
-              <div>돈-??-프사 </div>
-            </HeaderSection>
-            <ProgressSection>진행도</ProgressSection>
-            <TotalResultsSection>
-              <TotalResults quizzes={quizzes} totalResults={totalResults} />
-            </TotalResultsSection>
-            <button>돌아가기</button>
-          </GridContainer>
-        </AlignCenter>
+        <TotalResults quizzes={quizzes} totalResults={totalResults} />
       </>
     );
   }

@@ -3,7 +3,6 @@ axiosConfig.interceptors.request.use(config => {
   //요청 성공 직전 호출
   //헤더에 인가 토큰 부착
   //로컬스토리지에 저장한다고 가정한다면
-  console.log('asdasd');
   const accessToken: string | null = localStorage.getItem('Token');
   if (accessToken !== null) {
     config.headers.Authorization = `Bearer ${accessToken}`;

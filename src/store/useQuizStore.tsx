@@ -1,10 +1,9 @@
 import { create } from 'zustand';
-import type ClientquizStoreTypes from '../types/ClientquizStoreTypes';
-export const useClientQuizStore = create<ClientquizStoreTypes>(set => ({
+import ClientQuizStoreTypes from '../types/ClientQuizStoreTypes';
+export const useClientQuizStore = create<ClientQuizStoreTypes>(set => ({
   /** 페이지 전역상태*/
   currentPage: 0,
   handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
-
   /**유저  응답 전역상태 */
   userResponseAnswer: [],
   //유저의 응답을 추가(단답형, OX, 객관식 )
