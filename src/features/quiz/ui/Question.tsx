@@ -1,5 +1,5 @@
 import { QuestionDiv, QuestionSection, TextBlockButton } from './../styles';
-import { useClientQuizStore } from '../../../store/useQuizStore';
+import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import '../styles.css';
 import emptyChangeToDiv from '../service/emptyChangeToDiv';
@@ -28,7 +28,7 @@ export default function Question({ title, question }: questiontype) {
       //class명이 empty인(빈칸) html Element를 찾음
       if (domNode instanceof Element && domNode.attribs.class === 'empty') {
         //그 노드의 id를 가져옴
-        const id = Number(domNode.attribs.id);
+        const id = Number(domNode.attribs.id.match(/\d+$/));
         //전역상태(유저의 응답) 배열에서 해당 id의 값 가져와서 빈칸을 TextBlock 컴포넌트로 변경 해당 인덱스가 빈칸이면 그대로 domNod
         return userResponseAnswer[id] ? (
           <TextBlockButton

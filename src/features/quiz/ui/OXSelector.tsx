@@ -1,5 +1,5 @@
 import { OXButton, CharacterBox, ResponseBoxSection } from '../styles';
-import { useClientQuizStore } from '../../../store/useQuizStore';
+import { useClientQuizStore } from '../../../store/useClientQuizStore';
 export default function OXSelector() {
   //OX버튼을 눌러 답을 제출함
   const { userResponseAnswer, setUserResponseAnswer } = useClientQuizStore();

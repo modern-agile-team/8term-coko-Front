@@ -1,4 +1,4 @@
-import { useClientQuizStore } from '../../../store/useQuizStore';
+import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import { ResponseBoxSection, ShortAnswerInput } from '../styles';
 import { CharacterBox } from '../styles';
 

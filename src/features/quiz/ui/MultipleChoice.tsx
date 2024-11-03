@@ -1,6 +1,6 @@
 import Quiz from '../../../types/Quiz';
 import { MultipleChoiceQuestionButton, ResponseBoxSection } from '../styles';
-import { useClientQuizStore } from '../../../store/useQuizStore';
+import { useClientQuizStore } from '../../../store/useClientQuizStore';
 interface MultipleChoiceProps {
   answerChoice: Quiz['answerChoice'];
 }

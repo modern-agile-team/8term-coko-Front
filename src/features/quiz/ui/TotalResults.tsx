@@ -1,25 +1,30 @@
+import { useNavigate } from 'react-router-dom';
 import type Quiz from '../../../types/Quiz';
-import type ClientQuizStoreTypes from '../../../types/ClientQuizStoreTypes';
 interface TotalResultsProps {
   quizzes: Quiz[];
-  totalResults: ClientQuizStoreTypes['totalResults'];
+  totalResults: boolean[];
 }
 export default function TotalResults({
   quizzes,
   totalResults,
 }: TotalResultsProps) {
+  const navigate = useNavigate();
+  const goToLearnPage = () => {
+    navigate('/learn');
+  };
   return (
     <>
       <div>
         <ul>
           <li>총 문제 수 : {quizzes.length}</li>
           <li>맞은 문제 수 : {totalResults.filter(result => result).length}</li>
-          <li>
-            맞은 문제 id들 : {totalResults.filter(result => result).length}
-          </li>
+          <li>맞은 퀴즈 아이디:</li>
+          <div>기타 결과들..</div>
         </ul>
       </div>
-      <button type="button">돌아가기</button>
+      <button type="button" onClick={goToLearnPage}>
+        learn페이지로 돌아가기
+      </button>
     </>
   );
 }

@@ -2,7 +2,7 @@ import Question from '../../features/quiz/ui/Question';
 import { AlignCenter } from '../../style/LayOut';
 import { GridContainer, HeaderSection, ProgressSection } from '../quiz/styles';
 import type Quiz from '../../types/Quiz';
-import { useClientQuizStore } from '../../store/useQuizStore';
+import { useClientQuizStore } from '../../store/useClientQuizStore';
 import Combination from '../../features/quiz/ui/Combination';
 import MultipleChoice from '../../features/quiz/ui/MultipleChoice';
 import OXSelector from '../../features/quiz/ui/OXSelector';
@@ -15,28 +15,31 @@ import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
 import arraysEqual from '../../utils/arraysEqual';
 import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
-import QuizzesApi from './../../apis/quizzes';
+import QuizzesQuery from '../../queries/quizzesQuery';
+
 //퀴즈페이지
 export default function Quiz() {
-  //-----임시 유저 세팅-----
-  const user = { id: 1, name: 'Hi' };
-  localStorage.setItem('user', JSON.stringify(user));
-  //-----임시 유저 세팅----
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
-  const [section, partId] = useQueryParams(['section-id', 'part-id']);
   const [result, setResult] = useState<boolean>(false);
   const [isResultModal, setIsResultModal] = useState<boolean>(false);
+
+  //새로고침 시 WaringAlert가 뜨게해주는 훅
   useRefreshWaringAlert();
-  if (section === null || partId === null) {
+  //추후에 url에서 추출이 아닌 내부적으로 props로 전달하는 로직으로 변경 예정
+  const [partId] = useQueryParams(['part-id']);
+  if (partId === null) {
     return <div>404</div>;
   }
-  const { data: quizzes, isLoading } = QuizzesApi.get(
-    Number(section),
-    Number(partId)
-  );
+  //------------------------------------------
+  const { data: quizzes, isLoading } = QuizzesQuery.get({
+    partId: Number(partId),
+  });
+  //추후 loading 페이지로 교체
   if (isLoading) return <div>Loading</div>;
+  //------------------------
   if (!quizzes) return <div>404</div>;
+  //퀴즈가 끝났을때 결과페이지 리턴
   if (quizzes.length === totalResults.length) {
     return (
       <>
@@ -44,8 +47,10 @@ export default function Quiz() {
       </>
     );
   }
+  //-----------------------------
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
+  //
   const componentChoice = componentMapping<
     Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
   >({

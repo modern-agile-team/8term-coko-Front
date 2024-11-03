@@ -1,6 +1,6 @@
 import Quiz from '../../../types/Quiz';
 import { CombinationUl, TextBlockButton } from '../styles';
-import { useClientQuizStore } from '../../../store/useQuizStore';
+import { useClientQuizStore } from '../../../store/useClientQuizStore';
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];
   answer: Quiz['answer'];

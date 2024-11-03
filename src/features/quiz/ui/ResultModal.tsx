@@ -1,5 +1,6 @@
-import progressQuery from '../../../apis/users';
-import { useClientQuizStore } from '../../../store/useQuizStore';
+import progressQuery from '../../../queries/usersQuery';
+import { useClientQuizStore } from '../../../store/useClientQuizStore';
+import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
 import { ScoreBackGroundDiv, ScoreSection } from '../styles';
 interface ResultModalProps {
@@ -15,14 +16,9 @@ export default function ResultModal({
   const { handleNextPage, resetUserResponseAnswer, pushTotalResults } =
     useClientQuizStore();
   //임시 유저 가져오기
-  const user = localStorage.getItem('user');
-  let userId: number;
-  if (user !== null) {
-    userId = JSON.parse(user).id;
-  }
-
+  const { user } = useUserStore();
+  const userId = user.id;
   const addProgress = progressQuery.put();
-
   //임시 유저 가져오기
   return (
     <>
@@ -35,11 +31,12 @@ export default function ResultModal({
               pushTotalResults(result);
               setIsResultModal(false);
               handleNextPage();
-              addProgress.mutate({
-                userId,
-                quizId,
-                body: { isCorrect: result },
-              });
+              userId &&
+                addProgress.mutate({
+                  userId,
+                  quizId,
+                  body: { isCorrect: result },
+                });
             }}
           >
             계속하기

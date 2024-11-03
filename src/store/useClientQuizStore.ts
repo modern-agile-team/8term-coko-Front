@@ -1,6 +1,19 @@
 import { create } from 'zustand';
-import ClientQuizStoreTypes from '../types/ClientQuizStoreTypes';
-export const useClientQuizStore = create<ClientQuizStoreTypes>(set => ({
+interface State {
+  currentPage: number;
+  userResponseAnswer: string[];
+  totalResults: boolean[];
+}
+interface Actions {
+  handleNextPage: () => void;
+  setUserResponseAnswer: (userResposne: string) => void;
+  pushUserResponseAnswer: (userResponse: string) => void;
+  spliceUserResponseAnswer: (choiceIndex: number) => void;
+  swapUserResponseAnswer: (index1: number, index2: number) => void;
+  resetUserResponseAnswer: () => void;
+  pushTotalResults: (result: boolean) => void;
+}
+export const useClientQuizStore = create<State & Actions>(set => ({
   /** 페이지 전역상태*/
   currentPage: 0,
   handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
