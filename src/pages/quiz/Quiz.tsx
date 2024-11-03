@@ -15,7 +15,7 @@ import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
 import arraysEqual from '../../utils/arraysEqual';
 import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
-import QuizzesQuery from '../../queries/quizzesQuery';
+import QuizzesQuery from '../../querys/quizzesQuery';
 import useMoadl from '../../hooks/useModal';
 
 //퀴즈페이지

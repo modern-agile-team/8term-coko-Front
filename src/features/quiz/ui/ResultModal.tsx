@@ -1,4 +1,4 @@
-import progressQuery from '../../../queries/usersQuery';
+import progressQuery from '../../../querys/usersQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
