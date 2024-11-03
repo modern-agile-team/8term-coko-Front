@@ -19,21 +19,7 @@ export default function TotalResults({
           </li>
         </ul>
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          const isLogin = confirm('로그인 체크하는 로직 yes or no');
-          if (isLogin) {
-            alert('서버로 맞은문제 보내주기기');
-          } else {
-            confirm('로그인 안하면 저장안되는데 그냥 나갈꺼야?')
-              ? alert('그냥 /learn페이지로 보내버리기')
-              : alert('로그인 페이지로 이동하는데 지금상태를갖고있기');
-          }
-        }}
-      >
-        돌아가기
-      </button>
+      <button type="button">돌아가기</button>
     </>
   );
 }

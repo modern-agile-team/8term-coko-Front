@@ -18,6 +18,10 @@ import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
 import QuizzesApi from './../../apis/quizzes';
 //퀴즈페이지
 export default function Quiz() {
+  //-----임시 유저 세팅-----
+  const user = { id: 1, name: 'Hi' };
+  localStorage.setItem('user', JSON.stringify(user));
+  //-----임시 유저 세팅----
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
   const [section, partId] = useQueryParams(['section-id', 'part-id']);
@@ -40,7 +44,7 @@ export default function Quiz() {
       </>
     );
   }
-  const { title, question, category, answerChoice, answer } =
+  const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
   const componentChoice = componentMapping<
     Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
@@ -81,7 +85,11 @@ export default function Quiz() {
             </ResponseButton>
           </SubmitSection>
           {isResultModal && (
-            <ResultModal result={result} setIsResultModal={setIsResultModal} />
+            <ResultModal
+              quizId={id}
+              result={result}
+              setIsResultModal={setIsResultModal}
+            />
           )}
         </>
       </GridContainer>
