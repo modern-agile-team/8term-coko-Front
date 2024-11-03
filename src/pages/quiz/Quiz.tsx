@@ -16,14 +16,14 @@ import { useState } from 'react';
 import arraysEqual from '../../utils/arraysEqual';
 import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
 import QuizzesQuery from '../../queries/quizzesQuery';
+import useMoadl from '../../hooks/useModal';
 
 //퀴즈페이지
 export default function Quiz() {
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
   const [result, setResult] = useState<boolean>(false);
-  const [isResultModal, setIsResultModal] = useState<boolean>(false);
-
+  const { Modal, closeModal, openModal, isShow } = useMoadl();
   //새로고침 시 WaringAlert가 뜨게해주는 훅
   useRefreshWaringAlert();
   //추후에 url에서 추출이 아닌 내부적으로 props로 전달하는 로직으로 변경 예정
@@ -74,7 +74,7 @@ export default function Quiz() {
             <ResponseButton
               onClick={() => {
                 setResult(false);
-                setIsResultModal(true);
+                openModal();
               }}
             >
               스킵
@@ -83,19 +83,15 @@ export default function Quiz() {
               disabled={userResponseAnswer[0] === ''}
               onClick={() => {
                 setResult(arraysEqual<string>(userResponseAnswer, answer));
-                setIsResultModal(true);
+                openModal();
               }}
             >
               확인
             </ResponseButton>
           </SubmitSection>
-          {isResultModal && (
-            <ResultModal
-              quizId={id}
-              result={result}
-              setIsResultModal={setIsResultModal}
-            />
-          )}
+          <Modal isShow={isShow}>
+            <ResultModal quizId={id} result={result} closeModal={closeModal} />
+          </Modal>
         </>
       </GridContainer>
     </AlignCenter>

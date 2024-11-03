@@ -157,14 +157,7 @@ export const ScoreSection = styled.section`
 
   animation: ${fadeIn} 0.7s ease-out;
 `;
-export const ScoreBackGroundDiv = styled.div`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.001);
-`;
+
 export const LineChangeDiv = styled.div`
   flex-basis: 100%;
   height: 10px;
