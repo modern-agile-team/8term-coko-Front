@@ -1,17 +1,22 @@
 /**
- * @description 2개의 배열을 비교하는 함수입니다.
+ * @description 2개의 1차원 배열을 순서와 내부 값이 일치하는지 비교하는 함수입니다.
  *
- * @template T 배열 내부 요소의 타입
  *
- * @param T[] array 첫번째 array
- * @param T[] array 두번째 array
+ * @param array1 첫번째 array
+ * @param array2 두번째 array
  *
  * @returns boolean값
  *
- * @example arraysEquial<number>([1,2,3,4,5],[1,2,3,4,1]);
+ * @example isArrayContentEqual([1,2,3,4,5],['a',2,3,1]);
  * //false
  */
-const arraysEqual = <T>(array1: T[], array2: T[]) => {
-  return JSON.stringify(array1) === JSON.stringify(array2);
+const isArrayContentEqual = (array1: any[], array2: any[]): boolean => {
+  if (array1.length !== array2.length) return false;
+  for (let i = 0; i < array1.length; i++) {
+    if (array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+  return true;
 };
-export default arraysEqual;
+export default isArrayContentEqual;
