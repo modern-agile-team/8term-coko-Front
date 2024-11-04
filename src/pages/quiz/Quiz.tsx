@@ -8,14 +8,14 @@ import MultipleChoice from '../../features/quiz/ui/MultipleChoice';
 import OXSelector from '../../features/quiz/ui/OXSelector';
 import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
-import useRefreshWaringAlert from '../../hooks/useRefreshWaringAlert';
+import useBeforeUnload from '../../hooks/useBeforeUnload';
 import ResultModal from '../../features/quiz/ui/ResultModal';
-import useQueryParams from '../../hooks/useQueryParams';
+import getParams from '../../utils/getParams';
 import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
 import arraysEqual from '../../utils/arraysEqual';
 import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
-import QuizzesQuery from '../../querys/quizzesQuery';
+import QuizzesQuery from '../../queries/quizzesQuery';
 import useMoadl from '../../hooks/useModal';
 
 //퀴즈페이지
@@ -25,9 +25,9 @@ export default function Quiz() {
   const [result, setResult] = useState<boolean>(false);
   const { Modal, closeModal, openModal, isShow } = useMoadl();
   //새로고침 시 WaringAlert가 뜨게해주는 훅
-  useRefreshWaringAlert();
+  useBeforeUnload();
   //추후에 url에서 추출이 아닌 내부적으로 props로 전달하는 로직으로 변경 예정
-  const [partId] = useQueryParams(['part-id']);
+  const [partId] = getParams(['part-id']);
   if (partId === null) {
     return <div>404</div>;
   }
@@ -51,7 +51,7 @@ export default function Quiz() {
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
   //
-  const componentChoice = componentMapping<
+  const getComponentMappingByChoiceType = componentMapping<
     Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
   >({
     COMBINATION: Combination,
@@ -69,7 +69,7 @@ export default function Quiz() {
         <ProgressSection>진행도</ProgressSection>
         <>
           <Question title={title} question={question} category={category} />
-          {componentChoice(category, { answerChoice, answer })}
+          {getComponentMappingByChoiceType(category, { answerChoice, answer })}
           <SubmitSection>
             <ResponseButton
               onClick={() => {

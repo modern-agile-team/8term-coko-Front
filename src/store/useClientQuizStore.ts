@@ -18,7 +18,7 @@ export const useClientQuizStore = create<State & Actions>(set => ({
   currentPage: 0,
   handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
   /**유저  응답 전역상태 */
-  userResponseAnswer: [],
+  userResponseAnswer: [''],
   //유저의 응답을 추가(단답형, OX, 객관식 )
   setUserResponseAnswer: userResposne =>
     set(() => ({ userResponseAnswer: [userResposne] })),
@@ -36,7 +36,7 @@ export const useClientQuizStore = create<State & Actions>(set => ({
       return { userResponseAnswer: [...copyArray] };
     }),
   //유저 응답 리셋
-  resetUserResponseAnswer: () => set(() => ({ userResponseAnswer: [] })),
+  resetUserResponseAnswer: () => set(() => ({ userResponseAnswer: [''] })),
   //유저 응답 순서 교환
   swapUserResponseAnswer: (index1, index2) =>
     set(state => {

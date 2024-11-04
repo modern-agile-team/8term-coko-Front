@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import type Quiz from '../../../types/Quiz';
 interface TotalResultsProps {
   quizzes: Quiz[];
@@ -8,10 +8,6 @@ export default function TotalResults({
   quizzes,
   totalResults,
 }: TotalResultsProps) {
-  const navigate = useNavigate();
-  const goToLearnPage = () => {
-    navigate('/learn');
-  };
   return (
     <>
       <div>
@@ -22,9 +18,7 @@ export default function TotalResults({
           <div>기타 결과들..</div>
         </ul>
       </div>
-      <button type="button" onClick={goToLearnPage}>
-        learn페이지로 돌아가기
-      </button>
+      <Link to="/learn">learn페이지로 돌아가기</Link>
     </>
   );
 }

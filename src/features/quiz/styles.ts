@@ -18,7 +18,7 @@ interface ResponseBoxProps {
   $gridColumn?: string;
   $justifyContent?: string;
 }
-1;
+
 export const ResponseBoxSection = styled.section<ResponseBoxProps>`
   display: flex;
   justify-content: ${({ $justifyContent }) => $justifyContent || 'center'};
@@ -90,10 +90,10 @@ export const CombinationUl = styled.ul`
 `;
 
 //블럭유형에서 각 텍스트에 해당하는 리스트 스타일
-interface TextBlockLiProps {
+interface TextBlockButtonProps {
   $selected?: boolean;
 }
-export const TextBlockButton = styled.button<TextBlockLiProps>`
+export const TextBlockButton = styled.button<TextBlockButtonProps>`
   cursor: pointer;
   border-radius: 8px;
   background: #19191b;

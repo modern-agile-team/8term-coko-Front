@@ -8,6 +8,7 @@ const usersApis = {
     userId: number;
     quizId: number;
     body: Record<'isCorrect', boolean>;
-  }) => api.put(`/users/${userId}/progress/quizzes/${quizId}`, body),
+  }) =>
+    api.put<Promise<void>>(`/users/${userId}/progress/quizzes/${quizId}`, body),
 };
 export default usersApis;
