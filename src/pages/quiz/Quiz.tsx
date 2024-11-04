@@ -13,7 +13,7 @@ import ResultModal from '../../features/quiz/ui/ResultModal';
 import getParams from '../../utils/getParams';
 import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
-import isArrayContentEqual from '../../utils/arraysEqual';
+import isEqualArray from '../../utils/isEqualArray';
 import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
 import QuizzesQuery from '../../queries/quizzesQuery';
 import useMoadl from '../../hooks/useModal';
@@ -82,7 +82,7 @@ export default function Quiz() {
             <ResponseButton
               disabled={userResponseAnswer[0] === ''}
               onClick={() => {
-                setResult(isArrayContentEqual(userResponseAnswer, answer));
+                setResult(isEqualArray(userResponseAnswer, answer));
                 openModal();
               }}
             >
