@@ -27,11 +27,6 @@ export const ProgressSection = styled.section`
   border: 1px solid #afb1b6;
 `;
 //푸터 영역잡기
-export const FooterSection = styled.section`
-  display: flex;
-  height: 108px;
-  align-items: center;
-  justify-content: space-between;
+export const TotalResultsSection = styled.section`
   grid-column: 3;
-  margin-top: 19px;
 `;

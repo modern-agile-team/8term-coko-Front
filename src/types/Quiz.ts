@@ -1,10 +1,10 @@
 export default interface Quiz {
   id: number;
-  part: string;
+  partId: number;
   sectionId: number;
   title: string;
   question: string;
   answer: string[];
-  category: 'Combination' | 'MultipleChoice' | 'OXSelector' | 'ShortAnswer';
+  category: 'COMBINATION' | 'MULTIPLE_CHOICE' | 'OX_SELECTOR' | 'SHORT_ANSWER';
   answerChoice: string[];
 }
