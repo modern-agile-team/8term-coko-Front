@@ -2,7 +2,7 @@ import Router from './route/Router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './style/theme';
+import { media } from './style/media';
 import GlobalStyle from './style/GlobalStyle';
 import GlobalFont from './style/GlobalFont';
 
@@ -18,7 +18,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={media}>
           <GlobalStyle />
           <GlobalFont />
           <Router />

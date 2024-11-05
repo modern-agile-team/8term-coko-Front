@@ -5,7 +5,7 @@ import {
   LayOutDiv,
   FeatureDiv,
 } from '../../style/LayOut';
-export default function Main() {
+export default function Learn() {
   return (
     <AlignCenter>
       <GridContainer>

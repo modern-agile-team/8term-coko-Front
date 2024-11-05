@@ -1,10 +1,4 @@
-export const theme = {
-  /** @example color: ${({ theme }) => theme.color.main; */
-  color: {
-    main: '#0070f3',
-    sub: '#1db954',
-  },
-
+export const media = {
   /**
    * @example
    * ${({ theme }) => theme.media.desktop} {
