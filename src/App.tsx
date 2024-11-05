@@ -1,25 +1,31 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Router from './route/Router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './style/theme';
 import GlobalStyle from './style/GlobalStyle';
 import GlobalFont from './style/GlobalFont';
-import Main from './pages/main/Main';
-import Quest from './pages/Quest/Quest';
-import Ranking from './pages/Ranking/Ranking';
 
 function App() {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: Infinity,
+        gcTime: Infinity,
+      },
+    },
+  });
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <GlobalFont />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/quest" element={<Quest />}></Route>
-          <Route path="/Ranking" element={<Ranking />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <GlobalFont />
+          <Router />
+        </ThemeProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </>
   );
 }
 
