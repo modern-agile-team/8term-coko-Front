@@ -1,12 +1,9 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import Learn from '../pages/Learn/Learn';
-import Quest from '../pages/Quest/Quest';
-import Ranking from '../pages/Ranking/Ranking';
-import Quiz from '../pages/quiz/Quiz';
+import Learn from '../pages/learn/Learn';
+import Quest from '../pages/quest/Quest';
+import Ranking from '../pages/ranking/Ranking';
 import Login from '../pages/login/Login';
-import Quiz from '../pages/Quiz/Quiz';
-import Admin from '../admin/Admin';
-import CreateQuiz from '../admin/CreateQuiz';
+import Quiz from '../pages/quiz/Quiz';
 
 export default function Router() {
   return (
@@ -17,10 +14,8 @@ export default function Router() {
           <Route path="/learn" element={<Learn />} />
           <Route path="/quest" element={<Quest />} />
           <Route path="/ranking" element={<Ranking />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/quiz/:section/:part" element={<Quiz />} />
-          {/*어드민 페이지 부분 문제조회/추가 이외에 규모 확장 시 레포 분리 */}
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/create-quiz" element={<CreateQuiz />} />
         </Routes>
       </BrowserRouter>
     </>

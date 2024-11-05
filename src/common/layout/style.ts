@@ -42,3 +42,12 @@ export const LogoBox = styled.div`
   border: 1px solid;
   position: fixed;
 `;
+
+export const OverRay = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+`;
