@@ -1,13 +1,21 @@
-import { CircleButton } from '../../../common/ui/style';
+import { SectionButton } from '../../../common/ui/style';
 
 export default function SectionNavigateButton() {
+  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+
+  const imgUrls = [
+    `${imgUrl}섬1.svg`,
+    `${imgUrl}섬2.svg`,
+    `${imgUrl}섬3.svg`,
+    `${imgUrl}섬4.svg`,
+    `${imgUrl}섬5.svg`,
+  ];
+
   return (
     <>
-      <CircleButton>1</CircleButton>
-      <CircleButton>2</CircleButton>
-      <CircleButton>3</CircleButton>
-      <CircleButton>4</CircleButton>
-      <CircleButton>5</CircleButton>
+      {imgUrls.map((url, index) => (
+        <SectionButton key={index} $backgroundImage={url} />
+      ))}
     </>
   );
 }

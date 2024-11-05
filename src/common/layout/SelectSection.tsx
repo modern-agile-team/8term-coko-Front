@@ -4,12 +4,10 @@ import { SelectSectionBox } from './style';
 
 export default function SelectSection() {
   return (
-    <>
-      <SelectSectionBox>
-        <SectionArrowButton />
-        <SectionNavigateButton />
-        <SectionArrowButton />
-      </SelectSectionBox>
-    </>
+    <SelectSectionBox>
+      <SectionArrowButton />
+      <SectionNavigateButton />
+      <SectionArrowButton />
+    </SelectSectionBox>
   );
 }

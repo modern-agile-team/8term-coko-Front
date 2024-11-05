@@ -16,12 +16,12 @@ export default function HeaderItem({
   return (
     <>
       <div>
-        <HeaderIcon src={lifeIcon} alt="Life Icon" />
-        <HeaderIconNumber>{lifePoints}</HeaderIconNumber>
-      </div>
-      <div>
         <HeaderIcon src={pointIcon} alt="Point Icon" />
         <HeaderIconNumber>{points}</HeaderIconNumber>
+      </div>
+      <div>
+        <HeaderIcon src={lifeIcon} alt="Life Icon" />
+        <HeaderIconNumber>{lifePoints}</HeaderIconNumber>
       </div>
     </>
   );

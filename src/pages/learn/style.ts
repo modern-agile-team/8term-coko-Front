@@ -1,15 +1,26 @@
 import styled from 'styled-components';
 
-export const GridContainer = styled.div`
-  display: grid;
-  width: 1280px;
-  grid-template-columns: 2fr 7fr 3fr;
-  column-gap: 20px;
+// 글로벌스타일 적용 시 삭제
+export const BackgroundColor = styled.div`
+  background-color: #fff8eb;
 `;
 
-export const AlignCenter = styled.div`
+export const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const LeftSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const RightSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 `;
 
 export const Layout = styled.div`

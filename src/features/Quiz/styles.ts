@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
 //문제(Quiz)의 제목(title)과 문항(question)이 들어갈 공간
 export const QuestionSection = styled.section`
@@ -103,10 +104,13 @@ export const ResponseButton = styled.button`
 
 // Learn 페이지 퀴즈들 감싸는 박스
 export const QuizBox = styled.div`
-  width: 666px;
-  height: 468px;
-  margin-top: 25px;
+  width: 693px;
+  margin-top: 270px;
   border: 1px solid;
+`;
+
+export const UpperBackgroundImg = styled.img`
+  display: block;
 `;
 
 // 버튼 레이아웃 지정
@@ -115,6 +119,7 @@ export const ButtonWrapper = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-image: url(${imgUrl}배경2.webp);
 `;
 
 // 키캡(키보드 스위치) 버튼 (스타일 변경 예정)
@@ -124,5 +129,5 @@ export const KeyboardButton = styled.button`
   border-radius: 15px;
   background: #000000;
   color: #ffffff;
-  margin-top: 20px;
+  margin-bottom: 20px;
 `;

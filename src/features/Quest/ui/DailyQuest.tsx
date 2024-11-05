@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { DailyQuestSection } from '../style';
+import { DailyQuestSection, TextOverlay } from '../style';
 
 export default function DailyQuest() {
   const location = useLocation();
@@ -9,8 +9,8 @@ export default function DailyQuest() {
   const isQuest = location.pathname === '/quest';
 
   return (
-    <DailyQuestSection isLearn={isLearn} isQuest={isQuest}>
-      오늘의 퀘스트
+    <DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
+      <TextOverlay>오늘의 퀘스트</TextOverlay>
     </DailyQuestSection>
   );
 }
