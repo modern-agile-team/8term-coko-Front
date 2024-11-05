@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Learn from '../pages/Learn/Learn';
 import Quest from '../pages/Quest/Quest';
 import Ranking from '../pages/Ranking/Ranking';
+import Quiz from '../pages/quiz/Quiz';
+import Login from '../pages/login/Login';
 import Quiz from '../pages/Quiz/Quiz';
 import Admin from '../admin/Admin';
 import CreateQuiz from '../admin/CreateQuiz';
