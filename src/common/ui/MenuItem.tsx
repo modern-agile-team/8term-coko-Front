@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import { MenuButtonWrapper, MenuLink, MenuButton, MenuIcon } from './style';
 
 const menuItems = [
@@ -12,21 +13,27 @@ const menuItems = [
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
 export default function Menu() {
+  const location = useLocation();
+
   return (
     <>
-      {menuItems.map((value, index) => (
-        <MenuButtonWrapper key={index}>
-          <MenuLink to={`/${value.url}`}>
-            <MenuButton>
-              <MenuIcon
-                src={`${imgUrl}${value.icon}`}
-                alt={`${value.title} 아이콘`}
-              />
-              {value.title}
-            </MenuButton>
-          </MenuLink>
-        </MenuButtonWrapper>
-      ))}
+      {menuItems.map((value, index) => {
+        const isActive = location.pathname === `/${value.url}`;
+
+        return (
+          <MenuButtonWrapper key={index}>
+            <MenuLink to={`/${value.url}`}>
+              <MenuButton $activeStyle={isActive}>
+                <MenuIcon
+                  src={`${imgUrl}${value.icon}`}
+                  alt={`${value.title} 아이콘`}
+                />
+                {value.title}
+              </MenuButton>
+            </MenuLink>
+          </MenuButtonWrapper>
+        );
+      })}
     </>
   );
 }

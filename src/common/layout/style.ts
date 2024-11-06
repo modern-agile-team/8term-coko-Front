@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
+export const SectionBoxWrapper = styled.div``;
+
 export const SelectSectionBox = styled.section`
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   width: 599px;
   height: 197px;
   margin-top: 77px;

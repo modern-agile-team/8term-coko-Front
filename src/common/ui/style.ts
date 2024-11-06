@@ -5,10 +5,14 @@ interface SectionButtonProps {
   $backgroundImage: string;
 }
 
+interface MenuButtonProps {
+  $activeStyle: boolean;
+}
+
 export const SectionButton = styled.button<SectionButtonProps>`
   width: 100px;
   height: 75px;
-  margin-top: 35px;
+  margin-top: 75px;
   background: none;
   border: none;
   background-image: url(${props => props.$backgroundImage});
@@ -23,14 +27,14 @@ export const MenuButtonWrapper = styled.nav`
   display: inline-block;
 `;
 
-export const MenuButton = styled.button`
+export const MenuButton = styled.button<MenuButtonProps>`
   width: 193px;
   height: 42px;
   font-size: 15px;
   color: #fff;
   border-radius: 8px;
   border: 2px solid #ffe8c7;
-  background: #f0d8a7;
+  background: ${props => (props.$activeStyle ? '#D5B779' : '#F0D8A7')};
   display: flex;
   align-items: center;
   justify-content: flex-start;
