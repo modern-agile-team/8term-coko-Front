@@ -1,6 +1,6 @@
 import Question from '../../features/quiz/ui/Question';
 import { AlignCenter } from '../../style/LayOut';
-import { GridContainer, HeaderSection, ProgressSection } from '../quiz/styles';
+import { HeaderSection, ProgressSection } from '../quiz/styles';
 import type Quiz from '../../types/Quiz';
 import { useClientQuizStore } from '../../store/useClientQuizStore';
 import Combination from '../../features/quiz/ui/Combination';
@@ -39,15 +39,7 @@ export default function Quiz() {
   if (isLoading) return <div>Loading</div>;
   //------------------------
   if (!quizzes) return <div>404</div>;
-  //퀴즈가 끝났을때 결과페이지 리턴
-  if (quizzes.length === totalResults.length) {
-    return (
-      <>
-        <TotalResults quizzes={quizzes} totalResults={totalResults} />
-      </>
-    );
-  }
-  //-----------------------------
+
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
   //
@@ -61,39 +53,47 @@ export default function Quiz() {
   });
   return (
     <AlignCenter>
-      <GridContainer>
-        <HeaderSection>
-          <div>로고</div>
-          <div>돈-??-프사</div>
-        </HeaderSection>
-        <ProgressSection>진행도</ProgressSection>
-        <>
-          <Question title={title} question={question} category={category} />
-          {getComponentMappingByChoiceType(category, { answerChoice, answer })}
-          <SubmitSection>
-            <ResponseButton
-              onClick={() => {
-                setResult(false);
-                openModal();
-              }}
-            >
-              스킵
-            </ResponseButton>
-            <ResponseButton
-              disabled={userResponseAnswer[0] === ''}
-              onClick={() => {
-                setResult(isEqualArray(userResponseAnswer, answer));
-                openModal();
-              }}
-            >
-              확인
-            </ResponseButton>
-          </SubmitSection>
-          <Modal isShow={isShow}>
-            <ResultModal quizId={id} result={result} closeModal={closeModal} />
-          </Modal>
-        </>
-      </GridContainer>
+      <HeaderSection>
+        <div>로고</div>
+        <div>돈-??-프사</div>
+      </HeaderSection>
+      <ProgressSection>진행도</ProgressSection>
+      <Question title={title} question={question} category={category} />
+      {getComponentMappingByChoiceType(category, { answerChoice, answer })}
+      <SubmitSection>
+        <ResponseButton
+          onClick={() => {
+            setResult(false);
+            openModal();
+          }}
+        >
+          SKIP
+        </ResponseButton>
+        <ResponseButton
+          disabled={userResponseAnswer[0] === ''}
+          $disabled={userResponseAnswer[0] === ''}
+          onClick={() => {
+            setResult(isEqualArray(userResponseAnswer, answer));
+            openModal();
+          }}
+        >
+          제출
+        </ResponseButton>
+      </SubmitSection>
+      <Modal isShow={isShow}>
+        {quizzes.length === totalResults.length ? (
+          <TotalResults quizzes={quizzes} totalResults={totalResults} />
+        ) : (
+          <ResultModal
+            quizId={id}
+            result={result}
+            answer={answer}
+            lastPage={quizzes.length - 1}
+            openModal={openModal}
+            closeModal={closeModal}
+          />
+        )}
+      </Modal>
     </AlignCenter>
   );
 }
