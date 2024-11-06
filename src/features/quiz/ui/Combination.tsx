@@ -1,5 +1,5 @@
 import Quiz from '../../../types/Quiz';
-import { CombinationUl, TextBlockButton } from '../styles';
+import { CombinationSection, TextBlockButton } from '../styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import compact from '../../../utils/compact';
 interface CombinationProps {
@@ -14,7 +14,7 @@ export default function Combination({
 
   return (
     <>
-      <CombinationUl>
+      <CombinationSection>
         {answerChoice.map((choice, index) => {
           const isSelect = userResponseAnswer.includes(choice);
           return (
@@ -32,7 +32,7 @@ export default function Combination({
             </TextBlockButton>
           );
         })}
-      </CombinationUl>
+      </CombinationSection>
     </>
   );
 }
