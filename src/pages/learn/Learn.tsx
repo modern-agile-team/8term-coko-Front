@@ -1,10 +1,4 @@
-import {
-  BackgroundColor,
-  Wrapper,
-  LeftSection,
-  RightSection,
-  Layout,
-} from './style';
+import { Wrapper, LeftSection, RightSection, Layout } from './style';
 import MenuBar from '../../common/layout/MenuBar';
 import Header from '../../common/layout/Header';
 import DailyQuest from '../../features/Quest/ui/DailyQuest';
@@ -17,7 +11,7 @@ import PartNavContainer from '../../features/quiz/ui/PartNavContainer';
 
 export default function Learn() {
   return (
-    <BackgroundColor>
+    <>
       <Wrapper>
         <LeftSection>
           <CokoLogo />
@@ -36,6 +30,6 @@ export default function Learn() {
           <PartNavContainer />
         </QuizSection>
       </Layout>
-    </BackgroundColor>
+    </>
   );
 }
