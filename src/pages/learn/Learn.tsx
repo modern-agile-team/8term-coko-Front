@@ -11,9 +11,9 @@ import DailyQuest from '../../features/Quest/ui/DailyQuest';
 import CokoLogo from '../../common/layout/CokoLogo';
 import ProgressBar from '../../features/Progress/ui/ProgressBar';
 import SelectSection from '../../common/layout/SelectSection';
-import QuizSection from '../../features/Quiz/ui/QuizSection';
+import QuizSection from '../../features/quiz/ui/QuizSection';
 import KeycapAdventureIntro from '../../features/Learn/ui/KeycapAdventureIntro';
-import PartNavContainer from '../../features/Quiz/ui/PartNavContainer';
+import PartNavContainer from '../../features/quiz/ui/PartNavContainer';
 
 export default function Learn() {
   return (
