@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import Quiz from '../../types/Quiz';
+import { Link } from 'react-router-dom';
 
 //문제 유형별 컬러 객체
 const categoryColor: Record<
@@ -42,7 +43,6 @@ export const QuestionDiv = styled.div`
   align-items: flex-start;
   height: 200px;
   padding: 26px 0 0 80px;
-  font-family: 'MapleStory';
   font-size: 18px;
   font-weight: 700;
   text-align: left;
@@ -106,17 +106,30 @@ export const MultipleChoiceButton = styled.button<{
 export const ShortAnswerSection = styled.section`
   display: flex;
   align-items: center;
+  gap: 50px;
+  margin-top: 24px;
+  :nth-child(1) {
+    align-self: flex-end;
+  }
 `;
 //단답형 문항에서 단답형을 쓰는 인풋박스
 export const ShortAnswerInput = styled.input`
+  background-color: #fff8eb;
   text-align: center;
   width: 505px;
   height: 23px;
-  font-family: 'MapleStroy';
   font-weight: 700;
   border: none;
   border-bottom: 2px dashed #ba9372;
   color: #a2a2a2;
+  border-image: repeating-linear-gradient(
+      to right,
+      #ba9372 0,
+      #ba9372 15px,
+      transparent 15px,
+      transparent 30px
+    )
+    1;
   &:focus {
     outline: none;
   }
@@ -162,7 +175,6 @@ export const ResponseButton = styled.button<{ $disabled?: boolean }>`
   border: 2px solid #ffe8c7;
   gap: 6px;
   border-radius: 24px;
-  font-family: 'MaplestoryBold';
   font-size: 18px;
   line-height: 24px;
   background-color: #f0d8a7;
@@ -260,6 +272,7 @@ export const TotalResultSection = styled.section`
   height: 372.04px;
   background: #ffffff;
   border-radius: 40px;
+  box-shadow: 0 11px #e5e5e5;
 `;
 export const DashLineHr = styled.hr`
   border: 2px dashed #00d9e9;
@@ -272,4 +285,52 @@ export const DashLineHr = styled.hr`
       transparent 30px
     )
     1;
+`;
+export const TotalResultsTextBox = styled.p`
+  margin: 44px 0 17px 0;
+  display: flex;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 24px;
+
+  :nth-child(1) {
+    line-height: 12px;
+    font-weight: 700;
+    color: #49ff87;
+    font-size: 26px;
+  }
+  :nth-child(2) {
+    line-height: 24px;
+    font-size: 26px;
+    color: #ff4949;
+  }
+`;
+export const TotalResultsImageDiv = styled.div`
+  display: flex;
+  gap: 80px;
+  margin: 34px 0 18px 0;
+`;
+export const ImageDescriptionDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  :nth-last-child(1) {
+    color: #d30000;
+    font-size: 10px;
+    align-self: center;
+    position: absolute;
+    bottom: 50px;
+  }
+`;
+export const LearnLink = styled(Link)`
+  width: 152px;
+  height: 25px;
+  text-align: center;
+  border-radius: 24px;
+  background: #70f5ff;
+  border: 2px solid #00dce8;
+  text-decoration-line: none;
+  color: #ffffff;
+  align-self: flex-end;
+  margin: 35px 86px 0 0;
 `;

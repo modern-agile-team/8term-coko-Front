@@ -13,6 +13,7 @@ export default function OXSelector() {
             src={`${imgUrl}${
               userResponseAnswer[0] === 'O' ? 'O버튼.svg' : '퀴즈O버튼.svg'
             }`}
+            alt="O버튼"
           ></img>
         </OXButton>
         <CharacterImg src={`${imgUrl}OX코코.svg`}></CharacterImg>
@@ -21,6 +22,7 @@ export default function OXSelector() {
             src={`${imgUrl}${
               userResponseAnswer[0] === 'X' ? 'X버튼.svg' : '퀴즈X버튼.svg'
             }`}
+            alt="X버튼"
           ></img>
         </OXButton>
       </OXButtonDiv>

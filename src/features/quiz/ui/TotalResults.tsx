@@ -1,5 +1,13 @@
 import type Quiz from '../../../types/Quiz';
-import { CharacterImg, DashLineHr, TotalResultSection } from '../styles';
+import {
+  CharacterImg,
+  DashLineHr,
+  ImageDescriptionDiv,
+  LearnLink,
+  TotalResultSection,
+  TotalResultsImageDiv,
+  TotalResultsTextBox,
+} from '../styles';
 interface TotalResultsProps {
   quizzes: Quiz[];
   totalResults: boolean[];
@@ -8,20 +16,30 @@ export default function TotalResults({
   quizzes,
   totalResults,
 }: TotalResultsProps) {
+  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+
   return (
     <>
       <TotalResultSection>
-        <div>
-          총 {totalResults.filter(result => result).length} 문제를 맞혔고 보상을
-          얻었어!
-        </div>
+        <TotalResultsTextBox>
+          총<p>&nbsp; {totalResults.filter(result => result).length}&nbsp;</p>
+          문제를 맞혔고 <p>&nbsp;보상</p>을 얻었어!
+        </TotalResultsTextBox>
 
         <DashLineHr />
-        <CharacterImg></CharacterImg>
-        <CharacterImg></CharacterImg>
-
+        <TotalResultsImageDiv>
+          <ImageDescriptionDiv>
+            <CharacterImg src={`${imgUrl}레벨1코코.svg`} alt="레벨업 이미지" />
+            <p>Level.1</p>
+          </ImageDescriptionDiv>
+          <ImageDescriptionDiv>
+            <CharacterImg src={`${imgUrl}과일바구니.svg`} alt="보상" />
+            <p>생명력을 위한 과일 바구니</p>
+          </ImageDescriptionDiv>
+        </TotalResultsImageDiv>
         <DashLineHr />
-        <div>기타 결과들..</div>
+
+        <LearnLink to="/learn">메인으로</LearnLink>
       </TotalResultSection>
     </>
   );
