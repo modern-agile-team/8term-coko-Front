@@ -250,7 +250,9 @@ export const AnswerDiv = styled.div`
 `;
 export const TotalResultSection = styled.section`
   position: fixed;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -258,4 +260,16 @@ export const TotalResultSection = styled.section`
   height: 372.04px;
   background: #ffffff;
   border-radius: 40px;
+`;
+export const DashLineHr = styled.hr`
+  border: 2px dashed #00d9e9;
+  width: 80%;
+  border-image: repeating-linear-gradient(
+      to right,
+      #00d9e9 0,
+      #00d9e9 10px,
+      transparent 15px,
+      transparent 30px
+    )
+    1;
 `;

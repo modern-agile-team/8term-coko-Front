@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom';
 import type Quiz from '../../../types/Quiz';
-import { TotalResultSection } from '../styles';
-import { OverRay } from '../../../common/layout/style';
+import { CharacterImg, DashLineHr, TotalResultSection } from '../styles';
 interface TotalResultsProps {
   quizzes: Quiz[];
   totalResults: boolean[];
@@ -13,14 +11,18 @@ export default function TotalResults({
   return (
     <>
       <TotalResultSection>
-        <ul>
-          <li>총 문제 수 : {quizzes.length}</li>
-          <li>맞은 문제 수 : {totalResults.filter(result => result).length}</li>
-          <li>맞은 퀴즈 아이디:</li>
-          <div>기타 결과들..</div>
-        </ul>
+        <div>
+          총 {totalResults.filter(result => result).length} 문제를 맞혔고 보상을
+          얻었어!
+        </div>
+
+        <DashLineHr />
+        <CharacterImg></CharacterImg>
+        <CharacterImg></CharacterImg>
+
+        <DashLineHr />
+        <div>기타 결과들..</div>
       </TotalResultSection>
-      <Link to="/learn">learn페이지로 돌아가기</Link>
     </>
   );
 }

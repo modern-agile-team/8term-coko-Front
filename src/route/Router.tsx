@@ -1,19 +1,21 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Main from '../pages/main/Main';
-import Quest from '../pages/Quest/Quest';
-import Ranking from '../pages/Ranking/Ranking';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import Learn from '../pages/learn/Learn';
+import Quest from '../pages/quest/Quest';
+import Ranking from '../pages/ranking/Ranking';
 import Quiz from '../pages/quiz/Quiz';
 import Login from '../pages/login/Login';
+
 export default function Router() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/quest" element={<Quest />}></Route>
-          <Route path="/ranking" element={<Ranking />}></Route>
-          <Route path="/quiz" element={<Quiz />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/" element={<Navigate to="/learn" />} />
+          <Route path="/learn" element={<Learn />} />
+          <Route path="/quest" element={<Quest />} />
+          <Route path="/ranking" element={<Ranking />} />
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>
