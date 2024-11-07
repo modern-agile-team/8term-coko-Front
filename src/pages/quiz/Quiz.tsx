@@ -1,6 +1,11 @@
 import Question from '../../features/quiz/ui/Question';
 import { AlignCenter } from '../../style/LayOut';
-import { HeaderSection, ProgressSection } from '../quiz/styles';
+import {
+  HeaderSection,
+  ProgressSection,
+  ResponseButton,
+  SubmitSection,
+} from './styles';
 import type Quiz from '../../types/Quiz';
 import { useClientQuizStore } from '../../store/useClientQuizStore';
 import Combination from '../../features/quiz/ui/Combination';
@@ -14,7 +19,6 @@ import getParams from '../../utils/getParams';
 import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
 import isEqualArray from '../../utils/isEqualArray';
-import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
 import QuizzesQuery from '../../queries/quizzesQuery';
 import useMoadl from '../../hooks/useModal';
 
@@ -58,6 +62,7 @@ export default function Quiz() {
         <div>돈-??-프사</div>
       </HeaderSection>
       <ProgressSection>진행도</ProgressSection>
+
       <Question title={title} question={question} category={category} />
       {getComponentMappingByChoiceType(category, { answerChoice, answer })}
       <SubmitSection>

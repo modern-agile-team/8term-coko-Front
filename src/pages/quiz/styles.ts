@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 //그리드 나누기용 width는 나중에 글로벌스타일 들어오면 지우기
 
 export const GridContainer = styled.div`
@@ -23,7 +23,30 @@ export const ProgressSection = styled.section`
   border: 2px solid #00b6c0;
   background: #00d9e9;
 `;
-//푸터 영역잡기
-export const TotalResultsSection = styled.section`
-  grid-column: 3;
+//응답버튼 영역잡기
+export const SubmitSection = styled.section`
+  display: flex;
+  width: 980px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 48px;
+`;
+//응답 버튼
+export const ResponseButton = styled.button<{ $disabled?: boolean }>`
+  width: 130px;
+  height: 40px;
+  border: 2px solid #ffe8c7;
+  gap: 6px;
+  border-radius: 24px;
+  font-size: 18px;
+  line-height: 24px;
+  background-color: #f0d8a7;
+  color: #ffffff;
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      background-color: #f0d8a7;
+      border-color: #ffe8c7;
+      color: #e6e6e6;
+    `}
 `;

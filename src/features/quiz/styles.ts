@@ -49,7 +49,7 @@ export const QuestionDiv = styled.div`
   gap: 0px;
   flex-grow: 0;
 `;
-
+//
 export const OXButtonDiv = styled.div`
   margin-top: 23px;
   display: flex;
@@ -58,11 +58,8 @@ export const OXButtonDiv = styled.div`
   padding: 0;
 `;
 
-//캐릭터 이미지
-interface CharacterBoxProps {
-  $margin?: string;
-}
-export const CharacterImg = styled.img<CharacterBoxProps>`
+//캐릭터 이미지테그
+export const CharacterImg = styled.img<{ $margin?: string }>`
   margin: ${({ $margin }) => $margin || '0'};
 `;
 //ox유형에서 ox버튼
@@ -169,31 +166,6 @@ export const TextBlockButton = styled.button<{ $selected?: boolean }>`
     `};
 `;
 //화면 하단의
-export const ResponseButton = styled.button<{ $disabled?: boolean }>`
-  width: 130px;
-  height: 40px;
-  border: 2px solid #ffe8c7;
-  gap: 6px;
-  border-radius: 24px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #f0d8a7;
-  color: #ffffff;
-  ${({ $disabled }) =>
-    $disabled &&
-    css`
-      background-color: #f0d8a7;
-      border-color: #ffe8c7;
-      color: #e6e6e6;
-    `}
-`;
-export const SubmitSection = styled.section`
-  display: flex;
-  width: 980px;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 48px;
-`;
 
 export const EmptyDiv = styled.div`
   width: 100px;
@@ -260,7 +232,19 @@ export const AnswerDiv = styled.div`
   line-height: 24px;
   margin: 0 350px 58px 0;
 `;
+//모달 애니메이션
+const fadeInScaleUp = keyframes`
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8); 
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); 
+  }
+`;
 export const TotalResultSection = styled.section`
+  animation: ${fadeInScaleUp} 0.7s ease-out;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -274,6 +258,7 @@ export const TotalResultSection = styled.section`
   border-radius: 40px;
   box-shadow: 0 11px #e5e5e5;
 `;
+
 export const DashLineHr = styled.hr`
   border: 2px dashed #00d9e9;
   width: 80%;
