@@ -21,9 +21,12 @@ import { useState } from 'react';
 import isEqualArray from '../../utils/isEqualArray';
 import QuizzesQuery from '../../queries/quizzesQuery';
 import useModal from '../../hooks/useModal';
+import usePreloadImages from '../../hooks/usePreloadImages';
 
 //퀴즈페이지
 export default function Quiz() {
+  const baseURL = import.meta.env.VITE_IMG_BASE_URL;
+
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
   const [result, setResult] = useState<boolean>(false);
@@ -39,8 +42,25 @@ export default function Quiz() {
   const { data: quizzes, isLoading } = QuizzesQuery.get({
     partId: Number(partId),
   });
+  const isImageLoading = usePreloadImages({
+    baseURL,
+    imageUrls: [
+      'O버튼.svg',
+      'X버튼.svg',
+      'O버튼-선택.svg',
+      'X버튼-선택.svg',
+      '정답모달.svg',
+      '오답모달.svg',
+      '객관식-코코.svg',
+      '과일바구니.svg',
+      '단답형이미지1.svg',
+      '단답형이미지2.svg',
+      '레벨1코코.svg',
+      '과일바구니-아이템.svg',
+    ],
+  });
   //추후 loading 페이지로 교체
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading && isImageLoading) return <div>Loading</div>;
   //------------------------
   if (!quizzes) return <div>404</div>;
 
