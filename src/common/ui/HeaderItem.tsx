@@ -1,4 +1,4 @@
-import { HeaderIcon, HeaderIconNumber } from './style';
+import { IconWrapper, HeaderIcon, HeaderIconNumber } from './style';
 
 interface HeaderItemProps {
   lifeIcon: string;
@@ -15,14 +15,14 @@ export default function HeaderItem({
 }: HeaderItemProps) {
   return (
     <>
-      <div>
+      <IconWrapper>
         <HeaderIcon src={pointIcon} alt="Point Icon" />
         <HeaderIconNumber $color="#FFCD35;">{points}</HeaderIconNumber>
-      </div>
-      <div>
+      </IconWrapper>
+      <IconWrapper>
         <HeaderIcon src={lifeIcon} alt="Life Icon" />
         <HeaderIconNumber $color="#FE0F0F;">{lifePoints}</HeaderIconNumber>
-      </div>
+      </IconWrapper>
     </>
   );
 }

@@ -1,6 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import { DailyQuestSection, TextOverlay } from '../style';
 
+const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+
 export default function DailyQuest() {
   const location = useLocation();
 
@@ -10,6 +12,7 @@ export default function DailyQuest() {
 
   return (
     <DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
+      <img src={`${imgUrl}폭탄-아이콘.svg`}></img>
       <TextOverlay>오늘의 퀘스트</TextOverlay>
     </DailyQuestSection>
   );

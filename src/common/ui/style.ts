@@ -57,13 +57,21 @@ export const MenuIcon = styled.img`
   height: 26px;
 `;
 
+export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+`;
+
 export const HeaderIcon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 42px;
+  height: 30px;
 `;
 
 export const HeaderIconNumber = styled.span<HeaderIconNumberProps>`
   font-size: 15px;
+  font-weight: 700;
+  margin-left: 7px;
   color: ${({ $color }) => $color};
 `;
 

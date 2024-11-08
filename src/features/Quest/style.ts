@@ -5,6 +5,10 @@ export const DailyQuestSection = styled.section<{
   $isLearn: boolean;
   $isQuest: boolean;
 }>`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
   // URL에 따라 스타일 변경
   ${({ $isLearn }) =>
     $isLearn &&

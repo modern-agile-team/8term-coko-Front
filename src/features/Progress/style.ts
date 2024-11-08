@@ -1,12 +1,28 @@
 import styled from 'styled-components';
 
-// Learn 페이지 기준 (스타일 변경 예정)
-export const ProgressBox = styled.section`
-  width: 639px;
-  height: 16px;
-  margin-top: 39px;
-  border: 1px solid;
-  position: fixed;
+interface ProgressBoxProps {
+  $maxWidth?: string;
+  $height?: string;
+  $boxBgColor?: string;
+}
+
+interface InnerProgressProps {
+  $progress: number;
+  $innerBgColor?: string;
+}
+
+export const ProgressBox = styled.section<ProgressBoxProps>`
+  width: 100%;
+  max-width: ${({ $maxWidth }) => $maxWidth};
+  height: ${({ $height }) => $height};
+  background-color: ${({ $boxBgColor }) => $boxBgColor};
   border-radius: 8px;
-  background: #85705f;
+`;
+
+export const InnerProgress = styled.div<InnerProgressProps>`
+  width: ${({ $progress }) => $progress}%;
+  height: 100%;
+  background-color: ${({ $innerBgColor }) => $innerBgColor};
+  border-radius: 8px;
+  transition: width 0.3s ease;
 `;
