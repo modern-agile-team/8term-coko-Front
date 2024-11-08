@@ -65,11 +65,11 @@ export default function Question({ title, question, category }: questionProps) {
         <p>문제{currentPage + 1}.</p>
         <p>{title}</p>
       </Titlediv>
-      <p>
+      <div>
         {/* Dompurify를 이용한 xss공격 방어  문자열 랜더링*/}
         {/* <div>{parse(Dompurify.sanitize(nonEmptyQuestion), options)}</div> */}
         {parse(Dompurify.sanitize(nonEmptyQuestion), options)}
-      </p>
+      </div>
     </QuestionSection>
   );
 }

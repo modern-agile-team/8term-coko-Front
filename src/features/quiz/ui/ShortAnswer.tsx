@@ -1,5 +1,5 @@
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
-import { ShortAnswerSection, ShortAnswerInput } from '../styles';
+import { ShortAnswerSection, ShortAnswerInput, Img } from '../styles';
 
 export default function ShortAnswer() {
   const { setUserResponseAnswer } = useClientQuizStore();
@@ -8,7 +8,12 @@ export default function ShortAnswer() {
   return (
     <>
       <ShortAnswerSection>
-        <img src={`${imgUrl}단답형이미지1.svg`} alt="키보드 키캡 1" />
+        <Img
+          $width="130px"
+          $height="94px"
+          src={`${imgUrl}단답형이미지1.svg`}
+          alt="키보드 키캡 1"
+        />
         <ShortAnswerInput
           type="text"
           onChange={e => {
@@ -16,7 +21,12 @@ export default function ShortAnswer() {
           }}
           placeholder="답을 적어보세요."
         ></ShortAnswerInput>
-        <img src={`${imgUrl}단답형이미지2.svg`} alt="코코 상자" />
+        <Img
+          $width="252px"
+          $height="174px"
+          src={`${imgUrl}단답형이미지2.svg`}
+          alt="코코 상자"
+        />
       </ShortAnswerSection>
     </>
   );

@@ -3,6 +3,7 @@ import {
   MultipleChoiceButton,
   MultipleChoiceSection,
   MultipleChoiceButtonDiv,
+  Img,
 } from '../styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 interface MultipleChoiceProps {
@@ -15,7 +16,12 @@ export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
   return (
     <>
       <MultipleChoiceSection>
-        <img src={`${imgUrl}객관식-코코.svg`} alt="객관식 문제의 코코"></img>
+        <Img
+          src={`${imgUrl}객관식-코코.svg`}
+          alt="객관식 문제의 코코"
+          $width="193px"
+          $height="204px"
+        ></Img>
         <MultipleChoiceButtonDiv>
           {answerChoice.map((value, index) => (
             <MultipleChoiceButton
@@ -27,7 +33,12 @@ export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
             </MultipleChoiceButton>
           ))}
         </MultipleChoiceButtonDiv>
-        <img src={`${imgUrl}과일바구니.svg`} alt="과일 바구니"></img>
+        <Img
+          src={`${imgUrl}과일바구니.svg`}
+          alt="과일 바구니"
+          $width="92px"
+          $height="89px"
+        ></Img>
       </MultipleChoiceSection>
     </>
   );

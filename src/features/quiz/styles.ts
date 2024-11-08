@@ -25,7 +25,7 @@ export const QuestionSection = styled.section<{
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
   font-size: 18px;
   font-weight: 700;
-  > p:nth-last-child(1) {
+  > div:nth-last-child(1) {
     display: flex;
     flex-wrap: wrap;
     padding: 26px 0 0 80px;
@@ -59,10 +59,6 @@ export const OXButtonSection = styled.section`
   }
 `;
 
-//캐릭터 이미지테그
-export const CharacterImg = styled.img<{ $margin?: string }>`
-  margin: ${({ $margin }) => $margin || '0'};
-`;
 //객관식 버튼, 이미지 박스 영역
 export const MultipleChoiceSection = styled.section`
   display: flex;
@@ -318,4 +314,8 @@ export const LearnLink = styled(Link)`
     border-color: #00868d;
     background-color: #00d9e9;
   }
+`;
+export const Img = styled.img<{ $width: string; $height: string }>`
+  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height};
 `;

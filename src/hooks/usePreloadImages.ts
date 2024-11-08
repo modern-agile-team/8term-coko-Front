@@ -18,8 +18,7 @@ const usePreloadImages = ({
       });
     });
     Promise.all(imagePromise)
-      .then(data => {
-        console.log(data);
+      .then(() => {
         setIsLoading(false);
       })
       .catch(error => {

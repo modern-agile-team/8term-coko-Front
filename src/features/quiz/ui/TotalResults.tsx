@@ -1,8 +1,8 @@
 import type Quiz from '../../../types/Quiz';
 import {
-  CharacterImg,
   DashLineHr,
   ImageDescriptionDiv,
+  Img,
   LearnLink,
   TotalResultSection,
   TotalResultsImageDiv,
@@ -25,11 +25,21 @@ export default function TotalResults({ totalResults }: TotalResultsProps) {
         <DashLineHr />
         <TotalResultsImageDiv>
           <ImageDescriptionDiv>
-            <img src={`${imgUrl}레벨1코코.svg`} alt="레벨업 이미지" />
+            <Img
+              $width="201px"
+              $height="159px"
+              src={`${imgUrl}레벨1코코.svg`}
+              alt="레벨업 이미지"
+            />
             <p>Level.1</p>
           </ImageDescriptionDiv>
           <ImageDescriptionDiv>
-            <CharacterImg src={`${imgUrl}과일바구니-아이템.svg`} alt="보상" />
+            <Img
+              $width="146px"
+              $height="116px"
+              src={`${imgUrl}과일바구니-아이템.svg`}
+              alt="보상"
+            />
             <p>생명력을 위한 과일 바구니</p>
           </ImageDescriptionDiv>
         </TotalResultsImageDiv>
