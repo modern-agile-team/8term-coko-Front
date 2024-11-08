@@ -19,8 +19,10 @@ export const MenuBox = styled.div`
   flex-direction: column;
   gap: 40px;
   margin-top: 108px;
-  margin-left: 16px;
   position: fixed;
+  background-color: #fff1d9;
+  border-right: 7px solid #ffe8c7;
+  height: 100%;
 `;
 
 export const HeaderBox = styled.header`
@@ -33,12 +35,20 @@ export const HeaderBox = styled.header`
   position: fixed;
 `;
 
+export const LogoBoxWrapper = styled.div`
+  background-color: #fff1d9;
+  height: 108px;
+  position: fixed;
+  width: 235px;
+  border-right: 7px solid #ffe8c7;
+`;
+
 export const LogoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 193px;
-  height: 41px;
+  height: 42px;
   margin-top: 26px;
   margin-left: 16px;
   border: 1px solid;

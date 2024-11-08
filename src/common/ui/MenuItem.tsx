@@ -12,7 +12,7 @@ const menuItems = [
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
-export default function Menu() {
+export default function MenuItem() {
   const location = useLocation();
 
   return (

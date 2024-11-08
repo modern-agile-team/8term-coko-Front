@@ -9,13 +9,17 @@ interface MenuButtonProps {
   $activeStyle: boolean;
 }
 
+interface HeaderIconNumberProps {
+  $color: string;
+}
+
 export const SectionButton = styled.button<SectionButtonProps>`
   width: 100px;
   height: 75px;
   margin-top: 75px;
   background: none;
   border: none;
-  background-image: url(${props => props.$backgroundImage});
+  background-image: url(${({ $backgroundImage }) => $backgroundImage});
 `;
 
 export const ArrowButton = styled.button`
@@ -34,7 +38,9 @@ export const MenuButton = styled.button<MenuButtonProps>`
   color: #fff;
   border-radius: 8px;
   border: 2px solid #ffe8c7;
-  background: ${props => (props.$activeStyle ? '#D5B779' : '#F0D8A7')};
+  background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#F0D8A7')};
+  margin-left: 16px;
+  margin-right: 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -56,8 +62,9 @@ export const HeaderIcon = styled.img`
   height: 24px;
 `;
 
-export const HeaderIconNumber = styled.span`
+export const HeaderIconNumber = styled.span<HeaderIconNumberProps>`
   font-size: 15px;
+  color: ${({ $color }) => $color};
 `;
 
 export const LogoImg = styled.img`

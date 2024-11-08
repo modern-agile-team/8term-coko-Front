@@ -17,11 +17,11 @@ export default function HeaderItem({
     <>
       <div>
         <HeaderIcon src={pointIcon} alt="Point Icon" />
-        <HeaderIconNumber>{points}</HeaderIconNumber>
+        <HeaderIconNumber $color="#FFCD35;">{points}</HeaderIconNumber>
       </div>
       <div>
         <HeaderIcon src={lifeIcon} alt="Life Icon" />
-        <HeaderIconNumber>{lifePoints}</HeaderIconNumber>
+        <HeaderIconNumber $color="#FE0F0F;">{lifePoints}</HeaderIconNumber>
       </div>
     </>
   );

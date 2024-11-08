@@ -1,5 +1,5 @@
 import { HandsUpCokoImg, LegendKeycapMessageImg } from '../style';
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
@@ -21,7 +21,7 @@ const preloadImages = messageFilenames.map(filename => {
 export default function KeycapAdventureIntro() {
   const [messageIndex, setMessageIndex] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const interval = setInterval(() => {
       setMessageIndex(prevIndex => (prevIndex + 1) % preloadImages.length);
     }, 5000);

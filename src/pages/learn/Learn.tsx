@@ -1,8 +1,8 @@
-import { Wrapper, LeftSection, RightSection, Layout } from './style';
+import { Wrapper, LeftSection, RightSection, Layout } from '../../style/style';
 import MenuBar from '../../common/layout/MenuBar';
+import CokoLogo from '../../common/layout/CokoLogo';
 import Header from '../../common/layout/Header';
 import DailyQuest from '../../features/Quest/ui/DailyQuest';
-import CokoLogo from '../../common/layout/CokoLogo';
 import ProgressBar from '../../features/Progress/ui/ProgressBar';
 import SelectSection from '../../common/layout/SelectSection';
 import QuizSection from '../../features/quiz/ui/QuizSection';

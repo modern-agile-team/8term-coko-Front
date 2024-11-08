@@ -175,7 +175,7 @@ export const LineChangeDiv = styled.div`
 export const QuizBox = styled.div`
   width: 693px;
   margin-top: 270px;
-  border: 1px solid;
+  border: none;
 `;
 
 export const UpperBackgroundImg = styled.img`

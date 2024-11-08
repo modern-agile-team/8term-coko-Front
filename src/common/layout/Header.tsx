@@ -1,14 +1,16 @@
 import HeaderItem from '../ui/HeaderItem';
 import { HeaderBox } from './style';
 
+const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+
 export default function Header() {
   return (
     <HeaderBox>
       <HeaderItem
-        lifeIcon="https://cdn-icons-png.flaticon.com/128/25/25451.png"
+        pointIcon={`${imgUrl}골드.svg`}
+        points={500}
+        lifeIcon={`${imgUrl}과일바구니.svg`}
         lifePoints={5}
-        pointIcon="https://cdn-icons-png.flaticon.com/128/4291/4291341.png"
-        points={200}
       />
     </HeaderBox>
   );
