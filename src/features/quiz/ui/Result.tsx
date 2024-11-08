@@ -4,7 +4,7 @@ import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
 import handlePage from '../service/handlePage';
 import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
-interface ResultModalProps {
+interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
   result: boolean;
@@ -12,22 +12,17 @@ interface ResultModalProps {
   closeModal: () => void;
   openModal: () => void;
 }
-export default function ResultModal({
+export default function Result({
   quizId,
   answer,
   result,
   lastPage,
   closeModal,
   openModal,
-}: ResultModalProps) {
+}: ResultProps) {
   const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
-  const {
-    nextPage,
-    resetUserResponseAnswer,
-    pushTotalResults,
-    currentPage,
-    totalResults,
-  } = useClientQuizStore();
+  const { nextPage, resetUserResponseAnswer, pushTotalResults, currentPage } =
+    useClientQuizStore();
   //임시 유저 가져오기
   const { user } = useUserStore();
   const userId = user.id;

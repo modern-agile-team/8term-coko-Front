@@ -14,15 +14,26 @@ const categoryColor: Record<
 };
 
 //tite과 question이 들어가는 영역
-export const QuestionSection = styled.section<{ $category: Quiz['category'] }>`
+export const QuestionSection = styled.section<{
+  $category: Quiz['category'];
+}>`
   display: flex;
   flex-direction: column;
   margin-top: 37px;
-  width: 922px;
+  width: 60vw;
+  height: 35vh;
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
+  font-size: 18px;
+  font-weight: 700;
+  > p:nth-last-child(1) {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 26px 0 0 80px;
+  }
 `;
-//title 스타일
-export const TitleDiv = styled.div<{ $category: Quiz['category'] }>`
+export const Titlediv = styled.div<{
+  $category: Quiz['category'];
+}>`
   display: flex;
   align-items: center;
   gap: 15px;
@@ -30,42 +41,27 @@ export const TitleDiv = styled.div<{ $category: Quiz['category'] }>`
   border-bottom: 2px solid ${({ $category }) => categoryColor[$category].border};
   color: #ffffff;
   background-color: ${({ $category }) => categoryColor[$category].background};
-  font-size: 18px;
-  font-weight: 700;
   line-height: 24px;
   padding-left: 17px;
 `;
 //question 스타일
-export const QuestionDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 200px;
-  padding: 26px 0 0 80px;
-  font-size: 18px;
-  font-weight: 700;
-  text-align: left;
-  gap: 0px;
-  flex-grow: 0;
-`;
+
 //
-export const OXButtonDiv = styled.div`
+export const OXButtonSection = styled.section`
   margin-top: 23px;
   display: flex;
   justify-content: center;
   gap: 66px;
   padding: 0;
+  > button {
+    background-color: transparent;
+    border-color: transparent;
+  }
 `;
 
 //캐릭터 이미지테그
 export const CharacterImg = styled.img<{ $margin?: string }>`
   margin: ${({ $margin }) => $margin || '0'};
-`;
-//ox유형에서 ox버튼
-export const OXButton = styled.button`
-  background-color: transparent;
-  border-color: transparent;
 `;
 //객관식 버튼, 이미지 박스 영역
 export const MultipleChoiceSection = styled.section`
@@ -135,7 +131,7 @@ export const ShortAnswerInput = styled.input`
 export const CombinationSection = styled.section`
   display: flex;
   flex-wrap: wrap;
-  width: 1031px;
+  width: 70vw;
   gap: 10px;
   justify-content: center;
   margin: 49px 0 0 0;
@@ -318,4 +314,8 @@ export const LearnLink = styled(Link)`
   color: #ffffff;
   align-self: flex-end;
   margin: 35px 86px 0 0;
+  &:hover {
+    border-color: #00868d;
+    background-color: #00d9e9;
+  }
 `;

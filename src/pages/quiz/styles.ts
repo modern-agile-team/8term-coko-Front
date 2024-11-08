@@ -26,7 +26,7 @@ export const ProgressSection = styled.section`
 //응답버튼 영역잡기
 export const SubmitSection = styled.section`
   display: flex;
-  width: 980px;
+  width: 60vw;
   align-items: center;
   justify-content: space-between;
   margin-top: 48px;

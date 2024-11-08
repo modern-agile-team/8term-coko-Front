@@ -1,6 +1,5 @@
 import Quiz from '../../../types/Quiz';
 import {
-  CharacterImg,
   MultipleChoiceButton,
   MultipleChoiceSection,
   MultipleChoiceButtonDiv,
@@ -16,10 +15,7 @@ export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
   return (
     <>
       <MultipleChoiceSection>
-        <CharacterImg
-          src={`${imgUrl}객관식코코.svg`}
-          alt="객관식 문제의 코코"
-        ></CharacterImg>
+        <img src={`${imgUrl}객관식-코코.svg`} alt="객관식 문제의 코코"></img>
         <MultipleChoiceButtonDiv>
           {answerChoice.map((value, index) => (
             <MultipleChoiceButton
@@ -31,10 +27,7 @@ export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
             </MultipleChoiceButton>
           ))}
         </MultipleChoiceButtonDiv>
-        <CharacterImg
-          src={`${imgUrl}과일바구니.svg`}
-          alt="과일 바구니"
-        ></CharacterImg>
+        <img src={`${imgUrl}과일바구니.svg`} alt="과일 바구니"></img>
       </MultipleChoiceSection>
     </>
   );

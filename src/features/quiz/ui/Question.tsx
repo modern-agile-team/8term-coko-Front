@@ -1,9 +1,4 @@
-import {
-  QuestionDiv,
-  QuestionSection,
-  TextBlockButton,
-  TitleDiv,
-} from './../styles';
+import { QuestionSection, TextBlockButton, Titlediv } from './../styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import '../styles.css';
@@ -66,16 +61,15 @@ export default function Question({ title, question, category }: questionProps) {
 
   return (
     <QuestionSection $category={category}>
-      <TitleDiv $category={category}>
-        <div>문제{currentPage + 1}.</div>
-        <div>{title}</div>
-      </TitleDiv>
-      <QuestionDiv>
+      <Titlediv $category={category}>
+        <p>문제{currentPage + 1}.</p>
+        <p>{title}</p>
+      </Titlediv>
+      <p>
         {/* Dompurify를 이용한 xss공격 방어  문자열 랜더링*/}
         {/* <div>{parse(Dompurify.sanitize(nonEmptyQuestion), options)}</div> */}
-
         {parse(Dompurify.sanitize(nonEmptyQuestion), options)}
-      </QuestionDiv>
+      </p>
     </QuestionSection>
   );
 }

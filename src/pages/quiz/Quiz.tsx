@@ -14,20 +14,20 @@ import OXSelector from '../../features/quiz/ui/OXSelector';
 import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
 import useBeforeUnload from '../../hooks/useBeforeUnload';
-import ResultModal from '../../features/quiz/ui/ResultModal';
+import ResultModal from '../../features/quiz/ui/Result';
 import getParams from '../../utils/getParams';
 import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
 import isEqualArray from '../../utils/isEqualArray';
 import QuizzesQuery from '../../queries/quizzesQuery';
-import useMoadl from '../../hooks/useModal';
+import useModal from '../../hooks/useModal';
 
 //퀴즈페이지
 export default function Quiz() {
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
   const [result, setResult] = useState<boolean>(false);
-  const { Modal, closeModal, openModal, isShow } = useMoadl();
+  const { Modal, closeModal, openModal, isShow } = useModal();
   //페이지 이탈시 경고창이 뜨는 훅
   useBeforeUnload();
   //추후에 url에서 추출이 아닌 내부적으로 props로 전달하는 로직으로 변경 예정
