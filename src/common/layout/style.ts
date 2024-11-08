@@ -51,7 +51,8 @@ export const LogoBox = styled.div`
   height: 42px;
   margin-top: 26px;
   margin-left: 16px;
-  border: 1px solid;
+  border: 2px dashed #f00;
+  background: #efeff0;
   position: fixed;
 `;
 

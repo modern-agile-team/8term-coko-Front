@@ -37,7 +37,8 @@ export const MenuButton = styled.button<MenuButtonProps>`
   font-size: 15px;
   color: #fff;
   border-radius: 8px;
-  border: 2px solid #ffe8c7;
+  border: 2px solid
+    ${({ $activeStyle }) => ($activeStyle ? '#A69782' : '#FFE8C7')};
   background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#F0D8A7')};
   margin-left: 16px;
   margin-right: 20px;

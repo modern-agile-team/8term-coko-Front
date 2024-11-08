@@ -12,7 +12,7 @@ export default function DailyQuest() {
 
   return (
     <DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
-      <img src={`${imgUrl}폭탄-아이콘.svg`}></img>
+      <img src={`${imgUrl}폭탄-아이콘.svg`} alt="폭탄 아이콘" />
       <TextOverlay>오늘의 퀘스트</TextOverlay>
     </DailyQuestSection>
   );
