@@ -1,13 +1,18 @@
 import { useLayoutEffect, useState } from 'react';
+const IMG_DEFAULT_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 interface ImagePreloadOptions {
-  baseURL: string;
+  baseURL?: string;
   imageUrls: string[];
 }
 const usePreloadImages = ({
-  baseURL,
+  baseURL = IMG_DEFAULT_BASE_URL,
   imageUrls,
-}: ImagePreloadOptions): boolean => {
+}: ImagePreloadOptions): {
+  isLoading: boolean;
+  error: PromiseRejectedResult[] | null;
+} => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<PromiseRejectedResult[] | null>(null);
   useLayoutEffect(() => {
     const imagePromise = imageUrls.map(url => {
       return new Promise<void>((resolve, reject) => {
@@ -17,15 +22,14 @@ const usePreloadImages = ({
         img.src = baseURL + url;
       });
     });
-    Promise.all(imagePromise)
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.error(error.message);
-        setIsLoading(false);
-      });
+    Promise.allSettled(imagePromise).then(values => {
+      const rejectedValues = values.filter(
+        value => value.status === 'rejected'
+      );
+      setError(rejectedValues);
+      setIsLoading(false);
+    });
   }, []);
-  return isLoading;
+  return { isLoading, error };
 };
 export default usePreloadImages;

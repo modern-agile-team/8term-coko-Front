@@ -25,8 +25,6 @@ import usePreloadImages from '../../hooks/usePreloadImages';
 
 //퀴즈페이지
 export default function Quiz() {
-  const baseURL = import.meta.env.VITE_IMG_BASE_URL;
-
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
   const [result, setResult] = useState<boolean>(false);
@@ -42,12 +40,11 @@ export default function Quiz() {
   const { data: quizzes, isLoading } = QuizzesQuery.get({
     partId: Number(partId),
   });
-  const isImageLoading = usePreloadImages({
-    baseURL,
+  const { isLoading: isImageLoading } = usePreloadImages({
     imageUrls: [
       'O버튼.svg',
       'X버튼.svg',
-      'O버튼-선택.svg',
+      'O버튼-선택.sv',
       'X버튼-선택.svg',
       '정답모달.svg',
       '오답모달.svg',
@@ -60,7 +57,7 @@ export default function Quiz() {
     ],
   });
   //추후 loading 페이지로 교체
-  if (isLoading && isImageLoading) return <div>Loading</div>;
+  if (isLoading || isImageLoading) return <div>Loading</div>;
   //------------------------
   if (!quizzes) return <div>404</div>;
 

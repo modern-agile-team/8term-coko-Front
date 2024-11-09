@@ -1,9 +1,9 @@
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import { ShortAnswerSection, ShortAnswerInput, Img } from '../styles';
+const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 
 export default function ShortAnswer() {
   const { setUserResponseAnswer } = useClientQuizStore();
-  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
   return (
     <>
@@ -11,7 +11,7 @@ export default function ShortAnswer() {
         <Img
           $width="130px"
           $height="94px"
-          src={`${imgUrl}단답형이미지1.svg`}
+          src={`${IMG_BASE_URL}단답형이미지1.svg`}
           alt="키보드 키캡 1"
         />
         <ShortAnswerInput
@@ -24,7 +24,7 @@ export default function ShortAnswer() {
         <Img
           $width="252px"
           $height="174px"
-          src={`${imgUrl}단답형이미지2.svg`}
+          src={`${IMG_BASE_URL}단답형이미지2.svg`}
           alt="코코 상자"
         />
       </ShortAnswerSection>

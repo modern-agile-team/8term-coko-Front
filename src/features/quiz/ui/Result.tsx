@@ -2,8 +2,10 @@ import progressQuery from '../../../queries/usersQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
-import handlePage from '../service/handlePage';
+import handlePage from '../../../utils/handlePage';
+import noop from '../../../utils/noop';
 import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
+
 interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
@@ -42,9 +44,7 @@ export default function Result({
             resetUserResponseAnswer();
             pushTotalResults(result);
             closeModal();
-            if (!handlePage(currentPage, lastPage, nextPage)) {
-              openModal();
-            }
+            handlePage(currentPage, lastPage, nextPage, noop, openModal);
             userId &&
               addProgress.mutate({
                 userId,

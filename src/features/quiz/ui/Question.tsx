@@ -7,12 +7,12 @@ import lineChanger from '../service/lineChanger';
 import { useRef } from 'react';
 import Dompurify from 'dompurify';
 import Quiz from '../../../types/Quiz';
-interface questionProps {
+interface QuestionProps {
   title: Quiz['title'];
   question: Quiz['question'];
   category: Quiz['category'];
 }
-export default function Question({ title, question, category }: questionProps) {
+export default function Question({ title, question, category }: QuestionProps) {
   const {
     currentPage,
     userResponseAnswer,

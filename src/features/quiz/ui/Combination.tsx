@@ -15,20 +15,20 @@ export default function Combination({
   return (
     <>
       <CombinationSection>
-        {answerChoice.map((choice, index) => {
-          const isSelect = userResponseAnswer.includes(choice);
+        {answerChoice.map(value => {
+          const isSelect = userResponseAnswer.includes(value);
           return (
             <TextBlockButton
-              key={index}
+              key={value}
               onClick={() => {
                 //답 수랑 내가 선택한 답 (공백빼고) 갯수 비교 정답보다 선택한게 많으면 안되니
                 answer.length > compact(userResponseAnswer).length &&
-                  pushUserResponseAnswer(choice);
+                  pushUserResponseAnswer(value);
               }}
               $selected={isSelect}
               disabled={isSelect}
             >
-              {choice}
+              {value}
             </TextBlockButton>
           );
         })}
