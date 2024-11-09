@@ -44,7 +44,7 @@ export default function Quiz() {
     imageUrls: [
       'O버튼.svg',
       'X버튼.svg',
-      'O버튼-선택.sv',
+      'O버튼-선택.svg',
       'X버튼-선택.svg',
       '정답모달.svg',
       '오답모달.svg',
