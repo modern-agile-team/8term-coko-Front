@@ -2,18 +2,28 @@ import progressQuery from '../../../queries/usersQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
-import { ScoreSection } from '../styles';
-interface ResultModalProps {
+import handlePage from '../../../utils/handlePage';
+import noop from '../../../utils/noop';
+import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
+
+interface ResultProps {
   quizId: Quiz['id'];
+  answer: Quiz['answer'];
   result: boolean;
+  lastPage: number;
   closeModal: () => void;
+  openModal: () => void;
 }
-export default function ResultModal({
+export default function Result({
   quizId,
+  answer,
   result,
+  lastPage,
   closeModal,
-}: ResultModalProps) {
-  const { handleNextPage, resetUserResponseAnswer, pushTotalResults } =
+  openModal,
+}: ResultProps) {
+  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+  const { nextPage, resetUserResponseAnswer, pushTotalResults, currentPage } =
     useClientQuizStore();
   //임시 유저 가져오기
   const { user } = useUserStore();
@@ -22,14 +32,19 @@ export default function ResultModal({
   //임시 유저 가져오기
   return (
     <>
-      <ScoreSection>
-        {result ? '정답' : '오답'}
-        <button
+      <ScoreSection
+        $backGroundImage={
+          result ? `${imgUrl}정답모달.svg` : `${imgUrl}오답모달.svg`
+        }
+      >
+        <AnswerDiv>{!result && '정답 : ' + answer}</AnswerDiv>
+        <NextPageButton
+          $isAnswer={result}
           onClick={() => {
             resetUserResponseAnswer();
             pushTotalResults(result);
             closeModal();
-            handleNextPage();
+            handlePage(currentPage, lastPage, nextPage, noop, openModal);
             userId &&
               addProgress.mutate({
                 userId,
@@ -39,7 +54,7 @@ export default function ResultModal({
           }}
         >
           계속하기
-        </button>
+        </NextPageButton>
       </ScoreSection>
     </>
   );

@@ -9,10 +9,10 @@ import Modal from '../common/layout/Modal';
  * <button onClick={openModal}/>
  *  <Modal isShow={isShow}><ChildernComponent closeModal={closeModal}></Modal>
  * */
-const useMoadl = () => {
+const useModal = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const openModal = () => setIsShow(true);
   const closeModal = () => setIsShow(false);
   return { isShow, openModal, closeModal, Modal };
 };
-export default useMoadl;
+export default useModal;

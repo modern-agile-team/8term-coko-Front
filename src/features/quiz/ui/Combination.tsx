@@ -1,5 +1,5 @@
 import Quiz from '../../../types/Quiz';
-import { CombinationUl, TextBlockButton } from '../styles';
+import { CombinationSection, TextBlockButton } from '../styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import compact from '../../../utils/compact';
 interface CombinationProps {
@@ -14,25 +14,25 @@ export default function Combination({
 
   return (
     <>
-      <CombinationUl>
-        {answerChoice.map((choice, index) => {
-          const isSelect = userResponseAnswer.includes(choice);
+      <CombinationSection>
+        {answerChoice.map(value => {
+          const isSelect = userResponseAnswer.includes(value);
           return (
             <TextBlockButton
-              key={index}
+              key={value}
               onClick={() => {
                 //답 수랑 내가 선택한 답 (공백빼고) 갯수 비교 정답보다 선택한게 많으면 안되니
                 answer.length > compact(userResponseAnswer).length &&
-                  pushUserResponseAnswer(choice);
+                  pushUserResponseAnswer(value);
               }}
               $selected={isSelect}
               disabled={isSelect}
             >
-              {choice}
+              {value}
             </TextBlockButton>
           );
         })}
-      </CombinationUl>
+      </CombinationSection>
     </>
   );
 }

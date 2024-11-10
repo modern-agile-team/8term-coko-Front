@@ -1,4 +1,4 @@
-import { QuestionDiv, QuestionSection, TextBlockButton } from './../styles';
+import { QuestionSection, TextBlockButton, Titlediv } from './../styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import '../styles.css';
@@ -6,17 +6,20 @@ import emptyChangeToDiv from '../service/emptyChangeToDiv';
 import lineChanger from '../service/lineChanger';
 import { useRef } from 'react';
 import Dompurify from 'dompurify';
-interface questiontype {
-  title: string;
-  question: string;
-  category: string;
+import Quiz from '../../../types/Quiz';
+interface QuestionProps {
+  title: Quiz['title'];
+  question: Quiz['question'];
+  category: Quiz['category'];
 }
-export default function Question({ title, question }: questiontype) {
+export default function Question({ title, question, category }: QuestionProps) {
   const {
+    currentPage,
     userResponseAnswer,
     swapUserResponseAnswer,
     spliceUserResponseAnswer,
   } = useClientQuizStore();
+
   //\n을 줄바꿈 요소로 변경
   const lineChangeQuestion = lineChanger(question);
   //#empty#을 html Element로 변경
@@ -57,13 +60,16 @@ export default function Question({ title, question }: questiontype) {
   };
 
   return (
-    <QuestionSection>
-      <h1> {title} </h1>
-      <br></br>
-      <QuestionDiv>
+    <QuestionSection $category={category}>
+      <Titlediv $category={category}>
+        <p>문제{currentPage + 1}.</p>
+        <p>{title}</p>
+      </Titlediv>
+      <div>
         {/* Dompurify를 이용한 xss공격 방어  문자열 랜더링*/}
+        {/* <div>{parse(Dompurify.sanitize(nonEmptyQuestion), options)}</div> */}
         {parse(Dompurify.sanitize(nonEmptyQuestion), options)}
-      </QuestionDiv>
+      </div>
     </QuestionSection>
   );
 }
