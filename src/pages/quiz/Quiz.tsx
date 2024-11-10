@@ -40,7 +40,7 @@ export default function Quiz() {
   const { data: quizzes, isLoading } = QuizzesQuery.get({
     partId: Number(partId),
   });
-  const { isLoading: isImageLoading } = usePreloadImages({
+  const isImageLoading = usePreloadImages({
     imageUrls: [
       'O버튼.svg',
       'X버튼.svg',
