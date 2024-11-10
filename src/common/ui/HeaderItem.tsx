@@ -17,11 +17,15 @@ export default function HeaderItem({
     <>
       <IconWrapper>
         <HeaderIcon src={pointIcon} alt="Point Icon" />
-        <HeaderIconNumber $color="#FFCD35;">{points}</HeaderIconNumber>
+        <HeaderIconNumber $color="#FFCD35;">
+          {points.toLocaleString()}
+        </HeaderIconNumber>
       </IconWrapper>
       <IconWrapper>
         <HeaderIcon src={lifeIcon} alt="Life Icon" />
-        <HeaderIconNumber $color="#FE0F0F;">{lifePoints}</HeaderIconNumber>
+        <HeaderIconNumber $color="#FE0F0F;">
+          {lifePoints.toLocaleString()}
+        </HeaderIconNumber>
       </IconWrapper>
     </>
   );

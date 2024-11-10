@@ -5,10 +5,6 @@ export const DailyQuestSection = styled.section<{
   $isLearn: boolean;
   $isQuest: boolean;
 }>`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-
   // URL에 따라 스타일 변경
   ${({ $isLearn }) =>
     $isLearn &&
@@ -30,9 +26,47 @@ export const DailyQuestSection = styled.section<{
     `}
 `;
 
-export const TextOverlay = styled.div`
+export const QuestContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+`;
+
+export const QuestIcon = styled.img`
+  width: 38px;
+  height: 42px;
+  margin-bottom: 5px;
+`;
+
+export const DailyQuestText = styled.div`
   font-size: 15px;
   color: #9f9f9f;
   text-align: center;
-  margin-top: 27px;
+  margin-top: 20px;
+`;
+
+export const QuestsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+`;
+
+export const QuestsTitle = styled.div`
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: #b8b8b8;
+  text-align: center;
+`;
+
+export const ProgressBarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+`;
+
+export const RewardIcon = styled.img`
+  width: 24px;
+  height: 24px;
 `;

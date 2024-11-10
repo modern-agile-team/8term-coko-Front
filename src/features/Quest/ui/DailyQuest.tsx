@@ -1,5 +1,15 @@
 import { useLocation } from 'react-router-dom';
-import { DailyQuestSection, TextOverlay } from '../style';
+import {
+  DailyQuestSection,
+  QuestContent,
+  QuestIcon,
+  DailyQuestText,
+  QuestsWrapper,
+  QuestsTitle,
+  ProgressBarWrapper,
+  RewardIcon,
+} from '../style';
+import ProgressBar from '../../Progress/ui/ProgressBar';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
@@ -10,10 +20,42 @@ export default function DailyQuest() {
   const isLearn = location.pathname === '/learn';
   const isQuest = location.pathname === '/quest';
 
+  // 임시 데이터
+  const progress1 = 30;
+  const progress2 = 70;
+
   return (
     <DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
-      <img src={`${imgUrl}폭탄-아이콘.svg`} alt="폭탄 아이콘" />
-      <TextOverlay>오늘의 퀘스트</TextOverlay>
+      <QuestContent>
+        <QuestIcon src={`${imgUrl}폭탄-아이콘.svg`} alt="폭탄 아이콘" />
+        <DailyQuestText>오늘의 퀘스트</DailyQuestText>
+      </QuestContent>
+      <QuestsWrapper>
+        <QuestsTitle>문제 4개 풀기</QuestsTitle>
+        <ProgressBarWrapper>
+          <ProgressBar
+            $progress={progress1}
+            $maxWidth="172px"
+            $height="13px"
+            $boxBgColor="#F3F3F3;"
+            $innerBgColor="#F9012F"
+          />
+          <RewardIcon src={`${imgUrl}과일바구니.svg`} />
+        </ProgressBarWrapper>
+      </QuestsWrapper>
+      <QuestsWrapper>
+        <QuestsTitle>챕터 1 풀기</QuestsTitle>
+        <ProgressBarWrapper>
+          <ProgressBar
+            $progress={progress2}
+            $maxWidth="172px"
+            $height="13px"
+            $boxBgColor="#F3F3F3;"
+            $innerBgColor="#FFD100;"
+          />
+          <RewardIcon src={`${imgUrl}포인트.svg`} />
+        </ProgressBarWrapper>
+      </QuestsWrapper>
     </DailyQuestSection>
   );
 }

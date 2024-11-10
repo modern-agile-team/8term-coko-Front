@@ -65,7 +65,7 @@ export const IconWrapper = styled.div`
 `;
 
 export const HeaderIcon = styled.img`
-  width: 42px;
+  width: 30px;
   height: 30px;
 `;
 
