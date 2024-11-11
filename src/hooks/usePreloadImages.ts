@@ -34,7 +34,10 @@ const usePreloadImages = ({
       const rejectedValues = values.filter(
         value => value.status === 'rejected'
       );
-      console.error(rejectedValues);
+      if (rejectedValues.length > 0) {
+        console.error(rejectedValues);
+      }
+
       setIsLoading(false);
     });
   }, []);

@@ -263,7 +263,7 @@ export const DashLineHr = styled.hr`
     )
     1;
 `;
-export const TotalResultsTextBox = styled.p`
+export const TotalResultsTextDiv = styled.div`
   margin: 44px 0 17px 0;
   display: flex;
   font-size: 22px;

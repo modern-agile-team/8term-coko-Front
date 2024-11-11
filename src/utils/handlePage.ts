@@ -18,8 +18,9 @@ const handlePage = (
 ): void => {
   if (currentPage >= lastPage) {
     onFailure && onFailure();
+  } else {
+    onSuccess && onSuccess();
+    nextPage();
   }
-  onSuccess && onSuccess();
-  nextPage();
 };
 export default handlePage;
