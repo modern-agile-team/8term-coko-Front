@@ -178,16 +178,17 @@ export const QuizBox = styled.div`
   border: none;
 `;
 
+// 지도 윗 부분 이미지
 export const UpperBackgroundImg = styled.img`
   display: block;
 `;
 
 // 버튼 레이아웃 지정
 export const ButtonWrapper = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  place-items: center;
   background-image: url(${imgUrl}배경2.webp);
 `;
 
