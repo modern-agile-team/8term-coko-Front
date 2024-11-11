@@ -6,7 +6,7 @@ import {
   LearnLink,
   TotalResultSection,
   TotalResultsImageDiv,
-  TotalResultsTextBox,
+  TotalResultsTextDiv,
 } from '../styles';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 
@@ -19,10 +19,10 @@ export default function TotalResults({ totalResults }: TotalResultsProps) {
   return (
     <>
       <TotalResultSection>
-        <TotalResultsTextBox>
+        <TotalResultsTextDiv>
           총<p>&nbsp; {totalResultCount}&nbsp;</p>
           문제를 맞혔고 <p>&nbsp;보상</p>을 얻었어!
-        </TotalResultsTextBox>
+        </TotalResultsTextDiv>
         <DashLineHr />
         <TotalResultsImageDiv>
           <ImageDescriptionDiv>
