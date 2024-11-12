@@ -1,18 +1,4 @@
 import styled from 'styled-components';
-const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
-
-export const SectionBoxWrapper = styled.div``;
-
-export const SelectSectionBox = styled.section`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  width: 599px;
-  height: 197px;
-  margin-top: 77px;
-  position: fixed;
-  background-image: url(${imgUrl}글씨섬.svg);
-`;
 
 export const MenuBox = styled.div`
   display: flex;

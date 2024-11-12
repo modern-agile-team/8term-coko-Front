@@ -4,7 +4,7 @@ import CokoLogo from '../../common/layout/CokoLogo';
 import Header from '../../common/layout/Header';
 import DailyQuest from '../../features/Quest/ui/DailyQuest';
 import ProgressBar from '../../features/Progress/ui/ProgressBar';
-import SelectSection from '../../common/layout/SelectSection';
+import SelectSection from '../../features/Learn/ui/SelectSection';
 import QuizSection from '../../features/quiz/ui/QuizSection';
 import KeycapAdventureIntro from '../../features/Learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '../../features/quiz/ui/PartNavContainer';

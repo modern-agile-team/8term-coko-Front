@@ -198,6 +198,7 @@ export const KeyboardButton = styled.button`
   padding: 0;
   border: none;
   background-color: transparent;
+  margin-bottom: 20px;
 
   img {
     width: 100%;
