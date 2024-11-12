@@ -5,7 +5,7 @@ interface State {
   totalResults: boolean[];
 }
 interface Actions {
-  handleNextPage: () => void;
+  nextPage: () => void;
   setUserResponseAnswer: (userResposne: string) => void;
   pushUserResponseAnswer: (userResponse: string) => void;
   spliceUserResponseAnswer: (choiceIndex: number) => void;
@@ -16,7 +16,7 @@ interface Actions {
 export const useClientQuizStore = create<State & Actions>(set => ({
   /** 페이지 전역상태*/
   currentPage: 0,
-  handleNextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
+  nextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
   /**유저  응답 전역상태 */
   userResponseAnswer: [''],
   //유저의 응답을 추가(단답형, OX, 객관식 )

@@ -19,7 +19,7 @@ export const SelectSectionBox = styled.section`
   width: 599px;
   height: 197px;
   margin-top: 77px;
-  background-image: url(${imgUrl}글씨섬.svg);
+  background-image: url(${imgUrl}섹션-선택-섬.svg);
   background-repeat: no-repeat;
 `;
 

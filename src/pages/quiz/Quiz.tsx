@@ -1,6 +1,11 @@
 import Question from '../../features/quiz/ui/Question';
 import { AlignCenter } from '../../style/LayOut';
-import { GridContainer, HeaderSection, ProgressSection } from '../quiz/styles';
+import {
+  HeaderSection,
+  ProgressSection,
+  ResponseButton,
+  SubmitSection,
+} from './styles';
 import type Quiz from '../../types/Quiz';
 import { useClientQuizStore } from '../../store/useClientQuizStore';
 import Combination from '../../features/quiz/ui/Combination';
@@ -9,21 +14,21 @@ import OXSelector from '../../features/quiz/ui/OXSelector';
 import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
 import useBeforeUnload from '../../hooks/useBeforeUnload';
-import ResultModal from '../../features/quiz/ui/ResultModal';
+import ResultModal from '../../features/quiz/ui/Result';
 import getParams from '../../utils/getParams';
 import TotalResults from '../../features/quiz/ui/TotalResults';
 import { useState } from 'react';
 import isEqualArray from '../../utils/isEqualArray';
-import { ResponseButton, SubmitSection } from '../../features/quiz/styles';
 import QuizzesQuery from '../../queries/quizzesQuery';
-import useMoadl from '../../hooks/useModal';
+import useModal from '../../hooks/useModal';
+import usePreloadImages from '../../hooks/usePreloadImages';
 
 //퀴즈페이지
 export default function Quiz() {
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
   const [result, setResult] = useState<boolean>(false);
-  const { Modal, closeModal, openModal, isShow } = useMoadl();
+  const { Modal, closeModal, openModal, isShow } = useModal();
   //페이지 이탈시 경고창이 뜨는 훅
   useBeforeUnload();
   //추후에 url에서 추출이 아닌 내부적으로 props로 전달하는 로직으로 변경 예정
@@ -35,19 +40,27 @@ export default function Quiz() {
   const { data: quizzes, isLoading } = QuizzesQuery.get({
     partId: Number(partId),
   });
+  const isImageLoading = usePreloadImages({
+    imageUrls: [
+      'O버튼.svg',
+      'X버튼.svg',
+      'O버튼-선택.svg',
+      'X버튼-선택.svg',
+      '정답모달.svg',
+      '오답모달.svg',
+      '객관식-코코.svg',
+      '과일바구니.svg',
+      '단답형이미지1.svg',
+      '단답형이미지2.svg',
+      '레벨1코코.svg',
+      '과일바구니-아이템.svg',
+    ],
+  });
   //추후 loading 페이지로 교체
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading || isImageLoading) return <div>Loading</div>;
   //------------------------
   if (!quizzes) return <div>404</div>;
-  //퀴즈가 끝났을때 결과페이지 리턴
-  if (quizzes.length === totalResults.length) {
-    return (
-      <>
-        <TotalResults quizzes={quizzes} totalResults={totalResults} />
-      </>
-    );
-  }
-  //-----------------------------
+
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
   //
@@ -61,39 +74,48 @@ export default function Quiz() {
   });
   return (
     <AlignCenter>
-      <GridContainer>
-        <HeaderSection>
-          <div>로고</div>
-          <div>돈-??-프사</div>
-        </HeaderSection>
-        <ProgressSection>진행도</ProgressSection>
-        <>
-          <Question title={title} question={question} category={category} />
-          {getComponentMappingByChoiceType(category, { answerChoice, answer })}
-          <SubmitSection>
-            <ResponseButton
-              onClick={() => {
-                setResult(false);
-                openModal();
-              }}
-            >
-              스킵
-            </ResponseButton>
-            <ResponseButton
-              disabled={userResponseAnswer[0] === ''}
-              onClick={() => {
-                setResult(isEqualArray(userResponseAnswer, answer));
-                openModal();
-              }}
-            >
-              확인
-            </ResponseButton>
-          </SubmitSection>
-          <Modal isShow={isShow}>
-            <ResultModal quizId={id} result={result} closeModal={closeModal} />
-          </Modal>
-        </>
-      </GridContainer>
+      <HeaderSection>
+        <div>로고</div>
+        <div>돈-??-프사</div>
+      </HeaderSection>
+      <ProgressSection>진행도</ProgressSection>
+
+      <Question title={title} question={question} category={category} />
+      {getComponentMappingByChoiceType(category, { answerChoice, answer })}
+      <SubmitSection>
+        <ResponseButton
+          onClick={() => {
+            setResult(false);
+            openModal();
+          }}
+        >
+          SKIP
+        </ResponseButton>
+        <ResponseButton
+          disabled={userResponseAnswer[0] === ''}
+          $disabled={userResponseAnswer[0] === ''}
+          onClick={() => {
+            setResult(isEqualArray(userResponseAnswer, answer));
+            openModal();
+          }}
+        >
+          제출
+        </ResponseButton>
+      </SubmitSection>
+      <Modal isShow={isShow}>
+        {quizzes.length === totalResults.length ? (
+          <TotalResults quizzes={quizzes} totalResults={totalResults} />
+        ) : (
+          <ResultModal
+            quizId={id}
+            result={result}
+            answer={answer}
+            lastPage={quizzes.length - 1}
+            openModal={openModal}
+            closeModal={closeModal}
+          />
+        )}
+      </Modal>
     </AlignCenter>
   );
 }
