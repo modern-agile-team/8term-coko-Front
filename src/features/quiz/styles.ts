@@ -187,17 +187,21 @@ export const UpperBackgroundImg = styled.img`
 export const ButtonWrapper = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
   place-items: center;
   background-image: url(${imgUrl}배경2.webp);
 `;
 
-// 키캡(키보드 스위치) 버튼 (스타일 변경 예정)
+// 키캡(키보드 스위치) 버튼
 export const KeyboardButton = styled.button`
-  width: 70px;
-  height: 70px;
-  border-radius: 15px;
-  background: #000000;
-  color: #ffffff;
-  margin-bottom: 20px;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 `;

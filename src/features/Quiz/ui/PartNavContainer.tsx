@@ -27,13 +27,14 @@ export default function PartNavContainer() {
       <ButtonWrapper>
         {parts.map((part, index) => {
           const { gridColumn, gridRow } = getPartGridPosition(index);
+          const buttonImage = `${imgUrl}키캡${(index % 4) + 1}.svg`;
           return (
             <KeyboardButton
               key={`${part.partId}`}
               style={{ gridColumn, gridRow }}
               onClick={() => navigateToQuizPart(navigate, part)}
             >
-              {part.partId}
+              <img src={buttonImage} alt={`키캡${index + 1}`} />
             </KeyboardButton>
           );
         })}
