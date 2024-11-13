@@ -1,4 +1,9 @@
-import { UpperBackgroundImg, ButtonWrapper, KeyboardButton } from '../styles';
+import {
+  UpperBackgroundImg,
+  ButtonWrapper,
+  KeyboardButton,
+  SectionTitle,
+} from '../styles';
 import { useNavigate } from 'react-router-dom';
 import { navigateToQuizPart } from '../service/navigateToQuizPart';
 import getPartGridPosition from '../../Learn/service/getPartGridPosition';
@@ -23,7 +28,9 @@ export default function PartNavContainer() {
 
   return (
     <>
-      <UpperBackgroundImg src={`${imgUrl}배경1.webp`} />
+      <UpperBackgroundImg>
+        <SectionTitle>섹션 이름</SectionTitle>
+      </UpperBackgroundImg>
       <ButtonWrapper>
         {parts.map((part, index) => {
           const { gridColumn, gridRow } = getPartGridPosition(index);

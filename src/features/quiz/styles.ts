@@ -333,12 +333,38 @@ export const QuizBox = styled.div`
 `;
 
 // 지도 윗 부분 이미지
-export const UpperBackgroundImg = styled.img`
-  display: block;
+export const UpperBackgroundImg = styled.div`
+  width: 693px;
+  height: 147px;
+  background-image: url(${imgUrl}배경1.webp);
+  display: flex;
+  align-items: end;
+`;
+
+// 섹션 제목(이름)
+export const SectionTitle = styled.section`
+  width: 693px;
+  font-size: 17px;
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: #ffffff;
+    margin: 0 55px;
+    max-width: 200px;
+  }
 `;
 
 // 버튼 레이아웃 지정
-export const ButtonWrapper = styled.section`
+export const ButtonWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   place-items: center;
