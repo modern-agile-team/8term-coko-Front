@@ -23,6 +23,8 @@ export default function DailyQuest() {
   // 임시 데이터
   const progress1 = 30;
   const progress2 = 70;
+  const maxProgress1 = 100;
+  const maxProgress2 = 100;
 
   return (
     <DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
@@ -35,6 +37,7 @@ export default function DailyQuest() {
         <ProgressBarWrapper>
           <ProgressBar
             $progress={progress1}
+            $maxProgress={maxProgress1}
             $maxWidth="172px"
             $height="13px"
             $boxBgColor="#F3F3F3;"
@@ -48,6 +51,7 @@ export default function DailyQuest() {
         <ProgressBarWrapper>
           <ProgressBar
             $progress={progress2}
+            $maxProgress={maxProgress2}
             $maxWidth="172px"
             $height="13px"
             $boxBgColor="#F3F3F3;"

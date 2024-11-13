@@ -54,9 +54,9 @@ export const QuestsWrapper = styled.div`
 
 export const QuestsTitle = styled.div`
   font-size: 12px;
-  margin-bottom: 3px;
   color: #b8b8b8;
-  text-align: center;
+  text-align: start;
+  margin: 0 0 3px 40px;
 `;
 
 export const ProgressBarWrapper = styled.div`

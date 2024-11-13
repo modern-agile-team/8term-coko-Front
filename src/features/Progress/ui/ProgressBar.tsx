@@ -3,6 +3,7 @@ import { CSSProperties } from 'react';
 
 interface ProgressBarProps {
   $progress: number;
+  $maxProgress: number;
   $maxWidth?: string;
   $height?: string;
   $boxBgColor?: string;
@@ -14,6 +15,7 @@ interface ProgressBarProps {
  * @example
  * <ProgressBar
       $progress={progress}
+      $maxProgress={maxProgress}
       $maxWidth="200px"
       $height="15px"
       $boxBgColor="#FFFFFF"
@@ -24,12 +26,15 @@ interface ProgressBarProps {
 
 export default function ProgressBar({
   $progress,
+  $maxProgress,
   $maxWidth,
   $height,
   $boxBgColor,
   $innerBgColor,
   style,
 }: ProgressBarProps) {
+  const normalizedProgress = ($progress / $maxProgress) * 100;
+
   return (
     <ProgressBox
       $maxWidth={$maxWidth}
@@ -37,7 +42,10 @@ export default function ProgressBar({
       $boxBgColor={$boxBgColor}
       style={style}
     >
-      <InnerProgress $progress={$progress} $innerBgColor={$innerBgColor} />
+      <InnerProgress
+        $progress={normalizedProgress}
+        $innerBgColor={$innerBgColor}
+      />
     </ProgressBox>
   );
 }

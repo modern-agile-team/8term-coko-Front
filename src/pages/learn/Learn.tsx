@@ -12,6 +12,7 @@ import PartNavContainer from '../../features/quiz/ui/PartNavContainer';
 export default function Learn() {
   // 데이터베이스에서 가져온 것으로 가정
   const progress = 30;
+  const maxProgress = 100;
 
   return (
     <>
@@ -29,6 +30,7 @@ export default function Learn() {
       <Layout>
         <ProgressBar
           $progress={progress}
+          $maxProgress={maxProgress}
           $maxWidth="639px"
           $height="16px"
           $boxBgColor="#85705F"

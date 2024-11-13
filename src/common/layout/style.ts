@@ -17,7 +17,6 @@ export const HeaderBox = styled.header`
   align-items: center;
   width: 294px;
   height: 42px;
-  margin-top: 15px;
   position: fixed;
 `;
 
