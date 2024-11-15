@@ -58,10 +58,4 @@ export const ArrowButton = styled.button<{ direction: 'left' | 'right' }>`
     width: 100%;
     height: auto;
   }
-
-  /* ${({ direction }) =>
-    direction === 'left' &&
-    `
-    margin-right: 20px; 
-  `} */
 `;

@@ -12,7 +12,7 @@ interface ImagePreloadOptions {
  * @example
  * const isLoading = usePreloadImages({imageUrls:['/defaultImg.png','/defaultImg2.gif']});
  * if(isLoading){
- *    return <Loding/>;
+ *    return <Loading/>;
  * }
  */
 
