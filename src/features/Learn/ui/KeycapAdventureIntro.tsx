@@ -1,7 +1,8 @@
+import { useInterval } from '@modern-kit/react';
+import { getImageUrl } from '../../../utils/getImageUrl';
+import { useState } from 'react';
 import { HandsUpCokoImg, LegendKeycapMessageImg } from '../style';
-import { useState, useLayoutEffect } from 'react';
 
-const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 const messageFileNames = [
   '코코-멘트1.svg',
   '코코-멘트2.svg',
@@ -10,23 +11,28 @@ const messageFileNames = [
   '코코-멘트5.svg',
 ];
 
-export default function KeycapAdventureIntro() {
+interface KeycapAdventureIntroProps {
+  delay?: number;
+}
+
+export default function KeycapAdventureIntro({
+  delay = 5000, // 기본값 5000ms
+}: KeycapAdventureIntroProps) {
   const [messageIndex, setMessageIndex] = useState(0);
 
-  useLayoutEffect(() => {
-    const interval = setInterval(() => {
+  useInterval(
+    () => {
       setMessageIndex(prevIndex => (prevIndex + 1) % messageFileNames.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+    },
+    { delay }
+  );
 
   return (
     <>
       <LegendKeycapMessageImg
-        src={`${imgUrl}${messageFileNames[messageIndex]}`}
+        src={getImageUrl(messageFileNames[messageIndex])}
       />
-      <HandsUpCokoImg src={`${imgUrl}손든-코코.svg`} />
+      <HandsUpCokoImg src={getImageUrl('손든-코코.svg')} />
     </>
   );
 }
