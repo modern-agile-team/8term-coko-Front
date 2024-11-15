@@ -1,6 +1,6 @@
 import { SectionButton } from '../../../common/ui/style';
 
-export default function SectionNavigateButton() {
+export default function SectionNavigateContainer() {
   const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
   const imgUrls = [

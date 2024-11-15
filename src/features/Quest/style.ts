@@ -39,7 +39,7 @@ export const QuestIcon = styled.img`
   margin-bottom: 5px;
 `;
 
-export const DailyQuestText = styled.div`
+export const DailyQuestText = styled.p`
   font-size: 15px;
   color: #9f9f9f;
   text-align: center;
@@ -52,7 +52,7 @@ export const QuestsWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-export const QuestsTitle = styled.div`
+export const QuestsTitle = styled.p`
   font-size: 12px;
   color: #b8b8b8;
   text-align: start;

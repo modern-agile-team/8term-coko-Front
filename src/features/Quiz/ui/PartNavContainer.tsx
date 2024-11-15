@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import { navigateToQuizPart } from '../service/navigateToQuizPart';
 import getPartGridPosition from '../../Learn/service/getPartGridPosition';
 
+const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+
 export default function PartNavContainer() {
-  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
   const navigate = useNavigate();
 
   // 백엔드에서 가져올 데이터 (현재는 임시 데이터)
