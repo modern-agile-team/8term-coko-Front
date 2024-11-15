@@ -2,7 +2,7 @@ import MenuItem from '../ui/MenuItem';
 import { MenuBox } from './style';
 
 export default function MenuBar() {
-  const menu = [
+  const menus = [
     { id: 1, title: '학습', url: 'learn', icon: '학습-아이콘.svg' },
     { id: 2, title: '랭킹', url: 'ranking', icon: '랭킹-아이콘.svg' },
     { id: 3, title: '퀘스트', url: 'quest', icon: '퀘스트-아이콘.svg' },
@@ -13,7 +13,7 @@ export default function MenuBar() {
 
   return (
     <MenuBox>
-      {menu.map(menuItem => (
+      {menus.map(menuItem => (
         <MenuItem
           key={menuItem.id}
           id={menuItem.id}
