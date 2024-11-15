@@ -13,13 +13,13 @@ export default function MenuBar() {
 
   return (
     <MenuBox>
-      {menus.map(menuItem => (
+      {menus.map(menu => (
         <MenuItem
-          key={menuItem.id}
-          id={menuItem.id}
-          url={menuItem.url}
-          icon={menuItem.icon}
-          title={menuItem.title}
+          key={menu.id}
+          id={menu.id}
+          url={menu.url}
+          icon={menu.icon}
+          title={menu.title}
         />
       ))}
     </MenuBox>
