@@ -5,7 +5,6 @@ import {
   SectionTitle,
 } from '../styles';
 import { useNavigate } from 'react-router-dom';
-import { navigateToQuizPart } from '../service/navigateToQuizPart';
 import getPartGridPosition from '../../Learn/service/getPartGridPosition';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
@@ -40,7 +39,7 @@ export default function PartNavContainer() {
             <KeyboardButton
               key={`${part.partId}`}
               style={{ gridColumn, gridRow }}
-              onClick={() => navigateToQuizPart(navigate, part)}
+              onClick={() => navigate('/quiz', { state: part })}
             >
               <img src={buttonImage} alt={`키캡${index + 1}`} />
             </KeyboardButton>

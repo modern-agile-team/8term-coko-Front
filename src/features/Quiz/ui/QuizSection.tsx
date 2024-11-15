@@ -1,10 +1,6 @@
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import { QuizBox } from '../styles';
 
-interface QuizSectionProps {
-  children: ReactNode;
-}
-
-export default function QuizSection({ children }: QuizSectionProps) {
+export default function QuizSection({ children }: PropsWithChildren<{}>) {
   return <QuizBox>{children}</QuizBox>;
 }
