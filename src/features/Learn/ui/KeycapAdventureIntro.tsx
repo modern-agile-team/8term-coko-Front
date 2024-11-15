@@ -2,7 +2,7 @@ import { HandsUpCokoImg, LegendKeycapMessageImg } from '../style';
 import { useState, useLayoutEffect } from 'react';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
-const messageFilenames = [
+const messageFileNames = [
   '코코-멘트1.svg',
   '코코-멘트2.svg',
   '코코-멘트3.svg',
@@ -15,7 +15,7 @@ export default function KeycapAdventureIntro() {
 
   useLayoutEffect(() => {
     const interval = setInterval(() => {
-      setMessageIndex(prevIndex => (prevIndex + 1) % messageFilenames.length);
+      setMessageIndex(prevIndex => (prevIndex + 1) % messageFileNames.length);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -24,7 +24,7 @@ export default function KeycapAdventureIntro() {
   return (
     <>
       <LegendKeycapMessageImg
-        src={`${imgUrl}${messageFilenames[messageIndex]}`}
+        src={`${imgUrl}${messageFileNames[messageIndex]}`}
       />
       <HandsUpCokoImg src={`${imgUrl}손든-코코.svg`} />
     </>
