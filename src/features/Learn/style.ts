@@ -9,7 +9,6 @@ export const SectionBoxWrapper = styled.div`
   width: 100%;
   max-width: 730px;
   margin: 0 auto;
-  position: fixed;
 `;
 
 export const SelectSectionBox = styled.section`
@@ -18,7 +17,7 @@ export const SelectSectionBox = styled.section`
   gap: 10px;
   width: 599px;
   height: 197px;
-  margin-top: 77px;
+  margin-top: 30px;
   background-image: url(${imgUrl}섹션-선택-섬.svg);
   background-repeat: no-repeat;
 `;

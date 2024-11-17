@@ -1,4 +1,6 @@
 import { Wrapper, LeftSection, RightSection, Layout } from '../../style/style';
+import { ScrollableContainer } from './style';
+import { useScrollVisibility } from '../../hooks/useScrollVisibility';
 import MenuBar from '../../common/layout/MenuBar';
 import CokoLogo from '../../common/layout/CokoLogo';
 import Header from '../../common/layout/Header';
@@ -11,6 +13,8 @@ import PartNavContainer from '../../features/quiz/ui/PartNavContainer';
 import usePreloadImages from '../../hooks/usePreloadImages';
 
 export default function Learn() {
+  const showComponents = useScrollVisibility();
+
   const isImageLoading = usePreloadImages({
     imageUrls: [
       '코코-멘트1.svg',
@@ -20,9 +24,9 @@ export default function Learn() {
       '코코-멘트5.svg',
     ],
   });
+
   if (isImageLoading) return <div>Loading</div>;
 
-  // 데이터베이스에서 가져온 것으로 가정
   const progress = 30;
   const maxProgress = 100;
 
@@ -40,16 +44,18 @@ export default function Learn() {
         </RightSection>
       </Wrapper>
       <Layout>
-        <ProgressBar
-          $progress={progress}
-          $maxProgress={maxProgress}
-          $maxWidth="639px"
-          $height="16px"
-          $boxBgColor="#85705F"
-          $innerBgColor="#BFD683"
-          style={{ position: 'fixed', marginTop: '36px' }}
-        />
-        <SelectSection />
+        <ScrollableContainer $show={showComponents}>
+          <ProgressBar
+            $progress={progress}
+            $maxProgress={maxProgress}
+            $maxWidth="639px"
+            $height="16px"
+            $boxBgColor="#85705F"
+            $innerBgColor="#BFD683"
+            style={{ marginTop: '36px' }}
+          />
+          <SelectSection />
+        </ScrollableContainer>
         <QuizSection>
           <PartNavContainer />
         </QuizSection>
