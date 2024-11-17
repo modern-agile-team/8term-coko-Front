@@ -20,12 +20,9 @@ export default function KeycapAdventureIntro({
 }: KeycapAdventureIntroProps) {
   const [messageIndex, setMessageIndex] = useState(0);
 
-  useInterval(
-    () => {
-      setMessageIndex(prevIndex => (prevIndex + 1) % messageFileNames.length);
-    },
-    { delay }
-  );
+  useInterval(() => {
+    setMessageIndex(prevIndex => (prevIndex + 1) % messageFileNames.length);
+  }, delay);
 
   return (
     <>
