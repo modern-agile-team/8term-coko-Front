@@ -2,6 +2,8 @@ import styled, { css, keyframes } from 'styled-components';
 import Quiz from '../../types/Quiz';
 import { Link } from 'react-router-dom';
 
+const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+
 //문제 유형별 컬러 객체
 const categoryColor: Record<
   Quiz['category'],
@@ -74,6 +76,7 @@ export const MultipleChoiceButtonDiv = styled.div`
   grid-row-gap: 15px;
   grid-column-gap: 20px;
 `;
+
 //객관식에서 각 문항 버튼
 export const MultipleChoiceButton = styled.button<{
   $isClick: boolean;
@@ -123,6 +126,7 @@ export const ShortAnswerInput = styled.input`
     outline: none;
   }
 `;
+
 //블럭유형에서 리스트박스를 잡는 리스트 박스
 export const CombinationSection = styled.section`
   display: flex;
@@ -157,6 +161,7 @@ export const TextBlockButton = styled.button<{ $selected?: boolean }>`
       color: #00d9e9;
     `};
 `;
+
 //화면 하단의
 
 export const EmptyDiv = styled.div`
@@ -318,4 +323,66 @@ export const LearnLink = styled(Link)`
 export const Img = styled.img<{ $width: string; $height: string }>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
+`;
+
+// Learn 페이지 퀴즈들 감싸는 박스
+export const QuizBox = styled.div`
+  width: 693px;
+  margin-top: 270px;
+  border: none;
+`;
+
+// 지도 윗 부분 이미지
+export const UpperBackgroundImg = styled.div`
+  width: 693px;
+  height: 147px;
+  background-image: url(${imgUrl}배경1.webp);
+  display: flex;
+  align-items: end;
+`;
+
+// 섹션 제목(이름)
+export const SectionTitle = styled.section`
+  width: 693px;
+  font-size: 17px;
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: #ffffff;
+    margin: 0 55px;
+    max-width: 200px;
+  }
+`;
+
+// 버튼 레이아웃 지정
+export const ButtonWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  place-items: center;
+  background-image: url(${imgUrl}배경2.webp);
+`;
+
+// 키캡(키보드 스위치) 버튼
+export const KeyboardButton = styled.button`
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  margin-bottom: 20px;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 `;

@@ -7,12 +7,10 @@ export const GridContainer = styled.div`
   grid-template-columns: 98px 98px 764px 98px 98px;
   column-gap: 20px;
 `;
-//헤더 영역잡기용 나중에 헤더 생기면 지우기
+//헤더 영역잡기용
 export const HeaderSection = styled.section`
-  display: flex;
-  font-weight: 1000;
-  justify-content: space-between;
-  background-color: gray;
+  width: 294px;
+  align-self: flex-end;
   height: 42px;
 `;
 //진행도 영역잡기용 나중에 진행도 컴포넌트 분리되면 지우기

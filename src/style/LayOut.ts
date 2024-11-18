@@ -4,7 +4,6 @@ import { LayOut } from '../types/LayOut';
 export const GridContainer = styled.div`
   display: grid;
   width: 1280px;
-  margin: 0 62px;
   grid-template-columns: 2fr 7fr 3fr;
   column-gap: 20px;
 `;
@@ -20,7 +19,7 @@ export const LayOutDiv = styled.div<LayOut>`
   flex-direction: column;
   align-items: center;
   margin-top: ${({ $marginTop }) => $marginTop || '0px'};
-  height: ${({ $height }) => $height || '100vh'};
+  height: ${({ $height }) => $height};
   background-color: ${({ $backGroundColor }) => $backGroundColor || '#fffff'};
 `;
 export const FeatureDiv = styled.div<LayOut>`

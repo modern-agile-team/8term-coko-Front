@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import usePreservedCallback from './usePreservedCallback';
+import { usePreservedCallback } from '@modern-kit/react';
 
 interface UseBeforeUnloadProps {
   enabled?: boolean;

@@ -3,7 +3,7 @@ import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
 import handlePage from '../../../utils/handlePage';
-import noop from '../../../utils/noop';
+import { noop } from '@modern-kit/utils';
 import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
 
 interface ResultProps {

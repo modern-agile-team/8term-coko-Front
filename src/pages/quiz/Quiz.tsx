@@ -22,6 +22,7 @@ import isEqualArray from '../../utils/isEqualArray';
 import QuizzesQuery from '../../queries/quizzesQuery';
 import useModal from '../../hooks/useModal';
 import usePreloadImages from '../../hooks/usePreloadImages';
+import Header from '../../common/layout/Header';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -75,8 +76,7 @@ export default function Quiz() {
   return (
     <AlignCenter>
       <HeaderSection>
-        <div>로고</div>
-        <div>돈-??-프사</div>
+        <Header />
       </HeaderSection>
       <ProgressSection>진행도</ProgressSection>
 
