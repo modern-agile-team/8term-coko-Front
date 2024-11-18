@@ -7,8 +7,7 @@ export const SectionBoxWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 730px;
-  margin: 0 auto;
+  margin-top: 45px;
 `;
 
 export const SelectSectionBox = styled.section`
@@ -22,10 +21,10 @@ export const SelectSectionBox = styled.section`
   background-repeat: no-repeat;
 `;
 
-export const TextOverlay = styled.div`
+export const TextOverlay = styled.p`
   font-weight: 700;
   font-size: 18px;
-  margin-top: 100px;
+  margin: 80px 10px 0 10px;
 `;
 
 export const LegendKeycapMessageImg = styled.img`
@@ -52,7 +51,7 @@ export const ArrowButton = styled.button<{ direction: 'left' | 'right' }>`
   border: none;
   width: 25px;
   height: 25px;
-  margin-top: 100px;
+  margin-top: 80px;
   img {
     width: 100%;
     height: auto;

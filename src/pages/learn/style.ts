@@ -6,10 +6,10 @@ interface ScrollableContainerProps {
 
 export const ScrollableContainer = styled.div<ScrollableContainerProps>`
   transform: ${({ $show }) => ($show ? 'translateY(0)' : 'translateY(-100%)')};
-  transition: transform 1s ease;
+  transition: transform 0.5s ease;
   position: fixed;
-  width: 100%;
-  display: flex;
+  display: inline-flex;
+  width: auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
