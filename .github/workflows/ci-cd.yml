@@ -63,4 +63,4 @@ jobs:
           docker stop ${{ env.NAME }} || true
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run -d -p 80:3000 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run --env-file /home/ec2-user/.env -d -p 80:3000 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
