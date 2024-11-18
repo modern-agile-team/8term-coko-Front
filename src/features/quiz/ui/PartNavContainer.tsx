@@ -5,7 +5,7 @@ import {
   SectionTitle,
 } from '../styles';
 import { useNavigate } from 'react-router-dom';
-import getPartGridPosition from '../../Learn/service/getPartGridPosition';
+import getPartGridPosition from '../../learn/service/getPartGridPosition';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 

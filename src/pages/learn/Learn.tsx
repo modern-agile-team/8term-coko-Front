@@ -4,11 +4,11 @@ import { useScrollVisibility } from '../../hooks/useScrollVisibility';
 import MenuBar from '../../common/layout/MenuBar';
 import CokoLogo from '../../common/layout/CokoLogo';
 import Header from '../../common/layout/Header';
-import DailyQuest from '../../features/Quest/ui/DailyQuest';
-import ProgressBar from '../../features/Progress/ui/ProgressBar';
-import SelectSection from '../../features/Learn/ui/SelectSection';
+import DailyQuest from '../../features/quest/ui/DailyQuest';
+import ProgressBar from '../../features/progress/ui/ProgressBar';
+import SelectSection from '../../features/learn/ui/SelectSection';
 import QuizSection from '../../features/quiz/ui/QuizSection';
-import KeycapAdventureIntro from '../../features/Learn/ui/KeycapAdventureIntro';
+import KeycapAdventureIntro from '../../features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '../../features/quiz/ui/PartNavContainer';
 import usePreloadImages from '../../hooks/usePreloadImages';
 
@@ -44,16 +44,16 @@ export default function Learn() {
         </RightSection>
       </Wrapper>
       <Layout>
+        <ProgressBar
+          $progress={progress}
+          $maxProgress={maxProgress}
+          $maxWidth="639px"
+          $height="16px"
+          $boxBgColor="#85705F"
+          $innerBgColor="#BFD683"
+          style={{ position: 'fixed', marginTop: '36px' }}
+        />
         <ScrollableContainer $show={showComponents}>
-          <ProgressBar
-            $progress={progress}
-            $maxProgress={maxProgress}
-            $maxWidth="639px"
-            $height="16px"
-            $boxBgColor="#85705F"
-            $innerBgColor="#BFD683"
-            style={{ marginTop: '36px' }}
-          />
           <SelectSection />
         </ScrollableContainer>
         <QuizSection>

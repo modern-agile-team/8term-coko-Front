@@ -1,7 +1,7 @@
 import { Wrapper, LeftSection, RightSection, Layout } from '../../style/style';
 import { FeatureDiv } from '../../style/LayOut';
 import MenuBar from '../../common/layout/MenuBar';
-import DailyQuest from '../../features/Quest/ui/DailyQuest';
+import DailyQuest from '../../features/quest/ui/DailyQuest';
 import CokoLogo from '../../common/layout/CokoLogo';
 import Header from '../../common/layout/Header';
 

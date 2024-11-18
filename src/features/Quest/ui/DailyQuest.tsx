@@ -9,7 +9,7 @@ import {
   ProgressBarWrapper,
   RewardIcon,
 } from '../style';
-import ProgressBar from '../../Progress/ui/ProgressBar';
+import ProgressBar from '../../progress/ui/ProgressBar';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
