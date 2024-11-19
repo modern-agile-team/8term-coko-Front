@@ -4,9 +4,13 @@ import { useLocation } from 'react-router-dom';
  * @returns ex useGetLocationState<{partId:string}>();
  * @example const useGetLocationState<{partId:string}>();
  */
-function useGetLocationState(): { [key: string]: string } {
+function useGetLocationState(): { [ket: string]: string | undefined } {
   const location = useLocation();
   const state = location.state;
+  //state가 빈 객체일 경우
+  if (state === null) {
+    return {};
+  }
   return { ...state };
 }
 

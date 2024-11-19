@@ -15,7 +15,7 @@ import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
 import useBeforeUnload from '../../hooks/useBeforeUnload';
 import Result from '../../features/quiz/ui/Result';
-import getParams from '../../hooks/useGetLocationState';
+import useGetLocationState from '../../hooks/useGetLocationState';
 import TotalResults from '../../features/quiz/ui/TotalResults';
 import isEqualArray from '../../utils/isEqualArray';
 import QuizzesQuery from '../../queries/quizzesQuery';
@@ -37,8 +37,8 @@ export default function Quiz() {
   //----------------------------
   const [result, setResult] = useState<boolean>(false);
   const { Modal, closeModal, openModal, isShow } = useModal();
-  const { partId } = getParams();
-  if (partId === null) {
+  const { partId } = useGetLocationState();
+  if (!partId) {
     return <div>404</div>;
   }
 
