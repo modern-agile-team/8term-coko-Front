@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import User from '../types/User';
-import usersApis from '../apis/usersApis';
 import Experience from '../types/Experience';
+import experienceAPis from '../apis/experienceApis';
 
 const experienceQuery = {
   get: (id: User['id']) => {
     return useQuery({
       queryKey: ['experience', id],
-      queryFn: () => usersApis.getExperience(id),
+      queryFn: () => experienceAPis.getExperience(id),
       gcTime: 0,
       staleTime: 0,
     });
@@ -15,7 +15,7 @@ const experienceQuery = {
   patch: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.patchExperience,
+      mutationFn: experienceAPis.patchExperience,
       onMutate: async newExperience => {
         await queryClient.cancelQueries({
           queryKey: ['experience', newExperience.id],
