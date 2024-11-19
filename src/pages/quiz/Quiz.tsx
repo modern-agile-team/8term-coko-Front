@@ -24,6 +24,9 @@ import usePreloadImages from '../../hooks/usePreloadImages';
 import { useEffect, useState } from 'react';
 import Header from '../../common/layout/Header';
 import useUserStore from '../../store/useUserStore';
+import ProgressBar from '../../features/progress/ui/ProgressBar';
+import { Img } from '../../features/quiz/styles';
+import { getImageUrl } from '../../utils/getImageUrl';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -84,8 +87,16 @@ export default function Quiz() {
       <HeaderSection>
         <Header />
       </HeaderSection>
-      <ProgressSection>진행도</ProgressSection>
-
+      <ProgressSection $progress={totalResults.length}>
+        <ProgressBar
+          $maxWidth="100%"
+          $height="100%"
+          $progress={totalResults.length}
+          $maxProgress={quizzes.length}
+          $innerBgColor="#63DDE8"
+          $boxBgColor="#F4F4F4"
+        />
+      </ProgressSection>
       <Question title={title} question={question} category={category} />
       {getComponentMappingByChoiceType(category, { answerChoice, answer })}
       <SubmitSection>
