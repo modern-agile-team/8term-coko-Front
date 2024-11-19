@@ -27,7 +27,7 @@ export default function Result({
     useClientQuizStore();
   //임시 유저 가져오기
   const { user } = useUserStore();
-  const userId = user.id;
+  const userId = user?.id;
   const addProgress = progressQuery.put();
   //임시 유저 가져오기
   return (

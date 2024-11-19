@@ -12,6 +12,7 @@ interface Actions {
   swapUserResponseAnswer: (index1: number, index2: number) => void;
   resetUserResponseAnswer: () => void;
   pushTotalResults: (result: boolean) => void;
+  reset: () => void;
 }
 export const useClientQuizStore = create<State & Actions>(set => ({
   /** 페이지 전역상태*/
@@ -58,4 +59,10 @@ export const useClientQuizStore = create<State & Actions>(set => ({
   totalResults: [],
   pushTotalResults: result =>
     set(state => ({ totalResults: [...state.totalResults, result] })),
+  reset: () =>
+    set(() => ({
+      currentPage: 0,
+      userResponseAnswer: [''],
+      totalResults: [],
+    })),
 }));

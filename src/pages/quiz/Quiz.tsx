@@ -14,33 +14,39 @@ import OXSelector from '../../features/quiz/ui/OXSelector';
 import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
 import componentMapping from '../../utils/componentMap';
 import useBeforeUnload from '../../hooks/useBeforeUnload';
-import ResultModal from '../../features/quiz/ui/Result';
-import getParams from '../../utils/getParams';
+import Result from '../../features/quiz/ui/Result';
+import getParams from '../../hooks/useGetLocationState';
 import TotalResults from '../../features/quiz/ui/TotalResults';
-import { useState } from 'react';
 import isEqualArray from '../../utils/isEqualArray';
 import QuizzesQuery from '../../queries/quizzesQuery';
 import useModal from '../../hooks/useModal';
 import usePreloadImages from '../../hooks/usePreloadImages';
+import { useEffect, useState } from 'react';
 import Header from '../../common/layout/Header';
+import useUserStore from '../../store/useUserStore';
 
 //퀴즈페이지
 export default function Quiz() {
   const { currentPage, totalResults, userResponseAnswer } =
     useClientQuizStore();
+  const { setUser } = useUserStore();
+  //임시 유저 설정
+  useEffect(() => {
+    setUser({ id: 2, nickname: 'admin', level: 1 });
+  }, []);
+  //----------------------------
   const [result, setResult] = useState<boolean>(false);
   const { Modal, closeModal, openModal, isShow } = useModal();
-  //페이지 이탈시 경고창이 뜨는 훅
-  useBeforeUnload();
-  //추후에 url에서 추출이 아닌 내부적으로 props로 전달하는 로직으로 변경 예정
-  const [partId] = getParams(['part-id']);
+  const { partId } = getParams();
   if (partId === null) {
     return <div>404</div>;
   }
-  //------------------------------------------
+
   const { data: quizzes, isLoading } = QuizzesQuery.get({
     partId: Number(partId),
   });
+  useBeforeUnload({ enabled: quizzes?.length !== totalResults.length });
+
   const isImageLoading = usePreloadImages({
     imageUrls: [
       'O버튼.svg',
@@ -106,7 +112,7 @@ export default function Quiz() {
         {quizzes.length === totalResults.length ? (
           <TotalResults quizzes={quizzes} totalResults={totalResults} />
         ) : (
-          <ResultModal
+          <Result
             quizId={id}
             result={result}
             answer={answer}
