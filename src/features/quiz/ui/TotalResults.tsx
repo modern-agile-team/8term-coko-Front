@@ -17,7 +17,6 @@ import {
 import { getImageUrl } from './../../../utils/getImageUrl';
 import { useTimeout } from '@modern-kit/react';
 import { useNavigate } from 'react-router-dom';
-//화면 들어옴 => 0.5초동안 경험치오름 => 넘어가기 버튼 활성화
 interface TotalResultsProps {
   quizzes: Quiz[];
   totalResults: boolean[];
