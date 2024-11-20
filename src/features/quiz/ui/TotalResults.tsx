@@ -1,52 +1,100 @@
+import { experienceQuery } from '@queries/usersQuery';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import useUserStore from '@store/useUserStore';
 import type Quiz from '@/types/Quiz';
+import User from '@/types/User';
 import {
   DashLineHr,
   ImageDescriptionDiv,
   Img,
-  LearnLink,
+  RedirectToLearnButton,
+  TotalResultProgressDiv,
   TotalResultSection,
-  TotalResultsImageDiv,
+  TotalResultsRewardDiv,
   TotalResultsTextDiv,
 } from '../styles';
-const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
-
+import { getImageUrl } from '@utils/getImageUrl';
+import { useTimeout } from '@modern-kit/react';
+import { useNavigate } from 'react-router-dom';
+import ProgressBar from '@/features/progress/ui/ProgressBar';
 interface TotalResultsProps {
   quizzes: Quiz[];
   totalResults: boolean[];
 }
 export default function TotalResults({ totalResults }: TotalResultsProps) {
   const totalResultCount = totalResults.filter(result => result).length;
+  const { user } = useUserStore() as { user: User };
+  const experience = totalResultCount * 10;
+  const { mutate: experienceUpdate, isIdle } = experienceQuery.patch();
+  const { data: userExperience, isSuccess } = experienceQuery.get(user.id);
+  const { reset } = useClientQuizStore();
+  const navigate = useNavigate();
+  useTimeout(
+    () => {
+      experienceUpdate({ id: user.id, experience });
+    },
+    { delay: 1000, enabled: isSuccess }
+  );
+  if (!userExperience) {
+    return <div>404...</div>;
+  }
+
   return (
     <>
       <TotalResultSection>
         <TotalResultsTextDiv>
           총<p>&nbsp; {totalResultCount}&nbsp;</p>
-          문제를 맞혔고 <p>&nbsp;보상</p>을 얻었어!
+          문제를 맞혔고 <p>&nbsp;{experience} 경험치</p>를 얻었어!
         </TotalResultsTextDiv>
         <DashLineHr />
-        <TotalResultsImageDiv>
+        <TotalResultsRewardDiv>
           <ImageDescriptionDiv>
             <Img
               $width="201px"
               $height="159px"
-              src={`${IMG_BASE_URL}레벨1코코.svg`}
+              src={getImageUrl('레벨1코코.svg')}
               alt="레벨업 이미지"
             />
-            <p>Level.1</p>
+            <p>Level.{userExperience.level}</p>
           </ImageDescriptionDiv>
-          <ImageDescriptionDiv>
+          <TotalResultProgressDiv>
             <Img
-              $width="146px"
-              $height="116px"
-              src={`${IMG_BASE_URL}과일바구니-아이템.svg`}
-              alt="보상"
+              src={getImageUrl('반짝이.svg')}
+              $width="45px"
+              $height="60px"
+              alt="반짝이"
             />
-            <p>생명력을 위한 과일 바구니</p>
-          </ImageDescriptionDiv>
-        </TotalResultsImageDiv>
+            <div>
+              <p>경험치</p>
+              <ProgressBar
+                $height="16px"
+                $maxWidth="242px"
+                $boxBgColor="#85705F"
+                $innerBgColor="#BFD683"
+                $progress={userExperience?.experience}
+                $maxProgress={userExperience?.experienceForNextLevel}
+                style={{ width: '242px' }}
+              />
+            </div>
+            <Img
+              src={getImageUrl('반짝이.svg')}
+              $width="45px"
+              $height="60px"
+              alt="반짝이"
+            />
+          </TotalResultProgressDiv>
+        </TotalResultsRewardDiv>
         <DashLineHr />
-
-        <LearnLink to="/learn">메인으로</LearnLink>
+        <RedirectToLearnButton
+          disabled={isIdle}
+          $isActive={isIdle}
+          onClick={() => {
+            reset();
+            navigate('/learn');
+          }}
+        >
+          메인으로
+        </RedirectToLearnButton>
       </TotalResultSection>
     </>
   );
