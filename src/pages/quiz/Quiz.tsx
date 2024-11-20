@@ -15,7 +15,6 @@ import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
 import componentMapping from '@/utils/componentMap';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 import Result from '@/features/quiz/ui/Result';
-import getParams from '@/hooks/useGetLocationState';
 import TotalResults from '@/features/quiz/ui/TotalResults';
 import isEqualArray from '@/utils/isEqualArray';
 import QuizzesQuery from '@/queries/quizzesQuery';
@@ -25,6 +24,7 @@ import { useEffect, useState } from 'react';
 import Header from '@/common/layout/Header';
 import useUserStore from '@/store/useUserStore';
 import ProgressBar from '@/features/progress/ui/ProgressBar';
+import { useLocation } from 'react-router-dom';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -38,8 +38,8 @@ export default function Quiz() {
   //----------------------------
   const [result, setResult] = useState<boolean>(false);
   const { Modal, closeModal, openModal, isShow } = useModal();
-  const { partId } = getParams();
-  if (partId === null) {
+  const { partId } = useLocation().state as { partId: number };
+  if (!partId) {
     return <div>404</div>;
   }
 

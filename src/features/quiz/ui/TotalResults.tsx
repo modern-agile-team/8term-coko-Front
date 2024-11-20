@@ -1,9 +1,8 @@
-import experienceQuery from '../../../queries/experienceQuery';
-import { useClientQuizStore } from '../../../store/useClientQuizStore';
-import useUserStore from '../../../store/useUserStore';
-import User from '../../../types/User';
-import ProgressBar from '../../progress/ui/ProgressBar';
+import { experienceQuery } from '@queries/usersQuery';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import useUserStore from '@store/useUserStore';
 import type Quiz from '@/types/Quiz';
+import User from '@/types/User';
 import {
   DashLineHr,
   ImageDescriptionDiv,
@@ -14,9 +13,10 @@ import {
   TotalResultsRewardDiv,
   TotalResultsTextDiv,
 } from '../styles';
-import { getImageUrl } from './../../../utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
 import { useTimeout } from '@modern-kit/react';
 import { useNavigate } from 'react-router-dom';
+import ProgressBar from '@/features/progress/ui/ProgressBar';
 interface TotalResultsProps {
   quizzes: Quiz[];
   totalResults: boolean[];

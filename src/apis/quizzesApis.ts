@@ -2,7 +2,7 @@ import Quiz from '../types/Quiz';
 import api from './axios/instance';
 
 const quizzesApis = {
-  getquizzes: async (params?: {
+  getQuizzes: async (params?: {
     sectionId?: number;
     partId: number;
   }): Promise<Quiz[]> => {
