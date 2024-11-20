@@ -14,6 +14,7 @@ import { useEffect, useRef } from 'react';
  *
  * return <div ref={modalRef}>모달 내용</div>;
  */
+
 const useOutsideClick = (callback: () => void) => {
   const ref = useRef<HTMLDivElement>(null);
 

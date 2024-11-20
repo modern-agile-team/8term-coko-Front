@@ -44,6 +44,11 @@ export const LogoImageSection = styled.section`
   background: #d9d9d9;
 `;
 
+export const DashLineHr = styled.hr`
+  width: 80%;
+  border: 2px dashed #834b29;
+`;
+
 export const SocialLoginLink = styled(Link)<SocialLoginLinkProps>`
   display: flex;
   align-items: center;

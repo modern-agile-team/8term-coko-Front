@@ -1,54 +1,18 @@
-import Login from '@features/login/ui/Login';
-import useModal from '@hooks/useModal';
-import {
-  IconWrapper,
-  HeaderIcon,
-  HeaderIconNumber,
-  ProfileWrapper,
-  ProfileIcon,
-} from './style';
+import { IconWrapper, HeaderIcon } from './style';
 
 interface HeaderItemProps {
-  lifeIcon: string;
-  lifePoints: number;
-  pointIcon: string;
-  points: number;
-  profile: string;
-  profileBorder: string;
+  icon: string;
+  point: number;
+  color: string;
 }
 
-export default function HeaderItem({
-  lifeIcon,
-  lifePoints,
-  pointIcon,
-  points,
-  profile,
-  profileBorder,
-}: HeaderItemProps) {
-  const { isShow, openModal, closeModal, Modal } = useModal();
-
+export default function HeaderItem({ icon, point, color }: HeaderItemProps) {
   return (
     <>
-      <IconWrapper>
-        <HeaderIcon src={pointIcon} alt="Point Icon" />
-        <HeaderIconNumber $color="#FFCD35">
-          {points.toLocaleString()}
-        </HeaderIconNumber>
+      <IconWrapper $color={color}>
+        <HeaderIcon src={icon} />
+        <p>{point.toLocaleString()}</p>
       </IconWrapper>
-      <IconWrapper>
-        <HeaderIcon src={lifeIcon} alt="Life Icon" />
-        <HeaderIconNumber $color="#FE0F0F">
-          {lifePoints.toLocaleString()}
-        </HeaderIconNumber>
-      </IconWrapper>
-      <ProfileWrapper onClick={openModal}>
-        <ProfileIcon src={profileBorder} alt="Profile Border" />
-        <HeaderIcon src={profile} alt="Profile Icon" />
-      </ProfileWrapper>
-      {/* Modal 컴포넌트 */}
-      <Modal isShow={isShow}>
-        <Login openModal={openModal} closeModal={closeModal} />
-      </Modal>
     </>
   );
 }

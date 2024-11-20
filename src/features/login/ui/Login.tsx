@@ -5,6 +5,7 @@ import {
   LoginForm,
   LogoImageSection,
   SocialLoginLink,
+  DashLineHr,
 } from '../styles';
 
 interface LoginProps {
@@ -19,7 +20,7 @@ export default function Login({ closeModal }: LoginProps) {
     <FlexContainer>
       <LoginForm ref={modalRef}>
         <LogoImageSection />
-        <hr />
+        <DashLineHr />
         <SocialLoginLink $color="#000000" $backgroundColor="#ffffff" to="">
           <img src={getImageUrl('구글.svg')} alt="구글 로그인" />
           Google로 로그인

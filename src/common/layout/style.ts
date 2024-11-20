@@ -13,7 +13,8 @@ export const MenuBox = styled.div`
 
 export const HeaderBox = styled.header`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
+  gap: 20px;
   align-items: center;
   width: 294px;
   height: 42px;
