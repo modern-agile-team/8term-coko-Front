@@ -1,4 +1,4 @@
-import experienceQuery from '../../../queries/experienceQuery';
+import { experienceQuery } from '../../../queries/usersQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import type Quiz from '../../../types/Quiz';
