@@ -64,6 +64,18 @@ export const IconWrapper = styled.div`
   margin-right: 16px;
 `;
 
+export const ProfileWrapper = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+export const ProfileIcon = styled.img`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+`;
+
 export const HeaderIcon = styled.img`
   width: 30px;
   height: 30px;

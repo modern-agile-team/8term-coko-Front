@@ -42,7 +42,7 @@ export const LogoBox = styled.div`
 `;
 
 export const OverRay = styled.div`
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   width: 100vw;

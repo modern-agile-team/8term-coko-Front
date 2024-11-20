@@ -15,7 +15,7 @@ const categoryColor: Record<
   SHORT_ANSWER: { background: '#FF7676', border: '#FF5050' },
 };
 
-//tite과 question이 들어가는 영역
+//title과 question이 들어가는 영역
 export const QuestionSection = styled.section<{
   $category: Quiz['category'];
 }>`
