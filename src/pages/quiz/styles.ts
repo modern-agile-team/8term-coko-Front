@@ -14,7 +14,7 @@ export const HeaderSection = styled.section`
   height: 42px;
 `;
 //진행도 영역잡기용 나중에 진행도 컴포넌트 분리되면 지우기
-export const ProgressSection = styled.section<{ $progress: number }>`
+export const ProgressSection = styled.section`
   width: 60vw;
   height: 23px;
   border-radius: 8px;

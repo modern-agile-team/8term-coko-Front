@@ -85,7 +85,7 @@ export default function Quiz() {
       <HeaderSection>
         <Header />
       </HeaderSection>
-      <ProgressSection $progress={totalResults.length}>
+      <ProgressSection>
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
