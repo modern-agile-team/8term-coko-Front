@@ -1,6 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
 import Quiz from '../../types/Quiz';
-import { Link } from 'react-router-dom';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
@@ -275,36 +274,35 @@ export const TotalResultsTextDiv = styled.div`
   font-weight: 700;
   line-height: 24px;
 
-  :nth-child(1) {
+  > p:nth-child(1) {
     line-height: 12px;
     font-weight: 700;
     color: #49ff87;
     font-size: 26px;
   }
-  :nth-child(2) {
+  > p:nth-child(2) {
     line-height: 24px;
     font-size: 26px;
     color: #ff4949;
   }
 `;
-export const TotalResultsImageDiv = styled.div`
+export const TotalResultsRewardDiv = styled.div`
   display: flex;
-  gap: 80px;
-  margin: 34px 0 18px 0;
 `;
 export const ImageDescriptionDiv = styled.div`
+  margin: 34px 0 0 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  :nth-last-child(1) {
+  > p:nth-last-child(1) {
+    align-self: center;
+    position: relative;
+    top: 30px;
     color: #d30000;
     font-size: 10px;
-    align-self: center;
-    position: absolute;
-    bottom: 50px;
   }
 `;
-export const LearnLink = styled(Link)`
+export const RedirectToLearnButton = styled.button<{ $isActive: boolean }>`
   width: 152px;
   height: 25px;
   text-align: center;
@@ -315,9 +313,36 @@ export const LearnLink = styled(Link)`
   color: #ffffff;
   align-self: flex-end;
   margin: 35px 86px 0 0;
-  &:hover {
-    border-color: #00868d;
-    background-color: #00d9e9;
+  ${({ $isActive }) =>
+    $isActive
+      ? css`
+          border-color: #00d9e9;
+          background-color: #00d9e9;
+        `
+      : css`
+          &:hover {
+            border-color: #00868d;
+            background-color: #00d9e9;
+          }
+        `}
+`;
+export const TotalResultProgressDiv = styled.div`
+  display: grid;
+  grid-template-columns: 45px 242px 45px;
+  align-items: center;
+  p:nth-child(1) {
+    color: #d30000;
+    font-size: 10px;
+    height: 15px;
+    padding-left: 5px;
+  }
+  > img:first-child {
+    position: relative;
+    top: 10%;
+  }
+  > img:last-child {
+    position: relative;
+    top: -10%;
   }
 `;
 export const Img = styled.img<{ $width: string; $height: string }>`
