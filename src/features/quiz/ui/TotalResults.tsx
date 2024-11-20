@@ -1,9 +1,9 @@
 import experienceQuery from '../../../queries/experienceQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
-import type Quiz from '../../../types/Quiz';
 import User from '../../../types/User';
 import ProgressBar from '../../progress/ui/ProgressBar';
+import type Quiz from '@/types/Quiz';
 import {
   DashLineHr,
   ImageDescriptionDiv,
