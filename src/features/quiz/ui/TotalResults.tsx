@@ -1,4 +1,4 @@
-import type Quiz from '../../../types/Quiz';
+import type Quiz from '@/types/Quiz';
 import {
   DashLineHr,
   ImageDescriptionDiv,
