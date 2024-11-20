@@ -9,7 +9,7 @@
     "paths": {
       "@/*": ["*"],
       "@hooks*": ["hooks/*"],
-      "@feature*": ["feature/*"],
+      "@features*": ["features/*"],
       "@queries*": ["queries/*"],
       "@store*": ["store/*"],
       "@utils*": ["utils/*"],

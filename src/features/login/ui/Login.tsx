@@ -1,11 +1,11 @@
-import useOutsideClick from '../../../hooks/useOutsideClick';
-import { getImageUrl } from '../../../utils/getImageUrl';
+import useOutsideClick from '@hooks/useOutsideClick';
+import { getImageUrl } from '@utils/getImageUrl';
 import {
   FlexContainer,
   LoginForm,
   LogoImageSection,
   SocialLoginLink,
-} from '../style/styles';
+} from '../styles';
 
 interface LoginProps {
   closeModal: () => void;
@@ -19,6 +19,7 @@ export default function Login({ closeModal }: LoginProps) {
     <FlexContainer>
       <LoginForm ref={modalRef}>
         <LogoImageSection />
+        <hr />
         <SocialLoginLink $color="#000000" $backgroundColor="#ffffff" to="">
           <img src={getImageUrl('구글.svg')} alt="구글 로그인" />
           Google로 로그인

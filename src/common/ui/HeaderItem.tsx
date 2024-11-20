@@ -1,5 +1,5 @@
-import Login from '../../features/login/ui/Login';
-import useModal from './../../hooks/useModal';
+import Login from '@features/login/ui/Login';
+import useModal from '@hooks/useModal';
 import {
   IconWrapper,
   HeaderIcon,

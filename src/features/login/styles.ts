@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface SocialLoginLinkProps {
   $color: string;
@@ -14,7 +14,20 @@ export const FlexContainer = styled.section`
   min-height: 100vh;
 `;
 
+//모달 애니메이션
+const fadeInScaleUp = keyframes`
+  0% {
+    opacity: 0;
+    transform:  scale(0.9); 
+  }
+  100% {
+    opacity: 1;
+    transform:  scale(1); 
+  }
+`;
+
 export const LoginForm = styled.section`
+  animation: ${fadeInScaleUp} 0.7s ease-out;
   width: 400px;
   padding: 40px 20px;
   background: #bfd683;

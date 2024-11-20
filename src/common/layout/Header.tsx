@@ -1,4 +1,4 @@
-import { getImageUrl } from '../../utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
 import HeaderItem from '../ui/HeaderItem';
 import { HeaderBox } from './style';
 
