@@ -1,4 +1,4 @@
-import Question from '../../features/quiz/ui/Question';
+import Question from '@/features/quiz/ui/Question';
 import { AlignCenter } from '../../style/LayOut';
 import {
   HeaderSection,
@@ -6,27 +6,25 @@ import {
   ResponseButton,
   SubmitSection,
 } from './styles';
-import type Quiz from '../../types/Quiz';
-import { useClientQuizStore } from '../../store/useClientQuizStore';
-import Combination from '../../features/quiz/ui/Combination';
-import MultipleChoice from '../../features/quiz/ui/MultipleChoice';
-import OXSelector from '../../features/quiz/ui/OXSelector';
-import ShortAnswer from '../../features/quiz/ui/ShortAnswer';
-import componentMapping from '../../utils/componentMap';
-import useBeforeUnload from '../../hooks/useBeforeUnload';
-import Result from '../../features/quiz/ui/Result';
-import getParams from '../../hooks/useGetLocationState';
-import TotalResults from '../../features/quiz/ui/TotalResults';
-import isEqualArray from '../../utils/isEqualArray';
-import QuizzesQuery from '../../queries/quizzesQuery';
-import useModal from '../../hooks/useModal';
-import usePreloadImages from '../../hooks/usePreloadImages';
+import type Quiz from '@/types/Quiz';
+import { useClientQuizStore } from '@/store/useClientQuizStore';
+import Combination from '@/features/quiz/ui/Combination';
+import MultipleChoice from '@/features/quiz/ui/MultipleChoice';
+import OXSelector from '@/features/quiz/ui/OXSelector';
+import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
+import componentMapping from '@/utils/componentMap';
+import useBeforeUnload from '@/hooks/useBeforeUnload';
+import Result from '@/features/quiz/ui/Result';
+import getParams from '@/hooks/useGetLocationState';
+import TotalResults from '@/features/quiz/ui/TotalResults';
+import isEqualArray from '@/utils/isEqualArray';
+import QuizzesQuery from '@/queries/quizzesQuery';
+import useModal from '@/hooks/useModal';
+import usePreloadImages from '@/hooks/usePreloadImages';
 import { useEffect, useState } from 'react';
-import Header from '../../common/layout/Header';
-import useUserStore from '../../store/useUserStore';
-import ProgressBar from '../../features/progress/ui/ProgressBar';
-import { Img } from '../../features/quiz/styles';
-import { getImageUrl } from '../../utils/getImageUrl';
+import Header from '@/common/layout/Header';
+import useUserStore from '@/store/useUserStore';
+import ProgressBar from '@/features/progress/ui/ProgressBar';
 
 //퀴즈페이지
 export default function Quiz() {
