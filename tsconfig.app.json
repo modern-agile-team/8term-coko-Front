@@ -7,7 +7,14 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["*"],
+      "@hooks*": ["hooks/*"],
+      "@feature*": ["feature/*"],
+      "@queries*": ["queries/*"],
+      "@store*": ["store/*"],
+      "@utils*": ["utils/*"],
+      "@apis*": ["apis/*"],
+      "@types*": ["types/*"]
     },
 
     /* Bundler mode */
