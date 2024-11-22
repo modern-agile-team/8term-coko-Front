@@ -19,6 +19,7 @@ export const HeaderBox = styled.header`
   width: 294px;
   height: 42px;
   position: fixed;
+  padding-right: 20px;
 `;
 
 export const LogoBoxWrapper = styled.div`
