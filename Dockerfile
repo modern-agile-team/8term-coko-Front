@@ -1,17 +1,24 @@
-FROM node:20-alpine
+#########
+# BUILD #
+#########
 
+FROM node:16.20.0 AS BUILD_FRONTEND
+
+RUN mkdir -p /app
 WORKDIR /app
 
-COPY package.json .
-COPY package-lock.json .
+ADD . .
 
-RUN rm -rf node_modules
-RUN npm i
+RUN npm install
+RUN npm run build
 
-COPY . .
+#########
+## RUN ##
+#########
 
-## EXPOSE [Port you mentioned in the vite.config file]
-
-EXPOSE 3000
-
-CMD ["npm", "run", "dev"]
+FROM busybox
+WORKDIR /build
+COPY --from=BUILD_FRONTEND app/dist/. .
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["sh", "/entrypoint.sh"]
