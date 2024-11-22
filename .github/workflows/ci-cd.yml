@@ -57,10 +57,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor  }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
-      # 8080 -> 80 포트로 수행하도록 지정
+      # 3000 -> 8080 포트로 수행하도록 지정
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} || true
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run --env-file /home/ec2-user/.env -d -p 80:8080 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run --env-file /home/ec2-user/.env -d -p 8080:3000 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
