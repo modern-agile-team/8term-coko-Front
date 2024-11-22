@@ -12,7 +12,6 @@ interface ResultProps {
   result: boolean;
   lastPage: number;
   closeModal: () => void;
-  openModal: () => void;
 }
 export default function Result({
   quizId,
@@ -20,7 +19,6 @@ export default function Result({
   result,
   lastPage,
   closeModal,
-  openModal,
 }: ResultProps) {
   const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
   const { nextPage, resetUserResponseAnswer, pushTotalResults, currentPage } =
@@ -44,7 +42,7 @@ export default function Result({
             resetUserResponseAnswer();
             pushTotalResults(result);
             closeModal();
-            handlePage(currentPage, lastPage, nextPage, noop, openModal);
+            handlePage(currentPage, lastPage, nextPage, noop, closeModal);
             userId &&
               addProgress.mutate({
                 userId,

@@ -1,8 +1,5 @@
 import { experienceQuery } from '@queries/usersQuery';
 import { useClientQuizStore } from '@store/useClientQuizStore';
-import useUserStore from '@store/useUserStore';
-import type Quiz from '@/types/Quiz';
-import User from '@/types/User';
 import {
   DashLineHr,
   ImageDescriptionDiv,
@@ -17,30 +14,47 @@ import { getImageUrl } from '@utils/getImageUrl';
 import { useTimeout } from '@modern-kit/react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '@/features/progress/ui/ProgressBar';
-interface TotalResultsProps {
-  quizzes: Quiz[];
-  totalResults: boolean[];
+import { useEffect } from 'react';
+import useModal from '@/hooks/useModal';
+import useUserStore from '@/store/useUserStore';
+interface TotalResultProps {
+  lastPage: number;
+  resultModalShow: boolean;
 }
-export default function TotalResults({ totalResults }: TotalResultsProps) {
+export default function TotalResults({
+  lastPage,
+  resultModalShow,
+}: TotalResultProps) {
+  const { totalResults } = useClientQuizStore();
   const totalResultCount = totalResults.filter(result => result).length;
-  const { user } = useUserStore() as { user: User };
+  const { user } = useUserStore();
   const experience = totalResultCount * 10;
   const { mutate: experienceUpdate, isIdle } = experienceQuery.patch();
-  const { data: userExperience, isSuccess } = experienceQuery.get(user.id);
-  const { reset } = useClientQuizStore();
+  const { reset, currentPage } = useClientQuizStore();
+  const { Modal, closeModal, isShow, openModal } = useModal();
+
+  useEffect(() => {
+    if (currentPage === lastPage) {
+      openModal();
+    }
+  }, [currentPage, resultModalShow]);
+  if (!user) {
+    return <></>;
+  }
+  const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
+
   const navigate = useNavigate();
   useTimeout(
     () => {
       experienceUpdate({ id: user.id, experience });
     },
-    { delay: 1000, enabled: isSuccess }
+    { delay: 1000, enabled: isSuccess && isShow }
   );
   if (!userExperience) {
-    return <div>404...</div>;
+    return <></>;
   }
-
   return (
-    <>
+    <Modal isShow={isShow}>
       <TotalResultSection>
         <TotalResultsTextDiv>
           총<p>&nbsp; {totalResultCount}&nbsp;</p>
@@ -89,6 +103,7 @@ export default function TotalResults({ totalResults }: TotalResultsProps) {
           disabled={isIdle}
           $isActive={isIdle}
           onClick={() => {
+            closeModal();
             reset();
             navigate('/learn');
           }}
@@ -96,6 +111,6 @@ export default function TotalResults({ totalResults }: TotalResultsProps) {
           메인으로
         </RedirectToLearnButton>
       </TotalResultSection>
-    </>
+    </Modal>
   );
 }

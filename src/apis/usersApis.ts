@@ -1,3 +1,4 @@
+import Quiz from '@/types/Quiz';
 import Experience from '../types/Experience';
 import User from '../types/User';
 import api from './axios/instance';
@@ -23,6 +24,16 @@ const usersApis = {
   }): Promise<void> => {
     const { id, experience } = params;
     await api.patch(`/users/${id}/experience`, { experience });
+  },
+  getQuizzes: async (params: {
+    id: User['id'];
+    partId: Quiz['partId'];
+  }): Promise<Quiz[]> => {
+    const { id, partId } = params;
+    const response = await api.get(`quizzes/users/${id}/incorrect`, {
+      params: { partId },
+    });
+    return response.data;
   },
 };
 export default usersApis;

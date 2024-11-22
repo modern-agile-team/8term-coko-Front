@@ -14,9 +14,9 @@ export default function PartNavContainer() {
 
   // 백엔드에서 가져올 데이터 (현재는 임시 데이터)
   const parts = [
-    { partId: 1 },
-    { partId: 2 },
-    { partId: 3 },
+    { partId: 1, state: 'start' },
+    { partId: 2, state: '하는중' },
+    { partId: 3, state: '클리어' },
     { partId: 4 },
     { partId: 5 },
     { partId: 6 },
