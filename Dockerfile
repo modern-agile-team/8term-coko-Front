@@ -21,7 +21,7 @@ FROM nginx:alpine
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Nginx 포트 노출
-EXPOSE 8080
+EXPOSE 80
 
 # Nginx 실행
 CMD ["nginx", "-g", "daemon off;"]
