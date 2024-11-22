@@ -16,9 +16,10 @@ RUN npm run build
 ## RUN ##
 #########
 
-FROM busybox
-WORKDIR /build
-COPY --from=BUILD_FRONTEND app/dist/. .
-ADD entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["sh", "/entrypoint.sh"]
+FROM nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/htm
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
