@@ -1,18 +1,17 @@
-# 1. Build 단계
-FROM node:20-alpine AS build
+FROM node:20-alpine
+
 WORKDIR /app
 
-# 의존성 파일 복사 및 설치
-COPY package*.json ./
-RUN npm install
+COPY package.json .
+COPY package-lock.json .
 
-# 소스 복사 및 프로덕션 빌드
+RUN rm -rf node_modules
+RUN npm i
+
 COPY . .
-RUN npm run build --loglevel verbose
 
-# 2. Serve 단계
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+## EXPOSE [Port you mentioned in the vite.config file]
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
