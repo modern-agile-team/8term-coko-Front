@@ -1,48 +1,27 @@
 # Node.js를 사용하여 빌드
-FROM node:20-alpine AS base
+FROM node:20-alpine as builder
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# 의존성 파일 복사
+COPY package*.json ./
 
 # 의존성 설치
-FROM base AS deps
-RUN apk add --no-cache libc6-compat
+RUN npm install
 
-WORKDIR /app
-
-COPY package.json package-lock.json* ./
-
-RUN npm ci
-
-# 프로젝트 빌드
-FROM base AS builder
-
-WORKDIR /app
-
-COPY --from=deps /app/node_modules ./node_modules
-
+# 빌드 실행
 COPY . .
-
-# .env 파일을 컨테이너로 복사
-COPY .env .env
-
 RUN npm run build
 
-# 실행
-FROM base AS runner
+# Nginx 설정
+FROM nginx:alpine
 
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 reactjs
-
-# 빌드된 파일을 Nginx로 복사
+# 빌드된 파일을 Nginx의 기본 디렉토리로 복사
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# .env 파일을 Nginx에 복사 (필요에 따라)
-COPY .env /usr/share/nginx/.env
-
-USER reactjs
-
+# Nginx 포트 노출
 EXPOSE 80
 
+# Nginx 실행
 CMD ["nginx", "-g", "daemon off;"]
