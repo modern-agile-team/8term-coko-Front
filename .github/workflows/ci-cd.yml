@@ -54,9 +54,9 @@ jobs:
 
   # 배포 Job
   deploy:
-    needs: build
+    needs: build # build 후에 실행되도록 설정
     name: Deploy
-    runs-on: [self-hosted, label-go]
+    runs-on: [self-hosted, label-go] # self-hosted 환경 사용
     steps:
       # GitHub Container Registry 로그인
       - name: Login to ghcr
@@ -77,4 +77,4 @@ jobs:
           docker stop ${{ env.NAME }} || true
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run -d --network host --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
