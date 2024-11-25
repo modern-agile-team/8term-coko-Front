@@ -17,7 +17,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      # github repository에서 checkout
+      # GitHub repository에서 checkout
       - uses: actions/checkout@v3
 
       # Node.js 설치 및 의존성 설치
@@ -44,15 +44,16 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ env.VERSION }}
           restore-keys: |
             ${{ runner.os }}-buildx-
+
       # GitHub 컨테이너 레지스트리에 로그인 후 빌드 & 푸시
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
+          password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push Docker image
         id: docker_build
         uses: docker/build-push-action@v2
         with:
@@ -70,12 +71,17 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.actor  }}
-          password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} || true
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run --env-file /home/ec2-user/.env -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run --env-file /home/ec2-user/.env \
+            -v /etc/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \
+            -d -p 8080:80 \
+            --name ${{ env.NAME }} \
+            --restart always \
+            ${{ env.DOCKER_IMAGE }}:latest
