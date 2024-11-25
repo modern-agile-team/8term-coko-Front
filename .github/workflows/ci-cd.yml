@@ -29,7 +29,6 @@ jobs:
 
       # 4. dist 폴더를 Docker 컨텍스트로 복사
       - name: Prepare Docker context
-        # 4. dist 폴더를 Docker 컨텍스트로 복사
         run: |
           mkdir -p docker-context
           cp -r ./dist ./docker-context/
@@ -61,7 +60,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: ./docker-context # Docker 컨텍스트 설정
+          context: ./docker-context
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:latest
 
@@ -77,6 +76,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
 
+      # 1. 환경 변수 파일을 Docker 컨테이너에 주입
+      - name: Ensure .env file exists
+        run: |
+          echo "VITE_IMG_BASE_URL=${{ secrets.VITE_IMG_BASE_URL }}" > /home/ec2-user/.env
+
+      # 2. Docker 컨테이너 실행
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} || true
