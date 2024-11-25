@@ -29,7 +29,11 @@ jobs:
 
       # 4. dist 폴더를 Docker 컨텍스트로 복사
       - name: Prepare Docker context
-        run: mkdir -p docker-context && cp -r ./dist ./docker-context/
+        # 4. dist 폴더를 Docker 컨텍스트로 복사
+        run: |
+          mkdir -p docker-context
+          cp -r ./dist ./docker-context/
+          cp ./Dockerfile ./docker-context/
 
       # 5. Docker Buildx 설정
       - name: Set up docker buildx
