@@ -17,15 +17,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      # GitHub repository에서 checkout
+      # github repository에서 checkout
       - uses: actions/checkout@v3
-
-      # Docker Buildx 설정
+      # docker build 수행
       - name: Set up docker buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
-
-      # Docker 레이어 캐싱
       - name: Cache docker layers
         uses: actions/cache@v3
         with:
@@ -33,16 +30,13 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ env.VERSION }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-
-      # GitHub Container Registry 로그인
+      # GitHub 컨테이너 레지스트리에 로그인 후 빌드 & 푸시
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
-
-      # Docker 이미지 빌드 및 푸시
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -53,27 +47,20 @@ jobs:
 
   # 배포 Job
   deploy:
-    needs: build # build 완료 후 실행되도록 설정
+    needs: build # build 후에 실행되도록 정의
     name: Deploy
-    runs-on: [self-hosted, label-go] # AWS EC2에서 사용될 Runner의 라벨
+    runs-on: [self-hosted, label-go] # AWS ./configure에서 사용할 label명
     steps:
-      # GitHub Container Registry 로그인
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: ${{ github.actor  }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
-
-      # 도커 컨테이너 실행
+      # 80 -> 8080 포트로 수행하도록 지정
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} || true
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run -d \
-            -e SERVER_NAME=cokoedu.com \
-            -p 8080:80 \
-            --name ${{ env.NAME }} \
-            --restart always \
-            ${{ env.DOCKER_IMAGE }}:latest
+          docker run --env-file /home/ec2-user/.env -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
