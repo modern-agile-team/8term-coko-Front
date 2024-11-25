@@ -14,7 +14,8 @@
       "@store*": ["store/*"],
       "@utils*": ["utils/*"],
       "@apis*": ["apis/*"],
-      "@types*": ["types/*"]
+      "@common*": ["common/*"],
+      "@type*": ["types/*"]
     },
 
     /* Bundler mode */
