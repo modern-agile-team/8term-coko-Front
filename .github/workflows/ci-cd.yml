@@ -84,6 +84,7 @@ jobs:
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
           docker run --env-file /home/ec2-user/.env \
             -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf \
+            -v /etc/letsencrypt/live/cokoedu.com:/etc/letsencrypt/live/cokoedu.com \
             -d -p 8080:80 \
             --name ${{ env.NAME }} \
             --restart always \
