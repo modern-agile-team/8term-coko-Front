@@ -1,9 +1,11 @@
 name: CI/CD Docker
 
+# 트리거를 수행할 브랜치를 지정합니다.
 on:
   push:
     branches: [setting/#77/Applying_https_using_Nginx]
 
+# 환경설정
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
   VERSION: ${{ github.sha }}
@@ -15,31 +17,15 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      # GitHub Repository에서 코드 checkout
+      # GitHub repository에서 checkout
       - uses: actions/checkout@v3
 
-      # Node.js 설치 및 의존성 설치
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      # 의존성 설치
-      - run: npm install
-
-      # 환경 변수 .env 파일 생성
-      - name: Create .env file
-        run: |
-          echo "VITE_IMG_BASE_URL=${{ secrets.VITE_IMG_BASE_URL }}" > .env
-
-      # 빌드
-      - run: npm run build
-
-      # Docker build 수행
+      # Docker Buildx 설정
       - name: Set up docker buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
 
+      # Docker 레이어 캐싱
       - name: Cache docker layers
         uses: actions/cache@v3
         with:
@@ -48,7 +34,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      # GitHub 컨테이너 레지스트리에 로그인 후 빌드 & 푸시
+      # GitHub Container Registry 로그인
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
@@ -56,6 +42,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
 
+      # Docker 이미지 빌드 및 푸시
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -66,11 +53,11 @@ jobs:
 
   # 배포 Job
   deploy:
-    needs: build
+    needs: build # build 완료 후 실행되도록 설정
     name: Deploy
-    runs-on: [self-hosted, label-go]
+    runs-on: [self-hosted, label-go] # AWS EC2에서 사용될 Runner의 라벨
     steps:
-      # Docker 로그인
+      # GitHub Container Registry 로그인
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
@@ -78,10 +65,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
 
-      # Docker 컨테이너 실행
+      # 도커 컨테이너 실행
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} || true
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run --env VITE_IMG_BASE_URL=${{ secrets.VITE_IMG_BASE_URL }} -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d \
+            -e SERVER_NAME=cokoedu.com \
+            -p 8080:80 \
+            --name ${{ env.NAME }} \
+            --restart always \
+            ${{ env.DOCKER_IMAGE }}:latest
