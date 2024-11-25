@@ -18,11 +18,11 @@ import { useEffect } from 'react';
 import useModal from '@/hooks/useModal';
 import useUserStore from '@/store/useUserStore';
 interface TotalResultProps {
-  lastPage: number;
+  quizzesLength: number;
   resultModalShow: boolean;
 }
 export default function TotalResults({
-  lastPage,
+  quizzesLength,
   resultModalShow,
 }: TotalResultProps) {
   const { totalResults } = useClientQuizStore();
@@ -34,7 +34,7 @@ export default function TotalResults({
   const { Modal, closeModal, isShow, openModal } = useModal();
 
   useEffect(() => {
-    if (currentPage === lastPage) {
+    if (totalResults.length === quizzesLength) {
       openModal();
     }
   }, [currentPage, resultModalShow]);

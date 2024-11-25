@@ -22,7 +22,6 @@ const progressQuery = {
 };
 const userQuizzesQuery = {
   get: ({ userId, partId }: { userId: number; partId: number }) => {
-    console.log(12);
     return useQuery({
       queryKey: userKeys.partQuizzes(userId, partId),
       queryFn: () => usersApis.getQuizzes({ id: userId, partId }),

@@ -17,7 +17,7 @@ import useBeforeUnload from '@/hooks/useBeforeUnload';
 import Result from '@features/quiz/ui/Result';
 import TotalResults from '@features/quiz/ui/TotalResults';
 import isEqualArray from '@utils/isEqualArray';
-import QuizzesQuery from '@queries/quizzesQuery';
+import quizzesQuery from '@queries/quizzesQuery';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
 import { useEffect, useState } from 'react';
@@ -26,6 +26,7 @@ import useUserStore from '@store/useUserStore';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import { useLocation } from 'react-router-dom';
 import { userQuizzesQuery } from '@/queries/usersQuery';
+import GoToLogin from '@/features/login/ui/GoToLogin';
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
@@ -48,21 +49,19 @@ export default function Quiz() {
     useClientQuizStore();
   const { user } = useUserStore();
   const [result, setResult] = useState<boolean>(false);
-  const [modalState, setModalState] = useState<
-    'result' | 'totalResult' | 'login'
-  >('result');
   const { Modal, closeModal, openModal, isShow } = useModal();
   const { partId, state } = useLocation().state as {
     partId: number;
     state: 'start' | 'pending' | 'end';
   };
+  //유저가 없고 풀고있는중(pending) 이 아니라면
   const { data: quizzes, isLoading } =
-    user === undefined || state !== 'pending'
+    user === undefined && state !== 'pending'
       ? quizzesQuery.get({
           partId,
         })
       : userQuizzesQuery.get({
-          userId: user?.id,
+          userId: user!.id,
           partId,
         });
   useBeforeUnload({
@@ -83,7 +82,6 @@ export default function Quiz() {
     OX_SELECTOR: OXSelector,
     SHORT_ANSWER: ShortAnswer,
   });
-
   return (
     <AlignCenter>
       <HeaderSection>
@@ -130,7 +128,11 @@ export default function Quiz() {
           closeModal={closeModal}
         />
       </Modal>
-      <TotalResults lastPage={quizzes.length - 1} resultModalShow={isShow} />
+      {user ? (
+        <TotalResults quizzesLength={quizzes.length} resultModalShow={isShow} />
+      ) : (
+        <GoToLogin />
+      )}
     </AlignCenter>
   );
 }

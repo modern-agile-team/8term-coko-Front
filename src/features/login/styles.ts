@@ -68,3 +68,32 @@ export const SocialLoginLink = styled(Link)<SocialLoginLinkProps>`
     height: 20px;
   }
 `;
+export const GoToLoginForm = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 306px;
+  height: 370.47px;
+  border-radius: 40px;
+  background: #bfd683;
+  box-shadow: 0 10.53px #85705f;
+  > h2 {
+    margin-top: 20px;
+    color: #85705f;
+  }
+`;
+export const GoToLoginImg = styled.img`
+  width: 187.944px;
+  height: 219.219px;
+  margin: 7px 0 18px 0;
+`;
+
+export const GoToLoginButton = styled.button`
+  margin-top: 18px;
+  width: 145.444px;
+  height: 38.291px;
+  border-radius: 6px;
+  background: #000;
+  color: #bfd683;
+  font-size: 14px;
+`;
