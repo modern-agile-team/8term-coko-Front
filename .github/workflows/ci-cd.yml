@@ -83,8 +83,4 @@ jobs:
 
       # 2. Docker 컨테이너 실행
       - name: Docker run
-        run: |
-          docker stop ${{ env.NAME }} || true
-          docker rm ${{ env.NAME }} || true
-          docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run --env-file /home/ec2-user/.env \ -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf \ -d -p 8080:80 \ --name ${{ env.NAME }} \ --restart always \ ${{ env.DOCKER_IMAGE }}:latest
+        run: docker stop ${{ env.NAME }} || true && docker rm ${{ env.NAME }} || true && docker rmi ${{ env.DOCKER_IMAGE }}:latest || true && docker run --env-file /home/ec2-user/.env -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
