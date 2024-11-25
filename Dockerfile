@@ -1,13 +1,43 @@
-# Base image 설정
-FROM nginx:1.25.1-alpine3.17-slim
+# 1. Node.js 기반으로 빌드를 먼저 진행
+FROM node:18-alpine as build-stage
 
-# 작업 디렉토리 설정 (필요 시 추가)
+ARG VITE_IMG_BASE_URL
+
+ENV VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}
+
+# 작업 디렉토리 설정
 WORKDIR /app
 
-# 정적 파일 복사
-COPY ./dist /usr/share/nginx/html
+# 의존성 파일 복사
+COPY package*.json .
+RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 
-# Nginx 기본 포트 노출
+# 패키지 파일 복사
+COPY package.json package-lock.json ./
+
+# 의존성 설치
+RUN npm install
+
+# 애플리케이션 소스 복사
+COPY . .
+
+# 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
+RUN npm run build
+
+# 2. Nginx 이미지 설정 (실제 배포용)
+FROM nginx:1.25.1-alpine3.17-slim
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# 빌드된 정적 파일 복사 (이 부분은 첫 번째 단계에서 생성된 dist 폴더)
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Nginx의 기본 포트를 노출
 EXPOSE 80
 
 # Nginx 실행

@@ -8,37 +8,23 @@ env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
   VERSION: ${{ github.sha }}
   NAME: go_cicd
+  VITE_IMG_BASE_URL: ${{ secrets.VITE_IMG_BASE_URL }}
 
 jobs:
+  # 빌드 Job
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      # 1. 리포지토리 체크아웃
+      # GitHub Repository에서 Checkout
       - uses: actions/checkout@v3
 
-      # 2. Node.js 환경 설정 및 의존성 설치
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-      - run: npm install
-
-      # 3. 빌드 실행
-      - run: npm run build
-
-      # 4. dist 폴더를 Docker 컨텍스트로 복사
-      - name: Prepare Docker context
-        run: |
-          mkdir -p docker-context
-          cp -r ./dist ./docker-context/
-          cp ./Dockerfile ./docker-context/
-
-      # 5. Docker Buildx 설정
+      # Docker Buildx 설정
       - name: Set up docker buildx
         id: buildx
         uses: docker/setup-buildx-action@v2
 
+      # Docker 캐시 설정
       - name: Cache docker layers
         uses: actions/cache@v3
         with:
@@ -47,7 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      # 6. Docker 이미지 빌드 및 푸시
+      # GitHub Container Registry 로그인
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
@@ -55,20 +41,24 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
 
-      - name: Build and push Docker image
+      # Docker Build 및 Push
+      - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
-          context: ./docker-context
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:latest
+          build-args: |
+            VITE_IMG_BASE_URL=${{ secrets.VITE_IMG_BASE_URL }}
 
+  # 배포 Job
   deploy:
-    needs: build
+    needs: build # build 후에 실행되도록 설정
     name: Deploy
-    runs-on: [self-hosted, label-go]
+    runs-on: [self-hosted, label-go] # self-hosted 환경 사용
     steps:
+      # GitHub Container Registry 로그인
       - name: Login to ghcr
         uses: docker/login-action@v1
         with:
@@ -76,11 +66,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
 
-      # 1. 환경 변수 파일을 Docker 컨테이너에 주입
-      - name: Ensure .env file exists
+      # `.env` 파일 생성
+      - name: Generate .env file
         run: |
-          echo "VITE_IMG_BASE_URL=${{ secrets.VITE_IMG_BASE_URL }}" > /home/ec2-user/.env
+          echo IMAGE_NAME=${{ env.DOCKER_IMAGE }} > /home/ec2-user/.env
 
       # 2. Docker 컨테이너 실행
       - name: Docker run
-        run: docker stop ${{ env.NAME }} || true && docker rm ${{ env.NAME }} || true && docker rmi ${{ env.DOCKER_IMAGE }}:latest || true && docker run --env-file /home/ec2-user/.env -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+        run: |
+          docker stop ${{ env.NAME }} || true
+          docker rm ${{ env.NAME }} || true
+          docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
+          docker run -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
