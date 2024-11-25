@@ -27,4 +27,5 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
 
 # Nginx 실행 및 환경변수 주입
-ENTRYPOINT ["/bin/bash", "-c", "envsubst '${SERVER_NAME}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+ENTRYPOINT ["/bin/sh", "-c", "envsubst '${SERVER_NAME}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+
