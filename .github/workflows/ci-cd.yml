@@ -83,7 +83,7 @@ jobs:
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
           docker run --env-file /home/ec2-user/.env \
-            -v /etc/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \ # Nginx 설정 파일 마운트
+            -v /etc/nginx/nginx.conf:/etc/nginx/conf.d/default.conf \
             -d -p 8080:80 \
             --name ${{ env.NAME }} \
             --restart always \
