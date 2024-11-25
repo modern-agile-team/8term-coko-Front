@@ -54,9 +54,9 @@ jobs:
 
   # 배포 Job
   deploy:
-    needs: build # build 후에 실행되도록 설정
+    needs: build
     name: Deploy
-    runs-on: [self-hosted, label-go] # self-hosted 환경 사용
+    runs-on: [self-hosted, label-go]
     steps:
       # GitHub Container Registry 로그인
       - name: Login to ghcr
@@ -71,10 +71,10 @@ jobs:
         run: |
           echo IMAGE_NAME=${{ env.DOCKER_IMAGE }} > /home/ec2-user/.env
 
-      # 2. Docker 컨테이너 실행
+      # Docker 컨테이너 실행
       - name: Docker run
         run: |
           docker stop ${{ env.NAME }} || true
           docker rm ${{ env.NAME }} || true
           docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker run -d --network host --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
