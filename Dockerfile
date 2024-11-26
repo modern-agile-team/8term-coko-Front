@@ -2,22 +2,25 @@
 FROM node:18-alpine as build-stage
 
 ARG VITE_IMG_BASE_URL
+ARG VITE_BASE_URL  # VITE_BASE_URL 추가
 
 ENV VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}
+ENV VITE_BASE_URL=${VITE_BASE_URL} 
 
 # 작업 디렉토리 설정
 WORKDIR /app
 
 RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
+RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env 
 
 # 패키지 파일 복사
-COPY package.json package-lock.json ./
+COPY package.json package-lock.json ./ 
 
 # 의존성 설치
 RUN npm install
 
 # 애플리케이션 소스 복사
-COPY . .
+COPY . . 
 
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
 RUN npm run build
@@ -31,7 +34,11 @@ WORKDIR /app
 # 빌드된 정적 파일 복사 (이 부분은 첫 번째 단계에서 생성된 dist 폴더)
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
+# Nginx 설정 파일 복사
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Nginx 설정 파일에 환경 변수로 전달
+COPY --from=build-stage /app/.env /usr/share/nginx/html/.env 
 
 # Nginx의 기본 포트를 노출
 EXPOSE 80

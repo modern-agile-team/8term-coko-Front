@@ -8,6 +8,7 @@ env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
   VERSION: ${{ github.sha }}
   NAME: go_cicd
+  VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}
   VITE_IMG_BASE_URL: ${{ secrets.VITE_IMG_BASE_URL }}
 
 jobs:
@@ -50,13 +51,14 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_IMAGE }}:latest
           build-args: |
+            VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}
             VITE_IMG_BASE_URL=${{ secrets.VITE_IMG_BASE_URL }}
 
   # 배포 Job
   deploy:
     needs: build # build 후에 실행되도록 설정
     name: Deploy
-    runs-on: [self-hosted, label-go] # self-hosted 환경 사용
+    runs-on: [self-hosted, label-go]
     steps:
       # GitHub Container Registry 로그인
       - name: Login to ghcr
