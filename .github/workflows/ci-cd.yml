@@ -69,7 +69,7 @@ jobs:
       # `.env` 파일 생성
       - name: Generate .env file
         run: |
-          echo IMAGE_NAME=${{ env.DOCKER_IMAGE }} > /home/ec2-user/.env
+          echo IMAGE_NAME=${{ env.DOCKER_IMAGE }} > /home/ubuntu/.env
 
       # Docker 컨테이너 실행
       - name: Docker run

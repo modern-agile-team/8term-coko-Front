@@ -8,8 +8,6 @@ ENV VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 의존성 파일 복사
-COPY package*.json .
 RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 
 # 패키지 파일 복사
@@ -34,8 +32,6 @@ WORKDIR /app
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-
-# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Nginx의 기본 포트를 노출
 EXPOSE 80
