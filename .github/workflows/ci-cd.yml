@@ -74,7 +74,5 @@ jobs:
       # Docker 컨테이너 실행
       - name: Docker run
         run: |
-          docker stop ${{ env.NAME }} || true
-          docker rm ${{ env.NAME }} || true
-          docker rmi ${{ env.DOCKER_IMAGE }}:latest || true
-          docker run -d -p 8080:80 --name ${{ env.NAME }} --restart always ${{ env.DOCKER_IMAGE }}:latest
+          docker compose -f /home/ubuntu/docker-compose.yml down
+          docker compose -f /home/ubuntu/docker-compose.yml up -d --pull always
