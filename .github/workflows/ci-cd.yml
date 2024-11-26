@@ -72,7 +72,7 @@ jobs:
           echo IMAGE_NAME=${{ env.DOCKER_IMAGE }} > /home/ubuntu/.env
 
       # Docker 컨테이너 실행
-      - name: Docker run
-        run: |
-          docker compose -f /home/ubuntu/docker-compose.yml down
-          docker compose -f /home/ubuntu/docker-compose.yml up -d --pull always
+      # - name: Docker run
+      #   run: |
+      #     docker compose -f /home/ubuntu/docker-compose.yml down
+      #     docker compose -f /home/ubuntu/docker-compose.yml up -d --pull always
