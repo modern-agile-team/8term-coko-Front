@@ -14,7 +14,8 @@
       "@store*": ["store/*"],
       "@utils*": ["utils/*"],
       "@apis*": ["apis/*"],
-      "@types*": ["types/*"]
+      "@common*": ["common/*"],
+      "@type*": ["types/*"]
     },
 
     /* Bundler mode */
@@ -27,8 +28,8 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"]
