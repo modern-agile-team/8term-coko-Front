@@ -20,7 +20,7 @@ import isEqualArray from '@utils/isEqualArray';
 import quizzesQuery from '@queries/quizzesQuery';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Header from '@common/layout/Header';
 import useUserStore from '@store/useUserStore';
 import ProgressBar from '@features/progress/ui/ProgressBar';
@@ -54,23 +54,28 @@ export default function Quiz() {
     partId: number;
     state: 'start' | 'pending' | 'end';
   };
-  //유저가 없고 풀고있는중(pending) 이 아니라면
+  //유저 O 상태가 푸는중 => false
+  //유저 O 상태 처음 => true
+  //유저 O 상태 끝 => true
+  //유저 X => true
   const { data: quizzes, isLoading } =
-    user === undefined && state !== 'pending'
-      ? quizzesQuery.get({
-          partId,
-        })
-      : userQuizzesQuery.get({
+    user && state === 'pending'
+      ? userQuizzesQuery.get({
           userId: user!.id,
           partId,
+        })
+      : quizzesQuery.get({
+          partId,
         });
+
+  console.log(user);
+
   useBeforeUnload({
     enabled: quizzes?.length !== totalResults.length,
   });
 
   if (isLoading || isImageLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
-
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
 
@@ -129,9 +134,9 @@ export default function Quiz() {
         />
       </Modal>
       {user ? (
-        <TotalResults quizzesLength={quizzes.length} resultModalShow={isShow} />
+        <TotalResults isActive={totalResults.length === quizzes.length} />
       ) : (
-        <GoToLogin />
+        <GoToLogin isActive={totalResults.length === 2} />
       )}
     </AlignCenter>
   );

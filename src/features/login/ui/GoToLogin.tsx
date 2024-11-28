@@ -9,25 +9,30 @@ import Login from './Login';
 import { useClientQuizStore } from '@/store/useClientQuizStore';
 import { getImageUrl } from '@/utils/getImageUrl';
 import useModal from '@hooks/useModal';
+import { noop } from '@modern-kit/utils';
 import { useEffect, useState } from 'react';
-export default function GoToLogin() {
+interface GoToLoginProps {
+  isActive: boolean;
+}
+export default function GoToLogin({ isActive }: GoToLoginProps) {
   const { Modal, closeModal, isShow, openModal } = useModal();
-  const { totalResults, currentPage, reset } = useClientQuizStore();
+  const { currentPage, reset, totalResults } = useClientQuizStore();
   const [goLogin, setGoLogin] = useState<boolean>(false);
   useEffect(() => {
-    if (totalResults.length === 2) {
+    if (isActive) {
       openModal();
     }
     return () => {
-      if (totalResults.length === 2) {
+      if (isActive) {
         reset();
+        closeModal();
       }
     };
-  }, [currentPage]);
+  }, [currentPage, totalResults]);
   return (
     <Modal isShow={isShow}>
       {goLogin ? (
-        <Login closeModal={closeModal} openModal={openModal} />
+        <Login closeModal={noop} openModal={noop} />
       ) : (
         <FlexContainer>
           <GoToLoginForm>

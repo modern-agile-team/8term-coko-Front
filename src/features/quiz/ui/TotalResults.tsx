@@ -17,30 +17,23 @@ import ProgressBar from '@/features/progress/ui/ProgressBar';
 import { useEffect } from 'react';
 import useModal from '@/hooks/useModal';
 import useUserStore from '@/store/useUserStore';
+import User from '@/types/User';
 interface TotalResultProps {
-  quizzesLength: number;
-  resultModalShow: boolean;
+  isActive: boolean;
 }
-export default function TotalResults({
-  quizzesLength,
-  resultModalShow,
-}: TotalResultProps) {
+export default function TotalResults({ isActive }: TotalResultProps) {
   const { totalResults } = useClientQuizStore();
   const totalResultCount = totalResults.filter(result => result).length;
-  const { user } = useUserStore();
+  const { user } = useUserStore() as { user: User };
   const experience = totalResultCount * 10;
   const { mutate: experienceUpdate, isIdle } = experienceQuery.patch();
   const { reset, currentPage } = useClientQuizStore();
   const { Modal, closeModal, isShow, openModal } = useModal();
-
   useEffect(() => {
-    if (totalResults.length === quizzesLength) {
+    if (isActive) {
       openModal();
     }
-  }, [currentPage, resultModalShow]);
-  if (!user) {
-    return <></>;
-  }
+  }, [currentPage, totalResults]);
   const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
 
   const navigate = useNavigate();
