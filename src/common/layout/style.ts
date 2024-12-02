@@ -4,7 +4,7 @@ export const MenuBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-top: 108px;
+  margin-top: 179px;
   position: fixed;
   background-color: #fff1d9;
   border-right: 7px solid #ffe8c7;
@@ -24,23 +24,15 @@ export const HeaderBox = styled.header`
 
 export const LogoBoxWrapper = styled.div`
   background-color: #fff1d9;
-  height: 108px;
+  height: 179px;
   position: fixed;
   width: 235px;
   border-right: 7px solid #ffe8c7;
 `;
 
 export const LogoBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 193px;
-  height: 42px;
   margin-top: 26px;
-  margin-left: 16px;
-  border: 2px dashed #f00;
-  background: #efeff0;
-  position: fixed;
+  margin-left: 39px;
 `;
 
 export const OverRay = styled.div`
