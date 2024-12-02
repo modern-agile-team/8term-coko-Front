@@ -25,6 +25,8 @@ const userQuizzesQuery = {
     return useQuery({
       queryKey: userKeys.partQuizzes(userId, partId),
       queryFn: () => usersApis.getQuizzes({ id: userId, partId }),
+      gcTime: 0,
+      staleTime: 0,
     });
   },
 };

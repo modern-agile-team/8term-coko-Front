@@ -20,13 +20,15 @@ import isEqualArray from '@utils/isEqualArray';
 import quizzesQuery from '@queries/quizzesQuery';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from '@common/layout/Header';
 import useUserStore from '@store/useUserStore';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import { useLocation } from 'react-router-dom';
-import { userQuizzesQuery } from '@/queries/usersQuery';
-import GoToLogin from '@/features/login/ui/GoToLogin';
+import { userQuizzesQuery } from '@queries/usersQuery';
+import GoToLogin from '@features/login/ui/GoToLogin';
+import useFunnel from '@hooks/useFunnel';
+import PartClear from '@features/quiz/ui/PartClear';
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
@@ -52,12 +54,8 @@ export default function Quiz() {
   const { Modal, closeModal, openModal, isShow } = useModal();
   const { partId, state } = useLocation().state as {
     partId: number;
-    state: 'start' | 'pending' | 'end';
+    state?: 'start' | 'pending' | 'end';
   };
-  //유저 O 상태가 푸는중 => false
-  //유저 O 상태 처음 => true
-  //유저 O 상태 끝 => true
-  //유저 X => true
   const { data: quizzes, isLoading } =
     user && state === 'pending'
       ? userQuizzesQuery.get({
@@ -67,9 +65,13 @@ export default function Quiz() {
       : quizzesQuery.get({
           partId,
         });
-
-  console.log(user);
-
+  const { Funnel, setStep } = useFunnel('결과');
+  useEffect(() => {
+    if (totalResults.length === quizzes?.length) {
+      setStep('총결과');
+      openModal();
+    }
+  }, [currentPage, totalResults]);
   useBeforeUnload({
     enabled: quizzes?.length !== totalResults.length,
   });
@@ -125,19 +127,31 @@ export default function Quiz() {
         </ResponseButton>
       </SubmitSection>
       <Modal isShow={isShow}>
-        <Result
-          quizId={id}
-          result={result}
-          answer={answer}
-          lastPage={quizzes.length - 1}
-          closeModal={closeModal}
-        />
+        <Funnel>
+          <Funnel.Step name="결과">
+            <Result
+              quizId={id}
+              result={result}
+              answer={answer}
+              lastPage={quizzes.length - 1}
+              closeModal={closeModal}
+            />
+          </Funnel.Step>
+          <Funnel.Step name="로그인 유도">
+            <GoToLogin isActive={totalResults.length === 2} />
+          </Funnel.Step>
+          <Funnel.Step name="총결과">
+            <TotalResults
+              isActive={totalResults.length === quizzes.length}
+              onNext={setStep}
+              quizzesLength={quizzes.length}
+            />
+          </Funnel.Step>
+          <Funnel.Step name="파트 클리어">
+            <PartClear />
+          </Funnel.Step>
+        </Funnel>
       </Modal>
-      {user ? (
-        <TotalResults isActive={totalResults.length === quizzes.length} />
-      ) : (
-        <GoToLogin isActive={totalResults.length === 2} />
-      )}
     </AlignCenter>
   );
 }
