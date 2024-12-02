@@ -29,6 +29,8 @@ import { userQuizzesQuery } from '@queries/usersQuery';
 import GoToLogin from '@features/login/ui/GoToLogin';
 import useFunnel from '@hooks/useFunnel';
 import PartClear from '@features/quiz/ui/PartClear';
+import { noop } from '@modern-kit/utils';
+import Login from '@/features/login/ui/Login';
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
@@ -138,14 +140,13 @@ export default function Quiz() {
             />
           </Funnel.Step>
           <Funnel.Step name="로그인 유도">
-            <GoToLogin isActive={totalResults.length === 2} />
+            <GoToLogin setStep={setStep} />
+          </Funnel.Step>
+          <Funnel.Step name="로그인">
+            <Login closeModal={closeModal} openModal={noop} />
           </Funnel.Step>
           <Funnel.Step name="총결과">
-            <TotalResults
-              isActive={totalResults.length === quizzes.length}
-              onNext={setStep}
-              quizzesLength={quizzes.length}
-            />
+            <TotalResults setStep={setStep} quizzesLength={quizzes.length} />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">
             <PartClear />

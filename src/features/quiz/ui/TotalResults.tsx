@@ -14,18 +14,14 @@ import { getImageUrl } from '@utils/getImageUrl';
 import { useTimeout } from '@modern-kit/react';
 import { useNavigate } from 'react-router-dom';
 import ProgressBar from '@/features/progress/ui/ProgressBar';
-import { useEffect } from 'react';
-import useModal from '@/hooks/useModal';
 import useUserStore from '@/store/useUserStore';
 import User from '@/types/User';
 interface TotalResultProps {
-  isActive: boolean;
-  onNext: (step: string) => void;
+  setStep: (step: string) => void;
   quizzesLength: number;
 }
 export default function TotalResults({
-  isActive,
-  onNext,
+  setStep,
   quizzesLength,
 }: TotalResultProps) {
   const { totalResults } = useClientQuizStore();
@@ -98,7 +94,7 @@ export default function TotalResults({
         $isActive={isIdle}
         onClick={() => {
           reset();
-          isPartClear ? onNext('파트클리어') : navigate('/learn');
+          isPartClear ? setStep('파트클리어') : navigate('/learn');
         }}
       >
         메인으로
