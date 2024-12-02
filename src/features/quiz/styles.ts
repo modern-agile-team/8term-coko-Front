@@ -367,9 +367,13 @@ export const UpperBackgroundImg = styled.div`
 `;
 
 // 버튼 섹션 전체를 감싸는 Wrapper (백그라운드 이미지 고정)
-export const ButtonSectionWrapper = styled.div`
+export const EntireSectionContainer = styled.div`
   background-image: url(${imgUrl}배경2.webp);
-  background-repeat: no-repeat;
+`;
+
+// 섹션 하나를 감싸는 Wrapper
+export const SectionWrapper = styled.div`
+  padding-bottom: 20px;
 `;
 
 // 섹션 제목(이름)
@@ -381,7 +385,6 @@ export const SectionTitle = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
 
   &::before,
   &::after {
@@ -398,7 +401,6 @@ export const SectionTitle = styled.p`
 export const ButtonGrid = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
 `;
 
 // 키캡(키보드 스위치) 버튼

@@ -2,7 +2,8 @@ import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   UpperBackgroundImg,
-  ButtonSectionWrapper,
+  EntireSectionContainer,
+  SectionWrapper,
   SectionTitle,
   ButtonGrid,
   KeyboardButton,
@@ -48,6 +49,13 @@ const dummyData: Section[] = [
     part: [
       { id: 8, sectionId: 2, name: 'Number()' },
       { id: 9, sectionId: 2, name: 'String()' },
+      { id: 10, sectionId: 2, name: 'asd()' },
+      { id: 11, sectionId: 2, name: 'fasfsaf()' },
+      { id: 12, sectionId: 2, name: 'asfasfa()' },
+      { id: 13, sectionId: 2, name: 'asdasddas()' },
+      { id: 14, sectionId: 2, name: 'ffff()' },
+      { id: 15, sectionId: 2, name: 'cxx()' },
+      { id: 16, sectionId: 2, name: 'asdasd()' },
     ],
   },
 ];
@@ -59,7 +67,7 @@ export default function PartNavContainer() {
   return (
     <>
       <UpperBackgroundImg />
-      <ButtonSectionWrapper>
+      <EntireSectionContainer>
         {sections.map((section, sectionIndex) => {
           // 각 섹션 앞의 버튼 수 합산
           const previousPartsCount = sections
@@ -70,11 +78,8 @@ export default function PartNavContainer() {
             );
 
           return (
-            <div key={section.id}>
-              {/* 섹션 제목 */}
+            <SectionWrapper key={section.id}>
               <SectionTitle>{section.name}</SectionTitle>
-
-              {/* 버튼 그룹 */}
               <ButtonGrid>
                 {section.part.map((part, partIndex) => {
                   // 전역 인덱스 계산
@@ -97,10 +102,10 @@ export default function PartNavContainer() {
                   );
                 })}
               </ButtonGrid>
-            </div>
+            </SectionWrapper>
           );
         })}
-      </ButtonSectionWrapper>
+      </EntireSectionContainer>
     </>
   );
 }
