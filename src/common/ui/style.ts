@@ -87,7 +87,6 @@ export const HeaderIcon = styled.img`
 `;
 
 export const LogoImg = styled.img`
-  width: 30px;
-  height: 30px;
-  position: fixed;
+  width: 147px;
+  height: 117px;
 `;

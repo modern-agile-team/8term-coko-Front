@@ -366,8 +366,18 @@ export const UpperBackgroundImg = styled.div`
   align-items: end;
 `;
 
+// 버튼 섹션 전체를 감싸는 Wrapper (백그라운드 이미지 고정)
+export const EntireSectionContainer = styled.div`
+  background-image: url(${imgUrl}배경2.webp);
+`;
+
+// 섹션 하나를 감싸는 Wrapper
+export const SectionWrapper = styled.div`
+  padding-bottom: 20px;
+`;
+
 // 섹션 제목(이름)
-export const SectionTitle = styled.section`
+export const SectionTitle = styled.p`
   width: 693px;
   font-size: 17px;
   color: #ffffff;
@@ -375,7 +385,6 @@ export const SectionTitle = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
 
   &::before,
   &::after {
@@ -388,12 +397,10 @@ export const SectionTitle = styled.section`
   }
 `;
 
-// 버튼 레이아웃 지정
-export const ButtonWrapper = styled.div`
+// 버튼 배치를 위한 Wrapper (그리드 레이아웃)
+export const ButtonGrid = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  place-items: center;
-  background-image: url(${imgUrl}배경2.webp);
 `;
 
 // 키캡(키보드 스위치) 버튼
