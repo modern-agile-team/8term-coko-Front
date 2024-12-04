@@ -31,6 +31,7 @@ import useFunnel from '@hooks/useFunnel';
 import PartClear from '@features/quiz/ui/PartClear';
 import { noop } from '@modern-kit/utils';
 import Login from '@features/login/ui/Login';
+import { useUnmount } from '@modern-kit/react';
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
@@ -86,11 +87,7 @@ export default function Quiz() {
       openModal();
     }
   }, [totalResults, result]);
-  useEffect(() => {
-    return () => {
-      reset();
-    };
-  }, []);
+  useUnmount(() => reset());
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
