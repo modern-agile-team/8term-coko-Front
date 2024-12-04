@@ -5,7 +5,7 @@ import Quiz from '../../../types/Quiz';
 import handlePage from '../../../utils/handlePage';
 import { noop } from '@modern-kit/utils';
 import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
-import { getImageUrl } from '@/utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
 
 interface ResultProps {
   quizId: Quiz['id'];

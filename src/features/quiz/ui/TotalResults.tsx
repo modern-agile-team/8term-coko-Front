@@ -13,9 +13,9 @@ import {
 import { getImageUrl } from '@utils/getImageUrl';
 import { useTimeout } from '@modern-kit/react';
 import { useNavigate } from 'react-router-dom';
-import ProgressBar from '@/features/progress/ui/ProgressBar';
-import useUserStore from '@/store/useUserStore';
-import User from '@/types/User';
+import ProgressBar from '@features/progress/ui/ProgressBar';
+import useUserStore from '@store/useUserStore';
+import User from '@type/User';
 interface TotalResultProps {
   setStep: (step: string) => void;
   quizzesLength: number;
@@ -30,8 +30,6 @@ export default function TotalResults({
   const { user } = useUserStore() as { user: User };
   const experience = totalResultCount * 10;
   const { mutate: experienceUpdate, isIdle } = experienceQuery.patch();
-  const { reset } = useClientQuizStore();
-
   const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
 
   const navigate = useNavigate();

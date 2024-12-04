@@ -9,7 +9,7 @@ import { getImageUrl } from '@/utils/getImageUrl';
 interface GoToLoginProps {
   setStep: (step: string) => void;
 }
-export default function GoToLogin({ setStep }: GoToLoginProps) {
+export default function LoginPrompt({ setStep }: GoToLoginProps) {
   return (
     <>
       <FlexContainer>

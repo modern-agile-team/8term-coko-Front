@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { CompensationSection } from '../styles';
-import { pointQuery } from '@/queries/usersQuery';
+import { pointQuery } from '@queries/usersQuery';
 import { useTimeout } from '@modern-kit/react';
-import useUserStore from '@/store/useUserStore';
+import useUserStore from '@store/useUserStore';
 export default function PartClear() {
   const navigate = useNavigate();
   const { mutate: updatePoint } = pointQuery.patch();

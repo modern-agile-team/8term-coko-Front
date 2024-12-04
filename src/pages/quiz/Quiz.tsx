@@ -26,11 +26,11 @@ import useUserStore from '@store/useUserStore';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import { useLocation } from 'react-router-dom';
 import { userQuizzesQuery } from '@queries/usersQuery';
-import GoToLogin from '@features/login/ui/GoToLogin';
+import LoginPrompt from '@features/login/ui/LoginPrompt';
 import useFunnel from '@hooks/useFunnel';
 import PartClear from '@features/quiz/ui/PartClear';
 import { noop } from '@modern-kit/utils';
-import Login from '@/features/login/ui/Login';
+import Login from '@features/login/ui/Login';
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
@@ -151,7 +151,7 @@ export default function Quiz() {
             />
           </Funnel.Step>
           <Funnel.Step name="로그인 유도">
-            <GoToLogin setStep={setStep} />
+            <LoginPrompt setStep={setStep} />
           </Funnel.Step>
           <Funnel.Step name="로그인">
             <Login closeModal={closeModal} openModal={noop} />
