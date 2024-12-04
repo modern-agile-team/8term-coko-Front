@@ -67,25 +67,26 @@ export default function Quiz() {
       : quizzesQuery.get({
           partId,
         });
+  const isQuizAnswered = userResponseAnswer[0] === '';
+  const isQuizFinished = totalResults.length === quizzes?.length;
   const { Funnel, setStep } = useFunnel('결과');
   useEffect(() => {
     if (totalResults.length === 2 && !user) {
       setStep('로그인 유도');
       openModal();
     }
-    if (totalResults.length === quizzes?.length) {
+    if (isQuizFinished) {
       setStep('총결과');
       openModal();
     }
   }, [currentPage, totalResults]);
   useEffect(() => {
     return () => {
-      console.log('언마운트');
       reset();
     };
   }, []);
   useBeforeUnload({
-    enabled: quizzes?.length !== totalResults.length,
+    enabled: !isQuizFinished,
   });
 
   if (isLoading || isImageLoading) return <div>Loading</div>;
@@ -128,8 +129,8 @@ export default function Quiz() {
           SKIP
         </ResponseButton>
         <ResponseButton
-          disabled={userResponseAnswer[0] === ''}
-          $disabled={userResponseAnswer[0] === ''}
+          disabled={isQuizAnswered}
+          $disabled={isQuizAnswered}
           onClick={() => {
             setResult(isEqualArray(userResponseAnswer, answer));
             openModal();
