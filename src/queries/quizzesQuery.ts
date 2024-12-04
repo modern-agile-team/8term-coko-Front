@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import quizzesApis from './../apis/quizzesApis';
+import quizzesApis from '@apis/quizzesApis';
 const quizKeys = {
   all: ['quizzes'],
   filters: () => [...quizKeys.all, 'filter'],

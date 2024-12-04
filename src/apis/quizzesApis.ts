@@ -1,4 +1,4 @@
-import Quiz from '../types/Quiz';
+import Quiz from '@type/Quiz';
 import api from './axios/instance';
 
 const quizzesApis = {
