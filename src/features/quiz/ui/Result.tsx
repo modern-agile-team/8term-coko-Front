@@ -5,6 +5,7 @@ import Quiz from '../../../types/Quiz';
 import handlePage from '../../../utils/handlePage';
 import { noop } from '@modern-kit/utils';
 import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
+import { getImageUrl } from '@/utils/getImageUrl';
 
 interface ResultProps {
   quizId: Quiz['id'];
@@ -20,7 +21,6 @@ export default function Result({
   lastPage,
   closeModal,
 }: ResultProps) {
-  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
   const { nextPage, resetUserResponseAnswer, pushTotalResults, currentPage } =
     useClientQuizStore();
   //임시 유저 가져오기
@@ -31,9 +31,7 @@ export default function Result({
   return (
     <>
       <ScoreSection
-        $backGroundImage={
-          result ? `${imgUrl}정답모달.svg` : `${imgUrl}오답모달.svg`
-        }
+        $backGroundImage={getImageUrl(result ? `정답모달.svg` : `오답모달.svg`)}
       >
         <AnswerDiv>{!result && '정답 : ' + answer}</AnswerDiv>
         <NextPageButton

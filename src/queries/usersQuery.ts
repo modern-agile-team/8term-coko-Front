@@ -87,4 +87,11 @@ const experienceQuery = {
     });
   },
 };
-export { progressQuery, experienceQuery, userQuizzesQuery };
+const pointQuery = {
+  patch: () => {
+    return useMutation({
+      mutationFn: usersApis.patchPoint,
+    });
+  },
+};
+export { progressQuery, experienceQuery, userQuizzesQuery, pointQuery };

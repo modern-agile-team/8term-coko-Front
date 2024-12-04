@@ -239,7 +239,7 @@ const fadeInScaleUp = keyframes`
     transform: translate(-50%, -50%) scale(1); 
   }
 `;
-export const TotalResultSection = styled.section`
+export const CompensationSection = styled.section`
   animation: ${fadeInScaleUp} 0.7s ease-out;
   position: fixed;
   display: flex;

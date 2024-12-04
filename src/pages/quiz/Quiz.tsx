@@ -49,7 +49,7 @@ export default function Quiz() {
       '과일바구니-아이템.svg',
     ],
   });
-  const { currentPage, totalResults, userResponseAnswer } =
+  const { currentPage, totalResults, userResponseAnswer, reset } =
     useClientQuizStore();
   const { user } = useUserStore();
   const [result, setResult] = useState<boolean>(false);
@@ -69,11 +69,21 @@ export default function Quiz() {
         });
   const { Funnel, setStep } = useFunnel('결과');
   useEffect(() => {
+    if (totalResults.length === 2 && !user) {
+      setStep('로그인 유도');
+      openModal();
+    }
     if (totalResults.length === quizzes?.length) {
       setStep('총결과');
       openModal();
     }
   }, [currentPage, totalResults]);
+  useEffect(() => {
+    return () => {
+      console.log('언마운트');
+      reset();
+    };
+  }, []);
   useBeforeUnload({
     enabled: quizzes?.length !== totalResults.length,
   });

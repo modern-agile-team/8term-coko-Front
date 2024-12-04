@@ -1,19 +1,33 @@
-import useModal from '@/hooks/useModal';
-
+import { useNavigate } from 'react-router-dom';
+import { CompensationSection } from '../styles';
+import { pointQuery } from '@/queries/usersQuery';
+import { useTimeout } from '@modern-kit/react';
+import useUserStore from '@/store/useUserStore';
 export default function PartClear() {
-  const { Modal, closeModal, isShow } = useModal({ enable: true });
+  const navigate = useNavigate();
+  const { mutate: updatePoint } = pointQuery.patch();
+  const { user } = useUserStore();
+  const point = 1500;
+  useTimeout(
+    () => {
+      if (user) {
+        updatePoint({ id: user.id, point });
+      }
+    },
+    { delay: 500 }
+  );
   return (
     <>
-      <Modal isShow={isShow}>
-        <h1>와 깼다 ㅎㅎ</h1>
+      <CompensationSection>
+        <h1>와 파트클리어 축하해</h1>
         <button
           onClick={() => {
-            closeModal();
+            navigate('/learn');
           }}
         >
           넘어가기
         </button>
-      </Modal>
+      </CompensationSection>
     </>
   );
 }

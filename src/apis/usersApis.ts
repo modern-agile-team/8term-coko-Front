@@ -30,10 +30,17 @@ const usersApis = {
     partId: Quiz['partId'];
   }): Promise<Quiz[]> => {
     const { id, partId } = params;
-    const response = await api.get(`quizzes/users/${id}/incorrect`, {
+    const response = await api.get(`/quizzes/users/${id}/incorrect`, {
       params: { partId },
     });
     return response.data;
+  },
+  patchPoint: async (params: {
+    id: User['id'];
+    point: number;
+  }): Promise<void> => {
+    const { id, point } = params;
+    await api.patch(`/users/${id}/point`, { point });
   },
 };
 export default usersApis;

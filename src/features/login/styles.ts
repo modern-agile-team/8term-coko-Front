@@ -79,6 +79,7 @@ export const SocialLoginButton = styled.button<SocialLoginLinkProps>`
   }
 `;
 export const GoToLoginForm = styled.section`
+  animation: ${fadeInScaleUp} 0.7s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,11 +96,10 @@ export const GoToLoginForm = styled.section`
 export const GoToLoginImg = styled.img`
   width: 187.944px;
   height: 219.219px;
-  margin: 7px 0 18px 0;
+  margin-top: 7px;
 `;
 
 export const GoToLoginButton = styled.button`
-  margin-top: 18px;
   width: 145.444px;
   height: 38.291px;
   border-radius: 6px;

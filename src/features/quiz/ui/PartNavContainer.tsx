@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   UpperBackgroundImg,
@@ -15,6 +15,7 @@ interface Part {
   id: number;
   sectionId: number;
   name: string;
+  state?: string;
 }
 
 interface Section {
@@ -28,7 +29,7 @@ const dummyData: Section[] = [
     id: 1,
     name: '변수',
     part: [
-      { id: 1, sectionId: 1, name: 'var' },
+      { id: 1, sectionId: 1, name: 'var', state: 'start' },
       { id: 2, sectionId: 1, name: 'let' },
       { id: 3, sectionId: 1, name: 'const' },
     ],
@@ -37,7 +38,7 @@ const dummyData: Section[] = [
     id: 2,
     name: '자료형',
     part: [
-      { id: 4, sectionId: 2, name: 'string' },
+      { id: 4, sectionId: 2, name: 'string', state: 'pending' },
       { id: 5, sectionId: 2, name: 'number' },
       { id: 6, sectionId: 2, name: 'boolean' },
       { id: 7, sectionId: 2, name: 'null' },
@@ -63,7 +64,45 @@ const dummyData: Section[] = [
 export default function PartNavContainer() {
   const [sections, setSections] = useState<Section[]>(dummyData);
   const navigate = useNavigate();
+  const memoItem = useMemo(() => {
+    return sections.map((section, sectionIndex) => {
+      // 각 섹션 앞의 버튼 수 합산
+      const previousPartsCount = sections
+        .slice(0, sectionIndex)
+        .reduce((sum, currentSection) => sum + currentSection.part.length, 0);
 
+      return (
+        <SectionWrapper key={section.id}>
+          <SectionTitle>{section.name}</SectionTitle>
+          <ButtonGrid>
+            {section.part.map((part, partIndex) => {
+              // 전역 인덱스 계산
+              const globalIndex = previousPartsCount + partIndex;
+
+              const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
+              const buttonImage = getImageUrl(
+                `키캡${(globalIndex % 4) + 1}.svg`
+              );
+
+              return (
+                <KeyboardButton
+                  key={part.id}
+                  style={{ gridColumn, gridRow }}
+                  onClick={() =>
+                    navigate('/quiz', {
+                      state: { partId: part.id, state: part.state },
+                    })
+                  }
+                >
+                  <img src={buttonImage} alt={`키캡 ${part.name}`} />
+                </KeyboardButton>
+              );
+            })}
+          </ButtonGrid>
+        </SectionWrapper>
+      );
+    });
+  }, [sections]);
   // 백엔드에서 가져올 데이터 (현재는 임시 데이터)
   const parts = [
     { partId: 1, state: 'pending' },
@@ -81,45 +120,7 @@ export default function PartNavContainer() {
   return (
     <>
       <UpperBackgroundImg />
-      <EntireSectionContainer>
-        {sections.map((section, sectionIndex) => {
-          // 각 섹션 앞의 버튼 수 합산
-          const previousPartsCount = sections
-            .slice(0, sectionIndex)
-            .reduce(
-              (sum, currentSection) => sum + currentSection.part.length,
-              0
-            );
-
-          return (
-            <SectionWrapper key={section.id}>
-              <SectionTitle>{section.name}</SectionTitle>
-              <ButtonGrid>
-                {section.part.map((part, partIndex) => {
-                  // 전역 인덱스 계산
-                  const globalIndex = previousPartsCount + partIndex;
-
-                  const { gridColumn, gridRow } =
-                    getPartGridPosition(globalIndex);
-                  const buttonImage = getImageUrl(
-                    `키캡${(globalIndex % 4) + 1}.svg`
-                  );
-
-                  return (
-                    <KeyboardButton
-                      key={part.id}
-                      style={{ gridColumn, gridRow }}
-                      onClick={() => navigate('/quiz', { state: part })}
-                    >
-                      <img src={buttonImage} alt={`키캡 ${part.name}`} />
-                    </KeyboardButton>
-                  );
-                })}
-              </ButtonGrid>
-            </SectionWrapper>
-          );
-        })}
-      </EntireSectionContainer>
+      <EntireSectionContainer>{memoItem}</EntireSectionContainer>
     </>
   );
 }

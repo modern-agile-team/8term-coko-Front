@@ -6,7 +6,7 @@ import {
   Img,
   RedirectToLearnButton,
   TotalResultProgressDiv,
-  TotalResultSection,
+  CompensationSection,
   TotalResultsRewardDiv,
   TotalResultsTextDiv,
 } from '../styles';
@@ -45,7 +45,7 @@ export default function TotalResults({
     return <></>;
   }
   return (
-    <TotalResultSection>
+    <CompensationSection>
       <TotalResultsTextDiv>
         총<p>&nbsp; {totalResultCount}&nbsp;</p>
         문제를 맞혔고 <p>&nbsp;{experience} 경험치</p>를 얻었어!
@@ -93,12 +93,11 @@ export default function TotalResults({
         disabled={isIdle}
         $isActive={isIdle}
         onClick={() => {
-          reset();
-          isPartClear ? setStep('파트클리어') : navigate('/learn');
+          isPartClear ? setStep('파트 클리어') : navigate('/learn');
         }}
       >
         메인으로
       </RedirectToLearnButton>
-    </TotalResultSection>
+    </CompensationSection>
   );
 }
