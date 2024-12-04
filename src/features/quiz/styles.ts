@@ -239,7 +239,7 @@ const fadeInScaleUp = keyframes`
     transform: translate(-50%, -50%) scale(1); 
   }
 `;
-export const TotalResultSection = styled.section`
+export const CompensationSection = styled.section`
   animation: ${fadeInScaleUp} 0.7s ease-out;
   position: fixed;
   display: flex;
@@ -377,7 +377,7 @@ export const SectionWrapper = styled.div`
 `;
 
 // 섹션 제목(이름)
-export const SectionTitle = styled.p`
+export const SectionTitle = styled.h4`
   width: 693px;
   font-size: 17px;
   color: #ffffff;

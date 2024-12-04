@@ -9,8 +9,11 @@ import Modal from '../common/layout/Modal';
  * <button onClick={openModal}/>
  *  <Modal isShow={isShow}><ChildrenComponent closeModal={closeModal}></Modal>
  * */
-const useModal = () => {
-  const [isShow, setIsShow] = useState<boolean>(false);
+interface useModalProps {
+  enable?: boolean;
+}
+const useModal = ({ enable = false }: useModalProps = {}) => {
+  const [isShow, setIsShow] = useState<boolean>(enable);
   const openModal = () => setIsShow(true);
   const closeModal = () => setIsShow(false);
   return { isShow, openModal, closeModal, Modal };
