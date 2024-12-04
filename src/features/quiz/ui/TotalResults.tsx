@@ -17,18 +17,18 @@ import ProgressBar from '@features/progress/ui/ProgressBar';
 import useUserStore from '@store/useUserStore';
 import User from '@type/User';
 interface TotalResultProps {
-  setStep: (step: string) => void;
+  onNext: () => void;
   quizzesLength: number;
 }
 export default function TotalResults({
-  setStep,
+  onNext,
   quizzesLength,
 }: TotalResultProps) {
   const { totalResults } = useClientQuizStore();
-  const totalResultCount = totalResults.filter(result => result).length;
-  const isPartClear = quizzesLength === totalResultCount;
+  const quizCorrectAnswers = totalResults.filter(result => result).length;
+  const isPartClear = quizzesLength === quizCorrectAnswers;
   const { user } = useUserStore() as { user: User };
-  const experience = totalResultCount * 10;
+  const experience = quizCorrectAnswers * 10;
   const { mutate: experienceUpdate, isIdle } = experienceQuery.patch();
   const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
 
@@ -45,7 +45,7 @@ export default function TotalResults({
   return (
     <CompensationSection>
       <TotalResultsTextDiv>
-        총<p>&nbsp; {totalResultCount}&nbsp;</p>
+        총<p>&nbsp; {quizCorrectAnswers}&nbsp;</p>
         문제를 맞혔고 <p>&nbsp;{experience} 경험치</p>를 얻었어!
       </TotalResultsTextDiv>
       <DashLineHr />
@@ -91,7 +91,7 @@ export default function TotalResults({
         disabled={isIdle}
         $isActive={isIdle}
         onClick={() => {
-          isPartClear ? setStep('파트 클리어') : navigate('/learn');
+          isPartClear ? onNext() : navigate('/learn');
         }}
       >
         메인으로

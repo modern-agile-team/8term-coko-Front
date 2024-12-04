@@ -2,8 +2,6 @@ import { progressQuery } from '../../../queries/usersQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
-import handlePage from '../../../utils/handlePage';
-import { noop } from '@modern-kit/utils';
 import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
 import { getImageUrl } from '@utils/getImageUrl';
 
@@ -11,14 +9,12 @@ interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
   result: boolean;
-  lastPage: number;
   closeModal: () => void;
 }
 export default function Result({
   quizId,
   answer,
   result,
-  lastPage,
   closeModal,
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer, pushTotalResults, currentPage } =
@@ -38,9 +34,8 @@ export default function Result({
           $isAnswer={result}
           onClick={() => {
             resetUserResponseAnswer();
-            pushTotalResults(result);
             closeModal();
-            handlePage(currentPage, lastPage, nextPage, noop, closeModal);
+            nextPage();
             userId &&
               addProgress.mutate({
                 userId,

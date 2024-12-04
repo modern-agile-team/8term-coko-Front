@@ -49,8 +49,13 @@ export default function Quiz() {
       '과일바구니-아이템.svg',
     ],
   });
-  const { currentPage, totalResults, userResponseAnswer, reset } =
-    useClientQuizStore();
+  const {
+    currentPage,
+    totalResults,
+    userResponseAnswer,
+    reset,
+    pushTotalResults,
+  } = useClientQuizStore();
   const { user } = useUserStore();
   const [result, setResult] = useState<boolean>(false);
   const { Modal, closeModal, openModal, isShow } = useModal();
@@ -73,13 +78,14 @@ export default function Quiz() {
   useEffect(() => {
     if (totalResults.length === 2 && !user) {
       setStep('로그인 유도');
-      openModal();
     }
     if (isQuizFinished) {
       setStep('총결과');
+    }
+    if (totalResults.length !== 0) {
       openModal();
     }
-  }, [currentPage, totalResults]);
+  }, [totalResults, result]);
   useEffect(() => {
     return () => {
       reset();
@@ -122,8 +128,7 @@ export default function Quiz() {
       <SubmitSection>
         <ResponseButton
           onClick={() => {
-            setResult(false);
-            openModal();
+            pushTotalResults(false);
           }}
         >
           SKIP
@@ -132,8 +137,7 @@ export default function Quiz() {
           disabled={isQuizAnswered}
           $disabled={isQuizAnswered}
           onClick={() => {
-            setResult(isEqualArray(userResponseAnswer, answer));
-            openModal();
+            pushTotalResults(isEqualArray(userResponseAnswer, answer));
           }}
         >
           제출
@@ -144,20 +148,22 @@ export default function Quiz() {
           <Funnel.Step name="결과">
             <Result
               quizId={id}
-              result={result}
+              result={totalResults[currentPage]}
               answer={answer}
-              lastPage={quizzes.length - 1}
               closeModal={closeModal}
             />
           </Funnel.Step>
           <Funnel.Step name="로그인 유도">
-            <LoginPrompt setStep={setStep} />
+            <LoginPrompt onNext={() => setStep('로그인')} />
           </Funnel.Step>
           <Funnel.Step name="로그인">
             <Login closeModal={closeModal} openModal={noop} />
           </Funnel.Step>
           <Funnel.Step name="총결과">
-            <TotalResults setStep={setStep} quizzesLength={quizzes.length} />
+            <TotalResults
+              onNext={() => setStep('파트 클리어')}
+              quizzesLength={quizzes.length}
+            />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">
             <PartClear />

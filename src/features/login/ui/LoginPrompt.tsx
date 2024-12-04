@@ -2,29 +2,23 @@ import {
   DashLineHr,
   FlexContainer,
   GoToLoginButton,
-  GoToLoginForm,
-  GoToLoginImg,
+  LoginPromptSection,
+  LoginPromptImg,
 } from '../styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 interface GoToLoginProps {
-  setStep: (step: string) => void;
+  onNext: () => void;
 }
-export default function LoginPrompt({ setStep }: GoToLoginProps) {
+export default function LoginPrompt({ onNext }: GoToLoginProps) {
   return (
     <>
       <FlexContainer>
-        <GoToLoginForm>
+        <LoginPromptSection>
           <h2>문제 더 풀려면 로그인해 !</h2>
-          <GoToLoginImg src={getImageUrl('로그인키키.svg')}></GoToLoginImg>
+          <LoginPromptImg src={getImageUrl('로그인키키.svg')} />
           <DashLineHr />
-          <GoToLoginButton
-            onClick={() => {
-              setStep('로그인');
-            }}
-          >
-            로그인 창으로
-          </GoToLoginButton>
-        </GoToLoginForm>
+          <GoToLoginButton onClick={onNext}>로그인 창으로</GoToLoginButton>
+        </LoginPromptSection>
       </FlexContainer>
     </>
   );
