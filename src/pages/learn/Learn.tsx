@@ -1,20 +1,27 @@
 import { Wrapper, LeftSection, RightSection, Layout } from '../../style/style';
 import { ScrollableContainer } from './style';
-import { useScrollVisibility } from '../../hooks/useScrollVisibility';
-import MenuBar from '../../common/layout/MenuBar';
-import CokoLogo from '../../common/layout/CokoLogo';
-import Header from '../../common/layout/Header';
-import DailyQuest from '../../features/quest/ui/DailyQuest';
-import ProgressBar from '../../features/progress/ui/ProgressBar';
-import SelectSection from '../../features/learn/ui/SelectSection';
-import QuizSection from '../../features/quiz/ui/QuizSection';
-import KeycapAdventureIntro from '../../features/learn/ui/KeycapAdventureIntro';
-import PartNavContainer from '../../features/quiz/ui/PartNavContainer';
-import usePreloadImages from '../../hooks/usePreloadImages';
+import { useScrollVisibility } from '@hooks/useScrollVisibility';
+import MenuBar from '@common/layout/MenuBar';
+import CokoLogo from '@common/layout/CokoLogo';
+import Header from '@common/layout/Header';
+import DailyQuest from '@features/quest/ui/DailyQuest';
+import ProgressBar from '@features/progress/ui/ProgressBar';
+import SelectSection from '@features/learn/ui/SelectSection';
+import QuizSection from '@features/quiz/ui/QuizSection';
+import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
+import PartNavContainer from '@features/quiz/ui/PartNavContainer';
+import usePreloadImages from '@hooks/usePreloadImages';
+import useUserStore from '@store/useUserStore';
+import { useEffect } from 'react';
 
 export default function Learn() {
+  const { setUser } = useUserStore();
+  //임시 유저 설정
+  useEffect(() => {
+    setUser({ id: 3, nickname: 'admin', level: 1 });
+  }, []);
+  //----------------------------
   const showComponents = useScrollVisibility();
-
   const isImageLoading = usePreloadImages({
     imageUrls: [
       '코코-멘트1.svg',

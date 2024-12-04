@@ -1,31 +1,17 @@
-import { IconWrapper, HeaderIcon, HeaderIconNumber } from './style';
+import { IconWrapper, HeaderIcon } from './style';
 
 interface HeaderItemProps {
-  lifeIcon: string;
-  lifePoints: number;
-  pointIcon: string;
-  points: number;
+  icon: string;
+  point: number;
+  color: string;
 }
 
-export default function HeaderItem({
-  lifeIcon,
-  lifePoints,
-  pointIcon,
-  points,
-}: HeaderItemProps) {
+export default function HeaderItem({ icon, point, color }: HeaderItemProps) {
   return (
     <>
-      <IconWrapper>
-        <HeaderIcon src={pointIcon} alt="Point Icon" />
-        <HeaderIconNumber $color="#FFCD35;">
-          {points.toLocaleString()}
-        </HeaderIconNumber>
-      </IconWrapper>
-      <IconWrapper>
-        <HeaderIcon src={lifeIcon} alt="Life Icon" />
-        <HeaderIconNumber $color="#FE0F0F;">
-          {lifePoints.toLocaleString()}
-        </HeaderIconNumber>
+      <IconWrapper $color={color}>
+        <HeaderIcon src={icon} />
+        <p>{point.toLocaleString()}</p>
       </IconWrapper>
     </>
   );

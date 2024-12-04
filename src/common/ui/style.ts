@@ -9,7 +9,7 @@ interface MenuButtonProps {
   $activeStyle: boolean;
 }
 
-interface HeaderIconNumberProps {
+interface IconWrapperProps {
   $color: string;
 }
 
@@ -58,10 +58,27 @@ export const MenuIcon = styled.img`
   height: 26px;
 `;
 
-export const IconWrapper = styled.div`
+export const IconWrapper = styled.div<IconWrapperProps>`
   display: flex;
   align-items: center;
   margin-right: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-left: 7px;
+  gap: 7px;
+  color: ${({ $color }) => $color};
+`;
+
+export const ProfileWrapper = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+export const ProfileIcon = styled.img`
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
 `;
 
 export const HeaderIcon = styled.img`
@@ -69,15 +86,7 @@ export const HeaderIcon = styled.img`
   height: 30px;
 `;
 
-export const HeaderIconNumber = styled.span<HeaderIconNumberProps>`
-  font-size: 15px;
-  font-weight: 700;
-  margin-left: 7px;
-  color: ${({ $color }) => $color};
-`;
-
 export const LogoImg = styled.img`
-  width: 30px;
-  height: 30px;
-  position: fixed;
+  width: 147px;
+  height: 117px;
 `;

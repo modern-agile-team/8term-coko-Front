@@ -1,21 +1,40 @@
+import { getImageUrl } from '@utils/getImageUrl';
 import HeaderItem from '../ui/HeaderItem';
 import { HeaderBox } from './style';
-
-const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+import Login from '@features/login/ui/Login';
+import { ProfileWrapper, ProfileIcon, HeaderIcon } from '../ui/style';
+import useModal from '@hooks/useModal';
+import useUserStore from '@/store/useUserStore';
 
 export default function Header() {
-  // 임시 데이터
   const points: number = 2999999999;
   const lifePoints: number = 5;
-
+  const { isShow, openModal, closeModal, Modal } = useModal();
+  const { user } = useUserStore();
   return (
     <HeaderBox>
-      <HeaderItem
-        pointIcon={`${imgUrl}포인트.svg`}
-        points={points}
-        lifeIcon={`${imgUrl}과일바구니.svg`}
-        lifePoints={lifePoints}
-      />
+      {user && (
+        <>
+          <HeaderItem
+            icon={getImageUrl('포인트.svg')}
+            point={points}
+            color={'#FFCD35'}
+          />
+          <HeaderItem
+            icon={getImageUrl('과일바구니.svg')}
+            point={lifePoints}
+            color={'#FE0F0F'}
+          />
+        </>
+      )}
+      <ProfileWrapper onClick={openModal}>
+        <ProfileIcon src={getImageUrl('테두리.svg')} alt="프로필 테두리" />
+        <HeaderIcon src={getImageUrl('코코-프로필.svg')} alt="코코 프로필" />
+      </ProfileWrapper>
+      {/* Modal 컴포넌트 */}
+      <Modal isShow={isShow}>
+        <Login openModal={openModal} closeModal={closeModal} />
+      </Modal>
     </HeaderBox>
   );
 }
