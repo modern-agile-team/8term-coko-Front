@@ -1,10 +1,6 @@
-export interface Part {
-  id: number;
-  sectionId: number;
-  name: string;
-}
+import Part from './Part';
 
-export interface Section {
+export default interface Section {
   id: number;
   name: string;
   part: Part[];

@@ -7,7 +7,7 @@ const sectionKeys = {
   details: (id: number) => [...sectionKeys.all, 'detail', id] as const,
 };
 
-const SectionsQuery = {
+const sectionsQuery = {
   // 특정 섹션 ID에 대한 데이터 가져오기
   get: (id: number) =>
     useQuery({
@@ -23,4 +23,4 @@ const SectionsQuery = {
     }),
 };
 
-export default SectionsQuery;
+export default sectionsQuery;
