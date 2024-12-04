@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   UpperBackgroundImg,
@@ -61,51 +61,59 @@ const dummyData: Section[] = [
 ];
 
 export default function PartNavContainer() {
-  const [sections, setSections] = useState<Section[]>(dummyData);
   const navigate = useNavigate();
+
+  // 모든 섹션의 이전 버튼 수 누적 계산
+  const previousPartsCounts = useMemo(() => {
+    const counts: number[] = []; // 누적 버튼 수를 저장할 배열
+    let sum = 0; // 누적합을 저장할 변수
+
+    dummyData.forEach(section => {
+      counts.push(sum); // 현재까지의 누적합을 counts에 추가
+      sum += section.part.length; // 현재 섹션의 버튼 개수를 누적합에 더함
+    });
+
+    return counts;
+  }, []);
+
+  // 섹션 및 파트를 캐싱하여 렌더링
+  const memoItem = useMemo(() => {
+    return dummyData.map((section, sectionIndex) => {
+      const previousPartsCount = previousPartsCounts[sectionIndex];
+
+      return (
+        <SectionWrapper key={section.id}>
+          <SectionTitle>{section.name}</SectionTitle>
+          <ButtonGrid>
+            {section.part.map((part, partIndex) => {
+              const globalIndex = previousPartsCount + partIndex;
+              const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
+              const buttonImage = getImageUrl(
+                `키캡${(globalIndex % 4) + 1}.svg`
+              );
+
+              return (
+                <KeyboardButton
+                  key={part.id}
+                  style={{ gridColumn, gridRow }}
+                  onClick={() =>
+                    navigate('/quiz', { state: { partId: part.id } })
+                  }
+                >
+                  <img src={buttonImage} alt={`키캡 ${part.name}`} />
+                </KeyboardButton>
+              );
+            })}
+          </ButtonGrid>
+        </SectionWrapper>
+      );
+    });
+  }, [previousPartsCounts]);
 
   return (
     <>
       <UpperBackgroundImg />
-      <EntireSectionContainer>
-        {sections.map((section, sectionIndex) => {
-          // 각 섹션 앞의 버튼 수 합산
-          const previousPartsCount = sections
-            .slice(0, sectionIndex)
-            .reduce(
-              (sum, currentSection) => sum + currentSection.part.length,
-              0
-            );
-
-          return (
-            <SectionWrapper key={section.id}>
-              <SectionTitle>{section.name}</SectionTitle>
-              <ButtonGrid>
-                {section.part.map((part, partIndex) => {
-                  // 전역 인덱스 계산
-                  const globalIndex = previousPartsCount + partIndex;
-
-                  const { gridColumn, gridRow } =
-                    getPartGridPosition(globalIndex);
-                  const buttonImage = getImageUrl(
-                    `키캡${(globalIndex % 4) + 1}.svg`
-                  );
-
-                  return (
-                    <KeyboardButton
-                      key={part.id}
-                      style={{ gridColumn, gridRow }}
-                      onClick={() => navigate('/quiz', { state: part })}
-                    >
-                      <img src={buttonImage} alt={`키캡 ${part.name}`} />
-                    </KeyboardButton>
-                  );
-                })}
-              </ButtonGrid>
-            </SectionWrapper>
-          );
-        })}
-      </EntireSectionContainer>
+      <EntireSectionContainer>{memoItem}</EntireSectionContainer>
     </>
   );
 }
