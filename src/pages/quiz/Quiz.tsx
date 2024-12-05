@@ -17,7 +17,7 @@ import useBeforeUnload from '@/hooks/useBeforeUnload';
 import Result from '@features/quiz/ui/Result';
 import TotalResults from '@features/quiz/ui/TotalResults';
 import isEqualArray from '@utils/isEqualArray';
-import QuizzesQuery from '@queries/quizzesQuery';
+import quizzesQuery from '@queries/quizzesQuery';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
 import { useEffect, useState } from 'react';
@@ -25,29 +25,15 @@ import Header from '@common/layout/Header';
 import useUserStore from '@store/useUserStore';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import { useLocation } from 'react-router-dom';
-
+import { userQuizzesQuery } from '@queries/usersQuery';
+import LoginPrompt from '@features/login/ui/LoginPrompt';
+import useFunnel from '@hooks/useFunnel';
+import PartClear from '@features/quiz/ui/PartClear';
+import { noop } from '@modern-kit/utils';
+import Login from '@features/login/ui/Login';
+import { useUnmount } from '@modern-kit/react';
 //퀴즈페이지
 export default function Quiz() {
-  const { currentPage, totalResults, userResponseAnswer } =
-    useClientQuizStore();
-  const { setUser } = useUserStore();
-  //임시 유저 설정
-  useEffect(() => {
-    setUser({ id: 2, nickname: 'admin', level: 1 });
-  }, []);
-  //----------------------------
-  const [result, setResult] = useState<boolean>(false);
-  const { Modal, closeModal, openModal, isShow } = useModal();
-  const { partId } = useLocation().state as { partId: number };
-  if (!partId) {
-    return <div>404</div>;
-  }
-
-  const { data: quizzes, isLoading } = QuizzesQuery.get({
-    partId: Number(partId),
-  });
-  useBeforeUnload({ enabled: quizzes?.length !== totalResults.length });
-
   const isImageLoading = usePreloadImages({
     imageUrls: [
       'O버튼.svg',
@@ -64,14 +50,53 @@ export default function Quiz() {
       '과일바구니-아이템.svg',
     ],
   });
-  //추후 loading 페이지로 교체
-  if (isLoading || isImageLoading) return <div>Loading</div>;
-  //------------------------
-  if (!quizzes) return <div>404</div>;
+  const {
+    currentPage,
+    totalResults,
+    userResponseAnswer,
+    reset,
+    pushTotalResults,
+  } = useClientQuizStore();
+  const { user } = useUserStore();
+  const [result, setResult] = useState<boolean>(false);
+  const { Modal, closeModal, openModal, isShow } = useModal();
+  const { partId, state } = useLocation().state as {
+    partId: number;
+    state?: 'start' | 'pending' | 'end';
+  };
+  const { data: quizzes, isLoading } =
+    user && state === 'pending'
+      ? userQuizzesQuery.get({
+          userId: user!.id,
+          partId,
+        })
+      : quizzesQuery.get({
+          partId,
+        });
+  const isQuizAnswered = userResponseAnswer[0] === '';
+  const isQuizFinished = totalResults.length === quizzes?.length;
+  const { Funnel, setStep } = useFunnel('결과');
+  useEffect(() => {
+    if (totalResults.length === 2 && !user) {
+      setStep('로그인 유도');
+    }
+    if (isQuizFinished) {
+      setStep('총결과');
+    }
+    if (totalResults.length !== 0) {
+      openModal();
+    }
+  }, [totalResults, result]);
+  useUnmount(() => reset());
+  useBeforeUnload({
+    enabled: !isQuizFinished,
+  });
 
+  if (isLoading || isImageLoading) return <div>Loading</div>;
+  if (!quizzes) return <div>404</div>;
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
-  //
+
   const getComponentMappingByChoiceType = componentMapping<
     Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
   >({
@@ -100,36 +125,47 @@ export default function Quiz() {
       <SubmitSection>
         <ResponseButton
           onClick={() => {
-            setResult(false);
-            openModal();
+            pushTotalResults(false);
           }}
         >
           SKIP
         </ResponseButton>
         <ResponseButton
-          disabled={userResponseAnswer[0] === ''}
-          $disabled={userResponseAnswer[0] === ''}
+          disabled={isQuizAnswered}
+          $disabled={isQuizAnswered}
           onClick={() => {
-            setResult(isEqualArray(userResponseAnswer, answer));
-            openModal();
+            pushTotalResults(isEqualArray(userResponseAnswer, answer));
           }}
         >
           제출
         </ResponseButton>
       </SubmitSection>
       <Modal isShow={isShow}>
-        {quizzes.length === totalResults.length ? (
-          <TotalResults quizzes={quizzes} totalResults={totalResults} />
-        ) : (
-          <Result
-            quizId={id}
-            result={result}
-            answer={answer}
-            lastPage={quizzes.length - 1}
-            openModal={openModal}
-            closeModal={closeModal}
-          />
-        )}
+        <Funnel>
+          <Funnel.Step name="결과">
+            <Result
+              quizId={id}
+              result={totalResults[currentPage]}
+              answer={answer}
+              closeModal={closeModal}
+            />
+          </Funnel.Step>
+          <Funnel.Step name="로그인 유도">
+            <LoginPrompt onNext={() => setStep('로그인')} />
+          </Funnel.Step>
+          <Funnel.Step name="로그인">
+            <Login closeModal={closeModal} openModal={noop} />
+          </Funnel.Step>
+          <Funnel.Step name="총결과">
+            <TotalResults
+              onNext={() => setStep('파트 클리어')}
+              quizzesLength={quizzes.length}
+            />
+          </Funnel.Step>
+          <Funnel.Step name="파트 클리어">
+            <PartClear />
+          </Funnel.Step>
+        </Funnel>
       </Modal>
     </AlignCenter>
   );

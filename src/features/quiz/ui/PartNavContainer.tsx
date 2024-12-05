@@ -15,6 +15,7 @@ interface Part {
   id: number;
   sectionId: number;
   name: string;
+  state?: string;
 }
 
 interface Section {
@@ -28,7 +29,7 @@ const dummyData: Section[] = [
     id: 1,
     name: '변수',
     part: [
-      { id: 1, sectionId: 1, name: 'var' },
+      { id: 1, sectionId: 1, name: 'var', state: 'start' },
       { id: 2, sectionId: 1, name: 'let' },
       { id: 3, sectionId: 1, name: 'const' },
     ],
@@ -37,7 +38,7 @@ const dummyData: Section[] = [
     id: 2,
     name: '자료형',
     part: [
-      { id: 4, sectionId: 2, name: 'string' },
+      { id: 4, sectionId: 2, name: 'string', state: 'pending' },
       { id: 5, sectionId: 2, name: 'number' },
       { id: 6, sectionId: 2, name: 'boolean' },
       { id: 7, sectionId: 2, name: 'null' },

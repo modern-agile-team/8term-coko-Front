@@ -8,6 +8,11 @@ const userKeys = {
   detail: (id: number) => [...userKeys.details(), id] as const,
   experience: (userId: number) =>
     [...userKeys.detail(userId), 'experience'] as const,
+  quizzes: (userId: number) => [...userKeys.detail(userId), 'quizzes'],
+  partQuizzes: (userId: number, partId: number) => [
+    ...userKeys.quizzes(userId),
+    partId,
+  ],
 };
 
 const progressQuery = {
@@ -15,7 +20,16 @@ const progressQuery = {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
 };
-
+const userQuizzesQuery = {
+  get: ({ userId, partId }: { userId: number; partId: number }) => {
+    return useQuery({
+      queryKey: userKeys.partQuizzes(userId, partId),
+      queryFn: () => usersApis.getQuizzes({ id: userId, partId }),
+      gcTime: 0,
+      staleTime: 0,
+    });
+  },
+};
 const experienceQuery = {
   get: (id: User['id']) => {
     return useQuery({
@@ -23,6 +37,7 @@ const experienceQuery = {
       queryFn: () => usersApis.getExperience(id),
       gcTime: 0,
       staleTime: 0,
+      enabled: !!id,
     });
   },
   patch: () => {
@@ -72,4 +87,11 @@ const experienceQuery = {
     });
   },
 };
-export { progressQuery, experienceQuery };
+const pointQuery = {
+  patch: () => {
+    return useMutation({
+      mutationFn: usersApis.patchPoint,
+    });
+  },
+};
+export { progressQuery, experienceQuery, userQuizzesQuery, pointQuery };
