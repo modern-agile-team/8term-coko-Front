@@ -18,6 +18,7 @@ import sectionsQuery from '@/queries/sectionsQuery';
 export default function Learn() {
   const { setUser } = useUserStore();
 
+  // 임시 유저 생성
   useEffect(() => {
     setUser({ id: 3, nickname: 'admin', level: 1 });
   }, []);
@@ -42,6 +43,7 @@ export default function Learn() {
 
   // 이전 버튼 수 누적 계산
   const previousPartsCounts = useMemo(() => {
+    if (!section || !section.part) return [];
     const counts: number[] = [];
     let sum = 0;
 
