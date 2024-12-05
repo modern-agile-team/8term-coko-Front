@@ -13,7 +13,6 @@ import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
 import { useEffect } from 'react';
-import { setCookie } from '@utils/cookies';
 
 export default function Learn() {
   const { setUser } = useUserStore();
