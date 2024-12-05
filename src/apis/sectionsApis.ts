@@ -1,4 +1,4 @@
-import { Section } from '@type/Section';
+import Section from '@type/Section';
 import api from './axios/instance';
 
 const sectionsApis = {

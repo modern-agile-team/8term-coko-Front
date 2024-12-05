@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { usePreservedCallback } from '@modern-kit/react';
 
 /**
  * @description
@@ -16,12 +17,13 @@ import { useEffect, useRef } from 'react';
  */
 
 const useOutsideClick = (callback: () => void) => {
+  const preservedCallback = usePreservedCallback(callback);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
-        callback();
+        preservedCallback();
       }
     };
 
@@ -30,7 +32,7 @@ const useOutsideClick = (callback: () => void) => {
     return () => {
       document.removeEventListener('mousedown', onClickOutside);
     };
-  }, [callback]);
+  }, [preservedCallback]);
 
   return ref;
 };
