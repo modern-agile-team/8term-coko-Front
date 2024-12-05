@@ -2,7 +2,7 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, feature/#67/OAuth_2_0]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
@@ -76,5 +76,6 @@ jobs:
       # Docker Compose로 서비스 배포
       - name: Docker run
         run: |
+          docker rmi $(docker images -f "dangling=true" -q)
           docker compose -f /home/ubuntu/docker-compose.yml down
           docker compose -f /home/ubuntu/docker-compose.yml up -d --pull always
