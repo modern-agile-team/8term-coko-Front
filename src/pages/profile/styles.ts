@@ -92,7 +92,8 @@ export const MyQuizInfoDiv = styled.div`
     color: #85705f;
   }
 `;
-export const UserNameLabel = styled.p`
+export const UserNameLabel = styled.label`
+  display: block;
   text-align: center;
   border-radius: 15px;
   border: 2px solid #f09900;
@@ -104,7 +105,8 @@ export const UserNameLabel = styled.p`
   line-height: 20px; /* 142.857% */
   text-transform: lowercase;
 `;
-export const JoinDateLabel = styled.p`
+export const JoinDateLabel = styled.label`
+  display: block;
   color: #cbcbcb;
   margin-top: 5px;
   text-align: center;
@@ -114,7 +116,8 @@ export const JoinDateLabel = styled.p`
   line-height: 24px; /* 200% */
   text-transform: lowercase;
 `;
-export const BadgeLabel = styled.p`
+export const BadgeLabel = styled.label`
+  display: block;
   text-align: center;
   border-radius: 15px;
   width: 209px;
@@ -145,7 +148,8 @@ export const LevelList = styled.ol`
     color: #ffb53d;
   }
 `;
-export const LevelLabel = styled.p`
+export const LevelLabel = styled.label`
+  display: block;
   margin: 0 0 21px 70px;
   text-align: center;
   width: 117px;
