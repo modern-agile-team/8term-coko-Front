@@ -34,13 +34,14 @@ export const MyCharacterSection = styled.section`
   border-radius: 20px;
   background: #fff;
   margin: 46px 0 0 0;
+  gap: 119px;
   box-shadow: 0 3px #e5e5e5;
+  padding: 12px 0 0 24px;
 
   > div:nth-child(1) {
     display: flex;
     flex-direction: column;
     gap: 9px;
-    margin: 12px 0 0 24px;
   }
 `;
 

@@ -1,11 +1,17 @@
 import styled, { css } from 'styled-components';
 
-export const StoreItemWrapper = styled.div`
+export const StoreItemWrapper = styled.div<{ $query: string }>`
   margin: 18px 0 27px 0;
   display: grid;
   grid-template-columns: repeat(4, 144px);
   grid-template-rows: repeat(2, 125px);
   gap: 21px 19px;
+  ${({ $query }) =>
+    $query === '프로필' &&
+    css`
+      grid-template-columns: repeat(3, 180px);
+      grid-template-rows: repeat(1, 217px);
+    `}
 `;
 export const StoreItem = styled.div`
   display: flex;
@@ -15,6 +21,7 @@ export const StoreItem = styled.div`
   border: 2px solid #a5ecf0;
   background: #f4f4f4;
   padding: 10px 0;
+  cursor: pointer;
   &:hover {
     border-radius: 8px;
     border: 2px solid #00b6c0;

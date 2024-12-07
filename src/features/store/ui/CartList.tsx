@@ -20,26 +20,29 @@ const testItem = [
     place: '500',
   },
   {
-    id: 3,
+    id: 4,
     label: '해적 베레모',
     img: '해적-베레모.svg',
     place: '500',
   },
   {
-    id: 3,
+    id: 5,
     label: '해적 베레모',
     img: '해적-베레모.svg',
     place: '500',
   },
 ];
-export default function CartList() {
+interface CartListProps {
+  query: string;
+}
+export default function CartList({ query }: CartListProps) {
   return (
     <>
       <S.StoreCartListWrapper>
         {testItem.map(item => (
           <S.StoreItem key={item.id}>
             <S.ItemLabel>{item.label}</S.ItemLabel>
-            <S.ItemImage src={getImageUrl(item.img)}></S.ItemImage>
+            <S.ItemImage src={getImageUrl(item.img)} />
             <S.ItemLabel>{item.place} Point</S.ItemLabel>
           </S.StoreItem>
         ))}
