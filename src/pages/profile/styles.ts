@@ -128,7 +128,7 @@ export const BadgeLabel = styled.p`
   text-transform: lowercase;
   margin: 27px auto 0 40px;
 `;
-export const LevelList = styled.ul`
+export const LevelList = styled.ol`
   position: absolute;
   display: flex;
   flex-direction: column;

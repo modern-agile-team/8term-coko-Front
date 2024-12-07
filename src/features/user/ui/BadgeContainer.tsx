@@ -1,9 +1,4 @@
-import {
-  BadgeListItem,
-  BadgeWrapper,
-  PaginationButton,
-  PaginationIcon,
-} from '../styles';
+import * as S from '../styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 const testBadgeList = [
@@ -31,27 +26,27 @@ const testBadgeList = [
 export default function BadgeContainer() {
   return (
     <>
-      <BadgeWrapper>
-        <PaginationButton>
-          <PaginationIcon src={getImageUrl('뱃지-다음버튼.svg')} />
-        </PaginationButton>
+      <S.BadgeWrapper>
+        <S.PaginationButton>
+          <S.PaginationIcon src={getImageUrl('뱃지-다음버튼.svg')} />
+        </S.PaginationButton>
         <ul>
           {testBadgeList.map(badgeItem => (
-            <BadgeListItem key={badgeItem.id}>
+            <S.BadgeListItem key={badgeItem.id}>
               <div>
                 <img src={getImageUrl(badgeItem.badgeImage)} />
               </div>
               <h5>{badgeItem.badgeTitle}</h5>
-            </BadgeListItem>
+            </S.BadgeListItem>
           ))}
         </ul>
-        <PaginationButton>
-          <PaginationIcon
+        <S.PaginationButton>
+          <S.PaginationIcon
             src={getImageUrl('뱃지-다음버튼.svg')}
             $rotate="180deg"
           />
-        </PaginationButton>
-      </BadgeWrapper>
+        </S.PaginationButton>
+      </S.BadgeWrapper>
     </>
   );
 }

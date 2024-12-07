@@ -1,20 +1,8 @@
 import CokoLogo from '@common/layout/CokoLogo';
 import MenuBar from '@common/layout/MenuBar';
-import { Layout, LeftSection, RightSection, Wrapper } from '@/style/style';
+import * as globalS from '@/style/style';
 import Header from '@common/layout/Header';
-import {
-  BadgeLabel,
-  JoinDateLabel,
-  LevelDiv,
-  MyProgressDiv,
-  MyQuizInfoDiv,
-  UserNameLabel,
-  ProfileSection,
-  BadgeSection,
-  LevelList,
-  LevelLabel,
-  MyCharacterImage,
-} from './styles';
+import * as S from './styles';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import { getImageUrl } from '@/utils/getImageUrl';
@@ -24,20 +12,20 @@ const levelList = [60, 50, 40, 30, 20, 10];
 export default function Profile() {
   return (
     <>
-      <Wrapper>
-        <LeftSection>
+      <globalS.Wrapper>
+        <globalS.LeftSection>
           <CokoLogo />
           <MenuBar />
-        </LeftSection>
-        <RightSection>
+        </globalS.LeftSection>
+        <globalS.RightSection>
           <Header />
 
-          <LevelDiv>
+          <S.LevelDiv>
             <div>
-              <MyCharacterImage src={getImageUrl('테스트캐릭터.svg')} />
-              <LevelLabel>Level.1</LevelLabel>
+              <S.MyCharacterImage src={getImageUrl('테스트캐릭터.svg')} />
+              <S.LevelLabel>Level.1</S.LevelLabel>
             </div>
-            <LevelList>
+            <S.LevelList>
               {levelList.map(level => (
                 <React.Fragment key={level}>
                   <li>
@@ -46,7 +34,7 @@ export default function Profile() {
                   <li>&mdash;</li>
                 </React.Fragment>
               ))}
-            </LevelList>
+            </S.LevelList>
             <ProgressBar
               $progress={40}
               $maxProgress={100}
@@ -61,17 +49,17 @@ export default function Profile() {
                 top: '300px',
               }}
             />
-          </LevelDiv>
-        </RightSection>
-      </Wrapper>
-      <Layout>
-        <ProfileSection>
+          </S.LevelDiv>
+        </globalS.RightSection>
+      </globalS.Wrapper>
+      <globalS.Layout>
+        <S.ProfileSection>
           <div>
             <ProfileImage />
-            <UserNameLabel>유저 이름</UserNameLabel>
-            <JoinDateLabel>2024.10.01</JoinDateLabel>
+            <S.UserNameLabel>유저 이름</S.UserNameLabel>
+            <S.JoinDateLabel>2024.10.01</S.JoinDateLabel>
           </div>
-          <MyProgressDiv>
+          <S.MyProgressDiv>
             <p>
               코코에 접속한 지 벌써 <span>20</span>일이 됐어요 !
             </p>
@@ -89,7 +77,7 @@ export default function Profile() {
                 }}
               />
             </div>
-            <MyQuizInfoDiv>
+            <S.MyQuizInfoDiv>
               <p>
                 푼 문제 <span>52</span>개
               </p>
@@ -99,14 +87,14 @@ export default function Profile() {
               <p>
                 안 푼 문제 <span>52</span>개
               </p>
-            </MyQuizInfoDiv>
-          </MyProgressDiv>
-        </ProfileSection>
-        <BadgeSection>
-          <BadgeLabel>나의 뱃지</BadgeLabel>
+            </S.MyQuizInfoDiv>
+          </S.MyProgressDiv>
+        </S.ProfileSection>
+        <S.BadgeSection>
+          <S.BadgeLabel>나의 뱃지</S.BadgeLabel>
           <BadgeContainer />
-        </BadgeSection>
-      </Layout>
+        </S.BadgeSection>
+      </globalS.Layout>
     </>
   );
 }
