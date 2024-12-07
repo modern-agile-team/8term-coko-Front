@@ -3,6 +3,7 @@ import Learn from '../pages/learn/Learn';
 import Quest from '../pages/quest/Quest';
 import Ranking from '../pages/ranking/Ranking';
 import Quiz from '../pages/quiz/Quiz';
+import Store from '@/pages/store/Store';
 
 export default function Router() {
   return (
@@ -14,6 +15,7 @@ export default function Router() {
           <Route path="/quest" element={<Quest />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/store" element={<Store />} />
         </Routes>
       </BrowserRouter>
     </>
