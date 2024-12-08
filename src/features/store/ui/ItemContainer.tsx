@@ -1,50 +1,55 @@
 import { getImageUrl } from '@/utils/getImageUrl';
 import * as S from '../styles';
 import { useState } from 'react';
-const testItem = [
+import Item from '@type/Item';
+const testItem: Item[] = [
   {
     id: 1,
-    label: '해적 베레모',
-    img: '해적-베레모.svg',
-    place: '500',
-    category: 'hat',
-  },
-  {
-    id: 2,
-    label: '해적 의상',
-    img: '해적-의상.svg',
-    place: '1000',
-    category: 'top',
-  },
-  {
-    id: 3,
-    label: '해적 베레모',
-    img: '해적-베레모.svg',
-    place: '500',
+    name: '해적 베레모',
+    image: '해적-베레모.svg',
+    cost: 500,
     category: 'accessories',
   },
   {
+    id: 2,
+    name: '해적 의상',
+    image: '해적-의상.svg',
+    cost: 1000,
+    category: 'clothes',
+  },
+  {
+    id: 3,
+    name: '해초의 습격',
+    image: '해초의-습격.svg',
+    cost: 500,
+    category: 'profile',
+  },
+  {
     id: 4,
-    label: '해적 베레모',
-    img: '해적-베레모.svg',
-    place: '500',
+    name: '해적 베레모',
+    image: '해적-베레모.svg',
+    cost: 500,
     category: 'color',
   },
 ];
+
 interface ItemContainerProps {
-  query: string;
+  query: Item['category'];
 }
 export default function ItemContainer({ query }: ItemContainerProps) {
   //스타일링을 위함 추후 수정 예정
   const [currentPage, setCurrentPage] = useState<number>();
   return (
     <>
-      <S.StoreItemWrapper $query={query}>
+      <S.StoreItemWrapper $category={query}>
         {testItem.map(item => (
           <S.StoreItem key={item.id}>
-            <S.ItemLabel>{item.label}</S.ItemLabel>
-            <S.ItemImage src={getImageUrl(item.img)} />
-            <S.ItemLabel>{item.place} Point</S.ItemLabel>
+            <S.ItemLabel>{item.name}</S.ItemLabel>
+            <S.ItemImage
+              $category={item.category}
+              src={getImageUrl(item.image)}
+            />
+            <S.ItemLabel>{item.cost} Point</S.ItemLabel>
           </S.StoreItem>
         ))}
       </S.StoreItemWrapper>

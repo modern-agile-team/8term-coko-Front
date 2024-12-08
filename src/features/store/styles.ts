@@ -1,13 +1,14 @@
+import Item from '@type/Item';
 import styled, { css } from 'styled-components';
 
-export const StoreItemWrapper = styled.div<{ $query: string }>`
+export const StoreItemWrapper = styled.div<{ $category: Item['category'] }>`
   margin: 18px 0 27px 0;
   display: grid;
   grid-template-columns: repeat(4, 144px);
   grid-template-rows: repeat(2, 125px);
   gap: 21px 19px;
-  ${({ $query }) =>
-    $query === '프로필' &&
+  ${({ $category }) =>
+    $category === 'profile' &&
     css`
       grid-template-columns: repeat(3, 180px);
       grid-template-rows: repeat(1, 217px);
@@ -48,9 +49,15 @@ export const ItemLabel = styled.label`
   line-height: 16px; /* 160% */
   letter-spacing: 0.2px;
 `;
-export const ItemImage = styled.img`
+export const ItemImage = styled.img<{ $category: Item['category'] }>`
   width: 125px;
   height: 70px;
+  ${({ $category }) =>
+    $category === 'profile' &&
+    css`
+      width: 160px;
+      height: 160px;
+    `}
 `;
 export const PaginationDiv = styled.div`
   width: 276px;
@@ -95,7 +102,7 @@ export const StoreCartListWrapper = styled.div`
 `;
 
 export const PlaceLabel = styled.label`
-  margin-bottom: 26px;
+  margin: 28px 0 26px 0;
   text-align: center;
   display: block;
   width: 142.001px;

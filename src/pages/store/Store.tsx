@@ -8,10 +8,27 @@ import ItemContainer from '@features/store/ui/ItemContainer';
 import CartList from '@features/store/ui/CartList';
 import MyCharacter from '@features/user/ui/MyCharacter';
 import ProfileImage from '@features/user/ui/ProfileImage';
-const buttonLabelList = ['의상', '악세사리', '프로필', '색상'] as const;
+import Item from '@type/Item';
+const buttonList: { label: string; name: Item['category'] }[] = [
+  {
+    label: '의상',
+    name: 'clothes',
+  },
+  {
+    label: '악세사리',
+    name: 'accessories',
+  },
+  {
+    label: '프로필',
+    name: 'profile',
+  },
+  {
+    label: '색상',
+    name: 'color',
+  },
+];
 export default function Store() {
-  const [itemQuery, setItemQuery] =
-    useState<(typeof buttonLabelList)[number]>('의상');
+  const [itemQuery, setItemQuery] = useState<Item['category']>('clothes');
   return (
     <>
       <globalS.Wrapper>
@@ -23,7 +40,7 @@ export default function Store() {
           <Header />
           <S.CartListWrapper>
             <S.Label>장바구니</S.Label>
-            <CartList query={itemQuery} />
+            <CartList />
           </S.CartListWrapper>
         </globalS.RightSection>
       </globalS.Wrapper>
@@ -33,17 +50,17 @@ export default function Store() {
             <S.Button>내가 구매한 아이템</S.Button>
             <S.Button>초기화</S.Button>
           </div>
-          {itemQuery === '프로필' ? <ProfileImage /> : <MyCharacter />}
+          {itemQuery === 'profile' ? <ProfileImage /> : <MyCharacter />}
         </S.MyCharacterSection>
         <S.StoreItemListSection>
           <S.FilterListContainer>
-            {buttonLabelList.map(label => (
+            {buttonList.map(item => (
               <S.FilterButton
-                key={label}
-                onClick={() => setItemQuery(label)}
-                $isSelect={itemQuery === label}
+                key={item.name}
+                onClick={() => setItemQuery(item.name)}
+                $isSelect={itemQuery === item.name}
               >
-                {label}
+                {item.label}
               </S.FilterButton>
             ))}
           </S.FilterListContainer>
