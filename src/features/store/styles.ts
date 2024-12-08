@@ -1,12 +1,17 @@
 import Item from '@type/Item';
 import styled, { css } from 'styled-components';
 
-export const StoreItemWrapper = styled.div<{ $category: Item['category'] }>`
+export const ItemContainer = styled.ul<{ $category: Item['category'] }>`
   margin: 18px 0 27px 0;
   display: grid;
   grid-template-columns: repeat(4, 144px);
   grid-template-rows: repeat(2, 125px);
   gap: 21px 19px;
+  color: #a5ecf0;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
   ${({ $category }) =>
     $category === 'profile' &&
     css`
@@ -14,7 +19,8 @@ export const StoreItemWrapper = styled.div<{ $category: Item['category'] }>`
       grid-template-rows: repeat(1, 217px);
     `}
 `;
-export const StoreItem = styled.div`
+
+export const StoreItem = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,6 +28,12 @@ export const StoreItem = styled.div`
   border: 2px solid #a5ecf0;
   background: #f4f4f4;
   padding: 10px 0;
+  color: #fff;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.2px;
   cursor: pointer;
   &:hover {
     border-radius: 8px;
@@ -34,6 +46,7 @@ export const StoreItem = styled.div`
     }
   }
 `;
+
 export const ItemLabel = styled.label`
   text-align: center;
   display: block;
@@ -42,13 +55,10 @@ export const ItemLabel = styled.label`
   border-radius: 15px;
   border: 2px solid #a5ecf0;
   background: #00d9e9;
-  color: #fff;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px; /* 160% */
-  letter-spacing: 0.2px;
+  color: inherit;
+  font: inherit;
 `;
+
 export const ItemImage = styled.img<{ $category: Item['category'] }>`
   width: 125px;
   height: 70px;
@@ -59,32 +69,43 @@ export const ItemImage = styled.img<{ $category: Item['category'] }>`
       height: 160px;
     `}
 `;
+
 export const PaginationDiv = styled.div`
   width: 276px;
   display: flex;
   gap: 57px;
-`;
-export const PaginationButton = styled.button<{ $isSelect: boolean }>`
-  border: 0;
-  background-color: transparent;
   color: #a5ecf0;
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
   line-height: 24px; /* 160% */
+`;
+
+export const PaginationButton = styled.button<{ $isSelect: boolean }>`
+  border: 0;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+
   ${({ $isSelect }) =>
     $isSelect &&
     css`
       color: #00d9e9;
     `}
 `;
-export const StoreCartListWrapper = styled.div`
+
+export const StoreCartListWrapper = styled.ul`
   display: flex;
   overflow-y: auto;
   margin: 26px 0 0 0;
   flex-direction: column;
   gap: 28px;
   padding-right: 8px;
+  color: #a5ecf0;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px;
   &::-webkit-scrollbar {
     padding-left: 5px;
     width: 8px;
@@ -115,5 +136,5 @@ export const PlaceLabel = styled.label`
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 171.429% */
+  line-height: 24px;
 `;

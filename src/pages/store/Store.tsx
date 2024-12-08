@@ -39,7 +39,7 @@ export default function Store() {
         <globalS.RightSection>
           <Header />
           <S.CartListWrapper>
-            <S.Label>장바구니</S.Label>
+            <S.CartLabel>장바구니</S.CartLabel>
             <CartList />
           </S.CartListWrapper>
         </globalS.RightSection>

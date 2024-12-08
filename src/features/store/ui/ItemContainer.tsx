@@ -1,7 +1,7 @@
-import { getImageUrl } from '@/utils/getImageUrl';
 import * as S from '../styles';
 import { useState } from 'react';
-import Item from '@type/Item';
+import type Item from '@type/Item';
+import StoreItem from './StoreItem';
 const testItem: Item[] = [
   {
     id: 1,
@@ -41,18 +41,11 @@ export default function ItemContainer({ query }: ItemContainerProps) {
   const [currentPage, setCurrentPage] = useState<number>();
   return (
     <>
-      <S.StoreItemWrapper $category={query}>
+      <S.ItemContainer $category={query}>
         {testItem.map(item => (
-          <S.StoreItem key={item.id}>
-            <S.ItemLabel>{item.name}</S.ItemLabel>
-            <S.ItemImage
-              $category={item.category}
-              src={getImageUrl(item.image)}
-            />
-            <S.ItemLabel>{item.cost} Point</S.ItemLabel>
-          </S.StoreItem>
+          <StoreItem {...item} />
         ))}
-      </S.StoreItemWrapper>
+      </S.ItemContainer>
       {/* 추후 하드코딩 수정 */}
       <S.PaginationDiv>
         {[1, 2, 3, 4, 5].map(page => (

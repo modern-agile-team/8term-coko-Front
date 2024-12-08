@@ -11,8 +11,14 @@ export const CartListWrapper = styled.section`
   background: #fff;
   box-shadow: 0 3px #e5e5e5;
   margin: 84px 47px 0 0;
+  color: #fff;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.2px;
 `;
-export const Label = styled.label`
+export const CartLabel = styled.label`
   margin: 18px 0 0 0;
   display: block;
   width: 147.003px;
@@ -37,7 +43,11 @@ export const MyCharacterSection = styled.section`
   gap: 119px;
   box-shadow: 0 3px #e5e5e5;
   padding: 12px 0 0 24px;
-
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  text-transform: lowercase;
   > div:nth-child(1) {
     display: flex;
     flex-direction: column;
@@ -64,6 +74,11 @@ export const FilterListContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
   padding: 18px 40px 19px 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 20px;
+  color: #ff4949;
+  text-transform: lowercase;
 `;
 export const FilterButton = styled.button<{ $isSelect: boolean }>`
   width: 79px;
@@ -71,12 +86,8 @@ export const FilterButton = styled.button<{ $isSelect: boolean }>`
   border-radius: 15px;
   border: 2px solid #ff4949;
   background: #f4f4f4;
-  color: #ff4949;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px; /* 166.667% */
-  text-transform: lowercase;
+  font: inherit;
+  color: inherit;
   ${({ $isSelect }) =>
     $isSelect &&
     css`
@@ -84,7 +95,7 @@ export const FilterButton = styled.button<{ $isSelect: boolean }>`
       border-radius: 15px;
       border: 2px solid #e8080c;
       background: #ff4949;
-    `}
+    `};
 `;
 export const RedLine = styled.hr`
   width: 632px;
@@ -98,10 +109,6 @@ export const Button = styled.button`
   border-radius: 15px;
   border: 2px solid #e8080c;
   background: #ff4949;
-  color: #fff;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px; /* 166.667% */
-  text-transform: lowercase;
+  color: inherit;
+  font: inherit;
 `;

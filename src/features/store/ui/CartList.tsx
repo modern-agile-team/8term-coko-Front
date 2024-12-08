@@ -1,6 +1,6 @@
-import { getImageUrl } from '@utils/getImageUrl';
 import * as S from '../styles';
-import Item from '@type/Item';
+import type Item from '@type/Item';
+import StoreItem from './StoreItem';
 const testItem: Item[] = [
   {
     id: 1,
@@ -37,14 +37,7 @@ export default function CartList() {
     <>
       <S.StoreCartListWrapper>
         {testItem.map(item => (
-          <S.StoreItem key={item.id}>
-            <S.ItemLabel>{item.name}</S.ItemLabel>
-            <S.ItemImage
-              $category={item.category}
-              src={getImageUrl(item.image)}
-            />
-            <S.ItemLabel>{item.cost} Point</S.ItemLabel>
-          </S.StoreItem>
+          <StoreItem {...item} />
         ))}
       </S.StoreCartListWrapper>
       <S.PlaceLabel>총 1500포인트</S.PlaceLabel>
