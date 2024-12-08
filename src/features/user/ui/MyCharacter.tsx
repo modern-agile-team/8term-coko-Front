@@ -1,5 +1,5 @@
 import { getImageUrl } from '@utils/getImageUrl';
-import { MyCharacterImage } from '../styles';
+import { MyCharacterImage } from './styles';
 
 export default function MyCharacter() {
   return (

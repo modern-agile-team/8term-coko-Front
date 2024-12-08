@@ -1,4 +1,4 @@
-import * as S from '../styles';
+import * as S from './styles';
 import type Item from '@type/Item';
 import StoreItem from './StoreItem';
 const testItem: Item[] = [

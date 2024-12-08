@@ -1,5 +1,5 @@
 import type Item from '@type/Item';
-import * as S from '../styles';
+import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 
 export default function StoreItem({ id, name, image, category, cost }: Item) {
