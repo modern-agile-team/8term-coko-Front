@@ -8,8 +8,8 @@ import ItemContainer from '@features/store/ui/ItemContainer';
 import CartList from '@features/store/ui/CartList';
 import MyCharacter from '@features/user/ui/MyCharacter';
 import ProfileImage from '@features/user/ui/ProfileImage';
-import Item from '@type/Item';
-const buttonList: { label: string; name: Item['category'] }[] = [
+import CosmeticItem from '@/types/CosmeticItem ';
+const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
   {
     label: '의상',
     name: 'clothes',
@@ -26,9 +26,10 @@ const buttonList: { label: string; name: Item['category'] }[] = [
     label: '색상',
     name: 'color',
   },
-];
+] as const;
 export default function Store() {
-  const [itemQuery, setItemQuery] = useState<Item['category']>('clothes');
+  const [itemQuery, setItemQuery] =
+    useState<CosmeticItem['category']>('clothes');
   return (
     <>
       <globalS.Wrapper>

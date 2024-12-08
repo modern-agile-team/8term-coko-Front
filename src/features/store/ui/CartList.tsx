@@ -1,7 +1,7 @@
 import * as S from './styles';
-import type Item from '@type/Item';
+import type CosmeticItem from '@/types/CosmeticItem ';
 import StoreItem from './StoreItem';
-const testItem: Item[] = [
+const testItem: CosmeticItem[] = [
   {
     id: 1,
     name: '해적 베레모',
@@ -37,7 +37,7 @@ export default function CartList() {
     <>
       <S.StoreCartListWrapper>
         {testItem.map(item => (
-          <StoreItem {...item} />
+          <StoreItem key={item.id} {...item} />
         ))}
       </S.StoreCartListWrapper>
       <S.PlaceLabel>총 1500포인트</S.PlaceLabel>

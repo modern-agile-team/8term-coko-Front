@@ -1,15 +1,13 @@
-import type Item from '@type/Item';
+import type Item from '@/types/CosmeticItem ';
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 
-export default function StoreItem({ id, name, image, category, cost }: Item) {
+export default function StoreItem({ name, image, category, cost }: Item) {
   return (
-    <>
-      <S.StoreItem key={id}>
-        <S.ItemLabel>{name}</S.ItemLabel>
-        <S.ItemImage $category={category} src={getImageUrl(image)} />
-        <S.ItemLabel>{cost} Point</S.ItemLabel>
-      </S.StoreItem>
-    </>
+    <S.StoreItem>
+      <S.ItemLabel>{name}</S.ItemLabel>
+      <S.ItemImage $category={category} src={getImageUrl(image)} />
+      <S.ItemLabel>{cost} Point</S.ItemLabel>
+    </S.StoreItem>
   );
 }

@@ -1,8 +1,8 @@
 import * as S from './styles';
 import { useState } from 'react';
-import type Item from '@type/Item';
+import type CosmeticItem from '@/types/CosmeticItem ';
 import StoreItem from './StoreItem';
-const testItem: Item[] = [
+const testItem: CosmeticItem[] = [
   {
     id: 1,
     name: '해적 베레모',
@@ -34,7 +34,7 @@ const testItem: Item[] = [
 ];
 
 interface ItemContainerProps {
-  query: Item['category'];
+  query: CosmeticItem['category'];
 }
 export default function ItemContainer({ query }: ItemContainerProps) {
   //스타일링을 위함 추후 수정 예정
@@ -43,7 +43,7 @@ export default function ItemContainer({ query }: ItemContainerProps) {
     <>
       <S.ItemContainer $category={query}>
         {testItem.map(item => (
-          <StoreItem {...item} />
+          <StoreItem key={item.id} {...item} />
         ))}
       </S.ItemContainer>
       {/* 추후 하드코딩 수정 */}

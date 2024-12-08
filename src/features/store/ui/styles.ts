@@ -1,4 +1,4 @@
-import Item from '@type/Item';
+import Item from '@/types/CosmeticItem ';
 import styled, { css } from 'styled-components';
 
 export const ItemContainer = styled.ul<{ $category: Item['category'] }>`
