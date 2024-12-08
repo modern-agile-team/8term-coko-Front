@@ -1,8 +1,13 @@
-import type Item from '@/types/CosmeticItem ';
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
+import CosmeticItem from '@type/CosmeticItem ';
 
-export default function StoreItem({ name, image, category, cost }: Item) {
+export default function StoreItem({
+  name,
+  image,
+  category,
+  cost,
+}: CosmeticItem) {
   return (
     <S.StoreItem>
       <S.ItemLabel>{name}</S.ItemLabel>
