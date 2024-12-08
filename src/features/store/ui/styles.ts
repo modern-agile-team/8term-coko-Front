@@ -1,7 +1,7 @@
-import Item from '@/types/CosmeticItem ';
+import CosmeticItem from '@type/CosmeticItem ';
 import styled, { css } from 'styled-components';
 
-export const ItemContainer = styled.ul<{ $category: Item['category'] }>`
+export const ItemContainer = styled.ul<{ $category: CosmeticItem['category'] }>`
   margin: 18px 0 27px 0;
   display: grid;
   grid-template-columns: repeat(4, 144px);
@@ -59,7 +59,7 @@ export const ItemLabel = styled.label`
   font: inherit;
 `;
 
-export const ItemImage = styled.img<{ $category: Item['category'] }>`
+export const ItemImage = styled.img<{ $category: CosmeticItem['category'] }>`
   width: 125px;
   height: 70px;
   ${({ $category }) =>
