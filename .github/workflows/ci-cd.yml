@@ -2,7 +2,7 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [main, develop, feature/#67/OAuth_2_0]
+    branches: [main, develop]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy

@@ -20,6 +20,7 @@ export const HeaderBox = styled.header`
   height: 42px;
   position: fixed;
   padding-right: 20px;
+  z-index: 10;
 `;
 
 export const LogoBoxWrapper = styled.div`
