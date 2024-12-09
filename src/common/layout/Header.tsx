@@ -57,7 +57,10 @@ export default function Header() {
         <S.ProfileIcon src={getImageUrl('테두리.svg')} alt="프로필 테두리" />
         <S.HeaderIcon src={getImageUrl('코코-프로필.svg')} alt="코코 프로필" />
         {isLoggedIn && isOpen && (
-          <S.DropdownMenu ref={dropdownRef} onClick={e => e.stopPropagation()}>
+          <S.ProfileDropdownMenu
+            ref={dropdownRef}
+            onClick={e => e.stopPropagation()}
+          >
             <S.UserNameText>유저이름</S.UserNameText>
             <S.UserJoinDate>2024.11.19</S.UserJoinDate>
             <S.UserInfoButton
@@ -81,7 +84,7 @@ export default function Header() {
             >
               로그아웃
             </S.UserInfoButton>
-          </S.DropdownMenu>
+          </S.ProfileDropdownMenu>
         )}
       </S.ProfileWrapper>
       {!isLoggedIn && (

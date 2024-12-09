@@ -96,7 +96,7 @@ const slideIn = keyframes`
   }
 `;
 
-export const DropdownMenu = styled.div`
+export const ProfileDropdownMenu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
