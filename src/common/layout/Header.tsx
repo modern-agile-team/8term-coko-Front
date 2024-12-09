@@ -5,12 +5,12 @@ import { HeaderBox } from './style';
 import * as S from '../ui/style';
 import HeaderItem from '../ui/HeaderItem';
 import Login from '@features/login/ui/Login';
+import handleLogout from '@features/login/service/handleLogout';
+import isLoggedIn from '@utils/isLoggedIn';
 import useModal from '@hooks/useModal';
-import useUserStore from '@/store/useUserStore';
-import useAuth from '@hooks/useAuth';
+import useUserStore from '@store/useUserStore';
 import useDropdown from '@hooks/useDropdown';
 import useOutsideClick from '@hooks/useOutsideClick';
-import handleLogout from '@features/login/service/handleLogout';
 
 export default function Header() {
   const points: number = 2999999999;
@@ -19,7 +19,6 @@ export default function Header() {
   const navigate = useNavigate();
   const { isShow, openModal, closeModal, Modal } = useModal();
   const { user } = useUserStore();
-  const { isLoggedIn } = useAuth();
 
   const { isOpen, toggleDropdown, closeDropdown } = useDropdown();
   const profileRef = useRef<HTMLDivElement>(null);
@@ -30,7 +29,7 @@ export default function Header() {
   });
 
   const handleProfileClick = () => {
-    if (isLoggedIn) {
+    if (isLoggedIn()) {
       toggleDropdown(); // 열림/닫힘 상태 변경
     } else {
       openModal(); // 로그인 모달 열기
@@ -56,7 +55,7 @@ export default function Header() {
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
         <S.ProfileIcon src={getImageUrl('테두리.svg')} alt="프로필 테두리" />
         <S.HeaderIcon src={getImageUrl('코코-프로필.svg')} alt="코코 프로필" />
-        {isLoggedIn && isOpen && (
+        {isLoggedIn() && isOpen && (
           <S.ProfileDropdownMenu
             ref={dropdownRef}
             onClick={e => e.stopPropagation()}
@@ -87,7 +86,7 @@ export default function Header() {
           </S.ProfileDropdownMenu>
         )}
       </S.ProfileWrapper>
-      {!isLoggedIn && (
+      {!isLoggedIn() && (
         <Modal isShow={isShow}>
           <Login openModal={openModal} closeModal={closeModal} />
         </Modal>
