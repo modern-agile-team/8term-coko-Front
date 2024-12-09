@@ -21,7 +21,6 @@ api.interceptors.response.use(
   },
   error => {
     // HTTP 상태 코드가 에러인 경우
-    console.log(error);
     return Promise.reject(error);
   }
 );
