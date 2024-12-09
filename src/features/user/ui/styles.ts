@@ -49,3 +49,8 @@ export const BadgeListItem = styled.li`
     text-transform: lowercase;
   }
 `;
+//추후에 canvas 태그 등으로 변경
+export const MyCharacterImage = styled.img`
+  width: 171px;
+  height: 138px;
+`;

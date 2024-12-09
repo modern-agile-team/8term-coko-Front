@@ -1,4 +1,4 @@
-import * as S from '../styles';
+import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 const testBadgeList = [
