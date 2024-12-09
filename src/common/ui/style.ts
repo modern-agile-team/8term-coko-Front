@@ -1,24 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
-
-interface SectionButtonProps {
-  $backgroundImage: string;
-}
-
-interface MenuButtonProps {
-  $activeStyle: boolean;
-}
-
-interface IconWrapperProps {
-  $color: string;
-}
 
 interface UserInfoButtonProps {
   $backgroundColor: string;
   $boxShadow: string;
 }
 
-export const SectionButton = styled.button<SectionButtonProps>`
+export const SectionButton = styled.button<{ $backgroundImage: string }>`
   width: 100px;
   height: 75px;
   margin-top: 75px;
@@ -36,7 +24,7 @@ export const MenuButtonWrapper = styled.nav`
   display: inline-block;
 `;
 
-export const MenuButton = styled.button<MenuButtonProps>`
+export const MenuButton = styled.button<{ $activeStyle: boolean }>`
   width: 193px;
   height: 42px;
   font-size: 15px;
@@ -63,7 +51,7 @@ export const MenuIcon = styled.img`
   height: 26px;
 `;
 
-export const IconWrapper = styled.div<IconWrapperProps>`
+export const IconWrapper = styled.div<{ $color: string }>`
   display: flex;
   align-items: center;
   margin-right: 16px;
@@ -96,6 +84,18 @@ export const LogoImg = styled.img`
   height: 117px;
 `;
 
+// DropdownMenu 열릴 때 애니메이션
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 export const DropdownMenu = styled.div`
   display: flex;
   flex-direction: column;
@@ -105,11 +105,25 @@ export const DropdownMenu = styled.div`
   margin-top: 3px;
   right: 0;
   cursor: default;
-  width: 150px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   background-color: #fff;
-  border-radius: 8px;
-  border: 2px solid #ffb53d;
+  border-radius: 15px;
+  border: 3px solid #ffb53d;
+  animation: ${slideIn} 0.3s ease-out;
+`;
+
+export const UserNameText = styled.p`
+  color: #000;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 700;
+`;
+
+export const UserJoinDate = styled.p`
+  font-weight: 300;
+  color: #cbcbcb;
+  font-size: 12px;
 `;
 
 export const UserInfoButton = styled.button<UserInfoButtonProps>`
