@@ -2,6 +2,7 @@ import * as S from './styles';
 import { useState } from 'react';
 import type CosmeticItem from '@/types/CosmeticItem ';
 import StoreItem from './StoreItem';
+import CosmeticItemsQuery from '@/queries/CosmeticItemsQuery';
 const testItem: CosmeticItem[] = [
   {
     id: 1,
@@ -39,6 +40,7 @@ interface ItemContainerProps {
 export default function ItemContainer({ query }: ItemContainerProps) {
   //스타일링을 위함 추후 수정 예정
   const [currentPage, setCurrentPage] = useState<number>();
+  const { data } = CosmeticItemsQuery.get();
   return (
     <>
       <S.ItemContainer $category={query}>
