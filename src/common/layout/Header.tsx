@@ -21,7 +21,7 @@ export default function Header() {
 
   const profileRef = useRef<HTMLDivElement>(null);
   const { isOpen, togglePopover, popoverRef } = usePopover({
-    excludeRefs: [profileRef], // ProfileWrapper를 제외 목록에 추가
+    excludeRefs: [profileRef],
   });
 
   const handleProfileClick = () => {
