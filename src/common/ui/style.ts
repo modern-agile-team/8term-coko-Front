@@ -62,11 +62,6 @@ export const IconWrapper = styled.div<{ $color: string }>`
   color: ${({ $color }) => $color};
 `;
 
-export const ProfileWrapper = styled.div`
-  position: relative;
-  cursor: pointer;
-`;
-
 export const ProfileIcon = styled.img`
   position: absolute;
   width: 30px;
@@ -84,7 +79,12 @@ export const LogoImg = styled.img`
   height: 117px;
 `;
 
-// DropdownMenu 열릴 때 애니메이션
+export const ProfileWrapper = styled.div`
+  position: relative;
+  cursor: pointer;
+`;
+
+// Popover 열릴 때 애니메이션
 const slideIn = keyframes`
   from {
     opacity: 0;
@@ -96,7 +96,7 @@ const slideIn = keyframes`
   }
 `;
 
-export const ProfileDropdownMenu = styled.div`
+export const ProfilePopover = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -140,8 +140,7 @@ export const UserInfoButton = styled.button<UserInfoButtonProps>`
   border-radius: 6px;
   text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
   &:hover {
-    transform: translateY(-2px);
-    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease,
-      box-shadow 0.2s ease;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
   }
 `;
