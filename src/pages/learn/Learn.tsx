@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { Wrapper, LeftSection, RightSection, Layout } from '../../style/style';
+import * as globalS from '@/style/style';
 import { ScrollableContainer } from './style';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
 import MenuBar from '@common/layout/MenuBar';
@@ -60,18 +60,18 @@ export default function Learn() {
 
   return (
     <>
-      <Wrapper>
-        <LeftSection>
+      <globalS.Wrapper>
+        <globalS.LeftSection>
           <CokoLogo />
           <MenuBar />
-        </LeftSection>
-        <RightSection>
+        </globalS.LeftSection>
+        <globalS.RightSection>
           <Header />
           <DailyQuest />
           <KeycapAdventureIntro />
-        </RightSection>
-      </Wrapper>
-      <Layout>
+        </globalS.RightSection>
+      </globalS.Wrapper>
+      <globalS.Layout>
         <ProgressBar
           $progress={progress}
           $maxProgress={maxProgress}
@@ -92,7 +92,7 @@ export default function Learn() {
             error={error}
           />
         </QuizSection>
-      </Layout>
+      </globalS.Layout>
     </>
   );
 }

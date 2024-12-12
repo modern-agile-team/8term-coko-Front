@@ -8,7 +8,7 @@ import {
   DashLineHr,
 } from '../styles';
 import { LogoImg } from '@common/ui/style';
-import handleSocialLogin from '../service/handleSocialLogin';
+import handleLogin from '../service/handleLogin';
 
 interface LoginProps {
   openModal: () => void;
@@ -28,7 +28,7 @@ export default function Login({ closeModal }: LoginProps) {
         <SocialLoginButton
           $color="#000000"
           $backgroundColor="#ffffff"
-          onClick={() => handleSocialLogin('google')}
+          onClick={() => handleLogin('google')}
         >
           <img src={getImageUrl('구글.svg')} alt="구글 로그인" />
           Google 로그인
@@ -36,7 +36,7 @@ export default function Login({ closeModal }: LoginProps) {
         <SocialLoginButton
           $color="#000000"
           $backgroundColor="#FEE500"
-          onClick={() => handleSocialLogin('kakao')}
+          onClick={() => handleLogin('kakao')}
         >
           <img src={getImageUrl('카카오.svg')} alt="카카오 로그인" />
           Kakao 로그인
@@ -44,7 +44,7 @@ export default function Login({ closeModal }: LoginProps) {
         <SocialLoginButton
           $color="#ffffff"
           $backgroundColor="#000000"
-          onClick={() => handleSocialLogin('github')}
+          onClick={() => handleLogin('github')}
         >
           <img src={getImageUrl('깃허브.svg')} alt="깃허브 로그인" />
           GitHub 로그인
