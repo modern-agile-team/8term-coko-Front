@@ -20,6 +20,7 @@ export const HeaderBox = styled.header`
   height: 42px;
   position: fixed;
   padding-right: 20px;
+  z-index: 1;
 `;
 
 export const LogoBoxWrapper = styled.div`
@@ -42,4 +43,5 @@ export const OverRay = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.2);
+  z-index: 100;
 `;

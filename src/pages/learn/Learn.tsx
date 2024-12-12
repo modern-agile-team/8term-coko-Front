@@ -1,4 +1,5 @@
-import { Wrapper, LeftSection, RightSection, Layout } from '../../style/style';
+import { useEffect } from 'react';
+import * as globalS from '@/style/style';
 import { ScrollableContainer } from './style';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
 import MenuBar from '@common/layout/MenuBar';
@@ -12,7 +13,6 @@ import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
-import { useEffect } from 'react';
 
 export default function Learn() {
   const { setUser } = useUserStore();
@@ -29,6 +29,10 @@ export default function Learn() {
       '코코-멘트3.svg',
       '코코-멘트4.svg',
       '코코-멘트5.svg',
+      '키캡1.svg',
+      '키캡2.svg',
+      '키캡3.svg',
+      '키캡4.svg',
     ],
   });
 
@@ -39,18 +43,18 @@ export default function Learn() {
 
   return (
     <>
-      <Wrapper>
-        <LeftSection>
+      <globalS.Wrapper>
+        <globalS.LeftSection>
           <CokoLogo />
           <MenuBar />
-        </LeftSection>
-        <RightSection>
+        </globalS.LeftSection>
+        <globalS.RightSection>
           <Header />
           <DailyQuest />
           <KeycapAdventureIntro />
-        </RightSection>
-      </Wrapper>
-      <Layout>
+        </globalS.RightSection>
+      </globalS.Wrapper>
+      <globalS.Layout>
         <ProgressBar
           $progress={progress}
           $maxProgress={maxProgress}
@@ -66,7 +70,7 @@ export default function Learn() {
         <QuizSection>
           <PartNavContainer />
         </QuizSection>
-      </Layout>
+      </globalS.Layout>
     </>
   );
 }

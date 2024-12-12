@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   UpperBackgroundImg,
@@ -62,23 +62,32 @@ const dummyData: Section[] = [
 ];
 
 export default function PartNavContainer() {
-  const [sections, setSections] = useState<Section[]>(dummyData);
   const navigate = useNavigate();
+
+  // 모든 섹션의 이전 버튼 수 누적 계산
+  const previousPartsCounts = useMemo(() => {
+    const counts: number[] = []; // 누적 버튼 수를 저장할 배열
+    let sum = 0; // 누적합을 저장할 변수
+
+    dummyData.forEach(section => {
+      counts.push(sum); // 현재까지의 누적합을 counts에 추가
+      sum += section.part.length; // 현재 섹션의 버튼 개수를 누적합에 더함
+    });
+
+    return counts;
+  }, []);
+
+  // 섹션 및 파트를 캐싱하여 렌더링
   const memoItem = useMemo(() => {
-    return sections.map((section, sectionIndex) => {
-      // 각 섹션 앞의 버튼 수 합산
-      const previousPartsCount = sections
-        .slice(0, sectionIndex)
-        .reduce((sum, currentSection) => sum + currentSection.part.length, 0);
+    return dummyData.map((section, sectionIndex) => {
+      const previousPartsCount = previousPartsCounts[sectionIndex];
 
       return (
         <SectionWrapper key={section.id}>
           <SectionTitle>{section.name}</SectionTitle>
           <ButtonGrid>
             {section.part.map((part, partIndex) => {
-              // 전역 인덱스 계산
               const globalIndex = previousPartsCount + partIndex;
-
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
               const buttonImage = getImageUrl(
                 `키캡${(globalIndex % 4) + 1}.svg`
@@ -89,9 +98,7 @@ export default function PartNavContainer() {
                   key={part.id}
                   style={{ gridColumn, gridRow }}
                   onClick={() =>
-                    navigate('/quiz', {
-                      state: { partId: part.id, state: part.state },
-                    })
+                    navigate('/quiz', { state: { partId: part.id } })
                   }
                 >
                   <img src={buttonImage} alt={`키캡 ${part.name}`} />
@@ -102,20 +109,7 @@ export default function PartNavContainer() {
         </SectionWrapper>
       );
     });
-  }, [sections]);
-  // 백엔드에서 가져올 데이터 (현재는 임시 데이터)
-  const parts = [
-    { partId: 1, state: 'pending' },
-    { partId: 2, state: 'pending' },
-    { partId: 3, state: 'end' },
-    { partId: 4 },
-    { partId: 5 },
-    { partId: 6 },
-    { partId: 7 },
-    { partId: 8 },
-    { partId: 9 },
-    { partId: 10 },
-  ];
+  }, [previousPartsCounts]);
 
   return (
     <>

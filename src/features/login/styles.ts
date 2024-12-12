@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { getImageUrl } from './../../utils/getImageUrl';
 
 interface SocialLoginLinkProps {
   $color: string;

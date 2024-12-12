@@ -76,5 +76,8 @@ jobs:
       # Docker Compose로 서비스 배포
       - name: Docker run
         run: |
+          if [ -n "$(docker images -f "dangling=true" -q)" ]; then
+            docker rmi $(docker images -f "dangling=true" -q)
+          fi
           docker compose -f /home/ubuntu/docker-compose.yml down
           docker compose -f /home/ubuntu/docker-compose.yml up -d --pull always
