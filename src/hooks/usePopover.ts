@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { usePreservedCallback } from '@modern-kit/react';
+import { usePreservedCallback, useIsMounted } from '@modern-kit/react';
 import useOutsideClick from '@hooks/useOutsideClick';
-import useIsFirstMount from '@hooks/useIsFirstMount';
 
 /**
  * @description
@@ -47,7 +46,7 @@ const usePopover = (options?: {
   excludeRefs?: React.RefObject<HTMLElement>[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isFirst = useIsFirstMount();
+  const isMounted = useIsMounted();
 
   const preservedCallback = usePreservedCallback((isOpen: boolean) => {
     if (options?.callback) {
@@ -60,7 +59,7 @@ const usePopover = (options?: {
   const closePopover = useCallback(() => setIsOpen(false), []);
 
   useEffect(() => {
-    if (isFirst) {
+    if (isMounted) {
       return;
     }
     preservedCallback(isOpen);
