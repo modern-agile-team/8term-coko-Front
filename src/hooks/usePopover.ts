@@ -65,9 +65,12 @@ const usePopover = (options?: {
     preservedCallback(isOpen);
   }, [isOpen]);
 
-  const popoverRef = useOutsideClick(() => {
-    if (isOpen) togglePopover();
-  }, options);
+  const popoverRef = useOutsideClick(
+    () => {
+      if (isOpen) togglePopover();
+    },
+    { excludeRefs: options?.excludeRefs }
+  );
 
   return { isOpen, togglePopover, openPopover, closePopover, popoverRef };
 };
