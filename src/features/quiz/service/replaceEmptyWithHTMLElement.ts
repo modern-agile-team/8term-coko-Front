@@ -1,4 +1,4 @@
-const emptyChangeToDiv = (text: string) => {
+const replaceEmptyWithHTMLElement = (text: string) => {
   let index = 0;
   const newText = text.replace(/(#empty#)/g, () => {
     const replacement = `<span id="emptyBlock${index}" class="empty"></span>`;
@@ -8,4 +8,4 @@ const emptyChangeToDiv = (text: string) => {
 
   return newText;
 };
-export default emptyChangeToDiv;
+export default replaceEmptyWithHTMLElement;
