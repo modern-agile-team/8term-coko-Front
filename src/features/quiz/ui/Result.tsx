@@ -17,8 +17,7 @@ export default function Result({
   result,
   closeModal,
 }: ResultProps) {
-  const { nextPage, resetUserResponseAnswer, pushTotalResults, currentPage } =
-    useClientQuizStore();
+  const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   //임시 유저 가져오기
   const { user } = useUserStore();
   const userId = user?.id;

@@ -58,7 +58,6 @@ export default function Quiz() {
     pushTotalResults,
   } = useClientQuizStore();
   const { user } = useUserStore();
-  const [result, setResult] = useState<boolean>(false);
   const { Modal, closeModal, openModal, isShow } = useModal();
   const { partId, state } = useLocation().state as {
     partId: number;
@@ -86,7 +85,7 @@ export default function Quiz() {
     if (totalResults.length !== 0) {
       openModal();
     }
-  }, [totalResults, result]);
+  }, [totalResults]);
   useUnmount(() => reset());
   useBeforeUnload({
     enabled: !isQuizFinished,

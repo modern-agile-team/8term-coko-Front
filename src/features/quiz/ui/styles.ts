@@ -164,10 +164,15 @@ export const TextBlockButton = styled.button<{ $selected?: boolean }>`
 //화면 하단의
 
 export const EmptyDiv = styled.div`
+  position: relative;
+  display: inline-block;
   width: 100px;
-  height: 20px;
-  background-color: gray;
-  border-radius: 15px;
+  height: 26px;
+  border: 2px solid #00b6c0;
+  border-radius: 8px;
+  background: #e8e7e7;
+  top: 8px;
+  line-height: 1.5;
 `;
 const fadeIn = keyframes`
   from {
@@ -418,9 +423,11 @@ export const KeyboardButton = styled.button`
     display: block;
   }
 `;
+
 export const Pre = styled.pre`
   padding: 20px 0 0 20px;
 `;
+
 export const Code = styled.code`
   background-color: transparent;
   line-height: 1.5;

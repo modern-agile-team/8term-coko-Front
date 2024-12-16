@@ -5,9 +5,10 @@ import Quiz from '../../../types/Quiz';
 import 'highlight.js/styles/base16/atelier-cave-light.css';
 import useCodeHighlight from '@/features/quiz/service/useCodeHighlight';
 import dompurify from 'dompurify';
-import parse from 'html-react-parser';
+import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import replaceEmptyWithHTMLElement from '@/features/quiz/service/replaceEmptyWithHTMLElement';
 import addLineNumbersToCode from '@/features/quiz/service/addLineNumbersToCode';
+import TextBlock from '@/features/quiz/ui/TextBlock';
 
 interface QuestionProps {
   title: Quiz['title'];
@@ -15,11 +16,21 @@ interface QuestionProps {
   category: Quiz['category'];
 }
 export default function Question({ title, question, category }: QuestionProps) {
-  const { currentPage } = useClientQuizStore();
+  const { currentPage, userResponseAnswer } = useClientQuizStore();
+
   const highlightCode = useCodeHighlight(question, [question, currentPage]);
   const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
   const addLineNumberCode = addLineNumbersToCode(replaceEmptyCode);
 
+  const options: HTMLReactParserOptions = {
+    replace(domNode) {
+      if (domNode instanceof Element && domNode.attribs.class === 'empty') {
+        const id = Number(domNode.attribs.id.match(/\d+$/));
+
+        return <TextBlock text={userResponseAnswer[id]} />;
+      }
+    },
+  };
   return (
     <S.QuestionSection $category={category}>
       <S.Title $category={category}>
@@ -28,7 +39,7 @@ export default function Question({ title, question, category }: QuestionProps) {
       </S.Title>
       <S.Pre>
         <S.Code className="language-javascript">
-          {parse(dompurify.sanitize(addLineNumberCode))}
+          {parse(dompurify.sanitize(addLineNumberCode), options)}
         </S.Code>
       </S.Pre>
     </S.QuestionSection>
