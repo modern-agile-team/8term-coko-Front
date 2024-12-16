@@ -1,5 +1,5 @@
 import Quiz from '../../../types/Quiz';
-import { CombinationSection, TextBlockButton } from '../styles';
+import { CombinationSection, TextBlockButton } from './styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import compact from '../../../utils/compact';
 interface CombinationProps {

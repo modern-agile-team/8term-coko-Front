@@ -1,7 +1,7 @@
 const emptyChangeToDiv = (text: string) => {
   let index = 0;
   const newText = text.replace(/(#empty#)/g, () => {
-    const replacement = `<div id="emptyBlock${index}" class = "empty"></div>`;
+    const replacement = `<span id="emptyBlock${index}" class="empty"></span>`;
     index++;
     return replacement;
   });

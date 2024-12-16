@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import Quiz from '../../types/Quiz';
+import Quiz from '../../../types/Quiz';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
@@ -32,7 +32,7 @@ export const QuestionSection = styled.section<{
     padding: 26px 0 0 80px;
   }
 `;
-export const Titlediv = styled.div<{
+export const Title = styled.h3<{
   $category: Quiz['category'];
 }>`
   display: flex;
@@ -417,4 +417,11 @@ export const KeyboardButton = styled.button`
     height: auto;
     display: block;
   }
+`;
+export const Pre = styled.pre`
+  padding: 20px 0 0 20px;
+`;
+export const Code = styled.code`
+  background-color: transparent;
+  line-height: 1.5;
 `;
