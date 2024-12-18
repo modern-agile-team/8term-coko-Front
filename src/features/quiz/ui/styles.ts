@@ -143,8 +143,11 @@ export const CombinationSection = styled.section`
 //블럭유형에서 각 텍스트에 해당하는 리스트 스타일
 
 export const TextBlockButton = styled.button<{ $selected?: boolean }>`
+  position: relative;
+  display: inline-block;
   padding: 0 20px;
   border-radius: 8px;
+  line-height: 1.5;
   height: 26px;
   border: 2px solid #a5ecf0;
   background-color: #f4f4f4;
@@ -158,6 +161,7 @@ export const TextBlockButton = styled.button<{ $selected?: boolean }>`
       background-color: #00d9e9;
       border-color: #00b6c0;
       color: #00d9e9;
+      cursor: default;
     `};
 `;
 
@@ -165,14 +169,15 @@ export const TextBlockButton = styled.button<{ $selected?: boolean }>`
 
 export const EmptyDiv = styled.div`
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   width: 100px;
   height: 26px;
   border: 2px solid #00b6c0;
   border-radius: 8px;
   background: #e8e7e7;
-  top: 8px;
   line-height: 1.5;
+  vertical-align: middle;
+  font-size: 18px;
 `;
 const fadeIn = keyframes`
   from {
@@ -426,9 +431,7 @@ export const KeyboardButton = styled.button`
 
 export const Pre = styled.pre`
   padding: 20px 0 0 20px;
-`;
-
-export const Code = styled.code`
-  background-color: transparent;
   line-height: 1.5;
 `;
+
+export const Code = styled.code``;

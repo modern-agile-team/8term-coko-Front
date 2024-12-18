@@ -9,6 +9,7 @@ import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import replaceEmptyWithHTMLElement from '@/features/quiz/service/replaceEmptyWithHTMLElement';
 import addLineNumbersToCode from '@/features/quiz/service/addLineNumbersToCode';
 import TextBlock from '@/features/quiz/ui/TextBlock';
+import { useState } from 'react';
 
 interface QuestionProps {
   title: Quiz['title'];
@@ -26,11 +27,11 @@ export default function Question({ title, question, category }: QuestionProps) {
     replace(domNode) {
       if (domNode instanceof Element && domNode.attribs.class === 'empty') {
         const id = Number(domNode.attribs.id.match(/\d+$/));
-
-        return <TextBlock text={userResponseAnswer[id]} />;
+        return <TextBlock text={userResponseAnswer[id]} index={id} />;
       }
     },
   };
+
   return (
     <S.QuestionSection $category={category}>
       <S.Title $category={category}>
