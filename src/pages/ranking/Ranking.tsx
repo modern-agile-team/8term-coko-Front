@@ -18,6 +18,7 @@ export default function Ranking() {
           <Header />
           <S.BarrelTopCokoImg src={getImageUrl('통-위-코코.svg')} />
           <S.BarrelImg src={getImageUrl('동통.svg')} />
+          <S.BoatSayImg src={getImageUrl('배-멘트.svg')} />
           <S.BoatImg src={getImageUrl('배.svg')} />
         </globalS.RightSection>
       </globalS.Wrapper>

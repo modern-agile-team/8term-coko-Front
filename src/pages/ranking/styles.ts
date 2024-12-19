@@ -15,10 +15,18 @@ export const BarrelImg = styled.img`
   position: fixed;
 `;
 
+export const BoatSayImg = styled.img`
+  width: 225px;
+  height: 65px;
+  bottom: 0;
+  margin: 0 65px 240px;
+  position: fixed;
+`;
+
 export const BoatImg = styled.img`
-  width: 256px;
-  height: 308px;
-  margin: 0 33px 28px;
+  width: 179.2px;
+  height: 215.6px;
+  margin: 0 70px 28px;
   position: fixed;
   bottom: 0;
 `;
