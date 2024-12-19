@@ -1,28 +1,34 @@
 import { create } from 'zustand';
-type dragItemType = { value: string; index: number } | null;
+type dragItemType = { value: string; index: number };
 interface State {
-  dragStartItem: dragItemType;
-  dragOverItem: dragItemType;
+  dragStartItem: dragItemType | null;
+  dragOverItem: dragItemType | null;
+  isOutsideDropZone: boolean;
 }
 interface Action {
-  setdragStartItem: (item: dragItemType) => void;
-  setdragOverItem: (item: dragItemType) => void;
+  setDragStartItem: (item: dragItemType) => void;
+  setDragOverItem: (item: dragItemType) => void;
   drop: (
     callback: (dragStartItem: dragItemType, dragOverItem: dragItemType) => void
   ) => void;
+  setOutsideDropZone: (isOutSide: boolean) => void;
   reset: () => void;
 }
 export const useDnDStore = create<State & Action>((set, get) => ({
   dragStartItem: null,
   dragOverItem: null,
-  setdragStartItem: index => set(() => ({ dragStartItem: index })),
+  isOutsideDropZone: false,
 
-  setdragOverItem: index => set(() => ({ dragOverItem: index })),
-
-  reset: () => set(() => ({ dragOverItem: null, dragStartItem: null })),
+  setDragStartItem: item => set(() => ({ dragStartItem: item })),
+  setDragOverItem: item => set(() => ({ dragOverItem: item })),
+  setOutsideDropZone: isOutSide =>
+    set(() => ({ isOutsideDropZone: isOutSide })),
   drop: callback => {
     const { dragStartItem, dragOverItem, reset } = get();
-    callback(dragStartItem, dragOverItem);
+    if (dragStartItem && dragOverItem) {
+      callback(dragStartItem, dragOverItem);
+    }
     reset();
   },
+  reset: () => set(() => ({ dragOverItem: null, dragStartItem: null })),
 }));

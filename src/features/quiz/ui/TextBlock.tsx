@@ -11,42 +11,53 @@ export default function TextBlock({ text, index }: TextBlockProps) {
     swapUserResponseAnswer,
     setUserResponseAtIndex,
   } = useClientQuizStore();
-  const { setdragStartItem, setdragOverItem, drop } = useDnDStore();
+  const {
+    setDragStartItem,
+    setDragOverItem,
+    drop,
+    isOutsideDropZone,
+    setOutsideDropZone,
+  } = useDnDStore();
   return (
     <>
       {!text ? (
         <S.EmptyDiv
           draggable
-          onDragEnter={() => setdragOverItem({ value: '', index })}
+          onDragEnter={() => {
+            setOutsideDropZone(false);
+            setDragOverItem({ value: '', index });
+          }}
         />
       ) : (
         <S.TextBlockButton
           draggable
-          onDragStart={() => setdragStartItem({ value: text, index })}
-          onDragEnter={() => setdragOverItem({ value: text, index })}
-          onDragLeave={() => {
-            console.log('벗어남');
+          onDragStart={e => {
+            e.currentTarget.classList.add('drag-start');
+            setDragStartItem({ value: text, index });
           }}
-          onDragEnd={() =>
-            drop((dragStartItem, dragOverItem) => {
-              if (dragStartItem && dragOverItem) {
-                //빈칸에 드레그했을 때
+          onDragEnter={() => setDragOverItem({ value: text, index })}
+          onDragEnd={e => {
+            e.preventDefault();
+            if (isOutsideDropZone) {
+              spliceUserResponseAnswer(index);
+            } else {
+              drop((dragStartItem, dragOverItem) => {
                 if (dragOverItem.value === '') {
                   setUserResponseAtIndex(
                     dragStartItem?.value,
                     dragOverItem?.index
                   );
                   spliceUserResponseAnswer(dragStartItem?.index);
-                  //텍스트가 있는 칸에 드레그했을 때때
                 } else {
                   swapUserResponseAnswer(
                     dragStartItem.index,
                     dragOverItem.index
                   );
+                  e.currentTarget.classList.remove('drag-start');
                 }
-              }
-            })
-          }
+              });
+            }
+          }}
           onClick={() => spliceUserResponseAnswer(index)}
         >
           {text}

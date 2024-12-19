@@ -16,7 +16,7 @@ export default function Combination({
 }: CombinationProps) {
   const { userResponseAnswer, pushUserResponseAnswer, setUserResponseAtIndex } =
     useClientQuizStore();
-  const { setdragStartItem, dragOverItem, dragStartItem } = useDnDStore();
+  const { setDragStartItem, dragOverItem, dragStartItem } = useDnDStore();
   useEffect(() => {
     for (let i = 0; i < answer.length; i++) {
       setUserResponseAtIndex('', i);
@@ -44,14 +44,19 @@ export default function Combination({
                   pushUserResponseAnswer(value);
               }}
               draggable
-              onDragStart={() => setdragStartItem({ value, index })}
-              onDragEnd={() => {
+              onDragStart={e => {
+                e.currentTarget.classList.add('drag-start');
+                setDragStartItem({ value, index });
+              }}
+              onDragEnd={e => {
+                e.preventDefault();
                 if (dragOverItem && dragStartItem) {
                   setUserResponseAtIndex(
                     dragStartItem?.value,
                     dragOverItem?.index
                   );
                 }
+                e.currentTarget.classList.remove('drag-start');
               }}
             >
               {value}

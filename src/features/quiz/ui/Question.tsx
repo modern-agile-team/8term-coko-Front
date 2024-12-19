@@ -10,6 +10,7 @@ import replaceEmptyWithHTMLElement from '@/features/quiz/service/replaceEmptyWit
 import addLineNumbersToCode from '@/features/quiz/service/addLineNumbersToCode';
 import TextBlock from '@/features/quiz/ui/TextBlock';
 import { useState } from 'react';
+import { useDnDStore } from '@/store/useDnDStore';
 
 interface QuestionProps {
   title: Quiz['title'];
@@ -17,8 +18,9 @@ interface QuestionProps {
   category: Quiz['category'];
 }
 export default function Question({ title, question, category }: QuestionProps) {
-  const { currentPage, userResponseAnswer } = useClientQuizStore();
-
+  const { currentPage, userResponseAnswer, spliceUserResponseAnswer } =
+    useClientQuizStore();
+  const { setOutsideDropZone } = useDnDStore();
   const highlightCode = useCodeHighlight(question, [question, currentPage]);
   const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
   const addLineNumberCode = addLineNumbersToCode(replaceEmptyCode);
@@ -33,7 +35,15 @@ export default function Question({ title, question, category }: QuestionProps) {
   };
 
   return (
-    <S.QuestionSection $category={category}>
+    <S.QuestionSection
+      $category={category}
+      draggable
+      onDragEnter={e => {
+        if (e.currentTarget === e.target) {
+          setOutsideDropZone(true);
+        }
+      }}
+    >
       <S.Title $category={category}>
         <p>문제{currentPage + 1}.</p>
         <p>{title}</p>
