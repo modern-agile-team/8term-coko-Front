@@ -10,6 +10,7 @@ import isLoggedIn from '@utils/isLoggedIn';
 import useModal from '@hooks/useModal';
 import useUserStore from '@store/useUserStore';
 import usePopover from '@hooks/usePopover';
+import ProfileImage from '@/features/user/ui/ProfileImage';
 
 export default function Header() {
   const points: number = 2999999999;
@@ -49,8 +50,7 @@ export default function Header() {
         </>
       )}
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
-        <S.ProfileIcon src={getImageUrl('테두리.svg')} alt="프로필 테두리" />
-        <S.HeaderIcon src={getImageUrl('코코-프로필.svg')} alt="코코 프로필" />
+        <ProfileImage isIcon={true} />
         {isLoggedIn() && isOpen && (
           <S.ProfilePopover ref={popoverRef} onClick={e => e.stopPropagation()}>
             <S.UserNameText>유저이름</S.UserNameText>
