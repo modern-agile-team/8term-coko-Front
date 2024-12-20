@@ -55,7 +55,7 @@ export default function Profile() {
       <globalS.Layout>
         <S.ProfileSection>
           <div>
-            <ProfileImage />
+            <ProfileImage isIcon={false} />
             <S.UserNameLabel>유저 이름</S.UserNameLabel>
             <S.JoinDateLabel>2024.10.01</S.JoinDateLabel>
           </div>
