@@ -1,4 +1,4 @@
-import { Img, OXButtonSection } from '../styles';
+import { Img, OXButtonSection } from './styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 

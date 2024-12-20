@@ -7,7 +7,7 @@ import {
   SectionTitle,
   ButtonGrid,
   KeyboardButton,
-} from '../styles';
+} from './styles';
 import getPartGridPosition from '../../learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
 
