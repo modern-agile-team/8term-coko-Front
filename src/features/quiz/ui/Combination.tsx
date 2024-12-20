@@ -16,7 +16,7 @@ export default function Combination({
 }: CombinationProps) {
   const { userResponseAnswer, pushUserResponseAnswer, setUserResponseAtIndex } =
     useClientQuizStore();
-  const { setDragStartItem, dragOverItem, dragStartItem, drop } = useDnDStore();
+  const { setDragStartItem, drop } = useDnDStore();
 
   useEffect(() => {
     for (let i = 0; i < answer.length; i++) {
