@@ -1,4 +1,5 @@
 import { getImageUrl } from '@/utils/getImageUrl';
+import rankingOptions from '../service/rankingOptions';
 import * as S from './styles';
 
 interface MyRankProps {
@@ -6,9 +7,19 @@ interface MyRankProps {
   nickname: string;
   level: number;
   point: number;
+  selectedOption: string;
 }
 
-export default function MyRank({ rank, nickname, level, point }: MyRankProps) {
+export default function MyRank({
+  rank,
+  nickname,
+  level,
+  point,
+  selectedOption,
+}: MyRankProps) {
+  const user = { level, point };
+  const config = rankingOptions[selectedOption];
+
   return (
     <S.RankingItem $rank={rank}>
       <S.MedalContainer $rank={rank} $isMyRank>
@@ -27,8 +38,8 @@ export default function MyRank({ rank, nickname, level, point }: MyRankProps) {
       </S.UserInfo>
       <S.Container>
         <S.RankIconWrapper>
-          <S.RankIcon src={getImageUrl('포인트.svg')} />
-          <S.RankIconText>{point}</S.RankIconText>
+          <S.RankIcon src={getImageUrl(config.icon)} />
+          <S.RankIconText>{user[config.dataField]}</S.RankIconText>
         </S.RankIconWrapper>
         <S.AddFriend>+ 친구 추가</S.AddFriend>
       </S.Container>

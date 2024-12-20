@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
-import SortDropdown from './SortDropdown';
+import { useState, useEffect } from 'react';
 import { getImageUrl } from '@/utils/getImageUrl';
+import rankingOptions from '../service/rankingOptions';
+import SortDropdown from './SortDropdown';
 import MyRank from './MyRank';
 import * as S from './styles';
 
@@ -11,6 +12,11 @@ interface RankingContainerProps {
 export default function RankingContainer({
   onMyRankChange,
 }: RankingContainerProps) {
+  const [selectedOption, setSelectedOption] = useState('포인트 보유순');
+
+  // 현재 선택된 옵션의 데이터 가져오기
+  const config = rankingOptions[selectedOption];
+
   const myRank = {
     rank: 4,
     nickname: 'gwgwgwgwgw5',
@@ -70,15 +76,18 @@ export default function RankingContainer({
         nickname={myRank.nickname}
         level={myRank.level}
         point={myRank.point}
+        selectedOption={selectedOption}
       />
       {/* 정렬 드롭다운 */}
-      <SortDropdown />
+      <SortDropdown
+        selectedOption={selectedOption}
+        onSelectOption={setSelectedOption}
+      />
       {/* 나머지 순위 */}
       {dummyUsers.map((user, index) => (
         <S.RankingItem key={user.id} $rank={index + 1}>
           <S.MedalContainer $rank={index + 1} />
           <S.RankText>{index + 1}</S.RankText>
-          {/* 프로필 쪽은 수정예정 */}
           <S.ProfileWrapper>
             <S.ProfileOutline src={getImageUrl('테두리.svg')} />
             <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />
@@ -89,8 +98,8 @@ export default function RankingContainer({
           </S.UserInfo>
           <S.Container>
             <S.RankIconWrapper>
-              <S.RankIcon src={getImageUrl('포인트.svg')} />
-              <S.RankIconText>{user.point}</S.RankIconText>
+              <S.RankIcon src={getImageUrl(config.icon)} />
+              <S.RankIconText>{user[config.dataField]}</S.RankIconText>
             </S.RankIconWrapper>
             <S.AddFriend>+ 친구 추가</S.AddFriend>
           </S.Container>

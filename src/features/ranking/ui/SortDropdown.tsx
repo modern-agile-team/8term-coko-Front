@@ -1,15 +1,25 @@
-import { useState } from 'react';
 import usePopover from '@/hooks/usePopover';
+import rankingOptions from '../service/rankingOptions';
 import * as S from './styles';
 
-export default function SortDropDown() {
+interface SortDropDownProps {
+  selectedOption: string;
+  onSelectOption: (option: string) => void;
+}
+
+export default function SortDropdown({
+  selectedOption,
+  onSelectOption,
+}: SortDropDownProps) {
   const { isOpen, togglePopover, popoverRef } = usePopover();
-  const [selectedOption, setSelectedOption] = useState('포인트 보유순');
 
   const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+    onSelectOption(option);
     togglePopover();
   };
+
+  // 정렬 옵션 목록을 동적으로 생성
+  const SORT_OPTIONS = Object.keys(rankingOptions);
 
   return (
     <S.SortContainer ref={popoverRef}>
@@ -18,12 +28,14 @@ export default function SortDropDown() {
       </S.SortSelectButton>
       {isOpen && (
         <S.SortOptionUl>
-          <S.SortOptionLi onClick={() => handleOptionClick('포인트 보유순')}>
-            포인트 보유순
-          </S.SortOptionLi>
-          <S.SortOptionLi onClick={() => handleOptionClick('레벨순')}>
-            레벨순
-          </S.SortOptionLi>
+          {SORT_OPTIONS.map(option => (
+            <S.SortOptionLi
+              key={option}
+              onClick={() => handleOptionClick(option)}
+            >
+              {option}
+            </S.SortOptionLi>
+          ))}
         </S.SortOptionUl>
       )}
     </S.SortContainer>
