@@ -1,8 +1,8 @@
-import Quiz from '@type/Quiz';
+import type Quiz from '@type/Quiz';
 import { CombinationSection, TextBlockButton } from './styles';
-import { useClientQuizStore } from '@/store/useClientQuizStore';
-import compact from '../../../utils/compact';
-import { useDnDStore } from '@/store/useDnDStore';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import compact from '@utils/compact';
+import { useDnDStore } from '@store/useDnDStore';
 import { useEffect } from 'react';
 
 interface CombinationProps {

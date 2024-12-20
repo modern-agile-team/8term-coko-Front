@@ -1,31 +1,53 @@
 import hljs from 'highlight.js';
-import { useLayoutEffect, DependencyList, useState, useEffect } from 'react';
-import replaceEmptyWithHTMLElement from './replaceEmptyWithHTMLElement';
+import { DependencyList, useState, useLayoutEffect } from 'react';
 
 /**
- * 코드 하이라이팅을 적용하는 커스텀텀훅
+ * 주어진 코드 문자열을 하이라이트 처리된 HTML로 변환하는 React 커스텀 훅입니다.
  *
- * 이 훅은 `dependency` 값이 변경될 때마다 코드를 하이라이팅 합니다.
- * #empty#로 되어있는 부분을 빈 코드블럭으로 변경시켜줍니다.
- * 문제 페이지에서 사용되는 훅입니다.
+ * `highlight.js` 라이브러리를 사용하여 특정 언어의 코드 구문을 강조하고,
+ * 이를 하이라이트 처리된 HTML 문자열로 반환합니다.
+ * 의존성 배열(`deps`)을 통해 재렌더링 조건을 제어할 수 있습니다.
+ * 코드 "문자열" 을 반환하기 때문에 html-react-parser과과xss에 취약한 점을 보완하기 위해 dompurify를 같이 사용하는것을 권장드립니다다.
  *
- * @param {DependencyList} deps - 하이라이팅을 다시 적용할 조건이 되는 의존성. 의존성이 변경될 때마다 하이라이팅이 갱신됩니다.
- * @returns {React.RefObject<HTMLElement>} - 코드 블록을 참조할 수 있는 `ref`
+ * @param {string} code - 하이라이트 처리할 코드 문자열.
+ * @param {DependencyList} [deps] - 훅 실행을 제어할 의존성 배열. 기본값은 `undefined`이며, 이 경우 `code`와 `language`를 기본 의존성으로 사용합니다.
+ * @param {string} [language='javascript'] - 코드 하이라이트에 사용할 언어. 기본값은 'javascript'입니다.
+ * @returns {string} 하이라이트 처리된 HTML 문자열.
  *
  * @example
- * const codeRef = useCodeHighlight(code);
- * return <pre><code ref={codeRef}>{code}</code></pre>;
+ * const code = `
+ * const greet = (name) => {
+ *   console.log(\`Hello, \${name}!\`);
+ * };
+ * greet('World');
+ * `;
+ *
+ * const highlightedCode = useCodeHighlight(code, [code], 'javascript');
+ *
+ * return (
+ *   <pre>
+ *     <code>
+ *      {parse(dompurify.sanitize(addLineNumberCode), options)}
+ *     </code>
+ *   </pre>
+ * );
  */
-const useCodeHighlight = (code: string, deps?: DependencyList) => {
+const useCodeHighlight = (
+  code: string,
+  deps?: DependencyList,
+  language: string = 'javascript'
+) => {
   const [highlightCode, setHighlightCode] = useState<string>('');
 
-  useEffect(() => {
-    hljs.configure({ ignoreUnescapedHTML: true });
-    const highlightedCode = hljs.highlight(code, {
-      language: 'javascript',
-    }).value;
-    setHighlightCode(highlightedCode);
-  }, deps);
+  useLayoutEffect(() => {
+    try {
+      hljs.configure({ ignoreUnescapedHTML: true });
+      const highlightedCode = hljs.highlight(code, { language }).value;
+      setHighlightCode(highlightedCode);
+    } catch (error) {
+      setHighlightCode(code);
+    }
+  }, deps ?? [code, language]);
 
   return highlightCode;
 };

@@ -10,7 +10,7 @@ import isLoggedIn from '@utils/isLoggedIn';
 import useModal from '@hooks/useModal';
 import useUserStore from '@store/useUserStore';
 import usePopover from '@hooks/usePopover';
-import ProfileImage from '@/features/user/ui/ProfileImage';
+import ProfileImage from '@features/user/ui/ProfileImage';
 
 export default function Header() {
   const points: number = 2999999999;

@@ -1,6 +1,6 @@
-import { useClientQuizStore } from '@/store/useClientQuizStore';
+import { useClientQuizStore } from '@store/useClientQuizStore';
 import * as S from './styles';
-import { useDnDStore } from '@/store/useDnDStore';
+import { useDnDStore } from '@store/useDnDStore';
 interface TextBlockProps {
   text: string;
   index: number;
