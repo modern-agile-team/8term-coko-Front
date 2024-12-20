@@ -16,12 +16,33 @@ export default function Combination({
 }: CombinationProps) {
   const { userResponseAnswer, pushUserResponseAnswer, setUserResponseAtIndex } =
     useClientQuizStore();
-  const { setDragStartItem, dragOverItem, dragStartItem } = useDnDStore();
+  const { setDragStartItem, dragOverItem, dragStartItem, drop } = useDnDStore();
+
   useEffect(() => {
     for (let i = 0; i < answer.length; i++) {
       setUserResponseAtIndex('', i);
     }
   }, []);
+
+  const handleOnClick = (value: string) => {
+    answer.length > compact(userResponseAnswer).length &&
+      pushUserResponseAnswer(value);
+  };
+  const handleDragStart = (
+    e: React.DragEvent<HTMLButtonElement>,
+    value: string,
+    index: number
+  ) => {
+    e.currentTarget.classList.add('drag-start');
+    setDragStartItem({ value, index });
+  };
+  const handleDragEnd = (e: React.DragEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    drop((dragStartItem, dragOverItem) => {
+      setUserResponseAtIndex(dragStartItem.value, dragOverItem.index);
+    });
+    e.currentTarget.classList.remove('drag-start');
+  };
   return (
     <>
       <CombinationSection>
@@ -38,26 +59,10 @@ export default function Combination({
           ) : (
             <TextBlockButton
               key={value}
-              onClick={() => {
-                //답 수랑 내가 선택한 답 (공백빼고) 갯수 비교 정답보다 선택한게 많으면 안되니
-                answer.length > compact(userResponseAnswer).length &&
-                  pushUserResponseAnswer(value);
-              }}
+              onClick={() => handleOnClick(value)}
               draggable
-              onDragStart={e => {
-                e.currentTarget.classList.add('drag-start');
-                setDragStartItem({ value, index });
-              }}
-              onDragEnd={e => {
-                e.preventDefault();
-                if (dragOverItem && dragStartItem) {
-                  setUserResponseAtIndex(
-                    dragStartItem?.value,
-                    dragOverItem?.index
-                  );
-                }
-                e.currentTarget.classList.remove('drag-start');
-              }}
+              onDragStart={e => handleDragStart(e, value, index)}
+              onDragEnd={handleDragEnd}
             >
               {value}
             </TextBlockButton>
