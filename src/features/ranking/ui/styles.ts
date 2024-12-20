@@ -36,7 +36,6 @@ export const SortSelectButton = styled.button<{ $isToggled: boolean }>`
       : `#d37744 url(${getImageUrl(
           '정렬-위-화살표.svg'
         )}) no-repeat right 10px center`};
-  /* border-radius: 15px 15px 0 0; */
   border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
   border: 2px solid #c26b3b;
   &:focus {
