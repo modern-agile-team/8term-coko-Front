@@ -51,7 +51,11 @@ export default function Store() {
             <S.Button>내가 구매한 아이템</S.Button>
             <S.Button>초기화</S.Button>
           </div>
-          {itemQuery === 'profile' ? <ProfileImage /> : <MyCharacter />}
+          {itemQuery === 'profile' ? (
+            <ProfileImage isIcon={false} />
+          ) : (
+            <MyCharacter />
+          )}
         </S.MyCharacterSection>
         <S.StoreItemListSection>
           <S.FilterListContainer>
