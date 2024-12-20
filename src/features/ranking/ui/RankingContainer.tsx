@@ -1,7 +1,16 @@
+import SortDropdown from './SortDropdown';
 import { getImageUrl } from '@/utils/getImageUrl';
+import MyRank from './MyRank';
 import * as S from './styles';
 
 export default function RankingContainer() {
+  const myRank = {
+    rank: 4,
+    nickname: 'gwgwgwgwgw5',
+    level: 3,
+    point: 160,
+  };
+
   const dummyUsers = [
     {
       id: 2,
@@ -43,6 +52,16 @@ export default function RankingContainer() {
 
   return (
     <S.RankingContainer>
+      {/* 나의 순위 */}
+      <MyRank
+        rank={myRank.rank}
+        nickname={myRank.nickname}
+        level={myRank.level}
+        point={myRank.point}
+      />
+      {/* 정렬 드롭다운 */}
+      <SortDropdown />
+      {/* 나머지 순위 */}
       {dummyUsers.map((user, index) => (
         <S.RankingItem key={user.id} $rank={index + 1}>
           <S.MedalImg $rank={index + 1} />

@@ -1,9 +1,85 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 
+interface MedalImgProps {
+  $rank: number;
+  $isMyRank?: boolean;
+}
+
 export const RankingContainer = styled.div`
   width: 683px;
   margin-top: 62px;
+`;
+
+export const SortContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 47px;
+  margin-bottom: 27px;
+  position: relative;
+`;
+
+export const SortSelectButton = styled.button<{ $isToggled: boolean }>`
+  width: 136px;
+  height: 30px;
+  color: #fff3c0;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  background: ${({ $isToggled }) =>
+    $isToggled
+      ? `#d37744 url(${getImageUrl(
+          '정렬-아래-화살표.svg'
+        )}) no-repeat right 10px center`
+      : `#d37744 url(${getImageUrl(
+          '정렬-위-화살표.svg'
+        )}) no-repeat right 10px center`};
+  /* border-radius: 15px 15px 0 0; */
+  border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
+  border: 2px solid #c26b3b;
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SortOptionUl = styled.ul`
+  position: absolute;
+  top: 39px;
+  width: 136px;
+  border-radius: 0 0 15px 15px;
+  background-color: #fff3c0;
+  list-style: none;
+  z-index: 10;
+  border: 2px solid #c26b3b;
+  border-top: none;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+`;
+
+export const SortOptionLi = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #d37744;
+  background-color: #fff3c0;
+  border-bottom: 2px solid #c26b3b;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d37744;
+    color: #fff3c0;
+    border-bottom: 2px solid #c26b3b;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 export const RankingItem = styled.div<{ $rank: number }>`
@@ -45,11 +121,23 @@ export const RankingItem = styled.div<{ $rank: number }>`
     `}
 `;
 
-export const MedalImg = styled.div<{ $rank: number }>`
+export const MedalImg = styled.div<MedalImgProps>`
+  position: relative;
   width: 68px;
   height: 85px;
   margin-left: 23px;
   align-self: flex-start;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  ${({ $isMyRank }) =>
+    $isMyRank &&
+    css`
+      width: 103px;
+      height: 125px;
+      margin-right: 40px;
+    `}
   ${({ $rank }) =>
     $rank === 1 &&
     css`
@@ -65,11 +153,39 @@ export const MedalImg = styled.div<{ $rank: number }>`
     css`
       background-image: url(${getImageUrl('동메달.svg')});
     `}
-  ${({ $rank }) =>
+    ${({ $rank, $isMyRank }) =>
     $rank > 3 &&
+    $isMyRank &&
     css`
-      background-image: url(${getImageUrl('기본메달.svg')});
+      background-image: url(${getImageUrl('나의-순위.svg')});
     `}
+`;
+
+export const MyRankTextWrapper = styled.div<{ $rank: number }>`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  color: ${({ $rank }) =>
+    $rank <= 3
+      ? '#ffffff' // 1~3순위
+      : $rank % 2 === 0
+      ? '#d80000' // 4, 6, 8, ...
+      : '#d37744'}; // 5, 7, 9, ...
+`;
+
+export const MyRankLabel = styled.label`
+  font-size: 12px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 5px;
+`;
+
+export const MyRankNumber = styled.span`
+  font-size: 22px;
+  font-weight: 700;
 `;
 
 export const RankText = styled.p`
