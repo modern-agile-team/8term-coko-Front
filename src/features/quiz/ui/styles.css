@@ -3,11 +3,14 @@
   height: 10px;
 }
 .empty {
-  width: 150px;
+  position: relative;
+  display: inline-block;
+  width: 100px;
   height: 26px;
   border: 2px solid #00b6c0;
   border-radius: 8px;
   background: #e8e7e7;
+  top: 8px;
 }
 .text-block {
   cursor: pointer;
@@ -17,4 +20,7 @@
   list-style-type: none;
   padding: 0 20px;
   height: 26px;
+}
+.drag-start {
+  opacity: 50%;
 }

@@ -4,7 +4,7 @@ import {
   MultipleChoiceSection,
   MultipleChoiceButtonDiv,
   Img,
-} from '../styles';
+} from './styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 interface MultipleChoiceProps {
