@@ -11,12 +11,12 @@ interface MyRankProps {
 export default function MyRank({ rank, nickname, level, point }: MyRankProps) {
   return (
     <S.RankingItem $rank={rank}>
-      <S.MedalImg $rank={rank} $isMyRank>
+      <S.MedalContainer $rank={rank} $isMyRank>
         <S.MyRankTextWrapper $rank={rank}>
           <S.MyRankLabel>나의 순위</S.MyRankLabel>
           <S.MyRankNumber>{rank}</S.MyRankNumber>
         </S.MyRankTextWrapper>
-      </S.MedalImg>
+      </S.MedalContainer>
       <S.ProfileWrapper>
         <S.ProfileOutline src={getImageUrl('테두리.svg')} />
         <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />

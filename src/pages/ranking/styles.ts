@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { getImageUrl } from '@/utils/getImageUrl';
 
 export const BarrelTopCokoImg = styled.img`
   width: 171px;
@@ -8,11 +9,30 @@ export const BarrelTopCokoImg = styled.img`
   z-index: 1;
 `;
 
-export const BarrelImg = styled.img`
+export const BarrelContainer = styled.div<{ $rank: number | null }>`
   width: 170px;
   height: 155px;
   margin: 237px 87px;
   position: fixed;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  ${({ $rank }) =>
+    $rank === 1 &&
+    css`
+      background-image: url(${getImageUrl('금통.svg')});
+    `}
+  ${({ $rank }) =>
+    $rank === 2 &&
+    css`
+      background-image: url(${getImageUrl('은통.svg')});
+    `}
+  ${({ $rank }) =>
+    ($rank === null || $rank >= 3) &&
+    css`
+      background-image: url(${getImageUrl('동통.svg')});
+    `}
 `;
 
 export const BoatSayImg = styled.img`

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 
-interface MedalImgProps {
+interface MedalContainerProps {
   $rank: number;
   $isMyRank?: boolean;
 }
@@ -121,7 +121,7 @@ export const RankingItem = styled.div<{ $rank: number }>`
     `}
 `;
 
-export const MedalImg = styled.div<MedalImgProps>`
+export const MedalContainer = styled.div<MedalContainerProps>`
   position: relative;
   width: 68px;
   height: 85px;

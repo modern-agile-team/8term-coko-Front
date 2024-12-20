@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import * as globalS from '@/style/style';
 import * as S from './styles';
 import MenuBar from '@common/layout/MenuBar';
@@ -7,6 +8,8 @@ import { getImageUrl } from '@utils/getImageUrl';
 import RankingContainer from '@/features/ranking/ui/RankingContainer';
 
 export default function Ranking() {
+  const [myRank, setMyRank] = useState<number | null>(null);
+
   return (
     <>
       <globalS.Wrapper>
@@ -17,13 +20,13 @@ export default function Ranking() {
         <globalS.RightSection>
           <Header />
           <S.BarrelTopCokoImg src={getImageUrl('통-위-코코.svg')} />
-          <S.BarrelImg src={getImageUrl('동통.svg')} />
+          <S.BarrelContainer $rank={myRank} />
           <S.BoatSayImg src={getImageUrl('배-멘트.svg')} />
           <S.BoatImg src={getImageUrl('배.svg')} />
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <RankingContainer />
+        <RankingContainer onMyRankChange={setMyRank} />
       </globalS.Layout>
     </>
   );

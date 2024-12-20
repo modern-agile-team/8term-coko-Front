@@ -1,15 +1,27 @@
+import { useEffect } from 'react';
 import SortDropdown from './SortDropdown';
 import { getImageUrl } from '@/utils/getImageUrl';
 import MyRank from './MyRank';
 import * as S from './styles';
 
-export default function RankingContainer() {
+interface RankingContainerProps {
+  onMyRankChange: (rank: number) => void;
+}
+
+export default function RankingContainer({
+  onMyRankChange,
+}: RankingContainerProps) {
   const myRank = {
     rank: 4,
     nickname: 'gwgwgwgwgw5',
     level: 3,
     point: 160,
   };
+
+  // 나의 순위를 부모 컴포넌트로 전달
+  useEffect(() => {
+    onMyRankChange(myRank.rank);
+  }, [myRank.rank, onMyRankChange]);
 
   const dummyUsers = [
     {
@@ -64,7 +76,7 @@ export default function RankingContainer() {
       {/* 나머지 순위 */}
       {dummyUsers.map((user, index) => (
         <S.RankingItem key={user.id} $rank={index + 1}>
-          <S.MedalImg $rank={index + 1} />
+          <S.MedalContainer $rank={index + 1} />
           <S.RankText>{index + 1}</S.RankText>
           {/* 프로필 쪽은 수정예정 */}
           <S.ProfileWrapper>
