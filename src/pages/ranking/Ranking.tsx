@@ -5,10 +5,25 @@ import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import CokoLogo from '@common/layout/CokoLogo';
 import { getImageUrl } from '@utils/getImageUrl';
-import RankingContainer from '@/features/ranking/ui/RankingContainer';
+import RankingContainer from '@features/ranking/ui/RankingContainer';
 
 export default function Ranking() {
-  const [myRank, setMyRank] = useState<number | null>(null);
+  const [selectedOption, setSelectedOption] = useState('포인트 보유순');
+  const dummyUsers = [
+    { id: 2, nickname: 'gwgw2', level: 4, point: 200 },
+    { id: 3, nickname: 'gwgwgw3', level: 2, point: 5000 },
+    { id: 4, nickname: 'gwgwgwgw4', level: 3, point: 160 },
+    { id: 5, nickname: 'gwgwgwgwgw5', level: 10, point: 190 },
+    { id: 6, nickname: 'gwgwgwgwgwgw6', level: 12, point: 230 },
+    { id: 7, nickname: 'gwgwgwgwgwgwgw7', level: 1, point: 3000 },
+  ];
+
+  const myRank = {
+    rank: 4,
+    nickname: 'gwgwgwgwgw5',
+    level: 3,
+    point: 160,
+  };
 
   return (
     <>
@@ -20,13 +35,18 @@ export default function Ranking() {
         <globalS.RightSection>
           <Header />
           <S.BarrelTopCokoImg src={getImageUrl('통-위-코코.svg')} />
-          <S.BarrelContainer $rank={myRank} />
+          <S.BarrelContainer $rank={myRank.rank} />
           <S.BoatSayImg src={getImageUrl('배-멘트.svg')} />
           <S.BoatImg src={getImageUrl('배.svg')} />
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <RankingContainer onMyRankChange={setMyRank} />
+        <RankingContainer
+          myRank={myRank}
+          selectedOption={selectedOption}
+          onOptionChange={setSelectedOption}
+          users={dummyUsers}
+        />
       </globalS.Layout>
     </>
   );
