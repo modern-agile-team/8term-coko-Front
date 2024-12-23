@@ -139,6 +139,7 @@ export default function Quiz() {
         </ResponseButton>
       </SubmitSection>
       <Modal isShow={isShow}>
+        <PartClear></PartClear>
         <Funnel>
           <Funnel.Step name="결과">
             <Result

@@ -174,6 +174,11 @@ export const CombinationSection = styled.section`
   :nth-last-child(1) {
     margin-right: auto;
   }
+  ${media.mobile} {
+    img {
+      display: none;
+    }
+  }
 `;
 
 //블럭유형에서 각 텍스트에 해당하는 리스트 스타일
@@ -316,7 +321,10 @@ const fadeInScaleUp = keyframes`
     transform: translate(-50%, -50%) scale(1); 
   }
 `;
-export const CompensationSection = styled.section`
+export const CompensationSection = styled.section<{
+  $backgroundColor: string;
+  $boxShadow: string;
+}>`
   animation: ${fadeInScaleUp} 0.7s ease-out;
   position: fixed;
   display: flex;
@@ -327,24 +335,28 @@ export const CompensationSection = styled.section`
   transform: translate(-50%, -50%);
   width: 747.42px;
   height: 372.04px;
-  background: #ffffff;
+  background: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: 40px;
-  box-shadow: 0 11px #e5e5e5;
+  box-shadow: 0 11px ${({ $boxShadow }) => $boxShadow};
+  ${media.mobile} {
+    width: 100%;
+    height: 60%;
+  }
 `;
 
-export const DashLineHr = styled.hr`
-  border: 2px dashed #00d9e9;
+export const DashLineHr = styled.hr<{ $color: string }>`
+  border: 2px dashed ${({ $color }) => $color};
   width: 80%;
   border-image: repeating-linear-gradient(
       to right,
-      #00d9e9 0,
-      #00d9e9 10px,
+      ${({ $color }) => $color} 0,
+      ${({ $color }) => $color} 10px,
       transparent 15px,
       transparent 30px
     )
     1;
 `;
-export const TotalResultsTextDiv = styled.div`
+export const CompensationTextDiv = styled.div`
   margin: 44px 0 17px 0;
   display: flex;
   font-size: 22px;
@@ -362,9 +374,18 @@ export const TotalResultsTextDiv = styled.div`
     font-size: 26px;
     color: #ff4949;
   }
+  ${media.mobile} {
+    font-size: 18px;
+  }
 `;
 export const TotalResultsRewardDiv = styled.div`
   display: flex;
+  ${media.mobile} {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
 `;
 export const ImageDescriptionDiv = styled.div`
   margin: 34px 0 0 0;
@@ -420,6 +441,13 @@ export const TotalResultProgressDiv = styled.div`
   > img:last-child {
     position: relative;
     top: -10%;
+  }
+  ${media.mobile} {
+    > img {
+      display: none;
+    }
+    display: flex;
+    margin-bottom: 20px;
   }
 `;
 export const Img = styled.img<{ $width: string; $height: string }>`
