@@ -34,8 +34,6 @@ export const SubmitSection = styled.section`
   margin-top: 48px;
   ${media.mobile} {
     width: 85vw;
-    position: fixed;
-    bottom: 28px;
   }
 `;
 //응답 버튼

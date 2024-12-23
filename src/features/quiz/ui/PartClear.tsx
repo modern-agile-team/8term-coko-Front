@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { CompensationSection } from './styles';
+import * as S from './styles';
 import { pointQuery } from '@queries/usersQuery';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
 export default function PartClear() {
   const navigate = useNavigate();
-  const { mutate: updatePoint } = pointQuery.patch();
+  const { mutate: updatePoint, isIdle } = pointQuery.patch();
   const { user } = useUserStore();
   const point = 1500;
   useTimeout(
@@ -18,16 +18,24 @@ export default function PartClear() {
   );
   return (
     <>
-      <CompensationSection>
+      <S.CompensationSection $backgroundColor="#F0DAAB" $boxShadow="#E5C892">
         <h1>와 파트클리어 축하해</h1>
-        <button
+        <S.DashLineHr $color="#ffffff" />
+        <div>
+          <S.Img $height="" $width="" />
+          <S.Img $height="" $width="" />
+          <S.Img $height="" $width="" />
+        </div>
+        <p>{point} Point</p>
+        <S.RedirectToLearnButton
+          $isActive={isIdle}
           onClick={() => {
             navigate('/learn');
           }}
         >
-          넘어가기
-        </button>
-      </CompensationSection>
+          메인으로
+        </S.RedirectToLearnButton>
+      </S.CompensationSection>
     </>
   );
 }

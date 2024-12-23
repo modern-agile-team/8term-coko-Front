@@ -1,15 +1,6 @@
 import { experienceQuery } from '@queries/usersQuery';
 import { useClientQuizStore } from '@store/useClientQuizStore';
-import {
-  DashLineHr,
-  ImageDescriptionDiv,
-  Img,
-  RedirectToLearnButton,
-  TotalResultProgressDiv,
-  CompensationSection,
-  TotalResultsRewardDiv,
-  TotalResultsTextDiv,
-} from './styles';
+import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { useTimeout } from '@modern-kit/react';
 import { useNavigate } from 'react-router-dom';
@@ -43,24 +34,24 @@ export default function TotalResults({
     return <></>;
   }
   return (
-    <CompensationSection>
-      <TotalResultsTextDiv>
+    <S.CompensationSection $backgroundColor="#ffffff" $boxShadow="#E5E5E5">
+      <S.CompensationTextDiv>
         총<p>&nbsp; {quizCorrectAnswers}&nbsp;</p>
         문제를 맞혔고 <p>&nbsp;{experience} 경험치</p>를 얻었어!
-      </TotalResultsTextDiv>
-      <DashLineHr />
-      <TotalResultsRewardDiv>
-        <ImageDescriptionDiv>
-          <Img
+      </S.CompensationTextDiv>
+      <S.DashLineHr $color="#00DCE8" />
+      <S.TotalResultsRewardDiv>
+        <S.ImageDescriptionDiv>
+          <S.Img
             $width="201px"
             $height="159px"
             src={getImageUrl('레벨1코코.svg')}
             alt="레벨업 이미지"
           />
           <p>Level.{userExperience.level}</p>
-        </ImageDescriptionDiv>
-        <TotalResultProgressDiv>
-          <Img
+        </S.ImageDescriptionDiv>
+        <S.TotalResultProgressDiv>
+          <S.Img
             src={getImageUrl('반짝이.svg')}
             $width="45px"
             $height="60px"
@@ -78,24 +69,24 @@ export default function TotalResults({
               style={{ width: '242px' }}
             />
           </div>
-          <Img
+          <S.Img
             src={getImageUrl('반짝이.svg')}
             $width="45px"
             $height="60px"
             alt="반짝이"
           />
-        </TotalResultProgressDiv>
-      </TotalResultsRewardDiv>
-      <DashLineHr />
-      <RedirectToLearnButton
+        </S.TotalResultProgressDiv>
+      </S.TotalResultsRewardDiv>
+      <S.DashLineHr $color="#00DCE8" />
+      <S.RedirectToLearnButton
         disabled={isIdle}
         $isActive={isIdle}
         onClick={() => {
           isPartClear ? onNext() : navigate('/learn');
         }}
       >
-        메인으로
-      </RedirectToLearnButton>
-    </CompensationSection>
+        {isPartClear ? '보상 받기' : '메인으로'}
+      </S.RedirectToLearnButton>
+    </S.CompensationSection>
   );
 }
