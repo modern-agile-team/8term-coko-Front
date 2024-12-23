@@ -1,6 +1,7 @@
 import * as S from './styles';
-import type CosmeticItem from '@/types/CosmeticItem ';
 import StoreItem from './StoreItem';
+import type { CosmeticItem } from '@features/store/types';
+
 const testItem: CosmeticItem[] = [
   {
     id: 1,

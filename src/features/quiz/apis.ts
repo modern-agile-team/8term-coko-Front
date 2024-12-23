@@ -1,5 +1,5 @@
-import Quiz from '../types/Quiz';
-import api from './axios/instance';
+import api from '@apis/axios/instance';
+import type { Quiz } from '@features/quiz/types';
 
 const quizzesApis = {
   getQuizzes: async (params?: {

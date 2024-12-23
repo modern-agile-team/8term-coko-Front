@@ -1,4 +1,4 @@
-export default interface Quiz {
+export interface Quiz {
   id: number;
   partId: number;
   sectionId: number;

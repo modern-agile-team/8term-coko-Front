@@ -1,7 +1,7 @@
-import Quiz from '@/types/Quiz';
-import Experience from '../types/Experience';
-import User from '../types/User';
-import api from './axios/instance';
+import api from '@apis/axios/instance';
+import type { User, ExperiencedUser } from '@features/user/types';
+import type { Quiz } from '@features/quiz/types';
+
 const usersApis = {
   putQuizzesProgress: ({
     userId,
@@ -13,7 +13,7 @@ const usersApis = {
     body: Record<'isCorrect', boolean>;
   }) =>
     api.put<Promise<void>>(`/users/${userId}/progress/quizzes/${quizId}`, body),
-  getExperience: async (id: User['id']): Promise<Experience> => {
+  getExperience: async (id: User['id']): Promise<ExperiencedUser> => {
     const response = await api.get(`/users/${id}/experience`);
     return response.data;
   },

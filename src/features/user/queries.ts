@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import usersApis from '../apis/usersApis';
-import Experience from '../types/Experience';
-import User from '../types/User';
+import usersApis from '@features/user/apis';
+import type { User, ExperiencedUser } from '@features/user/types';
+
 const userKeys = {
   all: ['users'] as const,
   details: () => [...userKeys.all, 'detail'] as const,
@@ -49,12 +49,12 @@ const experienceQuery = {
           queryKey: userKeys.experience(newExperience.id),
           exact: true,
         });
-        const previousExperience = queryClient.getQueryData<Experience>(
+        const previousExperience = queryClient.getQueryData<ExperiencedUser>(
           userKeys.experience(newExperience.id)
         );
         queryClient.setQueryData(
           userKeys.experience(newExperience.id),
-          (old: Experience) => {
+          (old: ExperiencedUser) => {
             //경험치 증가 로직
             if (!old) return old;
             old.experience += newExperience.experience;

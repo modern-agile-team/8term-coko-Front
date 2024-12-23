@@ -1,13 +1,12 @@
-import { getImageUrl } from '@utils/getImageUrl';
-import { RANKING_OPTIONS } from '@features/ranking/constant';
+import * as S from './styles';
 import SortDropdown from './SortDropdown';
 import MyRank from './MyRank';
-import * as S from './styles';
-import type User from '@type/User';
-import type Rank from '@type/Rank';
+import { getImageUrl } from '@utils/getImageUrl';
+import { RANKING_OPTIONS } from '@features/ranking/constant';
+import type { User, RankedUser } from '@features/user/types';
 
 interface RankingContainerProps {
-  myRank: Rank;
+  myRank: RankedUser;
   selectedOption: keyof typeof RANKING_OPTIONS;
   onOptionChange: (option: keyof typeof RANKING_OPTIONS) => void;
   users: User[];

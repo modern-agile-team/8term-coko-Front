@@ -1,9 +1,9 @@
+import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { RANKING_OPTIONS } from '@features/ranking/constant';
-import * as S from './styles';
-import type Rank from '@type/Rank';
+import type { RankedUser } from '@features/user/types';
 
-interface MyRankProps extends Rank {
+interface MyRankProps extends RankedUser {
   selectedOption: keyof typeof RANKING_OPTIONS;
 }
 
