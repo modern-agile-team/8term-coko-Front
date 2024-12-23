@@ -139,7 +139,6 @@ export default function Quiz() {
         </ResponseButton>
       </SubmitSection>
       <Modal isShow={isShow}>
-        <PartClear></PartClear>
         <Funnel>
           <Funnel.Step name="결과">
             <Result
@@ -153,7 +152,7 @@ export default function Quiz() {
             <LoginPrompt onNext={() => setStep('로그인')} />
           </Funnel.Step>
           <Funnel.Step name="로그인">
-            <Login closeModal={closeModal} openModal={noop} />
+            <Login closeModal={noop} openModal={noop} />
           </Funnel.Step>
           <Funnel.Step name="총결과">
             <TotalResults
