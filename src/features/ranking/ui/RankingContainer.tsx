@@ -1,24 +1,16 @@
-import { getImageUrl } from '@/utils/getImageUrl';
-import rankingOptions from '../service/rankingOptions';
+import { getImageUrl } from '@utils/getImageUrl';
+import { RANKING_OPTIONS } from '@features/ranking/constant';
 import SortDropdown from './SortDropdown';
 import MyRank from './MyRank';
 import * as S from './styles';
+import type User from '@type/User';
+import type Rank from '@type/Rank';
 
 interface RankingContainerProps {
-  myRank: {
-    rank: number;
-    nickname: string;
-    level: number;
-    point: number;
-  };
-  selectedOption: string;
-  onOptionChange: (option: string) => void;
-  users: {
-    id: number;
-    nickname: string;
-    level: number;
-    point: number;
-  }[];
+  myRank: Rank;
+  selectedOption: keyof typeof RANKING_OPTIONS;
+  onOptionChange: (option: keyof typeof RANKING_OPTIONS) => void;
+  users: User[];
 }
 
 export default function RankingContainer({
@@ -27,18 +19,12 @@ export default function RankingContainer({
   onOptionChange,
   users,
 }: RankingContainerProps) {
-  const config = rankingOptions[selectedOption];
+  const config = RANKING_OPTIONS[selectedOption];
 
   return (
     <S.RankingContainer>
       {/* 나의 순위 */}
-      <MyRank
-        rank={myRank.rank}
-        nickname={myRank.nickname}
-        level={myRank.level}
-        point={myRank.point}
-        selectedOption={selectedOption}
-      />
+      <MyRank {...myRank} selectedOption={selectedOption} />
       {/* 정렬 드롭다운 */}
       <SortDropdown
         selectedOption={selectedOption}

@@ -1,13 +1,10 @@
-import { getImageUrl } from '@/utils/getImageUrl';
-import rankingOptions from '../service/rankingOptions';
+import { getImageUrl } from '@utils/getImageUrl';
+import { RANKING_OPTIONS } from '@features/ranking/constant';
 import * as S from './styles';
+import type Rank from '@type/Rank';
 
-interface MyRankProps {
-  rank: number;
-  nickname: string;
-  level: number;
-  point: number;
-  selectedOption: string;
+interface MyRankProps extends Rank {
+  selectedOption: keyof typeof RANKING_OPTIONS;
 }
 
 export default function MyRank({
@@ -18,7 +15,7 @@ export default function MyRank({
   selectedOption,
 }: MyRankProps) {
   const user = { level, point };
-  const config = rankingOptions[selectedOption];
+  const config = RANKING_OPTIONS[selectedOption];
 
   return (
     <S.RankingItem $rank={rank}>

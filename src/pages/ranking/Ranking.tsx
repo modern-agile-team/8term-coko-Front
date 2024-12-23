@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { getImageUrl } from '@utils/getImageUrl';
 import * as globalS from '@/style/style';
 import * as S from './styles';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import CokoLogo from '@common/layout/CokoLogo';
-import { getImageUrl } from '@utils/getImageUrl';
 import RankingContainer from '@features/ranking/ui/RankingContainer';
+import { RANKING_OPTIONS } from '@features/ranking/constant';
 
 export default function Ranking() {
-  const [selectedOption, setSelectedOption] = useState('포인트 보유순');
+  const [selectedOption, setSelectedOption] =
+    useState<keyof typeof RANKING_OPTIONS>('포인트 보유순');
   const dummyUsers = [
     { id: 2, nickname: 'gwgw2', level: 4, point: 200 },
     { id: 3, nickname: 'gwgwgw3', level: 2, point: 5000 },
@@ -19,10 +21,11 @@ export default function Ranking() {
   ];
 
   const myRank = {
-    rank: 4,
+    id: 5,
     nickname: 'gwgwgwgwgw5',
-    level: 3,
-    point: 160,
+    level: 10,
+    point: 190,
+    rank: 4,
   };
 
   return (
