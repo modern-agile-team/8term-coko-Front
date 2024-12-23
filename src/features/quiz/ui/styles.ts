@@ -1,5 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 import type Quiz from '@type/Quiz';
+import { media } from '@/style/media';
+import { getImageUrl } from '@/utils/getImageUrl';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
@@ -25,11 +27,17 @@ export const QuestionSection = styled.section<{
   height: 35vh;
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
   font-size: 18px;
+  background-color: #fff;
   font-weight: 700;
   > div:nth-last-child(1) {
     display: flex;
     flex-wrap: wrap;
     padding: 26px 0 0 80px;
+  }
+  ${media.mobile} {
+    width: 90vw;
+    font-size: 18px;
+    height: 50vh;
   }
 `;
 export const Title = styled.h3<{
@@ -44,6 +52,9 @@ export const Title = styled.h3<{
   background-color: ${({ $category }) => categoryColor[$category].background};
   line-height: 24px;
   padding-left: 17px;
+  > p:nth-child(1) {
+    white-space: nowrap;
+  }
 `;
 //question 스타일
 
@@ -58,6 +69,12 @@ export const OXButtonSection = styled.section`
     background-color: transparent;
     border-color: transparent;
   }
+  ${media.mobile} {
+    > img {
+      display: none; /* 예시로 테두리 설정 */
+    }
+    height: 30vh;
+  }
 `;
 
 //객관식 버튼, 이미지 박스 영역
@@ -66,6 +83,11 @@ export const MultipleChoiceSection = styled.section`
   gap: 20px;
   flex-wrap: wrap;
   align-items: center;
+  ${media.mobile} {
+    > img {
+      display: none;
+    }
+  }
 `;
 //객관식 버튼 모아놓는 스타일
 export const MultipleChoiceButtonDiv = styled.div`
@@ -74,6 +96,11 @@ export const MultipleChoiceButtonDiv = styled.div`
   grid-template-rows: 43px 43px;
   grid-row-gap: 15px;
   grid-column-gap: 20px;
+  ${media.mobile} {
+    grid-template-columns: 286px;
+    grid-template-rows: repeat(4, 43px);
+    margin-top: 34px;
+  }
 `;
 
 //객관식에서 각 문항 버튼
@@ -101,6 +128,15 @@ export const ShortAnswerSection = styled.section`
   margin-top: 24px;
   :nth-child(1) {
     align-self: flex-end;
+  }
+  ${media.mobile} {
+    height: 30vh;
+    > img {
+      display: none;
+    }
+    > input {
+      width: 286px;
+    }
   }
 `;
 //단답형 문항에서 단답형을 쓰는 인풋박스
@@ -189,19 +225,26 @@ const fadeIn = keyframes`
     transform: translateY(0);
   }
 `;
-export const ScoreSection = styled.section<{ $backGroundImage: string }>`
+export const ScoreSection = styled.section<{ $isResult: boolean }>`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  background-image: url(${({ $backGroundImage }) => $backGroundImage});
+  background-image: ${({ $isResult }) =>
+    `url(${getImageUrl($isResult ? '정답모달.svg' : '오답모달.svg')})`};
   background-size: cover;
   width: 100vw;
   height: 25%;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   animation: ${fadeIn} 0.7s ease-out;
+  ${media.mobile} {
+    background-image: ${({ $isResult }) =>
+      `url(${getImageUrl($isResult ? '정답모달.svg' : '오답모달.svg')})`};
+    justify-content: center;
+  }
 `;
 export const NextPageButton = styled.button<{ $isAnswer: boolean }>`
+  position: absolute;
   width: 175px;
   border: 2px solid #01f152;
   margin: 0 81px 39px 0;
@@ -226,17 +269,41 @@ export const NextPageButton = styled.button<{ $isAnswer: boolean }>`
         border-color: #e8080c;
       }
     `}
+  ${media.mobile} {
+    width: 343px;
+    height: 33px;
+    margin: 0 0 30px 0;
+    border: none;
+    background-color: #00dd4a;
+    box-shadow: 0 5px #00c843;
+    ${({ $isAnswer }) =>
+      !$isAnswer &&
+      css`
+        background-color: #ff1b1b;
+        box-shadow: 0 5px #e00;
+        &:hover {
+          background-color: #ff0004;
+        }
+      `}
+  }
 `;
 export const LineChangeDiv = styled.div`
   flex-basis: 100%;
   height: 10px;
 `;
 export const AnswerDiv = styled.div`
+  position: absolute;
   color: #ffffff;
   font-weight: 700;
   font-size: 24px;
   line-height: 24px;
-  margin: 0 350px 58px 0;
+  top: 90px;
+  right: 40%;
+  /* margin: 0 350px 58px 0; */
+  ${media.mobile} {
+    margin: 0;
+    top: 50px;
+  }
 `;
 //모달 애니메이션
 const fadeInScaleUp = keyframes`

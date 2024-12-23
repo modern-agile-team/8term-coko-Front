@@ -3,18 +3,17 @@ import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
 import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
-import { getImageUrl } from '@utils/getImageUrl';
 
 interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
-  result: boolean;
+  isResult: boolean;
   closeModal: () => void;
 }
 export default function Result({
   quizId,
   answer,
-  result,
+  isResult,
   closeModal,
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
@@ -25,12 +24,10 @@ export default function Result({
   //임시 유저 가져오기
   return (
     <>
-      <ScoreSection
-        $backGroundImage={getImageUrl(result ? `정답모달.svg` : `오답모달.svg`)}
-      >
-        <AnswerDiv>{!result && '정답 : ' + answer}</AnswerDiv>
+      <ScoreSection $isResult={isResult}>
+        <AnswerDiv>{!isResult && '정답 : ' + answer}</AnswerDiv>
         <NextPageButton
-          $isAnswer={result}
+          $isAnswer={isResult}
           onClick={() => {
             resetUserResponseAnswer();
             closeModal();
@@ -39,7 +36,7 @@ export default function Result({
               addProgress.mutate({
                 userId,
                 quizId,
-                body: { isCorrect: result },
+                body: { isCorrect: isResult },
               });
           }}
         >
