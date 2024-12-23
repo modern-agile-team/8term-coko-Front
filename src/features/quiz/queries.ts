@@ -8,7 +8,7 @@ const quizKeys = {
   part: (partId: number) => [...quizKeys.parts(), partId] as const,
 };
 
-const quizzesQuery = {
+export const quizzesQuery = {
   get: ({ partId }: { partId: number }) => {
     return useQuery({
       queryKey: quizKeys.part(partId),
@@ -18,4 +18,3 @@ const quizzesQuery = {
   },
 };
 
-export { quizzesQuery };
