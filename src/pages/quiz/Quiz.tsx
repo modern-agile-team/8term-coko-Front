@@ -90,7 +90,6 @@ export default function Quiz() {
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
-
   if (isLoading || isImageLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
   const { id, title, question, category, answerChoice, answer } =
@@ -144,7 +143,7 @@ export default function Quiz() {
           <Funnel.Step name="결과">
             <Result
               quizId={id}
-              result={totalResults[currentPage]}
+              isResult={totalResults[currentPage]}
               answer={answer}
               closeModal={closeModal}
             />

@@ -1,3 +1,4 @@
+import { media } from '@/style/media';
 import styled, { css } from 'styled-components';
 //그리드 나누기용 width는 나중에 글로벌스타일 들어오면 지우기
 
@@ -20,6 +21,9 @@ export const ProgressSection = styled.section`
   border-radius: 8px;
   border: 2px solid #00b6c0;
   background: #00d9e9;
+  ${media.mobile} {
+    width: 85vw;
+  }
 `;
 //응답버튼 영역잡기
 export const SubmitSection = styled.section`
@@ -28,6 +32,11 @@ export const SubmitSection = styled.section`
   align-items: center;
   justify-content: space-between;
   margin-top: 48px;
+  ${media.mobile} {
+    width: 85vw;
+    position: fixed;
+    bottom: 28px;
+  }
 `;
 //응답 버튼
 export const ResponseButton = styled.button<{ $disabled?: boolean }>`
