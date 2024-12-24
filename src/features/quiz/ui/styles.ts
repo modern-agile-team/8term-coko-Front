@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import type Quiz from '@type/Quiz';
+import type { Quiz } from '@features/quiz/types';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 

@@ -1,14 +1,15 @@
+import { useState } from 'react';
+import * as globalS from '@/style/style';
+import * as S from './styles';
 import CokoLogo from '@common/layout/CokoLogo';
 import Header from '@common/layout/Header';
 import MenuBar from '@common/layout/MenuBar';
-import * as globalS from '@/style/style';
-import * as S from './styles';
-import { useState } from 'react';
 import ItemContainer from '@features/store/ui/ItemContainer';
 import CartList from '@features/store/ui/CartList';
 import MyCharacter from '@features/user/ui/MyCharacter';
 import ProfileImage from '@features/user/ui/ProfileImage';
-import CosmeticItem from '@/types/CosmeticItem ';
+import type { CosmeticItem } from '@features/store/types';
+
 const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
   {
     label: '의상',

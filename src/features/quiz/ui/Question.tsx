@@ -1,15 +1,15 @@
 import * as S from './styles';
-import { useClientQuizStore } from '@store/useClientQuizStore';
 import './styles.css';
-import type Quiz from '@type/Quiz';
 import 'highlight.js/styles/base16/atelier-cave-light.css';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useDnDStore } from '@store/useDnDStore';
 import useCodeHighlight from '../service/useCodeHighlight';
 import dompurify from 'dompurify';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import replaceEmptyWithHTMLElement from '../service/replaceEmptyWithHTMLElement';
 import addLineNumbersToCode from '../service/addLineNumbersToCode';
 import TextBlock from './TextBlock';
-import { useDnDStore } from '@store/useDnDStore';
+import type { Quiz } from '@features/quiz/types';
 
 interface QuestionProps {
   title: Quiz['title'];
