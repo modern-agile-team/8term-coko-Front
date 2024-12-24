@@ -2,7 +2,6 @@ import styled, { css, keyframes } from 'styled-components';
 import type Quiz from '@type/Quiz';
 import { media } from '@/style/media';
 import { getImageUrl } from '@/utils/getImageUrl';
-
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
 //문제 유형별 컬러 객체
@@ -347,7 +346,7 @@ export const CompensationSection = styled.section<{
       display: none;
     }
     > button {
-      margin: 50px 0 0 0;
+      margin: 0;
       align-self: center;
     }
   }
@@ -373,7 +372,7 @@ export const CompensationTextDiv = styled.div`
   line-height: 24px;
 
   > p:nth-child(1) {
-    line-height: 12px;
+    line-height: 18px;
     font-weight: 700;
     color: #49ff87;
     font-size: 26px;
@@ -400,12 +399,21 @@ export const ImageDescriptionDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  > p:nth-last-child(1) {
+  > p {
     align-self: center;
     position: relative;
     top: 30px;
     color: #d30000;
     font-size: 10px;
+  }
+  ${media.mobile} {
+    margin: 0;
+    > p {
+      display: block;
+      position: static;
+      margin: 10px 0 20px 0;
+      font-size: 18px;
+    }
   }
 `;
 export const RedirectToLearnButton = styled.button<{ $isActive: boolean }>`
@@ -541,3 +549,29 @@ export const Pre = styled.pre`
 `;
 
 export const Code = styled.code``;
+
+export const PartClearTextDiv = styled.div`
+  display: flex;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 25px 0 15px 0;
+  > p {
+    color: #ff4949;
+  }
+`;
+export const PartClearImageBox = styled.div`
+  display: flex;
+  margin-top: 15px;
+  ${media.mobile} {
+    > img:nth-child(1),
+    img:nth-child(3) {
+      display: none;
+    }
+  }
+`;
+
+export const PartClearPoint = styled.p`
+  color: #f09900;
+  margin: 10px 0 15px 0;
+`;

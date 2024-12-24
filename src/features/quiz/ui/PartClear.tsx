@@ -4,7 +4,10 @@ import { pointQuery } from '@queries/usersQuery';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
 import { getImageUrl } from '@/utils/getImageUrl';
-export default function PartClear() {
+interface PartClearProps {
+  partId: number;
+}
+export default function PartClear({ partId }: PartClearProps) {
   const navigate = useNavigate();
   const { mutate: updatePoint, isIdle } = pointQuery.patch();
   const { user } = useUserStore();
@@ -20,11 +23,28 @@ export default function PartClear() {
   return (
     <>
       <S.CompensationSection $backgroundColor="#F0DAAB" $boxShadow="#E5C892">
-        <h1>와 파트클리어 축하해</h1>
-        <div>
-          {/* <S.Img $height="50%" $width="" src={getImageUrl('챕터완료.svg')} /> */}
-        </div>
-        <p>{point} Point</p>
+        <S.PartClearTextDiv>
+          축하해!&nbsp;<p>파트 {partId}</p>&nbsp;을 다 깼구나!
+        </S.PartClearTextDiv>
+        <S.DashLineHr $color="#fff" />
+        <S.PartClearImageBox>
+          <S.Img
+            $height="200px"
+            $width="121px"
+            src={getImageUrl('파트완료_왼쪽.svg')}
+          />
+          <S.Img
+            $height="200px"
+            $width="300px"
+            src={getImageUrl('파트완료_가운데.svg')}
+          />
+          <S.Img
+            $height="200px"
+            $width="121px"
+            src={getImageUrl('파트완료_오른쪽.svg')}
+          />
+        </S.PartClearImageBox>
+        <S.PartClearPoint>{point} Point</S.PartClearPoint>
         <S.RedirectToLearnButton
           $isActive={isIdle}
           onClick={() => {
