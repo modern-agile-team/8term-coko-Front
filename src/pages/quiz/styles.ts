@@ -33,6 +33,8 @@ export const SubmitSection = styled.section`
   justify-content: space-between;
   margin-top: 48px;
   ${media.mobile} {
+    position: fixed;
+    bottom: 0;
     width: 85vw;
   }
 `;

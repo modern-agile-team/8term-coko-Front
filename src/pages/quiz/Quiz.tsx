@@ -128,6 +128,7 @@ export default function Quiz() {
         >
           SKIP
         </ResponseButton>
+
         <ResponseButton
           disabled={isQuizAnswered}
           $disabled={isQuizAnswered}

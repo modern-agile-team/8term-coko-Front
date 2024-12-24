@@ -1,3 +1,4 @@
+import { isMobile } from '@modern-kit/utils';
 import { progressQuery } from '../../../queries/usersQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
@@ -17,15 +18,15 @@ export default function Result({
   closeModal,
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
-  //임시 유저 가져오기
   const { user } = useUserStore();
   const userId = user?.id;
   const addProgress = progressQuery.put();
-  //임시 유저 가져오기
+  const answerFeedback = isMobile() ? answer : `정답 : ${answer}`;
+
   return (
     <>
       <ScoreSection $isResult={isResult}>
-        <AnswerDiv>{!isResult && '정답 : ' + answer}</AnswerDiv>
+        <AnswerDiv>{!isResult && answerFeedback}</AnswerDiv>
         <NextPageButton
           $isAnswer={isResult}
           onClick={() => {

@@ -244,7 +244,7 @@ export const ScoreSection = styled.section<{ $isResult: boolean }>`
   animation: ${fadeIn} 0.7s ease-out;
   ${media.mobile} {
     background-image: ${({ $isResult }) =>
-      `url(${getImageUrl($isResult ? '정답모달.svg' : '오답모달.svg')})`};
+      `url(${getImageUrl($isResult ? '정답_모바일.svg' : '오답_모바일.svg')})`};
     justify-content: center;
   }
 `;
@@ -306,8 +306,10 @@ export const AnswerDiv = styled.div`
   right: 40%;
   /* margin: 0 350px 58px 0; */
   ${media.mobile} {
+    font-size: 18px;
     margin: 0;
-    top: 50px;
+    right: 8%;
+    top: 23%;
   }
 `;
 //모달 애니메이션
@@ -340,7 +342,14 @@ export const CompensationSection = styled.section<{
   box-shadow: 0 11px ${({ $boxShadow }) => $boxShadow};
   ${media.mobile} {
     width: 100%;
-    height: 60%;
+    height: 50%;
+    > hr {
+      display: none;
+    }
+    > button {
+      margin: 50px 0 0 0;
+      align-self: center;
+    }
   }
 `;
 
@@ -381,10 +390,9 @@ export const CompensationTextDiv = styled.div`
 export const TotalResultsRewardDiv = styled.div`
   display: flex;
   ${media.mobile} {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
-    gap: 40px;
   }
 `;
 export const ImageDescriptionDiv = styled.div`
@@ -448,6 +456,9 @@ export const TotalResultProgressDiv = styled.div`
     }
     display: flex;
     margin-bottom: 20px;
+    > div {
+      display: flex;
+    }
   }
 `;
 export const Img = styled.img<{ $width: string; $height: string }>`
