@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { media } from './style/media';
 import GlobalStyle from './style/GlobalStyle';
 import { useEffect } from 'react';
-import axios from 'axios';
+import api from './apis/axios/instance';
 
 function App() {
   const queryClient = new QueryClient({
@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const response = await axios.get('https://api.cokoedu.com/auth/verify');
+        const response = await api.get('/auth/verify');
         console.log('Verification successful:', response.data);
       } catch (error) {
         console.error('Verification failed:', error);
