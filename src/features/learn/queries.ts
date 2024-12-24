@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import sectionsApis from '@apis/sectionsApis';
+import sectionsApis from '@features/learn/apis';
 
 const sectionKeys = {
   all: ['sections'],

@@ -13,7 +13,7 @@ import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
-import sectionsQuery from '@/queries/sectionsQuery';
+import sectionsQuery from '@/features/learn/queries';
 
 export default function Learn() {
   const { setUser } = useUserStore();
