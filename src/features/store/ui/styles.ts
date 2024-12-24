@@ -1,5 +1,5 @@
-import CosmeticItem from '@type/CosmeticItem ';
 import styled, { css } from 'styled-components';
+import type { CosmeticItem } from '@features/store/types';
 
 export const ItemContainer = styled.ul<{ $category: CosmeticItem['category'] }>`
   margin: 18px 0 27px 0;

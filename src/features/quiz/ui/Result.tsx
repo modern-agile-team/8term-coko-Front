@@ -1,9 +1,9 @@
 import { isMobile } from '@modern-kit/utils';
-import { progressQuery } from '../../../queries/usersQuery';
-import { useClientQuizStore } from '../../../store/useClientQuizStore';
-import useUserStore from '../../../store/useUserStore';
-import Quiz from '../../../types/Quiz';
 import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
+import { progressQuery } from '@features/user/queries';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import useUserStore from '@store/useUserStore';
+import type { Quiz } from '@features/quiz/types';
 
 interface ResultProps {
   quizId: Quiz['id'];

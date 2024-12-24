@@ -1,6 +1,6 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
-import CosmeticItem from '@type/CosmeticItem ';
+import type { CosmeticItem } from '@features/store/types';
 
 export default function StoreItem({
   name,

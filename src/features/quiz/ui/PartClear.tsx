@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import * as S from './styles';
-import { pointQuery } from '@queries/usersQuery';
+import { CompensationSection } from './styles';
+import { pointQuery } from '@features/user/queries';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
 import { getImageUrl } from '@/utils/getImageUrl';

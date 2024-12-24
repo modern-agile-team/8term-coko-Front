@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import type User from '../types/User';
+import type { User } from '@features/user/types';
+
 interface State {
   user?: User;
 }

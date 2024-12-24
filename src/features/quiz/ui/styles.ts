@@ -1,7 +1,8 @@
 import styled, { css, keyframes } from 'styled-components';
-import type Quiz from '@type/Quiz';
 import { media } from '@/style/media';
 import { getImageUrl } from '@/utils/getImageUrl';
+import type { Quiz } from '@features/quiz/types';
+
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
 //문제 유형별 컬러 객체

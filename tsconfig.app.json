@@ -10,10 +10,8 @@
       "@/*": ["*"],
       "@hooks*": ["hooks/*"],
       "@features*": ["features/*"],
-      "@queries*": ["queries/*"],
       "@store*": ["store/*"],
       "@utils*": ["utils/*"],
-      "@apis*": ["apis/*"],
       "@common*": ["common/*"],
       "@type*": ["types/*"]
     },
