@@ -12,7 +12,6 @@
       "@features*": ["features/*"],
       "@store*": ["store/*"],
       "@utils*": ["utils/*"],
-      "@apis*": ["apis/*"],
       "@common*": ["common/*"],
       "@type*": ["types/*"]
     },

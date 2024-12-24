@@ -1,4 +1,4 @@
-import api from '@apis/axios/instance';
+import api from '@/axios/instance';
 import type { User, ExperiencedUser } from '@features/user/types';
 import type { Quiz } from '@features/quiz/types';
 
