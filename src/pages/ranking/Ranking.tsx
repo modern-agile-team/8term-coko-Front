@@ -12,17 +12,17 @@ export default function Ranking() {
   const [selectedOption, setSelectedOption] =
     useState<keyof typeof RANKING_OPTIONS>('포인트 보유순');
   const dummyUsers = [
-    { id: 2, nickname: 'gwgw2', level: 4, point: 200 },
-    { id: 3, nickname: 'gwgwgw3', level: 2, point: 5000 },
-    { id: 4, nickname: 'gwgwgwgw4', level: 3, point: 160 },
-    { id: 5, nickname: 'gwgwgwgwgw5', level: 10, point: 190 },
-    { id: 6, nickname: 'gwgwgwgwgwgw6', level: 12, point: 230 },
-    { id: 7, nickname: 'gwgwgwgwgwgwgw7', level: 1, point: 3000 },
+    { id: 2, name: 'gwgw2', level: 4, point: 200 },
+    { id: 3, name: 'gwgwgw3', level: 2, point: 5000 },
+    { id: 4, name: 'gwgwgwgw4', level: 3, point: 160 },
+    { id: 5, name: 'gwgwgwgwgw5', level: 10, point: 190 },
+    { id: 6, name: 'gwgwgwgwgwgw6', level: 12, point: 230 },
+    { id: 7, name: 'gwgwgwgwgwgwgw7', level: 1, point: 3000 },
   ];
 
   const myRank = {
     id: 5,
-    nickname: 'gwgwgwgwgw5',
+    name: 'gwgwgwgwgw5',
     level: 10,
     point: 190,
     rank: 4,
