@@ -5,7 +5,7 @@ import {
   ButtonGrid,
   KeyboardButton,
   UpperBackgroundImg,
-} from '../styles';
+} from './styles.ts';
 import { getImageUrl } from '@utils/getImageUrl';
 import { useNavigate } from 'react-router-dom';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';

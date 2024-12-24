@@ -13,6 +13,7 @@ export default function Modal({
   useEffect(() => {
     if (isShow) {
       document.body.style.overflow = 'hidden';
+      (document.activeElement as HTMLElement).blur();
     } else {
       document.body.style.overflow = 'auto';
     }

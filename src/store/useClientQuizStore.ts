@@ -7,6 +7,7 @@ interface State {
 interface Actions {
   nextPage: () => void;
   setUserResponseAnswer: (userResposne: string) => void;
+  setUserResponseAtIndex: (userResponse: string, index: number) => void;
   pushUserResponseAnswer: (userResponse: string) => void;
   spliceUserResponseAnswer: (choiceIndex: number) => void;
   swapUserResponseAnswer: (index1: number, index2: number) => void;
@@ -23,6 +24,12 @@ export const useClientQuizStore = create<State & Actions>(set => ({
   //유저의 응답을 추가(단답형, OX, 객관식 )
   setUserResponseAnswer: userResposne =>
     set(() => ({ userResponseAnswer: [userResposne] })),
+  //유저의 응답을 특정 인덱스에 업데이트
+  setUserResponseAtIndex: (userResponse, index) =>
+    set(state => {
+      state.userResponseAnswer[index] = userResponse;
+      return { userResponseAnswer: state.userResponseAnswer };
+    }),
   //유저 응답 누적 (조합형, 답이 여러개인 것)
   pushUserResponseAnswer: userResponse =>
     set(state => {

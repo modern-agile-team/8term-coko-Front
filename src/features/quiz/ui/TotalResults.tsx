@@ -9,7 +9,7 @@ import {
   CompensationSection,
   TotalResultsRewardDiv,
   TotalResultsTextDiv,
-} from '../styles';
+} from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { useTimeout } from '@modern-kit/react';
 import { useNavigate } from 'react-router-dom';

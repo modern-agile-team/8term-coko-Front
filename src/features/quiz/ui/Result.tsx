@@ -2,7 +2,7 @@ import { progressQuery } from '../../../queries/usersQuery';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import useUserStore from '../../../store/useUserStore';
 import Quiz from '../../../types/Quiz';
-import { AnswerDiv, NextPageButton, ScoreSection } from '../styles';
+import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 
 interface ResultProps {
@@ -17,8 +17,7 @@ export default function Result({
   result,
   closeModal,
 }: ResultProps) {
-  const { nextPage, resetUserResponseAnswer, pushTotalResults, currentPage } =
-    useClientQuizStore();
+  const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   //임시 유저 가져오기
   const { user } = useUserStore();
   const userId = user?.id;

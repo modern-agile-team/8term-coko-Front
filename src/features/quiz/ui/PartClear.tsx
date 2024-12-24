@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { CompensationSection } from '../styles';
+import { CompensationSection } from './styles';
 import { pointQuery } from '@queries/usersQuery';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
