@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import usersApis from '../apis/usersApis';
-import Experience from '../types/Experience';
-import User from '../types/User';
+import usersApis from '@features/user/apis';
+import type { User, ExperiencedUser } from '@features/user/types';
+
 const userKeys = {
   all: ['users'] as const,
   details: () => [...userKeys.all, 'detail'] as const,
@@ -15,12 +15,13 @@ const userKeys = {
   ],
 };
 
-const progressQuery = {
+export const progressQuery = {
   put: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
 };
-const userQuizzesQuery = {
+
+export const userQuizzesQuery = {
   get: ({ userId, partId }: { userId: number; partId: number }) => {
     return useQuery({
       queryKey: userKeys.partQuizzes(userId, partId),
@@ -30,7 +31,8 @@ const userQuizzesQuery = {
     });
   },
 };
-const experienceQuery = {
+
+export const experienceQuery = {
   get: (id: User['id']) => {
     return useQuery({
       queryKey: userKeys.experience(id),
@@ -49,12 +51,12 @@ const experienceQuery = {
           queryKey: userKeys.experience(newExperience.id),
           exact: true,
         });
-        const previousExperience = queryClient.getQueryData<Experience>(
+        const previousExperience = queryClient.getQueryData<ExperiencedUser>(
           userKeys.experience(newExperience.id)
         );
         queryClient.setQueryData(
           userKeys.experience(newExperience.id),
-          (old: Experience) => {
+          (old: ExperiencedUser) => {
             //경험치 증가 로직
             if (!old) return old;
             old.experience += newExperience.experience;
@@ -70,7 +72,6 @@ const experienceQuery = {
             return old;
           }
         );
-
         return { previousExperience };
       },
       onError: (err, newExperience, context) => {
@@ -87,11 +88,11 @@ const experienceQuery = {
     });
   },
 };
-const pointQuery = {
+
+export const pointQuery = {
   patch: () => {
     return useMutation({
       mutationFn: usersApis.patchPoint,
     });
   },
 };
-export { progressQuery, experienceQuery, userQuizzesQuery, pointQuery };

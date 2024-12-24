@@ -1,11 +1,12 @@
-import Quiz from '../../../types/Quiz';
 import {
   MultipleChoiceButton,
   MultipleChoiceSection,
   MultipleChoiceButtonDiv,
   Img,
 } from './styles';
-import { useClientQuizStore } from '../../../store/useClientQuizStore';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import type { Quiz } from '@features/quiz/types';
+
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 interface MultipleChoiceProps {
   answerChoice: Quiz['answerChoice'];

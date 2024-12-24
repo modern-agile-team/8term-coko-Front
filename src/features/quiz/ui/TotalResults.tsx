@@ -1,5 +1,3 @@
-import { experienceQuery } from '@queries/usersQuery';
-import { useClientQuizStore } from '@store/useClientQuizStore';
 import {
   DashLineHr,
   ImageDescriptionDiv,
@@ -11,11 +9,14 @@ import {
   TotalResultsTextDiv,
 } from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
-import { useTimeout } from '@modern-kit/react';
-import { useNavigate } from 'react-router-dom';
-import ProgressBar from '@features/progress/ui/ProgressBar';
 import useUserStore from '@store/useUserStore';
-import User from '@type/User';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useNavigate } from 'react-router-dom';
+import { useTimeout } from '@modern-kit/react';
+import { experienceQuery } from '@features/user/queries';
+import ProgressBar from '@features/progress/ui/ProgressBar';
+import type { User } from '@features/user/types';
+
 interface TotalResultProps {
   onNext: () => void;
   quizzesLength: number;

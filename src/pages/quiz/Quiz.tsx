@@ -1,37 +1,38 @@
-import Question from '@features/quiz/ui/Question';
-import { AlignCenter } from '../../style/LayOut';
 import {
   HeaderSection,
   ProgressSection,
   ResponseButton,
   SubmitSection,
 } from './styles';
-import type Quiz from '@type/Quiz';
+import { AlignCenter } from '@/style/LayOut';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import useBeforeUnload from '@/hooks/useBeforeUnload';
+import useModal from '@hooks/useModal';
+import usePreloadImages from '@hooks/usePreloadImages';
+import useFunnel from '@hooks/useFunnel';
+import { useUnmount } from '@modern-kit/react';
+import { noop } from '@modern-kit/utils';
 import { useClientQuizStore } from '@store/useClientQuizStore';
+import useUserStore from '@store/useUserStore';
+import { quizzesQuery } from '@features/quiz/queries';
+import { userQuizzesQuery } from '@features/user/queries';
+import Header from '@common/layout/Header';
+import ProgressBar from '@features/progress/ui/ProgressBar';
+import LoginPrompt from '@features/login/ui/LoginPrompt';
+import Login from '@features/login/ui/Login';
+import Question from '@features/quiz/ui/Question';
 import Combination from '@features/quiz/ui/Combination';
 import MultipleChoice from '@features/quiz/ui/MultipleChoice';
 import OXSelector from '@features/quiz/ui/OXSelector';
 import ShortAnswer from '@features/quiz/ui/ShortAnswer';
-import componentMapping from '@utils/componentMap';
-import useBeforeUnload from '@/hooks/useBeforeUnload';
 import Result from '@features/quiz/ui/Result';
 import TotalResults from '@features/quiz/ui/TotalResults';
-import isEqualArray from '@utils/isEqualArray';
-import quizzesQuery from '@queries/quizzesQuery';
-import useModal from '@hooks/useModal';
-import usePreloadImages from '@hooks/usePreloadImages';
-import { useEffect, useState } from 'react';
-import Header from '@common/layout/Header';
-import useUserStore from '@store/useUserStore';
-import ProgressBar from '@features/progress/ui/ProgressBar';
-import { useLocation } from 'react-router-dom';
-import { userQuizzesQuery } from '@queries/usersQuery';
-import LoginPrompt from '@features/login/ui/LoginPrompt';
-import useFunnel from '@hooks/useFunnel';
 import PartClear from '@features/quiz/ui/PartClear';
-import { noop } from '@modern-kit/utils';
-import Login from '@features/login/ui/Login';
-import { useUnmount } from '@modern-kit/react';
+import componentMapping from '@utils/componentMap';
+import isEqualArray from '@utils/isEqualArray';
+import type { Quiz } from '@features/quiz/types';
+
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({

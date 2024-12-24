@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { CompensationSection } from './styles';
-import { pointQuery } from '@queries/usersQuery';
+import { pointQuery } from '@features/user/queries';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
 export default function PartClear() {

@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import quizzesApis from '@apis/quizzesApis';
+import quizzesApis from '@features/quiz/apis';
+
 const quizKeys = {
   all: ['quizzes'],
   filters: () => [...quizKeys.all, 'filter'],
   parts: () => [...quizKeys.all, 'parts'] as const,
   part: (partId: number) => [...quizKeys.parts(), partId] as const,
 };
-const QuizzesQuery = {
+
+export const quizzesQuery = {
   get: ({ partId }: { partId: number }) => {
     return useQuery({
       queryKey: quizKeys.part(partId),
@@ -15,4 +17,3 @@ const QuizzesQuery = {
     });
   },
 };
-export default QuizzesQuery;

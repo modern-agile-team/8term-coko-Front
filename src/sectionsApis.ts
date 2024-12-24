@@ -1,5 +1,5 @@
 import Section from '@type/Section';
-import api from './axios/instance';
+import api from '@/axios/instance';
 
 const sectionsApis = {
   // 특정 섹션 ID에 대한 데이터 가져오기

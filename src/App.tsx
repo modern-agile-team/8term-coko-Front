@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { media } from './style/media';
 import GlobalStyle from './style/GlobalStyle';
 import { useEffect } from 'react';
-import api from './apis/axios/instance';
+import api from '@/axios/instance';
 
 function App() {
   const queryClient = new QueryClient({
