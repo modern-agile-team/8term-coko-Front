@@ -4,8 +4,6 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'styled-components';
 import { media } from './style/media';
 import GlobalStyle from './style/GlobalStyle';
-import { useEffect } from 'react';
-import api from '@/axios/instance';
 
 function App() {
   const queryClient = new QueryClient({
@@ -16,19 +14,6 @@ function App() {
       },
     },
   });
-
-  useEffect(() => {
-    const verifyAuth = async () => {
-      try {
-        const response = await api.get('/auth/verify');
-        console.log('Verification successful:', response.data);
-      } catch (error) {
-        console.error('Verification failed:', error);
-      }
-    };
-
-    verifyAuth();
-  }, []);
 
   return (
     <>

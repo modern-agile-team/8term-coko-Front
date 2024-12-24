@@ -4,7 +4,7 @@ import {
   GoToLoginButton,
   LoginPromptSection,
   LoginPromptImg,
-} from '../styles';
+} from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 interface GoToLoginProps {
   onNext: () => void;

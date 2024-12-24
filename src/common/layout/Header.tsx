@@ -1,16 +1,15 @@
+import * as S from '../ui/style';
+import { HeaderBox } from './style';
+import { getImageUrl } from '@utils/getImageUrl';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getImageUrl } from '@utils/getImageUrl';
-import { HeaderBox } from './style';
-import * as S from '../ui/style';
-import HeaderItem from '../ui/HeaderItem';
-import Login from '@features/login/ui/Login';
-import handleLogout from '@features/login/service/handleLogout';
-import isLoggedIn from '@utils/isLoggedIn';
 import useModal from '@hooks/useModal';
-import useUserStore from '@store/useUserStore';
 import usePopover from '@hooks/usePopover';
+import HeaderItem from '../ui/HeaderItem';
+import Login from '@features/auth/ui/Login';
+import handleLogout from '@features/auth/service/handleLogout';
 import ProfileImage from '@features/user/ui/ProfileImage';
+import { authQuery } from '@features/auth/queries';
 
 export default function Header() {
   const points: number = 2999999999;
@@ -18,18 +17,19 @@ export default function Header() {
 
   const navigate = useNavigate();
   const { isShow, openModal, closeModal, Modal } = useModal();
-  const { user } = useUserStore();
 
   const profileRef = useRef<HTMLDivElement>(null);
   const { isOpen, togglePopover, popoverRef } = usePopover({
     excludeRefs: [profileRef],
   });
 
+  const { data: user } = authQuery.verify();
+
   const handleProfileClick = () => {
-    if (isLoggedIn()) {
-      togglePopover(); // 팝오버 열기/닫기
+    if (user) {
+      togglePopover();
     } else {
-      openModal(); // 로그인 모달 열기
+      openModal();
     }
   };
 
@@ -51,9 +51,9 @@ export default function Header() {
       )}
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
         <ProfileImage isIcon={true} />
-        {isLoggedIn() && isOpen && (
+        {user && isOpen && (
           <S.ProfilePopover ref={popoverRef} onClick={e => e.stopPropagation()}>
-            <S.UserNameText>유저이름</S.UserNameText>
+            <S.UserNameText>{user.nickname}</S.UserNameText>
             <S.UserJoinDate>2024.11.19</S.UserJoinDate>
             <S.UserInfoButton
               $backgroundColor="#00FAFF"
@@ -79,7 +79,7 @@ export default function Header() {
           </S.ProfilePopover>
         )}
       </S.ProfileWrapper>
-      {!isLoggedIn() && (
+      {!user && (
         <Modal isShow={isShow}>
           <Login openModal={openModal} closeModal={closeModal} />
         </Modal>
