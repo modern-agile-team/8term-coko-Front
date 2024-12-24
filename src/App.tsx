@@ -20,9 +20,7 @@ function App() {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const response = await api.get('/auth/verify', {
-          withCredentials: true,
-        });
+        const response = await api.get('/auth/verify');
         console.log('Verification successful:', response.data);
       } catch (error) {
         console.error('Verification failed:', error);
