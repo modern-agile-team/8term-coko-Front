@@ -32,9 +32,10 @@ export const SubmitSection = styled.section`
   align-items: center;
   justify-content: space-between;
   margin-top: 48px;
+
   ${media.mobile} {
     position: fixed;
-    bottom: 0;
+    bottom: 10px;
     width: 85vw;
   }
 `;

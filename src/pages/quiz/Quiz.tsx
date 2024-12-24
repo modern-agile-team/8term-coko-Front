@@ -162,7 +162,7 @@ export default function Quiz() {
             />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">
-            <PartClear />
+            <PartClear partId={partId} />
           </Funnel.Step>
         </Funnel>
       </Modal>
