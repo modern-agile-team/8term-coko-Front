@@ -34,8 +34,6 @@ export const SubmitSection = styled.section`
   margin-top: 48px;
 
   ${media.mobile} {
-    position: fixed;
-    bottom: 10px;
     width: 85vw;
   }
 `;
