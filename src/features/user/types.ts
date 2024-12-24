@@ -1,6 +1,6 @@
 export interface User {
   id: number;
-  nickname: string;
+  name: string;
   level: number;
   point: number;
 }

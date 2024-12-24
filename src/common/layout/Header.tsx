@@ -53,7 +53,7 @@ export default function Header() {
         <ProfileImage isIcon={true} />
         {user && isOpen && (
           <S.ProfilePopover ref={popoverRef} onClick={e => e.stopPropagation()}>
-            <S.UserNameText>{user.nickname}</S.UserNameText>
+            <S.UserNameText>{user.name}</S.UserNameText>
             <S.UserJoinDate>2024.11.19</S.UserJoinDate>
             <S.UserInfoButton
               $backgroundColor="#00FAFF"

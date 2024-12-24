@@ -20,7 +20,7 @@ export default function Learn() {
 
   // 임시 유저 생성
   useEffect(() => {
-    setUser({ id: 3, nickname: 'admin', level: 1, point: 1000 });
+    setUser({ id: 3, name: 'admin', level: 1, point: 1000 });
   }, []);
 
   const showComponents = useScrollVisibility();
