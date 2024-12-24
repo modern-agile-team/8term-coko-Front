@@ -1,6 +1,6 @@
 import SectionArrowButton from './SectionArrowButton';
 import SectionNavigateContainer from './SectionNavigateContainer';
-import { SectionBoxWrapper, SelectSectionBox, TextOverlay } from '../style';
+import { SectionBoxWrapper, SelectSectionBox, TextOverlay } from './style';
 
 export default function SelectSection() {
   return (

@@ -1,4 +1,4 @@
-import { ArrowButton } from '../style';
+import { ArrowButton } from './style';
 
 export default function SectionArrowButton({
   direction,

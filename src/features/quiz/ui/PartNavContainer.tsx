@@ -9,7 +9,7 @@ import {
 import { getImageUrl } from '@utils/getImageUrl';
 import { useNavigate } from 'react-router-dom';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
-import type Section from '@type/Section';
+import type { Section } from '@/features/learn/types.ts';
 
 interface PartNavContainerProps {
   section?: Section;

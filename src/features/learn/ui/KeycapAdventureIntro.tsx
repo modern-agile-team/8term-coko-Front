@@ -1,7 +1,7 @@
 import { useInterval } from '@modern-kit/react';
-import { getImageUrl } from '../../../utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
 import { useState } from 'react';
-import { HandsUpCokoImg, LegendKeycapMessageImg } from '../style';
+import { HandsUpCokoImg, LegendKeycapMessageImg } from './style';
 
 const messageFileNames = [
   '코코-멘트1.svg',
