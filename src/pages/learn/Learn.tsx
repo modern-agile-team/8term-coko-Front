@@ -13,15 +13,18 @@ import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
+import { authQuery } from '@features/auth/queries';
 import sectionsQuery from '@/features/learn/queries';
 
 export default function Learn() {
   const { setUser } = useUserStore();
+  const { data: user } = authQuery.verify();
 
-  // 임시 유저 생성
   useEffect(() => {
-    setUser({ id: 3, name: 'admin', level: 1, point: 1000 });
-  }, []);
+    if (user) {
+      setUser(user);
+    }
+  }, [user, setUser]);
 
   const showComponents = useScrollVisibility();
   const isImageLoading = usePreloadImages({
@@ -53,7 +56,7 @@ export default function Learn() {
     return counts;
   }, [section]);
 
-  if (isImageLoading) return <div>Loading</div>;
+  if (isImageLoading) return <div>Loading...</div>;
 
   const progress = 30;
   const maxProgress = 100;
