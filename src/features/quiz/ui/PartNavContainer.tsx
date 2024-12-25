@@ -36,7 +36,7 @@ export default function PartNavContainer({
     <>
       <UpperBackgroundImg />
       <EntireSectionContainer>
-        <SectionWrapper key={section.id}>
+        <SectionWrapper id={`section-${section.id}`} key={section.id}>
           <SectionTitle>{section.name}</SectionTitle>
           <ButtonGrid>
             {section.part.map((part, partIndex) => {
@@ -54,6 +54,7 @@ export default function PartNavContainer({
                     navigate('/quiz', { state: { partId: part.id } })
                   }
                 >
+                  {part.name}
                   <img src={buttonImage} alt={`키캡 ${part.name}`} />
                 </KeyboardButton>
               );
