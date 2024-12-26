@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import * as S from '@features/quiz/ui/styles';
-import { pointQuery } from '@features/user/queries';
+import { partProgressQuery, pointQuery } from '@features/user/queries';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
 import { getImageUrl } from '@utils/getImageUrl';
@@ -9,15 +9,16 @@ interface PartClearProps {
 }
 export default function PartClear({ partId }: PartClearProps) {
   const navigate = useNavigate();
-  const { mutate: updatePoint, isIdle } = pointQuery.patch();
+  const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.patch();
+  const { mutate: updateProgress, isIdle: isProgressIdle } =
+    partProgressQuery.put();
   const { user } = useUserStore();
   const point = 1500;
   useTimeout(
     () => {
       if (user) {
         updatePoint({ id: user.id, point });
-
-        user.id;
+        updateProgress({ userId: user.id, partId, status: 'COMPLETED' });
       }
     },
     { delay: 500 }
@@ -49,7 +50,7 @@ export default function PartClear({ partId }: PartClearProps) {
         <S.PartClearPoint>{point} Point</S.PartClearPoint>
         <S.RedirectToLearnButton
           $margin="0 88px 0 0"
-          $isActive={isIdle}
+          $isActive={isPointIdle && isProgressIdle}
           onClick={() => {
             navigate('/learn');
           }}

@@ -160,6 +160,7 @@ export default function Quiz() {
             <TotalResults
               onNext={() => setStep('파트 클리어')}
               quizzesLength={quizzes.length}
+              partId={partId}
             />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">

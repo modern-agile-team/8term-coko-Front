@@ -4,30 +4,37 @@ import useUserStore from '@store/useUserStore';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useNavigate } from 'react-router-dom';
 import { useTimeout } from '@modern-kit/react';
-import { experienceQuery } from '@features/user/queries';
+import { experienceQuery, partProgressQuery } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { User } from '@features/user/types';
+import type { Quiz } from '@features/quiz/types';
 
 interface TotalResultProps {
   onNext: () => void;
   quizzesLength: number;
+  partId: Quiz['partId'];
 }
 export default function TotalResults({
   onNext,
   quizzesLength,
+  partId,
 }: TotalResultProps) {
   const { totalResults } = useClientQuizStore();
   const quizCorrectAnswers = totalResults.filter(result => result).length;
   const isPartClear = quizzesLength === quizCorrectAnswers;
   const { user } = useUserStore() as { user: User };
   const experience = quizCorrectAnswers * 10;
-  const { mutate: experienceUpdate, isIdle } = experienceQuery.patch();
+  const { mutate: experienceUpdate, isIdle: isexperienceIdle } =
+    experienceQuery.patch();
   const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
+  const { mutate: updateProgress, isIdle: isProgressIdle } =
+    partProgressQuery.put();
 
   const navigate = useNavigate();
   useTimeout(
     () => {
       experienceUpdate({ id: user.id, experience });
+      updateProgress({ partId, userId: user.id, status: 'IN_PROGRESS' });
     },
     { delay: 1000, enabled: isSuccess }
   );
@@ -80,8 +87,8 @@ export default function TotalResults({
       </S.TotalResultsRewardDiv>
       <S.DashLineHr $color="#00DCE8" />
       <S.RedirectToLearnButton
-        disabled={isIdle}
-        $isActive={isIdle}
+        disabled={isexperienceIdle && isProgressIdle}
+        $isActive={isexperienceIdle && isProgressIdle}
         $margin="35px 86px 0 0"
         onClick={() => {
           isPartClear ? onNext() : navigate('/learn');
