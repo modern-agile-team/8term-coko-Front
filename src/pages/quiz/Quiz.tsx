@@ -28,29 +28,18 @@ import OXSelector from '@features/quiz/ui/OXSelector';
 import ShortAnswer from '@features/quiz/ui/ShortAnswer';
 import Result from '@features/quiz/ui/Result';
 import TotalResults from '@features/user/ui/TotalResults';
-import PartClear from '@/features/user/ui/PartClear';
+import PartClear from '@features/user/ui/PartClear';
 import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
 import type { partStatus, Quiz } from '@features/quiz/types';
+import { preloadImages } from '@features/quiz/constants';
 
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
-    imageUrls: [
-      'O버튼.svg',
-      'X버튼.svg',
-      'O버튼-선택.svg',
-      'X버튼-선택.svg',
-      '정답모달.svg',
-      '오답모달.svg',
-      '객관식-코코.svg',
-      '과일바구니.svg',
-      '단답형이미지1.svg',
-      '단답형이미지2.svg',
-      '레벨1코코.svg',
-      '과일바구니-아이템.svg',
-    ],
+    imageUrls: preloadImages,
   });
+
   const {
     currentPage,
     totalResults,
@@ -59,25 +48,31 @@ export default function Quiz() {
     pushTotalResults,
   } = useClientQuizStore();
   const { user } = useUserStore();
+
   const { Modal, closeModal, openModal, isShow } = useModal();
   const { partId, status } = useLocation().state as {
     partId: number;
     status: partStatus;
   };
+
+  const isLoggedIn = user !== undefined;
+  const isInProgress = status === 'IN_PROGRESS';
+  const isQuizAnswered = userResponseAnswer[0] === '';
+
   const { data: quizzes, isLoading } =
-    user && status === 'IN_PROGRESS'
+    isLoggedIn && isInProgress
       ? userQuizzesQuery.get({
-          userId: user!.id,
+          userId: user.id,
           partId,
         })
       : quizzesQuery.get({
           partId,
         });
-  const isQuizAnswered = userResponseAnswer[0] === '';
   const isQuizFinished = totalResults.length === quizzes?.length;
   const { Funnel, setStep } = useFunnel('결과');
+
   useEffect(() => {
-    if (totalResults.length === 2 && !user) {
+    if (totalResults.length === 2 && !isLoggedIn) {
       setStep('로그인 유도');
     }
     if (isQuizFinished) {
@@ -91,6 +86,7 @@ export default function Quiz() {
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
+
   if (isLoading || isImageLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
   const { id, title, question, category, answerChoice, answer } =
