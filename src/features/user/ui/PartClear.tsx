@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import * as S from './styles';
-import { CompensationSection } from './styles';
+import * as S from '@features/quiz/ui/styles';
 import { pointQuery } from '@features/user/queries';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
-import { getImageUrl } from '@/utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
 interface PartClearProps {
   partId: number;
 }
@@ -17,6 +16,8 @@ export default function PartClear({ partId }: PartClearProps) {
     () => {
       if (user) {
         updatePoint({ id: user.id, point });
+
+        user.id;
       }
     },
     { delay: 500 }

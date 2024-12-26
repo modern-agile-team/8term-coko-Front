@@ -1,13 +1,4 @@
-import * as S from './styles';
-import {
-  DashLineHr,
-  ImageDescriptionDiv,
-  Img,
-  RedirectToLearnButton,
-  TotalResultProgressDiv,
-  CompensationSection,
-  TotalResultsRewardDiv,
-} from './styles';
+import * as S from '@features/quiz/ui/styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import useUserStore from '@store/useUserStore';
 import { useClientQuizStore } from '@store/useClientQuizStore';
