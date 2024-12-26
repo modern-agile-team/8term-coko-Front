@@ -1,20 +1,30 @@
-import { SectionButton } from '../../../common/ui/style';
+import { SectionButton } from '@common/ui/style';
+import { getImageUrl } from '@utils/getImageUrl';
+import sectionsQuery from '@features/learn/queries';
 
 export default function SectionNavigateContainer() {
-  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+  const { data: sections, isLoading, error } = sectionsQuery.getAll();
 
-  const imgUrls = [
-    `${imgUrl}섬1.svg`,
-    `${imgUrl}섬2.svg`,
-    `${imgUrl}섬3.svg`,
-    `${imgUrl}섬4.svg`,
-    `${imgUrl}섬5.svg`,
-  ];
+  const scrollToSection = (sectionId: number) => {
+    const targetSection = document.getElementById(`section-${sectionId}`);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (error) return <div>섹션 데이터를 가져오는데 실패했습니다.</div>;
 
   return (
     <>
-      {imgUrls.map((url, index) => (
-        <SectionButton key={index} $backgroundImage={url} />
+      {sections?.map((section, index) => (
+        <SectionButton
+          key={section.id}
+          $backgroundImage={getImageUrl(`섬${(index % 5) + 1}.svg`)}
+          onClick={() => scrollToSection(section.id)}
+        >
+          {section.name}
+        </SectionButton>
       ))}
     </>
   );
