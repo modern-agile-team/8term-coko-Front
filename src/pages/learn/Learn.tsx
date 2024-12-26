@@ -18,7 +18,7 @@ export default function Learn() {
   const { setUser } = useUserStore();
   //임시 유저 설정
   useEffect(() => {
-    setUser({ id: 3, nickname: 'admin', level: 1, point: 1000 });
+    setUser({ id: 1, nickname: '도윤', level: 1, point: 1000 });
   }, []);
   //----------------------------
   const showComponents = useScrollVisibility();

@@ -31,7 +31,7 @@ import TotalResults from '@features/user/ui/TotalResults';
 import PartClear from '@/features/user/ui/PartClear';
 import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
-import type { Quiz } from '@features/quiz/types';
+import type { partStatus, Quiz } from '@features/quiz/types';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -60,12 +60,12 @@ export default function Quiz() {
   } = useClientQuizStore();
   const { user } = useUserStore();
   const { Modal, closeModal, openModal, isShow } = useModal();
-  const { partId, state } = useLocation().state as {
+  const { partId, status } = useLocation().state as {
     partId: number;
-    state?: 'start' | 'pending' | 'end';
+    status: partStatus;
   };
   const { data: quizzes, isLoading } =
-    user && state === 'pending'
+    user && status === 'IN_PROGRESS'
       ? userQuizzesQuery.get({
           userId: user!.id,
           partId,
@@ -161,6 +161,7 @@ export default function Quiz() {
               onNext={() => setStep('파트 클리어')}
               quizzesLength={quizzes.length}
               partId={partId}
+              status={status}
             />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">

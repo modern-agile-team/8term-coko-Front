@@ -7,34 +7,41 @@ import { useTimeout } from '@modern-kit/react';
 import { experienceQuery, partProgressQuery } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { User } from '@features/user/types';
-import type { Quiz } from '@features/quiz/types';
+import type { partStatus, Quiz } from '@features/quiz/types';
 
 interface TotalResultProps {
   onNext: () => void;
   quizzesLength: number;
   partId: Quiz['partId'];
+  status: partStatus;
 }
 export default function TotalResults({
   onNext,
   quizzesLength,
   partId,
+  status,
 }: TotalResultProps) {
   const { totalResults } = useClientQuizStore();
-  const quizCorrectAnswers = totalResults.filter(result => result).length;
-  const isPartClear = quizzesLength === quizCorrectAnswers;
   const { user } = useUserStore() as { user: User };
-  const experience = quizCorrectAnswers * 10;
+
+  const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
   const { mutate: experienceUpdate, isIdle: isexperienceIdle } =
     experienceQuery.patch();
-  const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
   const { mutate: updateProgress, isIdle: isProgressIdle } =
     partProgressQuery.put();
 
   const navigate = useNavigate();
+
+  const quizCorrectAnswers = totalResults.filter(result => result).length;
+  const experience = quizCorrectAnswers * 10;
+  const isPartClear = quizzesLength === quizCorrectAnswers;
+  const isCompleted = status === 'COMPLETED';
+
   useTimeout(
     () => {
       experienceUpdate({ id: user.id, experience });
-      updateProgress({ partId, userId: user.id, status: 'IN_PROGRESS' });
+      !isCompleted &&
+        updateProgress({ partId, userId: user.id, status: 'IN_PROGRESS' });
     },
     { delay: 1000, enabled: isSuccess }
   );
@@ -91,10 +98,10 @@ export default function TotalResults({
         $isActive={isexperienceIdle && isProgressIdle}
         $margin="35px 86px 0 0"
         onClick={() => {
-          isPartClear ? onNext() : navigate('/learn');
+          isPartClear && !isCompleted ? onNext() : navigate('/learn');
         }}
       >
-        {isPartClear ? '보상 받기' : '메인으로'}
+        {isPartClear && !isCompleted ? '보상 받기' : '메인으로'}
       </S.RedirectToLearnButton>
     </S.CompensationSection>
   );
