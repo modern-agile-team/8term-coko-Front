@@ -1,6 +1,6 @@
 import * as S from './styles';
 import './styles.css';
-import 'highlight.js/styles/base16/atelier-cave-light.css';
+import 'highlight.js/styles/github.css';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useDnDStore } from '@store/useDnDStore';
 import useCodeHighlight from '../service/useCodeHighlight';
