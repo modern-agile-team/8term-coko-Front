@@ -1,4 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
+import { media } from '@/style/media';
+import { getImageUrl } from '@/utils/getImageUrl';
 import type { Quiz } from '@features/quiz/types';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
@@ -25,11 +27,17 @@ export const QuestionSection = styled.section<{
   height: 35vh;
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
   font-size: 18px;
+  background-color: #fff;
   font-weight: 700;
   > div:nth-last-child(1) {
     display: flex;
     flex-wrap: wrap;
     padding: 26px 0 0 80px;
+  }
+  ${media.mobile} {
+    width: 90vw;
+    font-size: 18px;
+    height: 50vh;
   }
 `;
 export const Title = styled.h3<{
@@ -44,6 +52,9 @@ export const Title = styled.h3<{
   background-color: ${({ $category }) => categoryColor[$category].background};
   line-height: 24px;
   padding-left: 17px;
+  > p:nth-child(1) {
+    white-space: nowrap;
+  }
 `;
 //question 스타일
 
@@ -58,6 +69,12 @@ export const OXButtonSection = styled.section`
     background-color: transparent;
     border-color: transparent;
   }
+  ${media.mobile} {
+    > img {
+      display: none; /* 예시로 테두리 설정 */
+    }
+    height: 30vh;
+  }
 `;
 
 //객관식 버튼, 이미지 박스 영역
@@ -66,6 +83,11 @@ export const MultipleChoiceSection = styled.section`
   gap: 20px;
   flex-wrap: wrap;
   align-items: center;
+  ${media.mobile} {
+    > img {
+      display: none;
+    }
+  }
 `;
 //객관식 버튼 모아놓는 스타일
 export const MultipleChoiceButtonDiv = styled.div`
@@ -74,6 +96,11 @@ export const MultipleChoiceButtonDiv = styled.div`
   grid-template-rows: 43px 43px;
   grid-row-gap: 15px;
   grid-column-gap: 20px;
+  ${media.mobile} {
+    grid-template-columns: 286px;
+    grid-template-rows: repeat(4, 43px);
+    margin-top: 34px;
+  }
 `;
 
 //객관식에서 각 문항 버튼
@@ -101,6 +128,15 @@ export const ShortAnswerSection = styled.section`
   margin-top: 24px;
   :nth-child(1) {
     align-self: flex-end;
+  }
+  ${media.mobile} {
+    height: 30vh;
+    > img {
+      display: none;
+    }
+    > input {
+      width: 286px;
+    }
   }
 `;
 //단답형 문항에서 단답형을 쓰는 인풋박스
@@ -137,6 +173,11 @@ export const CombinationSection = styled.section`
   padding: 0;
   :nth-last-child(1) {
     margin-right: auto;
+  }
+  ${media.mobile} {
+    img {
+      display: none;
+    }
   }
 `;
 
@@ -189,19 +230,26 @@ const fadeIn = keyframes`
     transform: translateY(0);
   }
 `;
-export const ScoreSection = styled.section<{ $backGroundImage: string }>`
+export const ScoreSection = styled.section<{ $isResult: boolean }>`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  background-image: url(${({ $backGroundImage }) => $backGroundImage});
+  background-image: ${({ $isResult }) =>
+    `url(${getImageUrl($isResult ? '정답모달.svg' : '오답모달.svg')})`};
   background-size: cover;
   width: 100vw;
   height: 25%;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   animation: ${fadeIn} 0.7s ease-out;
+  ${media.mobile} {
+    background-image: ${({ $isResult }) =>
+      `url(${getImageUrl($isResult ? '정답_모바일.svg' : '오답_모바일.svg')})`};
+    justify-content: center;
+  }
 `;
 export const NextPageButton = styled.button<{ $isAnswer: boolean }>`
+  position: absolute;
   width: 175px;
   border: 2px solid #01f152;
   margin: 0 81px 39px 0;
@@ -226,17 +274,43 @@ export const NextPageButton = styled.button<{ $isAnswer: boolean }>`
         border-color: #e8080c;
       }
     `}
+  ${media.mobile} {
+    width: 343px;
+    height: 33px;
+    margin: 0 0 30px 0;
+    border: none;
+    background-color: #00dd4a;
+    box-shadow: 0 5px #00c843;
+    ${({ $isAnswer }) =>
+      !$isAnswer &&
+      css`
+        background-color: #ff1b1b;
+        box-shadow: 0 5px #e00;
+        &:hover {
+          background-color: #ff0004;
+        }
+      `}
+  }
 `;
 export const LineChangeDiv = styled.div`
   flex-basis: 100%;
   height: 10px;
 `;
 export const AnswerDiv = styled.div`
+  position: absolute;
   color: #ffffff;
   font-weight: 700;
   font-size: 24px;
   line-height: 24px;
-  margin: 0 350px 58px 0;
+  top: 90px;
+  right: 40%;
+  /* margin: 0 350px 58px 0; */
+  ${media.mobile} {
+    font-size: 18px;
+    margin: 0;
+    right: 8%;
+    top: 23%;
+  }
 `;
 //모달 애니메이션
 const fadeInScaleUp = keyframes`
@@ -249,7 +323,10 @@ const fadeInScaleUp = keyframes`
     transform: translate(-50%, -50%) scale(1); 
   }
 `;
-export const CompensationSection = styled.section`
+export const CompensationSection = styled.section<{
+  $backgroundColor: string;
+  $boxShadow: string;
+}>`
   animation: ${fadeInScaleUp} 0.7s ease-out;
   position: fixed;
   display: flex;
@@ -260,24 +337,35 @@ export const CompensationSection = styled.section`
   transform: translate(-50%, -50%);
   width: 747.42px;
   height: 372.04px;
-  background: #ffffff;
+  background: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: 40px;
-  box-shadow: 0 11px #e5e5e5;
+  box-shadow: 0 11px ${({ $boxShadow }) => $boxShadow};
+  ${media.mobile} {
+    width: 100%;
+    height: 50%;
+    > hr {
+      display: none;
+    }
+    > button {
+      margin: 0;
+      align-self: center;
+    }
+  }
 `;
 
-export const DashLineHr = styled.hr`
-  border: 2px dashed #00d9e9;
+export const DashLineHr = styled.hr<{ $color: string }>`
+  border: 2px dashed ${({ $color }) => $color};
   width: 80%;
   border-image: repeating-linear-gradient(
       to right,
-      #00d9e9 0,
-      #00d9e9 10px,
+      ${({ $color }) => $color} 0,
+      ${({ $color }) => $color} 10px,
       transparent 15px,
       transparent 30px
     )
     1;
 `;
-export const TotalResultsTextDiv = styled.div`
+export const CompensationTextDiv = styled.div`
   margin: 44px 0 17px 0;
   display: flex;
   font-size: 22px;
@@ -285,7 +373,7 @@ export const TotalResultsTextDiv = styled.div`
   line-height: 24px;
 
   > p:nth-child(1) {
-    line-height: 12px;
+    line-height: 18px;
     font-weight: 700;
     color: #49ff87;
     font-size: 26px;
@@ -295,21 +383,38 @@ export const TotalResultsTextDiv = styled.div`
     font-size: 26px;
     color: #ff4949;
   }
+  ${media.mobile} {
+    font-size: 18px;
+  }
 `;
 export const TotalResultsRewardDiv = styled.div`
   display: flex;
+  ${media.mobile} {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 export const ImageDescriptionDiv = styled.div`
   margin: 34px 0 0 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  > p:nth-last-child(1) {
+  > p {
     align-self: center;
     position: relative;
     top: 30px;
     color: #d30000;
     font-size: 10px;
+  }
+  ${media.mobile} {
+    margin: 0;
+    > p {
+      display: block;
+      position: static;
+      margin: 10px 0 20px 0;
+      font-size: 18px;
+    }
   }
 `;
 export const RedirectToLearnButton = styled.button<{ $isActive: boolean }>`
@@ -353,6 +458,16 @@ export const TotalResultProgressDiv = styled.div`
   > img:last-child {
     position: relative;
     top: -10%;
+  }
+  ${media.mobile} {
+    > img {
+      display: none;
+    }
+    display: flex;
+    margin-bottom: 20px;
+    > div {
+      display: flex;
+    }
   }
 `;
 export const Img = styled.img<{ $width: string; $height: string }>`
@@ -435,3 +550,29 @@ export const Pre = styled.pre`
 `;
 
 export const Code = styled.code``;
+
+export const PartClearTextDiv = styled.div`
+  display: flex;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 25px 0 15px 0;
+  > p {
+    color: #ff4949;
+  }
+`;
+export const PartClearImageBox = styled.div`
+  display: flex;
+  margin-top: 15px;
+  ${media.mobile} {
+    > img:nth-child(1),
+    img:nth-child(3) {
+      display: none;
+    }
+  }
+`;
+
+export const PartClearPoint = styled.p`
+  color: #f09900;
+  margin: 10px 0 15px 0;
+`;

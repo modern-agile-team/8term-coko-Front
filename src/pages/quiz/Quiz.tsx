@@ -91,7 +91,6 @@ export default function Quiz() {
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
-
   if (isLoading || isImageLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
   const { id, title, question, category, answerChoice, answer } =
@@ -130,6 +129,7 @@ export default function Quiz() {
         >
           SKIP
         </ResponseButton>
+
         <ResponseButton
           disabled={isQuizAnswered}
           $disabled={isQuizAnswered}
@@ -145,7 +145,7 @@ export default function Quiz() {
           <Funnel.Step name="결과">
             <Result
               quizId={id}
-              result={totalResults[currentPage]}
+              isResult={totalResults[currentPage]}
               answer={answer}
               closeModal={closeModal}
             />
@@ -154,7 +154,7 @@ export default function Quiz() {
             <LoginPrompt onNext={() => setStep('로그인')} />
           </Funnel.Step>
           <Funnel.Step name="로그인">
-            <Login closeModal={closeModal} openModal={noop} />
+            <Login closeModal={noop} openModal={noop} />
           </Funnel.Step>
           <Funnel.Step name="총결과">
             <TotalResults
@@ -163,7 +163,7 @@ export default function Quiz() {
             />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">
-            <PartClear />
+            <PartClear partId={partId} />
           </Funnel.Step>
         </Funnel>
       </Modal>
