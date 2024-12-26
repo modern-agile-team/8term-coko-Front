@@ -47,6 +47,7 @@ export default function PartClear({ partId }: PartClearProps) {
         </S.PartClearImageBox>
         <S.PartClearPoint>{point} Point</S.PartClearPoint>
         <S.RedirectToLearnButton
+          $margin="0 88px 0 0"
           $isActive={isIdle}
           onClick={() => {
             navigate('/learn');

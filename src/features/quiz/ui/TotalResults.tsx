@@ -91,6 +91,7 @@ export default function TotalResults({
       <S.RedirectToLearnButton
         disabled={isIdle}
         $isActive={isIdle}
+        $margin="35px 86px 0 0"
         onClick={() => {
           isPartClear ? onNext() : navigate('/learn');
         }}

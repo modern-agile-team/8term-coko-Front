@@ -417,7 +417,10 @@ export const ImageDescriptionDiv = styled.div`
     }
   }
 `;
-export const RedirectToLearnButton = styled.button<{ $isActive: boolean }>`
+export const RedirectToLearnButton = styled.button<{
+  $isActive: boolean;
+  $margin: string;
+}>`
   width: 152px;
   height: 25px;
   text-align: center;
@@ -427,7 +430,7 @@ export const RedirectToLearnButton = styled.button<{ $isActive: boolean }>`
   text-decoration-line: none;
   color: #ffffff;
   align-self: flex-end;
-  margin: 35px 86px 0 0;
+  margin: ${({ $margin }) => $margin};
   ${({ $isActive }) =>
     $isActive
       ? css`
