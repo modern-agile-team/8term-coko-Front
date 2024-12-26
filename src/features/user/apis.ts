@@ -42,5 +42,9 @@ const usersApis = {
     const { id, point } = params;
     await api.patch(`/users/${id}/point`, { point });
   },
+  partProgress: async (params: { id: User['id'] }) => {
+    await api.put(`/users/${params.id}/part-progress`);
+  },
 };
+
 export default usersApis;

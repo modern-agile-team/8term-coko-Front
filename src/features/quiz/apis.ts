@@ -1,8 +1,7 @@
 import api from '@/axios/instance';
-import type { User } from '@/features/user/types';
 import type { Quiz } from '@features/quiz/types';
 
-export const quizzesApis = {
+const quizzesApis = {
   get: async (params?: {
     sectionId?: number;
     partId: number;
@@ -12,8 +11,4 @@ export const quizzesApis = {
   },
 };
 
-export const partProgressApis = {
-  put: async (params: { userId: User['id'] }): Promise<void> => {
-    await api.put(`/users/${params.userId}/part-progress`);
-  },
-};
+export default quizzesApis;

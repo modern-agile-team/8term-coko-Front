@@ -96,3 +96,10 @@ export const pointQuery = {
     });
   },
 };
+export const partProgressQuery = {
+  put: () => {
+    return useMutation({
+      mutationFn: usersApis.partProgress,
+    });
+  },
+};
