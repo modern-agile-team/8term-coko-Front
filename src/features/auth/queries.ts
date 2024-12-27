@@ -11,6 +11,8 @@ export const authQuery = {
     return useQuery({
       queryKey: authKeys.verify,
       queryFn: authApis.verify,
+      staleTime: 0,
+      gcTime: 0,
       retry: false,
     });
   },
