@@ -42,7 +42,7 @@ export default function Learn() {
   });
 
   // Section 데이터 가져오기
-  const { data: section, isLoading, error } = sectionsQuery.get(1);
+  const { data: section, isLoading, error } = sectionsQuery.get(2);
 
   // 이전 버튼 수 누적 계산
   const previousPartsCounts = useMemo(() => {

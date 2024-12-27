@@ -1,34 +1,45 @@
 import * as S from '../ui/style';
 import { HeaderBox } from './style';
 import { getImageUrl } from '@utils/getImageUrl';
-import { useRef } from 'react';
+import { useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
 import usePopover from '@hooks/usePopover';
 import useUserStore from '@store/useUserStore';
 import HeaderItem from '../ui/HeaderItem';
 import Login from '@features/auth/ui/Login';
-import handleLogout from '@features/auth/service/handleLogout';
 import ProfileImage from '@features/user/ui/ProfileImage';
+import { authQuery } from '@features/auth/queries';
 
 export default function Header() {
   const { user } = useUserStore();
+  const { mutate: logout } = authQuery.logout();
   const { isShow, openModal, closeModal, Modal } = useModal();
+  const navigate = useNavigate();
 
   const profileRef = useRef<HTMLDivElement>(null);
   const { isOpen, togglePopover, popoverRef } = usePopover({
     excludeRefs: [profileRef],
   });
 
-  const handleProfileClick = () => {
+  const handleProfileClick = useCallback(() => {
     if (user) {
       togglePopover();
     } else {
       openModal();
     }
-  };
+  }, [user, togglePopover, openModal]);
 
-  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout(undefined, {
+      onSuccess: () => {
+        window.location.href = '/';
+      },
+      onError: error => {
+        console.error('Logout failed:', error);
+      },
+    });
+  };
 
   return (
     <HeaderBox>
@@ -69,7 +80,7 @@ export default function Header() {
             <S.UserInfoButton
               $backgroundColor="#FF3F3D"
               $boxShadow="0 2px #EB0000"
-              onClick={() => handleLogout()}
+              onClick={handleLogout}
             >
               로그아웃
             </S.UserInfoButton>
