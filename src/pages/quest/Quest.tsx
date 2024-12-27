@@ -1,5 +1,4 @@
 import { Wrapper, LeftSection, RightSection, Layout } from '../../style/style';
-import { FeatureDiv } from '../../style/LayOut';
 import MenuBar from '../../common/layout/MenuBar';
 import DailyQuest from '../../features/quest/ui/DailyQuest';
 import CokoLogo from '../../common/layout/CokoLogo';
@@ -19,9 +18,6 @@ export default function Quest() {
       </Wrapper>
       <Layout>
         <DailyQuest />
-        <FeatureDiv $width="666px" $height="283px" $marginTop="24px">
-          메인 퀘스트 칸
-        </FeatureDiv>
       </Layout>
     </>
   );
