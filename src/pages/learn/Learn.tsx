@@ -14,7 +14,7 @@ import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
 import { authQuery } from '@features/auth/queries';
-import sectionsQuery from '@/features/learn/queries';
+import { sectionsQuery } from '@/features/learn/queries';
 
 export default function Learn() {
   const { setUser } = useUserStore();

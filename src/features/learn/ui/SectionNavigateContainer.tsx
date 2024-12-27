@@ -1,6 +1,6 @@
 import { SectionButton } from '@common/ui/style';
 import { getImageUrl } from '@utils/getImageUrl';
-import sectionsQuery from '@features/learn/queries';
+import { sectionsQuery } from '@features/learn/queries';
 
 export default function SectionNavigateContainer() {
   const { data: sections, isLoading, error } = sectionsQuery.getAll();
