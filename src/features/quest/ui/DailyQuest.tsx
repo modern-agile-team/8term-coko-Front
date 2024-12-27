@@ -35,10 +35,6 @@ export default function DailyQuest() {
     ? { $maxWidth: '434px', $height: '25px' } // isQuest일 때 사용할 크기
     : {};
 
-  // 보상 아이콘 높이 설정
-  const rewardHeight1 = isQuest ? '69px' : '24px';
-  const rewardHeight2 = isQuest ? '44px' : '24px';
-
   return (
     <S.DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
       <S.QuestContent $isLearn={isLearn} $isQuest={isQuest}>
@@ -70,11 +66,7 @@ export default function DailyQuest() {
             $innerBgColor="#FFD100"
             $borderRadius="20px"
           />
-          <S.RewardIconWrapper
-            $isLearn={isLearn}
-            $isQuest={isQuest}
-            $rewardHeight={rewardHeight1}
-          >
+          <S.RewardIconWrapper $isLearn={isLearn} $isQuest={isQuest}>
             <S.RewardIcon
               $isLearn={isLearn}
               $isQuest={isQuest}
@@ -101,11 +93,7 @@ export default function DailyQuest() {
             $innerBgColor="#FFD100"
             $borderRadius="20px"
           />
-          <S.RewardIconWrapper
-            $isLearn={isLearn}
-            $isQuest={isQuest}
-            $rewardHeight={rewardHeight2}
-          >
+          <S.RewardIconWrapper $isLearn={isLearn} $isQuest={isQuest}>
             <S.RewardIcon
               $isLearn={isLearn}
               $isQuest={isQuest}

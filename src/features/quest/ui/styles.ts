@@ -98,6 +98,7 @@ export const QuestsWrapper = styled.div<QuestUrlProps>`
       display: flex;
       flex-direction: column;
       margin-bottom: 10px;
+      position: relative;
     `}
   ${({ $isQuest }) =>
     $isQuest &&
@@ -111,6 +112,8 @@ export const QuestsWrapper = styled.div<QuestUrlProps>`
       justify-content: center;
       margin-top: 20px;
       box-shadow: 0 3px #e5e5e5;
+      position: relative;
+      z-index: -1;
     `}
 `;
 
@@ -128,9 +131,12 @@ export const QuestsTitle = styled.p<QuestUrlProps>`
     $isQuest &&
     css`
       color: #9f9f9f;
-      text-align: center;
       font-size: 15px;
       font-weight: 700;
+      position: absolute;
+      top: 35px;
+      left: 125px;
+      text-align: left;
     `}
 `;
 
@@ -187,8 +193,8 @@ export const RewardIconWrapper = styled.div<QuestUrlProps>`
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 64px;
-      height: 44px;
+      width: 74px;
+      height: 78px;
     `}
 `;
 
