@@ -12,7 +12,7 @@ import ProfileImage from '@features/user/ui/ProfileImage';
 import { authQuery } from '@features/auth/queries';
 
 export default function Header() {
-  const { user } = useUserStore();
+  const { user, clearUser } = useUserStore();
   const { mutate: logout } = authQuery.logout();
   const { isShow, openModal, closeModal, Modal } = useModal();
   const navigate = useNavigate();
@@ -33,6 +33,7 @@ export default function Header() {
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
+        clearUser();
         window.location.href = '/';
       },
       onError: error => {
