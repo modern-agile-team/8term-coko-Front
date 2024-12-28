@@ -1,7 +1,7 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { useLocation } from 'react-router-dom';
-import ProgressBar from '../../progress/ui/ProgressBar';
+import ProgressBar from '@features/progress/ui/ProgressBar';
 
 export default function DailyQuest() {
   const location = useLocation();
@@ -29,7 +29,7 @@ export default function DailyQuest() {
     : '';
 
   // ProgressBar 크기 설정
-  const progressBarProps = isLearn
+  const progressBarSizeProps = isLearn
     ? { $maxWidth: '172px', $height: '13px' }
     : isQuest
     ? { $maxWidth: '434px', $height: '25px' } // isQuest일 때 사용할 크기
@@ -61,8 +61,8 @@ export default function DailyQuest() {
           <ProgressBar
             $progress={progress1}
             $maxProgress={maxProgress1}
-            {...progressBarProps}
-            $boxBgColor="#F3F3F3;"
+            {...progressBarSizeProps}
+            $boxBgColor="#F3F3F3"
             $innerBgColor="#FFD100"
             $borderRadius="20px"
           />
@@ -88,8 +88,8 @@ export default function DailyQuest() {
           <ProgressBar
             $progress={progress2}
             $maxProgress={maxProgress2}
-            {...progressBarProps}
-            $boxBgColor="#F3F3F3;"
+            {...progressBarSizeProps}
+            $boxBgColor="#F3F3F3"
             $innerBgColor="#FFD100"
             $borderRadius="20px"
           />

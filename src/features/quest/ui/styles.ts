@@ -2,11 +2,9 @@ import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 
 interface QuestUrlProps {
-  $isLearn: boolean;
-  $isQuest: boolean;
-  $iconSrc?: string;
+  $isLearn?: boolean;
+  $isQuest?: boolean;
   $rewardSrc?: string;
-  $rewardHeight?: string;
 }
 
 // 오늘의 퀘스트 섹션
@@ -21,7 +19,7 @@ export const DailyQuestSection = styled.section<QuestUrlProps>`
       background-image: url(${getImageUrl('종이.svg')});
     `}
 
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       width: 683px;
@@ -43,7 +41,7 @@ export const QuestContent = styled.div<QuestUrlProps>`
       justify-content: center;
       margin-bottom: 15px;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       height: 36px;
@@ -60,7 +58,7 @@ export const QuestIcon = styled.img<QuestUrlProps>`
       margin-bottom: 5px;
       background-size: cover;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       display: none;
@@ -77,7 +75,7 @@ export const DailyQuestText = styled.p<QuestUrlProps>`
       text-align: center;
       margin-top: 20px;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       height: 36px;
@@ -100,7 +98,7 @@ export const QuestsWrapper = styled.div<QuestUrlProps>`
       margin-bottom: 10px;
       position: relative;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       width: 683px;
@@ -127,7 +125,7 @@ export const QuestsTitle = styled.p<QuestUrlProps>`
       text-align: start;
       margin: 0 0 3px 40px;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       color: #9f9f9f;
@@ -150,7 +148,7 @@ export const ProgressBarWrapper = styled.div<QuestUrlProps>`
       justify-content: center;
       gap: 3px;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       display: flex;
@@ -167,7 +165,7 @@ export const ProgressBarIcon = styled.img<QuestUrlProps>`
     css`
       display: none;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       left: 20px;
@@ -187,7 +185,7 @@ export const RewardIconWrapper = styled.div<QuestUrlProps>`
       width: 24px;
       height: 24px;
     `}
-  ${({ $isQuest }) =>
+  ${({ $isQuest = true }) =>
     $isQuest &&
     css`
       display: flex;
