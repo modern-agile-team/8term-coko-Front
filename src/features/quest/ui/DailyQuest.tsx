@@ -36,72 +36,77 @@ export default function DailyQuest() {
     : {};
 
   return (
-    <S.DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
-      <S.QuestContent $isLearn={isLearn} $isQuest={isQuest}>
-        <S.QuestIcon
-          src={getImageUrl('폭탄-아이콘.svg')}
-          $isLearn={isLearn}
-          $isQuest={isQuest}
-        />
-        <S.DailyQuestText $isLearn={isLearn} $isQuest={isQuest}>
-          오늘의 퀘스트
-        </S.DailyQuestText>
-      </S.QuestContent>
-      <S.QuestsWrapper $isLearn={isLearn} $isQuest={isQuest}>
-        <S.QuestsTitle $isLearn={isLearn} $isQuest={isQuest}>
-          문제 4개 클리어
-        </S.QuestsTitle>
-        <S.ProgressBarWrapper $isLearn={isLearn} $isQuest={isQuest}>
-          <S.ProgressBarIcon
-            src={getImageUrl('노랑-도장.svg')}
-            $isQuest={isQuest}
-            $isLearn={isLearn}
-          />
-
-          <ProgressBar
-            $progress={progress1}
-            $maxProgress={maxProgress1}
-            {...progressBarSizeProps}
-            $boxBgColor="#F3F3F3"
-            $innerBgColor="#FFD100"
-            $borderRadius="20px"
-          />
-          <S.RewardIconWrapper $isLearn={isLearn} $isQuest={isQuest}>
-            <S.RewardIcon
+    <S.QuestContainer $isLearn={isLearn} $isQuest={isQuest}>
+      <S.DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
+        <S.QuestContentWrapper $isLearn={isLearn} $isQuest={isQuest}>
+          <S.QuestContent $isLearn={isLearn} $isQuest={isQuest}>
+            <S.QuestIcon
+              src={getImageUrl('폭탄-아이콘.svg')}
               $isLearn={isLearn}
               $isQuest={isQuest}
-              $rewardSrc={rewardIconSrc1}
             />
-          </S.RewardIconWrapper>
-        </S.ProgressBarWrapper>
-      </S.QuestsWrapper>
-      <S.QuestsWrapper $isLearn={isLearn} $isQuest={isQuest}>
-        <S.QuestsTitle $isLearn={isLearn} $isQuest={isQuest}>
-          파트 1 클리어
-        </S.QuestsTitle>
-        <S.ProgressBarWrapper $isLearn={isLearn} $isQuest={isQuest}>
-          <S.ProgressBarIcon
-            src={getImageUrl('노랑-도장.svg')}
-            $isQuest={isQuest}
-            $isLearn={isLearn}
-          />
-          <ProgressBar
-            $progress={progress2}
-            $maxProgress={maxProgress2}
-            {...progressBarSizeProps}
-            $boxBgColor="#F3F3F3"
-            $innerBgColor="#FFD100"
-            $borderRadius="20px"
-          />
-          <S.RewardIconWrapper $isLearn={isLearn} $isQuest={isQuest}>
-            <S.RewardIcon
-              $isLearn={isLearn}
-              $isQuest={isQuest}
-              $rewardSrc={rewardIconSrc2}
-            />
-          </S.RewardIconWrapper>
-        </S.ProgressBarWrapper>
-      </S.QuestsWrapper>
-    </S.DailyQuestSection>
+            <S.DailyQuestText $isLearn={isLearn} $isQuest={isQuest}>
+              오늘의 퀘스트
+            </S.DailyQuestText>
+          </S.QuestContent>
+          <S.QuestItemsContainer>
+            <S.QuestsWrapper $isLearn={isLearn} $isQuest={isQuest}>
+              <S.QuestsTitle $isLearn={isLearn} $isQuest={isQuest}>
+                문제 4개 클리어
+              </S.QuestsTitle>
+              <S.ProgressBarWrapper $isLearn={isLearn} $isQuest={isQuest}>
+                <S.ProgressBarIcon
+                  src={getImageUrl('노랑-도장.svg')}
+                  $isQuest={isQuest}
+                  $isLearn={isLearn}
+                />
+                <ProgressBar
+                  $progress={progress1}
+                  $maxProgress={maxProgress1}
+                  {...progressBarSizeProps}
+                  $boxBgColor="#F3F3F3"
+                  $innerBgColor="#FFD100"
+                  $borderRadius="20px"
+                />
+                <S.RewardIconWrapper $isLearn={isLearn} $isQuest={isQuest}>
+                  <S.RewardIcon
+                    $isLearn={isLearn}
+                    $isQuest={isQuest}
+                    $rewardSrc={rewardIconSrc1}
+                  />
+                </S.RewardIconWrapper>
+              </S.ProgressBarWrapper>
+            </S.QuestsWrapper>
+            <S.QuestsWrapper $isLearn={isLearn} $isQuest={isQuest}>
+              <S.QuestsTitle $isLearn={isLearn} $isQuest={isQuest}>
+                파트 1 클리어
+              </S.QuestsTitle>
+              <S.ProgressBarWrapper $isLearn={isLearn} $isQuest={isQuest}>
+                <S.ProgressBarIcon
+                  src={getImageUrl('노랑-도장.svg')}
+                  $isQuest={isQuest}
+                  $isLearn={isLearn}
+                />
+                <ProgressBar
+                  $progress={progress2}
+                  $maxProgress={maxProgress2}
+                  {...progressBarSizeProps}
+                  $boxBgColor="#F3F3F3"
+                  $innerBgColor="#FFD100"
+                  $borderRadius="20px"
+                />
+                <S.RewardIconWrapper $isLearn={isLearn} $isQuest={isQuest}>
+                  <S.RewardIcon
+                    $isLearn={isLearn}
+                    $isQuest={isQuest}
+                    $rewardSrc={rewardIconSrc2}
+                  />
+                </S.RewardIconWrapper>
+              </S.ProgressBarWrapper>
+            </S.QuestsWrapper>
+          </S.QuestItemsContainer>
+        </S.QuestContentWrapper>
+      </S.DailyQuestSection>
+    </S.QuestContainer>
   );
-}
+}    

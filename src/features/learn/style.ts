@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@/style/media';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
 
@@ -35,6 +36,10 @@ export const LegendKeycapMessageImg = styled.img`
   margin-bottom: 170px;
   margin-right: 72px;
   transition: opacity 0.3s ease;
+
+  ${media.mobile} {
+    display: none;
+  };
 `;
 
 export const HandsUpCokoImg = styled.img`

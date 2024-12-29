@@ -1,11 +1,32 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
+import { media } from '@/style/media';
 
 interface QuestUrlProps {
   $isLearn?: boolean;
   $isQuest?: boolean;
   $rewardSrc?: string;
 }
+
+export const QuestContainer = styled.div<QuestUrlProps>`
+${({ $isLearn }) =>
+  $isLearn &&
+  css`
+    width: 270px;
+    margin-right: 28px;
+
+    ${media.mobile} {
+    display: none;
+    }
+  `}
+
+${({ $isQuest = true }) =>
+  $isQuest &&
+  css`
+    width: 683px;
+    margin-top: 57px;
+  `}
+`;
 
 // 오늘의 퀘스트 섹션
 export const DailyQuestSection = styled.section<QuestUrlProps>`
@@ -14,7 +35,7 @@ export const DailyQuestSection = styled.section<QuestUrlProps>`
     css`
       width: 270px;
       height: 210px;
-      margin: 89px 28px 0 0;
+      margin: 89px 0 0 0;
       position: fixed;
       background-image: url(${getImageUrl('종이.svg')});
     `}
@@ -22,14 +43,26 @@ export const DailyQuestSection = styled.section<QuestUrlProps>`
   ${({ $isQuest = true }) =>
     $isQuest &&
     css`
-      width: 683px;
+      width: 100%;
       height: 36px;
-      margin-top: 57px;
       border-radius: 10px;
       background: #ffb53d;
       box-shadow: 0 5px #f09900;
     `}
 `;
+
+// QuestContent와 QuestItemsContainer를 감싸는 컨테이너
+export const QuestContentWrapper = styled.div<QuestUrlProps>`
+  ${({ $isQuest = true }) =>
+    $isQuest &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    `}
+`;
+
 
 // '오늘의 퀘스트' 텍스트 + 아이콘 감싸는 div
 export const QuestContent = styled.div<QuestUrlProps>`
@@ -86,6 +119,23 @@ export const DailyQuestText = styled.p<QuestUrlProps>`
       font-size: 17px;
       font-weight: 700;
     `}
+`;
+
+export const QuestItemsContainer = styled.div<QuestUrlProps>`
+${({ $isLearn }) =>
+  $isLearn &&
+  css`
+    display: none;
+  `}
+
+${({ $isQuest = true }) =>
+  $isQuest &&
+  css`
+    width: 100%
+    height: 100%
+    display: flex;
+    flex-direction: column;
+  `}
 `;
 
 // 퀘스트 목록 감싸는 div
