@@ -72,7 +72,7 @@ export default function DailyQuest() {
                   <S.RewardIcon
                     $isLearn={isLearn}
                     $isQuest={isQuest}
-                    $rewardSrc={rewardIconSrc1}
+                    src={rewardIconSrc1}
                   />
                 </S.RewardIconWrapper>
               </S.ProgressBarWrapper>
@@ -99,7 +99,7 @@ export default function DailyQuest() {
                   <S.RewardIcon
                     $isLearn={isLearn}
                     $isQuest={isQuest}
-                    $rewardSrc={rewardIconSrc2}
+                    src={rewardIconSrc2}
                   />
                 </S.RewardIconWrapper>
               </S.ProgressBarWrapper>

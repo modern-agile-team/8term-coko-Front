@@ -5,7 +5,6 @@ import { media } from '@/style/media';
 interface QuestUrlProps {
   $isLearn?: boolean;
   $isQuest?: boolean;
-  $rewardSrc?: string;
 }
 
 export const QuestContainer = styled.div<QuestUrlProps>`
@@ -247,14 +246,7 @@ export const RewardIconWrapper = styled.div<QuestUrlProps>`
 `;
 
 // 보상 아이콘
-export const RewardIcon = styled.div<QuestUrlProps>`
-  ${({ $rewardSrc }) =>
-    $rewardSrc &&
-    css`
-      background-image: url(${$rewardSrc});
-      background-size: cover;
-      background-position: center;
-    `}
+export const RewardIcon = styled.img<QuestUrlProps>`
   width: 100%;
   height: 100%;
 `;

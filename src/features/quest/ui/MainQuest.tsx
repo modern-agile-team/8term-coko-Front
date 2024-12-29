@@ -34,7 +34,7 @@ export default function MainQuest() {
                 $borderRadius="20px"
               />
               <S.RewardIconWrapper>
-                <S.RewardIcon $rewardSrc={rewardIconSrc1} />
+                <S.RewardIcon src={getImageUrl('빨강-퀘스트-진행.svg')} />
               </S.RewardIconWrapper>
             </S.ProgressBarWrapper>
           </S.QuestsWrapper>
@@ -52,7 +52,7 @@ export default function MainQuest() {
                 $borderRadius="20px"
               />
               <S.RewardIconWrapper>
-            <S.RewardIcon $rewardSrc={rewardIconSrc2} />
+            <S.RewardIcon src={getImageUrl('빨강-퀘스트-보상.svg')} />
           </S.RewardIconWrapper>
         </S.ProgressBarWrapper>
       </S.QuestsWrapper>
