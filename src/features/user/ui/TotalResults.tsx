@@ -41,7 +41,7 @@ export default function TotalResults({
     () => {
       experienceUpdate({ id: user.id, experience });
       !isCompleted(partStatus) &&
-        updateProgress({ partId, userId: user.id, status: 'IN_PROGRESS' });
+        updateProgress({ partId, userId: user.id, partStatus: 'IN_PROGRESS' });
     },
     { delay: 1000, enabled: isSuccess }
   );

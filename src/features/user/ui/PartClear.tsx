@@ -10,18 +10,22 @@ interface PartClearProps {
   partId: number;
 }
 export default function PartClear({ partId }: PartClearProps) {
-  const navigate = useNavigate();
+  const { user } = useUserStore() as { user: User };
+
   const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.patch();
   const { mutate: updateProgress, isIdle: isProgressIdle } =
     partProgressQuery.put();
-  const { user } = useUserStore() as { user: User };
+
+  const navigate = useNavigate();
+
   useTimeout(
     () => {
       updatePoint({ id: user.id, point: DEFAULT_POINT });
-      updateProgress({ userId: user.id, partId, status: 'COMPLETED' });
+      updateProgress({ userId: user.id, partId, partStatus: 'COMPLETED' });
     },
     { delay: 500 }
   );
+
   return (
     <>
       <S.CompensationSection $backgroundColor="#F0DAAB" $boxShadow="#E5C892">

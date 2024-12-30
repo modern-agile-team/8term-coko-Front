@@ -475,6 +475,7 @@ export const TotalResultProgressDiv = styled.div`
     }
   }
 `;
+
 export const Img = styled.img<{ $width: string; $height: string }>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};

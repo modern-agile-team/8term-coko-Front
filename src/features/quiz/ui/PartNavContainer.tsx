@@ -11,7 +11,6 @@ import {
 import getPartGridPosition from '../../learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
 import { PartStatus } from '@/features/quiz/types';
-import { useTheme } from 'styled-components';
 
 interface Part {
   id: number;

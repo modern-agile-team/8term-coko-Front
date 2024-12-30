@@ -1,6 +1,6 @@
 import api from '@/axios/instance';
 import type { User, ExperiencedUser } from '@features/user/types';
-import type { partStatus, Quiz } from '@features/quiz/types';
+import type { PartStatus, Quiz } from '@features/quiz/types';
 
 const usersApis = {
   putQuizzesProgress: ({
@@ -45,10 +45,12 @@ const usersApis = {
   partProgress: async (params: {
     userId: User['id'];
     partId: Quiz['partId'];
-    status: partStatus;
+    partStatus: PartStatus;
   }) => {
-    const { userId, partId, status } = params;
-    await api.put(`/users/${userId}/part-progress/parts/${partId}`, { status });
+    const { userId, partId, partStatus } = params;
+    await api.put(`/users/${userId}/part-progress/parts/${partId}`, {
+      status: partStatus,
+    });
   },
 };
 
