@@ -27,26 +27,23 @@ export default function QuestSection({ title, quests }: QuestSectionProps) {
     ? { $maxWidth: '434px', $height: '25px' }
     : {};
 
+  const questUrlProps = { $isLearn: isLearn, $isQuest: isQuest };
+
   return (
-    <S.QuestContainer $isLearn={isLearn} $isQuest={isQuest}>
-      <S.DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
-        <S.QuestContentWrapper $isLearn={isLearn} $isQuest={isQuest}>
-          <S.QuestContent $isLearn={isLearn} $isQuest={isQuest}>
+    <S.QuestContainer {...questUrlProps}>
+      <S.DailyQuestSection {...questUrlProps}>
+        <S.QuestContentWrapper {...questUrlProps}>
+          <S.QuestContent {...questUrlProps}>
             <S.QuestIcon
               src={getImageUrl('폭탄-아이콘.svg')}
-              $isLearn={isLearn}
-              $isQuest={isQuest}
+              {...questUrlProps}
             />
-            <S.DailyQuestText $isLearn={isLearn} $isQuest={isQuest}>
-              {title}
-            </S.DailyQuestText>
+            <S.DailyQuestText {...questUrlProps}>{title}</S.DailyQuestText>
           </S.QuestContent>
           {quests.map((quest, index) => (
-            <S.QuestsWrapper key={index} $isLearn={isLearn} $isQuest={isQuest}>
-              <S.QuestsTitle $isLearn={isLearn} $isQuest={isQuest}>
-                {quest.title}
-              </S.QuestsTitle>
-              <S.ProgressBarWrapper $isLearn={isLearn} $isQuest={isQuest}>
+            <S.QuestsWrapper key={index} {...questUrlProps}>
+              <S.QuestsTitle {...questUrlProps}>{quest.title}</S.QuestsTitle>
+              <S.ProgressBarWrapper {...questUrlProps}>
                 <S.ProgressBarIcon
                   src={quest.progressBarIcon}
                   $isLearn={isLearn}
@@ -60,7 +57,7 @@ export default function QuestSection({ title, quests }: QuestSectionProps) {
                   $innerBgColor={quest.progressBarColor}
                   $borderRadius="20px"
                 />
-                <S.RewardIconWrapper $isLearn={isLearn} $isQuest={isQuest}>
+                <S.RewardIconWrapper {...questUrlProps}>
                   <S.RewardIcon src={quest.rewardIcon} />
                 </S.RewardIconWrapper>
               </S.ProgressBarWrapper>
