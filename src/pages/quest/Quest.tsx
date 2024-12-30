@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import * as globalS from '@/style/style';
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
@@ -11,9 +11,9 @@ import Header from '@common/layout/Header';
 export default function Quest() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleImageClick = useCallback(() => {
+  const handleImageClick = () => {
     setIsOpen(prevState => !prevState);
-  }, []);
+  };
 
   return (
     <>
