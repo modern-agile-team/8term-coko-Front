@@ -8,36 +8,36 @@ import type { Quiz } from '@features/quiz/types';
 interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
-  isResult: boolean;
+  isCorrect: boolean;
   closeModal: () => void;
 }
 export default function Result({
   quizId,
   answer,
-  isResult,
+  isCorrect,
   closeModal,
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
   const userId = user?.id;
-  const addProgress = progressQuery.put();
+  const { mutate: progressUpdate } = progressQuery.put();
   const answerFeedback = isMobile() ? answer : `정답 : ${answer}`;
 
   return (
     <>
-      <ScoreSection $isResult={isResult}>
-        <AnswerDiv>{!isResult && answerFeedback}</AnswerDiv>
+      <ScoreSection $isCorrect={isCorrect}>
+        <AnswerDiv>{!isCorrect && answerFeedback}</AnswerDiv>
         <NextPageButton
-          $isAnswer={isResult}
+          $isAnswer={isCorrect}
           onClick={() => {
             resetUserResponseAnswer();
             closeModal();
             nextPage();
             userId &&
-              addProgress.mutate({
+              progressUpdate({
                 userId,
                 quizId,
-                body: { isCorrect: isResult },
+                body: { isCorrect },
               });
           }}
         >

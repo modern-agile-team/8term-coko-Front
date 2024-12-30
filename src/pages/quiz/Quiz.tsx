@@ -42,10 +42,10 @@ export default function Quiz() {
 
   const {
     currentPage,
-    totalResults,
+    isCorrectList,
     userResponseAnswer,
     reset,
-    pushTotalResults,
+    pushIsCorrectList,
   } = useClientQuizStore();
   const { user } = useUserStore();
 
@@ -68,20 +68,20 @@ export default function Quiz() {
       : quizzesQuery.get({
           partId,
         });
-  const isQuizFinished = totalResults.length === quizzes?.length;
+  const isQuizFinished = isCorrectList.length === quizzes?.length;
   const { Funnel, setStep } = useFunnel('결과');
 
   useEffect(() => {
-    if (totalResults.length === 2 && !isLoggedIn) {
+    if (isCorrectList.length === 2 && !isLoggedIn) {
       setStep('로그인 유도');
     }
     if (isQuizFinished) {
       setStep('총결과');
     }
-    if (totalResults.length !== 0) {
+    if (isCorrectList.length !== 0) {
       openModal();
     }
-  }, [totalResults]);
+  }, [isCorrectList]);
   useUnmount(() => reset());
   useBeforeUnload({
     enabled: !isQuizFinished,
@@ -109,7 +109,7 @@ export default function Quiz() {
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
-          $progress={totalResults.length}
+          $progress={isCorrectList.length}
           $maxProgress={quizzes.length}
           $innerBgColor="#63DDE8"
           $boxBgColor="#F4F4F4"
@@ -120,7 +120,7 @@ export default function Quiz() {
       <SubmitSection>
         <ResponseButton
           onClick={() => {
-            pushTotalResults(false);
+            pushIsCorrectList(false);
           }}
         >
           SKIP
@@ -130,7 +130,7 @@ export default function Quiz() {
           disabled={isQuizAnswered}
           $disabled={isQuizAnswered}
           onClick={() => {
-            pushTotalResults(isEqualArray(userResponseAnswer, answer));
+            pushIsCorrectList(isEqualArray(userResponseAnswer, answer));
           }}
         >
           제출
@@ -141,7 +141,7 @@ export default function Quiz() {
           <Funnel.Step name="결과">
             <Result
               quizId={id}
-              isResult={totalResults[currentPage]}
+              isCorrect={isCorrectList[currentPage]}
               answer={answer}
               closeModal={closeModal}
             />

@@ -11,6 +11,7 @@ import {
 import getPartGridPosition from '../../learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
 import { partStatus } from '@/features/quiz/types';
+import { useTheme } from 'styled-components';
 
 interface Part {
   id: number;
@@ -39,7 +40,7 @@ const dummyData: Section[] = [
     id: 2,
     name: '자료형',
     part: [
-      { id: 4, sectionId: 2, name: 'string', status: 'STARTED' },
+      { id: 4, sectionId: 2, name: 'string', status: 'COMPLETED' },
       { id: 5, sectionId: 2, name: 'number' },
       { id: 6, sectionId: 2, name: 'boolean' },
       { id: 7, sectionId: 2, name: 'null' },

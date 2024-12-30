@@ -21,7 +21,7 @@ export default function TotalResults({
   partId,
   status,
 }: TotalResultProps) {
-  const { totalResults } = useClientQuizStore();
+  const { isCorrectList } = useClientQuizStore();
   const { user } = useUserStore() as { user: User };
 
   const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
@@ -32,7 +32,7 @@ export default function TotalResults({
 
   const navigate = useNavigate();
 
-  const quizCorrectAnswers = totalResults.filter(result => result).length;
+  const quizCorrectAnswers = isCorrectList.filter(result => result).length;
   const experience = quizCorrectAnswers * 10;
   const isPartClear = quizzesLength === quizCorrectAnswers;
   const isCompleted = status === 'COMPLETED';
@@ -45,9 +45,11 @@ export default function TotalResults({
     },
     { delay: 1000, enabled: isSuccess }
   );
+
   if (!userExperience) {
     return <></>;
   }
+
   return (
     <S.CompensationSection $backgroundColor="#ffffff" $boxShadow="#E5E5E5">
       <S.CompensationTextDiv>

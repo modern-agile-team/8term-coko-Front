@@ -230,12 +230,12 @@ const fadeIn = keyframes`
     transform: translateY(0);
   }
 `;
-export const ScoreSection = styled.section<{ $isResult: boolean }>`
+export const ScoreSection = styled.section<{ $isCorrect: boolean }>`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  background-image: ${({ $isResult }) =>
-    `url(${getImageUrl($isResult ? '정답모달.svg' : '오답모달.svg')})`};
+  background-image: ${({ $isCorrect }) =>
+    `url(${getImageUrl($isCorrect ? '정답모달.svg' : '오답모달.svg')})`};
   background-size: cover;
   width: 100vw;
   height: 25%;
@@ -243,8 +243,10 @@ export const ScoreSection = styled.section<{ $isResult: boolean }>`
   bottom: 0;
   animation: ${fadeIn} 0.7s ease-out;
   ${media.mobile} {
-    background-image: ${({ $isResult }) =>
-      `url(${getImageUrl($isResult ? '정답_모바일.svg' : '오답_모바일.svg')})`};
+    background-image: ${({ $isCorrect }) =>
+      `url(${getImageUrl(
+        $isCorrect ? '정답_모바일.svg' : '오답_모바일.svg'
+      )})`};
     justify-content: center;
   }
 `;

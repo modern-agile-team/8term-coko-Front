@@ -19,6 +19,7 @@ interface QuestionProps {
 export default function Question({ title, question, category }: QuestionProps) {
   const { currentPage, userResponseAnswer } = useClientQuizStore();
   const { setOutsideDropZone } = useDnDStore();
+
   const highlightCode = useCodeHighlight(question, [question, currentPage]);
   const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
   const addLineNumberCode = addLineNumbersToCode(replaceEmptyCode);

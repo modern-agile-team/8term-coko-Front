@@ -25,4 +25,5 @@ const replaceEmptyWithHTMLElement = (text: string) => {
 
   return newText;
 };
+
 export default replaceEmptyWithHTMLElement;
