@@ -83,7 +83,6 @@ export const QuestIcon = styled.img<QuestUrlProps>`
       width: 38px;
       height: 42px;
       margin-bottom: 5px;
-      background-size: cover;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&

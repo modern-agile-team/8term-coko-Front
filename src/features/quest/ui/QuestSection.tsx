@@ -1,24 +1,66 @@
 import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { useLocation } from 'react-router-dom';
 import ProgressBar from '@features/progress/ui/ProgressBar';
+import type { Quest } from 'features/quest/types';
 
 interface QuestSectionProps {
   title: string;
-  quests: {
-    title: string;
-    progress: number;
-    maxProgress: number;
-    progressBarColor: string;
-    rewardIcon: string;
-    progressBarIcon: string;
-  }[];
+  quests: Quest[];
+  isLearn: boolean;
+  isQuest: boolean;
+  component: 'daily' | 'main';
 }
 
-export default function QuestSection({ title, quests }: QuestSectionProps) {
-  const location = useLocation();
-  const isLearn = location.pathname === '/learn';
-  const isQuest = location.pathname === '/quest';
+export default function QuestSection({
+  title,
+  quests,
+  isLearn,
+  isQuest,
+  component,
+}: QuestSectionProps) {
+  // UI 속성을 페이지 컨텍스트와 progress에 따라 동적으로 설정
+  const getUIProps = (
+    progress: number,
+    maxProgress: number,
+    isLearn: boolean,
+    isQuest: boolean,
+    component: 'daily' | 'main'
+  ) => {
+    const isComplete = progress >= maxProgress;
+
+    // Learn 페이지에서 보여질 UI 속성
+    if (isLearn) {
+      return {
+        progressBarColor: '#FFD100',
+        rewardIcon: getImageUrl(
+          /** '포인트-퀘스트-완료.svg' 이미지는 아직 없어서 보이지 않음. */
+          isComplete ? '포인트-퀘스트-완료.svg' : '포인트.svg'
+        ),
+      };
+    }
+
+    // Quest 페이지에서 보여질 UI 속성
+    if (isQuest) {
+      return {
+        progressBarColor: component === 'daily' ? '#FFD100' : '#F9012F',
+        rewardIcon: getImageUrl(
+          isComplete
+            ? component === 'daily'
+              ? '노랑-퀘스트-보상.svg'
+              : '빨강-퀘스트-보상.svg'
+            : component === 'daily'
+            ? '노랑-퀘스트-진행.svg'
+            : '빨강-퀘스트-진행.svg'
+        ),
+        progressBarIcon: getImageUrl(
+          component === 'daily' ? '노랑-도장.svg' : '빨강-도장.svg'
+        ),
+      };
+    }
+
+    // 기본값
+    return {};
+  };
 
   // ProgressBar 크기 설정
   const progressBarSizeProps = isLearn
@@ -40,29 +82,35 @@ export default function QuestSection({ title, quests }: QuestSectionProps) {
             />
             <S.DailyQuestText {...questUrlProps}>{title}</S.DailyQuestText>
           </S.QuestContent>
-          {quests.map((quest, index) => (
-            <S.QuestsWrapper key={index} {...questUrlProps}>
-              <S.QuestsTitle {...questUrlProps}>{quest.title}</S.QuestsTitle>
-              <S.ProgressBarWrapper {...questUrlProps}>
-                <S.ProgressBarIcon
-                  src={quest.progressBarIcon}
-                  $isLearn={isLearn}
-                  $isQuest={isQuest}
-                />
-                <ProgressBar
-                  $progress={quest.progress}
-                  $maxProgress={quest.maxProgress}
-                  {...progressBarSizeProps}
-                  $boxBgColor="#F3F3F3"
-                  $innerBgColor={quest.progressBarColor}
-                  $borderRadius="20px"
-                />
-                <S.RewardIconWrapper {...questUrlProps}>
-                  <S.RewardIcon src={quest.rewardIcon} />
-                </S.RewardIconWrapper>
-              </S.ProgressBarWrapper>
-            </S.QuestsWrapper>
-          ))}
+          {quests.map(quest => {
+            const { progressBarColor, rewardIcon, progressBarIcon } =
+              getUIProps(
+                quest.progress,
+                quest.maxProgress,
+                isLearn,
+                isQuest,
+                component
+              );
+            return (
+              <S.QuestsWrapper key={quest.id} {...questUrlProps}>
+                <S.QuestsTitle {...questUrlProps}>{quest.title}</S.QuestsTitle>
+                <S.ProgressBarWrapper {...questUrlProps}>
+                  <S.ProgressBarIcon src={progressBarIcon} {...questUrlProps} />
+                  <ProgressBar
+                    $progress={quest.progress}
+                    $maxProgress={quest.maxProgress}
+                    {...progressBarSizeProps}
+                    $boxBgColor="#F3F3F3"
+                    $innerBgColor={progressBarColor}
+                    $borderRadius="20px"
+                  />
+                  <S.RewardIconWrapper {...questUrlProps}>
+                    <S.RewardIcon src={rewardIcon} />
+                  </S.RewardIconWrapper>
+                </S.ProgressBarWrapper>
+              </S.QuestsWrapper>
+            );
+          })}
         </S.QuestContentWrapper>
       </S.DailyQuestSection>
     </S.QuestContainer>
