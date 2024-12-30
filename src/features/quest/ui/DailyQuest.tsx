@@ -109,4 +109,4 @@ export default function DailyQuest() {
       </S.DailyQuestSection>
     </S.QuestContainer>
   );
-}    
+}

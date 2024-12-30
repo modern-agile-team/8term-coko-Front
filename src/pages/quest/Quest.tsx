@@ -9,7 +9,6 @@ import CokoLogo from '@common/layout/CokoLogo';
 import Header from '@common/layout/Header';
 
 export default function Quest() {
-
   const [isOpen, setIsOpen] = useState(false);
 
   const handleImageClick = useCallback(() => {
@@ -26,8 +25,10 @@ export default function Quest() {
         <globalS.RightSection>
           <Header />
           <S.TogglePaperImg
-            isOpen={isOpen}
-            src={getImageUrl(isOpen ? '펼친-퀘스트-종이.svg' : '닫힌-퀘스트-종이.svg')}
+            $isOpen={isOpen}
+            src={getImageUrl(
+              isOpen ? '펼친-퀘스트-종이.svg' : '닫힌-퀘스트-종이.svg'
+            )}
             onClick={handleImageClick}
           />
           <S.QuestBackViewCoko src={getImageUrl('퀘스트-뒷모습-코코.svg')} />

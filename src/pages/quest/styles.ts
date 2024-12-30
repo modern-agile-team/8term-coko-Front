@@ -1,4 +1,4 @@
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from 'styled-components';
 
 // TogglePaperImg 애니메이션 정의
 const fadeIn = keyframes`
@@ -12,13 +12,13 @@ const fadeIn = keyframes`
   }
 `;
 
-export const TogglePaperImg = styled.img<{ isOpen: boolean }>`
+export const TogglePaperImg = styled.img<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   margin-top: 140px;
   margin-right: 35px;
   cursor: pointer;
-  animation: ${({ isOpen }) => (isOpen ? fadeIn : null)} 0.3s ease-in-out;
+  animation: ${({ $isOpen }) => ($isOpen ? fadeIn : null)} 0.3s ease-in-out;
 `;
 
 export const QuestBackViewCoko = styled.img`

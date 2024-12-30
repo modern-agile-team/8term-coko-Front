@@ -8,23 +8,23 @@ interface QuestUrlProps {
 }
 
 export const QuestContainer = styled.div<QuestUrlProps>`
-${({ $isLearn }) =>
-  $isLearn &&
-  css`
-    width: 270px;
-    margin-right: 28px;
+  ${({ $isLearn }) =>
+    $isLearn &&
+    css`
+      width: 270px;
+      margin-right: 28px;
 
-    ${media.mobile} {
-    display: none;
-    }
-  `}
+      ${media.mobile} {
+        display: none;
+      }
+    `}
 
-${({ $isQuest = true }) =>
-  $isQuest &&
-  css`
-    width: 683px;
-    margin-top: 57px;
-  `}
+  ${({ $isQuest = true }) =>
+    $isQuest &&
+    css`
+      width: 683px;
+      margin-top: 40px;
+    `}
 `;
 
 // 오늘의 퀘스트 섹션
@@ -39,15 +39,7 @@ export const DailyQuestSection = styled.section<QuestUrlProps>`
       background-image: url(${getImageUrl('종이.svg')});
     `}
 
-  ${({ $isQuest = true }) =>
-    $isQuest &&
-    css`
-      width: 100%;
-      height: 36px;
-      border-radius: 10px;
-      background: #ffb53d;
-      box-shadow: 0 5px #f09900;
-    `}
+  ${({ $isQuest = true }) => $isQuest && css``}
 `;
 
 // QuestContent와 QuestItemsContainer를 감싸는 컨테이너
@@ -62,7 +54,6 @@ export const QuestContentWrapper = styled.div<QuestUrlProps>`
     `}
 `;
 
-
 // '오늘의 퀘스트' 텍스트 + 아이콘 감싸는 div
 export const QuestContent = styled.div<QuestUrlProps>`
   ${({ $isLearn }) =>
@@ -76,6 +67,10 @@ export const QuestContent = styled.div<QuestUrlProps>`
   ${({ $isQuest = true }) =>
     $isQuest &&
     css`
+      width: 683px;
+      border-radius: 10px;
+      background: #ffb53d;
+      box-shadow: 0 5px #f09900;
       height: 36px;
     `}
 `;
@@ -121,15 +116,15 @@ export const DailyQuestText = styled.p<QuestUrlProps>`
 `;
 
 export const QuestItemsContainer = styled.div<QuestUrlProps>`
-${({ $isLearn }) =>
-  $isLearn &&
-  css`
-    display: none;
-  `}
+  ${({ $isLearn }) =>
+    $isLearn &&
+    css`
+      display: none;
+    `}
 
-${({ $isQuest = true }) =>
-  $isQuest &&
-  css`
+  ${({ $isQuest = true }) =>
+    $isQuest &&
+    css`
     width: 100%
     height: 100%
     display: flex;
