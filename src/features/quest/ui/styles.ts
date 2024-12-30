@@ -42,9 +42,9 @@ export const QuestSection = styled.section<QuestUrlProps>`
   ${({ $isQuest = true }) => $isQuest && css``}
 `;
 
-// QuestContent와 QuestItemsContainer를 감싸는 컨테이너
-export const QuestContentWrapper = styled.div<QuestUrlProps>`
-  ${({ $isQuest = true }) =>
+// QuestContent와 QuestWrapper를 감싸는 컨테이너
+export const QuestContentWrapper = styled.div<Omit<QuestUrlProps, '$isLearn'>>`
+  ${({ $isQuest }) =>
     $isQuest &&
     css`
       display: flex;
@@ -92,7 +92,7 @@ export const QuestIcon = styled.img<QuestUrlProps>`
 `;
 
 // '오늘의 퀘스트' 혹은 '메인 퀘스트' 텍스트
-export const DailyOrMainQuestText = styled.p<QuestUrlProps>`
+export const QuestHeading = styled.h1<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
@@ -114,25 +114,8 @@ export const DailyOrMainQuestText = styled.p<QuestUrlProps>`
     `}
 `;
 
-export const QuestItemsContainer = styled.div<QuestUrlProps>`
-  ${({ $isLearn }) =>
-    $isLearn &&
-    css`
-      display: none;
-    `}
-
-  ${({ $isQuest = true }) =>
-    $isQuest &&
-    css`
-    width: 100%
-    height: 100%
-    display: flex;
-    flex-direction: column;
-  `}
-`;
-
-// 퀘스트 목록 감싸는 div
-export const QuestsWrapper = styled.div<QuestUrlProps>`
+// 단일 퀘스트 감싸는 div
+export const QuestWrapper = styled.div<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
@@ -159,7 +142,7 @@ export const QuestsWrapper = styled.div<QuestUrlProps>`
 `;
 
 // 퀘스트 제목
-export const QuestsTitle = styled.p<QuestUrlProps>`
+export const QuestsTitle = styled.h2<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`

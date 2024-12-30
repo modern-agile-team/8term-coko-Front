@@ -19,13 +19,7 @@ export default function QuestSection({
   component,
 }: QuestSectionProps) {
   // UI 속성을 페이지 컨텍스트와 progress에 따라 동적으로 설정
-  const getUIProps = (
-    progress: number,
-    maxProgress: number,
-    isLearn: boolean,
-    isQuest: boolean,
-    component: 'daily' | 'main'
-  ) => {
+  const getUIProps = (progress: number, maxProgress: number) => {
     const isComplete = progress >= maxProgress;
 
     // Learn 페이지에서 보여질 UI 속성
@@ -80,21 +74,13 @@ export default function QuestSection({
               src={getImageUrl('폭탄-아이콘.svg')}
               {...questUrlProps}
             />
-            <S.DailyOrMainQuestText {...questUrlProps}>
-              {title}
-            </S.DailyOrMainQuestText>
+            <S.QuestHeading {...questUrlProps}>{title}</S.QuestHeading>
           </S.QuestContent>
           {quests.map(quest => {
             const { progressBarColor, rewardIcon, progressBarIcon } =
-              getUIProps(
-                quest.progress,
-                quest.maxProgress,
-                isLearn,
-                isQuest,
-                component
-              );
+              getUIProps(quest.progress, quest.maxProgress);
             return (
-              <S.QuestsWrapper key={quest.id} {...questUrlProps}>
+              <S.QuestWrapper key={quest.id} {...questUrlProps}>
                 <S.QuestsTitle {...questUrlProps}>{quest.title}</S.QuestsTitle>
                 <S.ProgressBarWrapper {...questUrlProps}>
                   <S.ProgressBarIcon src={progressBarIcon} {...questUrlProps} />
@@ -110,7 +96,7 @@ export default function QuestSection({
                     <S.RewardIcon src={rewardIcon} />
                   </S.RewardIconWrapper>
                 </S.ProgressBarWrapper>
-              </S.QuestsWrapper>
+              </S.QuestWrapper>
             );
           })}
         </S.QuestContentWrapper>
