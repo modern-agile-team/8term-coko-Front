@@ -10,14 +10,14 @@ import {
 } from './styles';
 import getPartGridPosition from '../../learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
-import { partStatus } from '@/features/quiz/types';
+import { PartStatus } from '@/features/quiz/types';
 import { useTheme } from 'styled-components';
 
 interface Part {
   id: number;
   sectionId: number;
   name: string;
-  status?: partStatus;
+  status?: PartStatus;
 }
 
 interface Section {

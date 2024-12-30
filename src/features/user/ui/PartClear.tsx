@@ -4,6 +4,8 @@ import { partProgressQuery, pointQuery } from '@features/user/queries';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
 import { getImageUrl } from '@utils/getImageUrl';
+import { User } from '@/features/user/types';
+import { DEFAULT_POINT } from '@/features/user/constants';
 interface PartClearProps {
   partId: number;
 }
@@ -12,14 +14,11 @@ export default function PartClear({ partId }: PartClearProps) {
   const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.patch();
   const { mutate: updateProgress, isIdle: isProgressIdle } =
     partProgressQuery.put();
-  const { user } = useUserStore();
-  const point = 1500;
+  const { user } = useUserStore() as { user: User };
   useTimeout(
     () => {
-      if (user) {
-        updatePoint({ id: user.id, point });
-        updateProgress({ userId: user.id, partId, status: 'COMPLETED' });
-      }
+      updatePoint({ id: user.id, point: DEFAULT_POINT });
+      updateProgress({ userId: user.id, partId, status: 'COMPLETED' });
     },
     { delay: 500 }
   );
@@ -47,7 +46,7 @@ export default function PartClear({ partId }: PartClearProps) {
             src={getImageUrl('파트완료_오른쪽.svg')}
           />
         </S.PartClearImageBox>
-        <S.PartClearPoint>{point} Point</S.PartClearPoint>
+        <S.PartClearPoint>{DEFAULT_POINT} Point</S.PartClearPoint>
         <S.RedirectToLearnButton
           $margin="0 88px 0 0"
           $isActive={isPointIdle && isProgressIdle}

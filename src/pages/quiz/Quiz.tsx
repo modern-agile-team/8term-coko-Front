@@ -31,8 +31,9 @@ import TotalResults from '@features/user/ui/TotalResults';
 import PartClear from '@features/user/ui/PartClear';
 import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
-import type { partStatus, Quiz } from '@features/quiz/types';
+import type { PartStatus, Quiz } from '@features/quiz/types';
 import { preloadImages } from '@features/quiz/constants';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -50,17 +51,16 @@ export default function Quiz() {
   const { user } = useUserStore();
 
   const { Modal, closeModal, openModal, isShow } = useModal();
-  const { partId, status } = useLocation().state as {
+  const { partId, partStatus } = useLocation().state as {
     partId: number;
-    status: partStatus;
+    partStatus: PartStatus;
   };
 
-  const isLoggedIn = user !== undefined;
   const isInProgress = status === 'IN_PROGRESS';
   const isQuizAnswered = userResponseAnswer[0] === '';
 
   const { data: quizzes, isLoading } =
-    isLoggedIn && isInProgress
+    isLoggedIn(user) && isInProgress
       ? userQuizzesQuery.get({
           userId: user.id,
           partId,
@@ -72,7 +72,7 @@ export default function Quiz() {
   const { Funnel, setStep } = useFunnel('결과');
 
   useEffect(() => {
-    if (isCorrectList.length === 2 && !isLoggedIn) {
+    if (isCorrectList.length === 2 && !isLoggedIn(user)) {
       setStep('로그인 유도');
     }
     if (isQuizFinished) {
@@ -140,6 +140,7 @@ export default function Quiz() {
         <Funnel>
           <Funnel.Step name="결과">
             <Result
+              partStatus={partStatus}
               quizId={id}
               isCorrect={isCorrectList[currentPage]}
               answer={answer}
@@ -157,7 +158,7 @@ export default function Quiz() {
               onNext={() => setStep('파트 클리어')}
               quizzesLength={quizzes.length}
               partId={partId}
-              status={status}
+              partStatus={partStatus}
             />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">

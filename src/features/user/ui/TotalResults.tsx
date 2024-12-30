@@ -7,19 +7,20 @@ import { useTimeout } from '@modern-kit/react';
 import { experienceQuery, partProgressQuery } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { User } from '@features/user/types';
-import type { partStatus, Quiz } from '@features/quiz/types';
+import type { PartStatus, Quiz } from '@features/quiz/types';
+import { isCompleted } from '@/features/quiz/service/quizUtils';
 
 interface TotalResultProps {
   onNext: () => void;
   quizzesLength: number;
   partId: Quiz['partId'];
-  status: partStatus;
+  partStatus: PartStatus;
 }
 export default function TotalResults({
   onNext,
   quizzesLength,
   partId,
-  status,
+  partStatus,
 }: TotalResultProps) {
   const { isCorrectList } = useClientQuizStore();
   const { user } = useUserStore() as { user: User };
@@ -35,16 +36,23 @@ export default function TotalResults({
   const quizCorrectAnswers = isCorrectList.filter(result => result).length;
   const experience = quizCorrectAnswers * 10;
   const isPartClear = quizzesLength === quizCorrectAnswers;
-  const isCompleted = status === 'COMPLETED';
 
   useTimeout(
     () => {
       experienceUpdate({ id: user.id, experience });
-      !isCompleted &&
+      !isCompleted(partStatus) &&
         updateProgress({ partId, userId: user.id, status: 'IN_PROGRESS' });
     },
     { delay: 1000, enabled: isSuccess }
   );
+
+  const handleOnClick = () => {
+    if (isPartClear && !isCompleted(partStatus)) {
+      onNext();
+    } else {
+      navigate('/learn');
+    }
+  };
 
   if (!userExperience) {
     return <></>;
@@ -99,9 +107,7 @@ export default function TotalResults({
         disabled={isexperienceIdle && isProgressIdle}
         $isActive={isexperienceIdle && isProgressIdle}
         $margin="35px 86px 0 0"
-        onClick={() => {
-          isPartClear && !isCompleted ? onNext() : navigate('/learn');
-        }}
+        onClick={handleOnClick}
       >
         {isPartClear && !isCompleted ? '보상 받기' : '메인으로'}
       </S.RedirectToLearnButton>
