@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { media } from '@/style/media';
-
-const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+import { getImageUrl } from '@/utils/getImageUrl';
 
 export const SectionBoxWrapper = styled.div`
   display: flex;
@@ -18,7 +17,7 @@ export const SelectSectionBox = styled.section`
   width: 599px;
   height: 197px;
   margin-top: 30px;
-  background-image: url(${imgUrl}섹션-선택-섬.svg);
+  background-image: url(${getImageUrl('섹션-선택-섬.svg')});
   background-repeat: no-repeat;
 `;
 
@@ -39,7 +38,7 @@ export const LegendKeycapMessageImg = styled.img`
 
   ${media.mobile} {
     display: none;
-  };
+  }
 `;
 
 export const HandsUpCokoImg = styled.img`

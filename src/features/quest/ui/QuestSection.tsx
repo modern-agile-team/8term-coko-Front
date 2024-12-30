@@ -73,14 +73,16 @@ export default function QuestSection({
 
   return (
     <S.QuestContainer {...questUrlProps}>
-      <S.DailyQuestSection {...questUrlProps}>
+      <S.QuestSection {...questUrlProps}>
         <S.QuestContentWrapper {...questUrlProps}>
           <S.QuestContent {...questUrlProps}>
             <S.QuestIcon
               src={getImageUrl('폭탄-아이콘.svg')}
               {...questUrlProps}
             />
-            <S.DailyQuestText {...questUrlProps}>{title}</S.DailyQuestText>
+            <S.DailyOrMainQuestText {...questUrlProps}>
+              {title}
+            </S.DailyOrMainQuestText>
           </S.QuestContent>
           {quests.map(quest => {
             const { progressBarColor, rewardIcon, progressBarIcon } =
@@ -112,7 +114,7 @@ export default function QuestSection({
             );
           })}
         </S.QuestContentWrapper>
-      </S.DailyQuestSection>
+      </S.QuestSection>
     </S.QuestContainer>
   );
 }

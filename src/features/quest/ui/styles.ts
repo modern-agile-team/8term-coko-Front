@@ -27,8 +27,8 @@ export const QuestContainer = styled.div<QuestUrlProps>`
     `}
 `;
 
-// 오늘의 퀘스트 섹션
-export const DailyQuestSection = styled.section<QuestUrlProps>`
+// 퀘스트 섹션
+export const QuestSection = styled.section<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
@@ -91,8 +91,8 @@ export const QuestIcon = styled.img<QuestUrlProps>`
     `}
 `;
 
-// '오늘의 퀘스트' 텍스트
-export const DailyQuestText = styled.p<QuestUrlProps>`
+// '오늘의 퀘스트' 혹은 '메인 퀘스트' 텍스트
+export const DailyOrMainQuestText = styled.p<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
