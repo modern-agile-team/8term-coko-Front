@@ -13,7 +13,7 @@ export default function DailyQuest() {
   const isLearn = location.pathname === '/learn';
   const isQuest = location.pathname === '/quest';
 
-  // UI 속성을 페이지 컨텍스트와 progress에 따라 동적으로 설정 (DailyQuest)
+  // UI 속성을 컴포넌트와 progress에 따라 동적으로 설정 (DailyQuest)
   const getDailyUIProps = (progress: number, maxProgress: number) => {
     const isComplete = progress >= maxProgress;
     return {
