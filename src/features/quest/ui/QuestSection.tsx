@@ -8,7 +8,11 @@ interface QuestSectionProps {
   quests: Quest[];
   isLearn: boolean;
   isQuest: boolean;
-  component: 'daily' | 'main';
+  getUIProps: (progress: number, maxProgress: number) => {
+    progressBarColor: string;
+    rewardIcon: string;
+    progressBarIcon: string;
+  };
 }
 
 export default function QuestSection({
@@ -16,45 +20,8 @@ export default function QuestSection({
   quests,
   isLearn,
   isQuest,
-  component,
+  getUIProps,
 }: QuestSectionProps) {
-  // UI 속성을 페이지 컨텍스트와 progress에 따라 동적으로 설정
-  const getUIProps = (progress: number, maxProgress: number) => {
-    const isComplete = progress >= maxProgress;
-
-    // Learn 페이지에서 보여질 UI 속성
-    if (isLearn) {
-      return {
-        progressBarColor: '#FFD100',
-        rewardIcon: getImageUrl(
-          /** '포인트-퀘스트-완료.svg' 이미지는 아직 없어서 보이지 않음. */
-          isComplete ? '포인트-퀘스트-완료.svg' : '포인트.svg'
-        ),
-      };
-    }
-
-    // Quest 페이지에서 보여질 UI 속성
-    if (isQuest) {
-      return {
-        progressBarColor: component === 'daily' ? '#FFD100' : '#F9012F',
-        rewardIcon: getImageUrl(
-          isComplete
-            ? component === 'daily'
-              ? '노랑-퀘스트-보상.svg'
-              : '빨강-퀘스트-보상.svg'
-            : component === 'daily'
-            ? '노랑-퀘스트-진행.svg'
-            : '빨강-퀘스트-진행.svg'
-        ),
-        progressBarIcon: getImageUrl(
-          component === 'daily' ? '노랑-도장.svg' : '빨강-도장.svg'
-        ),
-      };
-    }
-
-    // 기본값
-    return {};
-  };
 
   // ProgressBar 크기 설정
   const progressBarSizeProps = isLearn
@@ -78,12 +45,18 @@ export default function QuestSection({
           </S.QuestContent>
           {quests.map(quest => {
             const { progressBarColor, rewardIcon, progressBarIcon } =
-              getUIProps(quest.progress, quest.maxProgress);
+            getUIProps(quest.progress, quest.maxProgress);
+
             return (
               <S.QuestWrapper key={quest.id} {...questUrlProps}>
                 <S.QuestsTitle {...questUrlProps}>{quest.title}</S.QuestsTitle>
                 <S.ProgressBarWrapper {...questUrlProps}>
-                  <S.ProgressBarIcon src={progressBarIcon} {...questUrlProps} />
+                  {progressBarIcon && (
+                    <S.ProgressBarIcon
+                      src={progressBarIcon}
+                      {...questUrlProps}
+                    />
+                  )}
                   <ProgressBar
                     $progress={quest.progress}
                     $maxProgress={quest.maxProgress}

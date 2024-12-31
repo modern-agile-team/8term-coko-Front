@@ -28,7 +28,7 @@ export const QuestContainer = styled.div<QuestUrlProps>`
 `;
 
 // 퀘스트 섹션
-export const QuestSection = styled.section<QuestUrlProps>`
+export const QuestSection = styled.section<Omit<QuestUrlProps, '$isQuest'>>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
@@ -38,8 +38,6 @@ export const QuestSection = styled.section<QuestUrlProps>`
       position: fixed;
       background-image: url(${getImageUrl('종이.svg')});
     `}
-
-  ${({ $isQuest = true }) => $isQuest && css``}
 `;
 
 // QuestContent와 QuestWrapper를 감싸는 컨테이너
@@ -99,7 +97,7 @@ export const QuestHeading = styled.h1<QuestUrlProps>`
       font-size: 15px;
       color: #9f9f9f;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 15px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
@@ -116,13 +114,14 @@ export const QuestHeading = styled.h1<QuestUrlProps>`
 
 // 단일 퀘스트 감싸는 div
 export const QuestWrapper = styled.div<QuestUrlProps>`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 10px;
-      position: relative;
+      margin-bottom: 15px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
@@ -131,12 +130,9 @@ export const QuestWrapper = styled.div<QuestUrlProps>`
       height: 111px;
       border-radius: 20px;
       background: #fff;
-      display: flex;
-      flex-direction: column;
       justify-content: center;
       margin-top: 20px;
       box-shadow: 0 3px #e5e5e5;
-      position: relative;
       z-index: -1;
     `}
 `;
@@ -146,10 +142,10 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      font-size: 12px;
+      font-size: 13px;
       color: #b8b8b8;
       text-align: start;
-      margin: 0 0 3px 40px;
+      margin-left: 37px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
@@ -166,20 +162,18 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
 
 // 진행도바 감싸는 div
 export const ProgressBarWrapper = styled.div<QuestUrlProps>`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      display: flex;
-      align-items: center;
-      justify-content: center;
       gap: 3px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
     css`
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
       gap: 15px;
     `}
 `;
@@ -202,28 +196,26 @@ export const ProgressBarIcon = styled.img<QuestUrlProps>`
 
 // 보상 아이콘 감싸는 div
 export const RewardIconWrapper = styled.div<QuestUrlProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
       width: 24px;
-      height: 24px;
+      height: 26px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
     css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
       width: 74px;
       height: 78px;
     `}
 `;
 
 // 보상 아이콘
-export const RewardIcon = styled.img<QuestUrlProps>`
+export const RewardIcon = styled.img`
   width: 100%;
   height: 100%;
 `;
