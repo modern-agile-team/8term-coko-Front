@@ -9,7 +9,7 @@ export default function SelectSection() {
   const { data: sections, isLoading, error } = sectionsQuery.getAll();
   const [currentPage, setCurrentPage] = useState(0);
 
-  const sectionList = sections as Section[]; // 섹션 데이터를 Section 타입 배열로 변환 (섹션 리스트)
+  const sectionList = sections as Section[] || []; // 섹션 데이터를 Section 타입 배열로 변환 (섹션 리스트)
   const ITEMS_PER_PAGE = 5; // 페이지당 항목(섹션) 수
 
   // 전체 페이지 수 계산 (한 페이지당 5개의 섹션)
