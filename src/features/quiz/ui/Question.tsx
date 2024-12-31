@@ -10,8 +10,8 @@ import type { Quiz } from '@features/quiz/types';
 import {
   addLineNumbersToCode,
   replaceEmptyWithHTMLElement,
-  useCodeHighlight,
 } from '@/features/quiz/service/quizUtils';
+import { useCodeHighlight } from '@/features/quiz/service/hooks';
 
 interface QuestionProps {
   title: Quiz['title'];
