@@ -32,13 +32,13 @@ import PartClear from '@features/user/ui/PartClear';
 import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
 import type { PartStatus, Quiz } from '@features/quiz/types';
-import { preloadImages } from '@features/quiz/constants';
+import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
-    imageUrls: preloadImages,
+    imageUrls: PRELOAD_IMAGES,
   });
 
   const {

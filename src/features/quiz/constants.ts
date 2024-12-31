@@ -1,4 +1,4 @@
-export const preloadImages = [
+export const PRELOAD_IMAGES = [
   'O버튼.svg',
   'X버튼.svg',
   'O버튼-선택.svg',
