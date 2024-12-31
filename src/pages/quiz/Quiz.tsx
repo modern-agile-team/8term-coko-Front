@@ -61,11 +61,11 @@ export default function Quiz() {
 
   const { data: quizzes, isLoading } =
     isLoggedIn(user) && isInProgress
-      ? userQuizzesQuery.get({
+      ? userQuizzesQuery.getQuizzes({
           userId: user.id,
           partId,
         })
-      : quizzesQuery.get({
+      : quizzesQuery.getQuizzes({
           partId,
         });
   const isQuizFinished = isCorrectList.length === quizzes?.length;

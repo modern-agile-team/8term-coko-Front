@@ -13,15 +13,15 @@ export default function PartClear({ partId }: PartClearProps) {
   const { user } = useUserStore() as { user: User };
 
   const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.patch();
-  const { mutate: updateProgress, isIdle: isProgressIdle } =
-    partProgressQuery.put();
+  const { mutate: updatePartProgress, isIdle: isProgressIdle } =
+    partProgressQuery.updatePartProgress();
 
   const navigate = useNavigate();
 
   useTimeout(
     () => {
       updatePoint({ id: user.id, point: DEFAULT_POINT });
-      updateProgress({ userId: user.id, partId, partStatus: 'COMPLETED' });
+      updatePartProgress({ userId: user.id, partId, partStatus: 'COMPLETED' });
     },
     { delay: 500 }
   );

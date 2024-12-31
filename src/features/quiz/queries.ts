@@ -9,7 +9,7 @@ const quizKeys = {
 };
 
 export const quizzesQuery = {
-  get: ({ partId }: { partId: number }) => {
+  getQuizzes: ({ partId }: { partId: number }) => {
     return useQuery({
       queryKey: quizKeys.part(partId),
       queryFn: () => quizzesApis.get({ partId }),

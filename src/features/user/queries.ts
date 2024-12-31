@@ -22,7 +22,7 @@ export const progressQuery = {
 };
 
 export const userQuizzesQuery = {
-  get: ({ userId, partId }: { userId: number; partId: number }) => {
+  getQuizzes: ({ userId, partId }: { userId: number; partId: number }) => {
     return useQuery({
       queryKey: userKeys.partQuizzes(userId, partId),
       queryFn: () => usersApis.getQuizzes({ id: userId, partId }),
@@ -98,7 +98,7 @@ export const pointQuery = {
 };
 
 export const partProgressQuery = {
-  put: () => {
+  updatePartProgress: () => {
     return useMutation({
       mutationFn: usersApis.partProgress,
     });
