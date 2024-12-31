@@ -1,17 +1,17 @@
+import * as S from './styles';
 import SectionArrowButton from './SectionArrowButton';
 import SectionNavigateContainer from './SectionNavigateContainer';
-import { SectionBoxWrapper, SelectSectionBox, TextOverlay } from './style';
 
 export default function SelectSection() {
   return (
-    <SectionBoxWrapper>
+    <S.SectionBoxWrapper>
       <SectionArrowButton direction="left" />
-      <TextOverlay>W</TextOverlay>
-      <SelectSectionBox>
+      <S.CompassText>W</S.CompassText>
+      <S.SelectSectionBox>
         <SectionNavigateContainer />
-      </SelectSectionBox>
-      <TextOverlay>E</TextOverlay>
+      </S.SelectSectionBox>
+      <S.CompassText>E</S.CompassText>
       <SectionArrowButton direction="right" />
-    </SectionBoxWrapper>
+    </S.SectionBoxWrapper>
   );
 }

@@ -1,19 +1,19 @@
-import { ArrowButton } from './style';
+import * as S from './styles';
+import { getImageUrl } from '@/utils/getImageUrl';
 
 export default function SectionArrowButton({
   direction,
 }: {
   direction: 'left' | 'right';
 }) {
-  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
   const arrowImg =
     direction === 'left'
-      ? `${imgUrl}왼쪽-화살표.svg`
-      : `${imgUrl}오른쪽-화살표.svg`;
+      ? `${getImageUrl('왼쪽-화살표.svg')}`
+      : `${getImageUrl('오른쪽-화살표.svg')}`;
 
   return (
-    <ArrowButton direction={direction}>
+    <S.ArrowButton direction={direction}>
       <img src={arrowImg} alt={`${direction} arrow`} />
-    </ArrowButton>
+    </S.ArrowButton>
   );
 }

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+import { getImageUrl } from '@utils/getImageUrl';
 
 export const SectionBoxWrapper = styled.div`
   display: flex;
@@ -10,6 +9,15 @@ export const SectionBoxWrapper = styled.div`
   margin-top: 45px;
 `;
 
+export const SectionButton = styled.button<{ $backgroundImage: string }>`
+  width: 100px;
+  height: 75px;
+  margin-top: 75px;
+  background: none;
+  border: none;
+  background-image: url(${({ $backgroundImage }) => $backgroundImage});
+`;
+
 export const SelectSectionBox = styled.section`
   display: flex;
   justify-content: center;
@@ -17,11 +25,11 @@ export const SelectSectionBox = styled.section`
   width: 599px;
   height: 197px;
   margin-top: 30px;
-  background-image: url(${imgUrl}섹션-선택-섬.svg);
+  background-image: url(${getImageUrl('섹션-선택-섬.svg')});
   background-repeat: no-repeat;
 `;
 
-export const TextOverlay = styled.p`
+export const CompassText = styled.p`
   font-weight: 700;
   font-size: 18px;
   margin: 80px 10px 0 10px;

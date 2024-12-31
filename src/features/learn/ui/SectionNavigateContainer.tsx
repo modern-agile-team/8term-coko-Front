@@ -1,4 +1,4 @@
-import { SectionButton } from '@common/ui/style';
+import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { sectionsQuery } from '@features/learn/queries';
 
@@ -18,13 +18,13 @@ export default function SectionNavigateContainer() {
   return (
     <>
       {sections?.map((section, index) => (
-        <SectionButton
+        <S.SectionButton
           key={section.id}
           $backgroundImage={getImageUrl(`섬${(index % 5) + 1}.svg`)}
           onClick={() => scrollToSection(section.id)}
         >
           {section.name}
-        </SectionButton>
+        </S.SectionButton>
       ))}
     </>
   );

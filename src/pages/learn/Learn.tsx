@@ -15,6 +15,7 @@ import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
 import { authQuery } from '@features/auth/queries';
 import { sectionsQuery } from '@/features/learn/queries';
+import { PRELOAD_IMAGES } from '@features/learn/constants';
 
 export default function Learn() {
   const { setUser } = useUserStore();
@@ -28,17 +29,7 @@ export default function Learn() {
 
   const showComponents = useScrollVisibility();
   const isImageLoading = usePreloadImages({
-    imageUrls: [
-      '코코-멘트1.svg',
-      '코코-멘트2.svg',
-      '코코-멘트3.svg',
-      '코코-멘트4.svg',
-      '코코-멘트5.svg',
-      '키캡1.svg',
-      '키캡2.svg',
-      '키캡3.svg',
-      '키캡4.svg',
-    ],
+    imageUrls: PRELOAD_IMAGES,
   });
 
   // Section 데이터 가져오기
