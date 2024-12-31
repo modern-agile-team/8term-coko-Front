@@ -3,7 +3,7 @@ import { getImageUrl } from '@utils/getImageUrl';
 import { PropsWithChildren } from 'react';
 
 interface QuestSectionProps {
-  title?: string;
+  title: string;
   isLearn: boolean;
   isQuest: boolean;
 }
