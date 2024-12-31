@@ -1,61 +1,54 @@
 import * as S from './styles';
+import { useState, useMemo } from 'react';
+import NavigationControl from './NavigationControl';
 import SectionNavigateContainer from './SectionNavigateContainer';
-import { getImageUrl } from '@utils/getImageUrl';
-import { useState } from 'react';
 import { sectionsQuery } from '@features/learn/queries';
 import type { Section } from '@features/learn/types';
 
 export default function SelectSection() {
   const { data: sections, isLoading, error } = sectionsQuery.getAll();
   const [currentPage, setCurrentPage] = useState(0);
-  const ITEMS_PER_PAGE = 5;
+
+  const sectionList = sections as Section[]; // 섹션 데이터를 Section 타입 배열로 변환 (섹션 리스트)
+  const ITEMS_PER_PAGE = 5; // 페이지당 항목(섹션) 수
+
+  // 전체 페이지 수 계산 (한 페이지당 5개의 섹션)
+  const totalPages = useMemo(() => Math.ceil(sectionList.length / ITEMS_PER_PAGE), [sectionList]);
+
+  // 현재 페이지에 보여줄 섹션 리스트 계산
+  const currentSections = useMemo(
+    () => sectionList.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE),
+    [currentPage, sectionList]
+  );
 
   if (isLoading) return <div>로딩 중...</div>;
   if (error) return <div>섹션 데이터를 가져오는데 실패했습니다.</div>;
 
-  const sectionList = sections as Section[];
-  const totalPages = Math.ceil(sectionList.length / ITEMS_PER_PAGE);
-  const startIndex = currentPage * ITEMS_PER_PAGE;
-  const currentSections = sectionList.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
-
-  const handlePageChange = (direction: 'left' | 'right') => {
-    setCurrentPage(prevPage => {
-      if (direction === 'left') {
-        return prevPage > 0 ? prevPage - 1 : prevPage;
-      } else {
-        return prevPage < totalPages - 1 ? prevPage + 1 : prevPage;
-      }
-    });
+  const goToPreviousPage = () => {
+    if (currentPage > 0) setCurrentPage((prev) => prev - 1);
   };
 
+  const goToNextPage = () => {
+    if (currentPage < totalPages - 1) setCurrentPage((prev) => prev + 1);
+  };
   return (
     <S.SectionBoxWrapper>
-      {/* 왼쪽 화살표 및 텍스트 */}
-      <S.ArrowButton
-        $isHidden={currentPage === 0}
-        onClick={() => handlePageChange('left')}
-      >
-        <img src={getImageUrl('왼쪽-화살표.svg')} alt="left arrow" />
-      </S.ArrowButton>
-      <S.CompassText $isHidden={currentPage === 0}>W</S.CompassText>
-
+      <NavigationControl
+        direction="left"
+        isHidden={currentPage === 0}
+        onClick={goToPreviousPage}
+        compassText="W"
+      />
       <S.SelectSectionBox>
         <SectionNavigateContainer sections={currentSections} />
       </S.SelectSectionBox>
-
-      {/* 오른쪽 화살표 및 텍스트 */}
-      <S.CompassText $isHidden={currentPage === totalPages - 1}>
-        E
-      </S.CompassText>
-      <S.ArrowButton
-        $isHidden={currentPage === totalPages - 1}
-        onClick={() => handlePageChange('right')}
-      >
-        <img src={getImageUrl('오른쪽-화살표.svg')} alt="right arrow" />
-      </S.ArrowButton>
+      <NavigationControl
+        direction="right"
+        isHidden={currentPage === totalPages - 1}
+        onClick={goToNextPage}
+        compassText="E"
+      />
     </S.SectionBoxWrapper>
   );
 }
+
