@@ -8,3 +8,5 @@ export interface Quiz {
   category: 'COMBINATION' | 'MULTIPLE_CHOICE' | 'OX_SELECTOR' | 'SHORT_ANSWER';
   answerChoice: string[];
 }
+
+export type PartStatus = 'LOCKED' | 'STARTED' | 'IN_PROGRESS' | 'COMPLETED';

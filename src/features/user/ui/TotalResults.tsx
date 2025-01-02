@@ -1,48 +1,63 @@
-import * as S from './styles';
-import {
-  DashLineHr,
-  ImageDescriptionDiv,
-  Img,
-  RedirectToLearnButton,
-  TotalResultProgressDiv,
-  CompensationSection,
-  TotalResultsRewardDiv,
-} from './styles';
+import * as S from '@features/quiz/ui/styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import useUserStore from '@store/useUserStore';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useNavigate } from 'react-router-dom';
 import { useTimeout } from '@modern-kit/react';
-import { experienceQuery } from '@features/user/queries';
+import { experienceQuery, partProgressQuery } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { User } from '@features/user/types';
+import type { PartStatus, Quiz } from '@features/quiz/types';
+import { isCompleted } from '@/features/quiz/service/quizUtils';
 
 interface TotalResultProps {
   onNext: () => void;
   quizzesLength: number;
+  partId: Quiz['partId'];
+  partStatus: PartStatus;
 }
 export default function TotalResults({
   onNext,
   quizzesLength,
+  partId,
+  partStatus,
 }: TotalResultProps) {
-  const { totalResults } = useClientQuizStore();
-  const quizCorrectAnswers = totalResults.filter(result => result).length;
-  const isPartClear = quizzesLength === quizCorrectAnswers;
+  const { isCorrectList } = useClientQuizStore();
   const { user } = useUserStore() as { user: User };
-  const experience = quizCorrectAnswers * 10;
-  const { mutate: experienceUpdate, isIdle } = experienceQuery.patch();
+
   const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
+  const { mutate: experienceUpdate, isIdle: isexperienceIdle } =
+    experienceQuery.patch();
+  const { mutate: updateProgress, isIdle: isProgressIdle } =
+    partProgressQuery.put();
 
   const navigate = useNavigate();
+
+  const quizCorrectAnswers = isCorrectList.filter(result => result).length;
+  const experience = quizCorrectAnswers * 10;
+  const isPartClear = quizzesLength === quizCorrectAnswers;
+
   useTimeout(
     () => {
       experienceUpdate({ id: user.id, experience });
+      !isCompleted(partStatus) &&
+        updateProgress({ partId, userId: user.id, partStatus: 'IN_PROGRESS' });
     },
     { delay: 1000, enabled: isSuccess }
   );
+
+  const handleOnClick = () => {
+    if (isPartClear && !isCompleted(partStatus)) {
+      onNext();
+    } else {
+      navigate('/learn');
+    }
+  };
+
   if (!userExperience) {
     return <></>;
   }
+
   return (
     <S.CompensationSection $backgroundColor="#ffffff" $boxShadow="#E5E5E5">
       <S.CompensationTextDiv>
@@ -89,13 +104,12 @@ export default function TotalResults({
       </S.TotalResultsRewardDiv>
       <S.DashLineHr $color="#00DCE8" />
       <S.RedirectToLearnButton
-        disabled={isIdle}
-        $isActive={isIdle}
-        onClick={() => {
-          isPartClear ? onNext() : navigate('/learn');
-        }}
+        disabled={isexperienceIdle && isProgressIdle}
+        $isActive={isexperienceIdle && isProgressIdle}
+        $margin="35px 86px 0 0"
+        onClick={handleOnClick}
       >
-        {isPartClear ? '보상 받기' : '메인으로'}
+        {isPartClear && !isCompleted ? '보상 받기' : '메인으로'}
       </S.RedirectToLearnButton>
     </S.CompensationSection>
   );

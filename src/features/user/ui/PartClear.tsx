@@ -1,26 +1,31 @@
 import { useNavigate } from 'react-router-dom';
-import * as S from './styles';
-import { CompensationSection } from './styles';
-import { pointQuery } from '@features/user/queries';
+import * as S from '@features/quiz/ui/styles';
+import { partProgressQuery, pointQuery } from '@features/user/queries';
 import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
-import { getImageUrl } from '@/utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
+import { User } from '@/features/user/types';
+import { DEFAULT_POINT } from '@/features/user/constants';
 interface PartClearProps {
   partId: number;
 }
 export default function PartClear({ partId }: PartClearProps) {
+  const { user } = useUserStore() as { user: User };
+
+  const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.patch();
+  const { mutate: updatePartProgress, isIdle: isProgressIdle } =
+    partProgressQuery.updatePartProgress();
+
   const navigate = useNavigate();
-  const { mutate: updatePoint, isIdle } = pointQuery.patch();
-  const { user } = useUserStore();
-  const point = 1500;
+
   useTimeout(
     () => {
-      if (user) {
-        updatePoint({ id: user.id, point });
-      }
+      updatePoint({ id: user.id, point: DEFAULT_POINT });
+      updatePartProgress({ userId: user.id, partId, partStatus: 'COMPLETED' });
     },
     { delay: 500 }
   );
+
   return (
     <>
       <S.CompensationSection $backgroundColor="#F0DAAB" $boxShadow="#E5C892">
@@ -45,9 +50,10 @@ export default function PartClear({ partId }: PartClearProps) {
             src={getImageUrl('파트완료_오른쪽.svg')}
           />
         </S.PartClearImageBox>
-        <S.PartClearPoint>{point} Point</S.PartClearPoint>
+        <S.PartClearPoint>{DEFAULT_POINT} Point</S.PartClearPoint>
         <S.RedirectToLearnButton
-          $isActive={isIdle}
+          $margin="0 88px 0 0"
+          $isActive={isPointIdle && isProgressIdle}
           onClick={() => {
             navigate('/learn');
           }}

@@ -10,12 +10,13 @@ import {
 } from './styles';
 import getPartGridPosition from '../../learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
+import { PartStatus } from '@/features/quiz/types';
 
 interface Part {
   id: number;
   sectionId: number;
   name: string;
-  state?: string;
+  status?: PartStatus;
 }
 
 interface Section {
@@ -29,7 +30,7 @@ const dummyData: Section[] = [
     id: 1,
     name: '변수',
     part: [
-      { id: 1, sectionId: 1, name: 'var', state: 'start' },
+      { id: 1, sectionId: 1, name: 'var', status: 'STARTED' },
       { id: 2, sectionId: 1, name: 'let' },
       { id: 3, sectionId: 1, name: 'const' },
     ],
@@ -38,7 +39,7 @@ const dummyData: Section[] = [
     id: 2,
     name: '자료형',
     part: [
-      { id: 4, sectionId: 2, name: 'string', state: 'pending' },
+      { id: 4, sectionId: 2, name: 'string', status: 'COMPLETED' },
       { id: 5, sectionId: 2, name: 'number' },
       { id: 6, sectionId: 2, name: 'boolean' },
       { id: 7, sectionId: 2, name: 'null' },
@@ -98,7 +99,9 @@ export default function PartNavContainer() {
                   key={part.id}
                   style={{ gridColumn, gridRow }}
                   onClick={() =>
-                    navigate('/quiz', { state: { partId: part.id } })
+                    navigate('/quiz', {
+                      state: { partId: part.id, status: part.status },
+                    })
                   }
                 >
                   <img src={buttonImage} alt={`키캡 ${part.name}`} />

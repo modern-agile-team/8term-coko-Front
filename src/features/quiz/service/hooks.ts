@@ -32,7 +32,8 @@ import { DependencyList, useState, useLayoutEffect } from 'react';
  *   </pre>
  * );
  */
-const useCodeHighlight = (
+
+export const useCodeHighlight = (
   code: string,
   deps?: DependencyList,
   language: string = 'javascript'
@@ -51,5 +52,3 @@ const useCodeHighlight = (
 
   return highlightCode;
 };
-
-export default useCodeHighlight;

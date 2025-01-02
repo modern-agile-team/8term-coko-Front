@@ -230,12 +230,12 @@ const fadeIn = keyframes`
     transform: translateY(0);
   }
 `;
-export const ScoreSection = styled.section<{ $isResult: boolean }>`
+export const ScoreSection = styled.section<{ $isCorrect: boolean }>`
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  background-image: ${({ $isResult }) =>
-    `url(${getImageUrl($isResult ? '정답모달.svg' : '오답모달.svg')})`};
+  background-image: ${({ $isCorrect }) =>
+    `url(${getImageUrl($isCorrect ? '정답모달.svg' : '오답모달.svg')})`};
   background-size: cover;
   width: 100vw;
   height: 25%;
@@ -243,8 +243,10 @@ export const ScoreSection = styled.section<{ $isResult: boolean }>`
   bottom: 0;
   animation: ${fadeIn} 0.7s ease-out;
   ${media.mobile} {
-    background-image: ${({ $isResult }) =>
-      `url(${getImageUrl($isResult ? '정답_모바일.svg' : '오답_모바일.svg')})`};
+    background-image: ${({ $isCorrect }) =>
+      `url(${getImageUrl(
+        $isCorrect ? '정답_모바일.svg' : '오답_모바일.svg'
+      )})`};
     justify-content: center;
   }
 `;
@@ -417,7 +419,10 @@ export const ImageDescriptionDiv = styled.div`
     }
   }
 `;
-export const RedirectToLearnButton = styled.button<{ $isActive: boolean }>`
+export const RedirectToLearnButton = styled.button<{
+  $isActive: boolean;
+  $margin: string;
+}>`
   width: 152px;
   height: 25px;
   text-align: center;
@@ -427,7 +432,7 @@ export const RedirectToLearnButton = styled.button<{ $isActive: boolean }>`
   text-decoration-line: none;
   color: #ffffff;
   align-self: flex-end;
-  margin: 35px 86px 0 0;
+  margin: ${({ $margin }) => $margin};
   ${({ $isActive }) =>
     $isActive
       ? css`
@@ -470,6 +475,7 @@ export const TotalResultProgressDiv = styled.div`
     }
   }
 `;
+
 export const Img = styled.img<{ $width: string; $height: string }>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};

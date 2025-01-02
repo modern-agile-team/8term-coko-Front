@@ -28,6 +28,7 @@ export default function Combination({
     answer.length > compact(userResponseAnswer).length &&
       pushUserResponseAnswer(value);
   };
+
   const handleDragStart = (
     e: React.DragEvent<HTMLButtonElement>,
     value: string,
@@ -36,6 +37,7 @@ export default function Combination({
     e.currentTarget.classList.add('drag-start');
     setDragStartItem({ value, index });
   };
+
   const handleDragEnd = (e: React.DragEvent<HTMLButtonElement>) => {
     e.preventDefault();
     drop((dragStartItem, dragOverItem) => {
@@ -43,6 +45,7 @@ export default function Combination({
     });
     e.currentTarget.classList.remove('drag-start');
   };
+
   return (
     <>
       <CombinationSection>
