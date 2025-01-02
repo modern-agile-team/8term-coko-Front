@@ -1,65 +1,69 @@
+import * as S from './styles';
+import { getImageUrl } from '@/utils/getImageUrl';
 import { useLocation } from 'react-router-dom';
-import {
-  DailyQuestSection,
-  QuestContent,
-  QuestIcon,
-  DailyQuestText,
-  QuestsWrapper,
-  QuestsTitle,
-  ProgressBarWrapper,
-  RewardIcon,
-} from '../style';
-import ProgressBar from '../../progress/ui/ProgressBar';
+import QuestSection from './QuestSection';
+import ProgressBar from '@features/progress/ui/ProgressBar';
+import type { Quest } from 'features/quest/types';
 
-const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
+const quests: Quest[] = [
+  { id: 1, title: '파트 1 클리어', progress: 30, maxProgress: 100 },
+  { id: 2, title: '문제 4개 풀기', progress: 100, maxProgress: 100 },
+];
 
 export default function DailyQuest() {
   const location = useLocation();
-
-  // URL에 따라 스타일 변경
   const isLearn = location.pathname === '/learn';
   const isQuest = location.pathname === '/quest';
 
-  // 임시 데이터
-  const progress1 = 30;
-  const progress2 = 70;
-  const maxProgress1 = 100;
-  const maxProgress2 = 100;
+  // UI 속성을 컴포넌트와 progress에 따라 동적으로 설정 (DailyQuest)
+  const getDailyUIProps = (progress: number, maxProgress: number) => {
+    const isComplete = progress >= maxProgress;
+    return {
+      progressBarColor: '#FFD100',
+      rewardIcon: getImageUrl(
+        isComplete ? '노랑-퀘스트-보상.svg' : '노랑-퀘스트-진행.svg'
+      ),
+      progressBarIcon: getImageUrl('노랑-도장.svg'),
+    };
+  };
+
+  // ProgressBar 크기 설정 (isLearn, isQuest에 따라 다름)
+  const progressBarSizeProps = isLearn
+    ? { $maxWidth: '172px', $height: '13px' }
+    : isQuest
+    ? { $maxWidth: '434px', $height: '25px' }
+    : {};
+
+  const questUrlProps = { $isLearn: isLearn, $isQuest: isQuest };
 
   return (
-    <DailyQuestSection $isLearn={isLearn} $isQuest={isQuest}>
-      <QuestContent>
-        <QuestIcon src={`${imgUrl}폭탄-아이콘.svg`} alt="폭탄 아이콘" />
-        <DailyQuestText>오늘의 퀘스트</DailyQuestText>
-      </QuestContent>
-      <QuestsWrapper>
-        <QuestsTitle>문제 4개 풀기</QuestsTitle>
-        <ProgressBarWrapper>
-          <ProgressBar
-            $progress={progress1}
-            $maxProgress={maxProgress1}
-            $maxWidth="172px"
-            $height="13px"
-            $boxBgColor="#F3F3F3;"
-            $innerBgColor="#F9012F"
-          />
-          <RewardIcon src={`${imgUrl}과일바구니.svg`} />
-        </ProgressBarWrapper>
-      </QuestsWrapper>
-      <QuestsWrapper>
-        <QuestsTitle>챕터 1 풀기</QuestsTitle>
-        <ProgressBarWrapper>
-          <ProgressBar
-            $progress={progress2}
-            $maxProgress={maxProgress2}
-            $maxWidth="172px"
-            $height="13px"
-            $boxBgColor="#F3F3F3;"
-            $innerBgColor="#FFD100;"
-          />
-          <RewardIcon src={`${imgUrl}포인트.svg`} />
-        </ProgressBarWrapper>
-      </QuestsWrapper>
-    </DailyQuestSection>
+    <QuestSection title="오늘의 퀘스트" isLearn={isLearn} isQuest={isQuest}>
+      {quests.map(quest => {
+        const { progressBarColor, rewardIcon, progressBarIcon } =
+          getDailyUIProps(quest.progress, quest.maxProgress);
+
+        return (
+          <S.QuestWrapper key={quest.id} {...questUrlProps}>
+            <S.QuestsTitle {...questUrlProps}>{quest.title}</S.QuestsTitle>
+            <S.ProgressBarWrapper {...questUrlProps}>
+              {progressBarIcon && (
+                <S.ProgressBarIcon src={progressBarIcon} {...questUrlProps} />
+              )}
+              <ProgressBar
+                $progress={quest.progress}
+                $maxProgress={quest.maxProgress}
+                {...progressBarSizeProps}
+                $boxBgColor="#F3F3F3"
+                $innerBgColor={progressBarColor}
+                $borderRadius="20px"
+              />
+              <S.RewardIconWrapper {...questUrlProps}>
+                <S.RewardIcon src={rewardIcon} />
+              </S.RewardIconWrapper>
+            </S.ProgressBarWrapper>
+          </S.QuestWrapper>
+        );
+      })}
+    </QuestSection>
   );
 }
