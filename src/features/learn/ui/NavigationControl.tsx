@@ -14,15 +14,27 @@ export default function NavigationControl({
   onClick,
   compassText,
 }: NavigationControlProps) {
+  const isLeft = direction === 'left';
+  const isRight = direction === 'right';
+
   return (
     <>
-      <S.ArrowButton $isHidden={isHidden} onClick={onClick}>
-        <img
-          src={getImageUrl(direction === 'left' ? '왼쪽-화살표.svg' : '오른쪽-화살표.svg')}
-          alt={`${direction} arrow`}
-        />
-      </S.ArrowButton>
-      <S.CompassText $isHidden={isHidden}>{compassText}</S.CompassText>
+      {isLeft && (
+        <>
+          <S.ArrowButton onClick={onClick} $isHidden={isHidden}>
+            <img src={getImageUrl('왼쪽-화살표.svg')} alt="left arrow" />
+          </S.ArrowButton>
+          <S.CompassText $isHidden={isHidden}>{compassText}</S.CompassText>
+        </>
+      )}
+      {isRight && (
+        <>
+          <S.CompassText $isHidden={isHidden}>{compassText}</S.CompassText>
+          <S.ArrowButton onClick={onClick} $isHidden={isHidden}>
+            <img src={getImageUrl('오른쪽-화살표.svg')} alt="right arrow" />
+          </S.ArrowButton>
+        </>
+      )}
     </>
   );
 }
