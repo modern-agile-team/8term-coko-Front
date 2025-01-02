@@ -51,7 +51,9 @@ export default function PartNavContainer({
                   key={part.id}
                   style={{ gridColumn, gridRow }}
                   onClick={() =>
-                    navigate('/quiz', { state: { partId: part.id } })
+                    navigate('/quiz', {
+                      state: { partId: part.id, status: part.partStatus },
+                    })
                   }
                 >
                   {part.name}

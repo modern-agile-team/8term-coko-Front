@@ -27,70 +27,66 @@ import MultipleChoice from '@features/quiz/ui/MultipleChoice';
 import OXSelector from '@features/quiz/ui/OXSelector';
 import ShortAnswer from '@features/quiz/ui/ShortAnswer';
 import Result from '@features/quiz/ui/Result';
-import TotalResults from '@features/quiz/ui/TotalResults';
-import PartClear from '@features/quiz/ui/PartClear';
+import TotalResults from '@features/user/ui/TotalResults';
+import PartClear from '@features/user/ui/PartClear';
 import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
-import type { Quiz } from '@features/quiz/types';
+import type { PartStatus, Quiz } from '@features/quiz/types';
+import { PRELOAD_IMAGES } from '@features/quiz/constants';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
 //퀴즈페이지
 export default function Quiz() {
   const isImageLoading = usePreloadImages({
-    imageUrls: [
-      'O버튼.svg',
-      'X버튼.svg',
-      'O버튼-선택.svg',
-      'X버튼-선택.svg',
-      '정답모달.svg',
-      '오답모달.svg',
-      '객관식-코코.svg',
-      '과일바구니.svg',
-      '단답형이미지1.svg',
-      '단답형이미지2.svg',
-      '레벨1코코.svg',
-      '과일바구니-아이템.svg',
-    ],
+    imageUrls: PRELOAD_IMAGES,
   });
+
   const {
     currentPage,
-    totalResults,
+    isCorrectList,
     userResponseAnswer,
     reset,
-    pushTotalResults,
+    pushIsCorrectList,
   } = useClientQuizStore();
   const { user } = useUserStore();
+
   const { Modal, closeModal, openModal, isShow } = useModal();
-  const { partId, state } = useLocation().state as {
+  const { partId, partStatus } = useLocation().state as {
     partId: number;
-    state?: 'start' | 'pending' | 'end';
+    partStatus: PartStatus;
   };
+
+  const isInProgress = status === 'IN_PROGRESS';
+  const isQuizAnswered = userResponseAnswer[0] === '';
+
   const { data: quizzes, isLoading } =
-    user && state === 'pending'
-      ? userQuizzesQuery.get({
-          userId: user!.id,
+    isLoggedIn(user) && isInProgress
+      ? userQuizzesQuery.getQuizzes({
+          userId: user.id,
           partId,
         })
-      : quizzesQuery.get({
+      : quizzesQuery.getQuizzes({
           partId,
         });
-  const isQuizAnswered = userResponseAnswer[0] === '';
-  const isQuizFinished = totalResults.length === quizzes?.length;
+  const isQuizFinished = isCorrectList.length === quizzes?.length;
   const { Funnel, setStep } = useFunnel('결과');
+
   useEffect(() => {
-    if (totalResults.length === 2 && !user) {
+    if (isCorrectList.length === 2 && !isLoggedIn(user)) {
       setStep('로그인 유도');
     }
     if (isQuizFinished) {
       setStep('총결과');
     }
-    if (totalResults.length !== 0) {
+    if (isCorrectList.length !== 0) {
       openModal();
     }
-  }, [totalResults]);
+  }, [isCorrectList]);
   useUnmount(() => reset());
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
+
   if (isLoading || isImageLoading) return <div>Loading</div>;
   if (!quizzes) return <div>404</div>;
   const { id, title, question, category, answerChoice, answer } =
@@ -113,7 +109,7 @@ export default function Quiz() {
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
-          $progress={totalResults.length}
+          $progress={isCorrectList.length}
           $maxProgress={quizzes.length}
           $innerBgColor="#63DDE8"
           $boxBgColor="#F4F4F4"
@@ -124,7 +120,7 @@ export default function Quiz() {
       <SubmitSection>
         <ResponseButton
           onClick={() => {
-            pushTotalResults(false);
+            pushIsCorrectList(false);
           }}
         >
           SKIP
@@ -134,7 +130,7 @@ export default function Quiz() {
           disabled={isQuizAnswered}
           $disabled={isQuizAnswered}
           onClick={() => {
-            pushTotalResults(isEqualArray(userResponseAnswer, answer));
+            pushIsCorrectList(isEqualArray(userResponseAnswer, answer));
           }}
         >
           제출
@@ -144,8 +140,9 @@ export default function Quiz() {
         <Funnel>
           <Funnel.Step name="결과">
             <Result
+              partStatus={partStatus}
               quizId={id}
-              isResult={totalResults[currentPage]}
+              isCorrect={isCorrectList[currentPage]}
               answer={answer}
               closeModal={closeModal}
             />
@@ -160,6 +157,8 @@ export default function Quiz() {
             <TotalResults
               onNext={() => setStep('파트 클리어')}
               quizzesLength={quizzes.length}
+              partId={partId}
+              partStatus={partStatus}
             />
           </Funnel.Step>
           <Funnel.Step name="파트 클리어">

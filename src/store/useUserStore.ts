@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import type { User } from '@features/user/types';
 
 interface State {
-  user?: User;
+  user: User | null;
 }
 interface Actions {
   setUser: (user: User) => void;
@@ -10,9 +10,9 @@ interface Actions {
 }
 
 const useUserStore = create<State & Actions>(set => ({
-  user: undefined,
+  user: null,
   setUser: user => set(() => ({ user })),
-  clearUser: () => set(() => ({ user: undefined })),
+  clearUser: () => set(() => ({ user: null })),
 }));
 
 export default useUserStore;

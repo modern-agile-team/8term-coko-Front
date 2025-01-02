@@ -2,7 +2,7 @@ import { create } from 'zustand';
 interface State {
   currentPage: number;
   userResponseAnswer: string[];
-  totalResults: boolean[];
+  isCorrectList: boolean[];
 }
 interface Actions {
   nextPage: () => void;
@@ -12,7 +12,7 @@ interface Actions {
   spliceUserResponseAnswer: (choiceIndex: number) => void;
   swapUserResponseAnswer: (index1: number, index2: number) => void;
   resetUserResponseAnswer: () => void;
-  pushTotalResults: (result: boolean) => void;
+  pushIsCorrectList: (result: boolean) => void;
   reset: () => void;
 }
 export const useClientQuizStore = create<State & Actions>(set => ({
@@ -63,9 +63,9 @@ export const useClientQuizStore = create<State & Actions>(set => ({
       return { userResponseAnswer: copyArray };
     }),
   /**정답 전역상태 */
-  totalResults: [],
-  pushTotalResults: result =>
-    set(state => ({ totalResults: [...state.totalResults, result] })),
+  isCorrectList: [],
+  pushIsCorrectList: result =>
+    set(state => ({ isCorrectList: [...state.isCorrectList, result] })),
   reset: () =>
     set(() => ({
       currentPage: 0,

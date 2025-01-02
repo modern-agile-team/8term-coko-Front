@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import quizzesApis from '@features/quiz/apis';
+import { useQuery } from '@tanstack/react-query';
 
 const quizKeys = {
   all: ['quizzes'],
@@ -9,10 +9,10 @@ const quizKeys = {
 };
 
 export const quizzesQuery = {
-  get: ({ partId }: { partId: number }) => {
+  getQuizzes: ({ partId }: { partId: number }) => {
     return useQuery({
       queryKey: quizKeys.part(partId),
-      queryFn: () => quizzesApis.getQuizzes({ partId }),
+      queryFn: () => quizzesApis.get({ partId }),
       //유저가 있으면 요청 x 또는 partId가 없으면
     });
   },

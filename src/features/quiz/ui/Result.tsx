@@ -3,44 +3,49 @@ import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
 import { progressQuery } from '@features/user/queries';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import useUserStore from '@store/useUserStore';
-import type { Quiz } from '@features/quiz/types';
+import type { PartStatus, Quiz } from '@features/quiz/types';
+import { isLoggedIn } from '@features/user/service/authUtils';
+import { isCompleted } from '@features/quiz/service/quizUtils';
 
 interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
-  isResult: boolean;
+  isCorrect: boolean;
   closeModal: () => void;
+  partStatus: PartStatus;
 }
+
 export default function Result({
   quizId,
   answer,
-  isResult,
+  isCorrect,
   closeModal,
+  partStatus,
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
-  const userId = user?.id;
-  const addProgress = progressQuery.put();
+  const { mutate: progressUpdate } = progressQuery.put();
+
+  const handleOnClick = () => {
+    resetUserResponseAnswer();
+    closeModal();
+    nextPage();
+    if (isLoggedIn(user) && !isCompleted(partStatus)) {
+      progressUpdate({
+        userId: user.id,
+        quizId,
+        body: { isCorrect },
+      });
+    }
+  };
+
   const answerFeedback = isMobile() ? answer : `정답 : ${answer}`;
 
   return (
     <>
-      <ScoreSection $isResult={isResult}>
-        <AnswerDiv>{!isResult && answerFeedback}</AnswerDiv>
-        <NextPageButton
-          $isAnswer={isResult}
-          onClick={() => {
-            resetUserResponseAnswer();
-            closeModal();
-            nextPage();
-            userId &&
-              addProgress.mutate({
-                userId,
-                quizId,
-                body: { isCorrect: isResult },
-              });
-          }}
-        >
+      <ScoreSection $isCorrect={isCorrect}>
+        <AnswerDiv>{!isCorrect && answerFeedback}</AnswerDiv>
+        <NextPageButton $isAnswer={isCorrect} onClick={handleOnClick}>
           계속하기
         </NextPageButton>
       </ScoreSection>

@@ -2,7 +2,7 @@ import api from '@/axios/instance';
 import type { Quiz } from '@features/quiz/types';
 
 const quizzesApis = {
-  getQuizzes: async (params?: {
+  get: async (params?: {
     sectionId?: number;
     partId: number;
   }): Promise<Quiz[]> => {
@@ -10,4 +10,5 @@ const quizzesApis = {
     return response.data;
   },
 };
+
 export default quizzesApis;

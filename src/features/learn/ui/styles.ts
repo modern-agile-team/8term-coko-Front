@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { getImageUrl } from '@utils/getImageUrl';
+import { media } from '@/style/media';
+import { getImageUrl } from '@/utils/getImageUrl';
 
 export const SectionBoxWrapper = styled.div`
   display: flex;
@@ -62,6 +63,10 @@ export const LegendKeycapMessageImg = styled.img`
   margin-bottom: 170px;
   margin-right: 72px;
   transition: opacity 0.3s ease;
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const HandsUpCokoImg = styled.img`
