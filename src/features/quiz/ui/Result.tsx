@@ -3,7 +3,8 @@ import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
 import { progressQuery } from '@features/user/queries';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import useUserStore from '@store/useUserStore';
-import type { PartStatus, Quiz } from '@features/quiz/types';
+import type { PartStatus } from '@features/learn/types';
+import type { Quiz } from '@features/quiz/types';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import { isCompleted } from '@features/quiz/service/quizUtils';
 

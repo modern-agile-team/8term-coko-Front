@@ -31,7 +31,8 @@ import TotalResults from '@features/user/ui/TotalResults';
 import PartClear from '@features/user/ui/PartClear';
 import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
-import type { PartStatus, Quiz } from '@features/quiz/types';
+import type { PartStatus } from '@features/learn/types';
+import type { Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 
