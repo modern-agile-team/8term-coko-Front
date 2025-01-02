@@ -11,74 +11,12 @@ export const RankingContainer = styled.div`
   margin-top: 62px;
 `;
 
-export const SortContainer = styled.div`
+export const SortDropdownWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 47px;
   margin-bottom: 27px;
-  position: relative;
-`;
-
-export const SortSelectButton = styled.button<{ $isToggled: boolean }>`
-  width: 136px;
-  height: 30px;
-  color: #fff3c0;
-  font-size: 12px;
-  font-weight: 700;
-  text-align: center;
-  background: ${({ $isToggled }) =>
-    $isToggled
-      ? `#d37744 url(${getImageUrl(
-          '정렬-아래-화살표.svg'
-        )}) no-repeat right 10px center`
-      : `#d37744 url(${getImageUrl(
-          '정렬-위-화살표.svg'
-        )}) no-repeat right 10px center`};
-  border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
-  border: 2px solid #c26b3b;
-  &:focus {
-    outline: none;
-  }
-`;
-
-export const SortOptionUl = styled.ul`
-  position: absolute;
-  top: 39px;
-  width: 136px;
-  border-radius: 0 0 15px 15px;
-  background-color: #fff3c0;
-  list-style: none;
-  z-index: 10;
-  border: 2px solid #c26b3b;
-  border-top: none;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-`;
-
-export const SortOptionLi = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #d37744;
-  background-color: #fff3c0;
-  border-bottom: 2px solid #c26b3b;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #d37744;
-    color: #fff3c0;
-    border-bottom: 2px solid #c26b3b;
-  }
-
-  &:last-child {
-    border-bottom: none;
-  }
 `;
 
 export const RankingItem = styled.div<{ $rank: number }>`
@@ -251,8 +189,8 @@ export const RankIconText = styled.p`
 `;
 
 export const RankIcon = styled.img`
-  width: 30px;
-  height: 35px;
+  width: 48px;
+  height: 38px;
   margin-left: 10px;
 `;
 

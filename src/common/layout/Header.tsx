@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getImageUrl } from '@utils/getImageUrl';
-import { HeaderBox } from './style';
-import * as S from '../ui/style';
-import HeaderItem from '../ui/HeaderItem';
+import { HeaderBox } from './styles';
+import * as S from 'common/ui/style';
+import HeaderItem from '@common/ui/HeaderItem';
 import Login from '@features/login/ui/Login';
 import handleLogout from '@features/login/service/handleLogout';
 import isLoggedIn from '@utils/isLoggedIn';

@@ -1,37 +1,37 @@
 import * as S from './styles';
 import usePopover from '@hooks/usePopover';
-import { RANKING_OPTIONS } from '@features/ranking/constant';
 import { objectKeys } from '@modern-kit/utils';
 
-interface SortDropDownProps {
-  selectedOption: keyof typeof RANKING_OPTIONS;
-  onSelectOption: (option: keyof typeof RANKING_OPTIONS) => void;
+interface SortDropDownProps<T> {
+  options: T;
+  selectedOption: keyof T;
+  onSelectOption: (option: keyof T) => void;
 }
 
-export default function SortDropdown({
+export default function SortDropdown<T>({
+  options,
   selectedOption,
   onSelectOption,
-}: SortDropDownProps) {
+}: SortDropDownProps<T>) {
   const { isOpen, togglePopover, popoverRef } = usePopover();
 
-  const handleOptionClick = (option: keyof typeof RANKING_OPTIONS) => {
+  const handleOptionClick = (option: keyof T) => {
     onSelectOption(option);
     togglePopover();
   };
 
-  // 정렬 옵션 목록을 동적으로 생성
-  const SORT_OPTIONS = objectKeys(RANKING_OPTIONS);
+  const SORT_OPTIONS = objectKeys(options);
 
   return (
     <S.SortContainer ref={popoverRef}>
       <S.SortSelectButton onClick={togglePopover} $isToggled={isOpen}>
-        {selectedOption}
+        {String(selectedOption)}
       </S.SortSelectButton>
       {isOpen && (
         <S.SortOptionUl>
           {SORT_OPTIONS.map(option => (
             <S.SortOptionLi
-              key={option}
+              key={String(option)}
               onClick={() => handleOptionClick(option)}
             >
               {option}

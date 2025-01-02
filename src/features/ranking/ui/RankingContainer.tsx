@@ -1,8 +1,8 @@
 import * as S from './styles';
-import SortDropdown from './SortDropdown';
-import MyRank from './MyRank';
 import { getImageUrl } from '@utils/getImageUrl';
-import { RANKING_OPTIONS } from '@features/ranking/constant';
+import MyRank from './MyRank';
+import SortDropdown from '@common/layout/SortDropdown';
+import { RANKING_OPTIONS } from '@/features/ranking/constants';
 import type { User, RankedUser } from '@features/user/types';
 
 interface RankingContainerProps {
@@ -24,11 +24,16 @@ export default function RankingContainer({
     <S.RankingContainer>
       {/* 나의 순위 */}
       <MyRank {...myRank} selectedOption={selectedOption} />
+
       {/* 정렬 드롭다운 */}
-      <SortDropdown
-        selectedOption={selectedOption}
-        onSelectOption={onOptionChange}
-      />
+      <S.SortDropdownWrapper>
+        <SortDropdown
+          options={RANKING_OPTIONS}
+          selectedOption={selectedOption}
+          onSelectOption={onOptionChange}
+        />
+      </S.SortDropdownWrapper>
+
       {/* 나머지 순위 */}
       {users.map((user, index) => (
         <S.RankingItem key={user.id} $rank={index + 1}>
