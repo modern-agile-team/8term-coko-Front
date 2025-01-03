@@ -1,19 +1,22 @@
 import * as S from '../ui/style';
 import { HeaderBox } from './style';
 import { getImageUrl } from '@utils/getImageUrl';
+import formatDate from '@utils/formatDate';
 import { useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
 import usePopover from '@hooks/usePopover';
 import useUserStore from '@store/useUserStore';
-import HeaderItem from '../ui/HeaderItem';
+import HeaderItem from '@common/ui/HeaderItem';
 import Login from '@features/auth/ui/Login';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import { authQuery } from '@features/auth/queries';
 
 export default function Header() {
-  const { user, clearUser } = useUserStore();
+  const { clearUser } = useUserStore();
+  const { data: user } = authQuery.verify();
   const { mutate: logout } = authQuery.logout();
+
   const { isShow, openModal, closeModal, Modal } = useModal();
   const navigate = useNavigate();
 
@@ -63,7 +66,7 @@ export default function Header() {
         {user && isOpen && (
           <S.ProfilePopover ref={popoverRef} onClick={e => e.stopPropagation()}>
             <S.UserNameText>{user.name}</S.UserNameText>
-            <S.UserJoinDate>2024.12.24</S.UserJoinDate>
+            <S.UserJoinDate>{formatDate(user.createdAt)}</S.UserJoinDate>
             <S.UserInfoButton
               $backgroundColor="#00FAFF"
               $boxShadow="0 2px #00E1EC"

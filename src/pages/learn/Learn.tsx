@@ -13,13 +13,11 @@ import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
-import { authQuery } from '@features/auth/queries';
 import { sectionsQuery } from '@/features/learn/queries';
 import { PRELOAD_IMAGES } from '@features/learn/constants';
 
 export default function Learn() {
-  const { setUser } = useUserStore();
-  const { data: user } = authQuery.verify();
+  const { user, setUser } = useUserStore();
 
   useEffect(() => {
     if (user) {
