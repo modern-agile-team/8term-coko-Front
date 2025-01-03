@@ -6,6 +6,7 @@ const authApis = {
     const response = await api.get('/auth/verify');
     return response.data;
   },
+
   logout: async (): Promise<void> => {
     await api.post('/auth/logout');
   },

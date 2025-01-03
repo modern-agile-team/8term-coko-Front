@@ -4,6 +4,7 @@ import type { User } from '@features/user/types';
 interface State {
   user: User | null;
 }
+
 interface Actions {
   setUser: (user: User) => void;
   clearUser: () => void;
