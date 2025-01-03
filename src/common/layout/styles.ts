@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 
 export const MenuBox = styled.div`
@@ -44,6 +44,10 @@ export const SortContainer = styled.div`
   position: relative;
 `;
 
+const getSortSelectButtonIcon = (isToggled: boolean) => {
+  return isToggled ? '정렬-아래-화살표.svg' : '정렬-위-화살표.svg';
+};
+
 export const SortSelectButton = styled.button<{ $isToggled: boolean }>`
   width: 136px;
   height: 30px;
@@ -51,16 +55,14 @@ export const SortSelectButton = styled.button<{ $isToggled: boolean }>`
   font-size: 12px;
   font-weight: 700;
   text-align: center;
-  background: ${({ $isToggled }) =>
-    $isToggled
-      ? `#d37744 url(${getImageUrl(
-          '정렬-아래-화살표.svg'
-        )}) no-repeat right 10px center`
-      : `#d37744 url(${getImageUrl(
-          '정렬-위-화살표.svg'
-        )}) no-repeat right 10px center`};
-  border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
   border: 2px solid #c26b3b;
+
+  background: ${({ $isToggled }) =>
+    `#d37744 url(${getImageUrl(
+      getSortSelectButtonIcon($isToggled)
+    )}) no-repeat right 10px center`};
+  border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
+
   &:focus {
     outline: none;
   }
