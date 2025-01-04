@@ -87,85 +87,86 @@ export default function Quiz() {
     enabled: !isQuizFinished,
   });
 
-  if (isLoading || isImageLoading) return <div>Loading</div>;
-  if (!quizzes) return <div>404</div>;
-  const { id, title, question, category, answerChoice, answer } =
-    quizzes[currentPage];
+  if (quizzes) {
+    const { id, title, question, category, answerChoice, answer } =
+      quizzes[currentPage];
 
-  const getComponentMappingByChoiceType = componentMapping<
-    Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
-  >({
-    COMBINATION: Combination,
-    MULTIPLE_CHOICE: MultipleChoice,
-    OX_SELECTOR: OXSelector,
-    SHORT_ANSWER: ShortAnswer,
-  });
-  return (
-    <AlignCenter>
-      <HeaderSection>
-        <Header />
-      </HeaderSection>
-      <ProgressSection>
-        <ProgressBar
-          $maxWidth="100%"
-          $height="100%"
-          $progress={isCorrectList.length}
-          $maxProgress={quizzes.length}
-          $innerBgColor="#63DDE8"
-          $boxBgColor="#F4F4F4"
-        />
-      </ProgressSection>
-      <Question title={title} question={question} category={category} />
-      {getComponentMappingByChoiceType(category, { answerChoice, answer })}
-      <SubmitSection>
-        <ResponseButton
-          onClick={() => {
-            pushIsCorrectList(false);
-          }}
-        >
-          SKIP
-        </ResponseButton>
+    const getComponentMappingByChoiceType = componentMapping<
+      Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
+    >({
+      COMBINATION: Combination,
+      MULTIPLE_CHOICE: MultipleChoice,
+      OX_SELECTOR: OXSelector,
+      SHORT_ANSWER: ShortAnswer,
+    });
+    return (
+      <AlignCenter>
+        <HeaderSection>
+          <Header />
+        </HeaderSection>
+        <ProgressSection>
+          <ProgressBar
+            $maxWidth="100%"
+            $height="100%"
+            $progress={isCorrectList.length}
+            $maxProgress={quizzes.length}
+            $innerBgColor="#63DDE8"
+            $boxBgColor="#F4F4F4"
+          />
+        </ProgressSection>
+        <Question title={title} question={question} category={category} />
+        {getComponentMappingByChoiceType(category, { answerChoice, answer })}
+        <SubmitSection>
+          <ResponseButton
+            onClick={() => {
+              pushIsCorrectList(false);
+            }}
+          >
+            SKIP
+          </ResponseButton>
 
-        <ResponseButton
-          disabled={isQuizAnswered}
-          $disabled={isQuizAnswered}
-          onClick={() => {
-            pushIsCorrectList(isEqualArray(userResponseAnswer, answer));
-          }}
-        >
-          제출
-        </ResponseButton>
-      </SubmitSection>
-      <Modal isShow={isShow}>
-        <Funnel>
-          <Funnel.Step name="결과">
-            <Result
-              partStatus={partStatus}
-              quizId={id}
-              isCorrect={isCorrectList[currentPage]}
-              answer={answer}
-              closeModal={closeModal}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="로그인 유도">
-            <LoginPrompt onNext={() => setStep('로그인')} />
-          </Funnel.Step>
-          <Funnel.Step name="로그인">
-            <Login closeModal={noop} openModal={noop} />
-          </Funnel.Step>
-          <Funnel.Step name="총결과">
-            <TotalResults
-              onNext={() => setStep('파트 클리어')}
-              quizzesLength={quizzes.length}
-              partId={partId}
-              partStatus={partStatus}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="파트 클리어">
-            <PartClear partId={partId} />
-          </Funnel.Step>
-        </Funnel>
-      </Modal>
-    </AlignCenter>
-  );
+          <ResponseButton
+            disabled={isQuizAnswered}
+            $disabled={isQuizAnswered}
+            onClick={() => {
+              pushIsCorrectList(isEqualArray(userResponseAnswer, answer));
+            }}
+          >
+            제출
+          </ResponseButton>
+        </SubmitSection>
+        <Modal isShow={isShow}>
+          <Funnel>
+            <Funnel.Step name="결과">
+              <Result
+                partStatus={partStatus}
+                quizId={id}
+                isCorrect={isCorrectList[currentPage]}
+                answer={answer}
+                closeModal={closeModal}
+              />
+            </Funnel.Step>
+            <Funnel.Step name="로그인 유도">
+              <LoginPrompt onNext={() => setStep('로그인')} />
+            </Funnel.Step>
+            <Funnel.Step name="로그인">
+              <Login closeModal={noop} openModal={noop} />
+            </Funnel.Step>
+            <Funnel.Step name="총결과">
+              <TotalResults
+                onNext={() => setStep('파트 클리어')}
+                quizzesLength={quizzes.length}
+                partId={partId}
+                partStatus={partStatus}
+              />
+            </Funnel.Step>
+            <Funnel.Step name="파트 클리어">
+              <PartClear partId={partId} />
+            </Funnel.Step>
+          </Funnel>
+        </Modal>
+      </AlignCenter>
+    );
+  }
+  if (isLoading) <div>로딩중</div>;
 }

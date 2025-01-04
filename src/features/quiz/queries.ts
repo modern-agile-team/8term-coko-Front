@@ -13,7 +13,6 @@ export const quizzesQuery = {
     return useQuery({
       queryKey: quizKeys.part(partId),
       queryFn: () => quizzesApis.get({ partId }),
-      //유저가 있으면 요청 x 또는 partId가 없으면
     });
   },
 };
