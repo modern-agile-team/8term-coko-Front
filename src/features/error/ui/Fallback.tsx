@@ -1,4 +1,4 @@
-import { FallbackWrapper } from '@/common/layout/style';
+import { FallbackWrapper } from './styles';
 import { FallbackProps } from 'react-error-boundary';
 
 export default function Fallback({ error, resetErrorBoundary }: FallbackProps) {

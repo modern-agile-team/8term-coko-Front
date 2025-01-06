@@ -46,15 +46,6 @@ export const OverRay = styled.div`
   z-index: 100;
 `;
 
-export const FallbackWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const LoadingWrapper = styled.div`
   position: fixed;
   top: 0;

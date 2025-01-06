@@ -11,9 +11,9 @@ import { media } from './style/media';
 import GlobalStyle from './style/GlobalStyle';
 import { ErrorBoundary } from 'react-error-boundary';
 import toast, { Toaster } from 'react-hot-toast';
-import Fallback from '@/common/layout/Fallback';
+import Fallback from '@/features/error/ui/Fallback';
 import LoadingIndicator from '@/common/layout/LoadingIndicator';
-import { AxiosError, isAxiosError } from 'axios';
+import { throwOnError } from '@/features/error/service/errorUtils';
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error, query) => {
@@ -28,13 +28,7 @@ const queryClient = new QueryClient({
       staleTime: Infinity,
       gcTime: Infinity,
       networkMode: 'always',
-      throwOnError: error => {
-        const axiosError = error as AxiosError; // 타입 단언
-        if (axiosError.response?.status && axiosError.response.status >= 500) {
-          return true;
-        }
-        return false;
-      },
+      throwOnError,
     },
   },
 });
