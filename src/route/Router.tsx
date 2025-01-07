@@ -5,7 +5,7 @@ import Quest from '@/pages/quest/Quest';
 import Ranking from '@/pages/ranking/Ranking';
 import Quiz from '@/pages/quiz/Quiz';
 import Profile from '@/pages/profile/Profile';
-import NotFoundPage from '@features/error/ui/NotFound';
+import NotFound from '@features/error/ui/NotFound';
 
 export default function Router() {
   return (
@@ -19,7 +19,7 @@ export default function Router() {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/store" element={<Store />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>
