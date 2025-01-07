@@ -8,7 +8,7 @@ import { objectKeys } from '@modern-kit/utils';
  * @param {keyof T} selectedOption - 현재 선택된 옵션.
  * @param {(option: keyof T) => void} onSelectOption - 옵션 선택 시 호출되는 콜백 함수.
  */
-interface SortDropDownProps<T> {
+interface SortDropDownProps<T extends Record<PropertyKey, any>> {
   options: T;
   selectedOption: keyof T;
   onSelectOption: (option: keyof T) => void;
@@ -41,7 +41,7 @@ interface SortDropDownProps<T> {
  *   );
  * }
  */
-export default function SortDropdown<T>({
+export default function SortDropdown<T extends Record<PropertyKey, any>>({
   options,
   selectedOption,
   onSelectOption,
