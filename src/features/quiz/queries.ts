@@ -1,5 +1,5 @@
 import quizzesApis from '@features/quiz/apis';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 const quizKeys = {
   all: ['quizzes'],

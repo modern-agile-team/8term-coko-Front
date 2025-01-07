@@ -29,7 +29,7 @@ export default function TotalResults({
   const { mutate: experienceUpdate, isIdle: isexperienceIdle } =
     experienceQuery.patch();
   const { mutate: updateProgress, isIdle: isProgressIdle } =
-    partProgressQuery.put();
+    partProgressQuery.updatePartProgress();
 
   const navigate = useNavigate();
 

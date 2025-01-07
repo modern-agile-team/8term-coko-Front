@@ -12,11 +12,11 @@ import { Toaster } from 'react-hot-toast';
 import Loader from '@common/layout/Loader';
 import QueryErrorBoundary from '@features/error/ui/QueryErrorBoundary';
 import { Suspense } from 'react';
-import { onError } from '@features/error/service/errorUtils';
+import { handleError } from '@features/error/service/errorUtils';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    onError,
+    onError: handleError,
   }),
   defaultOptions: {
     mutations: { networkMode: 'always' },

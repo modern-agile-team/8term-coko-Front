@@ -4,7 +4,6 @@ export default function Loader() {
   return (
     <LoadingWrapper>
       <LoadingSpinner />
-      <span>Loading...</span>
     </LoadingWrapper>
   );
 }
