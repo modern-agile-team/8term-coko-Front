@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query';
 import usersApis from '@features/user/apis';
 import type { User, ExperiencedUser } from '@features/user/types';
 
@@ -23,7 +28,7 @@ export const progressQuery = {
 
 export const userQuizzesQuery = {
   getQuizzes: ({ userId, partId }: { userId: number; partId: number }) => {
-    return useQuery({
+    return useSuspenseQuery({
       queryKey: userKeys.partQuizzes(userId, partId),
       queryFn: () => usersApis.getQuizzes({ id: userId, partId }),
       gcTime: 0,

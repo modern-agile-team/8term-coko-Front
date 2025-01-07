@@ -1,16 +1,12 @@
-import { QueryKey, ThrowOnError } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
+import { DefaultError, Query } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
-export const throwOnError: ThrowOnError<
-  unknown,
-  Error,
-  unknown,
-  QueryKey
-> = error => {
-  const axiosError = error as AxiosError;
-  console.log(axiosError);
-  if (axiosError.response?.status && axiosError.response.status >= 500) {
-    return true;
+type OnError = (
+  error: DefaultError,
+  query: Query<unknown, unknown, unknown>
+) => void;
+export const onError: OnError = (error, query) => {
+  if (query.state.data !== undefined) {
+    toast.error(`백그라운드 데이터 가져오기 실패: ${error.message}`);
   }
-  return false;
 };
