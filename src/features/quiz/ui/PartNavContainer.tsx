@@ -7,15 +7,16 @@ import {
   UpperBackgroundImg,
 } from './styles.ts';
 import { getImageUrl } from '@utils/getImageUrl';
-import { useNavigate } from 'react-router-dom';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
+import { useNavigate } from 'react-router-dom';
 import type { Section } from '@/features/learn/types.ts';
+import { AxiosError } from 'axios';
 
 interface PartNavContainerProps {
   section?: Section;
   previousPartsCounts: number[];
   isLoading: boolean;
-  error: any;
+  error: AxiosError;
 }
 
 export default function PartNavContainer({
