@@ -2,7 +2,7 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import authApis from '@features/auth/apis';
 
 const authKeys = {
-  all: ['auth'] as const,
+  all: ['users'] as const,
   verify: () => [...authKeys.all, 'verify'] as const,
   logout: () => [...authKeys.all, 'logout'] as const,
 };
