@@ -16,7 +16,7 @@ interface PartNavContainerProps {
   section?: Section;
   previousPartsCounts: number[];
   isLoading: boolean;
-  error: AxiosError;
+  error: unknown;
 }
 
 export default function PartNavContainer({

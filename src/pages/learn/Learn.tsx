@@ -12,19 +12,10 @@ import QuizSection from '@features/quiz/ui/QuizSection';
 import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
-import useUserStore from '@store/useUserStore';
 import { sectionsQuery } from '@/features/learn/queries';
 import { PRELOAD_IMAGES } from '@features/learn/constants';
 
 export default function Learn() {
-  const { user, setUser } = useUserStore();
-
-  useEffect(() => {
-    if (user) {
-      setUser(user);
-    }
-  }, [user, setUser]);
-
   const showComponents = useScrollVisibility();
   const isImageLoading = usePreloadImages({
     imageUrls: PRELOAD_IMAGES,
