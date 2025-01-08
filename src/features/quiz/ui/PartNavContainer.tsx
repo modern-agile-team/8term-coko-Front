@@ -42,14 +42,17 @@ export default function PartNavContainer({
             {section.part.map((part, partIndex) => {
               const globalIndex = previousPartsCount + partIndex;
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
-              const buttonImage = getImageUrl(
-                `키캡${(globalIndex % 4) + 1}.svg`
-              );
 
               const keyboardButtonWrapperRef = useRef<HTMLDivElement>(null);
               const { isOpen, togglePopover, popoverRef } = usePopover({
                 excludeRefs: [keyboardButtonWrapperRef],
               });
+
+              const buttonImage = getImageUrl(
+                isOpen
+                  ? `키캡${(globalIndex % 4) + 1}-선택.svg`
+                  : `키캡${(globalIndex % 4) + 1}.svg`
+              );
 
               return (
                 <KeyboardButtonWrapper
@@ -63,7 +66,7 @@ export default function PartNavContainer({
                   {/* KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘 */}
                   <KeyboardButton
                     onClick={() => {
-                      togglePopover();
+                      togglePopover(); 
                     }}
                   >
                     <img src={buttonImage} alt={`키캡 ${part.name}`} />

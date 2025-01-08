@@ -548,8 +548,8 @@ export const KeyboardButton = styled.button`
   margin-bottom: 20px;
 
   img {
-    width: 100%;
-    height: auto;
+    width: 138.6px;
+    height: 72.68px;
     display: block;
   }
 `;
@@ -557,27 +557,29 @@ export const KeyboardButton = styled.button`
 // 파트 눌렀을 때 나오는 말풍선 (예시: 식별자)
 export const SpeechBubble = styled.div`
   position: absolute;
-  background: #f3f3f3;
-  border-radius: 0.4em;
-  padding: 0.5em;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  top: calc(100% + 0.5em);
+  background: #ffffff;
+  border-radius: 0.8em; 
+  padding: 0.8em 1em; 
+  width: 110px;
+  text-align: center;
+  z-index: 5;
+  gap: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   left: 50%;
   transform: translateX(-50%);
 
   &:after {
     content: '';
     position: absolute;
-    top: 0;
+    bottom: 100%;
     left: 50%;
     width: 0;
     height: 0;
-    border: 1.375em solid transparent;
-    border-bottom-color: #f3f3f3;
-    border-top: 0;
+    border: 0.8em solid transparent;
+    border-bottom-color: #ffffff; 
     transform: translateX(-50%);
-    margin-top: -1.375em;
   }
 `;
 
@@ -586,7 +588,7 @@ export const GoToQuizButton = styled.button`
   padding: 0.5em 1em;
   border: none;
   border-radius: 0.4em;
-  background-color: #007bff;
+  background-color: #A0D468;
   color: #fff;
 `;
 

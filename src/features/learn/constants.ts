@@ -8,4 +8,8 @@ export const PRELOAD_IMAGES = [
   '키캡2.svg',
   '키캡3.svg',
   '키캡4.svg',
+  '키캡1-선택.svg',
+  '키캡2-선택.svg',
+  '키캡3-선택.svg',
+  '키캡4-선택.svg',
 ];
