@@ -60,7 +60,7 @@ export default function Quiz() {
   const isInProgress = status === 'IN_PROGRESS';
   const isQuizAnswered = userResponseAnswer[0] === '';
 
-  const { data: quizzes, isLoading } =
+  const { data: quizzes } =
     isLoggedIn(user) && isInProgress
       ? userQuizzesQuery.getQuizzes({
           userId: user.id,
@@ -69,6 +69,7 @@ export default function Quiz() {
       : quizzesQuery.getQuizzes({
           partId,
         });
+
   const isQuizFinished = isCorrectList.length === quizzes?.length;
   const { Funnel, setStep } = useFunnel('결과');
 
@@ -88,8 +89,6 @@ export default function Quiz() {
     enabled: !isQuizFinished,
   });
 
-  if (isLoading || isImageLoading) return <div>Loading</div>;
-  if (!quizzes) return <div>404</div>;
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
 
