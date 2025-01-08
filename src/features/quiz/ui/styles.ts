@@ -534,6 +534,10 @@ export const ButtonGrid = styled.section`
   grid-template-columns: repeat(5, 1fr);
 `;
 
+export const KeyboardButtonWrapper = styled.div`
+  position: relative;
+`;
+
 // 키캡(키보드 스위치) 버튼
 export const KeyboardButton = styled.button`
   width: auto;
@@ -548,6 +552,42 @@ export const KeyboardButton = styled.button`
     height: auto;
     display: block;
   }
+`;
+
+// 파트 눌렀을 때 나오는 말풍선 (예시: 식별자)
+export const SpeechBubble = styled.div`
+  position: absolute;
+  background: #f3f3f3;
+  border-radius: 0.4em;
+  padding: 0.5em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  top: calc(100% + 0.5em);
+  left: 50%;
+  transform: translateX(-50%);
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 1.375em solid transparent;
+    border-bottom-color: #f3f3f3;
+    border-top: 0;
+    transform: translateX(-50%);
+    margin-top: -1.375em;
+  }
+`;
+
+// /quiz로 보내는 버튼
+export const GoToQuizButton = styled.button`
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.4em;
+  background-color: #007bff;
+  color: #fff;
 `;
 
 export const Pre = styled.pre`

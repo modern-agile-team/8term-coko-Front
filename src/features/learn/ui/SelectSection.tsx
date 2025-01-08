@@ -6,7 +6,7 @@ import { sectionsQuery } from '@features/learn/queries';
 import type { Section } from '@features/learn/types';
 
 export default function SelectSection() {
-  const { data: sections, isLoading, error } = sectionsQuery.getAll();
+  const { data: sections } = sectionsQuery.getAll();
   const [currentPage, setCurrentPage] = useState(0);
 
   const sectionList = (sections as Section[]) || []; // 섹션 데이터를 Section 타입 배열로 변환 (섹션 리스트)
@@ -27,9 +27,6 @@ export default function SelectSection() {
       ),
     [currentPage, sectionList]
   );
-
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>섹션 데이터를 가져오는데 실패했습니다.</div>;
 
   const goToPreviousPage = () => {
     if (currentPage > 0) setCurrentPage(prev => prev - 1);
