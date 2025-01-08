@@ -76,4 +76,8 @@ export const HandsUpCokoImg = styled.img`
   bottom: 0;
   margin-bottom: 30px;
   margin-right: 72px;
+
+  ${media.mobile} {
+    display: none;
+  }
 `;

@@ -7,7 +7,7 @@ export default function Fallback({ error, resetErrorBoundary }: FallbackProps) {
   if (!isAxiosError(error)) {
     return <></>;
   }
-  //스테이터스 코드가 있을 때때
+  // 스테이터스 코드가 있을 때
   if (error.status) {
     return (
       <FallbackWrapper>

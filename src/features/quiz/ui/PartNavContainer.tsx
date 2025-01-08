@@ -14,20 +14,14 @@ import type { Section } from '@/features/learn/types.ts';
 interface PartNavContainerProps {
   section?: Section;
   previousPartsCounts: number[];
-  isLoading: boolean;
-  error: unknown;
 }
 
 export default function PartNavContainer({
   section,
   previousPartsCounts,
-  isLoading,
-  error,
 }: PartNavContainerProps) {
   const navigate = useNavigate();
 
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>섹션 데이터를 가져오는데 실패했습니다.</div>;
   if (!section) return <div>데이터가 없습니다.</div>;
 
   const previousPartsCount = previousPartsCounts[0];

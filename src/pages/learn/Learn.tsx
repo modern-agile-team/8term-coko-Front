@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from 'react';
 import * as globalS from '@/style/style';
+import { useMemo } from 'react';
 import { ScrollableContainer } from './style';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
 import MenuBar from '@common/layout/MenuBar';
@@ -17,12 +17,10 @@ import { PRELOAD_IMAGES } from '@features/learn/constants';
 
 export default function Learn() {
   const showComponents = useScrollVisibility();
-  const isImageLoading = usePreloadImages({
-    imageUrls: PRELOAD_IMAGES,
-  });
+  usePreloadImages({ imageUrls: PRELOAD_IMAGES });
 
   // Section 데이터 가져오기
-  const { data: section, isLoading, error } = sectionsQuery.get(2);
+  const { data: section } = sectionsQuery.get(2);
 
   // 이전 버튼 수 누적 계산
   const previousPartsCounts = useMemo(() => {
@@ -35,8 +33,6 @@ export default function Learn() {
 
     return counts;
   }, [section]);
-
-  if (isImageLoading) return <div>Loading...</div>;
 
   const progress = 30;
   const maxProgress = 100;
@@ -71,8 +67,6 @@ export default function Learn() {
           <PartNavContainer
             section={section}
             previousPartsCounts={previousPartsCounts}
-            isLoading={isLoading}
-            error={error}
           />
         </QuizSection>
       </globalS.Layout>
