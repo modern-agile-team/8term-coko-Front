@@ -1,4 +1,4 @@
-import { PartStatus } from '@/features/quiz/types';
+import { PartStatus } from '@features/learn/types';
 
 /**
  * 코드 문자열의 각 줄에 줄 번호를 추가합니다.

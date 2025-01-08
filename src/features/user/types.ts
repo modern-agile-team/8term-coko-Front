@@ -1,8 +1,9 @@
 export interface User {
   id: number;
-  nickname: string;
+  name: string;
   level: number;
   point: number;
+  createdAt: string;
 }
 
 export interface RankedUser extends User {

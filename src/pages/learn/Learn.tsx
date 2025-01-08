@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import * as globalS from '@/style/style';
 import { ScrollableContainer } from './style';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
@@ -13,30 +13,39 @@ import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/quiz/ui/PartNavContainer';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
+import { sectionsQuery } from '@/features/learn/queries';
+import { PRELOAD_IMAGES } from '@features/learn/constants';
 
 export default function Learn() {
-  const { setUser } = useUserStore();
-  //임시 유저 설정
+  const { user, setUser } = useUserStore();
+
   useEffect(() => {
-    setUser({ id: 1, nickname: '도윤', level: 1, point: 1000 });
-  }, []);
-  //----------------------------
+    if (user) {
+      setUser(user);
+    }
+  }, [user, setUser]);
+
   const showComponents = useScrollVisibility();
   const isImageLoading = usePreloadImages({
-    imageUrls: [
-      '코코-멘트1.svg',
-      '코코-멘트2.svg',
-      '코코-멘트3.svg',
-      '코코-멘트4.svg',
-      '코코-멘트5.svg',
-      '키캡1.svg',
-      '키캡2.svg',
-      '키캡3.svg',
-      '키캡4.svg',
-    ],
+    imageUrls: PRELOAD_IMAGES,
   });
 
-  if (isImageLoading) return <div>Loading</div>;
+  // Section 데이터 가져오기
+  const { data: section, isLoading, error } = sectionsQuery.get(2);
+
+  // 이전 버튼 수 누적 계산
+  const previousPartsCounts = useMemo(() => {
+    if (!section || !section.part) return [];
+    const counts: number[] = [];
+    let sum = 0;
+
+    counts.push(sum);
+    sum += section.part.length;
+
+    return counts;
+  }, [section]);
+
+  if (isImageLoading) return <div>Loading...</div>;
 
   const progress = 30;
   const maxProgress = 100;
@@ -68,7 +77,12 @@ export default function Learn() {
           <SelectSection />
         </ScrollableContainer>
         <QuizSection>
-          <PartNavContainer />
+          <PartNavContainer
+            section={section}
+            previousPartsCounts={previousPartsCounts}
+            isLoading={isLoading}
+            error={error}
+          />
         </QuizSection>
       </globalS.Layout>
     </>
