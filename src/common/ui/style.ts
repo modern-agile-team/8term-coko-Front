@@ -6,20 +6,6 @@ interface UserInfoButtonProps {
   $boxShadow: string;
 }
 
-export const SectionButton = styled.button<{ $backgroundImage: string }>`
-  width: 100px;
-  height: 75px;
-  margin-top: 75px;
-  background: none;
-  border: none;
-  background-image: url(${({ $backgroundImage }) => $backgroundImage});
-`;
-
-export const ArrowButton = styled.button`
-  width: 36px;
-  height: 36px;
-`;
-
 export const MenuButtonWrapper = styled.nav`
   display: inline-block;
 `;

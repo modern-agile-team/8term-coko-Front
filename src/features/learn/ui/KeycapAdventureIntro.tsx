@@ -1,7 +1,7 @@
-import { useInterval } from '@modern-kit/react';
-import { getImageUrl } from '../../../utils/getImageUrl';
+import * as S from './styles';
+import { getImageUrl } from '@utils/getImageUrl';
 import { useState } from 'react';
-import { HandsUpCokoImg, LegendKeycapMessageImg } from '../style';
+import { useInterval } from '@modern-kit/react';
 
 const messageFileNames = [
   '코코-멘트1.svg',
@@ -26,10 +26,10 @@ export default function KeycapAdventureIntro({
 
   return (
     <>
-      <LegendKeycapMessageImg
+      <S.LegendKeycapMessageImg
         src={getImageUrl(messageFileNames[messageIndex])}
       />
-      <HandsUpCokoImg src={getImageUrl('손든-코코.svg')} />
+      <S.HandsUpCokoImg src={getImageUrl('손든-코코.svg')} />
     </>
   );
 }

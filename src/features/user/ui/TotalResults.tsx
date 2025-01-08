@@ -7,7 +7,8 @@ import { useTimeout } from '@modern-kit/react';
 import { experienceQuery, partProgressQuery } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { User } from '@features/user/types';
-import type { PartStatus, Quiz } from '@features/quiz/types';
+import type { Quiz } from '@features/quiz/types';
+import type { PartStatus } from '@features/learn/types';
 import { isCompleted } from '@/features/quiz/service/quizUtils';
 
 interface TotalResultProps {

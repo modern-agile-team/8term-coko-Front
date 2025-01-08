@@ -1,36 +1,48 @@
-import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getImageUrl } from '@utils/getImageUrl';
-import { HeaderBox } from './style';
 import * as S from '../ui/style';
-import HeaderItem from '../ui/HeaderItem';
-import Login from '@features/login/ui/Login';
-import handleLogout from '@features/login/service/handleLogout';
-import isLoggedIn from '@utils/isLoggedIn';
+import { HeaderBox } from './style';
+import { getImageUrl } from '@utils/getImageUrl';
+import formatDate from '@utils/formatDate';
+import { useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
-import useUserStore from '@store/useUserStore';
 import usePopover from '@hooks/usePopover';
+import useUserStore from '@store/useUserStore';
+import HeaderItem from '@common/ui/HeaderItem';
+import Login from '@features/auth/ui/Login';
 import ProfileImage from '@features/user/ui/ProfileImage';
+import { authQuery } from '@features/auth/queries';
 
 export default function Header() {
-  const points: number = 2999999999;
-  const lifePoints: number = 5;
+  const { clearUser } = useUserStore();
+  const { data: user } = authQuery.verify();
+  const { mutate: logout } = authQuery.logout();
 
-  const navigate = useNavigate();
   const { isShow, openModal, closeModal, Modal } = useModal();
-  const { user } = useUserStore();
+  const navigate = useNavigate();
 
   const profileRef = useRef<HTMLDivElement>(null);
   const { isOpen, togglePopover, popoverRef } = usePopover({
     excludeRefs: [profileRef],
   });
 
-  const handleProfileClick = () => {
-    if (isLoggedIn()) {
-      togglePopover(); // 팝오버 열기/닫기
+  const handleProfileClick = useCallback(() => {
+    if (user) {
+      togglePopover();
     } else {
-      openModal(); // 로그인 모달 열기
+      openModal();
     }
+  }, [user, togglePopover, openModal]);
+
+  const handleLogout = () => {
+    logout(undefined, {
+      onSuccess: () => {
+        clearUser();
+        window.location.href = '/';
+      },
+      onError: error => {
+        console.error('Logout failed:', error);
+      },
+    });
   };
 
   return (
@@ -39,22 +51,22 @@ export default function Header() {
         <>
           <HeaderItem
             icon={getImageUrl('포인트.svg')}
-            point={points}
+            point={user.point}
             color={'#FFCD35'}
           />
           <HeaderItem
             icon={getImageUrl('과일바구니.svg')}
-            point={lifePoints}
+            point={5}
             color={'#FE0F0F'}
           />
         </>
       )}
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
         <ProfileImage isIcon={true} />
-        {isLoggedIn() && isOpen && (
+        {user && isOpen && (
           <S.ProfilePopover ref={popoverRef} onClick={e => e.stopPropagation()}>
-            <S.UserNameText>유저이름</S.UserNameText>
-            <S.UserJoinDate>2024.11.19</S.UserJoinDate>
+            <S.UserNameText>{user.name}</S.UserNameText>
+            <S.UserJoinDate>{formatDate(user.createdAt)}</S.UserJoinDate>
             <S.UserInfoButton
               $backgroundColor="#00FAFF"
               $boxShadow="0 2px #00E1EC"
@@ -79,7 +91,7 @@ export default function Header() {
           </S.ProfilePopover>
         )}
       </S.ProfileWrapper>
-      {!isLoggedIn() && (
+      {!user && (
         <Modal isShow={isShow}>
           <Login openModal={openModal} closeModal={closeModal} />
         </Modal>

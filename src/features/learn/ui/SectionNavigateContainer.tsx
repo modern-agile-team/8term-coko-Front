@@ -1,20 +1,29 @@
-import { SectionButton } from '../../../common/ui/style';
+import * as S from './styles';
+import { getImageUrl } from '@utils/getImageUrl';
+import type { Section } from '@features/learn/types';
 
-export default function SectionNavigateContainer() {
-  const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
-
-  const imgUrls = [
-    `${imgUrl}섬1.svg`,
-    `${imgUrl}섬2.svg`,
-    `${imgUrl}섬3.svg`,
-    `${imgUrl}섬4.svg`,
-    `${imgUrl}섬5.svg`,
-  ];
+export default function SectionNavigateContainer({
+  sections,
+}: {
+  sections: Section[];
+}) {
+  const scrollToSection = (sectionId: number) => {
+    const targetSection = document.getElementById(`section-${sectionId}`);
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
-      {imgUrls.map((url, index) => (
-        <SectionButton key={index} $backgroundImage={url} />
+      {sections.map((section, index) => (
+        <S.SectionButton
+          key={section.id}
+          $backgroundImage={getImageUrl(`섬${(index % 5) + 1}.svg`)}
+          onClick={() => scrollToSection(section.id)}
+        >
+          {section.name}
+        </S.SectionButton>
       ))}
     </>
   );
