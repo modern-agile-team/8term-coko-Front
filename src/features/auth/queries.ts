@@ -27,6 +27,7 @@ export const authQuery = {
           throw error;
         }
       },
+      throwOnError: false,
       staleTime: 0,
       gcTime: 0,
       retry: false,

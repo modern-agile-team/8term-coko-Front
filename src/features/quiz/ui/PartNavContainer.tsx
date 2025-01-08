@@ -10,7 +10,6 @@ import { getImageUrl } from '@utils/getImageUrl';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { useNavigate } from 'react-router-dom';
 import type { Section } from '@/features/learn/types.ts';
-import { AxiosError } from 'axios';
 
 interface PartNavContainerProps {
   section?: Section;
