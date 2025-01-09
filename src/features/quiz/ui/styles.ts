@@ -555,12 +555,13 @@ export const KeyboardButton = styled.button`
 `;
 
 // 파트 눌렀을 때 나오는 말풍선 (예시: 식별자)
-export const SpeechBubble = styled.div`
+export const SpeechBubble = styled.div<{ $bgColor: string }>`
   position: absolute;
-  background: #ffffff;
-  border-radius: 0.8em; 
-  padding: 0.8em 1em; 
+  background: ${({ $bgColor }) => $bgColor};
+  border-radius: 0.8em;
+  padding: 0.8em 1em;
   width: 110px;
+  color: #ffffff;
   text-align: center;
   z-index: 5;
   gap: 0.5em;
@@ -569,7 +570,6 @@ export const SpeechBubble = styled.div`
   align-items: center;
   left: 50%;
   transform: translateX(-50%);
-
   &:after {
     content: '';
     position: absolute;
@@ -578,18 +578,19 @@ export const SpeechBubble = styled.div`
     width: 0;
     height: 0;
     border: 0.8em solid transparent;
-    border-bottom-color: #ffffff; 
+    border-bottom-color: ${({ $bgColor }) => $bgColor};
     transform: translateX(-50%);
   }
 `;
 
 // /quiz로 보내는 버튼
-export const GoToQuizButton = styled.button`
+export const GoToQuizButton = styled.button<{ $fontColor: string }>`
   padding: 0.5em 1em;
   border: none;
   border-radius: 0.4em;
-  background-color: #A0D468;
-  color: #fff;
+  background-color: #ffffff;
+  color: ${({ $fontColor }) => $fontColor};
+  font-weight: 700;
 `;
 
 export const Pre = styled.pre`

@@ -10,6 +10,7 @@ import {
   GoToQuizButton,
 } from './styles.ts';
 import { getImageUrl } from '@utils/getImageUrl';
+import { COLORS } from '../constants.ts';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -66,7 +67,7 @@ export default function PartNavContainer({
                   {/* KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘 */}
                   <KeyboardButton
                     onClick={() => {
-                      togglePopover(); 
+                      togglePopover();
                     }}
                   >
                     <img src={buttonImage} alt={`키캡 ${part.name}`} />
@@ -77,6 +78,7 @@ export default function PartNavContainer({
                     <SpeechBubble
                       ref={popoverRef}
                       onClick={e => e.stopPropagation()}
+                      $bgColor={COLORS[(globalIndex % 4) + 1]}
                     >
                       {part.name}
                       <GoToQuizButton
@@ -85,6 +87,7 @@ export default function PartNavContainer({
                             state: { partId: part.id, status: part.partStatus },
                           });
                         }}
+                        $fontColor={COLORS[(globalIndex % 4) + 1]}
                       >
                         시작
                       </GoToQuizButton>
