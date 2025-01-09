@@ -538,6 +538,30 @@ export const KeyboardButtonWrapper = styled.div`
   position: relative;
 `;
 
+// 앉은-코코 이미지 애니메이션 keyframes 정의
+const fadeInAndDrop = keyframes`
+  0% {
+    opacity: 0; /* 완전히 투명 */
+    transform: translate(-50%, -20px); /* 위쪽에서 시작 */
+  }
+  100% {
+    opacity: 1; /* 불투명 */
+    transform: translate(-50%, 0); /* 최종 위치 */
+  }
+`;
+
+// 앉은-코코 이미지
+export const SittingCoko = styled.img`
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: 147px;
+  height: 120px;
+  animation: ${fadeInAndDrop} 0.3s ease-out forwards;
+`;
+
 // 키캡(키보드 스위치) 버튼
 export const KeyboardButton = styled.button`
   width: auto;

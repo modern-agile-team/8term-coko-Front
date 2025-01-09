@@ -5,6 +5,7 @@ import {
   SectionTitle,
   ButtonGrid,
   KeyboardButtonWrapper,
+  SittingCoko,
   KeyboardButton,
   SpeechBubble,
   GoToQuizButton,
@@ -64,6 +65,12 @@ export default function PartNavContainer({
                     gridRow,
                   }}
                 >
+                  {isOpen && (
+                    <SittingCoko
+                      src={getImageUrl('앉은-코코.svg')}
+                      alt="앉은 코코"
+                    />
+                  )}
                   {/* KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘 */}
                   <KeyboardButton
                     onClick={() => {
