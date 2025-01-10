@@ -7,6 +7,10 @@ const authApis = {
     return response.data;
   },
 
+  newAccessToken: async (): Promise<void> => {
+    await api.get('/auth/new-accessToken');
+  },
+
   logout: async (): Promise<void> => {
     await api.post('/auth/logout');
   },

@@ -1,4 +1,4 @@
-import { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
+import { InternalAxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
 // 요청 인터셉터
 export const requestInterceptor = (
@@ -13,6 +13,7 @@ export const responseInterceptor = (response: AxiosResponse): AxiosResponse => {
   return response;
 };
 
-export const responseErrorInterceptor = (error: any) => {
+// 응답 에러 인터셉터
+export const responseErrorInterceptor = (error: AxiosError) => {
   return Promise.reject(error);
 };

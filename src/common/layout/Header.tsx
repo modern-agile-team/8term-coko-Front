@@ -2,7 +2,7 @@ import * as S from '../ui/style';
 import { HeaderBox } from './style';
 import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
-import { useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
 import usePopover from '@hooks/usePopover';
@@ -13,9 +13,15 @@ import ProfileImage from '@features/user/ui/ProfileImage';
 import { authQuery } from '@features/auth/queries';
 
 export default function Header() {
-  const { clearUser } = useUserStore();
+  const { setUser, clearUser } = useUserStore();
   const { data: user } = authQuery.verify();
   const { mutate: logout } = authQuery.logout();
+
+  useEffect(() => {
+    if (user) {
+      setUser(user);
+    }
+  }, [user, setUser]);
 
   const { isShow, openModal, closeModal, Modal } = useModal();
   const navigate = useNavigate();

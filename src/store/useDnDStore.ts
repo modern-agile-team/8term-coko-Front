@@ -1,11 +1,12 @@
 import { create } from 'zustand';
 type dragItemType = { value: string; index: number };
+
 interface State {
   dragStartItem: dragItemType | null;
   dragOverItem: dragItemType | null;
   isOutsideDropZone: boolean;
 }
-interface Action {
+interface Actions {
   setDragStartItem: (item: dragItemType) => void;
   setDragOverItem: (item: dragItemType) => void;
   drop: (
@@ -14,7 +15,8 @@ interface Action {
   setOutsideDropZone: (isOutSide: boolean) => void;
   reset: () => void;
 }
-export const useDnDStore = create<State & Action>((set, get) => ({
+
+export const useDnDStore = create<State & Actions>((set, get) => ({
   dragStartItem: null,
   dragOverItem: null,
   isOutsideDropZone: false,
