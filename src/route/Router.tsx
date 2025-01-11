@@ -16,7 +16,9 @@ export default function Router() {
           <Route path="/learn" element={<Learn />} />
           <Route path="/quest" element={<Quest />} />
           <Route path="/ranking" element={<Ranking />} />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz" element={<Quiz />}>
+            <Route path="quiz/tutorial" element={<div>asd</div>}></Route>
+          </Route>
           <Route path="/store" element={<Store />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />

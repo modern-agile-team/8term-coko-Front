@@ -38,7 +38,7 @@ import { isLoggedIn } from '@/features/user/service/authUtils';
 
 //퀴즈페이지
 export default function Quiz() {
-  const isImageLoading = usePreloadImages({
+  usePreloadImages({
     imageUrls: PRELOAD_IMAGES,
   });
 
@@ -48,6 +48,7 @@ export default function Quiz() {
     userResponseAnswer,
     reset,
     pushIsCorrectList,
+    isQuizAnswered,
   } = useClientQuizStore();
   const { user } = useUserStore();
 
@@ -58,7 +59,6 @@ export default function Quiz() {
   };
 
   const isInProgress = status === 'IN_PROGRESS';
-  const isQuizAnswered = userResponseAnswer[0] === '';
 
   const { data: quizzes } =
     isLoggedIn(user) && isInProgress
@@ -127,8 +127,8 @@ export default function Quiz() {
         </ResponseButton>
 
         <ResponseButton
-          disabled={isQuizAnswered}
-          $disabled={isQuizAnswered}
+          disabled={isQuizAnswered()}
+          $disabled={isQuizAnswered()}
           onClick={() => {
             pushIsCorrectList(isEqualArray(userResponseAnswer, answer));
           }}
