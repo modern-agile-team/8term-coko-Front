@@ -100,6 +100,7 @@ export default function Quiz() {
     OX_SELECTOR: OXSelector,
     SHORT_ANSWER: ShortAnswer,
   });
+
   return (
     <AlignCenter>
       <HeaderSection>
