@@ -104,6 +104,7 @@ export default function Quiz() {
   return (
     <AlignCenter>
       <HeaderSection>
+        <title>{title}</title>
         <Header />
       </HeaderSection>
       <ProgressSection>

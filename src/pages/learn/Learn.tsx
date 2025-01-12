@@ -45,6 +45,7 @@ export default function Learn() {
           <MenuBar />
         </globalS.LeftSection>
         <globalS.RightSection>
+          <title>코코- 자바스크립트 코딩 문제풀이</title>
           <Header />
           <DailyQuest />
           <KeycapAdventureIntro />
