@@ -11,7 +11,7 @@ import useBeforeUnload from '@/hooks/useBeforeUnload';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useFunnel from '@hooks/useFunnel';
-import { useUnmount } from '@modern-kit/react';
+import { SwitchCase, useUnmount } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import useUserStore from '@store/useUserStore';
@@ -29,7 +29,6 @@ import ShortAnswer from '@features/quiz/ui/ShortAnswer';
 import Result from '@features/quiz/ui/Result';
 import TotalResults from '@features/user/ui/TotalResults';
 import PartClear from '@features/user/ui/PartClear';
-import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
 import type { PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
@@ -92,19 +91,10 @@ export default function Quiz() {
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
 
-  const getComponentMappingByChoiceType = componentMapping<
-    Pick<Quiz, 'answerChoice'> | Pick<Quiz, 'answer'>
-  >({
-    COMBINATION: Combination,
-    MULTIPLE_CHOICE: MultipleChoice,
-    OX_SELECTOR: OXSelector,
-    SHORT_ANSWER: ShortAnswer,
-  });
-
   return (
     <AlignCenter>
       <HeaderSection>
-        <title>{title}</title>
+        <title>{title} -coko</title>
         <Header />
       </HeaderSection>
       <ProgressSection>
@@ -118,7 +108,17 @@ export default function Quiz() {
         />
       </ProgressSection>
       <Question title={title} question={question} category={category} />
-      {getComponentMappingByChoiceType(category, { answerChoice, answer })}
+      <SwitchCase
+        value={category}
+        caseBy={{
+          COMBINATION: (
+            <Combination answerChoice={answerChoice} answer={answer} />
+          ),
+          MULTIPLE_CHOICE: <MultipleChoice answerChoice={answerChoice} />,
+          OX_SELECTOR: <OXSelector />,
+          SHORT_ANSWER: <ShortAnswer />,
+        }}
+      />
       <SubmitSection>
         <ResponseButton
           onClick={() => {

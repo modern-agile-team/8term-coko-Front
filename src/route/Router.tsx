@@ -6,6 +6,7 @@ import Ranking from '@/pages/ranking/Ranking';
 import Quiz from '@/pages/quiz/Quiz';
 import Profile from '@/pages/profile/Profile';
 import NotFound from '@features/error/ui/NotFound';
+import Tutorial from '@/pages/quiz/tutorial/Tutorial';
 
 export default function Router() {
   return (
@@ -16,9 +17,8 @@ export default function Router() {
           <Route path="/learn" element={<Learn />} />
           <Route path="/quest" element={<Quest />} />
           <Route path="/ranking" element={<Ranking />} />
-          <Route path="/quiz" element={<Quiz />}>
-            <Route path="quiz/tutorial" element={<div>asd</div>}></Route>
-          </Route>
+          <Route path="/quiz" element={<Quiz />} />
+          <Route path="quiz/tutorial" element={<Tutorial />} />
           <Route path="/store" element={<Store />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
