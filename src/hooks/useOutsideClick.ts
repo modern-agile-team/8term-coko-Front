@@ -23,7 +23,7 @@ import { usePreservedCallback } from '@modern-kit/react';
  */
 const useOutsideClick = (
   callback: () => void,
-  options?: { excludeRefs?: React.RefObject<HTMLElement>[] }
+  options?: { excludeRefs?: React.RefObject<HTMLElement | null>[] }
 ) => {
   const ref = useRef<HTMLDivElement>(null);
   const preservedCallback = usePreservedCallback(callback);
@@ -32,7 +32,11 @@ const useOutsideClick = (
     const onClickOutside = (e: MouseEvent) => {
       const target = e.target as Node;
 
-      const isExcluded = options?.excludeRefs?.some(
+      const filteredExcludeRefs = options?.excludeRefs?.filter(
+        excludeRef => excludeRef.current !== null
+      );
+
+      const isExcluded = filteredExcludeRefs?.some(
         excludeRef => excludeRef.current && excludeRef.current.contains(target)
       );
 

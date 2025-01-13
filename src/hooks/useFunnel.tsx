@@ -66,7 +66,8 @@ const useFunnel = <T,>(defaultStep: T): UseFunnelReturn<T> => {
    */
   const Funnel: FunnelComponent = ({ children }) => {
     const currentStep = children.find(
-      (child: ReactNode) => isValidElement(child) && child.props.name === step
+      (child: ReactNode) =>
+        isValidElement(child) && (child.props as StepProps).name === step
     );
     return currentStep || null;
   };
