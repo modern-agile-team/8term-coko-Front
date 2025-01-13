@@ -1,5 +1,5 @@
 import * as S from '../ui/style';
-import { HeaderBox } from './style';
+import { HeaderBox } from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
 import { useEffect, useRef, useCallback } from 'react';
