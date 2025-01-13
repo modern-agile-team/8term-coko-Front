@@ -9,7 +9,7 @@ interface MyRankProps extends RankedUser {
 
 export default function MyRank({
   rank,
-  nickname,
+  name,
   level,
   point,
   selectedOption,
@@ -31,7 +31,7 @@ export default function MyRank({
       </S.ProfileWrapper>
       <S.UserInfo>
         <S.UserLevelText>LV.{level}</S.UserLevelText>
-        <S.UserNameText>{nickname}</S.UserNameText>
+        <S.UserNameText>{name}</S.UserNameText>
       </S.UserInfo>
       <S.Container>
         <S.RankIconWrapper>

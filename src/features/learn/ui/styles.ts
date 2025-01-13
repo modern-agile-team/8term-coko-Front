@@ -10,6 +10,15 @@ export const SectionBoxWrapper = styled.div`
   margin-top: 45px;
 `;
 
+export const SectionButton = styled.button<{ $backgroundImage: string }>`
+  width: 100px;
+  height: 75px;
+  margin-top: 75px;
+  background: none;
+  border: none;
+  background-image: url(${({ $backgroundImage }) => $backgroundImage});
+`;
+
 export const SelectSectionBox = styled.section`
   display: flex;
   justify-content: center;
@@ -21,10 +30,29 @@ export const SelectSectionBox = styled.section`
   background-repeat: no-repeat;
 `;
 
-export const TextOverlay = styled.p`
+export const ArrowButton = styled.button<{
+  $isHidden: boolean;
+}>`
+  background: none;
+  border: none;
+  width: 25px;
+  height: 25px;
+  margin-top: 80px;
+  visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
+  pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+export const CompassText = styled.p<{ $isHidden: boolean }>`
   font-weight: 700;
   font-size: 18px;
   margin: 80px 10px 0 10px;
+  visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
+  pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
 `;
 
 export const LegendKeycapMessageImg = styled.img`
@@ -48,16 +76,8 @@ export const HandsUpCokoImg = styled.img`
   bottom: 0;
   margin-bottom: 30px;
   margin-right: 72px;
-`;
 
-export const ArrowButton = styled.button<{ direction: 'left' | 'right' }>`
-  background: none;
-  border: none;
-  width: 25px;
-  height: 25px;
-  margin-top: 80px;
-  img {
-    width: 100%;
-    height: auto;
+  ${media.mobile} {
+    display: none;
   }
 `;

@@ -4,7 +4,7 @@ defaultBranch: 'develop'
 autoCloseIssue: true
 commentMessage: |
   git fetch origin
-  git checkout ${branchName}
+  git switch ${branchName}
 
 branches:
   - label: 🌏 Deploy

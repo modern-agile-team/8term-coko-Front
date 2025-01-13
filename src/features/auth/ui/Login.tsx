@@ -6,7 +6,7 @@ import {
   LogoImgWrapper,
   SocialLoginButton,
   DashLineHr,
-} from '../styles';
+} from './styles';
 import { LogoImg } from '@common/ui/style';
 import handleLogin from '../service/handleLogin';
 

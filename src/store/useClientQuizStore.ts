@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 interface State {
   currentPage: number;
   userResponseAnswer: string[];
@@ -6,7 +7,7 @@ interface State {
 }
 interface Actions {
   nextPage: () => void;
-  setUserResponseAnswer: (userResposne: string) => void;
+  setUserResponseAnswer: (userResponse: string) => void;
   setUserResponseAtIndex: (userResponse: string, index: number) => void;
   pushUserResponseAnswer: (userResponse: string) => void;
   spliceUserResponseAnswer: (choiceIndex: number) => void;
@@ -15,6 +16,7 @@ interface Actions {
   pushIsCorrectList: (result: boolean) => void;
   reset: () => void;
 }
+
 export const useClientQuizStore = create<State & Actions>(set => ({
   /** 페이지 전역상태*/
   currentPage: 0,
@@ -22,8 +24,8 @@ export const useClientQuizStore = create<State & Actions>(set => ({
   /**유저  응답 전역상태 */
   userResponseAnswer: [''],
   //유저의 응답을 추가(단답형, OX, 객관식 )
-  setUserResponseAnswer: userResposne =>
-    set(() => ({ userResponseAnswer: [userResposne] })),
+  setUserResponseAnswer: userResponse =>
+    set(() => ({ userResponseAnswer: [userResponse] })),
   //유저의 응답을 특정 인덱스에 업데이트
   setUserResponseAtIndex: (userResponse, index) =>
     set(state => {

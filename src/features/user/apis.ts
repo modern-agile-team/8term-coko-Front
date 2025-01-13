@@ -1,6 +1,7 @@
 import api from '@/axios/instance';
 import type { User, ExperiencedUser } from '@features/user/types';
-import type { PartStatus, Quiz } from '@features/quiz/types';
+import type { PartStatus } from '@features/learn/types';
+import type { Quiz } from '@features/quiz/types';
 
 const usersApis = {
   putQuizzesProgress: ({

@@ -19,8 +19,8 @@ import { quizzesQuery } from '@features/quiz/queries';
 import { userQuizzesQuery } from '@features/user/queries';
 import Header from '@common/layout/Header';
 import ProgressBar from '@features/progress/ui/ProgressBar';
-import LoginPrompt from '@features/login/ui/LoginPrompt';
-import Login from '@features/login/ui/Login';
+import LoginPrompt from '@/features/auth/ui/LoginPrompt';
+import Login from '@/features/auth/ui/Login';
 import Question from '@features/quiz/ui/Question';
 import Combination from '@features/quiz/ui/Combination';
 import MultipleChoice from '@features/quiz/ui/MultipleChoice';
@@ -31,7 +31,8 @@ import TotalResults from '@features/user/ui/TotalResults';
 import PartClear from '@features/user/ui/PartClear';
 import componentMapping from '@utils/componentMap';
 import isEqualArray from '@utils/isEqualArray';
-import type { PartStatus, Quiz } from '@features/quiz/types';
+import type { PartStatus } from '@features/learn/types';
+import type { Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 
@@ -59,7 +60,7 @@ export default function Quiz() {
   const isInProgress = status === 'IN_PROGRESS';
   const isQuizAnswered = userResponseAnswer[0] === '';
 
-  const { data: quizzes, isLoading } =
+  const { data: quizzes } =
     isLoggedIn(user) && isInProgress
       ? userQuizzesQuery.getQuizzes({
           userId: user.id,
@@ -68,6 +69,7 @@ export default function Quiz() {
       : quizzesQuery.getQuizzes({
           partId,
         });
+
   const isQuizFinished = isCorrectList.length === quizzes?.length;
   const { Funnel, setStep } = useFunnel('결과');
 
@@ -87,8 +89,6 @@ export default function Quiz() {
     enabled: !isQuizFinished,
   });
 
-  if (isLoading || isImageLoading) return <div>Loading</div>;
-  if (!quizzes) return <div>404</div>;
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
 

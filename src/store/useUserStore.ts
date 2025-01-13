@@ -6,10 +6,13 @@ interface State {
 }
 interface Actions {
   setUser: (user: User) => void;
+  clearUser: () => void;
 }
+
 const useUserStore = create<State & Actions>(set => ({
-  //나중에 로그인 구현 시 로직 변경하기
   user: null,
   setUser: user => set(() => ({ user })),
+  clearUser: () => set(() => ({ user: null })),
 }));
+
 export default useUserStore;

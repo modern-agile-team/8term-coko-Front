@@ -534,6 +534,34 @@ export const ButtonGrid = styled.section`
   grid-template-columns: repeat(5, 1fr);
 `;
 
+export const KeyboardButtonWrapper = styled.div`
+  position: relative;
+`;
+
+// 앉은-코코 이미지 애니메이션 keyframes 정의
+const fadeInAndDrop = keyframes`
+  0% {
+    opacity: 0; /* 완전히 투명 */
+    transform: translate(-50%, -20px); /* 위쪽에서 시작 */
+  }
+  100% {
+    opacity: 1; /* 불투명 */
+    transform: translate(-50%, 0); /* 최종 위치 */
+  }
+`;
+
+// 앉은-코코 이미지
+export const SittingCoko = styled.img`
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  width: 147px;
+  height: 120px;
+  animation: ${fadeInAndDrop} 0.3s ease-out forwards;
+`;
+
 // 키캡(키보드 스위치) 버튼
 export const KeyboardButton = styled.button`
   width: auto;
@@ -544,10 +572,49 @@ export const KeyboardButton = styled.button`
   margin-bottom: 20px;
 
   img {
-    width: 100%;
-    height: auto;
+    width: 138.6px;
+    height: 72.68px;
     display: block;
   }
+`;
+
+// 파트 눌렀을 때 나오는 말풍선 (예시: 식별자)
+export const SpeechBubble = styled.div<{ $bgColor: string }>`
+  position: absolute;
+  background: ${({ $bgColor }) => $bgColor};
+  border-radius: 0.8em;
+  padding: 0.8em 1em;
+  width: 110px;
+  color: #ffffff;
+  text-align: center;
+  z-index: 5;
+  gap: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 0.8em solid transparent;
+    border-bottom-color: ${({ $bgColor }) => $bgColor};
+    transform: translateX(-50%);
+  }
+`;
+
+// /quiz로 보내는 버튼
+export const GoToQuizButton = styled.button<{ $fontColor: string }>`
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.4em;
+  background-color: #ffffff;
+  color: ${({ $fontColor }) => $fontColor};
+  font-weight: 700;
 `;
 
 export const Pre = styled.pre`

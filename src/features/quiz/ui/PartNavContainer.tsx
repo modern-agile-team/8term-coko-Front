@@ -1,123 +1,111 @@
-import { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   UpperBackgroundImg,
   EntireSectionContainer,
   SectionWrapper,
   SectionTitle,
   ButtonGrid,
+  KeyboardButtonWrapper,
+  SittingCoko,
   KeyboardButton,
-} from './styles';
-import getPartGridPosition from '../../learn/service/getPartGridPosition';
+  SpeechBubble,
+  GoToQuizButton,
+} from './styles.ts';
 import { getImageUrl } from '@utils/getImageUrl';
-import { PartStatus } from '@/features/quiz/types';
+import { COLORS } from '../constants.ts';
+import getPartGridPosition from '@features/learn/service/getPartGridPosition';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import usePopover from '@hooks/usePopover';
+import type { Section } from '@/features/learn/types.ts';
 
-interface Part {
-  id: number;
-  sectionId: number;
-  name: string;
-  status?: PartStatus;
+interface PartNavContainerProps {
+  section?: Section;
+  previousPartsCounts: number[];
 }
 
-interface Section {
-  id: number;
-  name: string;
-  part: Part[];
-}
-
-const dummyData: Section[] = [
-  {
-    id: 1,
-    name: '변수',
-    part: [
-      { id: 1, sectionId: 1, name: 'var', status: 'STARTED' },
-      { id: 2, sectionId: 1, name: 'let' },
-      { id: 3, sectionId: 1, name: 'const' },
-    ],
-  },
-  {
-    id: 2,
-    name: '자료형',
-    part: [
-      { id: 4, sectionId: 2, name: 'string', status: 'COMPLETED' },
-      { id: 5, sectionId: 2, name: 'number' },
-      { id: 6, sectionId: 2, name: 'boolean' },
-      { id: 7, sectionId: 2, name: 'null' },
-    ],
-  },
-  {
-    id: 3,
-    name: '형변환',
-    part: [
-      { id: 8, sectionId: 2, name: 'Number()' },
-      { id: 9, sectionId: 2, name: 'String()' },
-      { id: 10, sectionId: 2, name: 'asd()' },
-      { id: 11, sectionId: 2, name: 'fasfsaf()' },
-      { id: 12, sectionId: 2, name: 'asfasfa()' },
-      { id: 13, sectionId: 2, name: 'asdasddas()' },
-      { id: 14, sectionId: 2, name: 'ffff()' },
-      { id: 15, sectionId: 2, name: 'cxx()' },
-      { id: 16, sectionId: 2, name: 'asdasd()' },
-    ],
-  },
-];
-
-export default function PartNavContainer() {
+export default function PartNavContainer({
+  section,
+  previousPartsCounts,
+}: PartNavContainerProps) {
   const navigate = useNavigate();
 
-  // 모든 섹션의 이전 버튼 수 누적 계산
-  const previousPartsCounts = useMemo(() => {
-    const counts: number[] = []; // 누적 버튼 수를 저장할 배열
-    let sum = 0; // 누적합을 저장할 변수
+  if (!section) return <div>데이터가 없습니다.</div>;
 
-    dummyData.forEach(section => {
-      counts.push(sum); // 현재까지의 누적합을 counts에 추가
-      sum += section.part.length; // 현재 섹션의 버튼 개수를 누적합에 더함
-    });
+  // 이전 섹션들에서 포함된 파트의 총 개수. 현재 섹션의 파트의 전역 인덱스(globalIndex)를 계산
+  const previousPartsCount = previousPartsCounts[0];
 
-    return counts;
-  }, []);
-
-  // 섹션 및 파트를 캐싱하여 렌더링
-  const memoItem = useMemo(() => {
-    return dummyData.map((section, sectionIndex) => {
-      const previousPartsCount = previousPartsCounts[sectionIndex];
-
-      return (
-        <SectionWrapper key={section.id}>
+  return (
+    <>
+      <UpperBackgroundImg />
+      <EntireSectionContainer>
+        <SectionWrapper id={`section-${section.id}`} key={section.id}>
           <SectionTitle>{section.name}</SectionTitle>
           <ButtonGrid>
             {section.part.map((part, partIndex) => {
               const globalIndex = previousPartsCount + partIndex;
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
+
+              const keyboardButtonWrapperRef = useRef<HTMLDivElement>(null);
+              const { isOpen, togglePopover, popoverRef } = usePopover({
+                excludeRefs: [keyboardButtonWrapperRef],
+              });
+
               const buttonImage = getImageUrl(
-                `키캡${(globalIndex % 4) + 1}.svg`
+                isOpen
+                  ? `키캡${(globalIndex % 4) + 1}-선택.svg`
+                  : `키캡${(globalIndex % 4) + 1}.svg`
               );
 
               return (
-                <KeyboardButton
+                <KeyboardButtonWrapper
                   key={part.id}
-                  style={{ gridColumn, gridRow }}
-                  onClick={() =>
-                    navigate('/quiz', {
-                      state: { partId: part.id, status: part.status },
-                    })
-                  }
+                  ref={keyboardButtonWrapperRef}
+                  style={{
+                    gridColumn,
+                    gridRow,
+                  }}
                 >
-                  <img src={buttonImage} alt={`키캡 ${part.name}`} />
-                </KeyboardButton>
+                  {isOpen && (
+                    <SittingCoko
+                      src={getImageUrl('앉은-코코.svg')}
+                      alt="앉은 코코"
+                    />
+                  )}
+                  {/* KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘 */}
+                  <KeyboardButton
+                    onClick={() => {
+                      togglePopover();
+                    }}
+                  >
+                    <img src={buttonImage} alt={`키캡 ${part.name}`} />
+                  </KeyboardButton>
+
+                  {/* 말풍선 */}
+                  {isOpen && (
+                    <SpeechBubble
+                      ref={popoverRef}
+                      onClick={e => e.stopPropagation()}
+                      $bgColor={COLORS[(globalIndex % 4) + 1]}
+                    >
+                      {part.name}
+                      <GoToQuizButton
+                        onClick={() => {
+                          navigate('/quiz', {
+                            state: { partId: part.id, status: part.partStatus },
+                          });
+                        }}
+                        $fontColor={COLORS[(globalIndex % 4) + 1]}
+                      >
+                        시작
+                      </GoToQuizButton>
+                    </SpeechBubble>
+                  )}
+                </KeyboardButtonWrapper>
               );
             })}
           </ButtonGrid>
         </SectionWrapper>
-      );
-    });
-  }, [previousPartsCounts]);
-
-  return (
-    <>
-      <UpperBackgroundImg />
-      <EntireSectionContainer>{memoItem}</EntireSectionContainer>
+      </EntireSectionContainer>
     </>
   );
 }

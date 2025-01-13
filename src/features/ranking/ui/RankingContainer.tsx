@@ -45,7 +45,7 @@ export default function RankingContainer({
           </S.ProfileWrapper>
           <S.UserInfo>
             <S.UserLevelText>LV.{user.level}</S.UserLevelText>
-            <S.UserNameText>{user.nickname}</S.UserNameText>
+            <S.UserNameText>{user.name}</S.UserNameText>
           </S.UserInfo>
           <S.Container>
             <S.RankIconWrapper>
