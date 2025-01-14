@@ -8,7 +8,7 @@ import Result from '@/features/quiz/ui/Result';
 import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
 import { TUTORIAL_QUIZZES } from '@/features/tutorial/constants';
 import QuizTour from '@/features/tutorial/ui/QuizTour';
-import TotalResults from '@/features/user/ui/TotalResults';
+import TutorialClear from '@/features/tutorial/ui/TutorialClear';
 import useModal from '@/hooks/useModal';
 import {
   HeaderSection,
@@ -19,8 +19,7 @@ import {
 import { useClientQuizStore } from '@/store/useClientQuizStore';
 import { AlignCenter } from '@/style/LayOut';
 import isEqualArray from '@/utils/isEqualArray';
-import { SwitchCase } from '@modern-kit/react';
-import { noop } from '@modern-kit/utils';
+import { SwitchCase, useUnmount } from '@modern-kit/react';
 import { useEffect, useState } from 'react';
 
 export default function Tutorial() {
@@ -30,17 +29,21 @@ export default function Tutorial() {
     userResponseAnswer,
     pushIsCorrectList,
     isQuizAnswered,
+    reset,
   } = useClientQuizStore();
 
   const { id, title, question, category, answerChoice, answer } =
     TUTORIAL_QUIZZES[currentPage];
   const isQuizFinished = isCorrectList.length === TUTORIAL_QUIZZES.length;
-  const [step, setStep] = useState<'결과' | '총결과'>('결과');
+  const [caseNaem, setCaseName] = useState<'result' | 'tutorialClear'>(
+    'result'
+  );
   useEffect(() => {
     if (isQuizFinished) {
-      setStep('총결과');
+      setCaseName('tutorialClear');
     }
   }, [isCorrectList]);
+  useUnmount(() => reset());
   const { Modal, closeModal, isShow, openModal } = useModal();
 
   return (
@@ -97,9 +100,9 @@ export default function Tutorial() {
       </AlignCenter>
       <Modal isShow={isShow}>
         <SwitchCase
-          value={step}
+          value={caseNaem}
           caseBy={{
-            결과: (
+            result: (
               <Result
                 partStatus={'COMPLETED'}
                 quizId={id}
@@ -108,14 +111,7 @@ export default function Tutorial() {
                 closeModal={closeModal}
               />
             ),
-            총결과: (
-              <TotalResults
-                onNext={noop}
-                quizzesLength={TUTORIAL_QUIZZES.length}
-                partId={0}
-                partStatus={'COMPLETED'}
-              />
-            ),
+            tutorialClear: <TutorialClear />,
           }}
         ></SwitchCase>
       </Modal>
