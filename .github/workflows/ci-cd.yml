@@ -25,8 +25,13 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v3
 
-      # Docker 캐시 설정
+      # 캐시 디렉토리 확인 및 생성
+      - name: Ensure cache directory exists
+        run: mkdir -p /tmp/.buildx-cache
+
+      # Docker 캐시 복원 및 저장
       - name: Cache docker layers
+        id: cache-docker
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
