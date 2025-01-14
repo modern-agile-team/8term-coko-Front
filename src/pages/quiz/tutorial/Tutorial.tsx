@@ -17,8 +17,6 @@ import { AlignCenter } from '@/style/LayOut';
 import { SwitchCase } from '@modern-kit/react';
 
 export default function Tutorial() {
-  TUTORIAL_QUIZZES;
-
   const { id, title, question, category, answerChoice, answer } =
     TUTORIAL_QUIZZES[0];
 

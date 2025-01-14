@@ -1,10 +1,9 @@
-import { css, styled } from 'styled-components';
+import { styled } from 'styled-components';
 
 export const EmphasizedItemDiv = styled.div`
   position: fixed;
   width: 100px;
   height: 100px;
-  background-color: transparent;
-  border-radius: 50%;
+  clip-path: circle(40%);
   z-index: 1001;
 `;
