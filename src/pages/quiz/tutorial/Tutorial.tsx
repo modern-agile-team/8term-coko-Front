@@ -4,21 +4,44 @@ import Combination from '@/features/quiz/ui/Combination';
 import MultipleChoice from '@/features/quiz/ui/MultipleChoice';
 import OXSelector from '@/features/quiz/ui/OXSelector';
 import Question from '@/features/quiz/ui/Question';
+import Result from '@/features/quiz/ui/Result';
 import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
 import { TUTORIAL_QUIZZES } from '@/features/tutorial/constants';
 import QuizTour from '@/features/tutorial/ui/QuizTour';
+import TotalResults from '@/features/user/ui/TotalResults';
+import useModal from '@/hooks/useModal';
 import {
   HeaderSection,
   ProgressSection,
   SubmitSection,
   ResponseButton,
 } from '@/pages/quiz/styles';
+import { useClientQuizStore } from '@/store/useClientQuizStore';
 import { AlignCenter } from '@/style/LayOut';
+import isEqualArray from '@/utils/isEqualArray';
 import { SwitchCase } from '@modern-kit/react';
+import { noop } from '@modern-kit/utils';
+import { useEffect, useState } from 'react';
 
 export default function Tutorial() {
+  const {
+    currentPage,
+    isCorrectList,
+    userResponseAnswer,
+    pushIsCorrectList,
+    isQuizAnswered,
+  } = useClientQuizStore();
+
   const { id, title, question, category, answerChoice, answer } =
-    TUTORIAL_QUIZZES[0];
+    TUTORIAL_QUIZZES[currentPage];
+  const isQuizFinished = isCorrectList.length === TUTORIAL_QUIZZES.length;
+  const [step, setStep] = useState<'결과' | '총결과'>('결과');
+  useEffect(() => {
+    if (isQuizFinished) {
+      setStep('총결과');
+    }
+  }, [isCorrectList]);
+  const { Modal, closeModal, isShow, openModal } = useModal();
 
   return (
     <>
@@ -31,8 +54,8 @@ export default function Tutorial() {
           <ProgressBar
             $maxWidth="100%"
             $height="100%"
-            $progress={1}
-            $maxProgress={10}
+            $progress={isCorrectList.length}
+            $maxProgress={TUTORIAL_QUIZZES.length}
             $innerBgColor="#63DDE8"
             $boxBgColor="#F4F4F4"
           />
@@ -50,14 +73,52 @@ export default function Tutorial() {
           }}
         />
         <SubmitSection>
-          <ResponseButton>SKIP</ResponseButton>
+          <ResponseButton
+            onClick={() => {
+              pushIsCorrectList(false);
+              openModal();
+            }}
+          >
+            SKIP
+          </ResponseButton>
 
-          <ResponseButton disabled={false} $disabled={false} onClick={() => {}}>
+          <ResponseButton
+            disabled={isQuizAnswered()}
+            $disabled={isQuizAnswered()}
+            onClick={() => {
+              pushIsCorrectList(isEqualArray(userResponseAnswer, answer));
+              openModal();
+            }}
+          >
             제출
           </ResponseButton>
         </SubmitSection>
-        <QuizTour />
+        <QuizTour category={category} />
       </AlignCenter>
+      <Modal isShow={isShow}>
+        <SwitchCase
+          value={step}
+          caseBy={{
+            결과: (
+              <Result
+                partStatus={'COMPLETED'}
+                quizId={id}
+                isCorrect={isCorrectList[currentPage]}
+                answer={answer}
+                closeModal={closeModal}
+              />
+            ),
+            총결과: (
+              <TotalResults
+                onNext={noop}
+                quizzesLength={TUTORIAL_QUIZZES.length}
+                partId={0}
+                partStatus={'COMPLETED'}
+              />
+            ),
+          }}
+        ></SwitchCase>
+      </Modal>
     </>
   );
 }

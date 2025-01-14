@@ -14,7 +14,7 @@ import { getImageUrl } from '@utils/getImageUrl';
 import { COLORS } from '../constants.ts';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import usePopover from '@hooks/usePopover';
 import type { Section } from '@/features/learn/types.ts';
 
@@ -41,6 +41,7 @@ export default function PartNavContainer({
         <SectionWrapper id={`section-${section.id}`} key={section.id}>
           <SectionTitle>{section.name}</SectionTitle>
           <ButtonGrid>
+            <Link to="/quiz/tutorial">튜토리얼하실레오?</Link>
             {section.part.map((part, partIndex) => {
               const globalIndex = previousPartsCount + partIndex;
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
