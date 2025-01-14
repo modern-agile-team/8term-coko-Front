@@ -48,17 +48,25 @@ const getSortSelectButtonIcon = (isToggled: boolean) => {
   return isToggled ? '정렬-아래-화살표.svg' : '정렬-위-화살표.svg';
 };
 
-export const SortSelectButton = styled.button<{ $isToggled: boolean }>`
-  width: 136px;
-  height: 30px;
-  color: #fff3c0;
-  font-size: 12px;
+export const SortSelectButton = styled.button<{
+  $isToggled: boolean;
+  $width: string;
+  $height: string;
+  $color: string;
+  $fontSize: string;
+  $backgroundColor: string;
+  $borderColor: string;
+}>`
+  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height};
+  color: ${({ $color }) => $color};
+  font-size: ${({ $fontSize }) => $fontSize};
   font-weight: 700;
   text-align: center;
-  border: 2px solid #c26b3b;
+  border: 2px solid ${({ $borderColor }) => $borderColor};
 
-  background: ${({ $isToggled }) =>
-    `#d37744 url(${getImageUrl(
+  background: ${({ $isToggled, $backgroundColor }) =>
+    `${$backgroundColor} url(${getImageUrl(
       getSortSelectButtonIcon($isToggled)
     )}) no-repeat right 10px center`};
   border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
@@ -68,37 +76,48 @@ export const SortSelectButton = styled.button<{ $isToggled: boolean }>`
   }
 `;
 
-export const SortOptionUl = styled.ul`
+export const SortOptionUl = styled.ul<{
+  $width: string;
+  $backgroundColor: string;
+  $fontColor: string;
+  $borderColor: string;
+}>`
   position: absolute;
   top: 30px;
-  width: 136px;
+  width: ${({ $width }) => $width};
   border-radius: 0 0 15px 15px;
-  background-color: #fff3c0;
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  color: ${({ $fontColor }) => $fontColor};
   list-style: none;
   z-index: 10;
-  border: 2px solid #c26b3b;
+  border: 2px solid ${({ $borderColor }) => $borderColor};
   border-top: none;
   overflow: hidden;
   margin: 0;
   padding: 0;
 `;
 
-export const SortOptionLi = styled.li`
+export const SortOptionLi = styled.li<{
+  $height: string;
+  $color: string;
+  $backgroundColor: string;
+  $borderColor: string;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30px;
+  height: ${({ $height }) => $height};
   font-size: 12px;
   font-weight: 700;
-  color: #d37744;
-  background-color: #fff3c0;
-  border-bottom: 2px solid #c26b3b;
+  color: ${({ $color }) => $color};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  border-bottom: 2px solid ${({ $borderColor }) => $borderColor};
   cursor: pointer;
 
   &:hover {
-    background-color: #d37744;
-    color: #fff3c0;
-    border-bottom: 2px solid #c26b3b;
+    background-color: ${({ $color }) => $color};
+    color: ${({ $backgroundColor }) => $backgroundColor};
+    border-bottom: 2px solid ${({ $borderColor }) => $borderColor};
   }
 
   &:last-child {

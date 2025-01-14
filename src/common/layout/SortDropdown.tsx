@@ -12,6 +12,14 @@ interface SortDropDownProps<T extends Record<PropertyKey, any>> {
   options: T;
   selectedOption: keyof T;
   onSelectOption: (option: keyof T) => void;
+  width?: string; // 너비
+  height?: string; // 높이
+  fontSize?: string; // 글자 사이즈
+  ulFontColor?: string; // ul 폰트 색
+  liFontColor?: string; // li 폰트 색
+  ulBackgroundColor?: string; // ul 배경 색
+  liBackgroundColor?: string; // li 배경 색
+  borderColor?: string; // 테두리 색상
 }
 
 /**
@@ -45,6 +53,14 @@ export default function SortDropdown<T extends Record<PropertyKey, any>>({
   options,
   selectedOption,
   onSelectOption,
+  width = '136px',
+  height = '30px',
+  fontSize = '12px',
+  ulFontColor = '#FFF3C0;',
+  liFontColor = '#D37744',
+  ulBackgroundColor = '#d37744',
+  liBackgroundColor = '#fff3c0',
+  borderColor = '#c26b3b',
 }: SortDropDownProps<T>) {
   const { isOpen, togglePopover, popoverRef } = usePopover();
 
@@ -57,15 +73,33 @@ export default function SortDropdown<T extends Record<PropertyKey, any>>({
 
   return (
     <S.SortContainer ref={popoverRef}>
-      <S.SortSelectButton onClick={togglePopover} $isToggled={isOpen}>
+      <S.SortSelectButton
+        onClick={togglePopover}
+        $isToggled={isOpen}
+        $width={width}
+        $height={height}
+        $color={ulFontColor}
+        $fontSize={fontSize}
+        $backgroundColor={ulBackgroundColor}
+        $borderColor={borderColor}
+      >
         {String(selectedOption)}
       </S.SortSelectButton>
       {isOpen && (
-        <S.SortOptionUl>
+        <S.SortOptionUl
+          $width={width}
+          $backgroundColor={ulBackgroundColor}
+          $fontColor={ulFontColor}
+          $borderColor={borderColor}
+        >
           {SORT_OPTIONS.map(option => (
             <S.SortOptionLi
               key={String(option)}
               onClick={() => handleOptionClick(option)}
+              $height={height}
+              $color={liFontColor}
+              $backgroundColor={liBackgroundColor}
+              $borderColor={borderColor}
             >
               {option}
             </S.SortOptionLi>
