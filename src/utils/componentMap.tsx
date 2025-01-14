@@ -1,5 +1,5 @@
 interface ComponentMappingParam {
-  [key: string]: (props: any) => JSX.Element;
+  [key: string]: (props: any) => React.JSX.Element;
 }
 /**
  * @description {key : value}형태로 맵핑된 컴포넌트에서 key값에 따라서 switch-case처럼 분기형태로 랜더링 시킬 수 있는 함수입니다.
