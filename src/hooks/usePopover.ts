@@ -43,7 +43,7 @@ import useOutsideClick from '@hooks/useOutsideClick';
  */
 const usePopover = (options?: {
   callback?: (isOpen?: boolean) => void;
-  excludeRefs?: React.RefObject<HTMLElement>[];
+  excludeRefs?: React.RefObject<HTMLElement | null>[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const isMounted = useIsMounted();
@@ -69,7 +69,7 @@ const usePopover = (options?: {
     () => {
       if (isOpen) togglePopover();
     },
-    { excludeRefs: options?.excludeRefs }
+    { excludeRefs: options?.excludeRefs?.filter(ref => ref.current !== null) }
   );
 
   return { isOpen, togglePopover, openPopover, closePopover, popoverRef };
