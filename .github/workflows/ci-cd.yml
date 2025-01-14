@@ -2,7 +2,7 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [deploy/#110/Update_CI/CD_Workflow]
+    branches: [main, develop]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
@@ -15,7 +15,7 @@ jobs:
   # 빌드 Job
   build:
     name: Build
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       # GitHub Repository에서 Checkout
       - uses: actions/checkout@v4
