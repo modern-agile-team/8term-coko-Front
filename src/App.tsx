@@ -13,6 +13,8 @@ import Loader from '@common/layout/Loader';
 import QueryErrorBoundary from '@features/error/ui/QueryErrorBoundary';
 import { Suspense } from 'react';
 import { handleError } from '@features/error/service/errorUtils';
+import { ErrorBoundary } from 'react-error-boundary';
+import NotFound from '@/features/error/ui/NotFound';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -38,7 +40,9 @@ function App() {
           <Toaster position="top-right" />
           <QueryErrorBoundary>
             <Suspense fallback={<Loader />}>
-              <Router />
+              <ErrorBoundary FallbackComponent={NotFound}>
+                <Router />
+              </ErrorBoundary>
             </Suspense>
           </QueryErrorBoundary>
         </ThemeProvider>

@@ -56,11 +56,15 @@ export const useCodeHighlight = (
 };
 
 export const useGetLocationState = () => {
-  const { partId, partStatus } = useLocation().state;
-
-  if (!partId) {
-    throw new Error('Required data not found (404)');
+  const { state } = useLocation();
+  if (state === null) {
+    throw new Error('잘못된 접근입니다.');
   }
+  const { partId, partStatus } = state;
+  if (!partId) {
+    throw new Error('partId가 없습니다.');
+  }
+
   return { partId, partStatus } as {
     partId: number;
     partStatus: PartStatus;

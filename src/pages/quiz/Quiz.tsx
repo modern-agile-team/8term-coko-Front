@@ -7,7 +7,6 @@ import { AlignCenter } from '@/style/LayOut';
 
 export default function Quiz() {
   const QuizWithQuizzes = withQuizzes(QuizContainer);
-
   const { partId, partStatus } = useGetLocationState();
 
   return (

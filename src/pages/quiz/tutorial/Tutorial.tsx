@@ -4,9 +4,11 @@ import { TUTORIAL_ID } from '@/features/tutorial/constants';
 import TutorialContainer from '@/features/tutorial/ui/TutorialContainer';
 import { HeaderSection } from '@/pages/quiz/styles';
 import { AlignCenter } from '@/style/LayOut';
+import { useBeforeUnload } from '@modern-kit/react';
 
 export default function Tutorial() {
   const TutorialWithQuizzes = withQuizzes(TutorialContainer);
+  useBeforeUnload();
 
   return (
     <>
