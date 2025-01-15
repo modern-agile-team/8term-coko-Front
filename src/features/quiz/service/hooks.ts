@@ -1,5 +1,7 @@
+import { PartStatus } from '@/features/learn/types';
 import hljs from 'highlight.js';
 import { DependencyList, useState, useLayoutEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 /**
  * 주어진 코드 문자열을 하이라이트 처리된 HTML로 변환하는 React 커스텀 훅입니다.
@@ -51,4 +53,16 @@ export const useCodeHighlight = (
   }, deps ?? [code, language]);
 
   return highlightCode;
+};
+
+export const useGetLocationState = () => {
+  const { partId, partStatus } = useLocation().state;
+
+  if (!partId) {
+    throw new Error('Required data not found (404)');
+  }
+  return { partId, partStatus } as {
+    partId: number;
+    partStatus: PartStatus;
+  };
 };

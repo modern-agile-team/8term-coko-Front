@@ -64,7 +64,7 @@ export default function QuizTour({ category }: QuizTourProps) {
             description="이건 포인트야"
             style={{
               top: '5%',
-              right: '5%',
+              right: '8%',
             }}
           />
         </Funnel.Step>

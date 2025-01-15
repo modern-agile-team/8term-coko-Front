@@ -1,17 +1,14 @@
 import Header from '@/common/layout/Header';
-import { PartStatus } from '@/features/learn/types';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
+import { useGetLocationState } from '@/features/quiz/service/hooks';
 import QuizContainer from '@/features/quiz/ui/QuizContainer';
 import { HeaderSection } from '@/pages/quiz/styles';
 import { AlignCenter } from '@/style/LayOut';
-import { useLocation } from 'react-router-dom';
 
 export default function Quiz() {
   const QuizWithQuizzes = withQuizzes(QuizContainer);
-  const { partId, partStatus } = useLocation().state as {
-    partId: number;
-    partStatus: PartStatus;
-  };
+
+  const { partId, partStatus } = useGetLocationState();
 
   return (
     <AlignCenter>

@@ -26,12 +26,16 @@ const withQuizzes = <P extends object>(
   }) => {
     const { user } = useUserStore();
 
-    //유저가 없거나 진행중이 아닐 때 때는 모든 퀴즈 제공공
-    if (!isLoggedIn(user) || partStatus !== 'IN_PROGRESS') {
+    //파트가 잠겼을때는 에러를 던짐
+    if (partStatus === 'LOCKED') {
+      throw new Error('아직 진행할 수 없는 파트입니다.');
+    }
+    //일반적으로는 모든 퀴즈를 제공
+    if (partStatus !== 'IN_PROGRESS' && partStatus !== 'TUTORIAL') {
       const { data: quizzes } = quizzesQuery.getQuizzes({ partId });
       return <WrappedComponent {...(props as P)} quizzes={quizzes} />;
     }
-    //로그인 했고 이미 진행한적이 있을 때는 풀었던 문제 제공
+    //로그인 했고 풀고있던 파트에 대해서는 풀고있는 퀴즈를 제공
     if (isLoggedIn(user) && partStatus === 'IN_PROGRESS') {
       const { data: quizzes } = userQuizzesQuery.getQuizzes({
         userId: user.id,
@@ -39,7 +43,7 @@ const withQuizzes = <P extends object>(
       });
       return <WrappedComponent {...(props as P)} quizzes={quizzes} />;
     }
-    //모든 경우가 아닐 때 (튜토리얼) 문제 제공
+    //다 아닐때(튜토리얼) 문제 제공
     return <WrappedComponent {...(props as P)} quizzes={TUTORIAL_QUIZZES} />;
   };
 
