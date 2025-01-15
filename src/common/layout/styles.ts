@@ -77,14 +77,14 @@ export const SortSelectButton = styled.button<{
 `;
 
 export const SortOptionUl = styled.ul<{
-  $top?: string;
   $width?: string;
+  $height?: string;
   $backgroundColor?: string;
   $fontColor?: string;
   $borderColor?: string;
 }>`
   position: absolute;
-  top: ${({ $top }) => $top};
+  top: ${({ $height }) => $height};
   width: ${({ $width }) => $width};
   border-radius: 0 0 15px 15px;
   background-color: ${({ $backgroundColor }) => $backgroundColor};

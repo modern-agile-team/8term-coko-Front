@@ -15,7 +15,6 @@ interface SortDropDownProps<T extends Record<PropertyKey, any>> {
   width?: string; // 너비
   height?: string; // 높이
   fontSize?: string; // 글자 사이즈
-  top?: string; // li, ul 사이 거리
   ulFontColor?: string; // ul 폰트 색
   liFontColor?: string; // li 폰트 색
   ulBackgroundColor?: string; // ul 배경 색
@@ -57,7 +56,6 @@ export default function SortDropdown<T extends Record<PropertyKey, any>>({
   width,
   height,
   fontSize,
-  top,
   ulFontColor,
   liFontColor,
   ulBackgroundColor,
@@ -90,7 +88,7 @@ export default function SortDropdown<T extends Record<PropertyKey, any>>({
       {isOpen && (
         <S.SortOptionUl
           $width={width}
-          $top={top}
+          $height={height}
           $backgroundColor={ulBackgroundColor}
           $fontColor={ulFontColor}
           $borderColor={borderColor}
