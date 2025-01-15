@@ -14,6 +14,8 @@ interface SortDropDownProps<T extends Record<PropertyKey, any>> {
   onSelectOption: (option: keyof T) => void;
   width?: string; // 너비
   height?: string; // 높이
+  iconSize?: string; // 아이콘 사이즈(화살표)
+  iconRight?: string; // 아이콘 margin right
   fontSize?: string; // 글자 사이즈
   ulFontColor?: string; // ul 폰트 색
   liFontColor?: string; // li 폰트 색
@@ -45,6 +47,16 @@ interface SortDropDownProps<T extends Record<PropertyKey, any>> {
  *       options={RANKING_OPTIONS}
  *       selectedOption={selectedOption}
  *       onSelectOption={setSelectedOption}
+ *       width="136px"
+ *       height="30px"
+ *       iconSize="10px"
+ *       iconRight="15px"
+ *       fontSize="12px"
+ *       ulFontColor="#FFF3C0"
+ *       liFontColor="#D37744"
+ *       ulBackgroundColor="#d37744"
+ *       liBackgroundColor="#fff3c0"
+ *       borderColor="#c26b3b"
  *     />
  *   );
  * }
@@ -55,6 +67,8 @@ export default function SortDropdown<T extends Record<PropertyKey, any>>({
   onSelectOption,
   width,
   height,
+  iconSize,
+  iconRight,
   fontSize,
   ulFontColor,
   liFontColor,
@@ -78,12 +92,15 @@ export default function SortDropdown<T extends Record<PropertyKey, any>>({
         $isToggled={isOpen}
         $width={width}
         $height={height}
+        $iconSize={iconSize}
+        $iconRight={iconRight}
         $color={ulFontColor}
         $fontSize={fontSize}
         $backgroundColor={ulBackgroundColor}
         $borderColor={borderColor}
       >
         {String(selectedOption)}
+        <span>{'▲'}</span>
       </S.SortSelectButton>
       {isOpen && (
         <S.SortOptionUl

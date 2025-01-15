@@ -33,6 +33,8 @@ export default function RankingContainer({
           onSelectOption={onOptionChange}
           width="136px"
           height="30px"
+          iconSize="10px"
+          iconRight="15px"
           fontSize="12px"
           ulFontColor="#FFF3C0"
           liFontColor="#D37744"

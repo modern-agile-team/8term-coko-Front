@@ -44,10 +44,6 @@ export const SortContainer = styled.div`
   position: relative;
 `;
 
-const getSortSelectButtonIcon = (isToggled: boolean) => {
-  return isToggled ? '정렬-아래-화살표.svg' : '정렬-위-화살표.svg';
-};
-
 export const SortSelectButton = styled.button<{
   $isToggled: boolean;
   $width?: string;
@@ -56,6 +52,8 @@ export const SortSelectButton = styled.button<{
   $fontSize?: string;
   $backgroundColor?: string;
   $borderColor?: string;
+  $iconSize?: string;
+  $iconRight?: string;
 }>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
@@ -64,18 +62,27 @@ export const SortSelectButton = styled.button<{
   font-weight: 700;
   text-align: center;
   border: 2px solid ${({ $borderColor }) => $borderColor};
-
-  background: ${({ $isToggled, $backgroundColor }) =>
-    `${$backgroundColor} url(${getImageUrl(
-      getSortSelectButtonIcon($isToggled)
-    )}) no-repeat right 10px center`};
+  background: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 
   &:focus {
     outline: none;
   }
-`;
 
+  span {
+    position: absolute;
+    right: ${({ $iconRight }) => $iconRight};
+    font-size: ${({ $iconSize }) => $iconSize};
+    transform: ${({ $isToggled }) =>
+      $isToggled ? 'rotate(180deg)' : 'rotate(0deg)'};
+    transition: transform 0.1s ease;
+  }
+`;
 export const SortOptionUl = styled.ul<{
   $width?: string;
   $height?: string;
