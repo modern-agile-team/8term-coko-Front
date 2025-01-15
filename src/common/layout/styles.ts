@@ -1,5 +1,27 @@
-import styled, { css } from 'styled-components';
-import { getImageUrl } from '@utils/getImageUrl';
+import styled from 'styled-components';
+
+interface BaseStyleProps {
+  $width?: string;
+  $height?: string;
+  $color?: string;
+  $backgroundColor?: string;
+  $borderColor?: string;
+}
+
+interface SortSelectButtonProps extends BaseStyleProps {
+  $isToggled: boolean;
+  $fontSize?: string;
+  $iconSize?: string;
+  $iconRight?: string;
+}
+
+interface SortOptionUlProps extends BaseStyleProps {
+  $fontColor?: string;
+}
+
+interface SortOptionLiProps extends BaseStyleProps {
+  $height?: string;
+}
 
 export const MenuBox = styled.div`
   display: flex;
@@ -44,25 +66,15 @@ export const SortContainer = styled.div`
   position: relative;
 `;
 
-export const SortSelectButton = styled.button<{
-  $isToggled: boolean;
-  $width?: string;
-  $height?: string;
-  $color?: string;
-  $fontSize?: string;
-  $backgroundColor?: string;
-  $borderColor?: string;
-  $iconSize?: string;
-  $iconRight?: string;
-}>`
+export const SortSelectButton = styled.button<SortSelectButtonProps>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
   color: ${({ $color }) => $color};
   font-size: ${({ $fontSize }) => $fontSize};
   font-weight: 700;
   text-align: center;
-  border: 2px solid ${({ $borderColor }) => $borderColor};
   background: ${({ $backgroundColor }) => $backgroundColor};
+  border: 2px solid ${({ $borderColor }) => $borderColor};
   border-radius: ${({ $isToggled }) => ($isToggled ? '15px 15px 0 0' : '15px')};
 
   display: flex;
@@ -83,34 +95,22 @@ export const SortSelectButton = styled.button<{
     transition: transform 0.1s ease;
   }
 `;
-export const SortOptionUl = styled.ul<{
-  $width?: string;
-  $height?: string;
-  $backgroundColor?: string;
-  $fontColor?: string;
-  $borderColor?: string;
-}>`
+
+export const SortOptionUl = styled.ul<SortOptionUlProps>`
   position: absolute;
-  top: ${({ $height }) => $height};
-  width: ${({ $width }) => $width};
-  border-radius: 0 0 15px 15px;
-  background-color: ${({ $backgroundColor }) => $backgroundColor};
-  color: ${({ $fontColor }) => $fontColor};
   list-style: none;
   z-index: 10;
-  border: 2px solid ${({ $borderColor }) => $borderColor};
-  border-top: none;
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  top: ${({ $height }) => $height};
+  width: ${({ $width }) => $width};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  color: ${({ $fontColor }) => $fontColor};
+  border: 2px solid ${({ $borderColor }) => $borderColor};
+  border-radius: 0 0 15px 15px;
+  border-top: none;
 `;
 
-export const SortOptionLi = styled.li<{
-  $height?: string;
-  $color?: string;
-  $backgroundColor?: string;
-  $borderColor?: string;
-}>`
+export const SortOptionLi = styled.li<SortOptionLiProps>`
   display: flex;
   justify-content: center;
   align-items: center;
