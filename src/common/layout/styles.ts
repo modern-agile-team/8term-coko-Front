@@ -50,12 +50,12 @@ const getSortSelectButtonIcon = (isToggled: boolean) => {
 
 export const SortSelectButton = styled.button<{
   $isToggled: boolean;
-  $width: string;
-  $height: string;
-  $color: string;
-  $fontSize: string;
-  $backgroundColor: string;
-  $borderColor: string;
+  $width?: string;
+  $height?: string;
+  $color?: string;
+  $fontSize?: string;
+  $backgroundColor?: string;
+  $borderColor?: string;
 }>`
   width: ${({ $width }) => $width};
   height: ${({ $height }) => $height};
@@ -77,13 +77,14 @@ export const SortSelectButton = styled.button<{
 `;
 
 export const SortOptionUl = styled.ul<{
-  $width: string;
-  $backgroundColor: string;
-  $fontColor: string;
-  $borderColor: string;
+  $top?: string;
+  $width?: string;
+  $backgroundColor?: string;
+  $fontColor?: string;
+  $borderColor?: string;
 }>`
   position: absolute;
-  top: 30px;
+  top: ${({ $top }) => $top};
   width: ${({ $width }) => $width};
   border-radius: 0 0 15px 15px;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
@@ -98,10 +99,10 @@ export const SortOptionUl = styled.ul<{
 `;
 
 export const SortOptionLi = styled.li<{
-  $height: string;
-  $color: string;
-  $backgroundColor: string;
-  $borderColor: string;
+  $height?: string;
+  $color?: string;
+  $backgroundColor?: string;
+  $borderColor?: string;
 }>`
   display: flex;
   justify-content: center;

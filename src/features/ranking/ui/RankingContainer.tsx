@@ -31,6 +31,15 @@ export default function RankingContainer({
           options={RANKING_OPTIONS}
           selectedOption={selectedOption}
           onSelectOption={onOptionChange}
+          width="136px"
+          height="30px"
+          fontSize="12px"
+          top="30px"
+          ulFontColor="#FFF3C0"
+          liFontColor="#D37744"
+          ulBackgroundColor="#d37744"
+          liBackgroundColor="#fff3c0"
+          borderColor="#c26b3b"
         />
       </S.SortDropdownWrapper>
 
