@@ -1,19 +1,33 @@
 import { keyframes, styled } from 'styled-components';
 
+const slideInFromSide = keyframes`
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`;
 export const EmphasizedItemDiv = styled.div`
   position: absolute;
   display: flex;
   > p {
+    animation: ${slideInFromSide} 0.5s ease-out;
+
     position: absolute;
     top: 55%;
     left: 40%;
     z-index: 101;
   }
   > img {
+    animation: ${slideInFromSide} 0.5s ease-out;
     position: relative;
     z-index: 100;
   }
 `;
+
 export const TutorialOverRayDiv = styled.div`
   top: -60px;
   left: 150px;
@@ -25,7 +39,6 @@ export const TutorialOverRayDiv = styled.div`
   position: absolute;
   z-index: 5;
 `;
-
 const fadeInScaleUp = keyframes`
   0% {
     opacity: 0;
@@ -36,7 +49,6 @@ const fadeInScaleUp = keyframes`
     transform: translate(-50%, -50%) scale(1); 
   }
 `;
-
 export const TutorialClearWrapper = styled.div`
   animation: ${fadeInScaleUp} 0.7s ease-out;
   position: fixed;
