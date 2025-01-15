@@ -28,6 +28,8 @@ interface SortDropDownProps<T extends Record<PropertyKey, any>> {
  * @description 정렬할 때 사용할 수 있는 드롭다운 컴포넌트입니다.
  *
  * @example
+ * import { useState } from 'react';
+ *
  * const RANKING_OPTIONS = {
  *   '포인트 보유순': {
  *     icon: '포인트.svg',
@@ -39,7 +41,7 @@ interface SortDropDownProps<T extends Record<PropertyKey, any>> {
  *   },
  * } as const;
  *
- * function ExampleComponent() {
+ * export default Ranking() {
  *   const [selectedOption, setSelectedOption] = useState<keyof typeof RANKING_OPTIONS>('포인트 보유순');
  *
  *   return (
