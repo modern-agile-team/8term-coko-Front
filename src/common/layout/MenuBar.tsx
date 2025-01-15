@@ -1,6 +1,6 @@
 import MenuItem from '@common/ui/MenuItem';
 import { LogoBox, MenuBox } from './styles';
-import { LogoImg } from '@common/ui/style';
+import { LogoImg } from '@/common/ui/styles';
 import { MENUS } from './constants';
 import { getImageUrl } from '@utils/getImageUrl';
 

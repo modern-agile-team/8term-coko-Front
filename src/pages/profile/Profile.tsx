@@ -1,5 +1,5 @@
 import MenuBar from '@common/layout/MenuBar';
-import * as globalS from '@/style/style';
+import * as globalS from '@/style/styles';
 import Header from '@common/layout/Header';
 import * as S from './styles';
 import ProfileImage from '@features/user/ui/ProfileImage';

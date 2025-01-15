@@ -1,6 +1,6 @@
-import * as globalS from '@/style/style';
+import * as globalS from '@/style/styles';
 import { useMemo } from 'react';
-import { ScrollableContainer } from './style';
+import { ScrollableContainer } from './styles';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';

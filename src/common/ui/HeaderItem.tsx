@@ -1,4 +1,4 @@
-import { IconWrapper, HeaderIcon } from './style';
+import { IconWrapper, HeaderIcon } from './styles';
 
 interface HeaderItemProps {
   icon: string;

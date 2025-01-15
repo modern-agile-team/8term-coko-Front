@@ -1,4 +1,4 @@
-import * as S from '../ui/style';
+import * as S from '@common/ui/styles';
 import { HeaderBox } from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
