@@ -1,4 +1,3 @@
-import CokoLogo from '@common/layout/CokoLogo';
 import MenuBar from '@common/layout/MenuBar';
 import * as globalS from '@/style/style';
 import Header from '@common/layout/Header';
@@ -14,12 +13,10 @@ export default function Profile() {
     <>
       <globalS.Wrapper>
         <globalS.LeftSection>
-          <CokoLogo />
           <MenuBar />
         </globalS.LeftSection>
         <globalS.RightSection>
           <Header />
-
           <S.LevelDiv>
             <div>
               <S.MyCharacterImage src={getImageUrl('테스트캐릭터.svg')} />

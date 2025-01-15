@@ -1,6 +1,6 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
-import { RANKING_OPTIONS } from '@features/ranking/constant';
+import { RANKING_OPTIONS } from '@/features/ranking/constants';
 import type { RankedUser } from '@features/user/types';
 
 interface MyRankProps extends RankedUser {
