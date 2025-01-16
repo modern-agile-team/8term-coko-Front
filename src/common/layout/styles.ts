@@ -36,13 +36,24 @@ export const MenuBox = styled.div`
 export const HeaderBox = styled.header`
   display: flex;
   justify-content: flex-end;
+  position: fixed;
+  z-index: 1;
   gap: 20px;
   align-items: center;
   width: 294px;
   height: 42px;
-  position: fixed;
+  padding-top: 5px;
   padding-right: 20px;
-  z-index: 1;
+`;
+
+export const GoBackButton = styled.button`
+  border: none;
+  background: none;
+`;
+
+export const GoBackImg = styled.img`
+  width: 50px;
+  height: 25px;
 `;
 
 export const LogoBox = styled.div`
