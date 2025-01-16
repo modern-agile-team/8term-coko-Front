@@ -12,8 +12,6 @@ interface QuizTourProps {
 }
 export default function QuizTour({ category }: QuizTourProps) {
   const { Funnel, setStep, step } = useFunnel('진행도 설명1');
-  const { Modal, closeModal, isShow, openModal } = useModal();
-
   useEffect(() => {
     if (step === '' && category === 'COMBINATION') {
       toast('직접 문제를 풀어보세요!');
@@ -25,50 +23,39 @@ export default function QuizTour({ category }: QuizTourProps) {
       setStep(CATEGORY_STEP[category]);
     }
   }, [category]);
+
   return (
     <>
       <TutorialOverRayDiv>
         <Funnel>
           <Funnel.Step name="진행도 설명1">
             <EmphasizedItem
+              id="progress-bar"
               onNext={() => setStep('진행도 설명2')}
               description="이건 진행바야"
-              style={{
-                width: '60vw',
-                height: '23px',
-              }}
             />
           </Funnel.Step>
           <Funnel.Step name="진행도 설명2">
             <EmphasizedItem
+              id="progress-bar"
               onNext={() => setStep('목숨 설명')}
               description="얼마나 문제를 풀었고,
             얼마나 남았는지 알 수 있지"
-              style={{
-                top: '8%',
-                left: '13%',
-              }}
             />
           </Funnel.Step>
           <Funnel.Step name="목숨 설명">
             <EmphasizedItem
+              id="header-item-포인트"
               onNext={() => setStep('포인트 설명')}
               description="이 과일은 목숨이고
             문제를 틀리면 하나씩 감소해"
-              style={{
-                top: '5%',
-                right: '0.3%',
-              }}
             />
           </Funnel.Step>
           <Funnel.Step name="포인트 설명">
             <EmphasizedItem
+              id="header-item-과일바구니"
               onNext={() => setStep('조합형 설명')}
               description="이건 포인트야"
-              style={{
-                top: '5%',
-                right: '8%',
-              }}
             />
           </Funnel.Step>
           <Funnel.Step name="조합형 설명">

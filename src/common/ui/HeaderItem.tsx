@@ -1,3 +1,4 @@
+import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import { IconWrapper, HeaderIcon } from './style';
 
 interface HeaderItemProps {
@@ -9,7 +10,10 @@ interface HeaderItemProps {
 export default function HeaderItem({ icon, point, color }: HeaderItemProps) {
   return (
     <>
-      <IconWrapper $color={color}>
+      <IconWrapper
+        $color={color}
+        id={`header-item-${getImageNameFromUrl(icon)}`}
+      >
         <HeaderIcon src={icon} />
         <p>{point.toLocaleString()}</p>
       </IconWrapper>
