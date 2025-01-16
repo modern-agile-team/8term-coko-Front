@@ -46,16 +46,6 @@ export const HeaderBox = styled.header`
   padding-right: 20px;
 `;
 
-export const GoBackButton = styled.button`
-  border: none;
-  background: none;
-`;
-
-export const GoBackImg = styled.img`
-  width: 50px;
-  height: 25px;
-`;
-
 export const LogoBox = styled.div`
   margin-top: 26px;
   margin-left: 39px;

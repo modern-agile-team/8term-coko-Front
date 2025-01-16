@@ -4,6 +4,7 @@ import {
   ResponseButton,
   SubmitSection,
   AlignCenter,
+  GoBackButtonWrapper,
 } from './styles';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -35,6 +36,7 @@ import type { PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
+import GoBackButton from '@/common/ui/GoBackButton';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -106,6 +108,9 @@ export default function Quiz() {
         <Header />
       </HeaderSection>
       <ProgressSection>
+        <GoBackButtonWrapper>
+          <GoBackButton />
+        </GoBackButtonWrapper>
         <ProgressBar
           $maxWidth="100%"
           $height="100%"

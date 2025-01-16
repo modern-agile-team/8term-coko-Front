@@ -1,9 +1,9 @@
 import * as S from '@common/ui/styles';
-import { HeaderBox, GoBackButton, GoBackImg } from './styles';
+import { HeaderBox } from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
 import { useRef, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
 import usePopover from '@hooks/usePopover';
 import useUserStore from '@store/useUserStore';
@@ -44,16 +44,8 @@ export default function Header() {
     });
   };
 
-  const location = useLocation();
-  const isQuiz = location.pathname === '/quiz';
-
   return (
     <HeaderBox>
-      {isQuiz && (
-        <GoBackButton onClick={() => navigate(-1)}>
-          <GoBackImg src={getImageUrl('뒤로가기-버튼.svg')} alt="뒤로가기" />
-        </GoBackButton>
-      )}
       {user && (
         <>
           <HeaderItem
