@@ -14,3 +14,10 @@ export const ScrollableContainer = styled.div<ScrollableContainerProps>`
   justify-content: center;
   align-items: center;
 `;
+
+// Learn 페이지 퀴즈들 감싸는 박스
+export const QuizBox = styled.div`
+  width: 693px;
+  margin-top: 270px;
+  border: none;
+`;

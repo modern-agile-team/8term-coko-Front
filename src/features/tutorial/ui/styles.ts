@@ -13,31 +13,23 @@ const slideInFromSide = keyframes`
 export const EmphasizedItemDiv = styled.div`
   position: absolute;
   display: flex;
-  > p {
-    animation: ${slideInFromSide} 0.5s ease-out;
-
-    position: absolute;
-    top: 55%;
-    left: 40%;
-    z-index: 101;
-  }
-  > img {
-    animation: ${slideInFromSide} 0.5s ease-out;
-    position: relative;
-    z-index: 100;
-  }
+  width: 100px;
+  height: 100px;
+  background-color: rgb(128, 128, 128);
 `;
 
 export const TutorialOverRayDiv = styled.div`
-  top: -60px;
-  left: 150px;
-  width: 130px;
-  height: 130px;
-  background: transparent;
-  border-radius: 50%;
-  box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.8);
+  mix-blend-mode: hard-light;
   position: absolute;
-  z-index: 5;
+  display: flex;
+  justify-content: center;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); // 딤드 영역을 어둡게 처리
+  mix-blend-mode: hard-light; // 반드시 추가
+  z-index: 100;
 `;
 const fadeInScaleUp = keyframes`
   0% {

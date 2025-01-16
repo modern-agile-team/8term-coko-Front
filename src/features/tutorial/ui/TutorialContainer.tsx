@@ -1,4 +1,4 @@
-import Header from '@/common/layout/Header';
+import './style.css';
 import ProgressBar from '@/features/progress/ui/ProgressBar';
 import { Quiz } from '@/features/quiz/types';
 import Combination from '@/features/quiz/ui/Combination';
@@ -7,17 +7,16 @@ import OXSelector from '@/features/quiz/ui/OXSelector';
 import Question from '@/features/quiz/ui/Question';
 import Result from '@/features/quiz/ui/Result';
 import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
+import { useTutorial } from '@/features/tutorial/service/hooks';
 import QuizTour from '@/features/tutorial/ui/QuizTour';
 import TutorialClear from '@/features/tutorial/ui/TutorialClear';
 import useModal from '@/hooks/useModal';
 import {
-  HeaderSection,
   ProgressSection,
   SubmitSection,
   ResponseButton,
 } from '@/pages/quiz/styles';
 import { useClientQuizStore } from '@/store/useClientQuizStore';
-import { AlignCenter } from '@/style/LayOut';
 import isEqualArray from '@/utils/isEqualArray';
 import { SwitchCase, useUnmount } from '@modern-kit/react';
 import { useEffect, useState } from 'react';
@@ -51,7 +50,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
 
   return (
     <>
-      <ProgressSection>
+      <ProgressSection id="progressbar">
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
@@ -95,6 +94,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
         </ResponseButton>
       </SubmitSection>
       <QuizTour category={category} />
+
       <Modal isShow={isShow}>
         <SwitchCase
           value={caseNaem}

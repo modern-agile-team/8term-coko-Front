@@ -1,3 +1,4 @@
+import '@features/tutorial/ui/style.css';
 import Header from '@/common/layout/Header';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
 import { TUTORIAL_ID } from '@/features/tutorial/constants';
@@ -5,6 +6,8 @@ import TutorialContainer from '@/features/tutorial/ui/TutorialContainer';
 import { HeaderSection } from '@/pages/quiz/styles';
 import { AlignCenter } from '@/style/LayOut';
 import { useBeforeUnload } from '@modern-kit/react';
+import { useEffect } from 'react';
+import { TutorialOverRayDiv } from '@/features/tutorial/ui/styles';
 
 export default function Tutorial() {
   const TutorialWithQuizzes = withQuizzes(TutorialContainer);

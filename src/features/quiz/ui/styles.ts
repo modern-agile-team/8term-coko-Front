@@ -481,13 +481,6 @@ export const Img = styled.img<{ $width: string; $height: string }>`
   height: ${({ $height }) => $height};
 `;
 
-// Learn 페이지 퀴즈들 감싸는 박스
-export const QuizBox = styled.div`
-  width: 693px;
-  margin-top: 270px;
-  border: none;
-`;
-
 // 지도 윗 부분 이미지
 export const UpperBackgroundImg = styled.div`
   width: 693px;

@@ -3,7 +3,6 @@ import {
   EmphasizedItemDiv,
 } from '@/features/tutorial/ui/styles';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import { getImageUrl } from '@/utils/getImageUrl';
 import { CSSProperties } from 'react';
 
 interface EmphasizedItemProps {
@@ -12,20 +11,15 @@ interface EmphasizedItemProps {
   style: CSSProperties;
 }
 
-export default function EmphasizedItem({
-  onNext,
-  description,
-  style,
-}: EmphasizedItemProps) {
+export default function EmphasizedItem({ onNext, style }: EmphasizedItemProps) {
   const EmphasizedItemRef = useOutsideClick(onNext);
 
   return (
     <>
-      <EmphasizedItemDiv ref={EmphasizedItemRef} style={style}>
-        <TutorialOverRayDiv />
-        <p>{description}</p>
-        <img src={getImageUrl('튜토리얼.svg')} />
-      </EmphasizedItemDiv>
+      <EmphasizedItemDiv
+        ref={EmphasizedItemRef}
+        style={style}
+      ></EmphasizedItemDiv>
     </>
   );
 }
