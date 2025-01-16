@@ -13,8 +13,7 @@
       "@features*": ["features/*"],
       "@store*": ["store/*"],
       "@utils*": ["utils/*"],
-      "@common*": ["common/*"],
-      "@type*": ["types/*"]
+      "@common*": ["common/*"]
     },
 
     /* Bundler mode */

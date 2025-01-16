@@ -1,7 +1,15 @@
 import { media } from '@/style/media';
 import styled, { css } from 'styled-components';
-//그리드 나누기용 width는 나중에 글로벌스타일 들어오면 지우기
 
+//가운데 정렬
+export const AlignCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+//그리드 나누기용 width는 나중에 글로벌스타일 들어오면 지우기
 export const GridContainer = styled.div`
   display: grid;
   width: 1280px;

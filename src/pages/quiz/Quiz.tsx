@@ -3,8 +3,8 @@ import {
   ProgressSection,
   ResponseButton,
   SubmitSection,
+  AlignCenter,
 } from './styles';
-import { AlignCenter } from '@/style/LayOut';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
