@@ -18,14 +18,6 @@ export default function PartClear({ partId }: PartClearProps) {
 
   const navigate = useNavigate();
 
-  useTimeout(
-    () => {
-      updatePoint({ id: user.id, point: DEFAULT_POINT });
-      updatePartProgress({ userId: user.id, partId, partStatus: 'COMPLETED' });
-    },
-    { delay: 500 }
-  );
-
   return (
     <>
       <S.CompensationSection $backgroundColor="#F0DAAB" $boxShadow="#E5C892">
@@ -55,6 +47,12 @@ export default function PartClear({ partId }: PartClearProps) {
           $margin="0 88px 0 0"
           $isActive={isPointIdle && isProgressIdle}
           onClick={() => {
+            updatePoint({ id: user.id, point: DEFAULT_POINT });
+            updatePartProgress({
+              userId: user.id,
+              partId,
+              partStatus: 'COMPLETED',
+            });
             navigate('/learn');
           }}
         >
