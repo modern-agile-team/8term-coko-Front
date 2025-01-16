@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
-import { media } from '@/style/media';
+import { media } from '@style/media';
 
 interface QuestUrlProps {
   $isLearn?: boolean;

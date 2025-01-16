@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getImageUrl } from '@utils/getImageUrl';
-import * as globalS from '@/style/styles';
+import * as globalS from '@style/styles';
 import * as S from './styles';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';

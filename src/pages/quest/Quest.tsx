@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import * as globalS from '@/style/styles';
+import * as globalS from '@style/styles';
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import MenuBar from '@common/layout/MenuBar';

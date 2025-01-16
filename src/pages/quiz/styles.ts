@@ -1,4 +1,4 @@
-import { media } from '@/style/media';
+import { media } from '@style/media';
 import styled, { css } from 'styled-components';
 
 //가운데 정렬

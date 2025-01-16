@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
-import { media } from '@/style/media';
-import { getImageUrl } from '@/utils/getImageUrl';
+import { media } from '@style/media';
+import { getImageUrl } from '@utils/getImageUrl';
 import type { Quiz } from '@features/quiz/types';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
