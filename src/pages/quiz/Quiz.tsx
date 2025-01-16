@@ -1,10 +1,10 @@
 import {
+  AlignCenter,
   HeaderSection,
   ProgressSection,
+  GoBackButtonWrapper,
   ResponseButton,
   SubmitSection,
-  AlignCenter,
-  GoBackButtonWrapper,
 } from './styles';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -37,6 +37,7 @@ import type { Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 import GoBackButton from '@/common/ui/GoBackButton';
+import GoBackPrompt from '@/common/layout/GoBackPrompt';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -53,7 +54,22 @@ export default function Quiz() {
   } = useClientQuizStore();
   const { user } = useUserStore();
 
-  const { Modal, closeModal, openModal, isShow } = useModal();
+  // GoBackPrompt 모달 상태
+  const {
+    Modal: GoBackModal,
+    closeModal: closeGoBackModal,
+    openModal: openGoBackModal,
+    isShow: isGoBackModalVisible,
+  } = useModal();
+
+  // Funnel 모달 상태
+  const {
+    Modal: FunnelModal,
+    closeModal: closeFunnelModal,
+    openModal: openFunnelModal,
+    isShow: isFunnelModalVisible,
+  } = useModal();
+
   const { partId, partStatus } = useLocation().state as {
     partId: number;
     partStatus: PartStatus;
@@ -83,7 +99,7 @@ export default function Quiz() {
       setStep('총결과');
     }
     if (isCorrectList.length !== 0) {
-      openModal();
+      openFunnelModal();
     }
   }, [isCorrectList]);
   useUnmount(() => reset());
@@ -102,6 +118,16 @@ export default function Quiz() {
     OX_SELECTOR: OXSelector,
     SHORT_ANSWER: ShortAnswer,
   });
+
+  const handleGoBackClick = () => {
+    openGoBackModal();
+  };
+
+  const handleConfirmGoBack = () => {
+    closeGoBackModal();
+    window.history.back();
+  };
+
   return (
     <AlignCenter>
       <HeaderSection>
@@ -109,7 +135,7 @@ export default function Quiz() {
       </HeaderSection>
       <ProgressSection>
         <GoBackButtonWrapper>
-          <GoBackButton />
+          <GoBackButton onClick={handleGoBackClick} />
         </GoBackButtonWrapper>
         <ProgressBar
           $maxWidth="100%"
@@ -141,7 +167,15 @@ export default function Quiz() {
           제출
         </ResponseButton>
       </SubmitSection>
-      <Modal isShow={isShow}>
+      {/* GoBackPrompt 모달 */}
+      <GoBackModal isShow={isGoBackModalVisible}>
+        <GoBackPrompt
+          onCancel={closeGoBackModal}
+          onConfirm={handleConfirmGoBack}
+        />
+      </GoBackModal>
+      {/* Funnel 모달 */}
+      <FunnelModal isShow={isFunnelModalVisible}>
         <Funnel>
           <Funnel.Step name="결과">
             <Result
@@ -149,7 +183,7 @@ export default function Quiz() {
               quizId={id}
               isCorrect={isCorrectList[currentPage]}
               answer={answer}
-              closeModal={closeModal}
+              closeModal={closeFunnelModal}
             />
           </Funnel.Step>
           <Funnel.Step name="로그인 유도">
@@ -170,7 +204,7 @@ export default function Quiz() {
             <PartClear partId={partId} />
           </Funnel.Step>
         </Funnel>
-      </Modal>
+      </FunnelModal>
     </AlignCenter>
   );
 }
