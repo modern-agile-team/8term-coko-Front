@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
+import { slideIn } from '@style/animation';
 import { Link } from 'react-router-dom';
 
 interface UserInfoButtonProps {
@@ -70,18 +71,6 @@ export const ProfileWrapper = styled.div`
   cursor: pointer;
 `;
 
-// Popover 열릴 때 애니메이션
-const slideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
 export const ProfilePopover = styled.div`
   display: flex;
   flex-direction: column;
@@ -129,4 +118,14 @@ export const UserInfoButton = styled.button<UserInfoButtonProps>`
     transform: scale(1.05);
     transition: transform 0.2s ease;
   }
+`;
+
+export const StyledButton = styled.button`
+  border: none;
+  background: none;
+`;
+
+export const StyledImg = styled.img`
+  width: 50px;
+  height: 25px;
 `;

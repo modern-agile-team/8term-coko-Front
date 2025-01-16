@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { fadeInScaleUp, slideIn } from '@style/animation';
 
 interface BaseStyleProps {
   $width?: string;
@@ -159,5 +160,82 @@ export const LoadingSpinner = styled.div`
     to {
       transform: rotate(360deg);
     }
+  }
+`;
+
+export const FlexContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+`;
+
+export const PromptContainer = styled.section`
+  animation: ${fadeInScaleUp} 0.7s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 324px;
+  height: 387px;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px #e5e5e5;
+  text-align: center;
+`;
+
+export const PromptMessage = styled.div`
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 18px;
+    color: #d2691e; /* 초콜릿색 */
+  }
+
+  p {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: #8b4513; /* 갈색 */
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const GoBackPromptImg = styled.img`
+  width: 261px;
+  height: 159px;
+  margin-bottom: 20px;
+`;
+
+export const CancelButton = styled.button`
+  padding: 10px 20px;
+  background-color: #00dd4a;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  transition: transform 0.2s, background-color 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+`;
+
+export const ConfirmButton = styled.button`
+  padding: 10px 20px;
+  background-color: #ff4949;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  transition: transform 0.2s, background-color 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
   }
 `;

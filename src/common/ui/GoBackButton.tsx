@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { StyledButton, StyledImg } from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 
 interface GoBackButtonProps {
@@ -23,13 +23,3 @@ export default function GoBackButton({ onClick }: GoBackButtonProps) {
     </StyledButton>
   );
 }
-
-const StyledButton = styled.button`
-  border: none;
-  background: none;
-`;
-
-const StyledImg = styled.img`
-  width: 50px;
-  height: 25px;
-`;
