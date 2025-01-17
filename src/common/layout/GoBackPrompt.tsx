@@ -7,8 +7,8 @@ import {
   ConfirmButton,
   CancelButton,
 } from './styles';
-
 import { getImageUrl } from '@/utils/getImageUrl';
+import useOutsideClick from '@hooks/useOutsideClick';
 
 interface GoBackPromptProps {
   onConfirm: () => void; // 뒤로 가기 동작
@@ -19,17 +19,19 @@ export default function GoBackPrompt({
   onConfirm,
   onCancel,
 }: GoBackPromptProps) {
+  const modalRef = useOutsideClick(onCancel);
+
   return (
     <FlexContainer>
-      <PromptContainer>
+      <PromptContainer ref={modalRef}>
         <PromptMessage>
-          <h2>뒤로 가시겠습니까?</h2>
-          <p>진행 중인 내용이 사라질 수 있습니다.</p>
+          <h2>지금 나갈 거야...?</h2>
+          <p>진행사항이 사라질 수 있습니다.🚨</p>
         </PromptMessage>
         <GoBackPromptImg src={getImageUrl('우는-코코.svg')} />
         <ButtonContainer>
           <CancelButton onClick={onCancel}>계속하기</CancelButton>
-          <ConfirmButton onClick={onConfirm}>뒤로가기</ConfirmButton>
+          <ConfirmButton onClick={onConfirm}>나가기</ConfirmButton>
         </ButtonContainer>
       </PromptContainer>
     </FlexContainer>

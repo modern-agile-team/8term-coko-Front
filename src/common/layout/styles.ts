@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fadeInScaleUp, slideIn } from '@style/animation';
+import { fadeInScaleUp } from '@style/animation';
 
 interface BaseStyleProps {
   $width?: string;
@@ -189,14 +189,14 @@ export const PromptMessage = styled.div`
   margin-bottom: 20px;
 
   h2 {
-    font-size: 18px;
-    color: #d2691e; /* 초콜릿색 */
+    font-size: 20px;
+    color: #000000;
   }
 
   p {
     margin: 10px 0 0;
-    font-size: 14px;
-    color: #8b4513; /* 갈색 */
+    font-size: 16px;
+    color: #ff4949;
   }
 `;
 
@@ -213,29 +213,37 @@ export const GoBackPromptImg = styled.img`
 `;
 
 export const CancelButton = styled.button`
+  width: 200px;
   padding: 10px 20px;
-  background-color: #00dd4a;
+  background-color: #49c0f8;
   color: #fff;
   font-weight: bold;
-  border-radius: 6px;
+  font-size: 15px;
+  border-radius: 10px;
   border: none;
-  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 4px #38a6dc;
 
   &:hover {
-    transform: translateY(-3px);
+    background-color: #7fd6fa;
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(4px);
   }
 `;
 
 export const ConfirmButton = styled.button`
+  width: 200px;
   padding: 10px 20px;
-  background-color: #ff4949;
-  color: #fff;
+  color: #ee5555;
   font-weight: bold;
+  font-size: 15px;
   border-radius: 6px;
   border: none;
-  transition: transform 0.2s, background-color 0.2s;
+  background: none;
 
   &:hover {
-    transform: translateY(-3px);
+    color: #ff6666;
   }
 `;
