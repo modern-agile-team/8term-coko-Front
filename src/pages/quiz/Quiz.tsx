@@ -54,21 +54,7 @@ export default function Quiz() {
   } = useClientQuizStore();
   const { user } = useUserStore();
 
-  // GoBackPrompt 모달 상태
-  const {
-    Modal: GoBackModal,
-    closeModal: closeGoBackModal,
-    openModal: openGoBackModal,
-    isShow: isGoBackModalVisible,
-  } = useModal();
-
-  // Funnel 모달 상태
-  const {
-    Modal: FunnelModal,
-    closeModal: closeFunnelModal,
-    openModal: openFunnelModal,
-    isShow: isFunnelModalVisible,
-  } = useModal();
+  const { isShow, openModal, closeModal, Modal } = useModal();
 
   const { partId, partStatus } = useLocation().state as {
     partId: number;
@@ -95,17 +81,29 @@ export default function Quiz() {
     if (isCorrectList.length === 2 && !isLoggedIn(user)) {
       setStep('로그인 유도');
     }
+
     if (isQuizFinished) {
       setStep('총결과');
     }
+
     if (isCorrectList.length !== 0) {
-      openFunnelModal();
+      openModal();
     }
-  }, [isCorrectList]);
+  }, [isCorrectList, isQuizFinished]);
   useUnmount(() => reset());
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
+
+  const handleGoBackClick = () => {
+    setStep('뒤로가기');
+    openModal();
+  };
+
+  const handleConfirmGoBack = () => {
+    closeModal();
+    window.history.back();
+  };
 
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
@@ -118,15 +116,6 @@ export default function Quiz() {
     OX_SELECTOR: OXSelector,
     SHORT_ANSWER: ShortAnswer,
   });
-
-  const handleGoBackClick = () => {
-    openGoBackModal();
-  };
-
-  const handleConfirmGoBack = () => {
-    closeGoBackModal();
-    window.history.back();
-  };
 
   return (
     <AlignCenter>
@@ -167,15 +156,7 @@ export default function Quiz() {
           제출
         </ResponseButton>
       </SubmitSection>
-      {/* GoBackPrompt 모달 */}
-      <GoBackModal isShow={isGoBackModalVisible}>
-        <GoBackPrompt
-          onCancel={closeGoBackModal}
-          onConfirm={handleConfirmGoBack}
-        />
-      </GoBackModal>
-      {/* Funnel 모달 */}
-      <FunnelModal isShow={isFunnelModalVisible}>
+      <Modal isShow={isShow}>
         <Funnel>
           <Funnel.Step name="결과">
             <Result
@@ -183,11 +164,17 @@ export default function Quiz() {
               quizId={id}
               isCorrect={isCorrectList[currentPage]}
               answer={answer}
-              closeModal={closeFunnelModal}
+              closeModal={closeModal}
             />
           </Funnel.Step>
           <Funnel.Step name="로그인 유도">
             <LoginPrompt onNext={() => setStep('로그인')} />
+          </Funnel.Step>
+          <Funnel.Step name="뒤로가기">
+            <GoBackPrompt
+              onCancel={closeModal}
+              onConfirm={handleConfirmGoBack}
+            />
           </Funnel.Step>
           <Funnel.Step name="로그인">
             <Login closeModal={noop} openModal={noop} />
@@ -204,7 +191,7 @@ export default function Quiz() {
             <PartClear partId={partId} />
           </Funnel.Step>
         </Funnel>
-      </FunnelModal>
+      </Modal>
     </AlignCenter>
   );
 }
