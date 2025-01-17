@@ -12,9 +12,13 @@ export default function Modal({
 }: PropsWithChildren<ModalProps>) {
   useEffect(() => {
     if (isShow) {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.offsetWidth;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
       document.body.style.overflow = 'hidden';
       (document.activeElement as HTMLElement).blur();
     } else {
+      document.body.style.paddingRight = `0px`;
       document.body.style.overflow = 'auto';
     }
 
