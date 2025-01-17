@@ -1,21 +1,22 @@
 import { Quiz } from '@/features/quiz/types';
 
-export const TUTORIAL_ID = 1;
+export const TUTORIAL_ID = 1 as const;
+
 export const TUTORIAL_QUIZZES: Quiz[] = [
   {
     id: 1,
     answer: ['코코'],
-    answerChoice: ['안녕', '코코'],
+    answerChoice: ['안녕', '코코', '슝슝'],
     category: 'COMBINATION',
     partId: TUTORIAL_ID,
     question: '안녕 , #empty#',
     sectionId: TUTORIAL_ID,
-    title: '빈칸을 채우시오.',
+    title: '',
   },
   {
     id: 2,
     answer: ['코코'],
-    answerChoice: ['안녕', '코코'],
+    answerChoice: ['캬캬', '코코', '키키', '퓨퓨'],
     category: 'MULTIPLE_CHOICE',
     partId: TUTORIAL_ID,
     question: '사이트 마스코트의 이름은?',
@@ -34,13 +35,13 @@ export const TUTORIAL_QUIZZES: Quiz[] = [
   },
   {
     id: 4,
-    answer: ['O'],
+    answer: ['cokoedu.com'],
     answerChoice: [],
     category: 'SHORT_ANSWER',
     partId: TUTORIAL_ID,
-    question: '',
+    question: '사이트의 주소는?',
     sectionId: TUTORIAL_ID,
-    title: '알맞은 단어를 채워주세요',
+    title: '알맞은 단어를 채워주세요.',
   },
 ] as const;
 

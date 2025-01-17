@@ -1,5 +1,5 @@
-import { findDirection } from '@/features/tutorial/service/utils';
-import { PopupPosition } from '@/features/tutorial/types';
+import { calculateTutorialPopupPosition } from '@/features/tutorial/service/utils';
+import { media } from '@/style/media';
 import { css, keyframes, styled } from 'styled-components';
 
 const slideInFromSide = keyframes`
@@ -12,26 +12,14 @@ const slideInFromSide = keyframes`
     opacity: 1;
   }
 `;
-export const EmphasizedItemDiv = styled.div`
+export const FocusedItemDiv = styled.div`
   position: absolute;
-  display: flex;
-  width: 100px;
-  height: 100px;
   background-color: rgb(128, 128, 128);
-  > p {
-    position: absolute;
-    top: 30px;
-    background-color: transparent;
-  }
-  > img {
-    position: absolute;
-    z-index: 101;
-  }
 `;
 
 export const TutorialOverRayDiv = styled.div`
   mix-blend-mode: hard-light;
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   right: 0;
@@ -78,7 +66,7 @@ export const TutorialPopupWrapper = styled.div<{
   ${({ $popupPosition }) => {
     if ($popupPosition) {
       return css`
-        ${findDirection($popupPosition)}
+        ${calculateTutorialPopupPosition($popupPosition)}
       `;
     }
   }}
@@ -91,5 +79,16 @@ export const TutorialPopupWrapper = styled.div<{
   > img {
     width: 300px;
     height: 280px;
+  }
+  ${media.mobile} {
+    > img {
+      display: none;
+    }
+    > p {
+      position: relative;
+      color: #fff;
+      top: initial;
+      left: initial;
+    }
   }
 `;
