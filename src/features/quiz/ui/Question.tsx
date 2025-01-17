@@ -49,7 +49,7 @@ export default function Question({ title, question, category }: QuestionProps) {
         <p>문제{currentPage + 1}.</p>
         <p>{title}</p>
       </S.Title>
-      <S.Pre>
+      <S.Pre id="question">
         <S.Code>{parse(dompurify.sanitize(addLineNumberCode), options)}</S.Code>
       </S.Pre>
     </S.QuestionSection>

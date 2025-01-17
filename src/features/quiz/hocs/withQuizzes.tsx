@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { quizzesQuery } from '@features/quiz/queries';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import useUserStore from '@store/useUserStore';
@@ -17,9 +17,9 @@ interface InjectedProps {
 }
 
 const withQuizzes = <P extends object>(
-  WrappedComponent: React.FC<P & InjectedProps>
+  WrappedComponent: FC<P & InjectedProps>
 ) => {
-  const ComponentWithQuizzes: React.FC<P & WithQuizzesProps> = ({
+  const ComponentWithQuizzes: FC<P & WithQuizzesProps> = ({
     partId,
     partStatus,
     ...props
@@ -33,6 +33,7 @@ const withQuizzes = <P extends object>(
     //일반적으로는 모든 퀴즈를 제공
     if (partStatus !== 'IN_PROGRESS' && partStatus !== 'TUTORIAL') {
       const { data: quizzes } = quizzesQuery.getQuizzes({ partId });
+
       return <WrappedComponent {...(props as P)} quizzes={quizzes} />;
     }
     //로그인 했고 풀고있던 파트에 대해서는 풀고있는 퀴즈를 제공
@@ -41,6 +42,7 @@ const withQuizzes = <P extends object>(
         userId: user.id,
         partId,
       });
+
       return <WrappedComponent {...(props as P)} quizzes={quizzes} />;
     }
     //다 아닐때(튜토리얼) 문제 제공

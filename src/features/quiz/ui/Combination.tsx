@@ -48,7 +48,7 @@ export default function Combination({
 
   return (
     <>
-      <CombinationSection>
+      <CombinationSection id="combination">
         {answerChoice.map((value, index) => {
           const isSelect = userResponseAnswer.includes(value);
           return isSelect ? (

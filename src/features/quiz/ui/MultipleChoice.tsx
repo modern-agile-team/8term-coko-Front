@@ -23,7 +23,7 @@ export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
           $width="193px"
           $height="204px"
         />
-        <MultipleChoiceButtonDiv>
+        <MultipleChoiceButtonDiv id="multiple-choice">
           {answerChoice.map((value, index) => (
             <MultipleChoiceButton
               key={value}

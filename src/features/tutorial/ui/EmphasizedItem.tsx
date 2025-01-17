@@ -1,31 +1,44 @@
 import { calculatePosition } from '@/features/tutorial/service/utils';
-import { EmphasizedItemDiv } from '@/features/tutorial/ui/styles';
+import { PopupPosition } from '@/features/tutorial/types';
+import {
+  EmphasizedItemDiv,
+  TutorialPopupWrapper,
+  TutorialOverRayDiv,
+} from '@/features/tutorial/ui/styles';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import { CSSProperties } from 'react';
+import { getImageUrl } from '@/utils/getImageUrl';
 
-type EmphasizedItemBaseProps = {
+interface EmphasizedItemProps {
+  id: string;
   onNext: () => void;
   description: string;
-};
-
-type EmphasizedItemProps =
-  | (EmphasizedItemBaseProps & { id: string; style?: never })
-  | (EmphasizedItemBaseProps & { id?: never; style: CSSProperties });
+  popupPosition?: PopupPosition;
+}
 
 export default function EmphasizedItem({
   onNext,
   id,
-  style,
+  description,
 }: EmphasizedItemProps) {
   const EmphasizedItemRef = useOutsideClick(onNext);
-  const computedStyle = id ? calculatePosition(id) : style;
+  const rect = calculatePosition(id);
+
+  const computedStyle = {
+    width: `${rect?.width}px`,
+    height: `${rect?.height}px`,
+    top: `${rect?.top}px`,
+    left: `${rect?.left}px`,
+  };
 
   return (
     <>
-      <EmphasizedItemDiv
-        ref={EmphasizedItemRef}
-        style={computedStyle ?? {}}
-      ></EmphasizedItemDiv>
+      <TutorialPopupWrapper ref={EmphasizedItemRef} $popupPosition={rect}>
+        <p>{description}</p>
+        <img src={getImageUrl('튜토리얼.svg')} />
+      </TutorialPopupWrapper>
+      <TutorialOverRayDiv>
+        <EmphasizedItemDiv style={computedStyle ?? {}} />
+      </TutorialOverRayDiv>
     </>
   );
 }

@@ -72,6 +72,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
       />
       <SubmitSection>
         <ResponseButton
+          id="skip-button"
           onClick={() => {
             pushIsCorrectList(false);
             openModal();
@@ -81,6 +82,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
         </ResponseButton>
 
         <ResponseButton
+          id="submit-button"
           disabled={isQuizAnswered()}
           $disabled={isQuizAnswered()}
           onClick={() => {
@@ -92,7 +94,6 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
         </ResponseButton>
       </SubmitSection>
       <QuizTour category={category} />
-
       <Modal isShow={isShow}>
         <SwitchCase
           value={caseNaem}

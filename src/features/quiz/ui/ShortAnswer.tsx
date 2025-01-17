@@ -15,6 +15,7 @@ export default function ShortAnswer() {
           alt="키보드 키캡 1"
         />
         <ShortAnswerInput
+          id="short-answer"
           type="text"
           onChange={e => {
             setUserResponseAnswer(e.target.value);

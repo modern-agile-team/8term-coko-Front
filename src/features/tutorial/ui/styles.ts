@@ -1,4 +1,6 @@
-import { keyframes, styled } from 'styled-components';
+import { findDirection } from '@/features/tutorial/service/utils';
+import { PopupPosition } from '@/features/tutorial/types';
+import { css, keyframes, styled } from 'styled-components';
 
 const slideInFromSide = keyframes`
   from {
@@ -16,6 +18,15 @@ export const EmphasizedItemDiv = styled.div`
   width: 100px;
   height: 100px;
   background-color: rgb(128, 128, 128);
+  > p {
+    position: absolute;
+    top: 30px;
+    background-color: transparent;
+  }
+  > img {
+    position: absolute;
+    z-index: 101;
+  }
 `;
 
 export const TutorialOverRayDiv = styled.div`
@@ -27,8 +38,8 @@ export const TutorialOverRayDiv = styled.div`
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); // 딤드 영역을 어둡게 처리
-  mix-blend-mode: hard-light; // 반드시 추가
+  background-color: rgba(0, 0, 0, 0.7);
+  mix-blend-mode: hard-light;
   z-index: 100;
 `;
 const fadeInScaleUp = keyframes`
@@ -55,4 +66,30 @@ export const TutorialClearWrapper = styled.div`
   background: #fff;
   border-radius: 40px;
   box-shadow: 0 11px #e5e5e5;
+`;
+
+export const TutorialPopupWrapper = styled.div<{
+  $popupPosition: DOMRect | null;
+}>`
+  position: absolute;
+  z-index: 1001;
+  pointer-events: none;
+  user-select: none;
+  ${({ $popupPosition }) => {
+    if ($popupPosition) {
+      return css`
+        ${findDirection($popupPosition)}
+      `;
+    }
+  }}
+  > p {
+    white-space: pre-line;
+    position: absolute;
+    top: 150px;
+    left: 120px;
+  }
+  > img {
+    width: 300px;
+    height: 280px;
+  }
 `;

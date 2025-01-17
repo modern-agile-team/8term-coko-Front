@@ -8,7 +8,7 @@ export default function OXSelector() {
 
   return (
     <>
-      <OXButtonSection>
+      <OXButtonSection id="ox-selector">
         <button type="button" onClick={() => setUserResponseAnswer('O')}>
           <Img
             $width="160px"
