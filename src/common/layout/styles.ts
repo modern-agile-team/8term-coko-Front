@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { fadeInScaleUp } from '@style/animation';
+import { animations } from '@/style/animations';
 
 interface BaseStyleProps {
   $width?: string;
@@ -172,7 +172,7 @@ export const FlexContainer = styled.section`
 `;
 
 export const PromptContainer = styled.section`
-  animation: ${fadeInScaleUp} 0.7s ease-out;
+  animation: ${animations.fadeInScaleUp} 0.7s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;

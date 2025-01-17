@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { slideIn } from '@style/animation';
+import { animations } from '@/style/animations';
 import { Link } from 'react-router-dom';
 
 interface UserInfoButtonProps {
@@ -85,7 +85,7 @@ export const ProfilePopover = styled.div`
   background-color: #fff;
   border-radius: 15px;
   border: 3px solid #ffb53d;
-  animation: ${slideIn} 0.3s ease-out;
+  animation: ${animations.slideIn} 0.3s ease-out;
 `;
 
 export const UserNameText = styled.p`
