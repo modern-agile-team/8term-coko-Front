@@ -78,12 +78,16 @@ export default function Quiz() {
   const { Funnel, setStep } = useFunnel('결과');
 
   useEffect(() => {
-    if (isCorrectList.length === 2 && !isLoggedIn(user)) {
-      setStep('로그인 유도');
+    if (!isShow) {
+      setStep('결과');
     }
 
     if (isQuizFinished) {
       setStep('총결과');
+    }
+
+    if (isCorrectList.length === 2 && !isLoggedIn(user)) {
+      setStep('로그인 유도');
     }
 
     if (isCorrectList.length !== 0) {
