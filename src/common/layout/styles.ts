@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { animations } from '@/style/animations';
-
+import { OverRayDivProps } from '@/common/types';
 interface BaseStyleProps {
   $width?: string;
   $height?: string;
@@ -52,13 +52,14 @@ export const LogoBox = styled.div`
   margin-left: 39px;
 `;
 
-export const OverRay = styled.div`
+export const OverRayDiv = styled.div<OverRayDivProps>`
   position: fixed;
   right: 0;
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  mix-blend-mode: ${({ $mixBlendMode }) => $mixBlendMode};
   z-index: 100;
 `;
 

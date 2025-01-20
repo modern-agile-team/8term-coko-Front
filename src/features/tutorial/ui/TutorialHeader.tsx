@@ -1,6 +1,6 @@
-import { HeaderBox } from '@/common/layout/style';
+import { HeaderBox } from '@/common/layout/styles';
 import HeaderItem from '@/common/ui/HeaderItem';
-import { ProfileWrapper } from '@/common/ui/style';
+import { ProfileWrapper } from '@/common/ui/styles';
 import ProfileImage from '@/features/user/ui/ProfileImage';
 import { getImageUrl } from '@/utils/getImageUrl';
 

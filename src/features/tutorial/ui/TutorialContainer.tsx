@@ -49,7 +49,6 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
 
   return (
     <>
-      <QuizTutorial category={category} />
       <ProgressSection id="progress-bar">
         <ProgressBar
           $maxWidth="100%"
@@ -113,6 +112,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
           }}
         />
       </Modal>
+      <QuizTutorial category={category} />
     </>
   );
 }

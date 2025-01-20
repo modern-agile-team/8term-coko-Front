@@ -1,4 +1,4 @@
-import { OverRayDiv } from '@/common/layout/style';
+import { OverRayDiv } from '@/common/layout/styles';
 import { OverRayDivProps } from '@/common/types';
 import { PropsWithChildren, useEffect } from 'react';
 

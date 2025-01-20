@@ -1,4 +1,4 @@
-import { OverRayDiv } from '@/common/layout/style';
+import { OverRayDiv } from '@/common/layout/styles';
 import { calculatePosition } from '@/features/tutorial/service/utils';
 import { PopupPosition } from '@/features/tutorial/types';
 import {

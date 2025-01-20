@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
-import { OverRayDiv } from './style';
 import ModalPortal from '../../ModalPortal';
+import { OverRayDiv } from '@/common/layout/styles';
 
 interface ModalProps {
   isShow: boolean;
