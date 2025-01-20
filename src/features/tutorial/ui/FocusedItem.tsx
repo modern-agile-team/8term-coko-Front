@@ -1,5 +1,5 @@
 import { OverRayDiv } from '@/common/layout/styles';
-import { calculatePosition } from '@/features/tutorial/service/utils';
+import usePosition from '@/features/tutorial/service/hooks';
 import { PopupPosition } from '@/features/tutorial/types';
 import {
   TutorialPopupWrapper,
@@ -22,8 +22,9 @@ export default function FocusedItem({
   id,
   description,
 }: FocusedItemProps) {
+  const { rects, getPosition } = usePosition();
   const FocusedItemRef = useOutsideClick(onNext);
-  const rect = calculatePosition(id);
+  const rect = getPosition(id);
 
   const computedStyle = rect
     ? {
@@ -33,15 +34,7 @@ export default function FocusedItem({
         left: `${rect.left}px`,
       }
     : undefined;
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    (document.activeElement as HTMLElement).blur();
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
-
+  console.log(rects);
   return (
     <>
       <ModalPortal>

@@ -1,7 +1,7 @@
-type CalculatePosition = (id: string) => DOMRect | null;
+type GetPosition = (id: string) => DOMRect | null;
 import { isMobile } from '@modern-kit/utils';
 
-export const calculatePosition: CalculatePosition = id => {
+export const getPosition: GetPosition = id => {
   const element = document.getElementById(id);
   if (!element) return null;
 
@@ -30,7 +30,6 @@ export const calculateTutorialPopupPosition: FindMostSpaciousDirection =
     //상, 하 여백이 많은쪽으로
     if (isMobile()) {
       if (bottomDistance < 150) {
-        console.log(position.top);
         position.top = `${topDistance - 70}px`;
         return position;
       }

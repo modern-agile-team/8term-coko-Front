@@ -1,12 +1,12 @@
 import Header from '@/common/layout/Header';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
-import { useGetLocationState } from '@/features/quiz/service/hooks';
+import { useLocationQuizState } from '@/features/quiz/service/hooks';
 import QuizContainer from '@/features/quiz/ui/QuizContainer';
 import { AlignCenter, HeaderSection } from '@/pages/quiz/styles';
 
 export default function Quiz() {
   const QuizWithQuizzes = withQuizzes(QuizContainer);
-  const { partId, partStatus } = useGetLocationState();
+  const { partId, partStatus } = useLocationQuizState();
 
   return (
     <AlignCenter>

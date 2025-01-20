@@ -12,6 +12,7 @@ import {
   replaceEmptyWithHTMLElement,
 } from '@/features/quiz/service/quizUtils';
 import { useCodeHighlight } from '@/features/quiz/service/hooks';
+import usePosition from '@/features/tutorial/service/hooks';
 
 interface QuestionProps {
   title: Quiz['title'];
@@ -21,6 +22,8 @@ interface QuestionProps {
 export default function Question({ title, question, category }: QuestionProps) {
   const { currentPage, userResponseAnswer } = useClientQuizStore();
   const { setOutsideDropZone } = useDnDStore();
+
+  const { getClientRectRefCallback } = usePosition();
 
   const highlightCode = useCodeHighlight(question, [question, currentPage]);
   const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
@@ -49,7 +52,7 @@ export default function Question({ title, question, category }: QuestionProps) {
         <p>문제{currentPage + 1}.</p>
         <p>{title}</p>
       </S.Title>
-      <S.Pre id="question">
+      <S.Pre id="question" ref={getClientRectRefCallback}>
         <S.Code>{parse(dompurify.sanitize(addLineNumberCode), options)}</S.Code>
       </S.Pre>
     </S.QuestionSection>

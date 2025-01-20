@@ -55,7 +55,7 @@ export const useCodeHighlight = (
   return highlightCode;
 };
 
-export const useGetLocationState = () => {
+export const useLocationQuizState = () => {
   const { state } = useLocation();
   if (state === null) {
     throw new Error('잘못된 접근입니다.');

@@ -26,7 +26,7 @@ export default function QuizTutorial({ category }: QuizTutorialProps) {
     <>
       <Funnel>
         {TUTORIAL_STEP.map(step => (
-          <Funnel.Step name={step.name}>
+          <Funnel.Step name={step.name} key={step.name}>
             <FocusedItem
               id={step.id}
               onNext={() => setStep(step.nextStep)}

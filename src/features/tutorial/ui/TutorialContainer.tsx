@@ -6,6 +6,7 @@ import OXSelector from '@/features/quiz/ui/OXSelector';
 import Question from '@/features/quiz/ui/Question';
 import Result from '@/features/quiz/ui/Result';
 import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
+import usePosition from '@/features/tutorial/service/hooks';
 import QuizTutorial from '@/features/tutorial/ui/QuizTutorial';
 
 import TutorialClear from '@/features/tutorial/ui/TutorialClear';
@@ -36,7 +37,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
   const isQuizFinished = isCorrectList.length === quizzes.length;
-  const [caseNaem, setCaseName] = useState<'result' | 'tutorialClear'>(
+  const [caseName, setCaseName] = useState<'result' | 'tutorialClear'>(
     'result'
   );
   useEffect(() => {
@@ -46,10 +47,11 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
   }, [isCorrectList]);
   useUnmount(() => reset());
   const { Modal, closeModal, isShow, openModal } = useModal();
+  const { getClientRectRefCallback } = usePosition();
 
   return (
     <>
-      <ProgressSection id="progress-bar">
+      <ProgressSection id="progressbar" ref={getClientRectRefCallback}>
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
@@ -97,7 +99,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
 
       <Modal isShow={isShow}>
         <SwitchCase
-          value={caseNaem}
+          value={caseName}
           caseBy={{
             result: (
               <Result
