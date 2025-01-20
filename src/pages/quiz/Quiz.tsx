@@ -1,10 +1,11 @@
 import {
+  AlignCenter,
   HeaderSection,
   ProgressSection,
+  GoBackButtonWrapper,
   ResponseButton,
   SubmitSection,
 } from './styles';
-import { AlignCenter } from '@/style/LayOut';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
@@ -35,6 +36,8 @@ import type { PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
+import GoBackButton from '@/common/ui/GoBackButton';
+import GoBackPrompt from '@/common/layout/GoBackPrompt';
 
 //퀴즈페이지
 export default function Quiz() {
@@ -51,7 +54,8 @@ export default function Quiz() {
   } = useClientQuizStore();
   const { user } = useUserStore();
 
-  const { Modal, closeModal, openModal, isShow } = useModal();
+  const { isShow, openModal, closeModal, Modal } = useModal();
+
   const { partId, partStatus } = useLocation().state as {
     partId: number;
     partStatus: PartStatus;
@@ -74,20 +78,36 @@ export default function Quiz() {
   const { Funnel, setStep } = useFunnel('결과');
 
   useEffect(() => {
-    if (isCorrectList.length === 2 && !isLoggedIn(user)) {
-      setStep('로그인 유도');
+    if (!isShow) {
+      setStep('결과');
     }
+
     if (isQuizFinished) {
       setStep('총결과');
     }
+
+    if (isCorrectList.length === 2 && !isLoggedIn(user)) {
+      setStep('로그인 유도');
+    }
+
     if (isCorrectList.length !== 0) {
       openModal();
     }
-  }, [isCorrectList]);
+  }, [isCorrectList, isQuizFinished]);
   useUnmount(() => reset());
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
+
+  const handleGoBackClick = () => {
+    setStep('뒤로가기');
+    openModal();
+  };
+
+  const handleConfirmGoBack = () => {
+    closeModal();
+    window.history.back();
+  };
 
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
@@ -100,12 +120,16 @@ export default function Quiz() {
     OX_SELECTOR: OXSelector,
     SHORT_ANSWER: ShortAnswer,
   });
+
   return (
     <AlignCenter>
       <HeaderSection>
         <Header />
       </HeaderSection>
       <ProgressSection>
+        <GoBackButtonWrapper>
+          <GoBackButton onClick={handleGoBackClick} />
+        </GoBackButtonWrapper>
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
@@ -149,6 +173,12 @@ export default function Quiz() {
           </Funnel.Step>
           <Funnel.Step name="로그인 유도">
             <LoginPrompt onNext={() => setStep('로그인')} />
+          </Funnel.Step>
+          <Funnel.Step name="뒤로가기">
+            <GoBackPrompt
+              onCancel={closeModal}
+              onConfirm={handleConfirmGoBack}
+            />
           </Funnel.Step>
           <Funnel.Step name="로그인">
             <Login closeModal={noop} openModal={noop} />

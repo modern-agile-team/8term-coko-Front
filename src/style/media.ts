@@ -1,7 +1,9 @@
 export const media = {
   /**
    * @example
-   * ${({ media }) => media.desktop} {
+   * import { media } from '@style/media';
+   *
+   * ${media.mobile} {
    *   padding: 3px;
    * }
    */

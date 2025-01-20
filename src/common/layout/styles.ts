@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { animations } from '@/style/animations';
 
 interface BaseStyleProps {
   $width?: string;
@@ -36,13 +37,14 @@ export const MenuBox = styled.div`
 export const HeaderBox = styled.header`
   display: flex;
   justify-content: flex-end;
+  position: fixed;
+  z-index: 1;
   gap: 20px;
   align-items: center;
   width: 294px;
   height: 42px;
-  position: fixed;
+  padding-top: 5px;
   padding-right: 20px;
-  z-index: 1;
 `;
 
 export const LogoBox = styled.div`
@@ -158,5 +160,90 @@ export const LoadingSpinner = styled.div`
     to {
       transform: rotate(360deg);
     }
+  }
+`;
+
+export const FlexContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+`;
+
+export const PromptContainer = styled.section`
+  animation: ${animations.fadeInScaleUp} 0.7s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 324px;
+  height: 387px;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px #e5e5e5;
+  text-align: center;
+`;
+
+export const PromptMessage = styled.div`
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 20px;
+    color: #000000;
+  }
+
+  p {
+    margin: 10px 0 0;
+    font-size: 16px;
+    color: #ff4949;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const GoBackPromptImg = styled.img`
+  width: 261px;
+  height: 159px;
+  margin-bottom: 20px;
+`;
+
+export const CancelButton = styled.button`
+  width: 200px;
+  padding: 10px 20px;
+  background-color: #49c0f8;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px #38a6dc;
+
+  &:hover {
+    background-color: #7fd6fa;
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(4px);
+  }
+`;
+
+export const ConfirmButton = styled.button`
+  width: 200px;
+  padding: 10px 20px;
+  color: #ee5555;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 6px;
+  border: none;
+  background: none;
+
+  &:hover {
+    color: #ff6666;
   }
 `;

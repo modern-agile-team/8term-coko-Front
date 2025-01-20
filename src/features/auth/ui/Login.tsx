@@ -7,7 +7,7 @@ import {
   SocialLoginButton,
   DashLineHr,
 } from './styles';
-import { LogoImg } from '@common/ui/style';
+import { LogoImg } from '@common/ui/styles';
 import handleLogin from '../service/handleLogin';
 
 interface LoginProps {

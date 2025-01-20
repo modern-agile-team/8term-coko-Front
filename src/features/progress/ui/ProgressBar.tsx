@@ -1,4 +1,4 @@
-import { ProgressBox, InnerProgress } from '../style';
+import { ProgressBox, InnerProgress } from '@features/progress/styles';
 import { CSSProperties } from 'react';
 
 interface ProgressBarProps {

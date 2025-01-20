@@ -72,6 +72,6 @@ export const useClientQuizStore = create<State & Actions>(set => ({
     set(() => ({
       currentPage: 0,
       userResponseAnswer: [''],
-      totalResults: [],
+      isCorrectList: [],
     })),
 }));

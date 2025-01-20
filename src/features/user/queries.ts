@@ -96,8 +96,14 @@ export const experienceQuery = {
 
 export const pointQuery = {
   patch: () => {
+    const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.patchPoint,
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: userKeys.all,
+        });
+      },
     });
   },
 };

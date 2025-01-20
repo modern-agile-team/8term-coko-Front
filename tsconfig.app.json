@@ -9,12 +9,12 @@
     "paths": {
       "@/*": ["*"],
       "@axios": ["axios"],
-      "@hooks*": ["hooks/*"],
-      "@features*": ["features/*"],
-      "@store*": ["store/*"],
-      "@utils*": ["utils/*"],
       "@common*": ["common/*"],
-      "@type*": ["types/*"]
+      "@features*": ["features/*"],
+      "@hooks*": ["hooks/*"],
+      "@store*": ["store/*"],
+      "@style*": ["style/*"],
+      "@utils*": ["utils/*"]
     },
 
     /* Bundler mode */

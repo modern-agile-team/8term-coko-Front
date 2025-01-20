@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import * as S from '@features/quiz/ui/styles';
 import { partProgressQuery, pointQuery } from '@features/user/queries';
-import { useTimeout } from '@modern-kit/react';
 import useUserStore from '@store/useUserStore';
 import { getImageUrl } from '@utils/getImageUrl';
 import { User } from '@/features/user/types';
@@ -18,13 +17,17 @@ export default function PartClear({ partId }: PartClearProps) {
 
   const navigate = useNavigate();
 
-  useTimeout(
-    () => {
-      updatePoint({ id: user.id, point: DEFAULT_POINT });
-      updatePartProgress({ userId: user.id, partId, partStatus: 'COMPLETED' });
-    },
-    { delay: 500 }
-  );
+  const handleNavigateToLearn = () => {
+    updatePoint({ id: user.id, point: DEFAULT_POINT });
+
+    updatePartProgress({
+      userId: user.id,
+      partId,
+      partStatus: 'COMPLETED',
+    });
+
+    navigate('/learn');
+  };
 
   return (
     <>
@@ -55,7 +58,7 @@ export default function PartClear({ partId }: PartClearProps) {
           $margin="0 88px 0 0"
           $isActive={isPointIdle && isProgressIdle}
           onClick={() => {
-            navigate('/learn');
+            handleNavigateToLearn();
           }}
         >
           메인으로
