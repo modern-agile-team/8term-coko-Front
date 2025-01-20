@@ -6,7 +6,8 @@ import OXSelector from '@/features/quiz/ui/OXSelector';
 import Question from '@/features/quiz/ui/Question';
 import Result from '@/features/quiz/ui/Result';
 import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
-import QuizTour from '@/features/tutorial/ui/QuizTour';
+import QuizTutorial from '@/features/tutorial/ui/QuizTutorial';
+
 import TutorialClear from '@/features/tutorial/ui/TutorialClear';
 import useModal from '@/hooks/useModal';
 import {
@@ -48,6 +49,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
 
   return (
     <>
+      <QuizTutorial category={category} />
       <ProgressSection id="progress-bar">
         <ProgressBar
           $maxWidth="100%"
@@ -93,7 +95,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
           제출
         </ResponseButton>
       </SubmitSection>
-      <QuizTour category={category} />
+
       <Modal isShow={isShow}>
         <SwitchCase
           value={caseNaem}
@@ -109,7 +111,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
             ),
             tutorialClear: <TutorialClear />,
           }}
-        ></SwitchCase>
+        />
       </Modal>
     </>
   );
