@@ -16,9 +16,7 @@ function App() {
       <Toaster position="top-right" />
       <QueryErrorBoundary>
         <Suspense fallback={<Loader />}>
-          <ErrorBoundary FallbackComponent={NotFound}>
-            <Router />
-          </ErrorBoundary>
+          <Router />
         </Suspense>
       </QueryErrorBoundary>
     </>

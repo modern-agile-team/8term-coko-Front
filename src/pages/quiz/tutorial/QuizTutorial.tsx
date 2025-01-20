@@ -6,7 +6,7 @@ import { AlignCenter, HeaderSection } from '@/pages/quiz/styles';
 
 import { useBeforeUnload } from '@modern-kit/react';
 
-export default function Tutorial() {
+export default function QuizTutorial() {
   const TutorialWithQuizzes = withQuizzes(TutorialContainer);
   useBeforeUnload();
 
