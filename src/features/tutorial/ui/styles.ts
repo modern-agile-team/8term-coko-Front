@@ -1,34 +1,15 @@
 import { calculateTutorialPopupPosition } from '@/features/tutorial/service/utils';
+import { animations } from '@/style/animations';
 import { media } from '@/style/media';
-import { css, keyframes, styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
-const slideInFromSide = keyframes`
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
 export const FocusedItemDiv = styled.div`
   position: absolute;
   background-color: rgb(128, 128, 128);
 `;
 
-const fadeInScaleUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8); 
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1); 
-  }
-`;
 export const TutorialClearWrapper = styled.div`
-  animation: ${fadeInScaleUp} 0.7s ease-out;
+  animation: ${animations.fadeInScaleUp} 0.7s ease-out;
   position: fixed;
   display: flex;
   flex-direction: column;
