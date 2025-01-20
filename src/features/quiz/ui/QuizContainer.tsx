@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
@@ -20,14 +20,17 @@ import TotalResults from '@features/user/ui/TotalResults';
 import PartClear from '@features/user/ui/PartClear';
 import isEqualArray from '@utils/isEqualArray';
 import type { Part, PartStatus } from '@features/learn/types';
-import type { Quiz } from '@features/quiz/types';
+import type { CaseByModal, Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 import {
   ProgressSection,
   SubmitSection,
   ResponseButton,
+  GoBackButtonWrapper,
 } from '@/pages/quiz/styles';
+import GoBackButton from '@/common/ui/GoBackButton';
+import GoBackPrompt from '@/common/layout/GoBackPrompt';
 
 interface QuizProps {
   partStatus: PartStatus;
@@ -58,8 +61,8 @@ export default function QuizContainer({
 
   const { Modal, closeModal, openModal, isShow } = useModal();
   const isQuizFinished = isCorrectList.length === quizzes?.length;
-  const { Funnel, setStep } = useFunnel('결과');
 
+  const [step, setStep] = useState<CaseByModal>('결과');
   useEffect(() => {
     if (isCorrectList.length === 2 && !isLoggedIn(user)) {
       setStep('로그인 유도');
@@ -78,10 +81,21 @@ export default function QuizContainer({
 
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
+  const handleGoBackClick = () => {
+    setStep('뒤로가기');
+    openModal();
+  };
 
+  const handleConfirmGoBack = () => {
+    closeModal();
+    window.history.back();
+  };
   return (
     <>
       <ProgressSection>
+        <GoBackButtonWrapper>
+          <GoBackButton onClick={handleGoBackClick} />
+        </GoBackButtonWrapper>
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
@@ -123,34 +137,37 @@ export default function QuizContainer({
         </ResponseButton>
       </SubmitSection>
       <Modal isShow={isShow}>
-        <Funnel>
-          <Funnel.Step name="결과">
-            <Result
-              partStatus={partStatus}
-              quizId={id}
-              isCorrect={isCorrectList[currentPage]}
-              answer={answer}
-              closeModal={closeModal}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="로그인 유도">
-            <LoginPrompt onNext={() => setStep('로그인')} />
-          </Funnel.Step>
-          <Funnel.Step name="로그인">
-            <Login closeModal={noop} openModal={noop} />
-          </Funnel.Step>
-          <Funnel.Step name="총결과">
-            <TotalResults
-              onNext={() => setStep('파트 클리어')}
-              quizzesLength={quizzes.length}
-              partId={partId}
-              partStatus={partStatus}
-            />
-          </Funnel.Step>
-          <Funnel.Step name="파트 클리어">
-            <PartClear partId={partId} />
-          </Funnel.Step>
-        </Funnel>
+        <SwitchCase
+          value={step}
+          caseBy={{
+            결과: (
+              <Result
+                partStatus={partStatus}
+                quizId={id}
+                isCorrect={isCorrectList[currentPage]}
+                answer={answer}
+                closeModal={closeModal}
+              />
+            ),
+            '로그인 유도': <LoginPrompt onNext={() => setStep('로그인')} />,
+            로그인: <Login closeModal={noop} openModal={noop} />,
+            총결과: (
+              <TotalResults
+                onNext={() => setStep('파트 클리어')}
+                quizzesLength={quizzes.length}
+                partId={partId}
+                partStatus={partStatus}
+              />
+            ),
+            '파트 클리어': <PartClear partId={partId} />,
+            뒤로가기: (
+              <GoBackPrompt
+                onCancel={closeModal}
+                onConfirm={handleConfirmGoBack}
+              />
+            ),
+          }}
+        />
       </Modal>
     </>
   );
