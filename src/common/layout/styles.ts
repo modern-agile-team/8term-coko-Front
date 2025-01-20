@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { animations } from '@/style/animations';
+import { media } from '@style/media';
 
 interface BaseStyleProps {
   $width?: string;
@@ -24,14 +25,30 @@ interface SortOptionLiProps extends BaseStyleProps {
   $height?: string;
 }
 
-export const MenuBox = styled.div`
+export const MenuBox = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 40px;
   position: fixed;
+  z-index: 100;
   background-color: #fff1d9;
   border-right: 7px solid #ffe8c7;
   height: 100%;
+
+  ${media.mobile} {
+    flex-direction: row;
+    gap: 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-right: none;
+    border-top: 5px solid #ffe8c7;
+    height: 82px;
+    width: 100%;
+    padding: 16px;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export const HeaderBox = styled.header`
@@ -50,6 +67,10 @@ export const HeaderBox = styled.header`
 export const LogoBox = styled.div`
   margin-top: 26px;
   margin-left: 39px;
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const OverRay = styled.div`

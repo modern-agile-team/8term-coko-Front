@@ -1,5 +1,5 @@
 import * as S from './styles';
-import { getImageUrl } from '../../utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
 import { useLocation } from 'react-router-dom';
 
 interface MenuItem {
@@ -18,7 +18,7 @@ export default function MenuItem({ id, url, icon, title }: MenuItem) {
       <S.MenuLink to={`/${url}`}>
         <S.MenuButton $activeStyle={isActive}>
           <S.MenuIcon src={getImageUrl(icon)} alt={`${title} 아이콘`} />
-          {title}
+          <span>{title}</span>
         </S.MenuButton>
       </S.MenuLink>
     </S.MenuButtonWrapper>

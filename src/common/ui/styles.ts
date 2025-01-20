@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@style/media';
 import { animations } from '@/style/animations';
 import { Link } from 'react-router-dom';
 
@@ -20,13 +21,25 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
   border: 2px solid
     ${({ $activeStyle }) => ($activeStyle ? '#A69782' : '#FFE8C7')};
   background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#F0D8A7')};
-  margin-left: 16px;
-  margin-right: 20px;
+  margin: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-left: 30px;
   gap: 25px;
+
+  ${media.mobile} {
+    width: 48px;
+    height: 48px;
+    font-size: 0;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+
+    span {
+      display: none;
+    }
+  }
 `;
 
 export const MenuLink = styled(Link)`
@@ -36,6 +49,11 @@ export const MenuLink = styled(Link)`
 export const MenuIcon = styled.img`
   width: 27px;
   height: 26px;
+
+  ${media.mobile} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const IconWrapper = styled.div<{ $color: string }>`
