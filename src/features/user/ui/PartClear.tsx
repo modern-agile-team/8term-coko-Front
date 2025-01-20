@@ -17,6 +17,32 @@ export default function PartClear({ partId }: PartClearProps) {
 
   const navigate = useNavigate();
 
+  // 포인트 업데이트 함수
+  const handleUpdatePoint = () => {
+    updatePoint({ id: user.id, point: DEFAULT_POINT });
+  };
+
+  // 파트 진행 상태 업데이트 함수
+  const handleUpdatePartProgress = () => {
+    updatePartProgress({
+      userId: user.id,
+      partId,
+      partStatus: 'COMPLETED',
+    });
+  };
+
+  // learn 페이지로 이동 함수
+  const handleNavigateToLearn = () => {
+    navigate('/learn');
+  };
+
+  // 메인 핸들러 함수
+  const handleRedirect = () => {
+    handleUpdatePoint();
+    handleUpdatePartProgress();
+    handleNavigateToLearn();
+  };
+
   return (
     <>
       <S.CompensationSection $backgroundColor="#F0DAAB" $boxShadow="#E5C892">
@@ -46,13 +72,7 @@ export default function PartClear({ partId }: PartClearProps) {
           $margin="0 88px 0 0"
           $isActive={isPointIdle && isProgressIdle}
           onClick={() => {
-            updatePoint({ id: user.id, point: DEFAULT_POINT });
-            updatePartProgress({
-              userId: user.id,
-              partId,
-              partStatus: 'COMPLETED',
-            });
-            navigate('/learn');
+            handleRedirect;
           }}
         >
           메인으로
