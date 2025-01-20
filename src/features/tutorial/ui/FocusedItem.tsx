@@ -1,11 +1,12 @@
+import { OverRayDiv } from '@/common/layout/style';
 import { calculatePosition } from '@/features/tutorial/service/utils';
 import { PopupPosition } from '@/features/tutorial/types';
 import {
   TutorialPopupWrapper,
-  TutorialOverRayDiv,
   FocusedItemDiv,
 } from '@/features/tutorial/ui/styles';
 import useOutsideClick from '@/hooks/useOutsideClick';
+import ModalPortal from '@/ModalPortal';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { useEffect } from 'react';
 
@@ -40,15 +41,22 @@ export default function FocusedItem({
       document.body.style.overflow = 'auto';
     };
   }, []);
+
   return (
     <>
-      <TutorialPopupWrapper ref={FocusedItemRef} $popupPosition={rect}>
-        <p>{description}</p>
-        <img src={getImageUrl('튜토리얼.svg')} />
-      </TutorialPopupWrapper>
-      <TutorialOverRayDiv>
-        <FocusedItemDiv style={computedStyle} />
-      </TutorialOverRayDiv>
+      <ModalPortal>
+        <TutorialPopupWrapper ref={FocusedItemRef} $popupPosition={rect}>
+          <p>{description}</p>
+          <img src={getImageUrl('튜토리얼.svg')} />
+        </TutorialPopupWrapper>
+
+        <OverRayDiv
+          $backgroundColor="rgba(0, 0, 0, 0.7)"
+          $mixBlendMode=" hard-light"
+        >
+          <FocusedItemDiv style={computedStyle} />
+        </OverRayDiv>
+      </ModalPortal>
     </>
   );
 }

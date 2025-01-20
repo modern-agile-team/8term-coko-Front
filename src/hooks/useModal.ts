@@ -16,6 +16,7 @@ const useModal = ({ enable = false }: useModalProps = {}) => {
   const [isShow, setIsShow] = useState<boolean>(enable);
   const openModal = () => setIsShow(true);
   const closeModal = () => setIsShow(false);
+
   return { isShow, openModal, closeModal, Modal };
 };
 export default useModal;

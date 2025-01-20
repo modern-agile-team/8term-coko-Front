@@ -17,19 +17,6 @@ export const FocusedItemDiv = styled.div`
   background-color: rgb(128, 128, 128);
 `;
 
-export const TutorialOverRayDiv = styled.div`
-  mix-blend-mode: hard-light;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  mix-blend-mode: hard-light;
-  z-index: 100;
-`;
 const fadeInScaleUp = keyframes`
   0% {
     opacity: 0;
