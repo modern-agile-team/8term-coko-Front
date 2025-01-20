@@ -9,10 +9,10 @@ export interface Quiz {
   answerChoice: string[];
 }
 
-export type CaseByModal =
-  | '결과'
-  | '로그인 유도'
-  | '로그인'
-  | '총결과'
-  | '파트 클리어'
-  | '뒤로가기';
+export type ModalType =
+  | 'result'
+  | 'loginPrompt'
+  | 'login'
+  | 'totalResult'
+  | 'partClear'
+  | 'goBack';

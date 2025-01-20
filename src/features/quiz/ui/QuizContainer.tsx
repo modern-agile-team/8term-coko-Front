@@ -20,7 +20,7 @@ import TotalResults from '@features/user/ui/TotalResults';
 import PartClear from '@features/user/ui/PartClear';
 import isEqualArray from '@utils/isEqualArray';
 import type { Part, PartStatus } from '@features/learn/types';
-import type { CaseByModal, Quiz } from '@features/quiz/types';
+import type { ModalType, Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 import {
@@ -62,13 +62,13 @@ export default function QuizContainer({
   const { Modal, closeModal, openModal, isShow } = useModal();
   const isQuizFinished = isCorrectList.length === quizzes?.length;
 
-  const [step, setStep] = useState<CaseByModal>('결과');
+  const [step, setStep] = useState<ModalType>('result');
   useEffect(() => {
     if (isCorrectList.length === 2 && !isLoggedIn(user)) {
-      setStep('로그인 유도');
+      setStep('loginPrompt');
     }
     if (isQuizFinished) {
-      setStep('총결과');
+      setStep('totalResult');
     }
     if (isCorrectList.length !== 0) {
       openModal();
@@ -82,7 +82,7 @@ export default function QuizContainer({
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
   const handleGoBackClick = () => {
-    setStep('뒤로가기');
+    setStep('goBack');
     openModal();
   };
 
@@ -140,7 +140,7 @@ export default function QuizContainer({
         <SwitchCase
           value={step}
           caseBy={{
-            결과: (
+            result: (
               <Result
                 partStatus={partStatus}
                 quizId={id}
@@ -149,18 +149,18 @@ export default function QuizContainer({
                 closeModal={closeModal}
               />
             ),
-            '로그인 유도': <LoginPrompt onNext={() => setStep('로그인')} />,
-            로그인: <Login closeModal={noop} openModal={noop} />,
-            총결과: (
+            loginPrompt: <LoginPrompt onNext={() => setStep('login')} />,
+            login: <Login closeModal={noop} openModal={noop} />,
+            totalResult: (
               <TotalResults
-                onNext={() => setStep('파트 클리어')}
+                onNext={() => setStep('partClear')}
                 quizzesLength={quizzes.length}
                 partId={partId}
                 partStatus={partStatus}
               />
             ),
-            '파트 클리어': <PartClear partId={partId} />,
-            뒤로가기: (
+            partClear: <PartClear partId={partId} />,
+            goBack: (
               <GoBackPrompt
                 onCancel={closeModal}
                 onConfirm={handleConfirmGoBack}
