@@ -4,7 +4,7 @@ import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useDnDStore } from '@store/useDnDStore';
 import compact from '@utils/compact';
 import type { Quiz } from '@features/quiz/types';
-import usePosition from '@/features/tutorial/service/hooks';
+import { usePosition } from '@/features/tutorial/service/hooks';
 
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];

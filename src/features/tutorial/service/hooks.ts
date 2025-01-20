@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 
 type rects = Record<string, DOMRect>;
-const usePosition = () => {
+export const usePosition = () => {
   const [rects, setRects] = useState<rects>({});
 
   // refCallback 생성
@@ -23,5 +23,3 @@ const usePosition = () => {
 
   return { rects, getClientRectRefCallback, getPosition };
 };
-
-export default usePosition;

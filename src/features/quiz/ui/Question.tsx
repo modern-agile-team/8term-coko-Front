@@ -12,7 +12,7 @@ import {
   replaceEmptyWithHTMLElement,
 } from '@/features/quiz/service/quizUtils';
 import { useCodeHighlight } from '@/features/quiz/service/hooks';
-import usePosition from '@/features/tutorial/service/hooks';
+import { usePosition } from '@/features/tutorial/service/hooks';
 
 interface QuestionProps {
   title: Quiz['title'];

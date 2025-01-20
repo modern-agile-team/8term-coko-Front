@@ -1,5 +1,5 @@
 import { OverRayDiv } from '@/common/layout/styles';
-import usePosition from '@/features/tutorial/service/hooks';
+import { usePosition } from '@/features/tutorial/service/hooks';
 import { PopupPosition } from '@/features/tutorial/types';
 import {
   TutorialPopupWrapper,
@@ -8,7 +8,6 @@ import {
 import useOutsideClick from '@/hooks/useOutsideClick';
 import ModalPortal from '@/ModalPortal';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { useEffect } from 'react';
 
 interface FocusedItemProps {
   id: string;

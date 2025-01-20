@@ -1,4 +1,4 @@
-import usePosition from '@/features/tutorial/service/hooks';
+import { usePosition } from '@/features/tutorial/service/hooks';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import { ShortAnswerSection, ShortAnswerInput, Img } from './styles';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
