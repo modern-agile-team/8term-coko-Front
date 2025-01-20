@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import authApis from '@features/auth/apis';
 
 const authKeys = {
@@ -27,9 +27,10 @@ export const authQuery = {
           throw error;
         }
       },
-      throwOnError: false,
       staleTime: 0,
       gcTime: 0,
+      throwOnError: false,
+      refetchOnWindowFocus: false,
       retry: false,
     });
   },

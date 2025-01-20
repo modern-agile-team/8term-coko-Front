@@ -1,9 +1,8 @@
-import * as globalS from '@/style/style';
+import * as globalS from '@style/styles';
 import { useMemo } from 'react';
-import { QuizBox, ScrollableContainer } from './style';
+import { QuizBox, ScrollableContainer } from './styles';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
 import MenuBar from '@common/layout/MenuBar';
-import CokoLogo from '@common/layout/CokoLogo';
 import Header from '@common/layout/Header';
 import DailyQuest from '@features/quest/ui/DailyQuest';
 import ProgressBar from '@features/progress/ui/ProgressBar';
@@ -40,7 +39,6 @@ export default function Learn() {
     <>
       <globalS.Wrapper>
         <globalS.LeftSection>
-          <CokoLogo />
           <MenuBar />
         </globalS.LeftSection>
         <globalS.RightSection>

@@ -4,7 +4,7 @@ export const RANKING_OPTIONS = {
     dataField: 'point', // 포인트 기준
   },
   레벨순: {
-    icon: '과일바구니.svg',
+    icon: '레벨.svg',
     dataField: 'level', // 레벨 기준
   },
 } as const;

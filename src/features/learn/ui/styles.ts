@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '@/style/media';
+import { media } from '@style/media';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 export const SectionBoxWrapper = styled.div`

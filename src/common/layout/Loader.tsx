@@ -1,4 +1,4 @@
-import { LoadingSpinner, LoadingWrapper } from '@common/layout/style';
+import { LoadingSpinner, LoadingWrapper } from '@common/layout/styles';
 
 export default function Loader() {
   return (

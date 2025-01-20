@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import * as globalS from '@/style/style';
+import * as globalS from '@style/styles';
 import * as S from './styles';
-import CokoLogo from '@common/layout/CokoLogo';
 import Header from '@common/layout/Header';
 import MenuBar from '@common/layout/MenuBar';
 import ItemContainer from '@features/store/ui/ItemContainer';
@@ -35,7 +34,6 @@ export default function Store() {
     <>
       <globalS.Wrapper>
         <globalS.LeftSection>
-          <CokoLogo />
           <MenuBar />
         </globalS.LeftSection>
         <globalS.RightSection>

@@ -2,8 +2,7 @@ import Header from '@/common/layout/Header';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
 import { useGetLocationState } from '@/features/quiz/service/hooks';
 import QuizContainer from '@/features/quiz/ui/QuizContainer';
-import { HeaderSection } from '@/pages/quiz/styles';
-import { AlignCenter } from '@/style/LayOut';
+import { AlignCenter, HeaderSection } from '@/pages/quiz/styles';
 
 export default function Quiz() {
   const QuizWithQuizzes = withQuizzes(QuizContainer);

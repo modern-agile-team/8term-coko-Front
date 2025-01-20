@@ -1,6 +1,6 @@
-import { useLocation } from 'react-router-dom';
-import { MenuButtonWrapper, MenuLink, MenuButton, MenuIcon } from './style';
+import * as S from './styles';
 import { getImageUrl } from '../../utils/getImageUrl';
+import { useLocation } from 'react-router-dom';
 
 interface MenuItem {
   id: number;
@@ -14,13 +14,13 @@ export default function MenuItem({ id, url, icon, title }: MenuItem) {
   const isActive = location.pathname === `/${url}`;
 
   return (
-    <MenuButtonWrapper key={id}>
-      <MenuLink to={`/${url}`}>
-        <MenuButton $activeStyle={isActive}>
-          <MenuIcon src={getImageUrl(icon)} alt={`${title} 아이콘`} />
+    <S.MenuButtonWrapper key={id}>
+      <S.MenuLink to={`/${url}`}>
+        <S.MenuButton $activeStyle={isActive}>
+          <S.MenuIcon src={getImageUrl(icon)} alt={`${title} 아이콘`} />
           {title}
-        </MenuButton>
-      </MenuLink>
-    </MenuButtonWrapper>
+        </S.MenuButton>
+      </S.MenuLink>
+    </S.MenuButtonWrapper>
   );
 }

@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { getImageUrl } from '@utils/getImageUrl';
-import * as globalS from '@/style/style';
+import * as globalS from '@style/styles';
 import * as S from './styles';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
-import CokoLogo from '@common/layout/CokoLogo';
 import RankingContainer from '@features/ranking/ui/RankingContainer';
-import { RANKING_OPTIONS } from '@features/ranking/constant';
+import { RANKING_OPTIONS } from '@features/ranking/constants';
 
 export default function Ranking() {
   const [selectedOption, setSelectedOption] =
@@ -51,7 +50,6 @@ export default function Ranking() {
     <>
       <globalS.Wrapper>
         <globalS.LeftSection>
-          <CokoLogo />
           <MenuBar />
         </globalS.LeftSection>
         <globalS.RightSection>
