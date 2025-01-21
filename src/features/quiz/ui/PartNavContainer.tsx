@@ -87,7 +87,7 @@ export default function PartNavContainer({
                       onClick={e => e.stopPropagation()}
                       $bgColor={COLORS[(globalIndex % 4) + 1]}
                     >
-                      {part.name}
+                      <h3>{part.name}</h3>
                       <GoToQuizButton
                         onClick={() => {
                           navigate('/quiz', {

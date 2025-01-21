@@ -28,8 +28,9 @@ export default function KeycapAdventureIntro({
     <>
       <S.LegendKeycapMessageImg
         src={getImageUrl(messageFileNames[messageIndex])}
+        alt={messageFileNames[messageIndex]}
       />
-      <S.HandsUpCokoImg src={getImageUrl('손든-코코.svg')} />
+      <S.HandsUpCokoImg src={getImageUrl('손든-코코.svg')} alt="손든 코코" />
     </>
   );
 }

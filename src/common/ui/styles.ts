@@ -46,10 +46,6 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
     padding: 0;
     gap: 0;
     justify-content: center;
-
-    span {
-      display: none;
-    }
   }
 `;
 

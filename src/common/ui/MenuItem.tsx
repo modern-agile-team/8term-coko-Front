@@ -16,9 +16,9 @@ export default function MenuItem({ id, url, icon, title }: MenuItem) {
   return (
     <S.MenuButtonWrapper key={id}>
       <S.MenuLink to={`/${url}`}>
-        <S.MenuButton $activeStyle={isActive}>
+        <S.MenuButton $activeStyle={isActive} aria-label={title}>
           <S.MenuIcon src={getImageUrl(icon)} alt={`${title} 아이콘`} />
-          <span>{title}</span>
+          <strong>{title}</strong>
         </S.MenuButton>
       </S.MenuLink>
     </S.MenuButtonWrapper>
