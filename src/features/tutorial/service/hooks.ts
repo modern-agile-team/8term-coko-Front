@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import { useCallback } from 'react';
+import { useRectStore } from './../../../store/useRectStore';
 
-type rects = Record<string, DOMRect>;
-export const usePosition = () => {
-  const [rects, setRects] = useState<rects>({});
+export const useElementRect = () => {
+  const { setRect } = useRectStore();
 
   // refCallback 생성
   const getClientRectRefCallback = useCallback(
@@ -11,15 +11,10 @@ export const usePosition = () => {
 
       const rect = node.getBoundingClientRect();
       const id = node.id;
-      setRects(prev => ({
-        ...prev,
-        [id]: rect,
-      }));
+      setRect(id, rect);
     },
     []
   );
 
-  const getPosition = useCallback((id: string) => rects[id] || null, [rects]);
-
-  return { rects, getClientRectRefCallback, getPosition };
+  return { getClientRectRefCallback };
 };

@@ -6,3 +6,5 @@ export interface TutorialStep {
   nextStep: string;
   description: string;
 }
+
+export type rects = Record<string, DOMRect>;

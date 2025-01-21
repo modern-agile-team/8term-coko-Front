@@ -1,12 +1,12 @@
 import { Img, OXButtonSection } from './styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
-import { usePosition } from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/tutorial/service/hooks';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 
 export default function OXSelector() {
   //OX버튼을 눌러 답을 제출함
   const { userResponseAnswer, setUserResponseAnswer } = useClientQuizStore();
-  const { getClientRectRefCallback } = usePosition();
+  const { getClientRectRefCallback } = useElementRect();
 
   return (
     <>

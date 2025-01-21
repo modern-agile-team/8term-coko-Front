@@ -1,14 +1,4 @@
-type GetPosition = (id: string) => DOMRect | null;
 import { isMobile } from '@modern-kit/utils';
-
-export const getPosition: GetPosition = id => {
-  const element = document.getElementById(id);
-  if (!element) return null;
-
-  const rect = element.getBoundingClientRect();
-
-  return rect;
-};
 
 type Position = {
   top: string;

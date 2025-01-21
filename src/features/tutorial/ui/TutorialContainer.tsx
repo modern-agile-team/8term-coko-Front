@@ -6,7 +6,7 @@ import OXSelector from '@/features/quiz/ui/OXSelector';
 import Question from '@/features/quiz/ui/Question';
 import Result from '@/features/quiz/ui/Result';
 import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
-import usePosition from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/tutorial/service/hooks';
 import QuizTutorial from '@/features/tutorial/ui/QuizTutorial';
 
 import TutorialClear from '@/features/tutorial/ui/TutorialClear';
@@ -47,11 +47,11 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
   }, [isCorrectList]);
   useUnmount(() => reset());
   const { Modal, closeModal, isShow, openModal } = useModal();
-  const { getClientRectRefCallback } = usePosition();
+  const { getClientRectRefCallback } = useElementRect();
 
   return (
     <>
-      <ProgressSection id="progressbar" ref={getClientRectRefCallback}>
+      <ProgressSection id="progress-bar" ref={getClientRectRefCallback}>
         <ProgressBar
           $maxWidth="100%"
           $height="100%"
@@ -76,6 +76,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
       <SubmitSection>
         <ResponseButton
           id="skip-button"
+          ref={getClientRectRefCallback}
           onClick={() => {
             pushIsCorrectList(false);
             openModal();
@@ -86,6 +87,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
 
         <ResponseButton
           id="submit-button"
+          ref={getClientRectRefCallback}
           disabled={isQuizAnswered()}
           $disabled={isQuizAnswered()}
           onClick={() => {

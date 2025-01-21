@@ -1,5 +1,4 @@
 import { OverRayDiv } from '@/common/layout/styles';
-import { usePosition } from '@/features/tutorial/service/hooks';
 import { PopupPosition } from '@/features/tutorial/types';
 import {
   TutorialPopupWrapper,
@@ -8,6 +7,7 @@ import {
 import useOutsideClick from '@/hooks/useOutsideClick';
 import ModalPortal from '@/ModalPortal';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { useRectStore } from './../../../store/useRectStore';
 
 interface FocusedItemProps {
   id: string;
@@ -21,10 +21,9 @@ export default function FocusedItem({
   id,
   description,
 }: FocusedItemProps) {
-  const { rects, getPosition } = usePosition();
+  const { getRectById } = useRectStore();
   const FocusedItemRef = useOutsideClick(onNext);
-  const rect = getPosition(id);
-
+  const rect = getRectById(id);
   const computedStyle = rect
     ? {
         width: `${rect.width}px`,
@@ -33,7 +32,7 @@ export default function FocusedItem({
         left: `${rect.left}px`,
       }
     : undefined;
-  console.log(rects);
+
   return (
     <>
       <ModalPortal>

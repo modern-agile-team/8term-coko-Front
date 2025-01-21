@@ -6,7 +6,7 @@ import {
 } from './styles';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import type { Quiz } from '@features/quiz/types';
-import { usePosition } from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/tutorial/service/hooks';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 interface MultipleChoiceProps {
@@ -14,7 +14,7 @@ interface MultipleChoiceProps {
 }
 export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
   const { userResponseAnswer, setUserResponseAnswer } = useClientQuizStore();
-  const { getClientRectRefCallback } = usePosition();
+  const { getClientRectRefCallback } = useElementRect();
 
   return (
     <>
