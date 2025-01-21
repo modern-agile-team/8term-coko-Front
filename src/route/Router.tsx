@@ -1,6 +1,8 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
 import NotFound from '@features/error/ui/NotFound';
+import QuizTutorial from '@/pages/quiz/tutorial/QuizTutorial';
+import QuizErrorBoundary from '@/features/error/ui/QuizErrorBoundary';
 
 const Learn = lazy(() => import('@/pages/learn/Learn'));
 const Quest = lazy(() => import('@/pages/quest/Quest'));
@@ -16,9 +18,17 @@ export default function Router() {
       <Route path="/learn" element={<Learn />} />
       <Route path="/quest" element={<Quest />} />
       <Route path="/ranking" element={<Ranking />} />
-      <Route path="/quiz" element={<Quiz />} />
+      <Route
+        path="/quiz"
+        element={
+          <QuizErrorBoundary>
+            <Quiz />
+          </QuizErrorBoundary>
+        }
+      />
       <Route path="/store" element={<Store />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/quiz/tutorial" element={<QuizTutorial />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -1,9 +1,11 @@
+import { useElementRect } from '@/features/tutorial/service/hooks';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
 import { ShortAnswerSection, ShortAnswerInput, Img } from './styles';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 
 export default function ShortAnswer() {
   const { setUserResponseAnswer } = useClientQuizStore();
+  const { getClientRectRefCallback } = useElementRect();
 
   return (
     <>
@@ -15,7 +17,9 @@ export default function ShortAnswer() {
           alt="키보드 키캡 1"
         />
         <ShortAnswerInput
+          id="short-answer"
           type="text"
+          ref={getClientRectRefCallback}
           onChange={e => {
             setUserResponseAnswer(e.target.value);
           }}

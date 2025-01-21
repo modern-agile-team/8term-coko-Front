@@ -8,3 +8,11 @@ export interface Quiz {
   category: 'COMBINATION' | 'MULTIPLE_CHOICE' | 'OX_SELECTOR' | 'SHORT_ANSWER';
   answerChoice: string[];
 }
+
+export type ModalType =
+  | 'result'
+  | 'loginPrompt'
+  | 'login'
+  | 'totalResult'
+  | 'partClear'
+  | 'goBack';

@@ -13,11 +13,12 @@ interface Actions {
   spliceUserResponseAnswer: (choiceIndex: number) => void;
   swapUserResponseAnswer: (index1: number, index2: number) => void;
   resetUserResponseAnswer: () => void;
+  isQuizAnswered: () => boolean;
   pushIsCorrectList: (result: boolean) => void;
   reset: () => void;
 }
 
-export const useClientQuizStore = create<State & Actions>(set => ({
+export const useClientQuizStore = create<State & Actions>((set, get) => ({
   /** 페이지 전역상태*/
   currentPage: 0,
   nextPage: () => set(state => ({ currentPage: state.currentPage + 1 })),
@@ -47,6 +48,10 @@ export const useClientQuizStore = create<State & Actions>(set => ({
     }),
   //유저 응답 리셋
   resetUserResponseAnswer: () => set(() => ({ userResponseAnswer: [''] })),
+  isQuizAnswered: () => {
+    const { userResponseAnswer } = get();
+    return userResponseAnswer[0] === '';
+  },
   //유저 응답 순서 교환
   swapUserResponseAnswer: (index1, index2) =>
     set(state => {

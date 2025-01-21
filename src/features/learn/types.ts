@@ -11,4 +11,9 @@ export interface Part {
   partStatus: PartStatus;
 }
 
-export type PartStatus = 'LOCKED' | 'STARTED' | 'IN_PROGRESS' | 'COMPLETED';
+export type PartStatus =
+  | 'LOCKED'
+  | 'STARTED'
+  | 'IN_PROGRESS'
+  | 'COMPLETED'
+  | null;

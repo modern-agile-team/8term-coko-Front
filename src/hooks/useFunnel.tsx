@@ -19,6 +19,7 @@ interface FunnelComponent extends FC<FunnelProps> {
 }
 
 type UseFunnelReturn<T> = {
+  step: T;
   setStep: (step: T) => void;
   Funnel: FunnelComponent;
 };
@@ -73,6 +74,6 @@ const useFunnel = <T,>(defaultStep: T): UseFunnelReturn<T> => {
   };
 
   Funnel.Step = Step;
-  return { setStep, Funnel };
+  return { step, setStep, Funnel };
 };
 export default useFunnel;

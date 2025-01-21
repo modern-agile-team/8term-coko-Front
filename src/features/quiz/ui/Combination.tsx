@@ -4,6 +4,7 @@ import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useDnDStore } from '@store/useDnDStore';
 import compact from '@utils/compact';
 import type { Quiz } from '@features/quiz/types';
+import { useElementRect } from '@/features/tutorial/service/hooks';
 
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];
@@ -17,6 +18,7 @@ export default function Combination({
   const { userResponseAnswer, pushUserResponseAnswer, setUserResponseAtIndex } =
     useClientQuizStore();
   const { setDragStartItem, drop } = useDnDStore();
+  const { getClientRectRefCallback } = useElementRect();
 
   useEffect(() => {
     for (let i = 0; i < answer.length; i++) {
@@ -48,7 +50,7 @@ export default function Combination({
 
   return (
     <>
-      <CombinationSection>
+      <CombinationSection id="combination" ref={getClientRectRefCallback}>
         {answerChoice.map((value, index) => {
           const isSelect = userResponseAnswer.includes(value);
           return isSelect ? (
