@@ -66,7 +66,7 @@ export const HeaderBox = styled.header`
 
 export const LogoBox = styled.div`
   margin-top: 26px;
-  margin-left: 39px;
+  align-self: center;
 
   ${media.mobile} {
     display: none;

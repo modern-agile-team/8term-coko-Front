@@ -21,7 +21,7 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
   border: 2px solid
     ${({ $activeStyle }) => ($activeStyle ? '#A69782' : '#FFE8C7')};
   background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#F0D8A7')};
-  margin: 0;
+  margin: 0 16px 0 16px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -33,6 +33,7 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
     height: 48px;
     font-size: 0;
     padding: 0;
+    margin: 0;
     gap: 0;
     justify-content: center;
 
