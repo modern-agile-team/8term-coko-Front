@@ -1,6 +1,6 @@
 import * as globalS from '@style/styles';
+import * as S from './styles';
 import { useMemo } from 'react';
-import { QuizBox, ScreenReaderOnlyTitle, ScrollableContainer } from './styles';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
@@ -49,27 +49,28 @@ export default function Learn() {
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <ScreenReaderOnlyTitle>
+        <S.ScreenReaderOnlyTitle>
           코코와 함께 코딩 마스터하기!
-        </ScreenReaderOnlyTitle>
-        <ProgressBar
-          $progress={progress}
-          $maxProgress={maxProgress}
-          $maxWidth="639px"
-          $height="16px"
-          $boxBgColor="#85705F"
-          $innerBgColor="#BFD683"
-          style={{ position: 'fixed', marginTop: '36px' }}
-        />
-        <ScrollableContainer $show={showComponents}>
+        </S.ScreenReaderOnlyTitle>
+        <S.ProgressBarWrapper>
+          <ProgressBar
+            $progress={progress}
+            $maxProgress={maxProgress}
+            $maxWidth="639px"
+            $height="16px"
+            $boxBgColor="#85705F"
+            $innerBgColor="#BFD683"
+          />
+        </S.ProgressBarWrapper>
+        <S.ScrollableContainer $show={showComponents}>
           <SelectSection />
-        </ScrollableContainer>
-        <QuizBox>
+        </S.ScrollableContainer>
+        <S.SectionGroup>
           <PartNavContainer
             section={section}
             previousPartsCounts={previousPartsCounts}
           />
-        </QuizBox>
+        </S.SectionGroup>
       </globalS.Layout>
     </>
   );
