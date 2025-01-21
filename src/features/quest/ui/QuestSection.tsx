@@ -24,6 +24,7 @@ export default function QuestSection({
             <S.QuestIcon
               src={getImageUrl('폭탄-아이콘.svg')}
               {...questUrlProps}
+              alt="폭탄 아이콘"
             />
             <S.QuestHeading {...questUrlProps}>{title}</S.QuestHeading>
           </S.QuestContent>

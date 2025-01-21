@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '@style/media';
 import { animations } from '@/style/animations';
 import { Link } from 'react-router-dom';
 
@@ -7,35 +8,55 @@ interface UserInfoButtonProps {
   $boxShadow: string;
 }
 
-export const MenuButtonWrapper = styled.nav`
+export const MenuButtonWrapper = styled.div`
   display: inline-block;
 `;
 
-export const MenuButton = styled.button<{ $activeStyle: boolean }>`
+export const MenuLink = styled(Link)`
+  text-decoration: none;
+  display: block;
   width: 193px;
   height: 42px;
+  margin: 0 16px;
+
+  ${media.mobile} {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+  }
+`;
+
+export const MenuButton = styled.button<{ $activeStyle: boolean }>`
+  width: 100%;
+  height: 100%;
   font-size: 15px;
   color: #fff;
   border-radius: 8px;
   border: 2px solid
     ${({ $activeStyle }) => ($activeStyle ? '#A69782' : '#FFE8C7')};
   background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#F0D8A7')};
-  margin-left: 16px;
-  margin-right: 20px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding-left: 30px;
   gap: 25px;
-`;
 
-export const MenuLink = styled(Link)`
-  text-decoration: none;
+  ${media.mobile} {
+    font-size: 0;
+    padding: 0;
+    gap: 0;
+    justify-content: center;
+  }
 `;
 
 export const MenuIcon = styled.img`
   width: 27px;
   height: 26px;
+
+  ${media.mobile} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 export const IconWrapper = styled.div<{ $color: string }>`

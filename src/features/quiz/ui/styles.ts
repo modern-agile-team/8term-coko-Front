@@ -501,9 +501,9 @@ export const SectionWrapper = styled.div`
 `;
 
 // 섹션 제목(이름)
-export const SectionTitle = styled.h4`
+export const SectionTitle = styled.h2`
   width: 693px;
-  font-size: 17px;
+  font-size: 20px;
   color: #ffffff;
   text-align: center;
   display: flex;
@@ -597,6 +597,10 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
     border: 0.8em solid transparent;
     border-bottom-color: ${({ $bgColor }) => $bgColor};
     transform: translateX(-50%);
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 300;
   }
 `;
 
