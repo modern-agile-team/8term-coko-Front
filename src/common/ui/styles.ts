@@ -8,20 +8,33 @@ interface UserInfoButtonProps {
   $boxShadow: string;
 }
 
-export const MenuButtonWrapper = styled.nav`
+export const MenuButtonWrapper = styled.div`
   display: inline-block;
 `;
 
-export const MenuButton = styled.button<{ $activeStyle: boolean }>`
+export const MenuLink = styled(Link)`
+  text-decoration: none;
+  display: block;
   width: 193px;
   height: 42px;
+  margin: 0 16px;
+
+  ${media.mobile} {
+    width: 48px;
+    height: 48px;
+    margin: 0;
+  }
+`;
+
+export const MenuButton = styled.button<{ $activeStyle: boolean }>`
+  width: 100%;
+  height: 100%;
   font-size: 15px;
   color: #fff;
   border-radius: 8px;
   border: 2px solid
     ${({ $activeStyle }) => ($activeStyle ? '#A69782' : '#FFE8C7')};
   background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#F0D8A7')};
-  margin: 0 16px 0 16px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -29,11 +42,8 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
   gap: 25px;
 
   ${media.mobile} {
-    width: 48px;
-    height: 48px;
     font-size: 0;
     padding: 0;
-    margin: 0;
     gap: 0;
     justify-content: center;
 
@@ -41,10 +51,6 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
       display: none;
     }
   }
-`;
-
-export const MenuLink = styled(Link)`
-  text-decoration: none;
 `;
 
 export const MenuIcon = styled.img`
