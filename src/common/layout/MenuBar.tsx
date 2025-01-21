@@ -8,7 +8,7 @@ export default function MenuBar() {
   return (
     <MenuBox>
       <LogoBox>
-        <LogoImg src={getImageUrl('로고.svg')} />
+        <LogoImg src={getImageUrl('로고.svg')} alt="로고" />
       </LogoBox>
       {MENUS.map(menu => (
         <MenuItem

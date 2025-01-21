@@ -1,6 +1,6 @@
 import * as globalS from '@style/styles';
 import { useMemo } from 'react';
-import { ScrollableContainer } from './styles';
+import { ScreenReaderOnlyTitle, ScrollableContainer } from './styles';
 import { useScrollVisibility } from '@hooks/useScrollVisibility';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
@@ -49,6 +49,9 @@ export default function Learn() {
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
+        <ScreenReaderOnlyTitle>
+          코코와 함께 코딩 마스터하기!
+        </ScreenReaderOnlyTitle>
         <ProgressBar
           $progress={progress}
           $maxProgress={maxProgress}

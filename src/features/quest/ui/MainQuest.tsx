@@ -30,12 +30,18 @@ export default function MainQuest() {
         const { progressBarColor, rewardIcon, progressBarIcon } =
           getMainUIProps(quest.progress, quest.maxProgress);
 
+        const isComplete = quest.progress >= quest.maxProgress;
+
         return (
           <S.QuestWrapper key={quest.id} {...questUrlProps}>
             <S.QuestsTitle {...questUrlProps}>{quest.title}</S.QuestsTitle>
             <S.ProgressBarWrapper {...questUrlProps}>
               {progressBarIcon && (
-                <S.ProgressBarIcon src={progressBarIcon} {...questUrlProps} />
+                <S.ProgressBarIcon
+                  src={progressBarIcon}
+                  {...questUrlProps}
+                  alt="메인 퀘스트 도장"
+                />
               )}
               <ProgressBar
                 $progress={quest.progress}
@@ -47,7 +53,10 @@ export default function MainQuest() {
                 $borderRadius="20px"
               />
               <S.RewardIconWrapper {...questUrlProps}>
-                <S.RewardIcon src={rewardIcon} />
+                <S.RewardIcon
+                  src={rewardIcon}
+                  alt={isComplete ? '메인 퀘스트 보상' : '메인 퀘스트 진행'}
+                />
               </S.RewardIconWrapper>
             </S.ProgressBarWrapper>
           </S.QuestWrapper>

@@ -14,3 +14,15 @@ export const ScrollableContainer = styled.div<ScrollableContainerProps>`
   justify-content: center;
   align-items: center;
 `;
+
+export const ScreenReaderOnlyTitle = styled.h1`
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+`;
