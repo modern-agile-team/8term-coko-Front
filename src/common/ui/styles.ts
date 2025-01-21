@@ -47,6 +47,10 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
     gap: 0;
     justify-content: center;
   }
+
+  strong {
+    color: #5e4630;
+  }
 `;
 
 export const MenuIcon = styled.img`

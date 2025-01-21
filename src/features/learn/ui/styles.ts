@@ -42,8 +42,8 @@ export const ArrowButton = styled.button<{
   pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
 
   img {
-    width: 100%;
-    height: auto;
+    width: 25px;
+    height: 25px;
   }
 `;
 
