@@ -20,6 +20,13 @@ export const SectionGroup = styled.div`
   width: 693px;
   margin-top: 270px;
   border: none;
+
+  ${media.mobile} {
+    width: 100%;
+    max-width: 693px;
+    padding: 0 20px;
+    margin-top: 200px;
+  }
 `;
 
 export const ScreenReaderOnlyTitle = styled.h1`

@@ -28,8 +28,8 @@ export const SelectSectionBox = styled.div`
     max-width: 599px;
     height: calc((100vw - 80px) * 0.33);
     max-height: 197px;
-    min-width: 350px;
-    min-height: 130px;
+    min-width: 240px;
+    min-height: 80px;
   }
 `;
 
@@ -54,7 +54,6 @@ export const SectionButtonContainer = styled.div`
   z-index: 2;
 
   ${media.mobile} {
-    gap: 5px;
   }
 `;
 

@@ -528,6 +528,9 @@ export const SectionTitle = styled.h2`
 
   ${media.mobile} {
     color: #5f5f5f;
+    font-size: 20px;
+    max-width: 693px;
+    width: 100%;
   }
 
   &::before,
