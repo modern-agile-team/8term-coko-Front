@@ -6,7 +6,6 @@ export const BarrelTopCokoImg = styled.img`
   height: 150px;
   margin: 99px 87px;
   position: fixed;
-  z-index: 1;
 `;
 
 export const BarrelContainer = styled.div<{ $rank: number | null }>`
@@ -14,6 +13,7 @@ export const BarrelContainer = styled.div<{ $rank: number | null }>`
   height: 155px;
   margin: 237px 87px;
   position: fixed;
+  z-index: -1;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

@@ -606,6 +606,7 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
   align-items: center;
   left: 50%;
   transform: translateX(-50%);
+
   &:after {
     content: '';
     position: absolute;
@@ -617,9 +618,27 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
     border-bottom-color: ${({ $bgColor }) => $bgColor};
     transform: translateX(-50%);
   }
+
   h3 {
     font-size: 18px;
     font-weight: 300;
+  }
+
+  ${media.mobile} {
+    width: 110px;
+    padding: 0.6em 0.8em;
+    bottom: 30px;
+    left: auto;
+    right: -120px;
+    transform: none;
+
+    &:after {
+      display: none;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
   }
 `;
 
