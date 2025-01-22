@@ -2,6 +2,7 @@ import {
   UpperBackgroundImg,
   EntireSectionContainer,
   SectionWrapper,
+  QuizTutorialLinkWrapper,
   SectionTitle,
   ButtonGrid,
   KeyboardButtonWrapper,
@@ -40,8 +41,11 @@ export default function PartNavContainer({
       <EntireSectionContainer>
         <SectionWrapper id={`section-${section.id}`} key={section.id}>
           <SectionTitle>{section.name}</SectionTitle>
+          <QuizTutorialLinkWrapper>
+            <Link to="/quiz/tutorial">퀴즈 튜토리얼 </Link>
+          </QuizTutorialLinkWrapper>
+
           <ButtonGrid>
-            <Link to="/quiz/tutorial">튜토리얼하실레오?</Link>
             {section.part.map((part, partIndex) => {
               const globalIndex = previousPartsCount + partIndex;
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
