@@ -24,8 +24,12 @@ export const SelectSectionBox = styled.div`
   align-items: center;
 
   ${media.mobile} {
-    width: 390px;
-    height: 130px;
+    width: calc(100vw - 80px);
+    max-width: 599px;
+    height: calc((100vw - 80px) * 0.33);
+    max-height: 197px;
+    min-width: 350px;
+    min-height: 130px;
   }
 `;
 
@@ -75,7 +79,7 @@ export const SectionButton = styled.button`
   }
 
   span {
-    margin-top: 8px;
+    margin-top: 3px;
     font-size: 14px;
     color: #333;
 
