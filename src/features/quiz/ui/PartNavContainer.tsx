@@ -77,6 +77,12 @@ export default function PartNavContainer({
                 }
               };
 
+              const buttonImage = getImageUrl(
+                isOpen
+                  ? `키캡${(globalIndex % 4) + 1}-선택.svg`
+                  : `키캡${(globalIndex % 4) + 1}.svg`
+              );
+
               return (
                 <KeyboardButtonWrapper
                   key={part.id}
@@ -93,14 +99,7 @@ export default function PartNavContainer({
                     />
                   )}
                   <KeyboardButton onClick={handleButtonClick}>
-                    <img
-                      src={getImageUrl(
-                        isOpen
-                          ? `키캡${(globalIndex % 4) + 1}-선택.svg`
-                          : `키캡${(globalIndex % 4) + 1}.svg`
-                      )}
-                      alt={`키캡 ${part.name}`}
-                    />
+                    <img src={buttonImage} alt={`키캡 ${part.name}`} />
                   </KeyboardButton>
 
                   {/* 말풍선 */}
