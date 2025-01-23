@@ -29,7 +29,7 @@ export default function PartNavContainer({
   previousPartsCounts,
 }: PartNavContainerProps) {
   const navigate = useNavigate();
-  const [hasActiveBubble, setHasActiveBubble] = useState(false);
+  const [isActiveBubble, setIsActiveBubble] = useState(false);
 
   if (!section) return <div>데이터가 없습니다.</div>;
 
@@ -39,7 +39,7 @@ export default function PartNavContainer({
   return (
     <>
       <UpperBackgroundImg />
-      <EntireSectionContainer $hasActiveBubble={hasActiveBubble}>
+      <EntireSectionContainer $isActiveBubble={isActiveBubble}>
         <SectionWrapper id={`section-${section.id}`} key={section.id}>
           <SectionTitle>{section.name}</SectionTitle>
           <QuizTutorialLinkWrapper>
@@ -62,10 +62,10 @@ export default function PartNavContainer({
                 excludeRefs: [keyboardButtonWrapperRef],
               });
 
-              // 마지막 버튼인 경우, isOpen의 상태가 변경될 때만 setHasActiveBubble을 업데이트
+              // 마지막 버튼인 경우, isOpen의 상태가 변경될 때만 setIsActiveBubble을 업데이트
               useEffect(() => {
                 if (isLastButton) {
-                  setHasActiveBubble(prev => (prev !== isOpen ? isOpen : prev));
+                  setIsActiveBubble(prev => (prev !== isOpen ? isOpen : prev));
                 }
               }, [isOpen, isLastButton]);
 
@@ -73,7 +73,7 @@ export default function PartNavContainer({
               const handleButtonClick = () => {
                 togglePopover();
                 if (isLastButton) {
-                  setHasActiveBubble(prev => !prev);
+                  setIsActiveBubble(prev => !prev);
                 }
               };
 

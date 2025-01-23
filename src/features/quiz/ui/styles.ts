@@ -497,17 +497,17 @@ export const UpperBackgroundImg = styled.div`
 
 // 버튼 섹션 전체를 감싸는 Wrapper (백그라운드 이미지 고정)
 export const EntireSectionContainer = styled.div<{
-  $hasActiveBubble?: boolean;
+  $isActiveBubble?: boolean;
 }>`
   background-image: url(${imgUrl}배경2.webp);
-  padding-bottom: ${({ $hasActiveBubble }) =>
-    $hasActiveBubble ? '80px' : '0px'};
+  padding-bottom: ${({ $isActiveBubble }) =>
+    $isActiveBubble ? '80px' : '0px'};
   transition: margin-bottom 0.3s ease;
 
   ${media.mobile} {
     background-image: none;
-    padding-bottom: ${({ $hasActiveBubble }) =>
-      $hasActiveBubble ? '160px' : '60px'};
+    padding-bottom: ${({ $isActiveBubble }) =>
+      $isActiveBubble ? '160px' : '60px'};
   }
 `;
 
