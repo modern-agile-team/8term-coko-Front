@@ -53,6 +53,10 @@ const usersApis = {
       status: partStatus,
     });
   },
+  getHp: async () => {
+    const response = await api.get('users/user-hp');
+    return response.data;
+  },
 };
 
 export default usersApis;

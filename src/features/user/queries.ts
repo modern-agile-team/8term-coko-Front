@@ -18,10 +18,20 @@ const userKeys = {
     ...userKeys.quizzes(userId),
     partId,
   ],
+  hp: () => [...userKeys.all, 'hp'] as const,
 };
 
-export const progressQuery = {
-  put: () => {
+export const userHpQuery = {
+  getHp: () => {
+    return useSuspenseQuery({
+      queryKey: userKeys.hp(),
+      queryFn: usersApis.getHp,
+    });
+  },
+};
+
+export const userProgressQuery = {
+  updatePartProgress: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
 };

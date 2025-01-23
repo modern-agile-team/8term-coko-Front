@@ -11,10 +11,12 @@ import HeaderItem from '@common/ui/HeaderItem';
 import Login from '@features/auth/ui/Login';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import { authQuery } from '@features/auth/queries';
+import { userHpQuery } from '@/features/user/queries';
 
 export default function Header() {
   const { user, clearUser } = useUserStore();
   const { mutate: logout } = authQuery.logout();
+  const { data: userHp } = userHpQuery.getHp();
 
   const { isShow, openModal, closeModal, Modal } = useModal();
   const navigate = useNavigate();
@@ -55,7 +57,7 @@ export default function Header() {
           />
           <HeaderItem
             icon={getImageUrl('과일바구니.svg')}
-            point={5}
+            point={userHp.hp}
             color={'#FE0F0F'}
           />
         </>
