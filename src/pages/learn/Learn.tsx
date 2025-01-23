@@ -22,12 +22,12 @@ export default function Learn() {
 
   // 이전 버튼 수 누적 계산
   const previousPartsCounts = useMemo(() => {
-    if (!section || !section.part) return [];
+    if (!section || !section.parts) return [];
     const counts: number[] = [];
     let sum = 0;
 
     counts.push(sum);
-    sum += section.part.length;
+    sum += section.parts.length;
 
     return counts;
   }, [section]);

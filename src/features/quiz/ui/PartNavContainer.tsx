@@ -14,7 +14,7 @@ import {
 import { getImageUrl } from '@utils/getImageUrl';
 import { COLORS } from '../constants.ts';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
-import { useRef } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import usePopover from '@hooks/usePopover';
 import type { Section } from '@/features/learn/types.ts';
@@ -29,6 +29,7 @@ export default function PartNavContainer({
   previousPartsCounts,
 }: PartNavContainerProps) {
   const navigate = useNavigate();
+  const [hasActiveBubble, setHasActiveBubble] = useState(false);
 
   if (!section) return <div>데이터가 없습니다.</div>;
 
@@ -38,28 +39,43 @@ export default function PartNavContainer({
   return (
     <>
       <UpperBackgroundImg />
-      <EntireSectionContainer>
+      <EntireSectionContainer $hasActiveBubble={hasActiveBubble}>
         <SectionWrapper id={`section-${section.id}`} key={section.id}>
           <SectionTitle>{section.name}</SectionTitle>
           <QuizTutorialLinkWrapper>
-            <Link to="/quiz/tutorial">퀴즈 튜토리얼 </Link>
+            <Link to="/quiz/tutorial">퀴즈 튜토리얼</Link>
           </QuizTutorialLinkWrapper>
 
           <ButtonGrid>
-            {section.part.map((part, partIndex) => {
+            {section.parts.map((part, partIndex) => {
               const globalIndex = previousPartsCount + partIndex;
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
+
+              // 마지막 버튼인지 확인
+              const isLastButton = useMemo(
+                () => partIndex === section.parts.length - 1,
+                [partIndex, section.parts.length]
+              );
 
               const keyboardButtonWrapperRef = useRef<HTMLDivElement>(null);
               const { isOpen, togglePopover, popoverRef } = usePopover({
                 excludeRefs: [keyboardButtonWrapperRef],
               });
 
-              const buttonImage = getImageUrl(
-                isOpen
-                  ? `키캡${(globalIndex % 4) + 1}-선택.svg`
-                  : `키캡${(globalIndex % 4) + 1}.svg`
-              );
+              // 마지막 버튼인 경우, isOpen의 상태가 변경될 때만 setHasActiveBubble을 업데이트
+              useEffect(() => {
+                if (isLastButton) {
+                  setHasActiveBubble(prev => (prev !== isOpen ? isOpen : prev));
+                }
+              }, [isOpen, isLastButton]);
+
+              // KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘
+              const handleButtonClick = () => {
+                togglePopover();
+                if (isLastButton) {
+                  setHasActiveBubble(prev => !prev);
+                }
+              };
 
               return (
                 <KeyboardButtonWrapper
@@ -76,13 +92,15 @@ export default function PartNavContainer({
                       alt="앉은 코코"
                     />
                   )}
-                  {/* KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘 */}
-                  <KeyboardButton
-                    onClick={() => {
-                      togglePopover();
-                    }}
-                  >
-                    <img src={buttonImage} alt={`키캡 ${part.name}`} />
+                  <KeyboardButton onClick={handleButtonClick}>
+                    <img
+                      src={getImageUrl(
+                        isOpen
+                          ? `키캡${(globalIndex % 4) + 1}-선택.svg`
+                          : `키캡${(globalIndex % 4) + 1}.svg`
+                      )}
+                      alt={`키캡 ${part.name}`}
+                    />
                   </KeyboardButton>
 
                   {/* 말풍선 */}
@@ -96,7 +114,7 @@ export default function PartNavContainer({
                       <GoToQuizButton
                         onClick={() => {
                           navigate('/quiz', {
-                            state: { partId: part.id, status: part.partStatus },
+                            state: { partId: part.id, status: part.status },
                           });
                         }}
                         $fontColor={COLORS[(globalIndex % 4) + 1]}

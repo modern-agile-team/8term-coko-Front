@@ -496,11 +496,18 @@ export const UpperBackgroundImg = styled.div`
 `;
 
 // 버튼 섹션 전체를 감싸는 Wrapper (백그라운드 이미지 고정)
-export const EntireSectionContainer = styled.div`
+export const EntireSectionContainer = styled.div<{
+  $hasActiveBubble?: boolean;
+}>`
   background-image: url(${imgUrl}배경2.webp);
+  padding-bottom: ${({ $hasActiveBubble }) =>
+    $hasActiveBubble ? '80px' : '0px'};
+  transition: margin-bottom 0.3s ease;
+
   ${media.mobile} {
     background-image: none;
-    margin-bottom: 60px;
+    padding-bottom: ${({ $hasActiveBubble }) =>
+      $hasActiveBubble ? '160px' : '60px'};
   }
 `;
 
@@ -630,13 +637,16 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
   ${media.mobile} {
     width: 110px;
     padding: 0.6em 0.8em;
-    bottom: 30px;
-    left: auto;
-    right: -120px;
-    transform: none;
+    top: calc(90%);
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
 
     &:after {
-      display: none;
+      display: block;
+      top: -20px;
+      border-bottom-color: ${({ $bgColor }) => $bgColor};
+      border-top-color: transparent;
     }
 
     h3 {
