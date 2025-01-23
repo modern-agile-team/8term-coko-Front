@@ -65,13 +65,18 @@ export const SectionButton = styled.button`
   border: none;
   background: none;
   padding: 10px;
+  width: 100px;
+  height: 120px;
 
   img {
-    width: 100%;
-    height: auto;
-    max-width: 80px;
-    max-height: 80px;
+    width: 80px;
+    height: 80px;
+
     ${media.mobile} {
+      width: calc((100vw - 80px) * 0.15);
+      height: calc((100vw - 80px) * 0.15);
+      min-width: 40px;
+      min-height: 40px;
       max-width: 70px;
       max-height: 70px;
     }
