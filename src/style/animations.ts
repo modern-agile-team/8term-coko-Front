@@ -17,6 +17,10 @@ export const animations = {
     0% { transform: translateX(-100%); opacity: 0; }
     100% { transform: translateX(0); opacity: 1; }
   `,
+  fadeInAndDrop: keyframes`
+    0% { opacity: 0; transform: translate(-50%, -20px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+  `,
   fadeOutScaleDown: keyframes`
     0% { opacity: 1; transform: scale(1); }
     100% { opacity: 0; transform: scale(0.9); }

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { media } from '@style/media';
-import { getImageUrl } from '@/utils/getImageUrl';
 
 export const SectionBoxWrapper = styled.div`
   display: flex;
@@ -8,26 +7,95 @@ export const SectionBoxWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 45px;
+
+  ${media.mobile} {
+    margin-top: 65px;
+    gap: 5px;
+  }
 `;
 
-export const SectionButton = styled.button<{ $backgroundImage: string }>`
-  width: 100px;
-  height: 75px;
-  margin-top: 75px;
-  background: none;
-  border: none;
-  background-image: url(${({ $backgroundImage }) => $backgroundImage});
-`;
-
-export const SelectSectionBox = styled.section`
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+export const SelectSectionBox = styled.div`
+  position: relative;
   width: 599px;
   height: 197px;
   margin-top: 30px;
-  background-image: url(${getImageUrl('섹션-선택-섬.svg')});
-  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${media.mobile} {
+    width: calc(100vw - 80px);
+    max-width: 599px;
+    height: calc((100vw - 80px) * 0.33);
+    max-height: 197px;
+    min-width: 240px;
+    min-height: 80px;
+  }
+`;
+
+export const SelectSectionImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+`;
+
+export const SectionButtonContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+
+  ${media.mobile} {
+  }
+`;
+
+export const SectionButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 10px;
+  width: 100px;
+  height: 120px;
+
+  img {
+    width: 80px;
+    height: 80px;
+
+    ${media.mobile} {
+      width: calc((100vw - 80px) * 0.15);
+      height: calc((100vw - 80px) * 0.15);
+      min-width: 40px;
+      min-height: 40px;
+      max-width: 70px;
+      max-height: 70px;
+    }
+  }
+
+  span {
+    margin-top: 3px;
+    font-size: 14px;
+    color: #333;
+
+    ${media.mobile} {
+      font-size: 12px;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+  }
 `;
 
 export const ArrowButton = styled.button<{
@@ -41,9 +109,20 @@ export const ArrowButton = styled.button<{
   visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
   pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
 
+  ${media.mobile} {
+    width: 18px;
+    height: 18px;
+    margin-top: 50px;
+  }
+
   img {
-    width: 100%;
-    height: auto;
+    width: 25px;
+    height: 25px;
+
+    ${media.mobile} {
+      width: 18px;
+      height: 18px;
+    }
   }
 `;
 
@@ -53,6 +132,10 @@ export const CompassText = styled.p<{ $isHidden: boolean }>`
   margin: 80px 10px 0 10px;
   visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
   pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const LegendKeycapMessageImg = styled.img`

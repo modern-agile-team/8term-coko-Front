@@ -22,7 +22,7 @@ export default function NavigationControl({
       {isLeft && (
         <>
           <S.ArrowButton onClick={onClick} $isHidden={isHidden}>
-            <img src={getImageUrl('왼쪽-화살표.svg')} alt="left arrow" />
+            <img src={getImageUrl('왼쪽-화살표.svg')} alt="왼쪽 화살표" />
           </S.ArrowButton>
           <S.CompassText $isHidden={isHidden}>{compassText}</S.CompassText>
         </>
@@ -31,7 +31,7 @@ export default function NavigationControl({
         <>
           <S.CompassText $isHidden={isHidden}>{compassText}</S.CompassText>
           <S.ArrowButton onClick={onClick} $isHidden={isHidden}>
-            <img src={getImageUrl('오른쪽-화살표.svg')} alt="right arrow" />
+            <img src={getImageUrl('오른쪽-화살표.svg')} alt="오른쪽 화살표" />
           </S.ArrowButton>
         </>
       )}

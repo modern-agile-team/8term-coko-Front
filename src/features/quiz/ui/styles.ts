@@ -1,6 +1,7 @@
 import styled, { css, keyframes } from 'styled-components';
 import { media } from '@style/media';
 import { getImageUrl } from '@utils/getImageUrl';
+import { animations } from '@style/animations';
 import type { Quiz } from '@features/quiz/types';
 
 const imgUrl = import.meta.env.VITE_IMG_BASE_URL;
@@ -488,16 +489,38 @@ export const UpperBackgroundImg = styled.div`
   background-image: url(${imgUrl}배경1.webp);
   display: flex;
   align-items: end;
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 // 버튼 섹션 전체를 감싸는 Wrapper (백그라운드 이미지 고정)
-export const EntireSectionContainer = styled.div`
+export const EntireSectionContainer = styled.div<{
+  $isActiveBubble?: boolean;
+}>`
   background-image: url(${imgUrl}배경2.webp);
+  padding-bottom: ${({ $isActiveBubble }) =>
+    $isActiveBubble ? '80px' : '0px'};
+  transition: margin-bottom 0.3s ease;
+
+  ${media.mobile} {
+    background-image: none;
+    padding-bottom: ${({ $isActiveBubble }) =>
+      $isActiveBubble ? '160px' : '60px'};
+  }
 `;
 
 // 섹션 하나를 감싸는 Wrapper
 export const SectionWrapper = styled.div`
   padding-bottom: 20px;
+`;
+
+// 퀴즈 튜토리얼 링크 감싸는 Wrapper
+export const QuizTutorialLinkWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 `;
 
 // 섹션 제목(이름)
@@ -510,6 +533,13 @@ export const SectionTitle = styled.h2`
   align-items: center;
   justify-content: center;
 
+  ${media.mobile} {
+    color: #5f5f5f;
+    font-size: 20px;
+    max-width: 693px;
+    width: 100%;
+  }
+
   &::before,
   &::after {
     content: '';
@@ -518,6 +548,12 @@ export const SectionTitle = styled.h2`
     background: #ffffff;
     margin: 0 55px;
     max-width: 200px;
+
+    ${media.mobile} {
+      background: #5f5f5f;
+      margin: 0 35px;
+      max-width: 120px;
+    }
   }
 `;
 
@@ -525,22 +561,15 @@ export const SectionTitle = styled.h2`
 export const ButtonGrid = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  ${media.mobile} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const KeyboardButtonWrapper = styled.div`
   position: relative;
-`;
-
-// 앉은-코코 이미지 애니메이션 keyframes 정의
-const fadeInAndDrop = keyframes`
-  0% {
-    opacity: 0; /* 완전히 투명 */
-    transform: translate(-50%, -20px); /* 위쪽에서 시작 */
-  }
-  100% {
-    opacity: 1; /* 불투명 */
-    transform: translate(-50%, 0); /* 최종 위치 */
-  }
 `;
 
 // 앉은-코코 이미지
@@ -552,7 +581,7 @@ export const SittingCoko = styled.img`
   z-index: 5;
   width: 147px;
   height: 120px;
-  animation: ${fadeInAndDrop} 0.3s ease-out forwards;
+  animation: ${animations.fadeInAndDrop} 0.3s ease-out forwards;
 `;
 
 // 키캡(키보드 스위치) 버튼
@@ -587,6 +616,7 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
   align-items: center;
   left: 50%;
   transform: translateX(-50%);
+
   &:after {
     content: '';
     position: absolute;
@@ -598,9 +628,30 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
     border-bottom-color: ${({ $bgColor }) => $bgColor};
     transform: translateX(-50%);
   }
+
   h3 {
     font-size: 18px;
     font-weight: 300;
+  }
+
+  ${media.mobile} {
+    width: 110px;
+    padding: 0.6em 0.8em;
+    top: calc(90%);
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+
+    &:after {
+      display: block;
+      top: -20px;
+      border-bottom-color: ${({ $bgColor }) => $bgColor};
+      border-top-color: transparent;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
   }
 `;
 

@@ -12,4 +12,10 @@ export const PRELOAD_IMAGES = [
   '키캡2-선택.svg',
   '키캡3-선택.svg',
   '키캡4-선택.svg',
+  '섬1.svg',
+  '섬2.svg',
+  '섬3.svg',
+  '섬4.svg',
+  '섬5.svg',
+  '앉은-코코.svg',
 ];
