@@ -27,10 +27,10 @@ export const sectionsQuery = {
   getByPage: () =>
     useInfiniteQuery({
       queryKey: sectionKeys.paginated(),
-      queryFn: ({ pageParam }) =>
-        sectionsApis.getSectionsByPage(pageParam ?? null),
+      queryFn: ({ pageParam }: { pageParam?: number }) =>
+        sectionsApis.getSectionsByPage(pageParam ?? undefined),
       getNextPageParam: lastPage =>
         lastPage.hasNextPage ? lastPage.nextCursor : null,
-      initialPageParam: 0,
+      initialPageParam: undefined,
     }),
 };

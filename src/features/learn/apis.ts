@@ -15,10 +15,16 @@ const sectionsApis = {
   },
 
   //  페이지네이션 섹션 데이터 가져오기 (무한 스크롤)
-  getSectionsByPage: async (cursor?: number): Promise<SectionPagination> => {
-    const params = new URLSearchParams();
-    if (cursor) params.append('cursor', cursor.toString());
-    const response = await api.get(`/sections/parts?${params}`);
+  getSectionsByPage: async (
+    cursor?: number,
+    pageSize = 2
+  ): Promise<SectionPagination> => {
+    const response = await api.get('/sections/parts', {
+      params: {
+        cursor,
+        pageSize,
+      },
+    });
     const { data, hasNextPage, nextCursor } = response.data;
     return {
       sections: data || [],
