@@ -69,11 +69,16 @@ export default function PartNavContainer({
                 }
               }, [isOpen, isLastButton]);
 
+              // 파트가 잠겨있는지 확인
+              const isLocked = part.status === 'LOCKED';
+
               // KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘
               const handleButtonClick = () => {
-                togglePopover();
-                if (isLastButton) {
-                  setIsActiveBubble(prev => !prev);
+                if (!isLocked) {
+                  togglePopover();
+                  if (isLastButton) {
+                    setIsActiveBubble(prev => !prev);
+                  }
                 }
               };
 
@@ -98,7 +103,12 @@ export default function PartNavContainer({
                       alt="앉은 코코"
                     />
                   )}
-                  <KeyboardButton onClick={handleButtonClick}>
+                  {/* 파트가 잠겨있지 않은 경우에만 키보드 버튼을 클릭할 수 있도록 함 */}
+                  <KeyboardButton
+                    onClick={handleButtonClick}
+                    $isLocked={isLocked}
+                    disabled={isLocked}
+                  >
                     <img src={buttonImage} alt={`키캡 ${part.name}`} />
                   </KeyboardButton>
 

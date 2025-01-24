@@ -585,18 +585,21 @@ export const SittingCoko = styled.img`
 `;
 
 // 키캡(키보드 스위치) 버튼
-export const KeyboardButton = styled.button`
+export const KeyboardButton = styled.button<{ $isLocked: boolean }>`
   width: auto;
   height: auto;
   padding: 0;
   border: none;
   background-color: transparent;
   margin-bottom: 20px;
+  cursor: ${({ $isLocked }) => ($isLocked ? 'not-allowed' : 'pointer')};
 
   img {
     width: 138.6px;
     height: 72.68px;
     display: block;
+    filter: ${({ $isLocked }) => ($isLocked ? 'grayscale(85%)' : 'none')};
+    opacity: ${({ $isLocked }) => ($isLocked ? 0.5 : 1)};
   }
 `;
 
