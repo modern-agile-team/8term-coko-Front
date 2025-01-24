@@ -568,10 +568,6 @@ export const ButtonGrid = styled.section`
   }
 `;
 
-export const KeyboardButtonWrapper = styled.div`
-  position: relative;
-`;
-
 // 앉은-코코 이미지
 export const SittingCoko = styled.img`
   position: absolute;
@@ -582,6 +578,10 @@ export const SittingCoko = styled.img`
   width: 147px;
   height: 120px;
   animation: ${animations.fadeInAndDrop} 0.3s ease-out forwards;
+`;
+
+export const KeyboardButtonWrapper = styled.div`
+  position: relative;
 `;
 
 // 키캡(키보드 스위치) 버튼

@@ -1,10 +1,11 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useSuspenseQuery, useInfiniteQuery } from '@tanstack/react-query';
 import sectionsApis from '@features/learn/apis';
 
 const sectionKeys = {
   all: ['sections'],
   lists: () => [...sectionKeys.all, 'list'] as const,
   details: (id: number) => [...sectionKeys.all, 'detail', id] as const,
+  paginated: () => [...sectionKeys.all, 'paginated'] as const,
 };
 
 export const sectionsQuery = {
@@ -20,5 +21,16 @@ export const sectionsQuery = {
     useSuspenseQuery({
       queryKey: sectionKeys.lists(),
       queryFn: sectionsApis.getAllSections,
+    }),
+
+  // 페이지네이션 섹션 데이터 가져오기 (무한 스크롤)
+  getByPage: () =>
+    useInfiniteQuery({
+      queryKey: sectionKeys.paginated(),
+      queryFn: ({ pageParam }) =>
+        sectionsApis.getSectionsByPage(pageParam ?? null),
+      getNextPageParam: lastPage =>
+        lastPage.hasNextPage ? lastPage.nextCursor : null,
+      initialPageParam: 0,
     }),
 };

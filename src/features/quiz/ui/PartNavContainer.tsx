@@ -1,16 +1,4 @@
-import {
-  UpperBackgroundImg,
-  EntireSectionContainer,
-  SectionWrapper,
-  QuizTutorialLinkWrapper,
-  SectionTitle,
-  ButtonGrid,
-  KeyboardButtonWrapper,
-  SittingCoko,
-  KeyboardButton,
-  SpeechBubble,
-  GoToQuizButton,
-} from './styles.ts';
+import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { COLORS } from '../constants.ts';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
@@ -31,22 +19,22 @@ export default function PartNavContainer({
   const navigate = useNavigate();
   const [isActiveBubble, setIsActiveBubble] = useState(false);
 
-  if (!section) return <div>데이터가 없습니다.</div>;
+  if (!section?.parts?.length) return null; // 섹션이나 파트가 없을 때는 아무것도 렌더링하지 않음
 
   // 이전 섹션들에서 포함된 파트의 총 개수. 현재 섹션의 파트의 전역 인덱스(globalIndex)를 계산
   const previousPartsCount = previousPartsCounts[0];
 
   return (
     <>
-      <UpperBackgroundImg />
-      <EntireSectionContainer $isActiveBubble={isActiveBubble}>
-        <SectionWrapper id={`section-${section.id}`} key={section.id}>
-          <SectionTitle>{section.name}</SectionTitle>
-          <QuizTutorialLinkWrapper>
+      <S.UpperBackgroundImg />
+      <S.EntireSectionContainer $isActiveBubble={isActiveBubble}>
+        <S.SectionWrapper id={`section-${section.id}`} key={section.id}>
+          <S.SectionTitle>{section.name}</S.SectionTitle>
+          <S.QuizTutorialLinkWrapper>
             <Link to="/quiz/tutorial">퀴즈 튜토리얼</Link>
-          </QuizTutorialLinkWrapper>
+          </S.QuizTutorialLinkWrapper>
 
-          <ButtonGrid>
+          <S.ButtonGrid>
             {section.parts.map((part, partIndex) => {
               const globalIndex = previousPartsCount + partIndex;
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
@@ -89,7 +77,7 @@ export default function PartNavContainer({
               );
 
               return (
-                <KeyboardButtonWrapper
+                <S.KeyboardButtonWrapper
                   key={part.id}
                   ref={keyboardButtonWrapperRef}
                   style={{
@@ -98,29 +86,29 @@ export default function PartNavContainer({
                   }}
                 >
                   {isOpen && (
-                    <SittingCoko
+                    <S.SittingCoko
                       src={getImageUrl('앉은-코코.svg')}
                       alt="앉은 코코"
                     />
                   )}
                   {/* 파트가 잠겨있지 않은 경우에만 키보드 버튼을 클릭할 수 있도록 함 */}
-                  <KeyboardButton
+                  <S.KeyboardButton
                     onClick={handleButtonClick}
                     $isLocked={isLocked}
                     disabled={isLocked}
                   >
                     <img src={buttonImage} alt={`키캡 ${part.name}`} />
-                  </KeyboardButton>
+                  </S.KeyboardButton>
 
                   {/* 말풍선 */}
                   {isOpen && (
-                    <SpeechBubble
+                    <S.SpeechBubble
                       ref={popoverRef}
                       onClick={e => e.stopPropagation()}
                       $bgColor={COLORS[(globalIndex % 4) + 1]}
                     >
                       <h3>{part.name}</h3>
-                      <GoToQuizButton
+                      <S.GoToQuizButton
                         onClick={() => {
                           navigate('/quiz', {
                             state: { partId: part.id, status: part.status },
@@ -129,15 +117,15 @@ export default function PartNavContainer({
                         $fontColor={COLORS[(globalIndex % 4) + 1]}
                       >
                         시작
-                      </GoToQuizButton>
-                    </SpeechBubble>
+                      </S.GoToQuizButton>
+                    </S.SpeechBubble>
                   )}
-                </KeyboardButtonWrapper>
+                </S.KeyboardButtonWrapper>
               );
             })}
-          </ButtonGrid>
-        </SectionWrapper>
-      </EntireSectionContainer>
+          </S.ButtonGrid>
+        </S.SectionWrapper>
+      </S.EntireSectionContainer>
     </>
   );
 }

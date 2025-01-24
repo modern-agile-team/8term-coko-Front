@@ -4,6 +4,12 @@ export interface Section {
   parts: Part[];
 }
 
+export interface SectionPagination {
+  sections: Section[];
+  nextCursor: number | null;
+  hasNextPage: boolean;
+}
+
 export interface Part {
   id: number;
   name: string;

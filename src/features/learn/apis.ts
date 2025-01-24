@@ -1,5 +1,5 @@
 import api from '@/axios/instance';
-import type { Section } from '@/features/learn/types';
+import type { Section, SectionPagination } from '@/features/learn/types';
 
 const sectionsApis = {
   // 특정 섹션 ID에 대한 데이터 가져오기
@@ -13,6 +13,18 @@ const sectionsApis = {
     const response = await api.get('/sections');
     return response.data;
   },
-};
 
+  //  페이지네이션 섹션 데이터 가져오기 (무한 스크롤)
+  getSectionsByPage: async (cursor?: number): Promise<SectionPagination> => {
+    const params = new URLSearchParams();
+    if (cursor) params.append('cursor', cursor.toString());
+    const response = await api.get(`/sections/parts?${params}`);
+    const { data, hasNextPage, nextCursor } = response.data;
+    return {
+      sections: data || [],
+      hasNextPage,
+      nextCursor,
+    };
+  },
+};
 export default sectionsApis;
