@@ -2,7 +2,7 @@ import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { COLORS } from '../constants.ts';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
-import { useRef, useState, useEffect, useMemo } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import usePopover from '@hooks/usePopover';
 import type { Section } from '@/features/learn/types.ts';
@@ -40,10 +40,7 @@ export default function PartNavContainer({
               const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
 
               // 마지막 버튼인지 확인
-              const isLastButton = useMemo(
-                () => partIndex === section.parts.length - 1,
-                [partIndex, section.parts.length]
-              );
+              const isLastButton = partIndex === section.parts.length - 1;
 
               const keyboardButtonWrapperRef = useRef<HTMLDivElement>(null);
               const { isOpen, togglePopover, popoverRef } = usePopover({

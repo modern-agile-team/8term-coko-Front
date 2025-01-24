@@ -39,17 +39,16 @@ export default function Learn() {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [inView, hasNextPage, isFetchingNextPage]);
 
   // 이전 버튼 수 누적 계산
   const previousPartsCounts = useMemo(() => {
-    if (!sections) return [];
+    if (!sections || sections.length === 0) return [];
     const counts: number[] = [];
     let sum = 0;
 
     sections.forEach(section => {
       if (section?.parts) {
-        // parts가 존재하는지 확인
         counts.push(sum);
         sum += section.parts.length;
       }
