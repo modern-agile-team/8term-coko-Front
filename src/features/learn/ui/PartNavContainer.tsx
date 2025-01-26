@@ -12,7 +12,7 @@ export default function PartNavContainer() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     sectionsQuery.getByPage();
 
-  // Intersection Observer
+  // 스크롤 감지를 위한 Intersection Observer
   const { ref, inView } = useInView({ threshold: 1.0 });
 
   // 섹션 데이터
@@ -21,11 +21,12 @@ export default function PartNavContainer() {
     return data.pages.flatMap(page => page.sections || []);
   }, [data]);
 
+  // 무한 스크롤 트리거
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+  }, [inView, hasNextPage, isFetchingNextPage]);
 
   // 이전 섹션까지의 파트 개수 누적
   const previousPartsCounts = useMemo(() => {

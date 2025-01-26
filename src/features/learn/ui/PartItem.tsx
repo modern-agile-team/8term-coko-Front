@@ -28,12 +28,14 @@ export default memo(function PartItem({
     excludeRefs: [keyboardButtonWrapperRef],
   });
 
+  // 마지막 버튼인 경우, isOpen의 상태가 변경될 때만 setIsActiveBubble을 업데이트
   useEffect(() => {
     if (isLastButton) {
       onToggleBubble(isOpen);
     }
   }, [isOpen, isLastButton, onToggleBubble]);
 
+  // KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘
   const handleButtonClick = () => {
     if (!isLocked) {
       togglePopover();
