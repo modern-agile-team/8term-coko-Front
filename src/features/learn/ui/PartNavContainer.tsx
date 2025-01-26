@@ -1,9 +1,10 @@
 import * as S from '@features/learn/ui/styles';
+import PartItem from '@features/learn/ui/PartItem';
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { sectionsQuery } from '@features/learn/queries';
-import PartItem from '@features/learn/ui/PartItem';
+import { LoadingSpinner } from '@common/layout/styles';
 
 export default function PartNavContainer() {
   const [isActiveBubble, setIsActiveBubble] = useState(false);
@@ -13,7 +14,7 @@ export default function PartNavContainer() {
     sectionsQuery.getByPage();
 
   // 스크롤 감지를 위한 Intersection Observer
-  const { ref, inView } = useInView({ threshold: 1.0 });
+  const { ref, inView } = useInView({ threshold: 0 });
 
   // 섹션 데이터
   const sections = useMemo(() => {
@@ -54,6 +55,7 @@ export default function PartNavContainer() {
         <S.QuizTutorialLinkWrapper>
           <Link to="/quiz/tutorial">퀴즈 튜토리얼</Link>
         </S.QuizTutorialLinkWrapper>
+
         {sections.map((section, sectionIndex) => (
           <S.SectionWrapper
             key={section?.id || sectionIndex}
@@ -80,8 +82,15 @@ export default function PartNavContainer() {
           </S.SectionWrapper>
         ))}
 
-        {isFetchingNextPage && <p>더 많은 섹션을 로드하는 중입니다.</p>}
-        <div ref={ref} style={{ height: '1px' }} />
+        {isFetchingNextPage && (
+          <S.EntireSectionContainer>
+            <S.LoadingSpinnerWrapper>
+              <LoadingSpinner />
+            </S.LoadingSpinnerWrapper>
+          </S.EntireSectionContainer>
+        )}
+
+        <S.IntersectionTarget ref={ref} />
       </S.EntireSectionContainer>
     </>
   );

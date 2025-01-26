@@ -352,3 +352,16 @@ export const GoToQuizButton = styled.button<{ $fontColor: string }>`
   color: ${({ $fontColor }) => $fontColor};
   font-weight: 700;
 `;
+
+// 로딩 스피너 감싸는 Wrapper
+export const LoadingSpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+// 교차를 트리거하는 대상
+export const IntersectionTarget = styled.div`
+  height: 1px;
+`;
