@@ -1,6 +1,6 @@
 import * as S from '@features/learn/ui/styles';
 import PartItem from '@features/learn/ui/PartItem';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { sectionsQuery } from '@features/learn/queries';
@@ -27,7 +27,7 @@ export default function PartNavContainer() {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage, isFetchingNextPage]);
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   // 이전 섹션까지의 파트 개수 누적
   const previousPartsCounts = useMemo(() => {
@@ -44,9 +44,9 @@ export default function PartNavContainer() {
   }, [sections]);
 
   // 말풍선 상태를 자식에게 전달해 업데이트 받기
-  const handleToggleBubble = (isOpen: boolean) => {
+  const handleToggleBubble = useCallback((isOpen: boolean) => {
     setIsActiveBubble(isOpen);
-  };
+  }, []);
 
   return (
     <>

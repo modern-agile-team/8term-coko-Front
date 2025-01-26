@@ -28,20 +28,17 @@ export default memo(function PartItem({
     excludeRefs: [keyboardButtonWrapperRef],
   });
 
-  // 마지막 버튼인 경우, isOpen의 상태가 변경될 때만 setIsActiveBubble을 업데이트
+  // 마지막 버튼인 경우, 팝오버(말풍선) 열림/닫힘 상태가 바뀔 때만 상위에 전달
   useEffect(() => {
     if (isLastButton) {
       onToggleBubble(isOpen);
     }
   }, [isOpen, isLastButton, onToggleBubble]);
 
-  // KeyboardButton 클릭 시 팝오버(말풍선) 열림/닫힘
+  // KeyboardButton 클릭 시 팝오버 토글 (부모에 중복 전달 X)
   const handleButtonClick = () => {
     if (!isLocked) {
       togglePopover();
-      if (isLastButton) {
-        onToggleBubble(!isOpen);
-      }
     }
   };
 
@@ -61,6 +58,7 @@ export default memo(function PartItem({
       {isOpen && (
         <S.SittingCoko src={getImageUrl('앉은-코코.svg')} alt="앉은 코코" />
       )}
+
       <S.KeyboardButton
         onClick={handleButtonClick}
         $isLocked={isLocked}
