@@ -1,6 +1,6 @@
 import api from '@/axios/instance';
-import type { User, ExperiencedUser } from '@features/user/types';
-import type { PartStatus } from '@features/learn/types';
+import type { ExperiencedUser } from '@features/user/types';
+import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 
 const usersApis = {
@@ -21,6 +21,7 @@ const usersApis = {
     const { experience } = params;
     await api.patch(`/users/me/experience`, { experience });
   },
+
   getQuizzes: async (params: { partId: Quiz['partId'] }): Promise<Quiz[]> => {
     const { partId } = params;
     const response = await api.get(`/users/me/quizzes/incorrect`, {
@@ -28,10 +29,12 @@ const usersApis = {
     });
     return response.data;
   },
+
   patchPoint: async (params: { point: number }): Promise<void> => {
     const { point } = params;
     await api.patch(`/users/me/point`, { point });
   },
+
   partProgress: async (params: {
     partId: Quiz['partId'];
     partStatus: PartStatus;
@@ -40,6 +43,14 @@ const usersApis = {
     await api.put(`/users/me/part-progress/parts/${partId}`, {
       status: partStatus,
     });
+  },
+
+  getProgress: async (params?: {
+    sectionId?: Section['id'];
+    partId?: Part['id'];
+  }) => {
+    const response = await api.get('/users/me/progress', { params });
+    return response.data;
   },
 };
 

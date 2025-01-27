@@ -6,16 +6,30 @@ import {
 } from '@tanstack/react-query';
 import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
+import type { Section, Part } from '@features/learn/types';
 
 const userKeys = {
   all: ['users'] as const,
-  detail: () => [...userKeys.all, 'me'] as const,
-  experience: () => [...userKeys.detail(), 'experience'] as const,
-  quizzes: () => [...userKeys.detail(), 'quizzes'],
+  me: () => [...userKeys.all, 'me'] as const,
+  experience: () => [...userKeys.me(), 'experience'] as const,
+  quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
+  progress: (sectionId?: Section['id'], partId?: Part['id']) =>
+    sectionId || partId
+      ? ([...userKeys.me(), 'progress', { sectionId, partId }] as const)
+      : ([...userKeys.me(), 'progress'] as const),
 };
 
 export const useUserProgressQuery = {
+  getProgress: (params?: {
+    sectionId?: Section['id'];
+    partId?: Part['id'];
+  }) => {
+    return useQuery({
+      queryKey: userKeys.progress(params?.sectionId, params?.partId),
+      queryFn: () => usersApis.getProgress(params),
+    });
+  },
   updateQuizProgress: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
