@@ -25,7 +25,7 @@ export default function Result({
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
-  const { mutate: progressUpdate } = progressQuery.put();
+  const { mutate: progressUpdate } = progressQuery.updateQuizProgress();
 
   const handleOnClick = () => {
     resetUserResponseAnswer();
@@ -33,7 +33,6 @@ export default function Result({
     nextPage();
     if (isLoggedIn(user) && !isCompleted(partStatus)) {
       progressUpdate({
-        userId: user.id,
         quizId,
         body: { isCorrect },
       });

@@ -9,19 +9,14 @@ interface PartClearProps {
   partId: number;
 }
 export default function PartClear({ partId }: PartClearProps) {
-  const { user } = useUserStore() as { user: User };
-
   const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.patch();
   const { mutate: updatePartProgress, isIdle: isProgressIdle } =
     partProgressQuery.updatePartProgress();
-
   const navigate = useNavigate();
-
   const handleNavigateToLearn = () => {
-    updatePoint({ id: user.id, point: DEFAULT_POINT });
+    updatePoint({ point: DEFAULT_POINT });
 
     updatePartProgress({
-      userId: user.id,
       partId,
       partStatus: 'COMPLETED',
     });

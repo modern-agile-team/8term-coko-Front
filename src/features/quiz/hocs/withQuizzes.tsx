@@ -34,16 +34,29 @@ const withQuizzes = <P extends object>(
     if (partStatus !== 'IN_PROGRESS' && partStatus !== 'TUTORIAL') {
       const { data: quizzes } = quizzesQuery.getQuizzes({ partId });
 
-      return <WrappedComponent {...(props as P)} quizzes={quizzes} />;
+      return (
+        <WrappedComponent
+          {...(props as P)}
+          quizzes={quizzes}
+          partId={partId}
+          PartStatus={partStatus}
+        />
+      );
     }
     //로그인 했고 풀고있던 파트에 대해서는 풀고있는 퀴즈를 제공
     if (isLoggedIn(user) && partStatus === 'IN_PROGRESS') {
       const { data: quizzes } = userQuizzesQuery.getQuizzes({
-        userId: user.id,
         partId,
       });
 
-      return <WrappedComponent {...(props as P)} quizzes={quizzes} />;
+      return (
+        <WrappedComponent
+          {...(props as P)}
+          quizzes={quizzes}
+          partId={partId}
+          PartStatus={partStatus}
+        />
+      );
     }
     //다 아닐때(튜토리얼) 문제 제공
     return <WrappedComponent {...(props as P)} quizzes={TUTORIAL_QUIZZES} />;

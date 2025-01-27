@@ -48,7 +48,6 @@ export default function QuizContainer({
   usePreloadImages({
     imageUrls: PRELOAD_IMAGES,
   });
-
   const {
     currentPage,
     isCorrectList,
