@@ -4,7 +4,10 @@ import useUserStore from '@store/useUserStore';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useNavigate } from 'react-router-dom';
 import { useTimeout } from '@modern-kit/react';
-import { experienceQuery, partProgressQuery } from '@features/user/queries';
+import {
+  useUserExperienceQuery,
+  useUserPartProgressQuery,
+} from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { Quiz } from '@features/quiz/types';
 import type { PartStatus } from '@features/learn/types';
@@ -24,11 +27,12 @@ export default function TotalResults({
 }: TotalResultProps) {
   const { isCorrectList } = useClientQuizStore();
 
-  const { data: userExperience, isSuccess } = experienceQuery.getExperience();
+  const { data: userExperience, isSuccess } =
+    useUserExperienceQuery.getExperience();
   const { mutate: experienceUpdate, isIdle: isExperienceIdle } =
-    experienceQuery.updateExperience();
+    useUserExperienceQuery.updateExperience();
   const { mutate: updateProgress, isIdle: isProgressIdle } =
-    partProgressQuery.updatePartProgress();
+    useUserPartProgressQuery.updatePartProgress();
 
   const navigate = useNavigate();
 

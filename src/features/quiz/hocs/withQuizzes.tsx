@@ -4,7 +4,7 @@ import { isLoggedIn } from '@features/user/service/authUtils';
 import useUserStore from '@store/useUserStore';
 import type { Quiz } from '@features/quiz/types';
 import { PartStatus } from '@/features/learn/types';
-import { userQuizzesQuery } from '@/features/user/queries';
+import { useUserQuizzesQuery } from '@/features/user/queries';
 import { TUTORIAL_QUIZZES } from '@/features/tutorial/constants';
 
 interface WithQuizzesProps {
@@ -45,7 +45,7 @@ const withQuizzes = <P extends object>(
     }
     //로그인 했고 풀고있던 파트에 대해서는 풀고있는 퀴즈를 제공
     if (isLoggedIn(user) && partStatus === 'IN_PROGRESS') {
-      const { data: quizzes } = userQuizzesQuery.getQuizzes({
+      const { data: quizzes } = useUserQuizzesQuery.getQuizzes({
         partId,
       });
 

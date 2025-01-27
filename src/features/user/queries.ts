@@ -9,19 +9,19 @@ import type { ExperiencedUser } from '@features/user/types';
 
 const userKeys = {
   all: ['users'] as const,
-  detail: () => [...userKeys.all, 'my'] as const,
+  detail: () => [...userKeys.all, 'me'] as const,
   experience: () => [...userKeys.detail(), 'experience'] as const,
   quizzes: () => [...userKeys.detail(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
 };
 
-export const progressQuery = {
+export const useUserProgressQuery = {
   updateQuizProgress: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
 };
 
-export const userQuizzesQuery = {
+export const useUserQuizzesQuery = {
   getQuizzes: ({ partId }: { partId: number }) => {
     return useSuspenseQuery({
       queryKey: userKeys.partQuizzes(partId),
@@ -32,7 +32,7 @@ export const userQuizzesQuery = {
   },
 };
 
-export const experienceQuery = {
+export const useUserExperienceQuery = {
   getExperience: () => {
     return useQuery({
       queryKey: userKeys.experience(),
@@ -88,7 +88,7 @@ export const experienceQuery = {
   },
 };
 
-export const pointQuery = {
+export const useUserPointQuery = {
   updatePoint: () => {
     const queryClient = useQueryClient();
     return useMutation({
@@ -102,7 +102,7 @@ export const pointQuery = {
   },
 };
 
-export const partProgressQuery = {
+export const useUserPartProgressQuery = {
   updatePartProgress: () => {
     return useMutation({
       mutationFn: usersApis.partProgress,
