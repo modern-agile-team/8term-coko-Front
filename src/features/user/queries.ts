@@ -5,62 +5,56 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 import usersApis from '@features/user/apis';
-import type { User, ExperiencedUser } from '@features/user/types';
+import type { ExperiencedUser } from '@features/user/types';
 
 const userKeys = {
   all: ['users'] as const,
-  details: () => [...userKeys.all, 'detail'] as const,
-  detail: (id: number) => [...userKeys.details(), id] as const,
-  experience: (userId: number) =>
-    [...userKeys.detail(userId), 'experience'] as const,
-  quizzes: (userId: number) => [...userKeys.detail(userId), 'quizzes'],
-  partQuizzes: (userId: number, partId: number) => [
-    ...userKeys.quizzes(userId),
-    partId,
-  ],
+  detail: () => [...userKeys.all, 'me'] as const,
+  experience: () => [...userKeys.detail(), 'experience'] as const,
+  quizzes: () => [...userKeys.detail(), 'quizzes'],
+  partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
 };
 
-export const progressQuery = {
-  put: () => {
+export const useUserProgressQuery = {
+  updateQuizProgress: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
 };
 
-export const userQuizzesQuery = {
-  getQuizzes: ({ userId, partId }: { userId: number; partId: number }) => {
+export const useUserQuizzesQuery = {
+  getQuizzes: ({ partId }: { partId: number }) => {
     return useSuspenseQuery({
-      queryKey: userKeys.partQuizzes(userId, partId),
-      queryFn: () => usersApis.getQuizzes({ id: userId, partId }),
+      queryKey: userKeys.partQuizzes(partId),
+      queryFn: () => usersApis.getQuizzes({ partId }),
       gcTime: 0,
       staleTime: 0,
     });
   },
 };
 
-export const experienceQuery = {
-  get: (id: User['id']) => {
+export const useUserExperienceQuery = {
+  getExperience: () => {
     return useQuery({
-      queryKey: userKeys.experience(id),
-      queryFn: () => usersApis.getExperience(id),
+      queryKey: userKeys.experience(),
+      queryFn: () => usersApis.getExperience(),
       gcTime: 0,
       staleTime: 0,
-      enabled: !!id,
     });
   },
-  patch: () => {
+  updateExperience: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.patchExperience,
       onMutate: async newExperience => {
         await queryClient.cancelQueries({
-          queryKey: userKeys.experience(newExperience.id),
+          queryKey: userKeys.experience(),
           exact: true,
         });
         const previousExperience = queryClient.getQueryData<ExperiencedUser>(
-          userKeys.experience(newExperience.id)
+          userKeys.experience()
         );
         queryClient.setQueryData(
-          userKeys.experience(newExperience.id),
+          userKeys.experience(),
           (old: ExperiencedUser) => {
             //경험치 증가 로직
             if (!old) return old;
@@ -81,21 +75,21 @@ export const experienceQuery = {
       },
       onError: (err, newExperience, context) => {
         queryClient.setQueryData(
-          userKeys.experience(newExperience.id),
+          userKeys.experience(),
           context?.previousExperience
         );
       },
       onSettled: (data, error, newExperience) => {
         queryClient.invalidateQueries({
-          queryKey: userKeys.experience(newExperience.id),
+          queryKey: userKeys.experience(),
         });
       },
     });
   },
 };
 
-export const pointQuery = {
-  patch: () => {
+export const useUserPointQuery = {
+  updatePoint: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.patchPoint,
@@ -108,7 +102,7 @@ export const pointQuery = {
   },
 };
 
-export const partProgressQuery = {
+export const useUserPartProgressQuery = {
   updatePartProgress: () => {
     return useMutation({
       mutationFn: usersApis.partProgress,

@@ -6,16 +6,17 @@ import OXSelector from '@/features/quiz/ui/OXSelector';
 import Question from '@/features/quiz/ui/Question';
 import Result from '@/features/quiz/ui/Result';
 import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
+import {
+  ProgressSection,
+  ResponseButton,
+  SubmitSection,
+} from '@/features/quiz/ui/styles';
 import { useElementRect } from '@/features/tutorial/service/hooks';
 import QuizTutorial from '@/features/tutorial/ui/QuizTutorial';
 
 import TutorialClear from '@/features/tutorial/ui/TutorialClear';
 import useModal from '@/hooks/useModal';
-import {
-  ProgressSection,
-  SubmitSection,
-  ResponseButton,
-} from '@/pages/quiz/styles';
+
 import { useClientQuizStore } from '@/store/useClientQuizStore';
 import isEqualArray from '@/utils/isEqualArray';
 import { SwitchCase, useUnmount } from '@modern-kit/react';
@@ -105,11 +106,14 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
           caseBy={{
             result: (
               <Result
+                openModal={openModal}
                 partStatus={'COMPLETED'}
                 quizId={id}
+                onNext={() => {}}
                 isCorrect={isCorrectList[currentPage]}
                 answer={answer}
                 closeModal={closeModal}
+                isQuizFinished={false}
               />
             ),
             tutorialClear: <TutorialClear />,

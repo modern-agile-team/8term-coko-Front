@@ -9,7 +9,6 @@ export const requestInterceptor = (
 
 // 응답 인터셉터
 export const responseInterceptor = (response: AxiosResponse): AxiosResponse => {
-  console.log(response);
   return response;
 };
 
