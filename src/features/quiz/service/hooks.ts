@@ -1,6 +1,7 @@
 import { PartStatus } from '@/features/learn/types';
+import { userHpQuery } from '@/features/user/queries';
 import hljs from 'highlight.js';
-import { DependencyList, useState, useLayoutEffect } from 'react';
+import { DependencyList, useState, useLayoutEffect, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 /**
@@ -69,4 +70,19 @@ export const useLocationQuizState = () => {
     partId: number;
     partStatus: PartStatus;
   };
+};
+
+type useHpUpdate = (isCorrect: boolean) => void;
+export const useHpUpdate: useHpUpdate = isCorrect => {
+  const { mutate: hpUpdate } = userHpQuery.updateHp();
+  const { data: userHp } = userHpQuery.getHp();
+
+  useEffect(() => {
+    if (!isCorrect) {
+      hpUpdate({
+        hp: userHp.hp - 1,
+        hpStorage: userHp.hpStorage,
+      });
+    }
+  }, []);
 };

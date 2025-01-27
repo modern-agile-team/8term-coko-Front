@@ -28,6 +28,16 @@ export const userHpQuery = {
       queryFn: usersApis.getHp,
     });
   },
+  updateHp: () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+      mutationFn: usersApis.patchHp,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.hp() });
+      },
+    });
+  },
 };
 
 export const userProgressQuery = {
