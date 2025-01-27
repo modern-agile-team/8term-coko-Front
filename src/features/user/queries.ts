@@ -5,7 +5,7 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 import usersApis from '@features/user/apis';
-import type { User, ExperiencedUser } from '@features/user/types';
+import type { ExperiencedUser } from '@features/user/types';
 
 const userKeys = {
   all: ['users'] as const,

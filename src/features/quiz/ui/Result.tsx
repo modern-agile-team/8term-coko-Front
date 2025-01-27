@@ -12,8 +12,11 @@ interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
   isCorrect: boolean;
+  openModal: () => void;
   closeModal: () => void;
+  onNext: () => void;
   partStatus: PartStatus;
+  isQuizFinished: boolean;
 }
 
 export default function Result({
@@ -22,6 +25,9 @@ export default function Result({
   isCorrect,
   closeModal,
   partStatus,
+  onNext,
+  openModal,
+  isQuizFinished,
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
@@ -30,12 +36,17 @@ export default function Result({
   const handleOnClick = () => {
     resetUserResponseAnswer();
     closeModal();
-    nextPage();
     if (isLoggedIn(user) && !isCompleted(partStatus)) {
       progressUpdate({
         quizId,
         body: { isCorrect },
       });
+    }
+    if (isQuizFinished) {
+      onNext();
+      openModal();
+    } else {
+      nextPage();
     }
   };
 

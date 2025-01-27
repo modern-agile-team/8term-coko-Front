@@ -1,4 +1,8 @@
 import { PartStatus } from '@/features/learn/types';
+import { isCompleted } from '@/features/quiz/service/quizUtils';
+import { progressQuery } from '@/features/user/queries';
+import { isLoggedIn } from '@/features/user/service/authUtils';
+import useUserStore from '@/store/useUserStore';
 import hljs from 'highlight.js';
 import { DependencyList, useState, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';

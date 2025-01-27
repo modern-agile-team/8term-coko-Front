@@ -23,14 +23,15 @@ import type { Part, PartStatus } from '@features/learn/types';
 import type { ModalType, Quiz } from '@features/quiz/types';
 import { PRELOAD_IMAGES } from '@features/quiz/constants';
 import { isLoggedIn } from '@/features/user/service/authUtils';
-import {
-  ProgressSection,
-  SubmitSection,
-  ResponseButton,
-  GoBackButtonWrapper,
-} from '@/pages/quiz/styles';
+
 import GoBackButton from '@/common/ui/GoBackButton';
 import GoBackPrompt from '@/common/layout/GoBackPrompt';
+import {
+  GoBackButtonWrapper,
+  ProgressSection,
+  ResponseButton,
+  SubmitSection,
+} from '@/features/quiz/ui/styles';
 
 interface QuizProps {
   partStatus: PartStatus;
@@ -65,9 +66,6 @@ export default function QuizContainer({
   useEffect(() => {
     if (isCorrectList.length === 2 && !isLoggedIn(user)) {
       setStep('loginPrompt');
-    }
-    if (isQuizFinished) {
-      setStep('totalResult');
     }
     if (isCorrectList.length !== 0) {
       openModal();
@@ -145,7 +143,10 @@ export default function QuizContainer({
                 quizId={id}
                 isCorrect={isCorrectList[currentPage]}
                 answer={answer}
+                openModal={openModal}
                 closeModal={closeModal}
+                onNext={() => setStep('totalResult')}
+                isQuizFinished={isQuizFinished}
               />
             ),
             loginPrompt: <LoginPrompt onNext={() => setStep('login')} />,
