@@ -119,7 +119,7 @@ export const useUserPointQuery = {
 export const useUserPartProgressQuery = {
   updatePartProgress: () => {
     return useMutation({
-      mutationFn: usersApis.partProgress,
+      mutationFn: usersApis.putPartProgress,
     });
   },
 };

@@ -1,5 +1,5 @@
 import api from '@/axios/instance';
-import type { ExperiencedUser } from '@features/user/types';
+import type { ExperiencedUser, UserProgress } from '@features/user/types';
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 
@@ -35,7 +35,15 @@ const usersApis = {
     await api.patch(`/users/me/point`, { point });
   },
 
-  partProgress: async (params: {
+  getProgress: async (params?: {
+    sectionId?: Section['id'];
+    partId?: Part['id'];
+  }): Promise<UserProgress> => {
+    const response = await api.get('/users/me/progress', { params });
+    return response.data;
+  },
+
+  putPartProgress: async (params: {
     partId: Quiz['partId'];
     partStatus: PartStatus;
   }) => {
@@ -43,14 +51,6 @@ const usersApis = {
     await api.put(`/users/me/part-progress/parts/${partId}`, {
       status: partStatus,
     });
-  },
-
-  getProgress: async (params?: {
-    sectionId?: Section['id'];
-    partId?: Part['id'];
-  }) => {
-    const response = await api.get('/users/me/progress', { params });
-    return response.data;
   },
 };
 

@@ -11,12 +11,37 @@ import ProgressBar from '@features/progress/ui/ProgressBar';
 import SelectSection from '@features/learn/ui/SelectSection';
 import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/learn/ui/PartNavContainer';
+import { useState, useCallback } from 'react';
+import { useUserProgressQuery } from '@features/user/queries';
+import { Section, Part } from '@features/learn/types';
 
 export default function Learn() {
   const showComponents = useScrollVisibility();
-  const progress = 30;
-  const maxProgress = 100;
 
+  // 선택된 파트와 섹션 ID 상태 관리
+  const [selectedPartId, setSelectedPartId] = useState<Part['id'] | undefined>(
+    undefined
+  );
+  const [selectedSectionId, setSelectedSectionId] = useState<
+    Section['id'] | undefined
+  >(undefined);
+
+  // React Query 훅을 이용해 진행도 데이터 페칭
+  const { data: progressData } = useUserProgressQuery.getProgress({
+    partId: selectedPartId,
+    sectionId: selectedSectionId,
+  });
+
+  // PartNavContainer에 전달할 핸들러 함수 정의
+  const handleFetchProgress = useCallback(
+    (partId?: Part['id'], sectionId?: Section['id']) => {
+      setSelectedPartId(partId);
+      setSelectedSectionId(sectionId);
+    },
+    []
+  );
+
+  // 이미지 선로드
   usePreloadImages({ imageUrls: PRELOAD_IMAGES });
 
   return (
@@ -38,8 +63,8 @@ export default function Learn() {
         </S.ScreenReaderOnlyTitle>
         <S.ProgressBarWrapper>
           <ProgressBar
-            $progress={progress}
-            $maxProgress={maxProgress}
+            $progress={progressData?.correctUserProgressCount || 0}
+            $maxProgress={progressData?.totalQuizCount || 0}
             $maxWidth="639px"
             $height="16px"
             $boxBgColor="#85705F"
@@ -50,7 +75,7 @@ export default function Learn() {
           <SelectSection />
         </S.ScrollableContainer>
         <SectionGroup>
-          <PartNavContainer />
+          <PartNavContainer onFetchProgress={handleFetchProgress} />
         </SectionGroup>
       </globalS.Layout>
     </>

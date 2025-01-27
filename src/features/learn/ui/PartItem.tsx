@@ -5,13 +5,14 @@ import usePopover from '@hooks/usePopover';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
 import { COLORS } from '@features/learn/constants';
-import type { Part } from '@features/learn/types';
+import type { Part, Section } from '@features/learn/types';
 
 interface PartItemProps {
   part: Part;
   globalIndex: number;
   isLastButton: boolean;
   onToggleBubble: (isOpen: boolean) => void;
+  onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
 }
 
 export default memo(function PartItem({
@@ -19,6 +20,7 @@ export default memo(function PartItem({
   globalIndex,
   isLastButton,
   onToggleBubble,
+  onFetchProgress,
 }: PartItemProps) {
   const navigate = useNavigate();
   const isLocked = part.status === 'LOCKED';
@@ -35,10 +37,12 @@ export default memo(function PartItem({
     }
   }, [isOpen, isLastButton, onToggleBubble]);
 
-  // KeyboardButton 클릭 시 팝오버 토글 (부모에 중복 전달 X)
+  // KeyboardButton 클릭 시 팝오버 토글 및 진행도 요청
   const handleButtonClick = () => {
     if (!isLocked) {
       togglePopover();
+      // 클릭 시 해당 파트의 진행도 요청
+      onFetchProgress(part.id, part.sectionId);
     }
   };
 

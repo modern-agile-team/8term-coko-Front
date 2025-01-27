@@ -5,8 +5,15 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { sectionsQuery } from '@features/learn/queries';
 import { LoadingSpinner } from '@common/layout/styles';
+import type { Section, Part } from '@features/learn/types';
 
-export default function PartNavContainer() {
+interface PartNavContainerProps {
+  onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
+}
+
+export default function PartNavContainer({
+  onFetchProgress,
+}: PartNavContainerProps) {
   const [isActiveBubble, setIsActiveBubble] = useState(false);
 
   // 무한 스크롤 쿼리
@@ -75,6 +82,7 @@ export default function PartNavContainer() {
                     globalIndex={globalIndex}
                     isLastButton={isLastButton}
                     onToggleBubble={handleToggleBubble}
+                    onFetchProgress={onFetchProgress}
                   />
                 );
               })}
