@@ -26,7 +26,7 @@ export default function TotalResults({
 
   const { data: userExperience, isSuccess } = experienceQuery.getExperience();
   const { mutate: experienceUpdate, isIdle: isExperienceIdle } =
-    experienceQuery.patch();
+    experienceQuery.updateExperience();
   const { mutate: updateProgress, isIdle: isProgressIdle } =
     partProgressQuery.updatePartProgress();
 

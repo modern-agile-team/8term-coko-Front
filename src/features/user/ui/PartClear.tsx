@@ -9,7 +9,7 @@ interface PartClearProps {
   partId: number;
 }
 export default function PartClear({ partId }: PartClearProps) {
-  const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.patch();
+  const { mutate: updatePoint, isIdle: isPointIdle } = pointQuery.updatePoint();
   const { mutate: updatePartProgress, isIdle: isProgressIdle } =
     partProgressQuery.updatePartProgress();
   const navigate = useNavigate();

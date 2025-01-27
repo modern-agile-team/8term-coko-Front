@@ -41,7 +41,7 @@ export const experienceQuery = {
       staleTime: 0,
     });
   },
-  patch: () => {
+  updateExperience: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.patchExperience,
@@ -89,7 +89,7 @@ export const experienceQuery = {
 };
 
 export const pointQuery = {
-  patch: () => {
+  updatePoint: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.patchPoint,
