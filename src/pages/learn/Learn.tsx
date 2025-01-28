@@ -26,7 +26,7 @@ export default function Learn() {
     Section['id'] | undefined
   >(undefined);
 
-  // React Query 훅을 이용해 진행도 데이터 페칭
+  // user(자신)와 progress의 관계 데이터를 가져오는 쿼리
   const { data: progressData } = useUserProgressQuery.getProgress({
     partId: selectedPartId,
     sectionId: selectedSectionId,
@@ -41,7 +41,6 @@ export default function Learn() {
     []
   );
 
-  // 이미지 선로드
   usePreloadImages({ imageUrls: PRELOAD_IMAGES });
 
   return (
