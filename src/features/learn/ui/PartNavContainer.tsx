@@ -1,10 +1,12 @@
 import * as S from '@features/learn/ui/styles';
 import PartItem from '@features/learn/ui/PartItem';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import useUserStore from '@store/useUserStore';
 import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
 import { sectionsQuery } from '@features/learn/queries';
 import { LoadingSpinner } from '@common/layout/styles';
+import { isLoggedIn } from '@features/user/service/authUtils';
 import type { Section, Part } from '@features/learn/types';
 
 interface PartNavContainerProps {
@@ -15,10 +17,14 @@ export default function PartNavContainer({
   onFetchProgress,
 }: PartNavContainerProps) {
   const [isActiveBubble, setIsActiveBubble] = useState(false);
+  const { user } = useUserStore();
 
-  // 무한 스크롤 쿼리
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    sectionsQuery.getByPage();
+  // 로그인 상태에 따라 섹션 쿼리 선택
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = isLoggedIn(
+    user
+  )
+    ? sectionsQuery.getUserByPage()
+    : sectionsQuery.getByPage();
 
   // 스크롤 감지를 위한 Intersection Observer
   const { ref, inView } = useInView({ threshold: 0 });
