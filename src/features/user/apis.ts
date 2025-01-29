@@ -5,51 +5,39 @@ import type { Quiz } from '@features/quiz/types';
 
 const usersApis = {
   putQuizzesProgress: ({
-    userId,
     quizId,
     body,
   }: {
-    userId: number;
     quizId: number;
     body: Record<'isCorrect', boolean>;
-  }) =>
-    api.put<Promise<void>>(`/users/${userId}/progress/quizzes/${quizId}`, body),
-  getExperience: async (id: User['id']): Promise<ExperiencedUser> => {
-    const response = await api.get(`/users/${id}/experience`);
+  }) => api.put<Promise<void>>(`/users/me/progress/quizzes/${quizId}`, body),
+
+  getExperience: async (): Promise<ExperiencedUser> => {
+    const response = await api.get(`/users/me/experience`);
     return response.data;
   },
 
-  patchExperience: async (params: {
-    id: User['id'];
-    experience: number;
-  }): Promise<void> => {
-    const { id, experience } = params;
-    await api.patch(`/users/${id}/experience`, { experience });
+  patchExperience: async (params: { experience: number }): Promise<void> => {
+    const { experience } = params;
+    await api.patch(`/users/me/experience`, { experience });
   },
-  getQuizzes: async (params: {
-    id: User['id'];
-    partId: Quiz['partId'];
-  }): Promise<Quiz[]> => {
-    const { id, partId } = params;
-    const response = await api.get(`/quizzes/users/${id}/incorrect`, {
+  getQuizzes: async (params: { partId: Quiz['partId'] }): Promise<Quiz[]> => {
+    const { partId } = params;
+    const response = await api.get(`/users/me/quizzes/incorrect`, {
       params: { partId },
     });
     return response.data;
   },
-  patchPoint: async (params: {
-    id: User['id'];
-    point: number;
-  }): Promise<void> => {
-    const { id, point } = params;
-    await api.patch(`/users/${id}/point`, { point });
+  patchPoint: async (params: { point: number }): Promise<void> => {
+    const { point } = params;
+    await api.patch(`/users/me/point`, { point });
   },
   partProgress: async (params: {
-    userId: User['id'];
     partId: Quiz['partId'];
     partStatus: PartStatus;
   }) => {
-    const { userId, partId, partStatus } = params;
-    await api.put(`/users/${userId}/part-progress/parts/${partId}`, {
+    const { partId, partStatus } = params;
+    await api.put(`/users/me/part-progress/parts/${partId}`, {
       status: partStatus,
     });
   },

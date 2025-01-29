@@ -1,6 +1,6 @@
 import { isMobile } from '@modern-kit/utils';
 import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
-import { userHpQuery, userProgressQuery } from '@features/user/queries';
+import { progressQuery } from '@features/user/queries';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import useUserStore from '@store/useUserStore';
 import type { PartStatus } from '@features/learn/types';
@@ -13,8 +13,11 @@ interface ResultProps {
   quizId: Quiz['id'];
   answer: Quiz['answer'];
   isCorrect: boolean;
+  openModal: () => void;
   closeModal: () => void;
+  onNext: () => void;
   partStatus: PartStatus;
+  isQuizFinished: boolean;
 }
 
 export default function Result({
@@ -23,21 +26,28 @@ export default function Result({
   isCorrect,
   closeModal,
   partStatus,
+  onNext,
+  openModal,
+  isQuizFinished,
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
-  const { mutate: progressUpdate } = userProgressQuery.updatePartProgress();
-  useHpUpdate(isCorrect);
+  const { mutate: progressUpdate } = progressQuery.put();
+
   const handleOnClick = () => {
     resetUserResponseAnswer();
     closeModal();
-    nextPage();
     if (isLoggedIn(user) && !isCompleted(partStatus)) {
       progressUpdate({
-        userId: user.id,
         quizId,
         body: { isCorrect },
       });
+    }
+    if (isQuizFinished) {
+      onNext();
+      openModal();
+    } else {
+      nextPage();
     }
   };
 

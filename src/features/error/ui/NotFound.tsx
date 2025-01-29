@@ -1,8 +1,9 @@
-import { FallbackProps } from 'react-error-boundary';
 import { Link } from 'react-router-dom';
+
 interface NotFoundProps {
   error?: Error;
 }
+
 export default function NotFound({ error }: NotFoundProps) {
   return (
     <div>

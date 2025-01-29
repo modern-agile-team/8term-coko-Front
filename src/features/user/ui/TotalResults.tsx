@@ -4,9 +4,11 @@ import useUserStore from '@store/useUserStore';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useNavigate } from 'react-router-dom';
 import { useTimeout } from '@modern-kit/react';
-import { experienceQuery, partProgressQuery } from '@features/user/queries';
+import {
+  useUserExperienceQuery,
+  useUserPartProgressQuery,
+} from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
-import type { User } from '@features/user/types';
 import type { Quiz } from '@features/quiz/types';
 import type { PartStatus } from '@features/learn/types';
 import { isCompleted } from '@/features/quiz/service/quizUtils';
@@ -24,13 +26,13 @@ export default function TotalResults({
   partStatus,
 }: TotalResultProps) {
   const { isCorrectList } = useClientQuizStore();
-  const { user } = useUserStore() as { user: User };
 
-  const { data: userExperience, isSuccess } = experienceQuery.get(user?.id);
-  const { mutate: experienceUpdate, isIdle: isexperienceIdle } =
-    experienceQuery.patch();
+  const { data: userExperience, isSuccess } =
+    useUserExperienceQuery.getExperience();
+  const { mutate: experienceUpdate, isIdle: isExperienceIdle } =
+    useUserExperienceQuery.updateExperience();
   const { mutate: updateProgress, isIdle: isProgressIdle } =
-    partProgressQuery.updatePartProgress();
+    useUserPartProgressQuery.updatePartProgress();
 
   const navigate = useNavigate();
 
@@ -40,9 +42,9 @@ export default function TotalResults({
 
   useTimeout(
     () => {
-      experienceUpdate({ id: user.id, experience });
+      experienceUpdate({ experience });
       !isCompleted(partStatus) &&
-        updateProgress({ partId, userId: user.id, partStatus: 'IN_PROGRESS' });
+        updateProgress({ partId, partStatus: 'IN_PROGRESS' });
     },
     { delay: 1000, enabled: isSuccess }
   );
@@ -105,8 +107,8 @@ export default function TotalResults({
       </S.TotalResultsRewardDiv>
       <S.DashLineHr $color="#00DCE8" />
       <S.RedirectToLearnButton
-        disabled={isexperienceIdle && isProgressIdle}
-        $isActive={isexperienceIdle && isProgressIdle}
+        disabled={isExperienceIdle && isProgressIdle}
+        $isActive={isExperienceIdle && isProgressIdle}
         $margin="35px 86px 0 0"
         onClick={handleOnClick}
       >
