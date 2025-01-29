@@ -1,6 +1,6 @@
 import { isMobile } from '@modern-kit/utils';
 import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
-import { progressQuery } from '@features/user/queries';
+import { useUserProgressQuery } from '@features/user/queries';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import useUserStore from '@store/useUserStore';
 import type { PartStatus } from '@features/learn/types';
@@ -32,7 +32,8 @@ export default function Result({
 }: ResultProps) {
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
-  const { mutate: progressUpdate } = progressQuery.put();
+  const { mutate: progressUpdate } = useUserProgressQuery.updateQuizProgress();
+  useHpUpdate(isCorrect);
 
   const handleOnClick = () => {
     resetUserResponseAnswer();

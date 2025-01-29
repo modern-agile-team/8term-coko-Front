@@ -2,6 +2,7 @@ import api from '@/axios/instance';
 import type { User, ExperiencedUser, UserHp } from '@features/user/types';
 import type { PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
+import { AxiosError } from 'axios';
 
 const usersApis = {
   putQuizzesProgress: ({
@@ -45,7 +46,7 @@ const usersApis = {
     const response = await api.get('users/me/hp');
     return response.data;
   },
-  patchHp: async (params: { hp: number; hpStorage: number }) =>
+  patchHp: async (params: { hp: number; hpStorage: number }): Promise<void> =>
     await api.patch('/users/me/hp', params),
 };
 
