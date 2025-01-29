@@ -4,13 +4,13 @@ import type { SectionPagination } from '@features/learn/types';
 
 const sectionKeys = {
   all: ['sections'] as const,
-  lists: () => [...sectionKeys.all, 'list'] as const,
-  details: (id: number) => [...sectionKeys.all, 'detail', id] as const,
+  list: () => [...sectionKeys.all, 'list'] as const,
+  detail: (id: number) => [...sectionKeys.all, 'detail', id] as const,
   paginated: () => [...sectionKeys.all, 'paginated'] as const,
   userPaginated: () => [...sectionKeys.all, 'userPaginated'] as const,
 };
 
-// 쿼리 생성 공통 함수: 섹션 데이터 페이지네이션 (무한 스크롤)
+// 무한 스크롤용(페이지네이션) 섹션 쿼리 생성 함수
 const createInfiniteSectionQuery = (
   queryKey:
     | ReturnType<typeof sectionKeys.paginated>
@@ -28,24 +28,28 @@ const createInfiniteSectionQuery = (
     });
 };
 
-export const sectionsQuery = {
-  get: (id: number) =>
+export const useSectionDetailQuery = {
+  getSection: (id: number) =>
     useSuspenseQuery({
-      queryKey: sectionKeys.details(id),
+      queryKey: sectionKeys.detail(id),
       queryFn: () => sectionsApis.getSection(id),
     }),
+};
 
-  getAll: () =>
+export const useSectionListQuery = {
+  getAllSections: () =>
     useSuspenseQuery({
-      queryKey: sectionKeys.lists(),
+      queryKey: sectionKeys.list(),
       queryFn: sectionsApis.getAllSections,
     }),
+};
 
-  getByPage: createInfiniteSectionQuery(
+export const useSectionPaginationQuery = {
+  getSectionsByPage: createInfiniteSectionQuery(
     sectionKeys.paginated(),
     sectionsApis.getSectionsByPage
   ),
-  getUserByPage: createInfiniteSectionQuery(
+  getUserSectionsByPage: createInfiniteSectionQuery(
     sectionKeys.userPaginated(),
     sectionsApis.getUserSectionsByPage
   ),

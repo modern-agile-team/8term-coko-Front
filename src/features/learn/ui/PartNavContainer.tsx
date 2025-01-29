@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import useUserStore from '@store/useUserStore';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import { sectionsQuery } from '@features/learn/queries';
+import { useSectionPaginationQuery } from '@features/learn/queries';
 import { LoadingSpinner } from '@common/layout/styles';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import type { Section, Part } from '@features/learn/types';
@@ -23,8 +23,8 @@ export default function PartNavContainer({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = isLoggedIn(
     user
   )
-    ? sectionsQuery.getUserByPage()
-    : sectionsQuery.getByPage();
+    ? useSectionPaginationQuery.getUserSectionsByPage()
+    : useSectionPaginationQuery.getSectionsByPage();
 
   // 스크롤 감지를 위한 Intersection Observer
   const { ref, inView } = useInView({ threshold: 0 });

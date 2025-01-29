@@ -1,5 +1,5 @@
 import api from '@/axios/instance';
-import type { Section, SectionPagination } from '@/features/learn/types';
+import type { Section, SectionPagination } from '@features/learn/types';
 
 // 공통 함수: 페이지네이션 섹션 데이터 가져오기 (무한 스크롤)
 const createGetSectionsByPage = (endpoint: string) => {
