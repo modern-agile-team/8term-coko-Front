@@ -3,7 +3,7 @@ import { useUserHpQuery } from '@/features/user/queries';
 import useUserStore from '@/store/useUserStore';
 import { getImageUrl } from '@/utils/getImageUrl';
 
-export default function HeaderItemContainer() {
+export default function UserPresentHeaderItemContainer() {
   const { user } = useUserStore();
   const { data: userHp } = useUserHpQuery.getHp();
 

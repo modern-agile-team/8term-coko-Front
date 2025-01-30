@@ -9,7 +9,7 @@ import useUserStore from '@store/useUserStore';
 import Login from '@features/auth/ui/Login';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import { authQuery } from '@features/auth/queries';
-import HeaderItemContainer from '@/common/layout/HeaderItemContainer';
+import UserPresentHeaderItemContainer from '@/common/layout/UserPresentHeaderItemContainer';
 import HeaderErrorBoundary from '@/features/error/ui/HeaderErrorBoundary';
 
 export default function Header() {
@@ -47,7 +47,7 @@ export default function Header() {
   return (
     <HeaderBox>
       <HeaderErrorBoundary>
-        <HeaderItemContainer />
+        <UserPresentHeaderItemContainer />
       </HeaderErrorBoundary>
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
         <ProfileImage isIcon={true} />
