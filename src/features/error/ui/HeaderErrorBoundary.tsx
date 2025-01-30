@@ -2,13 +2,9 @@ import { isAxiosError } from 'axios';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
-interface QueryErrorBoundaryProps {
-  children: React.ReactNode;
-}
+import { PropsWithChildren } from 'react';
 
-export default function HeaderErrorBoundary({
-  children,
-}: QueryErrorBoundaryProps) {
+export default function HeaderErrorBoundary({ children }: PropsWithChildren) {
   return (
     <ErrorBoundary
       fallback={<></>}
