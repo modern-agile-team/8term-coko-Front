@@ -46,7 +46,7 @@ const usersApis = {
     const response = await api.get('users/me/hp');
     return response.data;
   },
-  patchHp: async (params: { hp: number; hpStorage: number }): Promise<void> =>
+  patchHp: async (params: Omit<UserHp, 'id'>): Promise<void> =>
     await api.patch('/users/me/hp', params),
 };
 
