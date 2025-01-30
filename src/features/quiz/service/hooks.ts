@@ -1,8 +1,8 @@
 import { PartStatus } from '@/features/learn/types';
 import { useUserHpQuery } from '@/features/user/queries';
-import { isAxiosError } from 'axios';
 import hljs from 'highlight.js';
 import { DependencyList, useState, useLayoutEffect, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 /**
@@ -82,7 +82,7 @@ export const useHpUpdate: useHpUpdate = isCorrect => {
 
   useEffect(() => {
     if (Number(userHp.hp) === 0) {
-      alert('목숨이 다 소진되었습니다.');
+      toast('목숨이 다 소진되었습니다.');
       navigate('/');
     }
     if (!isCorrect) {
@@ -91,5 +91,5 @@ export const useHpUpdate: useHpUpdate = isCorrect => {
         hpStorage: userHp.hpStorage,
       });
     }
-  }, [userHp.hp, isCorrect]);
+  }, [isCorrect]);
 };
