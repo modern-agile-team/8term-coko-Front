@@ -21,6 +21,7 @@ export const useUserHpQuery = {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
       queryFn: usersApis.getHp,
+      retry: 0,
     });
   },
   updateHp: () => {

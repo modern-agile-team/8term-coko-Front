@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -9,8 +10,16 @@ export default function HeaderErrorBoundary({
   children,
 }: QueryErrorBoundaryProps) {
   return (
-    <Suspense fallback={<></>}>
-      <ErrorBoundary fallback={<></>}>{children}</ErrorBoundary>
-    </Suspense>
+    <ErrorBoundary
+      fallback={<></>}
+      onError={error => {
+        if (isAxiosError(error) && error.response?.status === 401) {
+          return;
+        }
+        throw error;
+      }}
+    >
+      <Suspense fallback={<></>}>{children} </Suspense>
+    </ErrorBoundary>
   );
 }
