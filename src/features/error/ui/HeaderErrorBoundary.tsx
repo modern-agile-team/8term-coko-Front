@@ -19,7 +19,7 @@ export default function HeaderErrorBoundary({
         throw error;
       }}
     >
-      <Suspense fallback={<></>}>{children} </Suspense>
+      <Suspense fallback={<></>}>{children}</Suspense>
     </ErrorBoundary>
   );
 }
