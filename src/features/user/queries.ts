@@ -11,6 +11,7 @@ import type { Section, Part } from '@features/learn/types';
 const userKeys = {
   all: ['users'] as const,
   me: () => [...userKeys.all, 'me'] as const,
+  hp: () => [...userKeys.me(), 'hp'] as const,
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
@@ -20,28 +21,21 @@ const userKeys = {
       : ([...userKeys.me(), 'progress'] as const),
 };
 
-export const useUserProgressQuery = {
-  getProgress: (params?: {
-    sectionId?: Section['id'];
-    partId?: Part['id'];
-  }) => {
-    return useQuery({
-      queryKey: userKeys.progress(params?.sectionId, params?.partId),
-      queryFn: () => usersApis.getProgress(params),
+export const useUserHpQuery = {
+  getHp: () => {
+    return useSuspenseQuery({
+      queryKey: userKeys.hp(),
+      queryFn: usersApis.getHp,
+      retry: 0,
     });
   },
-  updateQuizProgress: () => {
-    return useMutation({ mutationFn: usersApis.putQuizzesProgress });
-  },
-};
-
-export const useUserQuizzesQuery = {
-  getQuizzes: ({ partId }: { partId: number }) => {
-    return useSuspenseQuery({
-      queryKey: userKeys.partQuizzes(partId),
-      queryFn: () => usersApis.getQuizzes({ partId }),
-      gcTime: 0,
-      staleTime: 0,
+  updateHp: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.patchHp,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.hp() });
+      },
     });
   },
 };
@@ -102,6 +96,17 @@ export const useUserExperienceQuery = {
   },
 };
 
+export const useUserQuizzesQuery = {
+  getQuizzes: ({ partId }: { partId: number }) => {
+    return useSuspenseQuery({
+      queryKey: userKeys.partQuizzes(partId),
+      queryFn: () => usersApis.getQuizzes({ partId }),
+      gcTime: 0,
+      staleTime: 0,
+    });
+  },
+};
+
 export const useUserPointQuery = {
   updatePoint: () => {
     const queryClient = useQueryClient();
@@ -121,5 +126,20 @@ export const useUserPartProgressQuery = {
     return useMutation({
       mutationFn: usersApis.putPartProgress,
     });
+  },
+};
+
+export const useUserProgressQuery = {
+  getProgress: (params?: {
+    sectionId?: Section['id'];
+    partId?: Part['id'];
+  }) => {
+    return useQuery({
+      queryKey: userKeys.progress(params?.sectionId, params?.partId),
+      queryFn: () => usersApis.getProgress(params),
+    });
+  },
+  updateQuizProgress: () => {
+    return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
 };

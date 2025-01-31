@@ -1,16 +1,16 @@
 import * as S from '@common/ui/styles';
 import { HeaderBox } from './styles';
-import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
 import { useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
 import usePopover from '@hooks/usePopover';
 import useUserStore from '@store/useUserStore';
-import HeaderItem from '@common/ui/HeaderItem';
 import Login from '@features/auth/ui/Login';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import { authQuery } from '@features/auth/queries';
+import UserPresentHeaderItemContainer from '@/common/layout/UserPresentHeaderItemContainer';
+import HeaderErrorBoundary from '@/features/error/ui/HeaderErrorBoundary';
 
 export default function Header() {
   const { user, clearUser } = useUserStore();
@@ -46,20 +46,9 @@ export default function Header() {
 
   return (
     <HeaderBox>
-      {user && (
-        <>
-          <HeaderItem
-            icon={getImageUrl('포인트.svg')}
-            point={user.point}
-            color={'#FFCD35'}
-          />
-          <HeaderItem
-            icon={getImageUrl('과일바구니.svg')}
-            point={5}
-            color={'#FE0F0F'}
-          />
-        </>
-      )}
+      <HeaderErrorBoundary>
+        <UserPresentHeaderItemContainer />
+      </HeaderErrorBoundary>
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
         <ProfileImage isIcon={true} />
         {user && isOpen && (

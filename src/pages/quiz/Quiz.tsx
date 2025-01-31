@@ -1,6 +1,6 @@
 import Header from '@/common/layout/Header';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
-import { useLocationQuizState } from '@/features/quiz/service/hooks';
+import { useLocationQuizState } from '@/features/quiz/hooks';
 import QuizContainer from '@/features/quiz/ui/QuizContainer';
 import { AlignCenter, HeaderSection } from '@/pages/quiz/styles';
 

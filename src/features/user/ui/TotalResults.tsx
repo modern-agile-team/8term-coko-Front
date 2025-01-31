@@ -11,7 +11,7 @@ import {
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { Quiz } from '@features/quiz/types';
 import type { PartStatus } from '@features/learn/types';
-import { isCompleted } from '@/features/quiz/service/quizUtils';
+import { isCompleted } from '@/features/quiz/utils';
 
 interface TotalResultProps {
   onNext: () => void;

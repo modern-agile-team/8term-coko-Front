@@ -15,6 +15,11 @@ export interface ExperiencedUser extends User {
   experienceForNextLevel: number;
 }
 
+export interface UserHp extends Pick<User, 'id'> {
+  hp: number;
+  hpStorage: number;
+}
+
 export interface UserProgress {
   totalQuizCount: number;
   totalUserProgressCount: number;

@@ -1,5 +1,9 @@
 import api from '@/axios/instance';
-import type { ExperiencedUser, UserProgress } from '@features/user/types';
+import type {
+  ExperiencedUser,
+  UserProgress,
+  UserHp,
+} from '@features/user/types';
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 
@@ -52,6 +56,12 @@ const usersApis = {
       status: partStatus,
     });
   },
+  getHp: async (): Promise<UserHp> => {
+    const response = await api.get('users/me/hp');
+    return response.data;
+  },
+  patchHp: async (params: Omit<UserHp, 'id'>): Promise<void> =>
+    await api.patch('/users/me/hp', params),
 };
 
 export default usersApis;
