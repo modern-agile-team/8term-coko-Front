@@ -6,7 +6,8 @@ import useUserStore from '@store/useUserStore';
 import type { PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import { isLoggedIn } from '@features/user/service/authUtils';
-import { isCompleted } from '@features/quiz/service/quizUtils';
+import { isCompleted } from '@/features/quiz/utils';
+import { useHpUpdate } from '@/features/quiz/hooks';
 
 interface ResultProps {
   quizId: Quiz['id'];
@@ -32,6 +33,7 @@ export default function Result({
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
   const { mutate: progressUpdate } = useUserProgressQuery.updateQuizProgress();
+  useHpUpdate(isCorrect);
 
   const handleOnClick = () => {
     resetUserResponseAnswer();

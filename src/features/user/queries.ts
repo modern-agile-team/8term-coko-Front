@@ -11,8 +11,28 @@ const userKeys = {
   all: ['users'] as const,
   detail: () => [...userKeys.all, 'me'] as const,
   experience: () => [...userKeys.detail(), 'experience'] as const,
-  quizzes: () => [...userKeys.detail(), 'quizzes'],
-  partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
+  quizzes: () => [...userKeys.detail(), 'quizzes'] as const,
+  partQuizzes: (partId: number) => [...userKeys.quizzes(), partId] as const,
+  hp: () => [...userKeys.detail(), 'hp'] as const,
+};
+
+export const useUserHpQuery = {
+  getHp: () => {
+    return useSuspenseQuery({
+      queryKey: userKeys.hp(),
+      queryFn: usersApis.getHp,
+      retry: 0,
+    });
+  },
+  updateHp: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.patchHp,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.hp() });
+      },
+    });
+  },
 };
 
 export const useUserProgressQuery = {
