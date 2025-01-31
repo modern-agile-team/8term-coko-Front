@@ -3,6 +3,7 @@ import { media } from '@style/media';
 
 interface ScrollableContainerProps {
   $show: boolean;
+  $isLoggedIn: boolean;
 }
 
 export const ScrollableContainer = styled.div<ScrollableContainerProps>`
@@ -14,6 +15,11 @@ export const ScrollableContainer = styled.div<ScrollableContainerProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: ${({ $isLoggedIn }) => ($isLoggedIn ? '45px' : '25px')};
+
+  ${media.mobile} {
+    margin-top: ${({ $isLoggedIn }) => ($isLoggedIn ? '0' : '-20px')};
+  }
 `;
 
 export const SectionGroup = styled.div`

@@ -77,7 +77,10 @@ export default function Learn() {
             />
           </S.ProgressBarWrapper>
         )}
-        <S.ScrollableContainer $show={showComponents}>
+        <S.ScrollableContainer
+          $show={showComponents}
+          $isLoggedIn={isLoggedIn(user)}
+        >
           <SelectSection />
         </S.ScrollableContainer>
         <SectionGroup>
