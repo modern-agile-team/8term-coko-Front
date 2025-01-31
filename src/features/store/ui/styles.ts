@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import type { CosmeticItem } from '@features/store/types';
+import { media } from '@/style/media';
 
 export const ItemContainer = styled.ul<{ $category: CosmeticItem['category'] }>`
   margin: 18px 0 27px 0;
@@ -18,6 +19,10 @@ export const ItemContainer = styled.ul<{ $category: CosmeticItem['category'] }>`
       grid-template-columns: repeat(3, 180px);
       grid-template-rows: repeat(1, 217px);
     `}
+
+  ${media.mobile} {
+    grid-template-columns: repeat(2, 144px);
+  }
 `;
 
 export const StoreItem = styled.li`
@@ -94,7 +99,7 @@ export const PaginationButton = styled.button<{ $isSelect: boolean }>`
     `}
 `;
 
-export const StoreCartListWrapper = styled.ul`
+export const CartListItemWrapper = styled.ul`
   display: flex;
   overflow-y: auto;
   margin: 26px 0 0 0;
@@ -137,4 +142,41 @@ export const PlaceLabel = styled.label`
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
+`;
+
+export const CartListWrapper = styled.section`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 194px;
+  height: 596px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 3px #e5e5e5;
+  margin: 84px 47px 0 0;
+  color: #fff;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+  ${media.mobile} {
+    display: none;
+  }
+`;
+export const CartLabel = styled.label`
+  margin: 18px 0 0 0;
+  display: block;
+  width: 147.003px;
+  height: 28.004px;
+  border-radius: 15px;
+  border: 2px solid #f09900;
+  background: #ffb53d;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 171.429% */
 `;

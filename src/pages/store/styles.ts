@@ -1,38 +1,6 @@
+import { media } from '@/style/media';
 import { css, styled } from 'styled-components';
 
-export const CartListWrapper = styled.section`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 194px;
-  height: 596px;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 3px #e5e5e5;
-  margin: 84px 47px 0 0;
-  color: #fff;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0.2px;
-`;
-export const CartLabel = styled.label`
-  margin: 18px 0 0 0;
-  display: block;
-  width: 147.003px;
-  height: 28.004px;
-  border-radius: 15px;
-  border: 2px solid #f09900;
-  background: #ffb53d;
-  color: #fff;
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 171.429% */
-`;
 export const MyCharacterSection = styled.section`
   display: flex;
   width: 683px;
@@ -53,6 +21,24 @@ export const MyCharacterSection = styled.section`
     flex-direction: column;
     gap: 9px;
   }
+  > div:nth-last-of-type(1) {
+    display: none;
+  }
+  ${media.mobile} {
+    width: 90%;
+    gap: 0px;
+    height: 244px;
+    > div:nth-last-of-type(2) {
+      position: absolute;
+      padding-top: 80px;
+      left: 30%;
+    }
+    > div:nth-last-of-type(1) {
+      display: block;
+      align-self: flex-end;
+      margin: 0 16px 10px auto;
+    }
+  }
 `;
 
 export const StoreItemListSection = styled.section`
@@ -65,6 +51,9 @@ export const StoreItemListSection = styled.section`
   background: #fff;
   margin: 26px 0 0 0;
   box-shadow: 0 3px #e5e5e5;
+  ${media.mobile} {
+    width: 90%;
+  }
 `;
 
 export const FilterListContainer = styled.div`
@@ -79,6 +68,11 @@ export const FilterListContainer = styled.div`
   line-height: 20px;
   color: #ff4949;
   text-transform: lowercase;
+  ${media.mobile} {
+    gap: 5px;
+    padding: 18px 0 19px 0;
+    align-self: center;
+  }
 `;
 export const FilterButton = styled.button<{ $isSelect: boolean }>`
   width: 79px;
@@ -101,14 +95,20 @@ export const RedLine = styled.hr`
   width: 632px;
   height: 2px;
   border-color: #ff4949;
+  ${media.mobile} {
+    width: 90%;
+  }
 `;
-
-export const Button = styled.button`
+interface StoreButtonProps {
+  $backgroundColor: string;
+  $borderColor: string;
+}
+export const StoreButton = styled.button<StoreButtonProps>`
   width: 121px;
   height: 23px;
   border-radius: 15px;
-  border: 2px solid #e8080c;
-  background: #ff4949;
+  border: 2px solid ${({ $borderColor }) => $borderColor};
+  background: ${({ $backgroundColor }) => $backgroundColor};
   color: inherit;
   font: inherit;
 `;

@@ -36,12 +36,15 @@ const testItem: CosmeticItem[] = [
 export default function CartList() {
   return (
     <>
-      <S.StoreCartListWrapper>
-        {testItem.map(item => (
-          <StoreItem key={item.id} {...item} />
-        ))}
-      </S.StoreCartListWrapper>
-      <S.PlaceLabel>총 1500포인트</S.PlaceLabel>
+      <S.CartListWrapper>
+        <S.CartLabel>장바구니</S.CartLabel>
+        <S.CartListItemWrapper>
+          {testItem.map(item => (
+            <StoreItem key={item.id} {...item} />
+          ))}
+        </S.CartListItemWrapper>
+        <S.PlaceLabel>총 1500포인트</S.PlaceLabel>
+      </S.CartListWrapper>
     </>
   );
 }

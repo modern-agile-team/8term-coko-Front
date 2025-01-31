@@ -38,23 +38,32 @@ export default function Store() {
         </globalS.LeftSection>
         <globalS.RightSection>
           <Header />
-          <S.CartListWrapper>
-            <S.CartLabel>장바구니</S.CartLabel>
-            <CartList />
-          </S.CartListWrapper>
+
+          <CartList />
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
         <S.MyCharacterSection>
           <div>
-            <S.Button>내가 구매한 아이템</S.Button>
-            <S.Button>초기화</S.Button>
+            <S.StoreButton $backgroundColor="#49FF87" $borderColor="#01F152">
+              내가 구매한 아이템
+            </S.StoreButton>
+            <S.StoreButton $backgroundColor="#FF4949" $borderColor="#E8080C">
+              초기화
+            </S.StoreButton>
           </div>
-          {itemQuery === 'profile' ? (
-            <ProfileImage isIcon={false} />
-          ) : (
-            <MyCharacter />
-          )}
+          <div>
+            {itemQuery === 'profile' ? (
+              <ProfileImage isIcon={false} />
+            ) : (
+              <MyCharacter />
+            )}
+          </div>
+          <div>
+            <S.StoreButton $backgroundColor="#FFB53D" $borderColor="#F09900">
+              장바구니
+            </S.StoreButton>
+          </div>
         </S.MyCharacterSection>
         <S.StoreItemListSection>
           <S.FilterListContainer>
