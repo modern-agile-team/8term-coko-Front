@@ -1,7 +1,6 @@
 import { isAxiosError } from 'axios';
 import { Suspense } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-
 import { PropsWithChildren } from 'react';
 
 export default function HeaderErrorBoundary({ children }: PropsWithChildren) {

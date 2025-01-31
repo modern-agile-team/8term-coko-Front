@@ -56,10 +56,12 @@ const usersApis = {
       status: partStatus,
     });
   },
+
   getHp: async (): Promise<UserHp> => {
     const response = await api.get('users/me/hp');
     return response.data;
   },
+
   patchHp: async (params: Omit<UserHp, 'id'>): Promise<void> =>
     await api.patch('/users/me/hp', params),
 };

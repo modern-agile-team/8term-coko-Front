@@ -14,6 +14,8 @@ import PartNavContainer from '@features/learn/ui/PartNavContainer';
 import { useState, useCallback } from 'react';
 import { useUserProgressQuery } from '@features/user/queries';
 import { Section, Part } from '@features/learn/types';
+import useUserStore from '@store/useUserStore';
+import { isLoggedIn } from '@features/user/service/authUtils';
 
 export default function Learn() {
   const showComponents = useScrollVisibility();
@@ -26,11 +28,14 @@ export default function Learn() {
     Section['id'] | undefined
   >(undefined);
 
-  // user(자신)와 progress의 관계 데이터를 가져오는 쿼리
-  const { data: progressData } = useUserProgressQuery.getProgress({
-    partId: selectedPartId,
-    sectionId: selectedSectionId,
-  });
+  const { user } = useUserStore();
+  // 로그인된 경우에만 user(자신)와 progress의 관계 데이터를 가져오기
+  const { data: progressData } = isLoggedIn(user)
+    ? useUserProgressQuery.getProgress({
+        partId: selectedPartId,
+        sectionId: selectedSectionId,
+      })
+    : { data: null };
 
   // PartNavContainer에 전달할 핸들러 함수 정의
   const handleFetchProgress = useCallback(
@@ -60,16 +65,18 @@ export default function Learn() {
         <S.ScreenReaderOnlyTitle>
           코코와 함께 코딩 마스터하기!
         </S.ScreenReaderOnlyTitle>
-        <S.ProgressBarWrapper>
-          <ProgressBar
-            $progress={progressData?.correctUserProgressCount || 0}
-            $maxProgress={progressData?.totalQuizCount || 0}
-            $maxWidth="639px"
-            $height="16px"
-            $boxBgColor="#85705F"
-            $innerBgColor="#BFD683"
-          />
-        </S.ProgressBarWrapper>
+        {isLoggedIn(user) && (
+          <S.ProgressBarWrapper>
+            <ProgressBar
+              $progress={progressData?.correctUserProgressCount || 0}
+              $maxProgress={progressData?.totalQuizCount || 0}
+              $maxWidth="639px"
+              $height="16px"
+              $boxBgColor="#85705F"
+              $innerBgColor="#BFD683"
+            />
+          </S.ProgressBarWrapper>
+        )}
         <S.ScrollableContainer $show={showComponents}>
           <SelectSection />
         </S.ScrollableContainer>
