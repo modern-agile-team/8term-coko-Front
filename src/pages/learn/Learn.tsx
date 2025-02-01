@@ -40,12 +40,12 @@ export default function Learn() {
   // PartNavContainer에 전달할 핸들러 함수 정의
   const handleFetchProgress = useCallback(
     (partId?: Part['id'], sectionId?: Section['id']) => {
-      setSelectedPartId(partId);
-      setSelectedSectionId(sectionId);
+      // undefined가 전달되면 상태 초기화
+      setSelectedPartId(partId ?? undefined);
+      setSelectedSectionId(sectionId ?? undefined);
     },
     []
   );
-
   usePreloadImages({ imageUrls: PRELOAD_IMAGES });
 
   return (
@@ -69,7 +69,7 @@ export default function Learn() {
           <S.ProgressBarWrapper>
             <ProgressBar
               $progress={progressData?.correctUserProgressCount || 0}
-              $maxProgress={progressData?.totalQuizCount || 0}
+              $maxProgress={Math.max(progressData?.totalQuizCount || 0, 1)}
               $maxWidth="639px"
               $height="16px"
               $boxBgColor="#85705F"

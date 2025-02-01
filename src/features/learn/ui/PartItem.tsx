@@ -37,6 +37,16 @@ export default memo(function PartItem({
     }
   }, [isOpen, isLastButton, onToggleBubble]);
 
+  useEffect(() => {
+    if (isOpen) {
+      // 팝오버 열릴 때 해당 파트 정보 전달
+      onFetchProgress(part.id, part.sectionId);
+    } else {
+      // 팝오버 닫힐 때 전체 progress 요청
+      onFetchProgress(undefined, undefined);
+    }
+  }, [isOpen, onFetchProgress, part.id, part.sectionId]);
+
   // KeyboardButton 클릭 시 팝오버 토글 및 진행도 요청
   const handleButtonClick = () => {
     if (!isLocked) {
