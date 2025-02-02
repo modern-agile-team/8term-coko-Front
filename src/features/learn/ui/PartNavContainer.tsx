@@ -1,39 +1,31 @@
+// @features/learn/ui/PartNavContainer.tsx
 import * as S from '@features/learn/ui/styles';
 import PartItem from '@features/learn/ui/PartItem';
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import useUserStore from '@store/useUserStore';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import { useSectionPaginationQuery } from '@features/learn/queries';
 import { LoadingSpinner } from '@common/layout/styles';
-import { isLoggedIn } from '@features/user/service/authUtils';
 import type { Section, Part } from '@features/learn/types';
 
 interface PartNavContainerProps {
+  sections: Section[];
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
   onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
 }
 
 export default function PartNavContainer({
+  sections,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
   onFetchProgress,
 }: PartNavContainerProps) {
   const [isActiveBubble, setIsActiveBubble] = useState(false);
-  const { user } = useUserStore();
-
-  // 로그인 상태에 따라 섹션 쿼리 선택
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = isLoggedIn(
-    user
-  )
-    ? useSectionPaginationQuery.getUserSectionsByPage()
-    : useSectionPaginationQuery.getSectionsByPage();
 
   // 스크롤 감지를 위한 Intersection Observer
   const { ref, inView } = useInView({ threshold: 0 });
-
-  // 섹션 데이터
-  const sections = useMemo(() => {
-    if (!data?.pages) return [];
-    return data.pages.flatMap(page => page.sections || []);
-  }, [data]);
 
   // 무한 스크롤 트리거
   useEffect(() => {
@@ -42,13 +34,13 @@ export default function PartNavContainer({
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  // 이전 섹션까지의 파트 개수 누적
+  // 글로벌 인덱스 계산 (섹션별 parts 개수 누적)
   const previousPartsCounts = useMemo(() => {
-    if (!sections || sections.length === 0) return [];
+    if (!sections) return [];
     const counts: number[] = [];
     let sum = 0;
     sections.forEach(section => {
-      if (section?.parts) {
+      if (section.parts) {
         counts.push(sum);
         sum += section.parts.length;
       }
