@@ -69,7 +69,7 @@ export default function Learn() {
         {isLoggedIn(user) && (
           <S.ProgressBarWrapper>
             <S.ProgressLabel $isPart={!!selectedPartId}>
-              {selectedPartId ? `파트 진행률` : '전체 진행률'}
+              {selectedPartId ? '파트 진행도' : '전체 진행도'}
             </S.ProgressLabel>
             <ProgressBar
               $progress={progressData?.correctUserProgressCount || 0}

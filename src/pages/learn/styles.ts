@@ -49,7 +49,7 @@ export const ScreenReaderOnlyTitle = styled.h1`
 
 export const ProgressBarWrapper = styled.div`
   position: fixed;
-  top: 36px;
+  top: 20px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -59,7 +59,7 @@ export const ProgressBarWrapper = styled.div`
   gap: 8px;
 
   ${media.mobile} {
-    top: 60px;
+    top: 35px;
     margin: 0 50px;
     width: calc(100% - 100px);
   }
