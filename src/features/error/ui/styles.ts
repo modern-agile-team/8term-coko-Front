@@ -22,8 +22,15 @@ export const NotFoundImage = styled.img`
   width: 60%;
   height: 40%;
 `;
-export const NotFoundText = styled.p<{ $margin: string }>`
-  margin: ${({ $margin }) => $margin};
+
+export const NotFoundHeading = styled.p`
+  font-family: Pretendard;
+  margin-bottom: 74px;
+`;
+
+export const NotFoundDescription = styled.p`
+  font-family: Pretendard;
+  margin: 45px 0 59px 0;
   text-align: center;
 `;
 export const GoToMainLink = styled(Link)`
