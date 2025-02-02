@@ -22,19 +22,17 @@ export default function Learn() {
   const showComponents = useScrollVisibility();
 
   // 선택된 파트와 섹션 ID 상태 관리
-  const [selectedPartId, setSelectedPartId] = useState<Part['id'] | undefined>(
-    undefined
-  );
+  const [selectedPartId, setSelectedPartId] = useState<Part['id'] | null>(null);
   const [selectedSectionId, setSelectedSectionId] = useState<
-    Section['id'] | undefined
-  >(undefined);
+    Section['id'] | null
+  >(null);
 
   const { user } = useUserStore();
   // 로그인된 경우에만 user(자신)와 progress의 관계 데이터를 가져오기
   const { data: progressData } = isLoggedIn(user)
     ? useUserProgressQuery.getProgress({
-        partId: selectedPartId,
-        sectionId: selectedSectionId,
+        partId: selectedPartId ?? undefined,
+        sectionId: selectedSectionId ?? undefined,
       })
     : { data: null };
 
@@ -42,8 +40,8 @@ export default function Learn() {
   const handleFetchProgress = useCallback(
     (partId?: Part['id'], sectionId?: Section['id']) => {
       // undefined가 전달되면 상태 초기화
-      setSelectedPartId(partId ?? undefined);
-      setSelectedSectionId(sectionId ?? undefined);
+      setSelectedPartId(partId ?? null);
+      setSelectedSectionId(sectionId ?? null);
     },
     []
   );
