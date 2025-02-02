@@ -26,3 +26,18 @@ export const COLORS: Record<number, string> = {
   3: '#F05650', // 빨간색
   4: '#2DB400', // 초록색
 };
+
+export const PROGRESS_COLORS = {
+  global: {
+    boxBg: '#85705F',
+    innerBg: '#BFD683',
+    text: '#5A4A3C',
+    icon: '🌍',
+  },
+  part: {
+    boxBg: '#9E8874',
+    innerBg: '#A3C989',
+    text: '#4A3C2E',
+    icon: '📌',
+  },
+} as const;

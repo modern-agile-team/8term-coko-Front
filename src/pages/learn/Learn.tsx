@@ -2,8 +2,13 @@ import * as globalS from '@style/styles';
 import * as S from './styles';
 import { SectionGroup } from './styles';
 import { PRELOAD_IMAGES } from '@features/learn/constants';
+import { PROGRESS_COLORS } from '@features/learn/constants';
+import { useState, useCallback } from 'react';
+import { useUserProgressQuery } from '@features/user/queries';
+import { isLoggedIn } from '@features/user/service/authUtils';
 import useScrollVisibility from '@hooks/useScrollVisibility';
 import usePreloadImages from '@hooks/usePreloadImages';
+import useUserStore from '@store/useUserStore';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import DailyQuest from '@features/quest/ui/DailyQuest';
@@ -11,11 +16,7 @@ import ProgressBar from '@features/progress/ui/ProgressBar';
 import SelectSection from '@features/learn/ui/SelectSection';
 import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/learn/ui/PartNavContainer';
-import { useState, useCallback } from 'react';
-import { useUserProgressQuery } from '@features/user/queries';
-import { Section, Part } from '@features/learn/types';
-import useUserStore from '@store/useUserStore';
-import { isLoggedIn } from '@features/user/service/authUtils';
+import type { Section, Part } from '@features/learn/types';
 
 export default function Learn() {
   const showComponents = useScrollVisibility();
@@ -67,14 +68,33 @@ export default function Learn() {
         </S.ScreenReaderOnlyTitle>
         {isLoggedIn(user) && (
           <S.ProgressBarWrapper>
+            <S.ProgressLabel $isPart={!!selectedPartId}>
+              {selectedPartId ? `파트 진행률` : '전체 진행률'}
+            </S.ProgressLabel>
             <ProgressBar
               $progress={progressData?.correctUserProgressCount || 0}
               $maxProgress={Math.max(progressData?.totalQuizCount || 0, 1)}
               $maxWidth="639px"
               $height="16px"
-              $boxBgColor="#85705F"
-              $innerBgColor="#BFD683"
+              $boxBgColor={
+                selectedPartId
+                  ? PROGRESS_COLORS.part.boxBg
+                  : PROGRESS_COLORS.global.boxBg
+              }
+              $innerBgColor={
+                selectedPartId
+                  ? PROGRESS_COLORS.part.innerBg
+                  : PROGRESS_COLORS.global.innerBg
+              }
+              $borderRadius="8px"
             />
+            <S.ProgressText>
+              {!progressData
+                ? '로딩 중...'
+                : selectedPartId
+                ? `${progressData.correctUserProgressCount}/${progressData.totalQuizCount} 문제`
+                : `총 ${progressData.totalQuizCount}문제 중 ${progressData.correctUserProgressCount}문제 완료`}
+            </S.ProgressText>
           </S.ProgressBarWrapper>
         )}
         <S.ScrollableContainer
