@@ -19,7 +19,7 @@ export const NotFoundWrapper = styled.div`
 `;
 
 export const NotFoundImage = styled.img`
-  width: 80%;
+  width: 60%;
   height: 40%;
 `;
 export const NotFoundText = styled.p<{ $margin: string }>`

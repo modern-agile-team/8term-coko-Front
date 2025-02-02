@@ -6,11 +6,7 @@ import {
 } from '@/features/error/ui/styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 
-interface NotFoundProps {
-  error?: Error;
-}
-
-export default function NotFound({ error }: NotFoundProps) {
+export default function NotFound() {
   return (
     <NotFoundWrapper>
       <NotFoundText $margin="0 0 74px 0">
