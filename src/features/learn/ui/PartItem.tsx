@@ -85,7 +85,7 @@ export default memo(function PartItem({
         <S.SpeechBubble
           ref={popoverRef}
           onClick={e => e.stopPropagation()}
-          $bgColor={COLORS[(globalIndex % 4) + 1]}
+          $bgColor={COLORS[globalIndex % 4]}
         >
           <h3>{part.name}</h3>
           <S.GoToQuizButton
@@ -94,7 +94,7 @@ export default memo(function PartItem({
                 state: { partId: part.id, status: part.status },
               });
             }}
-            $fontColor={COLORS[(globalIndex % 4) + 1]}
+            $fontColor={COLORS[globalIndex % 4]}
           >
             시작
           </S.GoToQuizButton>
