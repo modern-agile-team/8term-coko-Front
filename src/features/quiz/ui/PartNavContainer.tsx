@@ -113,7 +113,7 @@ export default function PartNavContainer({
                       <GoToQuizButton
                         onClick={() => {
                           navigate('/quiz', {
-                            state: { partId: part.id, status: part.status },
+                            state: { partId: part.id, partStatus: part.status },
                           });
                         }}
                         $fontColor={COLORS[(globalIndex % 4) + 1]}
