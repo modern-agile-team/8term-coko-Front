@@ -87,6 +87,12 @@ export default function QuizContainer({
     closeModal();
     window.history.back();
   };
+
+  const handleCancelGoBack = () => {
+    closeModal();
+    setStep('result');
+  };
+
   return (
     <>
       <ProgressSection>
@@ -162,7 +168,7 @@ export default function QuizContainer({
             partClear: <PartClear partId={partId} />,
             goBack: (
               <GoBackPrompt
-                onCancel={closeModal}
+                onCancel={handleCancelGoBack}
                 onConfirm={handleConfirmGoBack}
               />
             ),

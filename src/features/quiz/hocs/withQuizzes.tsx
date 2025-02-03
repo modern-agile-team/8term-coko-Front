@@ -39,7 +39,7 @@ const withQuizzes = <P extends object>(
           {...(props as P)}
           quizzes={quizzes}
           partId={partId}
-          PartStatus={partStatus}
+          partStatus={partStatus}
         />
       );
     }
@@ -54,7 +54,7 @@ const withQuizzes = <P extends object>(
           {...(props as P)}
           quizzes={quizzes}
           partId={partId}
-          PartStatus={partStatus}
+          partStatus={partStatus}
         />
       );
     }
