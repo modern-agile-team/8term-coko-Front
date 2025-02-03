@@ -6,36 +6,17 @@ import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import RankingContainer from '@features/ranking/ui/RankingContainer';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
+import { useRankingPaginationQuery } from '@features/ranking/queries';
 
 export default function Ranking() {
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedOption, setSelectedOption] =
-    useState<keyof typeof RANKING_OPTIONS>('포인트 보유순');
-  const dummyUsers = [
-    { id: 2, name: 'gwgw2', level: 4, point: 200, createdAt: '2021-10-01' },
-    { id: 3, name: 'gwgwgw3', level: 2, point: 5000, createdAt: '2021-10-02' },
-    { id: 4, name: 'gwgwgwgw4', level: 3, point: 160, createdAt: '2021-10-03' },
-    {
-      id: 5,
-      name: 'gwgwgwgwgw5',
-      level: 10,
-      point: 190,
-      createdAt: '2021-10-04',
-    },
-    {
-      id: 6,
-      name: 'gwgwgwgwgwgw6',
-      level: 12,
-      point: 230,
-      createdAt: '2021-10-05',
-    },
-    {
-      id: 7,
-      name: 'gwgwgwgwgwgwgw7',
-      level: 1,
-      point: 3000,
-      createdAt: '2021-10-06',
-    },
-  ];
+    useState<keyof typeof RANKING_OPTIONS>('레벨순');
+
+  const { data: ranking } = useRankingPaginationQuery.getRankingByPage(
+    currentPage,
+    RANKING_OPTIONS[selectedOption].dataField
+  );
 
   const myRank = {
     id: 5,
@@ -65,8 +46,22 @@ export default function Ranking() {
           myRank={myRank}
           selectedOption={selectedOption}
           onOptionChange={setSelectedOption}
-          users={dummyUsers}
+          users={ranking?.contents}
+          currentPage={currentPage}
+          limit={5}
         />
+        {/* 향후 화살표 모양 다음/이전 버튼 및 페이지 많아짐에 따라 보여줘야 할 페이지 버튼 제한 예정 */}
+        <S.RankingPaginationDiv>
+          {[...Array(ranking?.totalPage)].map((_, index) => (
+            <S.RankingPaginationButton
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              $isSelected={index + 1 === currentPage}
+            >
+              {index + 1}
+            </S.RankingPaginationButton>
+          ))}
+        </S.RankingPaginationDiv>
       </globalS.Layout>
     </>
   );
