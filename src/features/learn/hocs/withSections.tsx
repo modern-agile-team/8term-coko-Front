@@ -36,7 +36,7 @@ export default function withSections<P extends WithSectionsInjectedProps>(
 
     // 섹션 데이터 추출
     const sections = useMemo(() => {
-      return flatMap(data?.pages ?? [], page => page.sections || [], 1);
+      return flatMap(data?.pages ?? [], page => page.sections || []);
     }, [data]);
 
     return (
