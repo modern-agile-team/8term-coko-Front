@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import { useSectionPaginationQuery } from '@features/learn/queries';
 import useUserStore from '@store/useUserStore';
+import { flatMap } from '@modern-kit/utils';
 import type { Section } from '@features/learn/types';
 
 export interface WithSectionsInjectedProps {
@@ -35,8 +36,7 @@ export default function withSections<P extends WithSectionsInjectedProps>(
 
     // 섹션 데이터 추출
     const sections = useMemo(() => {
-      if (!data?.pages) return [];
-      return data.pages.flatMap(page => page.sections || []);
+      return flatMap(data?.pages ?? [], page => page.sections || [], 1);
     }, [data]);
 
     return (
