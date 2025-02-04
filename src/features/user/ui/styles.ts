@@ -130,3 +130,20 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
       }
     `}
 `;
+
+export const AttendanceCheckButton = styled.button`
+  border: none;
+  background-color: inherit;
+  display: flex;
+  > img {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+export const AttendanceCalendarWrapper = styled.div`
+  position:ab > img {
+    width: 100%;
+    height: 100%;
+  }
+`;
