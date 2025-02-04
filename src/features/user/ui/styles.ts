@@ -142,7 +142,12 @@ export const AttendanceCheckButton = styled.button`
 `;
 
 export const AttendanceCalendarWrapper = styled.div`
-  position:ab > img {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  left: 50%;
+  transform: translatex(-50%);
+  > img {
     width: 100%;
     height: 100%;
   }
