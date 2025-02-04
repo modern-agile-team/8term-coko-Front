@@ -31,8 +31,8 @@ export default function TotalResults({
     useUserExperienceQuery.getExperience();
   const { mutate: experienceUpdate, isIdle: isExperienceIdle } =
     useUserExperienceQuery.updateExperience();
-  const { mutate: updateProgress, isIdle: isProgressIdle } =
-    useUserPartProgressQuery.updatePartProgress();
+  const { mutate: updatePartStatus, isIdle: isProgressIdle } =
+    useUserPartProgressQuery.updatePartStatus();
 
   const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ export default function TotalResults({
     () => {
       experienceUpdate({ experience });
       !isCompleted(partStatus) &&
-        updateProgress({ partId, partStatus: 'IN_PROGRESS' });
+        updatePartStatus({ partId, partStatus: 'IN_PROGRESS' });
     },
     { delay: 1000, enabled: isSuccess }
   );

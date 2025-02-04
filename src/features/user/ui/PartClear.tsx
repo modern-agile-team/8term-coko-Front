@@ -12,13 +12,13 @@ interface PartClearProps {
 export default function PartClear({ partId }: PartClearProps) {
   const { mutate: updatePoint, isIdle: isPointIdle } =
     useUserPointQuery.updatePoint();
-  const { mutate: updatePartProgress, isIdle: isProgressIdle } =
-    useUserPartProgressQuery.updateCompletedPartProgress();
+  const { mutate: updatePartStatus, isIdle: isProgressIdle } =
+    useUserPartProgressQuery.updateCompletedPartStatus();
   const navigate = useNavigate();
   const handleNavigateToLearn = () => {
     updatePoint({ point: DEFAULT_POINT });
 
-    updatePartProgress({
+    updatePartStatus({
       partId,
     });
 
