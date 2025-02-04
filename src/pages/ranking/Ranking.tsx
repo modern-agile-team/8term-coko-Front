@@ -6,28 +6,40 @@ import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import RankingContainer from '@features/ranking/ui/RankingContainer';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
-import { useRankingPaginationQuery } from '@features/ranking/queries';
+import {
+  useUserRankingQuery,
+  useRankingPaginationQuery,
+} from '@features/ranking/queries';
+import useUserStore from '@/store/useUserStore';
+import { RankedUser } from '@/features/user/types';
 
 export default function Ranking() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedOption, setSelectedOption] =
     useState<keyof typeof RANKING_OPTIONS>('레벨순');
 
+  // 유저 전체 랭킹 정보 가져오기 (페이지네이션)
   const { data: ranking } = useRankingPaginationQuery.getRankingByPage(
     RANKING_OPTIONS[selectedOption].dataField,
     currentPage
   );
+  // 자신의 랭킹 정보 가져오기
+  const { data } = useUserRankingQuery.getRanking(
+    RANKING_OPTIONS[selectedOption].dataField
+  );
+
+  const { user } = useUserStore();
+  // 유저 데이터 + 랭킹 정보 병합
+  const myRank: RankedUser = {
+    id: user?.id ?? 0,
+    name: user?.name ?? '',
+    level: user?.level ?? 0,
+    point: user?.point ?? 0,
+    createdAt: user?.createdAt ?? '',
+    myRanking: data?.myRanking ?? 0,
+  };
 
   const totalPage = ranking?.totalPage ?? 1;
-
-  const myRank = {
-    id: 5,
-    name: 'gwgwgwgwgw5',
-    level: 10,
-    point: 190,
-    rank: 4,
-    createdAt: '2021-10-04',
-  };
 
   /** 이전 페이지로 이동 */
   const handlePrevPage = () => {
@@ -104,7 +116,7 @@ export default function Ranking() {
         <globalS.RightSection>
           <Header />
           <S.BarrelTopCokoImg src={getImageUrl('통-위-코코.svg')} />
-          <S.BarrelContainer $rank={myRank.rank} />
+          <S.BarrelContainer $rank={myRank.myRanking} />
           <S.BoatSayImg src={getImageUrl('배-멘트.svg')} />
           <S.BoatImg src={getImageUrl('배.svg')} />
         </globalS.RightSection>

@@ -6,6 +6,19 @@ const rankingKeys = {
   all: ['rankings'] as const,
   paginated: (sort: RankingSort, page: number) =>
     [...rankingKeys.all, sort, page] as const,
+  abc: (sort: RankingSort) =>
+    ['users', 'me', ...rankingKeys.all, sort] as const,
+};
+
+export const useUserRankingQuery = {
+  getRanking: (sort: RankingSort = 'level') => {
+    return useSuspenseQuery({
+      queryKey: rankingKeys.abc(sort),
+      queryFn: async () => {
+        return await rankingApis.getRanking({ sort });
+      },
+    });
+  },
 };
 
 export const useRankingPaginationQuery = {
