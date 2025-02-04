@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import type { RankingSort } from './types';
 import rankingApis from './apis';
 
@@ -12,7 +12,7 @@ const rankingKeys = {
 
 export const useUserRankingQuery = {
   getRanking: (sort: RankingSort = 'level') => {
-    return useSuspenseQuery({
+    return useQuery({
       queryKey: rankingKeys.abc(sort),
       queryFn: async () => {
         return await rankingApis.getRanking({ sort });
@@ -23,7 +23,7 @@ export const useUserRankingQuery = {
 
 export const useRankingPaginationQuery = {
   getRankingByPage: (sort: RankingSort = 'level', page: number) => {
-    return useSuspenseQuery({
+    return useQuery({
       queryKey: rankingKeys.paginated(sort, page),
       queryFn: () =>
         rankingApis.getRankingByPage({

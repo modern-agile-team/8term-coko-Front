@@ -13,26 +13,32 @@ import {
 import useUserStore from '@/store/useUserStore';
 import { RankedUser } from '@/features/user/types';
 import { isLoggedIn } from '@features/user/service/authUtils';
+import Skeleton from '@common/layout/Skeleton';
+import usePreloadImages from '@/hooks/usePreloadImages';
+import { PRELOAD_IMAGES } from '@features/ranking/constants';
 
 export default function Ranking() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedOption, setSelectedOption] =
     useState<keyof typeof RANKING_OPTIONS>('레벨순');
 
-  // 유저 전체 랭킹 정보 가져오기 (페이지네이션)
-  const { data: userRanking } = useRankingPaginationQuery.getRankingByPage(
-    RANKING_OPTIONS[selectedOption].dataField,
-    currentPage
-  );
+  usePreloadImages({ imageUrls: PRELOAD_IMAGES });
+
+  // 유저 전체 랭킹 정보 (페이지네이션)
+  const { data: userRanking, isLoading: isUserRankingLoading } =
+    useRankingPaginationQuery.getRankingByPage(
+      RANKING_OPTIONS[selectedOption].dataField,
+      currentPage
+    );
 
   const { user } = useUserStore();
 
-  // 자신의 랭킹 정보 가져오기
-  const { data: myRanking } = isLoggedIn(user)
+  // 자신의 랭킹 정보 (로그인한 경우만)
+  const { data: myRanking, isLoading: isMyRankingLoading } = isLoggedIn(user)
     ? useUserRankingQuery.getRanking(RANKING_OPTIONS[selectedOption].dataField)
-    : { data: null };
+    : { data: null, isLoading: false };
 
-  // 유저 데이터 + 랭킹 정보 병합
+  // 유저 정보와 쿼리 데이터를 병합하여 full RankedUser 객체 생성
   const myRank: RankedUser = {
     id: user?.id ?? 0,
     name: user?.name ?? '',
@@ -119,7 +125,22 @@ export default function Ranking() {
         <globalS.RightSection>
           <Header />
           <S.BarrelTopCokoImg src={getImageUrl('통-위-코코.svg')} />
-          <S.BarrelContainer $rank={myRank.ranking} />
+
+          {isMyRankingLoading ? (
+            <Skeleton
+              width="170px"
+              height="155px"
+              style={{
+                margin: '237px 87px',
+                position: 'fixed',
+                zIndex: '-1',
+                borderRadius: '30px',
+              }}
+            />
+          ) : (
+            <S.BarrelContainer $rank={myRank.ranking} />
+          )}
+
           <S.BoatSayImg src={getImageUrl('배-멘트.svg')} />
           <S.BoatImg src={getImageUrl('배.svg')} />
         </globalS.RightSection>
@@ -129,9 +150,11 @@ export default function Ranking() {
           myRank={myRank}
           selectedOption={selectedOption}
           onOptionChange={setSelectedOption}
-          users={userRanking?.contents}
+          users={userRanking?.contents ?? []}
           currentPage={currentPage}
           limit={5}
+          isUserRankingLoading={isUserRankingLoading}
+          isMyRankingLoading={isLoggedIn(user) ? isMyRankingLoading : false}
         />
         <S.RankingPaginationDiv>
           <S.RankingPaginationButton
@@ -140,7 +163,6 @@ export default function Ranking() {
           >
             ◀
           </S.RankingPaginationButton>
-
           {getPaginationPages().map((page, index) =>
             typeof page === 'number' ? (
               <S.RankingPaginationButton
@@ -154,7 +176,6 @@ export default function Ranking() {
               <span key={index}>···</span>
             )
           )}
-
           <S.RankingPaginationButton
             onClick={handleNextPage}
             disabled={currentPage === totalPage}

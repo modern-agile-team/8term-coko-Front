@@ -8,3 +8,5 @@ export const RANKING_OPTIONS = {
     dataField: 'point', // 포인트 기준
   },
 } as const;
+
+export const PRELOAD_IMAGES = ['금통.svg', '은통.svg', '동통.svg'];
