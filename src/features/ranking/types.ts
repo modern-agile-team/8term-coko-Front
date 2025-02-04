@@ -8,6 +8,6 @@ export interface RankingPagination {
   contents: Omit<User, 'createdAt'>[];
 }
 
-export interface UserRanking extends Pick<RankedUser, 'myRanking'> {}
+export interface MyRanking extends Pick<RankedUser, 'ranking'> {}
 
 export type RankingSort = 'level' | 'point';

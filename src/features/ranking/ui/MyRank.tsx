@@ -8,7 +8,7 @@ interface MyRankProps extends RankedUser {
 }
 
 export default function MyRank({
-  myRanking,
+  ranking,
   name,
   level,
   point,
@@ -18,11 +18,11 @@ export default function MyRank({
   const config = RANKING_OPTIONS[selectedOption];
 
   return (
-    <S.RankingItem $rank={myRanking}>
-      <S.MedalContainer $rank={myRanking} $isMyRank>
-        <S.MyRankTextWrapper $rank={myRanking}>
+    <S.RankingItem $rank={ranking}>
+      <S.MedalContainer $rank={ranking} $isMyRank>
+        <S.MyRankTextWrapper $rank={ranking}>
           <S.MyRankLabel>나의 순위</S.MyRankLabel>
-          <S.MyRankNumber>{myRanking}</S.MyRankNumber>
+          <S.MyRankNumber>{ranking}</S.MyRankNumber>
         </S.MyRankTextWrapper>
       </S.MedalContainer>
       <S.ProfileWrapper>

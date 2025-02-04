@@ -20,7 +20,7 @@ export default function Ranking() {
     useState<keyof typeof RANKING_OPTIONS>('레벨순');
 
   // 유저 전체 랭킹 정보 가져오기 (페이지네이션)
-  const { data: ranking } = useRankingPaginationQuery.getRankingByPage(
+  const { data: userRanking } = useRankingPaginationQuery.getRankingByPage(
     RANKING_OPTIONS[selectedOption].dataField,
     currentPage
   );
@@ -28,7 +28,7 @@ export default function Ranking() {
   const { user } = useUserStore();
 
   // 자신의 랭킹 정보 가져오기
-  const { data } = isLoggedIn(user)
+  const { data: myRanking } = isLoggedIn(user)
     ? useUserRankingQuery.getRanking(RANKING_OPTIONS[selectedOption].dataField)
     : { data: null };
 
@@ -39,10 +39,10 @@ export default function Ranking() {
     level: user?.level ?? 0,
     point: user?.point ?? 0,
     createdAt: user?.createdAt ?? '',
-    myRanking: data?.myRanking ?? 0,
+    ranking: myRanking?.ranking ?? 0,
   };
 
-  const totalPage = ranking?.totalPage ?? 1;
+  const totalPage = userRanking?.totalPage ?? 1;
 
   /** 이전 페이지로 이동 */
   const handlePrevPage = () => {
@@ -119,7 +119,7 @@ export default function Ranking() {
         <globalS.RightSection>
           <Header />
           <S.BarrelTopCokoImg src={getImageUrl('통-위-코코.svg')} />
-          <S.BarrelContainer $rank={myRank.myRanking} />
+          <S.BarrelContainer $rank={myRank.ranking} />
           <S.BoatSayImg src={getImageUrl('배-멘트.svg')} />
           <S.BoatImg src={getImageUrl('배.svg')} />
         </globalS.RightSection>
@@ -129,7 +129,7 @@ export default function Ranking() {
           myRank={myRank}
           selectedOption={selectedOption}
           onOptionChange={setSelectedOption}
-          users={ranking?.contents}
+          users={userRanking?.contents}
           currentPage={currentPage}
           limit={5}
         />

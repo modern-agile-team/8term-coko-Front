@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface RankedUser extends User {
-  myRanking: number;
+  ranking: number;
 }
 
 export interface ExperiencedUser extends User {

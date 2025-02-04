@@ -1,8 +1,8 @@
 import api from '@/axios/instance';
-import type { RankingPagination, RankingSort, UserRanking } from './types';
+import type { RankingPagination, RankingSort, MyRanking } from './types';
 
 const rankingApis = {
-  getRanking: async (params: { sort: RankingSort }): Promise<UserRanking> => {
+  getRanking: async (params: { sort: RankingSort }): Promise<MyRanking> => {
     const response = await api.get('users/me/rankings', { params });
     return response.data;
   },
