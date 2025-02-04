@@ -5,6 +5,8 @@ import SortDropdown from '@common/layout/SortDropdown';
 import { RANKING_OPTIONS } from '@/features/ranking/constants';
 import type { RankedUser } from '@features/user/types';
 import type { RankingPagination } from '@features/ranking/types';
+import useUserStore from '@/store/useUserStore';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
 interface RankingContainerProps {
   myRank: RankedUser;
@@ -25,10 +27,14 @@ export default function RankingContainer({
 }: RankingContainerProps) {
   const config = RANKING_OPTIONS[selectedOption];
 
+  const { user } = useUserStore();
+
   return (
     <S.RankingContainer>
-      {/* 나의 순위 */}
-      <MyRank {...myRank} selectedOption={selectedOption} />
+      {/* 나의 순위 (로그인을 한 유저만 렌더링) */}
+      {isLoggedIn(user) && (
+        <MyRank {...myRank} selectedOption={selectedOption} />
+      )}
 
       {/* 정렬 드롭다운 */}
       <S.SortDropdownWrapper>

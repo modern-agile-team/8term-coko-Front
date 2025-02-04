@@ -12,6 +12,7 @@ import {
 } from '@features/ranking/queries';
 import useUserStore from '@/store/useUserStore';
 import { RankedUser } from '@/features/user/types';
+import { isLoggedIn } from '@features/user/service/authUtils';
 
 export default function Ranking() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -23,12 +24,14 @@ export default function Ranking() {
     RANKING_OPTIONS[selectedOption].dataField,
     currentPage
   );
-  // 자신의 랭킹 정보 가져오기
-  const { data } = useUserRankingQuery.getRanking(
-    RANKING_OPTIONS[selectedOption].dataField
-  );
 
   const { user } = useUserStore();
+
+  // 자신의 랭킹 정보 가져오기
+  const { data } = isLoggedIn(user)
+    ? useUserRankingQuery.getRanking(RANKING_OPTIONS[selectedOption].dataField)
+    : { data: null };
+
   // 유저 데이터 + 랭킹 정보 병합
   const myRank: RankedUser = {
     id: user?.id ?? 0,
