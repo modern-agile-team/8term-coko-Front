@@ -1,4 +1,3 @@
-// @features/learn/ui/PartNavContainer.tsx
 import * as S from '@features/learn/ui/styles';
 import PartItem from '@features/learn/ui/PartItem';
 import { useState, useMemo, useCallback } from 'react';
