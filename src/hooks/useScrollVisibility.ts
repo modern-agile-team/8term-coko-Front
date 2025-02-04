@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useThrottle } from '@modern-kit/react';
 
-export function useScrollVisibility() {
+export default function useScrollVisibility() {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 

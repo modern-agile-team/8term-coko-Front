@@ -1,8 +1,11 @@
 import api from '@/axios/instance';
-import type { User, ExperiencedUser, UserHp } from '@features/user/types';
-import type { PartStatus } from '@features/learn/types';
+import type {
+  ExperiencedUser,
+  UserProgress,
+  UserHp,
+} from '@features/user/types';
+import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
-import { AxiosError } from 'axios';
 
 const usersApis = {
   putQuizzesProgress: ({
@@ -22,6 +25,7 @@ const usersApis = {
     const { experience } = params;
     await api.patch(`/users/me/experience`, { experience });
   },
+
   getQuizzes: async (params: { partId: Quiz['partId'] }): Promise<Quiz[]> => {
     const { partId } = params;
     const response = await api.get(`/users/me/quizzes/incorrect`, {
@@ -29,11 +33,21 @@ const usersApis = {
     });
     return response.data;
   },
+
   patchPoint: async (params: { point: number }): Promise<void> => {
     const { point } = params;
     await api.patch(`/users/me/point`, { point });
   },
-  partProgress: async (params: {
+
+  getProgress: async (params?: {
+    sectionId?: Section['id'];
+    partId?: Part['id'];
+  }): Promise<UserProgress> => {
+    const response = await api.get('/users/me/progress', { params });
+    return response.data;
+  },
+
+  putPartProgress: async (params: {
     partId: Quiz['partId'];
     partStatus: PartStatus;
   }) => {
@@ -42,10 +56,12 @@ const usersApis = {
       status: partStatus,
     });
   },
+
   getHp: async (): Promise<UserHp> => {
     const response = await api.get('users/me/hp');
     return response.data;
   },
+
   patchHp: async (params: Omit<UserHp, 'id'>): Promise<void> =>
     await api.patch('/users/me/hp', params),
 };
