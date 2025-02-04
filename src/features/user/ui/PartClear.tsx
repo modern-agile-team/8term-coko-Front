@@ -4,9 +4,7 @@ import {
   useUserPartProgressQuery,
   useUserPointQuery,
 } from '@features/user/queries';
-import useUserStore from '@store/useUserStore';
 import { getImageUrl } from '@utils/getImageUrl';
-import { User } from '@/features/user/types';
 import { DEFAULT_POINT } from '@/features/user/constants';
 interface PartClearProps {
   partId: number;
@@ -15,14 +13,13 @@ export default function PartClear({ partId }: PartClearProps) {
   const { mutate: updatePoint, isIdle: isPointIdle } =
     useUserPointQuery.updatePoint();
   const { mutate: updatePartProgress, isIdle: isProgressIdle } =
-    useUserPartProgressQuery.updatePartProgress();
+    useUserPartProgressQuery.updateCompletedPartProgress();
   const navigate = useNavigate();
   const handleNavigateToLearn = () => {
     updatePoint({ point: DEFAULT_POINT });
 
     updatePartProgress({
       partId,
-      partStatus: 'COMPLETED',
     });
 
     navigate('/learn');

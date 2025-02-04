@@ -133,7 +133,16 @@ export const useUserPartProgressQuery = {
   updatePartProgress: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.putPartProgress,
+      mutationFn: usersApis.patchPartProgress,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+      },
+    });
+  },
+  updateCompletedPartProgress: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.patchCompletedPartProgress,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
       },
