@@ -19,3 +19,25 @@ export const PRELOAD_IMAGES = [
   '섬5.svg',
   '앉은-코코.svg',
 ];
+
+export const COLORS = [
+  '#007BFF', // 파란색
+  '#FAC608', // 노란색
+  '#F05650', // 빨간색
+  '#2DB400', // 초록색
+] as const;
+
+export const PROGRESS_COLORS = {
+  global: {
+    boxBg: '#85705F',
+    innerBg: '#BFD683',
+    text: '#5A4A3C',
+    icon: '🌍',
+  },
+  part: {
+    boxBg: '#9E8874',
+    innerBg: '#A3C989',
+    text: '#4A3C2E',
+    icon: '📌',
+  },
+} as const;

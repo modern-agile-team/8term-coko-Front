@@ -2,13 +2,13 @@ import * as S from './styles';
 import { useState, useMemo } from 'react';
 import NavigationControl from './NavigationControl';
 import SectionNavigateContainer from './SectionNavigateContainer';
-import { sectionsQuery } from '@features/learn/queries';
+import { useSectionListQuery } from '@features/learn/queries';
 import { useMediaQuery } from '@modern-kit/react';
 import { mediaQueryMap } from '@style/mediaQueryMap';
 import type { Section } from '@features/learn/types';
 
 export default function SelectSection() {
-  const { data: sections } = sectionsQuery.getAll();
+  const { data: sections } = useSectionListQuery.getAllSections();
   const [currentPage, setCurrentPage] = useState(0);
   const isMobile = useMediaQuery(mediaQueryMap.mobile);
   const itemsPerPage = isMobile ? 3 : 5;

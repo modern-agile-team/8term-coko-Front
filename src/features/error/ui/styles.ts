@@ -24,7 +24,6 @@ export const NotFoundImage = styled.img`
 `;
 
 export const NotFoundHeading = styled.p`
-  font-family: Pretendard;
   margin-bottom: 74px;
 `;
 

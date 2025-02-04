@@ -12,10 +12,3 @@ export const PRELOAD_IMAGES = [
   '레벨1코코.svg',
   '과일바구니-아이템.svg',
 ];
-
-export const COLORS: Record<number, string> = {
-  1: '#007BFF', // 파란색
-  2: '#FAC608', // 노란색
-  3: '#F05650', // 빨간색
-  4: '#2DB400', // 초록색
-};

@@ -6,14 +6,19 @@ import {
 } from '@tanstack/react-query';
 import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
+import type { Section, Part } from '@features/learn/types';
 
 const userKeys = {
   all: ['users'] as const,
-  detail: () => [...userKeys.all, 'me'] as const,
-  experience: () => [...userKeys.detail(), 'experience'] as const,
-  quizzes: () => [...userKeys.detail(), 'quizzes'] as const,
-  partQuizzes: (partId: number) => [...userKeys.quizzes(), partId] as const,
-  hp: () => [...userKeys.detail(), 'hp'] as const,
+  me: () => [...userKeys.all, 'me'] as const,
+  hp: () => [...userKeys.me(), 'hp'] as const,
+  experience: () => [...userKeys.me(), 'experience'] as const,
+  quizzes: () => [...userKeys.me(), 'quizzes'],
+  partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
+  progress: (sectionId?: Section['id'], partId?: Part['id']) =>
+    sectionId || partId
+      ? ([...userKeys.me(), 'progress', { sectionId, partId }] as const)
+      : ([...userKeys.me(), 'progress'] as const),
 };
 
 export const useUserHpQuery = {
@@ -31,23 +36,6 @@ export const useUserHpQuery = {
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.hp() });
       },
-    });
-  },
-};
-
-export const useUserProgressQuery = {
-  updateQuizProgress: () => {
-    return useMutation({ mutationFn: usersApis.putQuizzesProgress });
-  },
-};
-
-export const useUserQuizzesQuery = {
-  getQuizzes: ({ partId }: { partId: number }) => {
-    return useSuspenseQuery({
-      queryKey: userKeys.partQuizzes(partId),
-      queryFn: () => usersApis.getQuizzes({ partId }),
-      gcTime: 0,
-      staleTime: 0,
     });
   },
 };
@@ -108,6 +96,17 @@ export const useUserExperienceQuery = {
   },
 };
 
+export const useUserQuizzesQuery = {
+  getQuizzes: ({ partId }: { partId: number }) => {
+    return useSuspenseQuery({
+      queryKey: userKeys.partQuizzes(partId),
+      queryFn: () => usersApis.getQuizzes({ partId }),
+      gcTime: 0,
+      staleTime: 0,
+    });
+  },
+};
+
 export const useUserPointQuery = {
   updatePoint: () => {
     const queryClient = useQueryClient();
@@ -125,7 +124,22 @@ export const useUserPointQuery = {
 export const useUserPartProgressQuery = {
   updatePartProgress: () => {
     return useMutation({
-      mutationFn: usersApis.partProgress,
+      mutationFn: usersApis.putPartProgress,
     });
+  },
+};
+
+export const useUserProgressQuery = {
+  getProgress: (params?: {
+    sectionId?: Section['id'];
+    partId?: Part['id'];
+  }) => {
+    return useQuery({
+      queryKey: userKeys.progress(params?.sectionId, params?.partId),
+      queryFn: () => usersApis.getProgress(params),
+    });
+  },
+  updateQuizProgress: () => {
+    return useMutation({ mutationFn: usersApis.putQuizzesProgress });
   },
 };
