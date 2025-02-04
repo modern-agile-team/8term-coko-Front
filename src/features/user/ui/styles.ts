@@ -1,5 +1,4 @@
 import { media } from '@/style/media';
-import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
 export const BadgeWrapper = styled.div`
   display: flex;
@@ -151,46 +150,71 @@ export const AttendanceCheckButton = styled.button`
   }
 `;
 
-export const AttendanceCalendarWrapper = styled.div`
+export const AttendanceCalendarBoard = styled.div`
   position: relative;
-  width: 700px;
-  height: 600px;
-  top: 50%;
-  left: 50%;
+  height: 500px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  transform: translate(-50%, -50%);
-  gap: 2px;
-  padding: 85px 15px 0 0px;
+  gap: 4px;
 
   > span {
     color: #b57400;
     font-weight: 700;
     font-size: 14px;
-    position: relative;
-    border-radius: 8px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
     z-index: 1000;
+    padding: 8px 8px 0 0;
   }
+
   > img {
     position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  ${media.mobile} {
+    height: 200px;
+    gap: 4px;
+    > span {
+      font-size: 10px;
+    }
+  }
+`;
+
+export const AttendanceCalendarWrapper = styled.div`
+  position: relative;
+  width: 700px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  > h1 {
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  > img {
     width: 700px;
-    height: 600px;
+    height: 67px;
   }
   ${media.mobile} {
-    width: 300px;
-    height: 250px;
-    gap: 4px;
-    padding: 33px 6px 0 3px;
-    > span {
+    width: 280px;
+    height: 230px;
+    > h1 {
       font-size: 12px;
     }
     > img {
-      width: 300px;
-      height: 250px;
+      width: 280px;
+      height: 28px;
     }
   }
 `;
