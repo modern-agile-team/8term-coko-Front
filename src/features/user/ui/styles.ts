@@ -1,3 +1,4 @@
+import { media } from '@/style/media';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
 export const BadgeWrapper = styled.div`
@@ -139,16 +140,40 @@ export const AttendanceCheckButton = styled.button`
     width: 24px;
     height: 24px;
   }
+  ${media.mobile} {
+    position: fixed;
+    left: 30px;
+    bottom: 100px;
+    > img {
+      width: 36px;
+      height: 36px;
+    }
+  }
 `;
 
 export const AttendanceCalendarWrapper = styled.div`
-  position: absolute;
-  width: 800px;
-  height: 800px;
+  position: relative;
+  width: 500px;
+  height: 400px;
+  top: 50%;
   left: 50%;
-  transform: translatex(-50%);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  transform: translate(-50%, -50%);
+  gap: 12px;
+  padding: 50px 10px 0 10px;
+  > div {
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    z-index: 1000;
+  }
   > img {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    width: 500px;
+    height: 400px;
   }
 `;
