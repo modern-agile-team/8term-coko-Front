@@ -47,14 +47,17 @@ const usersApis = {
     return response.data;
   },
 
-  putPartProgress: async (params: {
+  patchPartStatus: async (params: {
     partId: Quiz['partId'];
     partStatus: PartStatus;
   }) => {
     const { partId, partStatus } = params;
-    await api.put(`/users/me/part-progress/parts/${partId}`, {
+    await api.patch(`/users/me/parts/${partId}/status`, {
       status: partStatus,
     });
+  },
+  patchCompletedPartStatus: async (params: { partId: Quiz['partId'] }) => {
+    await api.patch(`/users/me/parts/${params.partId}/status/completed`);
   },
 
   getHp: async (): Promise<UserHp> => {
