@@ -144,14 +144,14 @@ export const PlaceLabel = styled.label`
   line-height: 24px;
 `;
 
-export const CartListWrapper = styled.section`
+export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 20px;
   width: 194px;
   height: 596px;
-  border-radius: 20px;
   background: #fff;
   box-shadow: 0 3px #e5e5e5;
   margin: 84px 47px 0 0;
@@ -161,10 +161,16 @@ export const CartListWrapper = styled.section`
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.2px;
+  z-index: 1000;
+
   ${media.mobile} {
-    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -50px;
+    display: ${({ $isMobileHidden }) => ($isMobileHidden ? 'none' : 'flex')};
   }
 `;
+
 export const CartLabel = styled.label`
   margin: 18px 0 0 0;
   display: block;

@@ -33,10 +33,13 @@ const testItem: CosmeticItem[] = [
   },
 ];
 
-export default function CartList() {
+interface CartListProps {
+  isMobileHidden?: boolean;
+}
+export default function CartList({ isMobileHidden = true }: CartListProps) {
   return (
     <>
-      <S.CartListWrapper>
+      <S.CartListWrapper $isMobileHidden={isMobileHidden}>
         <S.CartLabel>장바구니</S.CartLabel>
         <S.CartListItemWrapper>
           {testItem.map(item => (

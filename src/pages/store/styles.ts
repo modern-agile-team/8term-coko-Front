@@ -27,16 +27,20 @@ export const MyCharacterSection = styled.section`
   ${media.mobile} {
     width: 90%;
     gap: 0px;
-    height: 244px;
+    height: 284px;
     > div:nth-last-of-type(2) {
       position: absolute;
       padding-top: 80px;
       left: 30%;
+      z-index: 100;
     }
     > div:nth-last-of-type(1) {
+      position: relative;
+      left: 50px;
+      bottom: 10px;
       display: block;
       align-self: flex-end;
-      margin: 0 16px 10px auto;
+      z-index: 100;
     }
   }
 `;
@@ -53,6 +57,7 @@ export const StoreItemListSection = styled.section`
   box-shadow: 0 3px #e5e5e5;
   ${media.mobile} {
     width: 90%;
+    margin-bottom: 90px;
   }
 `;
 

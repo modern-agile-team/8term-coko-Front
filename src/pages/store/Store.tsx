@@ -8,6 +8,8 @@ import CartList from '@features/store/ui/CartList';
 import MyCharacter from '@features/user/ui/MyCharacter';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import type { CosmeticItem } from '@features/store/types';
+import { getViewportSize, isMobile } from '@modern-kit/utils';
+import useModal from '@/hooks/useModal';
 
 const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
   {
@@ -30,6 +32,12 @@ const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
 export default function Store() {
   const [itemQuery, setItemQuery] =
     useState<CosmeticItem['category']>('clothes');
+  const [isCartOpne, setIsCartOpen] = useState(false);
+
+  const toggleIsOpen = () => {
+    setIsCartOpen(prev => !prev);
+  };
+
   return (
     <>
       <globalS.Wrapper>
@@ -38,8 +46,7 @@ export default function Store() {
         </globalS.LeftSection>
         <globalS.RightSection>
           <Header />
-
-          <CartList />
+          <CartList isMobileHidden={isCartOpne} />
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
@@ -60,7 +67,11 @@ export default function Store() {
             )}
           </div>
           <div>
-            <S.StoreButton $backgroundColor="#FFB53D" $borderColor="#F09900">
+            <S.StoreButton
+              $backgroundColor="#FFB53D"
+              $borderColor="#F09900"
+              onClick={toggleIsOpen}
+            >
               장바구니
             </S.StoreButton>
           </div>
