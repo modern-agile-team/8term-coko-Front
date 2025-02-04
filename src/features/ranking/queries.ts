@@ -9,7 +9,7 @@ const rankingKeys = {
 };
 
 export const useRankingPaginationQuery = {
-  getRankingByPage: (page: number, sort: RankingSort = 'level') => {
+  getRankingByPage: (sort: RankingSort = 'level', page: number) => {
     return useSuspenseQuery({
       queryKey: rankingKeys.paginated(sort, page),
       queryFn: () =>

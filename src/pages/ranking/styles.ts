@@ -72,7 +72,7 @@ export const RankingPaginationDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
   margin-bottom: 20px;
 `;
 
@@ -93,5 +93,7 @@ export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
     $isSelected &&
     css`
       color: #d80000;
+      background: #f0d8a7;
+      border-radius: 5px;
     `}
 `;
