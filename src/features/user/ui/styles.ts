@@ -153,17 +153,21 @@ export const AttendanceCheckButton = styled.button`
 
 export const AttendanceCalendarWrapper = styled.div`
   position: relative;
-  width: 500px;
-  height: 400px;
+  width: 700px;
+  height: 600px;
   top: 50%;
   left: 50%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
   transform: translate(-50%, -50%);
-  gap: 12px;
-  padding: 50px 10px 0 10px;
-  > div {
+  gap: 2px;
+  padding: 85px 15px 0 0px;
+
+  > span {
+    color: #b57400;
+    font-weight: 700;
+    font-size: 14px;
     position: relative;
     border-radius: 8px;
     display: flex;
@@ -173,7 +177,20 @@ export const AttendanceCalendarWrapper = styled.div`
   }
   > img {
     position: absolute;
-    width: 500px;
-    height: 400px;
+    width: 700px;
+    height: 600px;
+  }
+  ${media.mobile} {
+    width: 300px;
+    height: 250px;
+    gap: 4px;
+    padding: 33px 6px 0 3px;
+    > span {
+      font-size: 12px;
+    }
+    > img {
+      width: 300px;
+      height: 250px;
+    }
   }
 `;

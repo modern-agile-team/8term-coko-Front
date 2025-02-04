@@ -22,7 +22,7 @@ export default function AttendanceCheck() {
       <Modal isShow={isShow}>
         <AttendanceCalendarWrapper ref={modalRef}>
           {days.map(i => (
-            <div key={i}>{i}</div>
+            <span key={i}>{i}</span>
           ))}
           <img src={getImageUrl('출석체크.svg')} />
         </AttendanceCalendarWrapper>
