@@ -15,10 +15,18 @@ const userKeys = {
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
-  progress: (sectionId?: Section['id'], partId?: Part['id']) =>
-    sectionId || partId
-      ? ([...userKeys.me(), 'progress', { sectionId, partId }] as const)
-      : ([...userKeys.me(), 'progress'] as const),
+
+  progress: {
+    root: () => [...userKeys.me(), 'progress'] as const,
+    section: (sectionId: Section['id']) =>
+      [...userKeys.progress.root(), 'section', sectionId] as const,
+    part: (partId: Part['id']) =>
+      [...userKeys.progress.root(), 'part', partId] as const,
+    detail: (sectionId?: Section['id'], partId?: Part['id']) =>
+      sectionId || partId
+        ? ([...userKeys.progress.root(), { sectionId, partId }] as const)
+        : userKeys.progress.root(),
+  },
 };
 
 export const useUserHpQuery = {
@@ -123,8 +131,12 @@ export const useUserPointQuery = {
 
 export const useUserPartProgressQuery = {
   updatePartProgress: () => {
+    const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.putPartProgress,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+      },
     });
   },
 };
@@ -135,7 +147,7 @@ export const useUserProgressQuery = {
     partId?: Part['id'];
   }) => {
     return useQuery({
-      queryKey: userKeys.progress(params?.sectionId, params?.partId),
+      queryKey: userKeys.progress.detail(params?.sectionId, params?.partId),
       queryFn: () => usersApis.getProgress(params),
     });
   },

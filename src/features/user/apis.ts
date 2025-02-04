@@ -52,7 +52,7 @@ const usersApis = {
     partStatus: PartStatus;
   }) => {
     const { partId, partStatus } = params;
-    await api.put(`/users/me/part-progress/parts/${partId}`, {
+    await api.patch(`/users/me/parts/${partId}/status`, {
       status: partStatus,
     });
   },
