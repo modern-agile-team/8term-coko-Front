@@ -34,7 +34,7 @@ export default function withSections<P extends WithSectionsInjectedProps>(
       ? useSectionPaginationQuery.getUserSectionsByPage()
       : useSectionPaginationQuery.getSectionsByPage();
 
-    // 섹션 데이터 추출
+    // 페이지네이션된 데이터의 각 페이지에서 섹션(section) 배열을 추출하고 하나의 배열로 평탄화
     const sections = useMemo(() => {
       return flatMap(data?.pages ?? [], page => page.sections || []);
     }, [data]);
