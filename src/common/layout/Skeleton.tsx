@@ -1,4 +1,4 @@
-import { FC, CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import { SkeletonBase } from './styles';
 
 interface SkeletonProps {
@@ -7,8 +7,6 @@ interface SkeletonProps {
   style?: CSSProperties;
 }
 
-const Skeleton: FC<SkeletonProps> = ({ width, height, style }) => {
+export default function Skeleton({ width, height, style }: SkeletonProps) {
   return <SkeletonBase width={width} height={height} style={style} />;
-};
-
-export default Skeleton;
+}

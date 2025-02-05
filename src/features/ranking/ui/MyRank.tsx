@@ -5,7 +5,6 @@ import { useUserRankingQuery } from '@features/user/queries';
 import useUserStore from '@store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import MyRankSkeleton from './MyRankSkeleton';
-import type { RankedUser } from '@features/user/types';
 
 interface MyRankProps {
   selectedOption: keyof typeof RANKING_OPTIONS;
@@ -31,22 +30,17 @@ export default function MyRank({ selectedOption }: MyRankProps) {
     );
   }
 
-  const myRank: RankedUser = {
-    id: user?.id ?? 0,
-    name: user?.name ?? '',
-    level: user?.level ?? 0,
-    point: user?.point ?? 0,
-    createdAt: user?.createdAt ?? '',
-    ranking: data?.ranking ?? 0,
-  };
+  const ranking = data?.ranking ?? 0;
+  const level = user?.level ?? 0;
+  const name = user?.name ?? '';
 
   return (
     <S.MyRankingContainer>
-      <S.RankingItem $rank={myRank.ranking}>
-        <S.MedalContainer $rank={myRank.ranking} $isMyRank>
-          <S.MyRankTextWrapper $rank={myRank.ranking}>
+      <S.RankingItem $rank={ranking}>
+        <S.MedalContainer $rank={ranking} $isMyRank>
+          <S.MyRankTextWrapper $rank={ranking}>
             <S.MyRankLabel>나의 순위</S.MyRankLabel>
-            <S.MyRankNumber>{myRank.ranking}</S.MyRankNumber>
+            <S.MyRankNumber>{ranking}</S.MyRankNumber>
           </S.MyRankTextWrapper>
         </S.MedalContainer>
         <S.ProfileWrapper>
@@ -54,8 +48,8 @@ export default function MyRank({ selectedOption }: MyRankProps) {
           <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />
         </S.ProfileWrapper>
         <S.UserInfo>
-          <S.UserLevelText>LV.{myRank.level}</S.UserLevelText>
-          <S.UserNameText>{myRank.name}</S.UserNameText>
+          <S.UserLevelText>LV.{level}</S.UserLevelText>
+          <S.UserNameText>{name}</S.UserNameText>
         </S.UserInfo>
         <S.Container>
           <S.RankIconWrapper>
@@ -63,7 +57,9 @@ export default function MyRank({ selectedOption }: MyRankProps) {
               src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)}
             />
             <S.RankIconText>
-              {myRank[RANKING_OPTIONS[selectedOption].dataField]}
+              {data?.ranking ??
+                user?.[RANKING_OPTIONS[selectedOption].dataField] ??
+                0}
             </S.RankIconText>
           </S.RankIconWrapper>
           <S.AddFriend>+ 친구 추가</S.AddFriend>
