@@ -45,12 +45,11 @@ function TutorialContainer({ quizzes }: TutorialProps) {
   const [showTutorial, setShowTutorial] = useState(false);
 
   useEffect(() => {
-    // 500ms 후에 QuizTutorial 렌더링
     const timer = setTimeout(() => {
       setShowTutorial(true);
     }, 100);
 
-    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 정리
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
