@@ -10,6 +10,8 @@ export interface RankedUser extends User {
   ranking: number;
 }
 
+export interface PersonalRanking extends Pick<RankedUser, 'ranking'> {}
+
 export interface ExperiencedUser extends User {
   experience: number;
   experienceForNextLevel: number;

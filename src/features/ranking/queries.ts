@@ -10,17 +10,6 @@ const rankingKeys = {
     [...rankingKeys.all, sort, page] as const,
 };
 
-export const useUserRankingQuery = {
-  getRanking: (sort: RankingSort = 'level') => {
-    return useQuery({
-      queryKey: rankingKeys.personal(sort),
-      queryFn: async () => {
-        return await rankingApis.getRanking({ sort });
-      },
-    });
-  },
-};
-
 export const useRankingPaginationQuery = {
   getRankingByPage: (sort: RankingSort = 'level', page: number) => {
     return useQuery({

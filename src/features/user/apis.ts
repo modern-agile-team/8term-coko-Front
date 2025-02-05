@@ -3,9 +3,11 @@ import type {
   ExperiencedUser,
   UserProgress,
   UserHp,
+  PersonalRanking,
 } from '@features/user/types';
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
+import type { RankingSort } from '@features/ranking/types';
 
 const usersApis = {
   putQuizzesProgress: ({
@@ -67,6 +69,13 @@ const usersApis = {
 
   patchHp: async (params: Omit<UserHp, 'id'>): Promise<void> =>
     await api.patch('/users/me/hp', params),
+
+  getRanking: async (params: {
+    sort: RankingSort;
+  }): Promise<PersonalRanking> => {
+    const response = await api.get('users/me/rankings', { params });
+    return response.data;
+  },
 };
 
 export default usersApis;

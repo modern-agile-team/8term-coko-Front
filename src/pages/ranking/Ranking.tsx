@@ -9,10 +9,8 @@ import Skeleton from '@common/layout/Skeleton';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
 import usePreloadImages from '@hooks/usePreloadImages';
 import { PRELOAD_IMAGES } from '@features/ranking/constants';
-import {
-  useUserRankingQuery,
-  useRankingPaginationQuery,
-} from '@features/ranking/queries';
+import { useRankingPaginationQuery } from '@features/ranking/queries';
+import { useUserRankingQuery } from '@features/user/queries';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import { generatePaginationPages } from '@utils/generatePaginationPages';

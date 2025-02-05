@@ -1,4 +1,4 @@
-import type { User, RankedUser } from '@features/user/types';
+import type { User } from '@features/user/types';
 
 export interface RankingPagination {
   totalCount: number;
@@ -7,7 +7,5 @@ export interface RankingPagination {
   limit: number;
   contents: Omit<User, 'createdAt'>[];
 }
-
-export interface PersonalRanking extends Pick<RankedUser, 'ranking'> {}
 
 export type RankingSort = 'level' | 'point';
