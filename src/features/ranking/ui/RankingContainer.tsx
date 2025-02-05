@@ -2,12 +2,12 @@ import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import MyRank from './MyRank';
 import SortDropdown from '@common/layout/SortDropdown';
-import { RANKING_OPTIONS } from '@/features/ranking/constants';
-import type { RankedUser } from '@/features/user/types';
-import type { RankingPagination } from '@/features/ranking/types';
-import useUserStore from '@/store/useUserStore';
-import { isLoggedIn } from '@/features/user/service/authUtils';
-import Skeleton from '@/common/layout/Skeleton';
+import useUserStore from '@store/useUserStore';
+import Skeleton from '@common/layout/Skeleton';
+import { isLoggedIn } from '@features/user/service/authUtils';
+import { RANKING_OPTIONS } from '@features/ranking/constants';
+import type { RankedUser } from '@features/user/types';
+import type { RankingPagination } from '@features/ranking/types';
 
 interface RankingContainerProps {
   myRank: RankedUser;

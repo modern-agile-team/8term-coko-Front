@@ -50,22 +50,18 @@ export default function Ranking() {
 
   const totalPage = userRanking?.totalPage ?? 1;
 
-  /** 이전 페이지로 이동 */
   const handlePrevPage = () => {
     if (currentPage > 1) setCurrentPage(prev => prev - 1);
   };
 
-  /** 다음 페이지로 이동 */
   const handleNextPage = () => {
     if (currentPage < totalPage) setCurrentPage(prev => prev + 1);
   };
 
-  /** 특정 페이지로 이동 */
   const handlePageClick = (page: number) => {
     setCurrentPage(page);
   };
 
-  /** 페이지 버튼 계산 */
   const getPaginationPages = () => {
     const MAX_VISIBLE = 7; // 최대 노출할 페이지 버튼 개수
     const pages: (number | string)[] = [];
@@ -80,7 +76,7 @@ export default function Ranking() {
 
     // 최대 노출 버튼이 7개인 경우, 항상 첫 페이지와 마지막 페이지는 표시
     // 가운데에 (MAX_VISIBLE - 2)개 버튼(여기선 5개)을 현재 페이지 중심으로 표시
-    const WINDOW_SIZE = MAX_VISIBLE - 2; // 슬라이딩 윈도우 크기 (예: 5)
+    const WINDOW_SIZE = MAX_VISIBLE - 2;
 
     // 현재 페이지를 중심으로 시작 페이지 계산
     let startPage = Math.max(2, currentPage - Math.floor(WINDOW_SIZE / 2));
