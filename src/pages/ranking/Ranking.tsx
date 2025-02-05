@@ -3,8 +3,9 @@ import { getImageUrl } from '@utils/getImageUrl';
 import * as globalS from '@style/styles';
 import * as S from './styles';
 import MenuBar from '@common/layout/MenuBar';
-import Header from '@common/layout/Header';
 import RankingContainer from '@features/ranking/ui/RankingContainer';
+import Header from '@common/layout/Header';
+import Skeleton from '@common/layout/Skeleton';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
 import usePreloadImages from '@hooks/usePreloadImages';
 import { PRELOAD_IMAGES } from '@features/ranking/constants';
@@ -14,8 +15,6 @@ import {
 } from '@features/ranking/queries';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
-import Skeleton from '@common/layout/Skeleton';
-
 import { generatePaginationPages } from '@utils/generatePaginationPages';
 import type { RankedUser } from '@/features/user/types';
 
