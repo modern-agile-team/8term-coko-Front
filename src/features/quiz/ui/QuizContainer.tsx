@@ -33,6 +33,7 @@ import {
   SubmitSection,
 } from '@/features/quiz/ui/styles';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
+import { useHpUpdate } from '@/features/quiz/hooks';
 
 interface QuizProps {
   partStatus: PartStatus;
@@ -75,6 +76,7 @@ function QuizContainer({
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
+  useHpUpdate(isCorrectList[currentPage]);
 
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];

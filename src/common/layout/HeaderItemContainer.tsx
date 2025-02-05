@@ -9,7 +9,7 @@ interface HeaderItemContainer {
 }
 
 export default function HeaderItemContainer({ user }: HeaderItemContainer) {
-  const { data: userHp } = useUserHpQuery.getHp();
+  const { data: userHp } = useUserHpQuery.getHpWithSuspense();
 
   return (
     <>

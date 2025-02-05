@@ -8,10 +8,11 @@ export const useElementRect = () => {
   const getClientRectRefCallback = useCallback(
     <T extends HTMLElement>(node: T | null) => {
       if (!node) return;
-
-      const rect = node.getBoundingClientRect();
-      const id = node.id;
-      setRect(id, rect);
+      requestAnimationFrame(() => {
+        const rect = node.getBoundingClientRect();
+        const id = node.id;
+        setRect(id, rect);
+      });
     },
     []
   );
