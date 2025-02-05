@@ -6,7 +6,11 @@ interface MedalContainerProps {
   $isMyRank?: boolean;
 }
 
-export const RankingContainer = styled.div`
+export const UserRankingListContainer = styled.div`
+  width: 683px;
+`;
+
+export const MyRankingContainer = styled.div`
   width: 683px;
   margin-top: 62px;
 `;
@@ -204,4 +208,34 @@ export const AddFriend = styled.button`
   color: #fff;
   font-size: 13px;
   font-weight: 700;
+`;
+
+export const RankingPaginationDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+`;
+
+export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #d37744;
+
+  &:hover {
+    color: #d80000;
+  }
+
+  ${({ $isSelected }) =>
+    $isSelected &&
+    css`
+      color: #d80000;
+      background: #f0d8a7;
+      border-radius: 5px;
+    `}
 `;

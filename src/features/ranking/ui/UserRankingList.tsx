@@ -1,50 +1,53 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
-import MyRank from './MyRank';
 import SortDropdown from '@common/layout/SortDropdown';
-import useUserStore from '@store/useUserStore';
-import Skeleton from '@common/layout/Skeleton';
-import { isLoggedIn } from '@features/user/service/authUtils';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
-import type { RankedUser } from '@features/user/types';
-import type { RankingPagination } from '@features/ranking/types';
+import { useRankingPaginationQuery } from '@features/ranking/queries';
 import UserRankingListSkeleton from './UserRankingListSkeleton';
-import MyRankSkeleton from './MyRankSkeleton';
+import { generatePaginationPages } from '@utils/generatePaginationPages';
 
 interface UserRankingListProps {
-  myRank: RankedUser;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
   selectedOption: keyof typeof RANKING_OPTIONS;
   onOptionChange: (option: keyof typeof RANKING_OPTIONS) => void;
-  users: RankingPagination['contents'];
-  currentPage: number;
-  limit: number;
-  isUserRankingLoading: boolean;
-  isMyRankingLoading: boolean;
 }
 
 export default function UserRankingList({
-  myRank,
+  currentPage,
+  setCurrentPage,
   selectedOption,
   onOptionChange,
-  users,
-  currentPage,
-  limit,
-  isUserRankingLoading,
-  isMyRankingLoading,
 }: UserRankingListProps) {
-  const config = RANKING_OPTIONS[selectedOption];
-  const { user } = useUserStore();
+  // 전체 유저 랭킹 정보 (페이지네이션)
+  const { data, isLoading } = useRankingPaginationQuery.getRankingByPage(
+    RANKING_OPTIONS[selectedOption].dataField,
+    currentPage
+  );
+
+  const totalPage = data?.totalPage ?? 1;
+  const pages = generatePaginationPages({
+    currentPage,
+    totalPage,
+    maxVisible: 7,
+  });
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPage) setCurrentPage(currentPage + 1);
+  };
+
+  const handlePageClick = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const limit = 5;
 
   return (
-    <S.RankingContainer>
-      {/* 나의 순위 (로그인을 한 유저만 렌더링) */}
-      {isLoggedIn(user) &&
-        (isMyRankingLoading ? (
-          <MyRankSkeleton />
-        ) : (
-          <MyRank {...myRank} selectedOption={selectedOption} />
-        ))}
-
+    <S.UserRankingListContainer>
       {/* 정렬 드롭다운 */}
       <S.SortDropdownWrapper>
         <SortDropdown
@@ -64,11 +67,11 @@ export default function UserRankingList({
         />
       </S.SortDropdownWrapper>
 
-      {/* 나머지 순위 영역 */}
-      {isUserRankingLoading ? (
+      {/* 전체 유저 랭킹 리스트 */}
+      {isLoading ? (
         <UserRankingListSkeleton />
       ) : (
-        users.map((user, index) => {
+        data?.contents.map((user, index) => {
           const rank = (currentPage - 1) * limit + (index + 1);
           return (
             <S.RankingItem key={user.id} $rank={rank}>
@@ -84,8 +87,12 @@ export default function UserRankingList({
               </S.UserInfo>
               <S.Container>
                 <S.RankIconWrapper>
-                  <S.RankIcon src={getImageUrl(config.icon)} />
-                  <S.RankIconText>{user[config.dataField]}</S.RankIconText>
+                  <S.RankIcon
+                    src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)}
+                  />
+                  <S.RankIconText>
+                    {user[RANKING_OPTIONS[selectedOption].dataField]}
+                  </S.RankIconText>
                 </S.RankIconWrapper>
                 <S.AddFriend>+ 친구 추가</S.AddFriend>
               </S.Container>
@@ -93,6 +100,35 @@ export default function UserRankingList({
           );
         })
       )}
-    </S.RankingContainer>
+
+      {/* 페이지네이션 */}
+      <S.RankingPaginationDiv>
+        <S.RankingPaginationButton
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          ◀
+        </S.RankingPaginationButton>
+        {pages.map((page, index) =>
+          typeof page === 'number' ? (
+            <S.RankingPaginationButton
+              key={index}
+              onClick={() => handlePageClick(page)}
+              $isSelected={page === currentPage}
+            >
+              {page}
+            </S.RankingPaginationButton>
+          ) : (
+            <span key={index}>···</span>
+          )
+        )}
+        <S.RankingPaginationButton
+          onClick={handleNextPage}
+          disabled={currentPage === totalPage}
+        >
+          ▶
+        </S.RankingPaginationButton>
+      </S.RankingPaginationDiv>
+    </S.UserRankingListContainer>
   );
 }
