@@ -1,6 +1,6 @@
 import HeaderItem from '@/common/ui/HeaderItem';
 import { useUserHpQuery } from '@/features/user/queries';
-import AttendanceCheck from '@/features/user/ui/AttendanceCheck';
+import AttendanceCalendarModal from '@/features/user/ui/AttendanceCalendarModal';
 import useUserStore from '@/store/useUserStore';
 import { getImageUrl } from '@/utils/getImageUrl';
 
@@ -12,7 +12,7 @@ export default function UserPresentHeaderItemContainer() {
     <>
       {user && (
         <>
-          <AttendanceCheck />
+          <AttendanceCalendarModal />
           <HeaderItem
             icon={getImageUrl('포인트.svg')}
             point={user.point}

@@ -26,3 +26,7 @@ export interface UserProgress {
   correctUserProgressCount: number;
   inCorrectUserProgressCount: number;
 }
+
+export interface UserAttendance extends Pick<User, 'id'> {
+  date: string;
+}

@@ -19,6 +19,8 @@ const userKeys = {
     sectionId || partId
       ? ([...userKeys.me(), 'progress', { sectionId, partId }] as const)
       : ([...userKeys.me(), 'progress'] as const),
+  attendance: () => [...userKeys.me(), 'attendance'] as const,
+  attendanceList: () => [...userKeys.attendance(), 'list'] as const,
 };
 
 export const useUserHpQuery = {
@@ -141,5 +143,24 @@ export const useUserProgressQuery = {
   },
   updateQuizProgress: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
+  },
+};
+
+export const useUserAttendanceQuery = {
+  getAttendanceList: (parmas: { year: number; month: number }) => {
+    return useSuspenseQuery({
+      queryKey: userKeys.attendanceList(),
+      queryFn: () => usersApis.getAttendanceList(parmas),
+    });
+  },
+  getAttendance: () =>
+    useSuspenseQuery({
+      queryKey: userKeys.attendance(),
+      queryFn: usersApis.getAttendance,
+    }),
+  recordAttendance: () => {
+    return useMutation({
+      mutationFn: usersApis.postAttendance,
+    });
   },
 };
