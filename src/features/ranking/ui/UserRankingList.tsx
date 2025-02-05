@@ -8,8 +8,10 @@ import { isLoggedIn } from '@features/user/service/authUtils';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
 import type { RankedUser } from '@features/user/types';
 import type { RankingPagination } from '@features/ranking/types';
+import UserRankingListSkeleton from './UserRankingListSkeleton';
+import MyRankSkeleton from './MyRankSkeleton';
 
-interface RankingContainerProps {
+interface UserRankingListProps {
   myRank: RankedUser;
   selectedOption: keyof typeof RANKING_OPTIONS;
   onOptionChange: (option: keyof typeof RANKING_OPTIONS) => void;
@@ -20,7 +22,7 @@ interface RankingContainerProps {
   isMyRankingLoading: boolean;
 }
 
-export default function RankingContainer({
+export default function UserRankingList({
   myRank,
   selectedOption,
   onOptionChange,
@@ -29,7 +31,7 @@ export default function RankingContainer({
   limit,
   isUserRankingLoading,
   isMyRankingLoading,
-}: RankingContainerProps) {
+}: UserRankingListProps) {
   const config = RANKING_OPTIONS[selectedOption];
   const { user } = useUserStore();
 
@@ -38,15 +40,7 @@ export default function RankingContainer({
       {/* 나의 순위 (로그인을 한 유저만 렌더링) */}
       {isLoggedIn(user) &&
         (isMyRankingLoading ? (
-          <Skeleton
-            width="100%"
-            height="115px"
-            style={{
-              borderRadius: '20px',
-              marginBottom: '27px',
-              boxShadow: '0 7px #bdbdbd',
-            }}
-          />
+          <MyRankSkeleton />
         ) : (
           <MyRank {...myRank} selectedOption={selectedOption} />
         ))}
@@ -71,43 +65,34 @@ export default function RankingContainer({
       </S.SortDropdownWrapper>
 
       {/* 나머지 순위 영역 */}
-      {isUserRankingLoading
-        ? Array.from({ length: 5 }).map((_, index) => (
-            <Skeleton
-              key={index}
-              width="100%"
-              height="115px"
-              style={{
-                borderRadius: '20px',
-                marginBottom: '27px',
-                boxShadow: '0 7px #bdbdbd',
-              }}
-            />
-          ))
-        : users.map((user, index) => {
-            const rank = (currentPage - 1) * limit + (index + 1);
-            return (
-              <S.RankingItem key={user.id} $rank={rank}>
-                <S.MedalContainer $rank={rank} />
-                <S.RankText>{rank}</S.RankText>
-                <S.ProfileWrapper>
-                  <S.ProfileOutline src={getImageUrl('테두리.svg')} />
-                  <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />
-                </S.ProfileWrapper>
-                <S.UserInfo>
-                  <S.UserLevelText>LV.{user.level}</S.UserLevelText>
-                  <S.UserNameText>{user.name}</S.UserNameText>
-                </S.UserInfo>
-                <S.Container>
-                  <S.RankIconWrapper>
-                    <S.RankIcon src={getImageUrl(config.icon)} />
-                    <S.RankIconText>{user[config.dataField]}</S.RankIconText>
-                  </S.RankIconWrapper>
-                  <S.AddFriend>+ 친구 추가</S.AddFriend>
-                </S.Container>
-              </S.RankingItem>
-            );
-          })}
+      {isUserRankingLoading ? (
+        <UserRankingListSkeleton />
+      ) : (
+        users.map((user, index) => {
+          const rank = (currentPage - 1) * limit + (index + 1);
+          return (
+            <S.RankingItem key={user.id} $rank={rank}>
+              <S.MedalContainer $rank={rank} />
+              <S.RankText>{rank}</S.RankText>
+              <S.ProfileWrapper>
+                <S.ProfileOutline src={getImageUrl('테두리.svg')} />
+                <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />
+              </S.ProfileWrapper>
+              <S.UserInfo>
+                <S.UserLevelText>LV.{user.level}</S.UserLevelText>
+                <S.UserNameText>{user.name}</S.UserNameText>
+              </S.UserInfo>
+              <S.Container>
+                <S.RankIconWrapper>
+                  <S.RankIcon src={getImageUrl(config.icon)} />
+                  <S.RankIconText>{user[config.dataField]}</S.RankIconText>
+                </S.RankIconWrapper>
+                <S.AddFriend>+ 친구 추가</S.AddFriend>
+              </S.Container>
+            </S.RankingItem>
+          );
+        })
+      )}
     </S.RankingContainer>
   );
 }

@@ -3,7 +3,7 @@ import { getImageUrl } from '@utils/getImageUrl';
 import * as globalS from '@style/styles';
 import * as S from './styles';
 import MenuBar from '@common/layout/MenuBar';
-import RankingContainer from '@features/ranking/ui/RankingContainer';
+import UserRankingList from '@/features/ranking/ui/UserRankingList';
 import Header from '@common/layout/Header';
 import Skeleton from '@common/layout/Skeleton';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
@@ -97,7 +97,7 @@ export default function Ranking() {
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <RankingContainer
+        <UserRankingList
           myRank={myRank}
           selectedOption={selectedOption}
           onOptionChange={setSelectedOption}
