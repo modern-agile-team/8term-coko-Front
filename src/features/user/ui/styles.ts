@@ -1,4 +1,5 @@
 import { media } from '@/style/media';
+import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
 export const BadgeWrapper = styled.div`
   display: flex;
@@ -156,31 +157,44 @@ export const AttendanceCalendarBoard = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 4px;
-
-  > span {
-    color: #b57400;
-    font-weight: 700;
-    font-size: 14px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    z-index: 1000;
-    padding: 8px 8px 0 0;
-  }
+  padding: 3px 7px;
+  column-gap: 4px;
+  row-gap: 2px;
+  background-image: url(${getImageUrl('달력아래.svg')});
+  background-size: cover;
 
   > img {
     position: absolute;
     width: 100%;
     height: 100%;
   }
+  ${media.mobile} {
+    padding: 2px 3px 0 3px;
+    height: 200px;
+    gap: 5px;
+  }
+`;
+
+export const AttendanceDayCell = styled.span`
+  color: #b57400;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  z-index: 1000;
+  > p {
+    position: absolute;
+    padding: 5px 5px 0 0;
+  }
+  > img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 
   ${media.mobile} {
-    height: 200px;
-    gap: 4px;
-    > span {
-      font-size: 10px;
-    }
+    font-size: 10px;
   }
 `;
 

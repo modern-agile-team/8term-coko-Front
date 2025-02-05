@@ -6,9 +6,12 @@ import {
   getMonth,
   getYear,
 } from '@/features/user/service/utils';
-import { AttendanceCalendarBoard } from '@/features/user/ui/styles';
-import { getImageUrl } from '@/utils/getImageUrl';
+import {
+  AttendanceCalendarBoard,
+  AttendanceDayCell,
+} from '@/features/user/ui/styles';
 import { useEffect, useMemo } from 'react';
+import toast from 'react-hot-toast';
 
 export default function AttendanceCalendar() {
   const { data: userAttendanceList } = useUserAttendanceQuery.getAttendanceList(
@@ -25,11 +28,15 @@ export default function AttendanceCalendar() {
 
   useEffect(() => {
     if (!isUserAttendance) {
-      recordAttendance();
+      recordAttendance(undefined, {
+        onSuccess: () => {
+          toast('출석체크 성공!');
+        },
+      });
     }
   }, []);
 
-  const StampDays = useMemo(
+  const StampDaysMap = useMemo(
     () =>
       userAttendanceList.reduce<Record<number, boolean>>((acc, cur) => {
         acc[getDayFromDateString(cur.date)] = true;
@@ -41,12 +48,11 @@ export default function AttendanceCalendar() {
   return (
     <AttendanceCalendarBoard>
       {days.map(day => (
-        <span key={day}>
-          {StampDays[day] && '도장'}
-          {day}
-        </span>
+        <AttendanceDayCell key={day}>
+          {StampDaysMap[day] && <img src={''} />}
+          <p>{day}</p>
+        </AttendanceDayCell>
       ))}
-      <img src={getImageUrl('달력아래.svg')} />
     </AttendanceCalendarBoard>
   );
 }
