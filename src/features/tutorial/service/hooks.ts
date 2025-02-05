@@ -10,6 +10,7 @@ export const useElementRect = () => {
       if (!node) return;
       requestAnimationFrame(() => {
         const rect = node.getBoundingClientRect();
+
         const id = node.id;
         setRect(id, rect);
       });

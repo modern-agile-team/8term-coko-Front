@@ -42,6 +42,17 @@ function TutorialContainer({ quizzes }: TutorialProps) {
   const [caseName, setCaseName] = useState<'result' | 'tutorialClear'>(
     'result'
   );
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  useEffect(() => {
+    // 500ms 후에 QuizTutorial 렌더링
+    const timer = setTimeout(() => {
+      setShowTutorial(true);
+    }, 100);
+
+    return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 정리
+  }, []);
+
   useEffect(() => {
     if (isQuizFinished) {
       setCaseName('tutorialClear');
@@ -121,7 +132,7 @@ function TutorialContainer({ quizzes }: TutorialProps) {
           }}
         />
       </Modal>
-      <QuizTutorial category={category} />
+      {showTutorial && <QuizTutorial category={category} />}
     </>
   );
 }
