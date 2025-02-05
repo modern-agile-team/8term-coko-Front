@@ -1,4 +1,5 @@
 import ProgressBar from '@/features/progress/ui/ProgressBar';
+import withQuizzes from '@/features/quiz/hocs/withQuizzes';
 import { Quiz } from '@/features/quiz/types';
 import Combination from '@/features/quiz/ui/Combination';
 import MultipleChoice from '@/features/quiz/ui/MultipleChoice';
@@ -25,7 +26,7 @@ import { useEffect, useState } from 'react';
 interface TutorialProps {
   quizzes: Quiz[];
 }
-export default function TutorialContainer({ quizzes }: TutorialProps) {
+function TutorialContainer({ quizzes }: TutorialProps) {
   const {
     currentPage,
     isCorrectList,
@@ -124,3 +125,5 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
     </>
   );
 }
+
+export default withQuizzes(TutorialContainer);
