@@ -1,6 +1,6 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
-import type { RankingSort } from './types';
+import { useQuery } from '@tanstack/react-query';
 import rankingApis from './apis';
+import type { RankingSort } from './types';
 
 const rankingKeys = {
   all: ['rankings'] as const,
