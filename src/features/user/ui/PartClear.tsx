@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import * as S from '@features/quiz/ui/styles';
 import {
-  useUserPartProgressQuery,
+  useUserPartStatusQuery,
   useUserPointQuery,
 } from '@features/user/queries';
 import { getImageUrl } from '@utils/getImageUrl';
@@ -13,7 +13,7 @@ export default function PartClear({ partId }: PartClearProps) {
   const { mutate: updatePoint, isIdle: isPointIdle } =
     useUserPointQuery.updatePoint();
   const { mutate: updatePartStatus, isIdle: isProgressIdle } =
-    useUserPartProgressQuery.updateCompletedPartStatus();
+    useUserPartStatusQuery.updateCompletedPartStatus();
   const navigate = useNavigate();
   const handleNavigateToLearn = () => {
     updatePoint({ point: DEFAULT_POINT });

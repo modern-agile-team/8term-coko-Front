@@ -3,7 +3,7 @@ import { create } from 'zustand';
 interface State {
   currentPage: number;
   userResponseAnswer: string[];
-  isCorrectList: boolean[];
+  isCorrectList: (boolean | undefined)[];
 }
 interface Actions {
   nextPage: () => void;

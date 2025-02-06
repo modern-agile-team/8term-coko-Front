@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
-import useFunnel from '@hooks/useFunnel';
 import { SwitchCase, useUnmount } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
 import { useClientQuizStore } from '@store/useClientQuizStore';
@@ -33,7 +32,7 @@ import {
   SubmitSection,
 } from '@/features/quiz/ui/styles';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
-import { useHpUpdate } from '@/features/quiz/hooks';
+import { useHpUpdate } from '@/features/user/hooks';
 
 interface QuizProps {
   partStatus: PartStatus;
@@ -64,6 +63,7 @@ function QuizContainer({
   const isQuizFinished = isCorrectList.length === quizzes?.length;
 
   const [step, setStep] = useState<ModalType>('result');
+
   useEffect(() => {
     if (isCorrectList.length === 2 && !isLoggedIn(user)) {
       setStep('loginPrompt');
@@ -149,7 +149,7 @@ function QuizContainer({
               <Result
                 partStatus={partStatus}
                 quizId={id}
-                isCorrect={isCorrectList[currentPage]}
+                isCorrect={!!isCorrectList[currentPage]}
                 answer={answer}
                 openModal={openModal}
                 closeModal={closeModal}
