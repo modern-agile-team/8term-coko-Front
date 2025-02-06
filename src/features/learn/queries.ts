@@ -14,7 +14,7 @@ const sectionKeys = {
 const createInfiniteSectionQuery = (
   queryKey:
     | ReturnType<typeof sectionKeys.paginated>
-    | ReturnType<typeof userKeys.userPaginated>,
+    | ReturnType<typeof userKeys.sections.paginated>,
   apiFn: (cursor?: number) => Promise<SectionPagination>
 ) => {
   return () =>
@@ -50,7 +50,7 @@ export const useSectionPaginationQuery = {
     sectionsApis.getSectionsByPage
   ),
   getUserSectionsByPage: createInfiniteSectionQuery(
-    userKeys.userPaginated(),
+    userKeys.sections.paginated(),
     sectionsApis.getUserSectionsByPage
   ),
 };

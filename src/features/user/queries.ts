@@ -17,7 +17,9 @@ export const userKeys = {
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
-  userPaginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
+  sections: {
+    paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
+  },
 
   progress: {
     root: () => [...userKeys.me(), 'progress'] as const,
@@ -148,7 +150,7 @@ export const useUserPartStatusQuery = {
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
         queryClient.invalidateQueries({
-          queryKey: userKeys.userPaginated(),
+          queryKey: userKeys.sections.paginated(),
         });
       },
     });
@@ -160,7 +162,7 @@ export const useUserPartStatusQuery = {
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
         queryClient.invalidateQueries({
-          queryKey: userKeys.userPaginated(),
+          queryKey: userKeys.sections.paginated(),
         });
       },
     });
