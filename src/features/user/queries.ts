@@ -17,8 +17,11 @@ const userKeys = {
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
-  attendance: () => [...userKeys.me(), 'attendance'] as const,
-  attendanceList: () => [...userKeys.attendance(), 'list'] as const,
+  attendance: {
+    root: () => [...userKeys.me(), 'attendance'] as const,
+    list: () => [...userKeys.attendance.root(), 'list'] as const,
+  },
+
   progress: {
     root: () => [...userKeys.me(), 'progress'] as const,
     section: (sectionId: Section['id']) =>
@@ -179,13 +182,13 @@ export const useUserProgressQuery = {
 export const useUserAttendanceQuery = {
   getAttendanceList: (parmas: { year: number; month: number }) => {
     return useSuspenseQuery({
-      queryKey: userKeys.attendanceList(),
+      queryKey: userKeys.attendance.list(),
       queryFn: () => usersApis.getAttendanceList(parmas),
     });
   },
   getAttendance: () =>
     useSuspenseQuery({
-      queryKey: userKeys.attendance(),
+      queryKey: userKeys.attendance.root(),
       queryFn: usersApis.getAttendance,
     }),
   recordAttendance: () => {
@@ -193,7 +196,7 @@ export const useUserAttendanceQuery = {
     return useMutation({
       mutationFn: usersApis.postAttendance,
       onSettled: () => {
-        queryClient.invalidateQueries({ queryKey: userKeys.attendance() });
+        queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
       },
     });
   },
