@@ -1,16 +1,16 @@
-export const getYear = () => {
+export const getCurrentYear = () => {
   const today = new Date();
   return today.getFullYear();
 };
 
-export const getMonth = () => {
+export const getCurrentMonth = () => {
   const today = new Date();
   return today.getMonth() + 1;
 };
 
 export const getLastDayOfMonth = (): number => {
-  const targetYear = getYear();
-  const targetMonth = getMonth();
+  const targetYear = getCurrentYear();
+  const targetMonth = getCurrentMonth();
   return new Date(targetYear, targetMonth, 0).getDate();
 };
 

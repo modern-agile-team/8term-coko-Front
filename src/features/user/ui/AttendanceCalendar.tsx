@@ -3,8 +3,8 @@ import {
   generateDaysInMonth,
   getDayFromDateString,
   getLastDayOfMonth,
-  getMonth,
-  getYear,
+  getCurrentMonth,
+  getCurrentYear,
 } from '@/features/user/service/utils';
 import {
   AttendanceCalendarBoard,
@@ -17,8 +17,8 @@ import toast from 'react-hot-toast';
 export default function AttendanceCalendar() {
   const { data: userAttendanceList } = useUserAttendanceQuery.getAttendanceList(
     {
-      year: getYear(),
-      month: getMonth(),
+      year: getCurrentYear(),
+      month: getCurrentMonth(),
     }
   );
   const { data: isUserAttendance } = useUserAttendanceQuery.getAttendance();

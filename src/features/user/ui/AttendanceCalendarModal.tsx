@@ -1,5 +1,5 @@
 import Loader from '@/common/layout/Loader';
-import { getMonth } from '@/features/user/service/utils';
+import { getCurrentMonth } from '@/features/user/service/utils';
 import AttendanceCalendar from '@/features/user/ui/AttendanceCalendar';
 import {
   AttendanceCalendarWrapper,
@@ -19,7 +19,7 @@ export default function AttendanceCalendarModal() {
       <Modal isShow={isShow}>
         <Suspense fallback={<Loader />}>
           <AttendanceCalendarWrapper ref={modalRef}>
-            <h1>{getMonth()}월 출석체크</h1>
+            <h1>{getCurrentMonth()}월 출석체크</h1>
             <img src={getImageUrl('달력위.svg')} />
             <AttendanceCalendar />
           </AttendanceCalendarWrapper>
