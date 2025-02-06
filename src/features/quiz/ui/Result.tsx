@@ -7,7 +7,6 @@ import type { PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import { isCompleted } from '@/features/quiz/utils';
-import { useHpUpdate } from '@/features/quiz/hooks';
 
 interface ResultProps {
   quizId: Quiz['id'];
