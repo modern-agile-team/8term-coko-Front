@@ -153,15 +153,16 @@ export const AttendanceCheckButton = styled.button`
 
 export const AttendanceCalendarBoard = styled.div`
   position: relative;
-  height: 500px;
+  height: 520px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  padding: 3px 5px;
+  padding: 5px 5px 0;
   column-gap: 4px;
-  row-gap: 20px;
   background-image: url(${getImageUrl('달력아래.svg')});
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
   > img {
     position: absolute;
