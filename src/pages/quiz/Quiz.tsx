@@ -5,7 +5,7 @@ import { AlignCenter, HeaderSection } from '@/pages/quiz/styles';
 
 export default function Quiz() {
   const { partId, partStatus } = useLocationQuizState();
-  console.log(partStatus);
+
   return (
     <AlignCenter>
       <HeaderSection>
