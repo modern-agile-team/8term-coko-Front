@@ -32,6 +32,8 @@ import {
   ResponseButton,
   SubmitSection,
 } from '@/features/quiz/ui/styles';
+import withQuizzes from '@/features/quiz/hocs/withQuizzes';
+import { useHpUpdate } from '@/features/quiz/hooks';
 
 interface QuizProps {
   partStatus: PartStatus;
@@ -40,8 +42,7 @@ interface QuizProps {
 interface InjectedProps {
   quizzes: Quiz[];
 }
-
-export default function QuizContainer({
+function QuizContainer({
   quizzes,
   partStatus,
   partId,
@@ -75,6 +76,7 @@ export default function QuizContainer({
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
+  useHpUpdate(isCorrectList[currentPage]);
 
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
@@ -178,3 +180,5 @@ export default function QuizContainer({
     </>
   );
 }
+
+export default withQuizzes(QuizContainer);

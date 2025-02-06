@@ -7,6 +7,8 @@ import {
 import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
+import useUserStore from '@/store/useUserStore';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
 const userKeys = {
   all: ['users'] as const,
@@ -15,20 +17,35 @@ const userKeys = {
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
-  progress: (sectionId?: Section['id'], partId?: Part['id']) =>
-    sectionId || partId
-      ? ([...userKeys.me(), 'progress', { sectionId, partId }] as const)
-      : ([...userKeys.me(), 'progress'] as const),
   attendance: () => [...userKeys.me(), 'attendance'] as const,
   attendanceList: () => [...userKeys.attendance(), 'list'] as const,
+  progress: {
+    root: () => [...userKeys.me(), 'progress'] as const,
+    section: (sectionId: Section['id']) =>
+      [...userKeys.progress.root(), 'section', sectionId] as const,
+    part: (partId: Part['id']) =>
+      [...userKeys.progress.root(), 'part', partId] as const,
+    detail: (sectionId?: Section['id'], partId?: Part['id']) =>
+      sectionId || partId
+        ? ([...userKeys.progress.root(), { sectionId, partId }] as const)
+        : userKeys.progress.root(),
+  },
 };
 
 export const useUserHpQuery = {
-  getHp: () => {
+  getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
       queryFn: usersApis.getHp,
       retry: 0,
+    });
+  },
+  getHpWhenLoggedIn: () => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.hp(),
+      queryFn: usersApis.getHp,
+      enabled: isLoggedIn(user),
     });
   },
   updateHp: () => {
@@ -124,9 +141,22 @@ export const useUserPointQuery = {
 };
 
 export const useUserPartProgressQuery = {
-  updatePartProgress: () => {
+  updatePartStatus: () => {
+    const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.putPartProgress,
+      mutationFn: usersApis.patchPartStatus,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+      },
+    });
+  },
+  updateCompletedPartStatus: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.patchCompletedPartStatus,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+      },
     });
   },
 };
@@ -137,7 +167,7 @@ export const useUserProgressQuery = {
     partId?: Part['id'];
   }) => {
     return useQuery({
-      queryKey: userKeys.progress(params?.sectionId, params?.partId),
+      queryKey: userKeys.progress.detail(params?.sectionId, params?.partId),
       queryFn: () => usersApis.getProgress(params),
     });
   },
