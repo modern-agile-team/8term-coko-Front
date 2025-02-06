@@ -10,13 +10,14 @@ import type { Section, Part } from '@features/learn/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 
-const userKeys = {
+export const userKeys = {
   all: ['users'] as const,
   me: () => [...userKeys.all, 'me'] as const,
   hp: () => [...userKeys.me(), 'hp'] as const,
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
+  userPaginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
 
   progress: {
     root: () => [...userKeys.me(), 'progress'] as const,
@@ -146,7 +147,9 @@ export const useUserPartStatusQuery = {
       mutationFn: usersApis.patchPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
-        queryClient.invalidateQueries({ queryKey: userKeys.me() });
+        queryClient.invalidateQueries({
+          queryKey: userKeys.userPaginated(),
+        });
       },
     });
   },
@@ -156,7 +159,9 @@ export const useUserPartStatusQuery = {
       mutationFn: usersApis.patchCompletedPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
-        queryClient.invalidateQueries({ queryKey: userKeys.me() });
+        queryClient.invalidateQueries({
+          queryKey: userKeys.userPaginated(),
+        });
       },
     });
   },
