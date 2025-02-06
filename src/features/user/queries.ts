@@ -7,6 +7,8 @@ import {
 import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
+import useUserStore from '@/store/useUserStore';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
 const userKeys = {
   all: ['users'] as const,
@@ -30,11 +32,19 @@ const userKeys = {
 };
 
 export const useUserHpQuery = {
-  getHp: () => {
+  getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
       queryFn: usersApis.getHp,
       retry: 0,
+    });
+  },
+  getHpWhenLoggedIn: () => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.hp(),
+      queryFn: usersApis.getHp,
+      enabled: isLoggedIn(user),
     });
   },
   updateHp: () => {

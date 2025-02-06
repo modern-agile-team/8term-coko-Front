@@ -1,5 +1,7 @@
 import { PartStatus } from '@/features/learn/types';
 import { useUserHpQuery } from '@/features/user/queries';
+import { isLoggedIn } from '@/features/user/service/authUtils';
+import useUserStore from '@/store/useUserStore';
 import hljs from 'highlight.js';
 import { DependencyList, useState, useLayoutEffect, useEffect } from 'react';
 import toast from 'react-hot-toast';
@@ -76,16 +78,20 @@ export const useLocationQuizState = () => {
 type useHpUpdate = (isCorrect: boolean) => void;
 export const useHpUpdate: useHpUpdate = isCorrect => {
   const { mutate: hpUpdate } = useUserHpQuery.updateHp();
-  const { data: userHp } = useUserHpQuery.getHp();
+  const { data: userHp } = useUserHpQuery.getHpWhenLoggedIn();
+  const { user } = useUserStore();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Number(userHp.hp) === 0) {
+    if (Number(userHp?.hp) === 0) {
       toast('목숨이 다 소진되었습니다.');
       navigate('/');
     }
-    if (!isCorrect) {
+
+    if (isCorrect) return;
+
+    if (isLoggedIn(user) && userHp) {
       hpUpdate({
         hp: Number(userHp.hp) - 1,
         hpStorage: userHp.hpStorage,

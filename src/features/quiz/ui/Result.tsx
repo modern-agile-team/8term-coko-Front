@@ -33,7 +33,6 @@ export default function Result({
   const { nextPage, resetUserResponseAnswer } = useClientQuizStore();
   const { user } = useUserStore();
   const { mutate: progressUpdate } = useUserProgressQuery.updateQuizProgress();
-  useHpUpdate(isCorrect);
 
   const handleOnClick = () => {
     resetUserResponseAnswer();
