@@ -114,11 +114,13 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+
   > img:first-child {
     position: absolute;
     z-index: 20;
     transform: scale(1.6);
   }
+
   ${({ $isIcon }) =>
     $isIcon &&
     css`
@@ -136,14 +138,17 @@ export const AttendanceCheckButton = styled.button`
   border: none;
   background-color: inherit;
   display: flex;
+
   > img {
     width: 24px;
     height: 24px;
   }
+
   ${media.mobile} {
     position: fixed;
     left: 30px;
     bottom: 100px;
+
     > img {
       width: 36px;
       height: 36px;
@@ -169,6 +174,7 @@ export const AttendanceCalendarBoard = styled.div`
     width: 100%;
     height: 100%;
   }
+
   ${media.mobile} {
     padding: 2px 3px 0 3px;
     height: 200px;
@@ -184,6 +190,7 @@ export const AttendanceDayCell = styled.span`
   align-items: flex-start;
   justify-content: flex-end;
   z-index: 1000;
+
   > p {
     position: absolute;
     padding: 5px 5px 0 0;
@@ -208,6 +215,7 @@ export const AttendanceCalendarWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   > h1 {
     position: absolute;
     left: 50%;
@@ -221,9 +229,11 @@ export const AttendanceCalendarWrapper = styled.div`
     width: 700px;
     height: 67px;
   }
+
   ${media.mobile} {
     width: 280px;
     height: 230px;
+
     > h1 {
       font-size: 12px;
     }
