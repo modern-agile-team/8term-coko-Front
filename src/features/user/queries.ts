@@ -159,8 +159,12 @@ export const useUserAttendanceQuery = {
       queryFn: usersApis.getAttendance,
     }),
   recordAttendance: () => {
+    const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.postAttendance,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.attendance() });
+      },
     });
   },
 };

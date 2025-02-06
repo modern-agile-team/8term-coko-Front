@@ -10,6 +10,7 @@ import {
   AttendanceCalendarBoard,
   AttendanceDayCell,
 } from '@/features/user/ui/styles';
+import { getImageUrl } from '@/utils/getImageUrl';
 import { useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 
@@ -49,7 +50,7 @@ export default function AttendanceCalendar() {
     <AttendanceCalendarBoard>
       {days.map(day => (
         <AttendanceDayCell key={day}>
-          {StampDaysMap[day] && <img src={''} />}
+          {StampDaysMap[day] && <img src={getImageUrl('출석체크도장.svg')} />}
           <p>{day}</p>
         </AttendanceDayCell>
       ))}
