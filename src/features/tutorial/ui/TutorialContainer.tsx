@@ -20,7 +20,7 @@ import useModal from '@/hooks/useModal';
 
 import { useClientQuizStore } from '@/store/useClientQuizStore';
 import isEqualArray from '@/utils/isEqualArray';
-import { SwitchCase, useUnmount } from '@modern-kit/react';
+import { SwitchCase, useUnmount, useTimeout } from '@modern-kit/react';
 import { useEffect, useState } from 'react';
 
 interface TutorialProps {
@@ -44,14 +44,7 @@ function TutorialContainer({ quizzes }: TutorialProps) {
   );
   const [showTutorial, setShowTutorial] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowTutorial(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+  useTimeout(() => setShowTutorial(true), 100);
   useEffect(() => {
     if (isQuizFinished) {
       setCaseName('tutorialClear');

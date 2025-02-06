@@ -44,9 +44,10 @@ export const animations = {
     50% { transform: translateY(-50px); }
     100% { transform: translateY(0); }
   `,
-  fadeInScaleUpForCenter: keyframes`  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5); 
+  fadeInScaleUpForCenter: keyframes`
+  from {
+    opacity: 0; transform: 
+    translate(-50%, -50%) scale(0.5); 
   }
   to {
     opacity: 1;
