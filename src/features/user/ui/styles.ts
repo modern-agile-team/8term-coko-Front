@@ -159,7 +159,7 @@ export const AttendanceCalendarBoard = styled.div`
   grid-template-rows: repeat(5, 1fr);
   padding: 3px 5px;
   column-gap: 4px;
-  row-gap: 2px;
+  row-gap: 20px;
   background-image: url(${getImageUrl('달력아래.svg')});
   background-size: cover;
 
