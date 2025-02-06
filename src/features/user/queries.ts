@@ -139,13 +139,14 @@ export const useUserPointQuery = {
   },
 };
 
-export const useUserPartProgressQuery = {
+export const useUserPartStatusQuery = {
   updatePartStatus: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.patchPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+        queryClient.invalidateQueries({ queryKey: userKeys.me() });
       },
     });
   },
@@ -155,6 +156,7 @@ export const useUserPartProgressQuery = {
       mutationFn: usersApis.patchCompletedPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+        queryClient.invalidateQueries({ queryKey: userKeys.me() });
       },
     });
   },

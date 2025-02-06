@@ -149,7 +149,7 @@ function QuizContainer({
               <Result
                 partStatus={partStatus}
                 quizId={id}
-                isCorrect={isCorrectList[currentPage]}
+                isCorrect={!!isCorrectList[currentPage]}
                 answer={answer}
                 openModal={openModal}
                 closeModal={closeModal}

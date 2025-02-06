@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
-type useHpUpdate = (isCorrect: boolean) => void;
+type useHpUpdate = (isCorrect: boolean | undefined) => void;
 export const useHpUpdate: useHpUpdate = isCorrect => {
   const { mutate: hpUpdate } = useUserHpQuery.updateHp();
   const { data: userHp } = useUserHpQuery.getHpWhenLoggedIn();

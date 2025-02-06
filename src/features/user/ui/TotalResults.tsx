@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTimeout } from '@modern-kit/react';
 import {
   useUserExperienceQuery,
-  useUserPartProgressQuery,
+  useUserPartStatusQuery,
 } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { Quiz } from '@features/quiz/types';
@@ -32,7 +32,7 @@ export default function TotalResults({
   const { mutate: experienceUpdate, isIdle: isExperienceIdle } =
     useUserExperienceQuery.updateExperience();
   const { mutate: updatePartStatus, isIdle: isProgressIdle } =
-    useUserPartProgressQuery.updatePartStatus();
+    useUserPartStatusQuery.updatePartStatus();
 
   const navigate = useNavigate();
 
