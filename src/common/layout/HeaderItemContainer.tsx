@@ -1,14 +1,15 @@
 import HeaderItem from '@/common/ui/HeaderItem';
 import { useUserHpQuery } from '@/features/user/queries';
 import { User } from '@/features/user/types';
-import useUserStore from '@/store/useUserStore';
 import { getImageUrl } from '@/utils/getImageUrl';
 
-interface HeaderItemContainer {
+interface HeaderItemContainerProps {
   user: User;
 }
 
-export default function HeaderItemContainer({ user }: HeaderItemContainer) {
+export default function HeaderItemContainer({
+  user,
+}: HeaderItemContainerProps) {
   const { data: userHp } = useUserHpQuery.getHpWithSuspense();
 
   return (
