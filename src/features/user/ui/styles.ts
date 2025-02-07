@@ -1,3 +1,4 @@
+import { media } from '@/style/media';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
 export const BadgeWrapper = styled.div`
@@ -113,11 +114,13 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+
   > img:first-child {
     position: absolute;
     z-index: 20;
     transform: scale(1.6);
   }
+
   ${({ $isIcon }) =>
     $isIcon &&
     css`
@@ -129,4 +132,114 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
         transform: scale(0.35);
       }
     `}
+`;
+
+export const AttendanceCheckButton = styled.button`
+  border: none;
+  background-color: inherit;
+  display: flex;
+
+  > img {
+    width: 24px;
+    height: 24px;
+  }
+
+  ${media.mobile} {
+    position: fixed;
+    left: 30px;
+    bottom: 100px;
+
+    > img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+`;
+
+export const AttendanceCalendarBoard = styled.div`
+  position: relative;
+  height: 520px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  padding: 5px 5px 0;
+  column-gap: 4px;
+  background-image: url(${getImageUrl('달력아래.svg')});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  ${media.mobile} {
+    padding: 2px 3px 0 3px;
+    height: 200px;
+    gap: 5px;
+  }
+`;
+
+export const AttendanceDayCell = styled.span`
+  color: #b57400;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  z-index: 1000;
+
+  > p {
+    position: absolute;
+    padding: 5px 5px 0 0;
+  }
+  > img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  ${media.mobile} {
+    font-size: 10px;
+  }
+`;
+
+export const AttendanceCalendarWrapper = styled.div`
+  position: relative;
+  width: 700px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  > h1 {
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  > img {
+    width: 700px;
+    height: 67px;
+  }
+
+  ${media.mobile} {
+    width: 280px;
+    height: 230px;
+
+    > h1 {
+      font-size: 12px;
+    }
+    > img {
+      width: 280px;
+      height: 28px;
+    }
+  }
 `;

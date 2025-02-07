@@ -30,3 +30,8 @@ export interface UserProgress {
   correctUserProgressCount: number;
   inCorrectUserProgressCount: number;
 }
+
+export interface UserAttendance {
+  id: number;
+  date: string;
+}

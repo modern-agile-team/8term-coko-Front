@@ -1,6 +1,7 @@
 import HeaderItem from '@/common/ui/HeaderItem';
 import { useUserHpQuery } from '@/features/user/queries';
 import { User } from '@/features/user/types';
+import AttendanceCalendarModal from '@/features/user/ui/AttendanceCalendarModal';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 interface HeaderItemContainerProps {
@@ -14,6 +15,7 @@ export default function HeaderItemContainer({
 
   return (
     <>
+      <AttendanceCalendarModal />
       <HeaderItem
         icon={getImageUrl('포인트.svg')}
         point={user.point}

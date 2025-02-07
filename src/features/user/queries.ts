@@ -19,10 +19,13 @@ export const userKeys = {
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
+  attendance: {
+    root: () => [...userKeys.me(), 'attendance'] as const,
+    list: () => [...userKeys.attendance.root(), 'list'] as const,
+  },
   sections: {
     paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
   },
-
   progress: {
     root: () => [...userKeys.me(), 'progress'] as const,
     section: (sectionId: Section['id']) =>
@@ -191,6 +194,29 @@ export const useUserRankingQuery = {
     return useQuery({
       queryKey: userKeys.ranking(sort),
       queryFn: () => usersApis.getRanking({ sort }),
+    });
+  },
+};
+
+export const useUserAttendanceQuery = {
+  getAttendanceList: (params: { year: number; month: number }) => {
+    return useSuspenseQuery({
+      queryKey: userKeys.attendance.list(),
+      queryFn: () => usersApis.getAttendanceList(params),
+    });
+  },
+  getAttendance: () =>
+    useSuspenseQuery({
+      queryKey: userKeys.attendance.root(),
+      queryFn: usersApis.getAttendance,
+    }),
+  recordAttendance: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.postAttendance,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
+      },
     });
   },
 };

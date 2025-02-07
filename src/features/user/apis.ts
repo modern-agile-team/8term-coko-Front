@@ -4,6 +4,7 @@ import type {
   UserProgress,
   UserHp,
   PersonalRanking,
+  UserAttendance,
 } from '@features/user/types';
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
@@ -76,6 +77,20 @@ const usersApis = {
     const response = await api.get('users/me/rankings', { params });
     return response.data;
   },
+
+  getAttendanceList: async (params: {
+    year: number;
+    month: number;
+  }): Promise<UserAttendance[]> => {
+    const response = await api.get('/users/me/attendance', { params });
+    return response.data;
+  },
+
+  getAttendance: async (): Promise<boolean> => {
+    const response = await api.get('/users/me/attendance/today');
+    return response.data;
+  },
+  postAttendance: async () => await api.post('/users/me/attendance'),
 };
 
 export default usersApis;
