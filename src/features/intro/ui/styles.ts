@@ -60,3 +60,56 @@ export const TutorialPopupWrapper = styled.div<{
     }
   }
 `;
+
+export const IntroImage = styled.img`
+  width: 787px;
+  height: 497px;
+  box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.4);
+`;
+
+export const PageIntroWrapper = styled.section<{
+  $orderChange: boolean;
+  $backgroundColor: string;
+  $isVisible: boolean;
+}>`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  gap: 70px;
+
+  > div {
+    ${({ $orderChange }) => ($orderChange ? 'order: 2;' : '')}
+  }
+  ${({ $isVisible }) =>
+    $isVisible &&
+    css`
+      animation: ${animations.slideIn} 1s ease-out;
+    `}
+`;
+
+export const IntroCard = styled.div<{ $alignItems: string }>`
+  display: flex;
+  flex-direction: column;
+  align-items: ${({ $alignItems }) => $alignItems};
+
+  > h1 {
+    color: #00d9e9;
+  }
+  > h3 {
+    color: #00d9e9;
+    font-weight: 600;
+  }
+  > p {
+    margin-top: 24px;
+    color: #19191b;
+    font-family: 'Wanted Sans';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+    white-space: pre-line;
+  }
+`;

@@ -1,5 +1,12 @@
-import * as S from '@/pages/intro/styles';
+import {
+  IntroCard,
+  IntroImage,
+  PageIntroWrapper,
+} from '@/features/intro/ui/styles';
+import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { useIntersectionObserver } from '@modern-kit/react';
+import { useState } from 'react';
 
 interface PageIntroProps {
   label: string;
@@ -17,17 +24,32 @@ export default function PageIntroBanner({
   orderChange,
   backgroundColor,
 }: PageIntroProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const { ref: targetRef } = useIntersectionObserver({
+    onIntersectStart: () => {
+      setIsVisible(true);
+    },
+    onIntersectEnd: () => {
+      setIsVisible(false);
+    },
+  });
   return (
-    <S.PageIntroWrapper
+    <PageIntroWrapper
       $orderChange={orderChange}
       $backgroundColor={backgroundColor}
+      ref={targetRef}
+      $isVisible={isVisible}
     >
-      <S.IntroCard $alignItems="flex-start">
-        <h5> {label}</h5>
+      <IntroCard $alignItems="flex-start">
+        <h3> {label}</h3>
         <h1>{mainTitle}</h1>
         <p>{description}</p>
-      </S.IntroCard>
-      <S.IntroImage src={getImageUrl(image)} />
-    </S.PageIntroWrapper>
+      </IntroCard>
+      <IntroImage
+        src={getImageUrl(image)}
+        alt={`${getImageNameFromUrl(image)}이미지`}
+      />
+    </PageIntroWrapper>
   );
 }

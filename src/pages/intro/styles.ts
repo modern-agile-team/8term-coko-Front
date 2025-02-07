@@ -1,6 +1,40 @@
+import { animations } from '@/style/animations';
 import styled from 'styled-components';
 export const IntroWrapper = styled.div`
   overflow-x: hidden;
+
+  * {
+    font-family: 'Wanted Sans';
+  }
+
+  h1 {
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 60px;
+  }
+
+  h2 {
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 60px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 60px;
+  }
+
+  h4 {
+    font-family: 'goorm Sans OTF';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 10px;
+  }
 `;
 export const IntroHeader = styled.header`
   width: 100vw;
@@ -22,7 +56,6 @@ export const IntroHeader = styled.header`
     > a {
       color: #000;
       text-align: center;
-      font-family: 'goorm Sans OTF';
       font-size: 15px;
       font-style: normal;
       font-weight: 400;
@@ -32,7 +65,7 @@ export const IntroHeader = styled.header`
   }
 `;
 
-export const CokoIntroSectionWrapper = styled.div`
+export const TopCokoIntroWrapper = styled.div`
   position: relative;
   margin-top: 4px;
   box-sizing: border-box;
@@ -42,62 +75,64 @@ export const CokoIntroSectionWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 100px;
-  > div:nth-child(1) {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
 
-    > div {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      > h1,
-      h2 {
-        color: #fff;
-        font-family: 'Wanted Sans';
-        line-height: 60px;
-      }
-      > h1 {
-        font-size: 50px;
-      }
-      > h2 {
-        margin-top: 19px;
-        font-size: 40px;
-      }
-      > button {
-        width: 326px;
-        height: 50px;
-        flex-shrink: 0;
-        border: none;
-        border-radius: 20px;
-        background: #fff;
-        box-shadow: 0 3px #e5e5e5;
-        color: #000;
-        text-align: center;
-        font-family: 'goorm Sans OTF';
-        font-size: 20px;
-        font-weight: 400;
-        line-height: 50px;
-        margin-top: 73px;
-      }
-      > button:nth-child(4) {
-        background: #00d9e9;
-        box-shadow: 0 3px #00b6c0;
-        margin-top: 22px;
-      }
-    }
-  }
   > div:nth-child(2) {
     flex: 1;
     > img {
+      animation: ${animations.float} 5s ease-in-out infinite;
       position: absolute;
       width: 984px;
       height: 600px;
     }
   }
 `;
+export const CokoIntroLeftDiv = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    > h1,
+    h2 {
+      color: #fff;
+      font-family: 'Wanted Sans';
+      line-height: 60px;
+    }
+    > h1 {
+      font-size: 50px;
+    }
+    > h2 {
+      margin-top: 19px;
+      font-size: 40px;
+    }
+    > button {
+      width: 326px;
+      height: 50px;
+      flex-shrink: 0;
+      border: none;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 3px #e5e5e5;
+      color: #000;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 50px;
+      margin-top: 73px;
+    }
+    > button:nth-child(4) {
+      background: #00d9e9;
+      box-shadow: 0 3px #00b6c0;
+      margin-top: 22px;
+    }
+  }
+`;
+
 export const GradientCokoIntroWrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -108,21 +143,6 @@ export const GradientCokoIntroWrapper = styled.section`
   background: linear-gradient(to bottom, #00edff, #ffffff 80%);
   text-align: center;
   color: #fff;
-  > h3,
-  h4 {
-    color: #fff;
-    font-family: 'Wanted Sans';
-    font-style: normal;
-    line-height: 60px;
-  }
-  > h3 {
-    font-size: 40px;
-    font-weight: 700;
-  }
-  > h4 {
-    font-size: 20px;
-    font-weight: 600;
-  }
 `;
 
 export const QuizIntroWrapper = styled.section`
@@ -146,7 +166,6 @@ export const QuizIntroButtonList = styled.div`
     height: 49px;
     color: #000;
     text-align: center;
-    font-family: 'goorm Sans OTF';
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -158,62 +177,6 @@ export const QuizIntroButtonList = styled.div`
   }
 `;
 
-export const IntroCard = styled.div<{ $alignItems: string }>`
-  display: flex;
-  flex-direction: column;
-  align-items: ${({ $alignItems }) => $alignItems};
-  > h5,
-  h1 {
-    color: #00d9e9;
-    font-family: 'Wanted Sans';
-    font-style: normal;
-    font-weight: 600;
-    line-height: 50px;
-    white-space: pre-line;
-  }
-  > h5 {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 50px;
-  }
-  > h1 {
-    font-size: 50px;
-    font-weight: 900;
-    line-height: 60px;
-  }
-  > p {
-    margin-top: 24px;
-    color: #19191b;
-    font-family: 'Wanted Sans';
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 30px;
-    white-space: pre-line;
-  }
-`;
-
-export const IntroImage = styled.img`
-  width: 787px;
-  height: 497px;
-  box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.4);
-`;
-export const PageIntroWrapper = styled.section<{
-  $orderChange: boolean;
-  $backgroundColor: string;
-}>`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ $backgroundColor }) => $backgroundColor};
-  gap: 70px;
-
-  > div {
-    ${({ $orderChange }) => ($orderChange ? 'order: 2;' : '')}
-  }
-`;
 export const IntroFooterWrapper = styled.section`
   width: 100vw;
   height: 100vh;
@@ -250,15 +213,6 @@ export const TeamIntroWrapper = styled.div`
     display: flex;
     flex-direction: column;
     color: #fff;
-    font-family: 'goorm Sans OTF';
-
-    > h6 {
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 10px;
-    }
-
     li {
       margin-top: 20px;
       font-size: 12px;
@@ -276,5 +230,60 @@ export const ProfileIntroWrapper = styled.section`
   align-items: center;
   > div {
     height: 247px;
+  }
+`;
+
+export const BottomCokoIntroWrapper = styled.section`
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+
+  > div {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+    > img {
+      width: 361.335px;
+      height: 340.748px;
+      flex-shrink: 0;
+    }
+  }
+
+  > div:nth-child(2) {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 39px;
+      > p {
+        color: #00dbe8;
+        text-align: right;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 40px;
+      }
+      > button {
+        border-radius: 20px;
+        background: #00d9e9;
+        border: none;
+        width: 290px;
+        height: 44px;
+        box-shadow: 0 3px #00b6c0;
+        color: #fff;
+        text-align: center;
+        font-family: 'goorm Sans OTF';
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 50px; /* 250% */
+      }
+    }
   }
 `;

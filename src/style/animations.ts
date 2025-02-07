@@ -53,4 +53,15 @@ export const animations = {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1); 
   }`,
+  float: keyframes`
+  0% {
+    transform: translateY(0); 
+  }
+  50% {
+    transform: translateY(-10px); 
+  }
+  100% {
+    transform: translateY(0); 
+}
+`,
 } as const;
