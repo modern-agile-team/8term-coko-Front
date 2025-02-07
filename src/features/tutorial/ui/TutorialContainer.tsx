@@ -1,4 +1,5 @@
 import ProgressBar from '@/features/progress/ui/ProgressBar';
+import withQuizzes from '@/features/quiz/hocs/withQuizzes';
 import { Quiz } from '@/features/quiz/types';
 import Combination from '@/features/quiz/ui/Combination';
 import MultipleChoice from '@/features/quiz/ui/MultipleChoice';
@@ -19,13 +20,13 @@ import useModal from '@/hooks/useModal';
 
 import { useClientQuizStore } from '@/store/useClientQuizStore';
 import isEqualArray from '@/utils/isEqualArray';
-import { SwitchCase, useUnmount } from '@modern-kit/react';
+import { SwitchCase, useUnmount, useTimeout } from '@modern-kit/react';
 import { useEffect, useState } from 'react';
 
 interface TutorialProps {
   quizzes: Quiz[];
 }
-export default function TutorialContainer({ quizzes }: TutorialProps) {
+function TutorialContainer({ quizzes }: TutorialProps) {
   const {
     currentPage,
     isCorrectList,
@@ -41,6 +42,9 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
   const [caseName, setCaseName] = useState<'result' | 'tutorialClear'>(
     'result'
   );
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  useTimeout(() => setShowTutorial(true), 100);
   useEffect(() => {
     if (isQuizFinished) {
       setCaseName('tutorialClear');
@@ -110,7 +114,7 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
                 partStatus={'COMPLETED'}
                 quizId={id}
                 onNext={() => {}}
-                isCorrect={isCorrectList[currentPage]}
+                isCorrect={!!isCorrectList[currentPage]}
                 answer={answer}
                 closeModal={closeModal}
                 isQuizFinished={false}
@@ -120,7 +124,9 @@ export default function TutorialContainer({ quizzes }: TutorialProps) {
           }}
         />
       </Modal>
-      <QuizTutorial category={category} />
+      {showTutorial && <QuizTutorial category={category} />}
     </>
   );
 }
+
+export default withQuizzes(TutorialContainer);

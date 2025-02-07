@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import useBeforeUnload from '@/hooks/useBeforeUnload';
 import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
-import useFunnel from '@hooks/useFunnel';
 import { SwitchCase, useUnmount } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
 import { useClientQuizStore } from '@store/useClientQuizStore';
@@ -32,6 +31,8 @@ import {
   ResponseButton,
   SubmitSection,
 } from '@/features/quiz/ui/styles';
+import withQuizzes from '@/features/quiz/hocs/withQuizzes';
+import { useHpUpdate } from '@/features/user/hooks';
 
 interface QuizProps {
   partStatus: PartStatus;
@@ -40,8 +41,7 @@ interface QuizProps {
 interface InjectedProps {
   quizzes: Quiz[];
 }
-
-export default function QuizContainer({
+function QuizContainer({
   quizzes,
   partStatus,
   partId,
@@ -63,6 +63,7 @@ export default function QuizContainer({
   const isQuizFinished = isCorrectList.length === quizzes?.length;
 
   const [step, setStep] = useState<ModalType>('result');
+
   useEffect(() => {
     if (isCorrectList.length === 2 && !isLoggedIn(user)) {
       setStep('loginPrompt');
@@ -75,6 +76,7 @@ export default function QuizContainer({
   useBeforeUnload({
     enabled: !isQuizFinished,
   });
+  useHpUpdate(isCorrectList[currentPage]);
 
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
@@ -147,7 +149,7 @@ export default function QuizContainer({
               <Result
                 partStatus={partStatus}
                 quizId={id}
-                isCorrect={isCorrectList[currentPage]}
+                isCorrect={!!isCorrectList[currentPage]}
                 answer={answer}
                 openModal={openModal}
                 closeModal={closeModal}
@@ -178,3 +180,5 @@ export default function QuizContainer({
     </>
   );
 }
+
+export default withQuizzes(QuizContainer);

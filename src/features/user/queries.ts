@@ -8,8 +8,10 @@ import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
+import useUserStore from '@/store/useUserStore';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
-const userKeys = {
+export const userKeys = {
   all: ['users'] as const,
   me: () => [...userKeys.all, 'me'] as const,
   hp: () => [...userKeys.me(), 'hp'] as const,
@@ -17,6 +19,9 @@ const userKeys = {
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
+  sections: {
+    paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
+  },
 
   progress: {
     root: () => [...userKeys.me(), 'progress'] as const,
@@ -32,11 +37,19 @@ const userKeys = {
 };
 
 export const useUserHpQuery = {
-  getHp: () => {
+  getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
       queryFn: usersApis.getHp,
       retry: 0,
+    });
+  },
+  getHpWhenLoggedIn: () => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.hp(),
+      queryFn: usersApis.getHp,
+      enabled: isLoggedIn(user),
     });
   },
   updateHp: () => {
@@ -131,13 +144,16 @@ export const useUserPointQuery = {
   },
 };
 
-export const useUserPartProgressQuery = {
+export const useUserPartStatusQuery = {
   updatePartStatus: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApis.patchPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+        queryClient.invalidateQueries({
+          queryKey: userKeys.sections.paginated(),
+        });
       },
     });
   },
@@ -147,6 +163,9 @@ export const useUserPartProgressQuery = {
       mutationFn: usersApis.patchCompletedPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+        queryClient.invalidateQueries({
+          queryKey: userKeys.sections.paginated(),
+        });
       },
     });
   },
