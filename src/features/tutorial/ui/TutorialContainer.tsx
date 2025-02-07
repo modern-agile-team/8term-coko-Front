@@ -114,7 +114,7 @@ function TutorialContainer({ quizzes }: TutorialProps) {
                 partStatus={'COMPLETED'}
                 quizId={id}
                 onNext={() => {}}
-                isCorrect={isCorrectList[currentPage]}
+                isCorrect={!!isCorrectList[currentPage]}
                 answer={answer}
                 closeModal={closeModal}
                 isQuizFinished={false}
