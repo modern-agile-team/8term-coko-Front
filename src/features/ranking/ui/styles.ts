@@ -115,18 +115,18 @@ export const MyRankTextWrapper = styled.div<{ $rank: number }>`
       : $rank % 2 === 0
       ? '#d80000' // 4, 6, 8, ...
       : '#d37744'}; // 5, 7, 9, ...
-`;
 
-export const MyRankLabel = styled.label`
-  font-size: 12px;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 5px;
-`;
+  label {
+    font-size: 12px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+  }
 
-export const MyRankNumber = styled.span`
-  font-size: 22px;
-  font-weight: 700;
+  span {
+    font-size: 22px;
+    font-weight: 700;
+  }
 `;
 
 export const RankText = styled.p`
@@ -138,32 +138,32 @@ export const RankText = styled.p`
 
 export const UserInfo = styled.div`
   margin-left: 15px;
-`;
 
-export const UserLevelText = styled.p`
-  font-size: 15px;
-  font-weight: 700;
-`;
+  p:first-of-type {
+    font-size: 15px;
+    font-weight: 700;
+  }
 
-export const UserNameText = styled.p`
-  font-size: 20px;
-  font-weight: 700;
+  p:last-of-type {
+    font-size: 20px;
+    font-weight: 700;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
   position: relative;
-`;
 
-export const ProfileOutline = styled.img`
-  width: 64.287px;
-  height: 64.75px;
-  position: absolute;
-  z-index: 1;
-`;
+  img:first-of-type {
+    width: 64.287px;
+    height: 64.75px;
+    position: absolute;
+    z-index: 1;
+  }
 
-export const ProfileImg = styled.img`
-  width: 64.287px;
-  height: 64.75px;
+  img:last-of-type {
+    width: 64.287px;
+    height: 64.75px;
+  }
 `;
 
 export const Container = styled.div`
@@ -181,21 +181,21 @@ export const RankIconWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
 
-export const RankIconText = styled.p`
-  color: #9f9f9f;
-  font-size: 15px;
-  font-weight: 700;
-  flex-grow: 1;
-  text-align: center;
-  margin-right: 10px;
-`;
+  img {
+    width: 48px;
+    height: 38px;
+    margin-left: 10px;
+  }
 
-export const RankIcon = styled.img`
-  width: 48px;
-  height: 38px;
-  margin-left: 10px;
+  p {
+    color: #9f9f9f;
+    font-size: 15px;
+    font-weight: 700;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 10px;
+  }
 `;
 
 export const AddFriend = styled.button`

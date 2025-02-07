@@ -78,21 +78,19 @@ export default function UserRankingList({
               <S.MedalContainer $rank={rank} />
               <S.RankText>{rank}</S.RankText>
               <S.ProfileWrapper>
-                <S.ProfileOutline src={getImageUrl('테두리.svg')} />
-                <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />
+                <img src={getImageUrl('테두리.svg')} />
+                <img src={getImageUrl('코코-프로필.svg')} />
               </S.ProfileWrapper>
               <S.UserInfo>
-                <S.UserLevelText>LV.{user.level}</S.UserLevelText>
-                <S.UserNameText>{user.name}</S.UserNameText>
+                <p>LV.{user.level}</p>
+                <p>{user.name}</p>
               </S.UserInfo>
               <S.Container>
                 <S.RankIconWrapper>
-                  <S.RankIcon
+                  <img
                     src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)}
                   />
-                  <S.RankIconText>
-                    {user[RANKING_OPTIONS[selectedOption].dataField]}
-                  </S.RankIconText>
+                  <p>{user[RANKING_OPTIONS[selectedOption].dataField]}</p>
                 </S.RankIconWrapper>
                 <S.AddFriend>+ 친구 추가</S.AddFriend>
               </S.Container>

@@ -60,26 +60,22 @@ export default function MyRank({
       <S.RankingItem $rank={ranking}>
         <S.MedalContainer $rank={ranking} $isMyRank>
           <S.MyRankTextWrapper $rank={ranking}>
-            <S.MyRankLabel>나의 순위</S.MyRankLabel>
-            <S.MyRankNumber>{ranking}</S.MyRankNumber>
+            <label>나의 순위</label>
+            <span>{ranking}</span>
           </S.MyRankTextWrapper>
         </S.MedalContainer>
         <S.ProfileWrapper>
-          <S.ProfileOutline src={getImageUrl('테두리.svg')} />
-          <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />
+          <img src={getImageUrl('테두리.svg')} />
+          <img src={getImageUrl('코코-프로필.svg')} />
         </S.ProfileWrapper>
         <S.UserInfo>
-          <S.UserLevelText>LV.{level}</S.UserLevelText>
-          <S.UserNameText>{name}</S.UserNameText>
+          <p>LV.{level}</p>
+          <p>{name}</p>
         </S.UserInfo>
         <S.Container>
           <S.RankIconWrapper>
-            <S.RankIcon
-              src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)}
-            />
-            <S.RankIconText>
-              {user?.[RANKING_OPTIONS[selectedOption].dataField] ?? 0}
-            </S.RankIconText>
+            <img src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)} />
+            <p>{user?.[RANKING_OPTIONS[selectedOption].dataField] ?? 0}</p>
           </S.RankIconWrapper>
           <S.AddFriend>+ 친구 추가</S.AddFriend>
         </S.Container>
