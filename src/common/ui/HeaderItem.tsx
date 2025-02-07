@@ -1,6 +1,6 @@
 import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import { IconWrapper, HeaderIcon } from './styles';
-import { useElementRect } from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/intro/service/hooks';
 
 interface HeaderItemProps {
   icon: string;

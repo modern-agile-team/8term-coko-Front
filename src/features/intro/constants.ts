@@ -1,5 +1,5 @@
 import { Quiz } from '@/features/quiz/types';
-import { TutorialStep } from '@/features/tutorial/types';
+import { TutorialStep } from '@/features/intro/types';
 
 export const TUTORIAL_ID = 1 as const;
 

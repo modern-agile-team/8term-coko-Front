@@ -1,5 +1,5 @@
 import { BUTTON_LIST, COKO_TEAM_INFO } from '@/pages/constants';
-import BadgeIntro from '@/pages/intro/BadgeIntro';
+import BadgeIntro from '@/features/intro/ui/BadgeIntro';
 import PageIntro from '@/pages/intro/PageIntro';
 import * as S from '@/pages/intro/styles';
 import { getImageUrl } from '@/utils/getImageUrl';

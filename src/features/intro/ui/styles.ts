@@ -1,4 +1,4 @@
-import { calculateTutorialPopupPosition } from '@/features/tutorial/service/utils';
+import { calculateTutorialPopupPosition } from '@/features/intro/service/utils';
 import { animations } from '@/style/animations';
 import { media } from '@/style/media';
 import { css, styled } from 'styled-components';

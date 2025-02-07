@@ -12,10 +12,10 @@ import {
   ResponseButton,
   SubmitSection,
 } from '@/features/quiz/ui/styles';
-import { useElementRect } from '@/features/tutorial/service/hooks';
-import QuizTutorial from '@/features/tutorial/ui/QuizTutorial';
+import { useElementRect } from '@/features/intro/service/hooks';
+import QuizTutorial from '@/features/intro/ui/QuizTutorial';
 
-import TutorialClear from '@/features/tutorial/ui/TutorialClear';
+import TutorialClear from '@/features/intro/ui/TutorialClear';
 import useModal from '@/hooks/useModal';
 
 import { useClientQuizStore } from '@/store/useClientQuizStore';

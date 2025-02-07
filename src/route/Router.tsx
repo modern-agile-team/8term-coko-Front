@@ -15,7 +15,7 @@ const Profile = lazy(() => import('@/pages/profile/Profile'));
 export default function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/learn" />} />
+      <Route path="/" element={<Navigate to="/intro" />} />
       <Route path="/learn" element={<Learn />} />
       <Route path="/quest" element={<Quest />} />
       <Route path="/ranking" element={<Ranking />} />

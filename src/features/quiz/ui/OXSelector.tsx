@@ -1,6 +1,6 @@
 import { Img, OXButtonSection } from './styles';
 import { useClientQuizStore } from '../../../store/useClientQuizStore';
-import { useElementRect } from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/intro/service/hooks';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 
 export default function OXSelector() {
