@@ -14,9 +14,9 @@ export const getLastDayOfMonth = (): number => {
   return new Date(targetYear, targetMonth, 0).getDate();
 };
 
-export const getDayFromDateString = (dateString: string) => {
-  const date = new Date(dateString);
-  const day = date.getDate();
+export const getDayFromDate = (date: string | Date) => {
+  const parsedDate = new Date(date);
+  const day = parsedDate.getDate();
   return day;
 };
 
