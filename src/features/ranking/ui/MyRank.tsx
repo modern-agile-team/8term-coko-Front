@@ -5,12 +5,19 @@ import { useUserRankingQuery } from '@features/user/queries';
 import useUserStore from '@store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import MyRankSkeleton from './MyRankSkeleton';
+import { useEffect } from 'react';
 
 interface MyRankProps {
   selectedOption: keyof typeof RANKING_OPTIONS;
+  onRankingChange: (ranking: number) => void;
+  onLoadingChange: (isLoading: boolean) => void;
 }
 
-export default function MyRank({ selectedOption }: MyRankProps) {
+export default function MyRank({
+  selectedOption,
+  onRankingChange,
+  onLoadingChange,
+}: MyRankProps) {
   const { user } = useUserStore();
 
   // 자신의 랭킹 정보 (로그인한 경우만)
@@ -18,8 +25,26 @@ export default function MyRank({ selectedOption }: MyRankProps) {
     ? useUserRankingQuery.getRanking(RANKING_OPTIONS[selectedOption].dataField)
     : { data: null, isLoading: false };
 
+  const ranking = data?.ranking ?? 0;
+  const level = user?.level ?? 0;
+  const name = user?.name ?? '';
+
+  // ranking 정보가 변경될 때마다 부모 컴포넌트에 전달
+  useEffect(() => {
+    if (onRankingChange) {
+      onRankingChange(ranking);
+    }
+  }, [ranking, onRankingChange]);
+
+  // ranking 정보 로딩 상태가 변경될 때마다 부모 컴포넌트에 전달
+  useEffect(() => {
+    if (onLoadingChange) {
+      onLoadingChange(isLoading);
+    }
+  }, [isLoading, onLoadingChange]);
+
   if (!isLoggedIn(user)) {
-    return null;
+    return <S.MyRankingContainer></S.MyRankingContainer>;
   }
 
   if (isLoading) {
@@ -29,10 +54,6 @@ export default function MyRank({ selectedOption }: MyRankProps) {
       </S.MyRankingContainer>
     );
   }
-
-  const ranking = data?.ranking ?? 0;
-  const level = user?.level ?? 0;
-  const name = user?.name ?? '';
 
   return (
     <S.MyRankingContainer>
@@ -57,9 +78,7 @@ export default function MyRank({ selectedOption }: MyRankProps) {
               src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)}
             />
             <S.RankIconText>
-              {data?.ranking ??
-                user?.[RANKING_OPTIONS[selectedOption].dataField] ??
-                0}
+              {user?.[RANKING_OPTIONS[selectedOption].dataField] ?? 0}
             </S.RankIconText>
           </S.RankIconWrapper>
           <S.AddFriend>+ 친구 추가</S.AddFriend>
