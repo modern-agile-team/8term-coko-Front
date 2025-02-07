@@ -1,5 +1,6 @@
+import { Quiz } from '@/features/quiz/types';
 import { animations } from '@/style/animations';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 export const IntroWrapper = styled.div`
   overflow-x: hidden;
 
@@ -53,14 +54,20 @@ export const IntroHeader = styled.header`
     display: flex;
     gap: 40px;
 
-    > a {
-      color: #000;
+    > button {
+      color: #00d9e9;
       text-align: center;
+      font-family: 'goorm Sans OTF';
       font-size: 15px;
       font-style: normal;
       font-weight: 400;
-      line-height: 30px;
-      text-decoration: none;
+      line-height: 30px; /* 200% */
+      letter-spacing: 0.16px;
+      border: none;
+      background-color: inherit;
+    }
+    > button:nth-child(2) {
+      color: #000;
     }
   }
 `;
@@ -110,7 +117,9 @@ export const CokoIntroLeftDiv = styled.div`
       margin-top: 19px;
       font-size: 40px;
     }
-    > button {
+
+    > button,
+    a {
       width: 326px;
       height: 50px;
       flex-shrink: 0;
@@ -124,8 +133,10 @@ export const CokoIntroLeftDiv = styled.div`
       font-weight: 400;
       line-height: 50px;
       margin-top: 73px;
+      text-decoration: none;
     }
-    > button:nth-child(4) {
+    > button,
+    a:nth-child(4) {
       background: #00d9e9;
       box-shadow: 0 3px #00b6c0;
       margin-top: 22px;
@@ -160,21 +171,28 @@ export const QuizIntroButtonList = styled.div`
   justify-content: center;
   background-color: #fff;
   padding: 50px 0;
+`;
 
-  > button {
-    width: 224px;
-    height: 49px;
-    color: #000;
-    text-align: center;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 50px;
-    border-radius: 20px;
-    background: #fff;
-    box-shadow: 0 4px #e5e5e5;
-    border: none;
-  }
+export const CategoryButton = styled.button<{ $isActive: boolean }>`
+  width: 224px;
+  height: 49px;
+  color: #000;
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 4px #e5e5e5;
+  border: none;
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      color: #fff;
+      background: #00d9e9;
+      box-shadow: 0 4px #00b6c0;
+    `}
 `;
 
 export const IntroFooterWrapper = styled.section`
@@ -269,7 +287,7 @@ export const BottomCokoIntroWrapper = styled.section`
         font-weight: 700;
         line-height: 40px;
       }
-      > button {
+      > a {
         border-radius: 20px;
         background: #00d9e9;
         border: none;
@@ -283,6 +301,7 @@ export const BottomCokoIntroWrapper = styled.section`
         font-style: normal;
         font-weight: 400;
         line-height: 50px; /* 250% */
+        text-decoration: none;
       }
     }
   }

@@ -10,15 +10,40 @@ import {
 } from '@/features/intro/constants';
 import { Fragment } from 'react/jsx-runtime';
 import { IntroCard } from '@/features/intro/ui/styles';
+import { useRef, useState } from 'react';
+import { Quiz } from '@/features/quiz/types';
+import { useScrollTo } from '@modern-kit/react';
 
 export default function Intro() {
+  const [activeCategory, setActiveCategory] =
+    useState<Quiz['category']>('COMBINATION');
+
+  const footerRef = useRef<HTMLDivElement | null>(null);
+  const QuizIntroRef = useRef<HTMLDivElement | null>(null);
+  const { scrollToElement } = useScrollTo<HTMLDivElement>();
+
+  const handleScrollToFooter = () => {
+    console.log(footerRef.current);
+    if (footerRef.current) {
+      scrollToElement(footerRef.current, {
+        behavior: 'smooth',
+      });
+    }
+  };
+  const handleScrollToQuizIntro = () => {
+    if (QuizIntroRef.current) {
+      scrollToElement(QuizIntroRef.current, {
+        behavior: 'smooth',
+      });
+    }
+  };
   return (
     <S.IntroWrapper>
       <S.IntroHeader>
         <img src={getImageUrl('로고.svg')} />
         <div>
-          <Link to={'/intro'}>사이트 소개</Link>
-          <Link to={'/'}>만든 사람들</Link>
+          <button onClick={handleScrollToQuizIntro}>사이트 소개</button>
+          <button onClick={handleScrollToFooter}>만든 사람들</button>
         </div>
       </S.IntroHeader>
       <main>
@@ -30,8 +55,8 @@ export default function Intro() {
                 자바스크립트 학습 사이트
               </h1>
               <h2>코딩하는 코끼리, 코코</h2>
-              <button>시작하기</button>
-              <button>로그인하기</button>
+              <Link to="/quiz/tutorial">시작하기</Link>
+              <Link to="/login">로그인하기</Link>
             </div>
           </S.CokoIntroLeftDiv>
 
@@ -45,13 +70,27 @@ export default function Intro() {
           <h3>코코 사이트와 함께 다양하고, 재밌는 방식으로 공부하기</h3>
         </S.GradientCokoIntroWrapper>
 
-        <S.QuizIntroButtonList>
-          {BUTTON_LIST.map(button => (
-            <button key={button.id}>{button.label}</button>
+        <S.QuizIntroButtonList ref={QuizIntroRef}>
+          {BUTTON_LIST.map(buttonOption => (
+            <S.CategoryButton
+              $isActive={buttonOption.category === activeCategory}
+              key={buttonOption.category}
+              onClick={() => setActiveCategory(buttonOption.category)}
+            >
+              {buttonOption.label}
+            </S.CategoryButton>
           ))}
         </S.QuizIntroButtonList>
+        <PageIntroBanner
+          label="QUIZ"
+          mainTitle={'다양한 \n문제 유형'}
+          description={'다양한 문제 유형으로\n코딩 문제를 쉽고, 재밌게.'}
+          image={`${activeCategory}-소개.webp`}
+          backgroundColor="#fff"
+          orderChange
+        />
         {PAGE_INTRO_DATA.map((intro, index) =>
-          index === 2 ? (
+          index === 1 ? (
             <Fragment key={intro.label}>
               <S.ProfileIntroWrapper>
                 <IntroCard $alignItems="center">
@@ -93,13 +132,13 @@ export default function Intro() {
               전설의 키캡을 찾아 나서는
               <br /> 해적 코코의 여정을 함께해요 !
             </p>
-            <button>모험 떠나러 가기</button>
+            <Link to="/learn">모험 떠나러 가기</Link>
           </div>
         </div>
       </S.BottomCokoIntroWrapper>
       <S.IntroFooterWrapper>
         <hr />
-        <S.IntroFooter>
+        <S.IntroFooter ref={footerRef}>
           <S.TeamIntroWrapper>
             {COKO_TEAM_INFO.map(team => (
               <div key={team.label}>

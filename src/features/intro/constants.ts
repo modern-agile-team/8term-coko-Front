@@ -133,14 +133,6 @@ export const PAGE_INTRO_DATA: {
   backgroundColor: string;
 }[] = [
   {
-    label: 'QUIZ',
-    mainTitle: '다양한 \n문제 유형',
-    description: '다양한 문제 유형으로\n코딩 문제를 쉽고, 재밌게.',
-    image: '조합형소개.webp',
-    orderChange: true,
-    backgroundColor: '#fff',
-  },
-  {
     label: 'QUEST',
     mainTitle: '매일 달라지는\n미션들',
     description: '공부에 의욕을 더해주는 미션들.',
@@ -166,14 +158,14 @@ export const PAGE_INTRO_DATA: {
   },
 ] as const;
 
-export const BUTTON_LIST: { id: number; label: string }[] = [
-  { id: 1, label: '조합형' },
-  { id: 2, label: '객관식' },
+export const BUTTON_LIST: { category: Quiz['category']; label: string }[] = [
+  { category: 'COMBINATION', label: '조합형' },
+  { category: 'MULTIPLE_CHOICE', label: '객관식' },
   {
-    id: 3,
+    category: 'SHORT_ANSWER',
     label: '단답형',
   },
-  { id: 4, label: 'O, X' },
+  { category: 'OX_SELECTOR', label: 'O, X' },
 ] as const;
 
 export const COKO_TEAM_INFO: { label: string; createBy: string[] }[] = [

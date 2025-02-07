@@ -65,6 +65,10 @@ export const IntroImage = styled.img`
   width: 787px;
   height: 497px;
   box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease-in-out;
+  &:hover {
+    transform: scale(1.07);
+  }
 `;
 
 export const PageIntroWrapper = styled.section<{
@@ -94,7 +98,7 @@ export const IntroCard = styled.div<{ $alignItems: string }>`
   display: flex;
   flex-direction: column;
   align-items: ${({ $alignItems }) => $alignItems};
-
+  white-space: pre-line;
   > h1 {
     color: #00d9e9;
   }

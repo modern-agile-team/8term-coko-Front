@@ -46,8 +46,8 @@ export const animations = {
   `,
   fadeInScaleUpForCenter: keyframes`
   from {
-    opacity: 0; transform: 
-    translate(-50%, -50%) scale(0.5); 
+    opacity: 0; 
+    transform: translate(-50%, -50%) scale(0.5); 
   }
   to {
     opacity: 1;
