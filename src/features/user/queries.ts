@@ -171,9 +171,7 @@ export const useUserRankingQuery = {
   getRanking: (sort: RankingSort = 'level') => {
     return useQuery({
       queryKey: userKeys.ranking(sort),
-      queryFn: async () => {
-        return await usersApis.getRanking({ sort });
-      },
+      queryFn: () => usersApis.getRanking({ sort }),
     });
   },
 };
