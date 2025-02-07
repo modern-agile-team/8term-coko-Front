@@ -1,10 +1,10 @@
 import * as S from './styles';
-import { getImageUrl } from '@utils/getImageUrl';
 import SortDropdown from '@common/layout/SortDropdown';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
 import { useRankingPaginationQuery } from '@features/ranking/queries';
 import UserRankingListSkeleton from './UserRankingListSkeleton';
 import { generatePaginationPages } from '@utils/generatePaginationPages';
+import RankingItem from './RankingItem';
 
 interface UserRankingListProps {
   currentPage: number;
@@ -74,27 +74,14 @@ export default function UserRankingList({
         data?.contents.map((user, index) => {
           const rank = (currentPage - 1) * limit + (index + 1);
           return (
-            <S.RankingItem key={user.id} $rank={rank}>
-              <S.MedalContainer $rank={rank} />
-              <S.RankText>{rank}</S.RankText>
-              <S.ProfileWrapper>
-                <img src={getImageUrl('테두리.svg')} />
-                <img src={getImageUrl('코코-프로필.svg')} />
-              </S.ProfileWrapper>
-              <S.UserInfo>
-                <p>LV.{user.level}</p>
-                <p>{user.name}</p>
-              </S.UserInfo>
-              <S.Container>
-                <S.RankIconWrapper>
-                  <img
-                    src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)}
-                  />
-                  <p>{user[RANKING_OPTIONS[selectedOption].dataField]}</p>
-                </S.RankIconWrapper>
-                <S.AddFriend>+ 친구 추가</S.AddFriend>
-              </S.Container>
-            </S.RankingItem>
+            <RankingItem
+              key={user.id}
+              rank={rank}
+              level={user.level}
+              name={user.name}
+              selectedOption={selectedOption}
+              value={user[RANKING_OPTIONS[selectedOption].dataField]}
+            />
           );
         })
       )}

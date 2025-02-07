@@ -1,11 +1,11 @@
 import * as S from './styles';
-import { getImageUrl } from '@utils/getImageUrl';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
 import { useUserRankingQuery } from '@features/user/queries';
 import useUserStore from '@store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import MyRankSkeleton from './MyRankSkeleton';
 import { useEffect } from 'react';
+import RankingItem from './RankingItem';
 
 interface MyRankProps {
   selectedOption: keyof typeof RANKING_OPTIONS;
@@ -57,29 +57,14 @@ export default function MyRank({
 
   return (
     <S.MyRankingContainer>
-      <S.RankingItem $rank={ranking}>
-        <S.MedalContainer $rank={ranking} $isMyRank>
-          <S.MyRankTextWrapper $rank={ranking}>
-            <label>나의 순위</label>
-            <span>{ranking}</span>
-          </S.MyRankTextWrapper>
-        </S.MedalContainer>
-        <S.ProfileWrapper>
-          <img src={getImageUrl('테두리.svg')} />
-          <img src={getImageUrl('코코-프로필.svg')} />
-        </S.ProfileWrapper>
-        <S.UserInfo>
-          <p>LV.{level}</p>
-          <p>{name}</p>
-        </S.UserInfo>
-        <S.Container>
-          <S.RankIconWrapper>
-            <img src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)} />
-            <p>{user?.[RANKING_OPTIONS[selectedOption].dataField] ?? 0}</p>
-          </S.RankIconWrapper>
-          <S.AddFriend>+ 친구 추가</S.AddFriend>
-        </S.Container>
-      </S.RankingItem>
+      <RankingItem
+        rank={ranking}
+        level={level}
+        name={name}
+        selectedOption={selectedOption}
+        value={user?.[RANKING_OPTIONS[selectedOption].dataField] ?? 0}
+        isMyRank
+      />
     </S.MyRankingContainer>
   );
 }
