@@ -11,14 +11,18 @@ const rankingKeys = {
 };
 
 export const useRankingPaginationQuery = {
-  getRankingByPage: (sort: RankingSort = 'level', page: number) => {
+  getRankingByPage: (
+    sort: RankingSort = 'level',
+    page: number,
+    limit: number = 5
+  ) => {
     return useQuery({
       queryKey: rankingKeys.paginated(sort, page),
       queryFn: () =>
         rankingApis.getRankingByPage({
           sort,
           page,
-          limit: 5,
+          limit,
         }),
     });
   },
