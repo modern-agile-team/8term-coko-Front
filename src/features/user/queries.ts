@@ -188,10 +188,10 @@ export const useUserProgressQuery = {
 };
 
 export const useUserAttendanceQuery = {
-  getAttendanceList: (parmas: { year: number; month: number }) => {
+  getAttendanceList: (params: { year: number; month: number }) => {
     return useSuspenseQuery({
       queryKey: userKeys.attendance.list(),
-      queryFn: () => usersApis.getAttendanceList(parmas),
+      queryFn: () => usersApis.getAttendanceList(params),
     });
   },
   getAttendance: () =>
