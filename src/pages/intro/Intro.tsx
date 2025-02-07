@@ -1,10 +1,13 @@
-import { BUTTON_LIST, COKO_TEAM_INFO } from '@/pages/constants';
 import BadgeIntro from '@/features/intro/ui/BadgeIntro';
 import PageIntroBanner from '@/features/intro/ui/PageIntroBanner';
 import * as S from '@/pages/intro/styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { Link } from 'react-router-dom';
-import { PAGE_INTRO_DATA } from '@/features/intro/constants';
+import {
+  BUTTON_LIST,
+  COKO_TEAM_INFO,
+  PAGE_INTRO_DATA,
+} from '@/features/intro/constants';
 import { Fragment } from 'react/jsx-runtime';
 
 export default function Intro() {
