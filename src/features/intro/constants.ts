@@ -123,3 +123,45 @@ export const TUTORIAL_STEP: TutorialStep[] = [
     description: `단답형 문제는 여기에 정답을 써넣으면 돼!`,
   },
 ] as const;
+
+export const PAGE_INTRO_DATA: {
+  label: string;
+  mainTitle: string;
+  description: string;
+  image: string;
+  orderChange: boolean;
+  backgroundColor: string;
+}[] = [
+  {
+    label: 'QUIZ',
+    mainTitle: '다양한 \n문제 유형',
+    description: '다양한 문제 유형으로\n코딩 문제를 쉽고, 재밌게.',
+    image: '조합형소개.webp',
+    orderChange: true,
+    backgroundColor: '#fff',
+  },
+  {
+    label: 'QUEST',
+    mainTitle: '매일 달라지는\n미션들',
+    description: '공부에 의욕을 더해주는 미션들.',
+    image: '퀘스트소개.webp',
+    orderChange: false,
+    backgroundColor: '#fff',
+  },
+  {
+    label: 'RANKING',
+    mainTitle: '다른 회원들과\n실력 겨루기',
+    description: '성취감과 성장을 도와주는\n다른 회원들과의 선의의 경쟁.',
+    image: '퀘스트소개.webp',
+    orderChange: false,
+    backgroundColor: '#F7F7F7',
+  },
+  {
+    label: 'STORE',
+    mainTitle: '나만의\n캐릭터',
+    description: '캐릭터를 자신만의 스타일로\n꾸밀 수 있는 상점까지.',
+    image: '퀘스트소개.webp',
+    orderChange: true,
+    backgroundColor: '#F7F7F7',
+  },
+] as const;

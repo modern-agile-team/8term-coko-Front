@@ -134,10 +134,12 @@ export const QuizIntroWrapper = styled.section`
 `;
 
 export const QuizIntroButtonList = styled.div`
-  width: 80%;
+  width: 100vw;
   display: flex;
   gap: 51px;
   justify-content: center;
+  background-color: #fff;
+  padding: 50px 0;
 
   > button {
     width: 224px;
@@ -214,8 +216,8 @@ export const PageIntroWrapper = styled.section<{
 `;
 export const IntroFooterWrapper = styled.section`
   width: 100vw;
-  height: 200vh;
-  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%, #00edff 100%);
+  height: 100vh;
+  background: linear-gradient(to bottom, #ffffff 0%, #00edff 120%);
   display: flex;
   justify-content: flex-end;
   align-items: center;

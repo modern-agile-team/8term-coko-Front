@@ -6,16 +6,16 @@ interface PageIntroProps {
   mainTitle: string;
   description: string;
   image: string;
-  orderChange?: boolean;
-  backgroundColor?: string;
+  orderChange: boolean;
+  backgroundColor: string;
 }
-export default function PageIntro({
+export default function PageIntroBanner({
   label,
   mainTitle,
   description,
   image,
-  orderChange = false,
-  backgroundColor = '#fff',
+  orderChange,
+  backgroundColor,
 }: PageIntroProps) {
   return (
     <S.PageIntroWrapper
