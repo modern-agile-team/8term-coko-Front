@@ -191,9 +191,11 @@ export const useUserProgressQuery = {
 
 export const useUserRankingQuery = {
   getRanking: (sort: RankingSort = 'level') => {
+    const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.ranking(sort),
       queryFn: () => usersApis.getRanking({ sort }),
+      enabled: isLoggedIn(user),
     });
   },
 };
