@@ -2,7 +2,7 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, bugFix/#144/Ranking_Page]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
