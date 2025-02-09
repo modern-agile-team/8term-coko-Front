@@ -37,12 +37,13 @@ export default function Intro() {
       });
     }
   };
+
   return (
     <S.IntroWrapper>
       <title>코코-자바스크립트 학습 사이트</title>
       <S.IntroHeader>
         <Link to="/learn">
-          <img src={getImageUrl('로고.svg')} />
+          <img src={getImageUrl('로고.svg')} alt="사이트 로고" />
         </Link>
         <div>
           <button onClick={handleScrollToQuizIntro}>사이트 소개</button>
@@ -64,7 +65,7 @@ export default function Intro() {
           </S.CokoIntroLeftDiv>
 
           <div>
-            <img src={getImageUrl('메인소개.webp')}></img>
+            <img src={getImageUrl('메인소개.webp')} alt="메인화면 소개" />
           </div>
         </S.TopCokoIntroWrapper>
 
@@ -127,7 +128,7 @@ export default function Intro() {
       </main>
       <S.BottomCokoIntroWrapper>
         <div>
-          <img src={getImageUrl('앉은-코코.svg')} />
+          <img src={getImageUrl('앉은-코코.svg')} alt="앉아있는 코코" />
         </div>
         <div>
           <div>
@@ -154,7 +155,7 @@ export default function Intro() {
               </div>
             ))}
           </S.TeamIntroWrapper>
-          <img src={getImageUrl('인스타_아이콘.svg')} />
+          <img src={getImageUrl('인스타_아이콘.svg')} alt="인스타 아이콘" />
         </S.IntroFooter>
       </S.IntroFooterWrapper>
     </S.IntroWrapper>

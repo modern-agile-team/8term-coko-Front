@@ -46,10 +46,7 @@ export default function PageIntroBanner({
         <h1>{mainTitle}</h1>
         <p>{description}</p>
       </IntroCard>
-      <IntroImage
-        src={getImageUrl(image)}
-        alt={`${getImageNameFromUrl(image)}이미지`}
-      />
+      <IntroImage src={getImageUrl(image)} alt={getImageNameFromUrl(image)} />
     </PageIntroWrapper>
   );
 }

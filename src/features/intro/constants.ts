@@ -175,7 +175,7 @@ export const COKO_TEAM_INFO: { label: string; createBy: string[] }[] = [
   { label: '디자인', createBy: ['이채영'] },
 ] as const;
 
-export const BADGE_LIST: string[] = [
+export const BADGE_IMAGE_LIST: string[] = [
   '뱃지-파트클리어.svg',
   '뱃지-첫틀림.svg',
   '뱃지-첫아이템.svg',

@@ -1,5 +1,6 @@
-import { BADGE_LIST } from '@/features/intro/constants';
+import { BADGE_IMAGE_LIST } from '@/features/intro/constants';
 import { BadgeContainer, BadgeList } from '@/features/intro/ui/styles';
+import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { useCallback, useRef, useState } from 'react';
 
@@ -38,9 +39,9 @@ export default function BadgeIntro() {
         onWheel={handleWheel}
       >
         <BadgeList>
-          {BADGE_LIST.map(badge => (
-            <li key={badge}>
-              <img src={getImageUrl(badge)} />
+          {BADGE_IMAGE_LIST.map(image => (
+            <li key={image}>
+              <img src={getImageUrl(image)} alt={getImageNameFromUrl(image)} />
             </li>
           ))}
         </BadgeList>
