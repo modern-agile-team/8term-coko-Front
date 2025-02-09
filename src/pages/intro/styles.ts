@@ -45,9 +45,12 @@ export const IntroHeader = styled.header`
   padding: 0 52px 0 61px;
   justify-content: space-between;
   box-shadow: 0px 4px #e5e5e5;
-  > img {
-    width: 65px;
-    height: 52px;
+  > a {
+    > img {
+      width: 65px;
+      height: 52px;
+      cursor: pointer;
+    }
   }
   > div {
     display: flex;
@@ -225,7 +228,7 @@ export const IntroFooter = styled.footer`
 export const TeamIntroWrapper = styled.div`
   display: flex;
   gap: 86px;
-
+  font-family: 'goorm Sans OTF';
   > div {
     display: flex;
     flex-direction: column;

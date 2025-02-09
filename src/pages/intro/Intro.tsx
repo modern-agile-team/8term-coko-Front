@@ -40,7 +40,9 @@ export default function Intro() {
   return (
     <S.IntroWrapper>
       <S.IntroHeader>
-        <img src={getImageUrl('로고.svg')} />
+        <Link to="/learn">
+          <img src={getImageUrl('로고.svg')} />
+        </Link>
         <div>
           <button onClick={handleScrollToQuizIntro}>사이트 소개</button>
           <button onClick={handleScrollToFooter}>만든 사람들</button>
