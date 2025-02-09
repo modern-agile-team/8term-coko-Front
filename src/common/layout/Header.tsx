@@ -9,8 +9,9 @@ import useUserStore from '@store/useUserStore';
 import Login from '@features/auth/ui/Login';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import { authQuery } from '@features/auth/queries';
-import UserPresentHeaderItemContainer from '@/common/layout/UserPresentHeaderItemContainer';
+import HeaderItemContainer from '@/common/layout/HeaderItemContainer';
 import HeaderErrorBoundary from '@/features/error/ui/HeaderErrorBoundary';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
 export default function Header() {
   const { user, clearUser } = useUserStore();
@@ -47,7 +48,7 @@ export default function Header() {
   return (
     <HeaderBox>
       <HeaderErrorBoundary>
-        <UserPresentHeaderItemContainer />
+        {isLoggedIn(user) && <HeaderItemContainer user={user} />}
       </HeaderErrorBoundary>
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
         <ProfileImage isIcon={true} />

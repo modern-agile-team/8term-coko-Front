@@ -44,4 +44,17 @@ export const animations = {
     50% { transform: translateY(-50px); }
     100% { transform: translateY(0); }
   `,
+  shimmerLoading: keyframes`
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  `,
+  fadeInScaleUpForCenter: keyframes`
+  from {
+    opacity: 0; transform: 
+    translate(-50%, -50%) scale(0.5); 
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1); 
+  }`,
 } as const;

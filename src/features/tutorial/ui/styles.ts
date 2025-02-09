@@ -9,7 +9,7 @@ export const FocusedItemDiv = styled.div`
 `;
 
 export const TutorialClearWrapper = styled.div`
-  animation: ${animations.fadeInScaleUp} 0.7s ease-out;
+  animation: ${animations.fadeInScaleUpForCenter} 0.7s ease-out;
   position: fixed;
   display: flex;
   flex-direction: column;

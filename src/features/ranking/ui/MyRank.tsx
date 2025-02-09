@@ -1,45 +1,70 @@
 import * as S from './styles';
-import { getImageUrl } from '@utils/getImageUrl';
-import { RANKING_OPTIONS } from '@/features/ranking/constants';
-import type { RankedUser } from '@features/user/types';
+import { RANKING_OPTIONS } from '@features/ranking/constants';
+import { useUserRankingQuery } from '@features/user/queries';
+import useUserStore from '@store/useUserStore';
+import { isLoggedIn } from '@features/user/service/authUtils';
+import MyRankSkeleton from './MyRankSkeleton';
+import { useEffect } from 'react';
+import RankingItem from './RankingItem';
 
-interface MyRankProps extends RankedUser {
+interface MyRankProps {
   selectedOption: keyof typeof RANKING_OPTIONS;
+  onRankingChange: (ranking: number) => void;
+  onLoadingChange: (isLoading: boolean) => void;
 }
 
 export default function MyRank({
-  rank,
-  name,
-  level,
-  point,
   selectedOption,
+  onRankingChange,
+  onLoadingChange,
 }: MyRankProps) {
-  const user = { level, point };
-  const config = RANKING_OPTIONS[selectedOption];
+  // 자신의 랭킹 정보 (로그인한 경우만)
+  const { data, isLoading } = useUserRankingQuery.getRanking(
+    RANKING_OPTIONS[selectedOption].dataField
+  );
+
+  const { user } = useUserStore();
+
+  const ranking = data?.ranking ?? 0;
+  const level = user?.level ?? 0;
+  const name = user?.name ?? '';
+
+  // ranking 정보가 변경될 때마다 부모 컴포넌트에 전달
+  useEffect(() => {
+    if (onRankingChange) {
+      onRankingChange(ranking);
+    }
+  }, [ranking, onRankingChange]);
+
+  // ranking 정보 로딩 상태가 변경될 때마다 부모 컴포넌트에 전달
+  useEffect(() => {
+    if (onLoadingChange) {
+      onLoadingChange(isLoading);
+    }
+  }, [isLoading, onLoadingChange]);
+
+  if (!isLoggedIn(user)) {
+    return <S.MyRankingContainer></S.MyRankingContainer>;
+  }
+
+  if (isLoading) {
+    return (
+      <S.MyRankingContainer>
+        <MyRankSkeleton />
+      </S.MyRankingContainer>
+    );
+  }
 
   return (
-    <S.RankingItem $rank={rank}>
-      <S.MedalContainer $rank={rank} $isMyRank>
-        <S.MyRankTextWrapper $rank={rank}>
-          <S.MyRankLabel>나의 순위</S.MyRankLabel>
-          <S.MyRankNumber>{rank}</S.MyRankNumber>
-        </S.MyRankTextWrapper>
-      </S.MedalContainer>
-      <S.ProfileWrapper>
-        <S.ProfileOutline src={getImageUrl('테두리.svg')} />
-        <S.ProfileImg src={getImageUrl('코코-프로필.svg')} />
-      </S.ProfileWrapper>
-      <S.UserInfo>
-        <S.UserLevelText>LV.{level}</S.UserLevelText>
-        <S.UserNameText>{name}</S.UserNameText>
-      </S.UserInfo>
-      <S.Container>
-        <S.RankIconWrapper>
-          <S.RankIcon src={getImageUrl(config.icon)} />
-          <S.RankIconText>{user[config.dataField]}</S.RankIconText>
-        </S.RankIconWrapper>
-        <S.AddFriend>+ 친구 추가</S.AddFriend>
-      </S.Container>
-    </S.RankingItem>
+    <S.MyRankingContainer>
+      <RankingItem
+        rank={ranking}
+        level={level}
+        name={name}
+        selectedOption={selectedOption}
+        value={user?.[RANKING_OPTIONS[selectedOption].dataField] ?? 0}
+        isMyRank
+      />
+    </S.MyRankingContainer>
   );
 }

@@ -7,7 +7,11 @@ export interface User {
 }
 
 export interface RankedUser extends User {
-  rank: number;
+  ranking: number;
+}
+
+export interface PersonalRanking {
+  ranking: number;
 }
 
 export interface ExperiencedUser extends User {
@@ -18,4 +22,16 @@ export interface ExperiencedUser extends User {
 export interface UserHp extends Pick<User, 'id'> {
   hp: number;
   hpStorage: number;
+}
+
+export interface UserProgress {
+  totalQuizCount: number;
+  totalUserProgressCount: number;
+  correctUserProgressCount: number;
+  inCorrectUserProgressCount: number;
+}
+
+export interface UserAttendance {
+  id: number;
+  date: string;
 }

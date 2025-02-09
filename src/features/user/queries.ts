@@ -6,22 +6,53 @@ import {
 } from '@tanstack/react-query';
 import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
+import type { Section, Part } from '@features/learn/types';
+import type { RankingSort } from '@features/ranking/types';
+import useUserStore from '@/store/useUserStore';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
-const userKeys = {
+export const userKeys = {
   all: ['users'] as const,
-  detail: () => [...userKeys.all, 'me'] as const,
-  experience: () => [...userKeys.detail(), 'experience'] as const,
-  quizzes: () => [...userKeys.detail(), 'quizzes'] as const,
-  partQuizzes: (partId: number) => [...userKeys.quizzes(), partId] as const,
-  hp: () => [...userKeys.detail(), 'hp'] as const,
+  me: () => [...userKeys.all, 'me'] as const,
+  hp: () => [...userKeys.me(), 'hp'] as const,
+  experience: () => [...userKeys.me(), 'experience'] as const,
+  quizzes: () => [...userKeys.me(), 'quizzes'],
+  partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
+  ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
+  attendance: {
+    root: () => [...userKeys.me(), 'attendance'] as const,
+    list: () => [...userKeys.attendance.root(), 'list'] as const,
+  },
+  sections: {
+    paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
+  },
+  progress: {
+    root: () => [...userKeys.me(), 'progress'] as const,
+    section: (sectionId: Section['id']) =>
+      [...userKeys.progress.root(), 'section', sectionId] as const,
+    part: (partId: Part['id']) =>
+      [...userKeys.progress.root(), 'part', partId] as const,
+    detail: (sectionId?: Section['id'], partId?: Part['id']) =>
+      sectionId || partId
+        ? ([...userKeys.progress.root(), { sectionId, partId }] as const)
+        : userKeys.progress.root(),
+  },
 };
 
 export const useUserHpQuery = {
-  getHp: () => {
+  getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
       queryFn: usersApis.getHp,
       retry: 0,
+    });
+  },
+  getHpWhenLoggedIn: () => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.hp(),
+      queryFn: usersApis.getHp,
+      enabled: isLoggedIn(user),
     });
   },
   updateHp: () => {
@@ -31,23 +62,6 @@ export const useUserHpQuery = {
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.hp() });
       },
-    });
-  },
-};
-
-export const useUserProgressQuery = {
-  updateQuizProgress: () => {
-    return useMutation({ mutationFn: usersApis.putQuizzesProgress });
-  },
-};
-
-export const useUserQuizzesQuery = {
-  getQuizzes: ({ partId }: { partId: number }) => {
-    return useSuspenseQuery({
-      queryKey: userKeys.partQuizzes(partId),
-      queryFn: () => usersApis.getQuizzes({ partId }),
-      gcTime: 0,
-      staleTime: 0,
     });
   },
 };
@@ -108,6 +122,17 @@ export const useUserExperienceQuery = {
   },
 };
 
+export const useUserQuizzesQuery = {
+  getQuizzes: ({ partId }: { partId: number }) => {
+    return useSuspenseQuery({
+      queryKey: userKeys.partQuizzes(partId),
+      queryFn: () => usersApis.getQuizzes({ partId }),
+      gcTime: 0,
+      staleTime: 0,
+    });
+  },
+};
+
 export const useUserPointQuery = {
   updatePoint: () => {
     const queryClient = useQueryClient();
@@ -122,10 +147,78 @@ export const useUserPointQuery = {
   },
 };
 
-export const useUserPartProgressQuery = {
-  updatePartProgress: () => {
+export const useUserPartStatusQuery = {
+  updatePartStatus: () => {
+    const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.partProgress,
+      mutationFn: usersApis.patchPartStatus,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+        queryClient.invalidateQueries({
+          queryKey: userKeys.sections.paginated(),
+        });
+      },
+    });
+  },
+  updateCompletedPartStatus: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.patchCompletedPartStatus,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
+        queryClient.invalidateQueries({
+          queryKey: userKeys.sections.paginated(),
+        });
+      },
+    });
+  },
+};
+
+export const useUserProgressQuery = {
+  getProgress: (params?: {
+    sectionId?: Section['id'];
+    partId?: Part['id'];
+  }) => {
+    return useQuery({
+      queryKey: userKeys.progress.detail(params?.sectionId, params?.partId),
+      queryFn: () => usersApis.getProgress(params),
+    });
+  },
+  updateQuizProgress: () => {
+    return useMutation({ mutationFn: usersApis.putQuizzesProgress });
+  },
+};
+
+export const useUserRankingQuery = {
+  getRanking: (sort: RankingSort = 'level') => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.ranking(sort),
+      queryFn: () => usersApis.getRanking({ sort }),
+      enabled: isLoggedIn(user),
+    });
+  },
+};
+
+export const useUserAttendanceQuery = {
+  getAttendanceList: (params: { year: number; month: number }) => {
+    return useSuspenseQuery({
+      queryKey: userKeys.attendance.list(),
+      queryFn: () => usersApis.getAttendanceList(params),
+    });
+  },
+  getAttendance: () =>
+    useSuspenseQuery({
+      queryKey: userKeys.attendance.root(),
+      queryFn: usersApis.getAttendance,
+    }),
+  recordAttendance: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.postAttendance,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
+      },
     });
   },
 };
