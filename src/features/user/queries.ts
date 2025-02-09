@@ -7,6 +7,7 @@ import {
 import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
+import type { RankingSort } from '@features/ranking/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 
@@ -17,6 +18,7 @@ export const userKeys = {
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
+  ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
   attendance: {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
@@ -184,6 +186,15 @@ export const useUserProgressQuery = {
   },
   updateQuizProgress: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
+  },
+};
+
+export const useUserRankingQuery = {
+  getRanking: (sort: RankingSort = 'level') => {
+    return useQuery({
+      queryKey: userKeys.ranking(sort),
+      queryFn: () => usersApis.getRanking({ sort }),
+    });
   },
 };
 

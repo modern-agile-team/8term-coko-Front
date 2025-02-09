@@ -1,11 +1,16 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { media } from '@/style/media';
 
 export const BarrelTopCokoImg = styled.img`
   width: 171px;
   height: 150px;
   margin: 99px 87px;
   position: fixed;
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const BarrelContainer = styled.div<{ $rank: number | null }>`
@@ -33,6 +38,10 @@ export const BarrelContainer = styled.div<{ $rank: number | null }>`
     css`
       background-image: url(${getImageUrl('동통.svg')});
     `}
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const BoatSayImg = styled.img`
@@ -41,6 +50,10 @@ export const BoatSayImg = styled.img`
   bottom: 0;
   margin: 0 65px 240px;
   position: fixed;
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const BoatImg = styled.img`
@@ -49,4 +62,38 @@ export const BoatImg = styled.img`
   margin: 0 70px 28px;
   position: fixed;
   bottom: 0;
+
+  ${media.mobile} {
+    display: none;
+  }
+`;
+
+export const RankingPaginationDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+`;
+
+export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #d37744;
+
+  &:hover {
+    color: #d80000;
+  }
+
+  ${({ $isSelected }) =>
+    $isSelected &&
+    css`
+      color: #d80000;
+      background: #f0d8a7;
+      border-radius: 5px;
+    `}
 `;
