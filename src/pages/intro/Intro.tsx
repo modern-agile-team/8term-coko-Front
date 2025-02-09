@@ -39,6 +39,7 @@ export default function Intro() {
   };
   return (
     <S.IntroWrapper>
+      <title>코코-자바스크립트 학습 사이트</title>
       <S.IntroHeader>
         <Link to="/learn">
           <img src={getImageUrl('로고.svg')} />
