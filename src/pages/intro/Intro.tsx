@@ -23,7 +23,6 @@ export default function Intro() {
   const { scrollToElement } = useScrollTo<HTMLDivElement>();
 
   const handleScrollToFooter = () => {
-    console.log(footerRef.current);
     if (footerRef.current) {
       scrollToElement(footerRef.current, {
         behavior: 'smooth',

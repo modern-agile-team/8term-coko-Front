@@ -44,7 +44,7 @@ export default function PageIntroBanner({
       $isVisible={isVisible}
     >
       <IntroCard $alignItems="flex-start">
-        <h3> {label}</h3>
+        <h3>{label}</h3>
         <h1>{mainTitle}</h1>
         <p>{description}</p>
       </IntroCard>

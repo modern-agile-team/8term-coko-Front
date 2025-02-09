@@ -2,11 +2,21 @@ import { BADGE_IMAGE_LIST } from '@/features/intro/constants';
 import { BadgeContainer, BadgeList } from '@/features/intro/ui/styles';
 import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { useHover } from '@modern-kit/react';
 import { useCallback, useRef, useState } from 'react';
 
 export default function BadgeIntro() {
   const [isHovered, setIsHovered] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { ref: containerRef } = useHover<HTMLDivElement>({
+    onEnter: () => {
+      document.addEventListener('wheel', blockScroll, { passive: false });
+      setIsHovered(true);
+    },
+    onLeave: () => {
+      document.removeEventListener('wheel', blockScroll);
+      setIsHovered(false);
+    },
+  });
 
   const blockScroll = useCallback((e: WheelEvent) => {
     e.preventDefault();
@@ -20,24 +30,9 @@ export default function BadgeIntro() {
     containerRef.current.scrollLeft += scrollAmount;
   };
 
-  const handleOnMouseEnter = () => {
-    document.addEventListener('wheel', blockScroll, { passive: false });
-    setIsHovered(true);
-  };
-
-  const handleOnMouseLeave = () => {
-    document.removeEventListener('wheel', blockScroll);
-    setIsHovered(false);
-  };
-
   return (
     <>
-      <BadgeContainer
-        ref={containerRef}
-        onMouseEnter={handleOnMouseEnter}
-        onMouseLeave={handleOnMouseLeave}
-        onWheel={handleWheel}
-      >
+      <BadgeContainer ref={containerRef} onWheel={handleWheel}>
         <BadgeList>
           {BADGE_IMAGE_LIST.map(image => (
             <li key={image}>
