@@ -18,12 +18,12 @@ export default function MyRank({
   onRankingChange,
   onLoadingChange,
 }: MyRankProps) {
-  const { user } = useUserStore();
-
   // 자신의 랭킹 정보 (로그인한 경우만)
-  const { data, isLoading } = isLoggedIn(user)
-    ? useUserRankingQuery.getRanking(RANKING_OPTIONS[selectedOption].dataField)
-    : { data: null, isLoading: false };
+  const { data, isLoading } = useUserRankingQuery.getRanking(
+    RANKING_OPTIONS[selectedOption].dataField
+  );
+
+  const { user } = useUserStore();
 
   const ranking = data?.ranking ?? 0;
   const level = user?.level ?? 0;
