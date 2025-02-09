@@ -2,9 +2,9 @@ import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import QuestSection from './QuestSection';
 import ProgressBar from '@features/progress/ui/ProgressBar';
-import type { Quest } from '@features/quest/types';
+import type { MainQuest } from '@features/quest/types';
 
-const quests: Quest[] = [
+const quests: MainQuest[] = [
   { id: 1, title: '섹션 1 클리어', progress: 100, maxProgress: 100 },
   { id: 2, title: '섹션 2 클리어', progress: 30, maxProgress: 100 },
 ];

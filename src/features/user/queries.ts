@@ -23,6 +23,10 @@ export const userKeys = {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
   },
+  quest: {
+    daily: () => [...userKeys.me(), 'quest', 'daily'] as const,
+    main: () => [...userKeys.me(), 'quest', 'main'] as const,
+  },
   sections: {
     paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
   },
@@ -217,6 +221,15 @@ export const useUserAttendanceQuery = {
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
       },
+    });
+  },
+};
+
+export const useUserQuestQuery = {
+  getDailyQuest: () => {
+    return useQuery({
+      queryKey: userKeys.quest.daily(),
+      queryFn: usersApis.getDailyQuest,
     });
   },
 };
