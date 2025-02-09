@@ -174,3 +174,21 @@ export const COKO_TEAM_INFO: { label: string; createBy: string[] }[] = [
   { label: '백엔드', createBy: ['홍대경', '이건우', '전희나'] },
   { label: '디자인', createBy: ['이채영'] },
 ] as const;
+
+export const BADGE_LIST: string[] = [
+  '뱃지-파트클리어.svg',
+  '뱃지-첫틀림.svg',
+  '뱃지-첫아이템.svg',
+  '뱃지-첫색상.svg',
+  '뱃지-섹션1.svg',
+  '뱃지-레벨10.svg',
+  '뱃지-404방문.svg',
+  '뱃지-일일-퀘스트.svg',
+  '뱃지-메인-퀘스트.svg',
+  '뱃지-랭킹1등.svg',
+  '뱃지-랭킹2등.svg',
+  '뱃지-랭킹3등.svg',
+  '뱃지-7일출석.svg',
+  '뱃지-14일출석.svg',
+  '뱃지-30일출석.svg',
+] as const;

@@ -1,4 +1,3 @@
-import { Quiz } from '@/features/quiz/types';
 import { animations } from '@/style/animations';
 import styled, { css } from 'styled-components';
 export const IntroWrapper = styled.div`
@@ -246,6 +245,9 @@ export const ProfileIntroWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   > div {
     height: 247px;
   }

@@ -117,3 +117,35 @@ export const IntroCard = styled.div<{ $alignItems: string }>`
     white-space: pre-line;
   }
 `;
+
+export const BadgeContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  overflow-x: auto;
+  height: 247px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+export const BadgeList = styled.ul`
+  display: flex;
+  gap: 43px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  > li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 232.986px;
+    border-radius: 8px;
+    border: 2px solid #ffe161;
+    background: #ffefaa;
+    padding: 30px;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
