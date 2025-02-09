@@ -16,6 +16,7 @@ interface PageIntroProps {
   orderChange: boolean;
   backgroundColor: string;
 }
+
 export default function PageIntroBanner({
   label,
   mainTitle,
@@ -34,6 +35,7 @@ export default function PageIntroBanner({
       setIsVisible(false);
     },
   });
+
   return (
     <PageIntroWrapper
       $orderChange={orderChange}
