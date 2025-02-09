@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
+import { media } from '@style/media';
 
 interface MedalContainerProps {
   $rank: number;
@@ -8,11 +9,25 @@ interface MedalContainerProps {
 
 export const UserRankingListContainer = styled.div`
   width: 683px;
+
+  ${media.mobile} {
+    width: calc(100vw - 80px);
+    max-width: 683px;
+    height: calc((100vw - 80px) * 0.33);
+    min-width: 340px;
+  }
 `;
 
 export const MyRankingContainer = styled.div`
   width: 683px;
   margin-top: 62px;
+
+  ${media.mobile} {
+    width: calc(100vw - 80px);
+    max-width: 683px;
+    height: calc((100vw - 80px) * 0.33);
+    min-width: 340px;
+  }
 `;
 
 export const SortDropdownWrapper = styled.div`
@@ -121,6 +136,7 @@ export const MyRankTextWrapper = styled.div<{ $rank: number }>`
     font-weight: 700;
     display: block;
     margin-bottom: 5px;
+    white-space: nowrap;
   }
 
   span {
@@ -164,6 +180,10 @@ export const ProfileWrapper = styled.div`
     width: 64.287px;
     height: 64.75px;
   }
+
+  ${media.mobile} {
+    display: none;
+  }
 `;
 
 export const Container = styled.div`
@@ -195,6 +215,12 @@ export const RankIconWrapper = styled.div`
     flex-grow: 1;
     text-align: center;
     margin-right: 10px;
+  }
+
+  ${media.mobile} {
+    width: calc(100vw - 80px);
+    max-width: 173px;
+    min-width: 110px;
   }
 `;
 
