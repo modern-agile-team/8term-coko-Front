@@ -12,7 +12,11 @@ export default function StoreItem({
     <S.StoreItem>
       <S.ItemLabel>{name}</S.ItemLabel>
       <S.ItemImage $category={category} src={getImageUrl(image)} />
-      <S.ItemLabel>{cost} Point</S.ItemLabel>
+      <div>
+        <S.ItemLabel>{cost} Point</S.ItemLabel>
+        <img src={getImageUrl('구매')} />
+        <img src={getImageUrl('장바구니추가')} />
+      </div>
     </S.StoreItem>
   );
 }

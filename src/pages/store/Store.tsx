@@ -7,33 +7,27 @@ import ItemContainer from '@features/store/ui/ItemContainer';
 import CartList from '@features/store/ui/CartList';
 import MyCharacter from '@features/user/ui/MyCharacter';
 import ProfileImage from '@features/user/ui/ProfileImage';
-import type { CosmeticItem } from '@features/store/types';
-import { getViewportSize, isMobile } from '@modern-kit/utils';
-import useModal from '@/hooks/useModal';
 import { useToggle } from '@modern-kit/react';
+import {
+  ACCESSPRIES_OPTIONS,
+  BUTTION_LIST,
+  CLOTHES_OPTIONS,
+} from '@/features/store/constants';
+import StoreSortBar from '@/features/store/ui/StoreSortBar';
+import { contains } from '@modern-kit/utils';
+import { CosmeticItemOption } from '@/features/store/types';
 
-const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
-  {
-    label: '의상',
-    name: 'clothes',
-  },
-  {
-    label: '악세사리',
-    name: 'accessories',
-  },
-  {
-    label: '프로필',
-    name: 'profile',
-  },
-  {
-    label: '색상',
-    name: 'color',
-  },
-] as const;
 export default function Store() {
-  const [itemQuery, setItemQuery] =
-    useState<CosmeticItem['category']>('clothes');
+  const [itemQuery, setItemQuery] = useState<string>('all');
   const [isCartOpne, toggleIsCartOpen] = useToggle(true);
+  const [isMyItem, toggleIsMyItem] = useToggle();
+
+  const checkShouldClearLabel = (options: CosmeticItemOption[]) => {
+    return contains(
+      options.map(option => option.value),
+      itemQuery
+    );
+  };
 
   return (
     <>
@@ -49,7 +43,11 @@ export default function Store() {
       <globalS.Layout>
         <S.MyCharacterSection>
           <div>
-            <S.StoreButton $backgroundColor="#49FF87" $borderColor="#01F152">
+            <S.StoreButton
+              $backgroundColor="#49FF87"
+              $borderColor="#01F152"
+              onClick={toggleIsMyItem}
+            >
               내가 구매한 아이템
             </S.StoreButton>
             <S.StoreButton $backgroundColor="#FF4949" $borderColor="#E8080C">
@@ -75,7 +73,17 @@ export default function Store() {
         </S.MyCharacterSection>
         <S.StoreItemListSection>
           <S.FilterListContainer>
-            {buttonList.map(item => (
+            <StoreSortBar
+              items={CLOTHES_OPTIONS}
+              setItemQuery={setItemQuery}
+              shouldClearLabel={checkShouldClearLabel(ACCESSPRIES_OPTIONS)}
+            />
+            <StoreSortBar
+              items={ACCESSPRIES_OPTIONS}
+              setItemQuery={setItemQuery}
+              shouldClearLabel={checkShouldClearLabel(CLOTHES_OPTIONS)}
+            />
+            {BUTTION_LIST.map(item => (
               <S.FilterButton
                 key={item.name}
                 onClick={() => setItemQuery(item.name)}
@@ -86,7 +94,7 @@ export default function Store() {
             ))}
           </S.FilterListContainer>
           <S.RedLine />
-          <ItemContainer query={itemQuery} />
+          <ItemContainer query={itemQuery} isMyItem={isMyItem} />
         </S.StoreItemListSection>
       </globalS.Layout>
     </>

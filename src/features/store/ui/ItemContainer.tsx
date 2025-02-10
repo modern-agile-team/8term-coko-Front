@@ -2,47 +2,21 @@ import * as S from './styles';
 import { useState } from 'react';
 import StoreItem from './StoreItem';
 import { CosmeticItem } from '@/features/store/types';
-const testItem: CosmeticItem[] = [
-  {
-    id: 1,
-    name: '해적 베레모',
-    image: '해적-베레모.svg',
-    cost: 500,
-    category: 'accessories',
-  },
-  {
-    id: 2,
-    name: '해적 의상',
-    image: '해적-의상.svg',
-    cost: 1000,
-    category: 'clothes',
-  },
-  {
-    id: 3,
-    name: '해초의 습격',
-    image: '해초의-습격.svg',
-    cost: 500,
-    category: 'profile',
-  },
-  {
-    id: 4,
-    name: '해적 베레모',
-    image: '해적-베레모.svg',
-    cost: 500,
-    category: 'color',
-  },
-];
+import withCosmeticItem from '@/features/store/hocs/withCosmeticItem';
 
 interface ItemContainerProps {
-  query: CosmeticItem['category'];
+  query: string;
+  cosmeticItem: CosmeticItem[];
 }
-export default function ItemContainer({ query }: ItemContainerProps) {
+
+function ItemContainer({ query, cosmeticItem }: ItemContainerProps) {
   //스타일링을 위함 추후 수정 예정
   const [currentPage, setCurrentPage] = useState<number>();
+
   return (
     <>
       <S.ItemContainer $category={query}>
-        {testItem.map(item => (
+        {cosmeticItem.map(item => (
           <StoreItem key={item.id} {...item} />
         ))}
       </S.ItemContainer>
@@ -61,3 +35,5 @@ export default function ItemContainer({ query }: ItemContainerProps) {
     </>
   );
 }
+
+export default withCosmeticItem(ItemContainer);

@@ -5,3 +5,5 @@ export interface CosmeticItem {
   image: string;
   category: 'clothes' | 'accessories' | 'profile' | 'color';
 }
+
+export type CosmeticItemOption = { label: string; value: string };

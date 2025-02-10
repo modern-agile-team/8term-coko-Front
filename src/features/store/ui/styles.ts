@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import type { CosmeticItem } from '@features/store/types';
 import { media } from '@/style/media';
 
-export const ItemContainer = styled.ul<{ $category: CosmeticItem['category'] }>`
+export const ItemContainer = styled.ul<{ $category: string }>`
   margin: 18px 0 27px 0;
   display: grid;
   grid-template-columns: repeat(4, 144px);
@@ -161,7 +161,7 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.2px;
-  z-index: 1000;
+  z-index: 101;
 
   ${media.mobile} {
     left: 50%;
@@ -185,4 +185,35 @@ export const CartLabel = styled.label`
   font-style: normal;
   font-weight: 700;
   line-height: 24px; /* 171.429% */
+`;
+
+export const StoreSortDropDown = styled.ul<{ $isSelect: boolean }>`
+  border-radius: 15px 15px 0px 0px;
+  width: 79px;
+  height: 23px;
+  background: #ff4949;
+  position: relative;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+
+  > li {
+    margin: 0;
+    width: 100%;
+    border: 2px solid #ff4949;
+    border-width: 0 2px 2px 2px;
+    &:hover {
+      background: #ff4949;
+      color: #fff;
+    }
+  }
+  > :first-child {
+    border-radius: 15px 15px 0px 0px;
+    border: none;
+    color: #fff;
+  }
+  > :last-child {
+    border-top: none;
+    border-radius: 0px 0px 15px 15px;
+  }
 `;
