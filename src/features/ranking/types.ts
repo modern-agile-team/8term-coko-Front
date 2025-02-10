@@ -8,4 +8,4 @@ export interface RankingPagination {
   contents: Omit<User, 'createdAt'>[];
 }
 
-export type RankingSort = 'level' | 'point';
+export type RankingSort = 'level' | 'point' | 'totalAttendance';
