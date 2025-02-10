@@ -1,4 +1,4 @@
-import { rects } from '@/features/tutorial/types';
+import { rects } from '@/features/intro/types';
 import { create } from 'zustand';
 
 interface State {

@@ -1,9 +1,9 @@
 import { OverRayDiv } from '@/common/layout/styles';
-import { PopupPosition } from '@/features/tutorial/types';
+import { PopupPosition } from '@/features/intro/types';
 import {
   TutorialPopupWrapper,
   FocusedItemDiv,
-} from '@/features/tutorial/ui/styles';
+} from '@/features/intro/ui/styles';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import ModalPortal from '@/ModalPortal';
 import { getImageUrl } from '@/utils/getImageUrl';

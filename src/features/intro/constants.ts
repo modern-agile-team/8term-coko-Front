@@ -1,5 +1,5 @@
 import { Quiz } from '@/features/quiz/types';
-import { TutorialStep } from '@/features/tutorial/types';
+import { TutorialStep } from '@/features/intro/types';
 
 export const TUTORIAL_ID = 1 as const;
 
@@ -122,4 +122,73 @@ export const TUTORIAL_STEP: TutorialStep[] = [
     nextStep: '',
     description: `단답형 문제는 여기에 정답을 써넣으면 돼!`,
   },
+] as const;
+
+export const PAGE_INTRO_DATA: {
+  label: string;
+  mainTitle: string;
+  description: string;
+  image: string;
+  orderChange: boolean;
+  backgroundColor: string;
+}[] = [
+  {
+    label: 'QUEST',
+    mainTitle: '매일 달라지는\n미션들',
+    description: '공부에 의욕을 더해주는 미션들.',
+    image: '소개-퀘스트.svg',
+    orderChange: false,
+    backgroundColor: '#fff',
+  },
+  {
+    label: 'RANKING',
+    mainTitle: '다른 회원들과\n실력 겨루기',
+    description: '성취감과 성장을 도와주는\n다른 회원들과의 선의의 경쟁.',
+    image: '소개-랭킹.svg',
+    orderChange: false,
+    backgroundColor: '#F7F7F7',
+  },
+  {
+    label: 'STORE',
+    mainTitle: '나만의\n캐릭터',
+    description: '캐릭터를 자신만의 스타일로\n꾸밀 수 있는 상점까지.',
+    image: '소개-상점.svg',
+    orderChange: true,
+    backgroundColor: '#F7F7F7',
+  },
+] as const;
+
+export const BUTTON_LIST: { category: Quiz['category']; label: string }[] = [
+  { category: 'COMBINATION', label: '조합형' },
+  { category: 'MULTIPLE_CHOICE', label: '객관식' },
+  {
+    category: 'SHORT_ANSWER',
+    label: '단답형',
+  },
+  { category: 'OX_SELECTOR', label: 'O, X' },
+] as const;
+
+export const COKO_TEAM_INFO: { label: string; createBy: string[] }[] = [
+  { label: '만든 사람들', createBy: ['모던애자일 8기'] },
+  { label: '프론트', createBy: ['구도윤', '신현성'] },
+  { label: '백엔드', createBy: ['홍대경', '이건우', '전희나'] },
+  { label: '디자인', createBy: ['이채영'] },
+] as const;
+
+export const BADGE_IMAGE_LIST: string[] = [
+  '뱃지-파트클리어.svg',
+  '뱃지-첫틀림.svg',
+  '뱃지-첫아이템.svg',
+  '뱃지-첫색상.svg',
+  '뱃지-섹션1.svg',
+  '뱃지-레벨10.svg',
+  '뱃지-404방문.svg',
+  '뱃지-일일-퀘스트.svg',
+  '뱃지-메인-퀘스트.svg',
+  '뱃지-랭킹1등.svg',
+  '뱃지-랭킹2등.svg',
+  '뱃지-랭킹3등.svg',
+  '뱃지-7일출석.svg',
+  '뱃지-14일출석.svg',
+  '뱃지-30일출석.svg',
 ] as const;

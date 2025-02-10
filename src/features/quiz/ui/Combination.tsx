@@ -4,7 +4,7 @@ import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useDnDStore } from '@store/useDnDStore';
 import compact from '@utils/compact';
 import type { Quiz } from '@features/quiz/types';
-import { useElementRect } from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/intro/service/hooks';
 
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];
