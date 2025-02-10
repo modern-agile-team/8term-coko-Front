@@ -1,7 +1,6 @@
-import withQuizzes from '@/features/quiz/hocs/withQuizzes';
-import { TUTORIAL_ID } from '@/features/tutorial/constants';
-import TutorialWithQuizzes from '@/features/tutorial/ui/TutorialContainer';
-import TutorialHeader from '@/features/tutorial/ui/TutorialHeader';
+import { TUTORIAL_ID } from '@/features/intro/constants';
+import TutorialWithQuizzes from '@/features/intro/ui/TutorialContainer';
+import TutorialHeader from '@/features/intro/ui/TutorialHeader';
 import { AlignCenter, HeaderSection } from '@/pages/quiz/styles';
 
 import { useBeforeUnload } from '@modern-kit/react';

@@ -6,7 +6,7 @@ import {
 } from './styles';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import type { Quiz } from '@features/quiz/types';
-import { useElementRect } from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/intro/service/hooks';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 interface MultipleChoiceProps {

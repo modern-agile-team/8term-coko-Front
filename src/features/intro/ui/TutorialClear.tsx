@@ -1,4 +1,4 @@
-import { TutorialClearWrapper } from '@/features/tutorial/ui/styles';
+import { TutorialClearWrapper } from '@/features/intro/ui/styles';
 import { useClientQuizStore } from '@/store/useClientQuizStore';
 import { Link } from 'react-router-dom';
 

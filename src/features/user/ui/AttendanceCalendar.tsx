@@ -42,7 +42,7 @@ export default function AttendanceCalendar() {
         acc[getDayFromDate(cur.date)] = true;
         return acc;
       }, {}),
-    []
+    [userAttendanceList]
   );
 
   return (

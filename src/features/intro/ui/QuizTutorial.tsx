@@ -1,6 +1,6 @@
 import { Quiz } from '@/features/quiz/types';
-import { CATEGORY_STEP, TUTORIAL_STEP } from '@/features/tutorial/constants';
-import FocusedItem from '@/features/tutorial/ui/FocusedItem';
+import { CATEGORY_STEP, TUTORIAL_STEP } from '@/features/intro/constants';
+import FocusedItem from '@/features/intro/ui/FocusedItem';
 import useFunnel from '@/hooks/useFunnel';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
