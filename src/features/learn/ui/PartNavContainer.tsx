@@ -95,7 +95,7 @@ export default function PartNavContainer({
           </S.EntireSectionContainer>
         )}
 
-        <div ref={targetRef} />
+        <div ref={targetRef} style={{ height: '1px' }} />
       </S.EntireSectionContainer>
     </>
   );

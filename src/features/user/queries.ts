@@ -7,6 +7,7 @@ import {
 import usersApis from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
+import type { RankingSort } from '@features/ranking/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 
@@ -17,10 +18,14 @@ export const userKeys = {
   experience: () => [...userKeys.me(), 'experience'] as const,
   quizzes: () => [...userKeys.me(), 'quizzes'],
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
+  ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
+  attendance: {
+    root: () => [...userKeys.me(), 'attendance'] as const,
+    list: () => [...userKeys.attendance.root(), 'list'] as const,
+  },
   sections: {
     paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
   },
-
   progress: {
     root: () => [...userKeys.me(), 'progress'] as const,
     section: (sectionId: Section['id']) =>
@@ -181,5 +186,39 @@ export const useUserProgressQuery = {
   },
   updateQuizProgress: () => {
     return useMutation({ mutationFn: usersApis.putQuizzesProgress });
+  },
+};
+
+export const useUserRankingQuery = {
+  getRanking: (sort: RankingSort = 'level') => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.ranking(sort),
+      queryFn: () => usersApis.getRanking({ sort }),
+      enabled: isLoggedIn(user),
+    });
+  },
+};
+
+export const useUserAttendanceQuery = {
+  getAttendanceList: (params: { year: number; month: number }) => {
+    return useSuspenseQuery({
+      queryKey: userKeys.attendance.list(),
+      queryFn: () => usersApis.getAttendanceList(params),
+    });
+  },
+  getAttendance: () =>
+    useSuspenseQuery({
+      queryKey: userKeys.attendance.root(),
+      queryFn: usersApis.getAttendance,
+    }),
+  recordAttendance: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersApis.postAttendance,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
+      },
+    });
   },
 };

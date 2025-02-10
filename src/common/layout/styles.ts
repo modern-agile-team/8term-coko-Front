@@ -1,7 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { animations } from '@/style/animations';
 import { OverRayDivProps } from '@/common/types';
 import { media } from '@/style/media';
+
 interface BaseStyleProps {
   $width?: string;
   $height?: string;
@@ -268,4 +269,19 @@ export const ConfirmButton = styled.button`
   &:hover {
     color: #ff6666;
   }
+`;
+
+export const SkeletonBase = styled.div<{
+  width?: string;
+  height?: string;
+}>`
+  background: linear-gradient(90deg, #d6d6d6 25%, #f0f0f0 50%, #d6d6d6 75%);
+  background-size: 200% 100%;
+  animation: ${animations.shimmerLoading} 2s infinite linear;
+
+  ${({ width, height }) => css`
+    width: ${width || '100%'};
+    height: ${height || '16px'};
+    border-radius: 4px;
+  `}
 `;

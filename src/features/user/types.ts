@@ -7,7 +7,11 @@ export interface User {
 }
 
 export interface RankedUser extends User {
-  rank: number;
+  ranking: number;
+}
+
+export interface PersonalRanking {
+  ranking: number;
 }
 
 export interface ExperiencedUser extends User {
@@ -25,4 +29,9 @@ export interface UserProgress {
   totalUserProgressCount: number;
   correctUserProgressCount: number;
   inCorrectUserProgressCount: number;
+}
+
+export interface UserAttendance {
+  id: number;
+  date: string;
 }
