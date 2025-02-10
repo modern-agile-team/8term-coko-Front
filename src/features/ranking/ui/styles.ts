@@ -9,11 +9,12 @@ interface MedalContainerProps {
 
 export const UserRankingListContainer = styled.div`
   width: 683px;
+  display: flex;
+  flex-direction: column;
 
   ${media.mobile} {
     width: calc(100vw - 80px);
     max-width: 683px;
-    height: calc((100vw - 80px) * 0.33);
     min-width: 340px;
   }
 `;
@@ -21,11 +22,11 @@ export const UserRankingListContainer = styled.div`
 export const MyRankingContainer = styled.div`
   width: 683px;
   margin-top: 62px;
+  height: 115px;
 
   ${media.mobile} {
     width: calc(100vw - 80px);
     max-width: 683px;
-    height: calc((100vw - 80px) * 0.33);
     min-width: 340px;
   }
 `;
@@ -36,6 +37,7 @@ export const SortDropdownWrapper = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 27px;
+  margin-top: 27px;
 `;
 
 export const RankingItem = styled.div<{ $rank: number }>`
@@ -46,6 +48,7 @@ export const RankingItem = styled.div<{ $rank: number }>`
   height: 115px;
   border-radius: 20px;
   margin-bottom: 27px;
+  position: relative;
 
   ${({ $rank }) =>
     $rank === 1 &&
@@ -94,6 +97,7 @@ export const MedalContainer = styled.div<MedalContainerProps>`
       height: 125px;
       margin-right: 40px;
     `}
+
   ${({ $rank }) =>
     $rank === 1 &&
     css`
@@ -109,12 +113,18 @@ export const MedalContainer = styled.div<MedalContainerProps>`
     css`
       background-image: url(${getImageUrl('동메달.svg')});
     `}
-    ${({ $rank, $isMyRank }) =>
+  ${({ $rank, $isMyRank }) =>
     $rank > 3 &&
     $isMyRank &&
     css`
       background-image: url(${getImageUrl('나의-순위.svg')});
     `}
+
+  ${media.mobile} {
+    width: 82px;
+    height: 102px;
+    margin-left: 15px;
+  }
 `;
 
 export const MyRankTextWrapper = styled.div<{ $rank: number }>`
@@ -150,6 +160,13 @@ export const RankText = styled.p`
   font-weight: 700;
   margin-left: 15px;
   margin-right: 30px;
+
+  ${media.mobile} {
+    position: absolute;
+    font-size: 30px;
+    margin-left: 48px;
+    margin-top: 5px;
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -163,6 +180,19 @@ export const UserInfo = styled.div`
   p:last-of-type {
     font-size: 20px;
     font-weight: 700;
+  }
+
+  ${media.mobile} {
+    position: absolute;
+    margin-left: 110px;
+
+    p:first-of-type {
+      font-size: 12px;
+    }
+
+    p:last-of-type {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -190,7 +220,11 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 15px 37px 0 auto;
+  margin: 0 37px 0 auto;
+
+  ${media.mobile} {
+    margin: 0 25px 0 auto;
+  }
 `;
 
 export const RankIconWrapper = styled.div`
@@ -218,30 +252,24 @@ export const RankIconWrapper = styled.div`
   }
 
   ${media.mobile} {
-    width: calc(100vw - 80px);
-    max-width: 173px;
-    min-width: 110px;
-  }
-`;
+    max-width: 130px;
 
-export const AddFriend = styled.button`
-  width: 167px;
-  height: 19px;
-  margin-top: 6px;
-  border-radius: 15px;
-  border: 2px solid #c26b3b;
-  background: #d37744;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 700;
+    img {
+      width: 38px;
+      height: 30px;
+    }
+  }
 `;
 
 export const RankingPaginationDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
   margin-bottom: 20px;
+
+  span {
+    color: #d37744;
+  }
 `;
 
 export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
@@ -252,6 +280,11 @@ export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
   font-size: 18px;
   font-weight: 700;
   color: #d37744;
+  margin: 0 15px 0 15px;
+
+  ${media.mobile} {
+    margin: 0 8px 0 8px;
+  }
 
   &:hover {
     color: #d80000;

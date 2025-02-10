@@ -29,7 +29,6 @@ export default function UserRankingList({
   const pages = generatePaginationPages({
     currentPage,
     totalPage,
-    maxVisible: 7,
   });
 
   const handlePrevPage = () => {
