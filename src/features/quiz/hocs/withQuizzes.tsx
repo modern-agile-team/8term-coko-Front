@@ -5,7 +5,7 @@ import useUserStore from '@store/useUserStore';
 import type { Quiz } from '@features/quiz/types';
 import { PartStatus } from '@/features/learn/types';
 import { useUserQuizzesQuery } from '@/features/user/queries';
-import { TUTORIAL_QUIZZES } from '@/features/tutorial/constants';
+import { TUTORIAL_QUIZZES } from '@/features/intro/constants';
 
 interface WithQuizzesProps {
   partId: number;

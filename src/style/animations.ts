@@ -49,12 +49,12 @@ export const animations = {
     100% { background-position: 200% 0; }
   `,
   fadeInScaleUpForCenter: keyframes`
-  from {
-    opacity: 0; transform: 
-    translate(-50%, -50%) scale(0.5); 
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1); 
-  }`,
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+`,
+  float: keyframes`
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+`,
 } as const;

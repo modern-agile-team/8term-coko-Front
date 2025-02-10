@@ -3,6 +3,7 @@ export interface User {
   name: string;
   level: number;
   point: number;
+  totalAttendance: number;
   createdAt: string;
 }
 

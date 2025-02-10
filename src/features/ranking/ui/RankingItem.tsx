@@ -43,7 +43,6 @@ export default function RankingItem({
           <img src={getImageUrl(RANKING_OPTIONS[selectedOption].icon)} />
           <p>{value}</p>
         </S.RankIconWrapper>
-        <S.AddFriend>+ 친구 추가</S.AddFriend>
       </S.Container>
     </S.RankingItem>
   );
