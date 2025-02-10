@@ -16,7 +16,7 @@ export const userKeys = {
   me: () => [...userKeys.all, 'me'] as const,
   hp: () => [...userKeys.me(), 'hp'] as const,
   experience: () => [...userKeys.me(), 'experience'] as const,
-  quizzes: () => [...userKeys.me(), 'quizzes'],
+  quizzes: () => [...userKeys.me(), 'quizzes'] as const,
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
   attendance: {

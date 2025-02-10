@@ -36,6 +36,7 @@ const testItem: CosmeticItem[] = [
 interface CartListProps {
   isMobileHidden?: boolean;
 }
+
 export default function CartList({ isMobileHidden = true }: CartListProps) {
   return (
     <>

@@ -10,6 +10,7 @@ import ProfileImage from '@features/user/ui/ProfileImage';
 import type { CosmeticItem } from '@features/store/types';
 import { getViewportSize, isMobile } from '@modern-kit/utils';
 import useModal from '@/hooks/useModal';
+import { useToggle } from '@modern-kit/react';
 
 const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
   {
@@ -32,11 +33,7 @@ const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
 export default function Store() {
   const [itemQuery, setItemQuery] =
     useState<CosmeticItem['category']>('clothes');
-  const [isCartOpne, setIsCartOpen] = useState(false);
-
-  const toggleIsOpen = () => {
-    setIsCartOpen(prev => !prev);
-  };
+  const [isCartOpne, toggleIsCartOpen] = useToggle(true);
 
   return (
     <>
@@ -70,7 +67,7 @@ export default function Store() {
             <S.StoreButton
               $backgroundColor="#FFB53D"
               $borderColor="#F09900"
-              onClick={toggleIsOpen}
+              onClick={toggleIsCartOpen}
             >
               장바구니
             </S.StoreButton>
