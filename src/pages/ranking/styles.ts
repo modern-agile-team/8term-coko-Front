@@ -98,7 +98,7 @@ export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
     `}
 `;
 
-export const UserRankingListMargin = styled.div`
+export const MobileOnlyUserRankingMargin = styled.div`
   ${media.mobile} {
     margin-top: 80px;
   }
