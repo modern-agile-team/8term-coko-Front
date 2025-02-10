@@ -64,7 +64,6 @@ export const TutorialPopupWrapper = styled.div<{
 export const IntroImage = styled.img`
   width: 787px;
   height: 497px;
-  box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.4);
   transition: transform 0.4s ease-in-out;
   &:hover {
     transform: scale(1.07);

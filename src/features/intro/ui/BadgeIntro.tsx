@@ -6,15 +6,12 @@ import { useHover } from '@modern-kit/react';
 import { useCallback, useRef, useState } from 'react';
 
 export default function BadgeIntro() {
-  const [isHovered, setIsHovered] = useState(false);
-  const { ref: containerRef } = useHover<HTMLDivElement>({
+  const { ref: containerRef, isHovered } = useHover<HTMLDivElement>({
     onEnter: () => {
       document.addEventListener('wheel', blockScroll, { passive: false });
-      setIsHovered(true);
     },
     onLeave: () => {
       document.removeEventListener('wheel', blockScroll);
-      setIsHovered(false);
     },
   });
 
