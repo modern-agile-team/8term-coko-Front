@@ -5,17 +5,15 @@ import { CosmeticItem } from '@/features/store/types';
 import withCosmeticItem from '@/features/store/hocs/withCosmeticItem';
 
 interface ItemContainerProps {
-  query: string;
   cosmeticItem: CosmeticItem[];
 }
 
-function ItemContainer({ query, cosmeticItem }: ItemContainerProps) {
-  //스타일링을 위함 추후 수정 예정
+function ItemContainer({ cosmeticItem }: ItemContainerProps) {
   const [currentPage, setCurrentPage] = useState<number>();
 
   return (
     <>
-      <S.ItemContainer $category={query}>
+      <S.ItemContainer>
         {cosmeticItem.map(item => (
           <StoreItem key={item.id} {...item} />
         ))}

@@ -12,20 +12,14 @@ import {
   CLOTHES_OPTIONS,
 } from '@/features/store/constants';
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
-import { contains } from '@modern-kit/utils';
-import { CosmeticItemOption } from '@/features/store/types';
+
 import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
+import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import useUserStore from './../../store/useUserStore';
+import { isLoggedIn } from '@/features/user/service/authUtils';
 
 export default function Store() {
-  const [itemQuery, setItemQuery] = useState<string>('all');
-  const [isMyItem, toggleIsMyItem] = useToggle();
-
-  const checkShouldClearLabel = (options: CosmeticItemOption[]) => {
-    return contains(
-      options.map(option => option.value),
-      itemQuery
-    );
-  };
+  const { query, setQuery } = useCosmeticItemStore();
 
   return (
     <>
@@ -33,36 +27,31 @@ export default function Store() {
         <globalS.LeftSection>
           <MenuBar />
         </globalS.LeftSection>
+
         <globalS.RightSection>
           <Header />
         </globalS.RightSection>
       </globalS.Wrapper>
+
       <globalS.Layout>
+        {}
         <StoreMyCharacterSection />
         <S.StoreItemListSection>
           <S.FilterListContainer>
-            <StoreSortBar
-              items={CLOTHES_OPTIONS}
-              setItemQuery={setItemQuery}
-              shouldClearLabel={checkShouldClearLabel(ACCESSPRIES_OPTIONS)}
-            />
-            <StoreSortBar
-              items={ACCESSPRIES_OPTIONS}
-              setItemQuery={setItemQuery}
-              shouldClearLabel={checkShouldClearLabel(CLOTHES_OPTIONS)}
-            />
+            <StoreSortBar items={CLOTHES_OPTIONS} />
+            <StoreSortBar items={ACCESSPRIES_OPTIONS} />
             {BUTTION_LIST.map(item => (
               <S.FilterButton
-                key={item.name}
-                onClick={() => setItemQuery(item.name)}
-                $isSelect={itemQuery === item.name}
+                key={item.label}
+                onClick={() => setQuery(item.query)}
+                $isSelect={query.mainCategoryId === item.query.mainCategoryId}
               >
                 {item.label}
               </S.FilterButton>
             ))}
           </S.FilterListContainer>
           <S.RedLine />
-          <ItemContainer query={itemQuery} isMyItem={isMyItem} />
+          <ItemContainer />
         </S.StoreItemListSection>
       </globalS.Layout>
     </>

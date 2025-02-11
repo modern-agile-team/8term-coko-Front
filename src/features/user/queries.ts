@@ -225,7 +225,7 @@ export const useUserAttendanceQuery = {
 
 export const useUserItemsQuery = {
   resetEquippedItems: () => {
-    useMutation({
+    return useMutation({
       mutationFn: userItemsApi.putResetEquippedItems,
     });
   },

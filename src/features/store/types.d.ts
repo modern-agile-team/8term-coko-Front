@@ -8,4 +8,7 @@ export interface CosmeticItem {
   category: 'clothes' | 'accessories' | 'profile' | 'color';
 }
 
-export type CosmeticItemOption = { label: string; value: string };
+export type CosmeticItemOption = {
+  label: string;
+  query: Pick<CosmeticItem, 'mainCategoryId' | 'subCategoryId'>;
+};

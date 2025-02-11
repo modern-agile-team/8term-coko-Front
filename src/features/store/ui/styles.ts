@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import type { CosmeticItem } from '@features/store/types';
 import { media } from '@/style/media';
 
-export const ItemContainer = styled.ul<{ $category: string }>`
+export const ItemContainer = styled.ul`
   margin: 18px 0 27px 0;
   display: grid;
   grid-template-columns: repeat(4, 144px);
@@ -13,12 +13,6 @@ export const ItemContainer = styled.ul<{ $category: string }>`
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
-  ${({ $category }) =>
-    $category === 'profile' &&
-    css`
-      grid-template-columns: repeat(3, 180px);
-      grid-template-rows: repeat(1, 217px);
-    `}
 
   ${media.mobile} {
     grid-template-columns: repeat(2, 144px);
@@ -40,6 +34,9 @@ export const StoreItem = styled.li`
   line-height: 16px;
   letter-spacing: 0.2px;
   cursor: pointer;
+  > div {
+    display: flex;
+  }
   &:hover {
     border-radius: 8px;
     border: 2px solid #00b6c0;
@@ -162,7 +159,6 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.2px;
-  z-index: 101;
 
   ${media.mobile} {
     left: 50%;

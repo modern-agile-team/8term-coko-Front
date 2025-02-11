@@ -1,34 +1,31 @@
 import { CosmeticItemOption } from '@/features/store/types';
 import { StoreSortDropDown } from '@/features/store/ui/styles';
 import { FilterButton } from '@/pages/store/styles';
+import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 import { useOutsidePointerDown, useToggle } from '@modern-kit/react';
-import { Dispatch, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface StoreSortBarProps {
   items: CosmeticItemOption[];
-  shouldClearLabel: boolean;
-  setItemQuery: Dispatch<React.SetStateAction<string>>;
 }
 
-export default function StoreSortBar({
-  items,
-  shouldClearLabel,
-  setItemQuery,
-}: StoreSortBarProps) {
+export default function StoreSortBar({ items }: StoreSortBarProps) {
   const [isOpen, toggleIsOpen] = useToggle();
   const dropDownRef = useOutsidePointerDown<HTMLUListElement>(toggleIsOpen);
   const [currentLabel, setCurrentLabel] = useState<string | null>(null);
-  useEffect(() => {
-    if (shouldClearLabel) {
-      setCurrentLabel(null);
-    }
-  }, [shouldClearLabel]);
+  const { query, setQuery } = useCosmeticItemStore();
 
   const handleItemClick = (item: CosmeticItemOption) => {
+    setQuery(item.query);
     setCurrentLabel(item.label);
-    setItemQuery(item.value);
     toggleIsOpen();
   };
+
+  useEffect(() => {
+    if (items[0].query.mainCategoryId !== query.mainCategoryId) {
+      setCurrentLabel(null);
+    }
+  }, [query]);
 
   if (isOpen) {
     return (
@@ -44,7 +41,10 @@ export default function StoreSortBar({
   }
 
   return (
-    <FilterButton $isSelect={false} onClick={toggleIsOpen}>
+    <FilterButton
+      $isSelect={items[0].query.mainCategoryId === query.mainCategoryId}
+      onClick={toggleIsOpen}
+    >
       {currentLabel || items[0].label} ▲
     </FilterButton>
   );
