@@ -1,13 +1,13 @@
-import { OverRayDiv } from '@/common/layout/styles';
-import { PopupPosition } from '@/features/intro/types';
+import { OverRayDiv } from '@common/layout/styles';
+import { PopupPosition } from '@features/intro/types';
 import {
   TutorialPopupWrapper,
   FocusedItemDiv,
-} from '@/features/intro/ui/styles';
-import useOutsideClick from '@/hooks/useOutsideClick';
+} from '@features/intro/ui/styles';
+import useOutsideClick from '@hooks/useOutsideClick';
 import ModalPortal from '@/ModalPortal';
-import { getImageUrl } from '@/utils/getImageUrl';
-import { useRectStore } from './../../../store/useRectStore';
+import { getImageUrl } from '@utils/getImageUrl';
+import { useRectStore } from '@store/useRectStore';
 
 interface FocusedItemProps {
   id: string;

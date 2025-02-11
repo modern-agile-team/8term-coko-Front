@@ -58,7 +58,7 @@ export default function Intro() {
                 자바스크립트 학습 사이트
               </h1>
               <h2>코딩하는 코끼리, 코코</h2>
-              <Link to="/quiz/tutorial">시작하기</Link>
+              <Link to="/learn/tutorial">시작하기</Link>
               <Link to="/login">로그인하기</Link>
             </div>
           </S.CokoIntroLeftDiv>

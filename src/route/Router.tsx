@@ -2,7 +2,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
 import NotFound from '@features/error/ui/NotFound';
 import QuizTutorialPage from '@/pages/quiz/tutorial/QuizTutorialPage';
-import LearnTutorialPage from './../pages/learn/tutorial/LearnTutorialPage';
+import LearnTutorialPage from '@/pages/learn/tutorial/LearnTutorialPage';
 import QuizErrorBoundary from '@/features/error/ui/QuizErrorBoundary';
 import Intro from '@/pages/intro/Intro';
 
@@ -14,10 +14,20 @@ const Quiz = lazy(() => import('@/pages/quiz/Quiz'));
 const Store = lazy(() => import('@/pages/store/Store'));
 const Profile = lazy(() => import('@/pages/profile/Profile'));
 
+const getInitialRoute = () => {
+  const visited = localStorage.getItem('visited');
+
+  if (!visited) {
+    localStorage.setItem('visited', 'true');
+    return '/intro';
+  }
+  return '/learn';
+};
+
 export default function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={'/learn'} />} />
+      <Route path="/" element={<Navigate to={getInitialRoute()} />} />
       <Route path="/learn" element={<Learn />} />
       <Route path="/quest" element={<Quest />} />
       <Route path="/ranking" element={<Ranking />} />

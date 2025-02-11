@@ -143,7 +143,7 @@ export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
     name: '키캡 버튼 설명',
     id: 'keycap-button',
     nextStep: '퀴즈 팝오버 설명',
-    description: `키캡 버튼을 누르면
+    description: `파트(키캡) 버튼을 누르면
             퀴즈를 풀 수 있는 화면으로 이동할 수 있어!`,
   },
   {
