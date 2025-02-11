@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import type { CosmeticItem } from '@features/store/types';
 import { media } from '@/style/media';
 
 export const ItemContainer = styled.ul`
@@ -19,7 +18,7 @@ export const ItemContainer = styled.ul`
   }
 `;
 
-export const StoreItem = styled.li`
+export const CosmeticItemLi = styled.li`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -34,36 +33,18 @@ export const StoreItem = styled.li`
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.2px;
-  cursor: pointer;
-  span {
-    position: absolute;
-    right: 5px;
-  }
-  > div {
-    display: flex;
-  }
+
   &:hover {
     border-radius: 8px;
     border: 2px solid #00b6c0;
     background: rgba(0, 217, 233, 0.8);
-    > label {
+
+    label {
       border-radius: 15px;
       border: 2px solid #00d9e9;
       background: #a5ecf0;
     }
   }
-`;
-
-export const ItemLabel = styled.label`
-  text-align: center;
-  display: block;
-  width: 73px;
-  height: 17px;
-  border-radius: 15px;
-  border: 2px solid #a5ecf0;
-  background: #00d9e9;
-  color: inherit;
-  font: inherit;
 `;
 
 export const ItemImage = styled.img`
@@ -123,23 +104,6 @@ export const CartListItemWrapper = styled.ul`
   }
 `;
 
-export const PlaceLabel = styled.label`
-  margin: 28px 0 26px 0;
-  text-align: center;
-  display: block;
-  width: 142.001px;
-  height: 28.004px;
-  border-radius: 15px;
-  border: 2px solid #f09900;
-  background: #ffb53d;
-  color: #fff;
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px;
-`;
-
 export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   position: absolute;
   right: 20px;
@@ -158,6 +122,19 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.2px;
+  > label {
+    width: 147.003px;
+    height: 28.004px;
+    border-radius: 15px;
+    border: 2px solid #f09900;
+    background: #ffb53d;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+  }
 
   ${media.mobile} {
     left: 50%;
@@ -166,22 +143,6 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
     right: 0px;
     display: ${({ $isMobileHidden }) => ($isMobileHidden ? 'none' : 'flex')};
   }
-`;
-
-export const CartLabel = styled.label`
-  margin: 18px 0 0 0;
-  display: block;
-  width: 147.003px;
-  height: 28.004px;
-  border-radius: 15px;
-  border: 2px solid #f09900;
-  background: #ffb53d;
-  color: #fff;
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 24px; /* 171.429% */
 `;
 
 export const StoreSortDropDown = styled.ul<{ $isSelect: boolean }>`
@@ -193,6 +154,7 @@ export const StoreSortDropDown = styled.ul<{ $isSelect: boolean }>`
   list-style: none;
   text-align: center;
   cursor: pointer;
+  z-index: 100;
 
   > li {
     margin: 0;
@@ -212,5 +174,65 @@ export const StoreSortDropDown = styled.ul<{ $isSelect: boolean }>`
   > :last-child {
     border-top: none;
     border-radius: 0px 0px 15px 15px;
+  }
+`;
+
+export const CosmeticItemHeader = styled.div`
+  label {
+    width: 73px;
+    height: 20px;
+    padding: 2px 25px;
+    border-radius: 15px;
+    border: 2px solid #a5ecf0;
+    background: #00d9e9;
+  }
+  span {
+    position: absolute;
+    right: 6px;
+  }
+`;
+
+export const CosmeticItemFooter = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  > label {
+    width: 73px;
+    height: 20px;
+    padding: 2px 25px;
+    border-radius: 15px;
+    border: 2px solid #a5ecf0;
+    background: #00d9e9;
+  }
+
+  > img {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+`;
+
+export const CosmeticItemCheckOutWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  position: relative;
+  width: 198px;
+  height: 260px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  > div {
+    width: 165px;
+    height: 184px;
+    border-radius: 10px;
+    background: #bbf0f3;
+    display: flex;
+    flex-direction: column;
   }
 `;

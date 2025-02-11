@@ -16,24 +16,18 @@ const withCosmeticItem = <P extends object>(
     SubtractInjectedProps<P, InjectedProps>
   > = ({ ...rest }) => {
     const { isMyItemsVisible } = useCosmeticItemStore();
+    const { data: cosmeticItem, isLoading } =
+      useCosmeticItemQuery.getCosmeticItemByPage(!isMyItemsVisible);
 
-    //모든 아이템 조회(페이지네이션)
-    if (!isMyItemsVisible) {
-      const { data, isLoading } = useCosmeticItemQuery.getCosmeticItemByPage(
-        !isMyItemsVisible
-      );
-      if (isLoading) return <SkeletonBase width="100px" height="100px" />;
-      if (!data) {
-        return <SkeletonBase />;
-      }
-      return <WrappedComponent {...(rest as P)} cosmeticItem={data} />;
+    if (isLoading) {
+      return <SkeletonBase width="100px" height="100px" />;
     }
-    //내가 구매한 아이템 조회(페이지네이션)
-    const cosmeticItem: CosmeticItem[] = isMyItemsVisible ? [] : [];
+    if (!cosmeticItem) {
+      return <SkeletonBase />;
+    }
 
     return <WrappedComponent {...(rest as P)} cosmeticItem={cosmeticItem} />;
   };
-
   return ComponentWithCosmeticItem;
 };
 

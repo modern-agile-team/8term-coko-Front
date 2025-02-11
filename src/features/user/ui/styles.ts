@@ -243,3 +243,44 @@ export const AttendanceCalendarWrapper = styled.div`
     }
   }
 `;
+export const SaveButton = styled.button`
+  display: flex;
+  width: 65px;
+  height: 23px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 15px;
+  border: 2px solid #f09900;
+  background: #ffb53d;
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  align-self: center;
+  margin: auto 0 10px 0;
+`;
+
+export const EquipButton = styled.button`
+  display: flex;
+  width: 100px;
+  height: 20px;
+  padding: 4px 12px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  border: 2px solid #f09900;
+  background: #ffb53d;
+  color: var(--white, #fff);
+  font-family: Maplestory;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.2px;
+`;

@@ -1,4 +1,4 @@
-import { CosmeticItem, CosmeticItemOption } from '@/features/store/types';
+import { CosmeticItemOption } from '@/features/store/types';
 
 export const CLOTHES_OPTIONS: CosmeticItemOption[] = [
   { label: '의상', query: { mainCategoryId: 1, subCategoryId: null } },

@@ -1,17 +1,16 @@
 import CartList from '@/features/store/ui/CartList';
 import MyCharacter from '@/features/user/ui/MyCharacter';
-import ProfileImage from '@/features/user/ui/ProfileImage';
 import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
 import useModal from './../../../hooks/useModal';
 import { useUserItemsQuery } from '@/features/user/queries';
-import useUserStore from './../../../store/useUserStore';
-import { isLoggedIn } from './../service/authUtils';
 import { Link } from 'react-router-dom';
+import { SaveButton } from '@/features/user/ui/styles';
+import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 
 export default function StoreMyCharacterSection() {
-  const { user } = useUserStore();
   const { Modal, isShow, openModal, closeModal } = useModal();
   const { mutate: resetEquippedItems } = useUserItemsQuery.resetEquippedItems();
+  const { isMyItemsVisible, toggleIsMyItemsVisible } = useCosmeticItemStore();
 
   return (
     <>
@@ -21,7 +20,11 @@ export default function StoreMyCharacterSection() {
       <CartList isMobileHidden={true} />
       <MyCharacterSection>
         <div>
-          <StoreButton $backgroundColor="#49FF87" $borderColor="#01F152">
+          <StoreButton
+            $backgroundColor="#49FF87"
+            $borderColor="#01F152"
+            onClick={toggleIsMyItemsVisible}
+          >
             내가 구매한 아이템
           </StoreButton>
           <StoreButton
@@ -31,6 +34,7 @@ export default function StoreMyCharacterSection() {
           >
             초기화
           </StoreButton>
+          {isMyItemsVisible && <SaveButton>저장</SaveButton>}
         </div>
         <div>
           {/* {itemQuery === 'profile' ? (

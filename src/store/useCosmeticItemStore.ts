@@ -5,18 +5,21 @@ interface State {
   isMyItemsVisible: boolean;
   query: CosmeticItemOption['query'];
   selectedCosmeticItems: CosmeticItem[];
+  equippedItems: Record<number, { image: string }>;
 }
 interface Actions {
   toggleIsMyItemsVisible: () => void;
   setQuery: (query: State['query']) => void;
   addCosmeticItems: (cosmeticItem: CosmeticItem) => void;
   removeCosmeticItemById: (id: number) => void;
+  addEquippedItem: (id: number, image: string) => void;
 }
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
   isMyItemsVisible: false,
   query: { mainCategoryId: 1, subCategoryId: null },
   selectedCosmeticItems: [],
+  equippedItems: {},
 
   toggleIsMyItemsVisible: () =>
     set(state => ({ isMyItemsVisible: !state.isMyItemsVisible })),
@@ -40,5 +43,12 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
       selectedCosmeticItems: prev.selectedCosmeticItems.filter(
         item => item.id !== id
       ),
+    })),
+  addEquippedItem: (id, image) =>
+    set(state => ({
+      equippedItems: {
+        ...state.equippedItems,
+        [id]: { image }, // 기존 아이템에 새로운 아이템 추가
+      },
     })),
 }));
