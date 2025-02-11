@@ -1,7 +1,8 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { lazy } from 'react';
 import NotFound from '@features/error/ui/NotFound';
-import QuizTutorial from '@/pages/quiz/tutorial/QuizTutorial';
+import QuizTutorialPage from '@/pages/quiz/tutorial/QuizTutorialPage';
+import LearnTutorialPage from './../pages/learn/tutorial/LearnTutorialPage';
 import QuizErrorBoundary from '@/features/error/ui/QuizErrorBoundary';
 import Intro from '@/pages/intro/Intro';
 
@@ -32,7 +33,8 @@ export default function Router() {
       />
       <Route path="/store" element={<Store />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/quiz/tutorial" element={<QuizTutorial />} />
+      <Route path="/quiz/tutorial" element={<QuizTutorialPage />} />
+      <Route path="/learn/tutorial" element={<LearnTutorialPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

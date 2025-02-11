@@ -39,6 +39,8 @@ export default function withSections<P extends WithSectionsInjectedProps>(
       return flatMap(data?.pages ?? [], page => page.sections || []);
     }, [data]);
 
+    console.log(sections);
+
     return (
       <WrappedComponent
         {...(props as P)}

@@ -1,8 +1,7 @@
 import { TutorialClearWrapper } from '@/features/intro/ui/styles';
-import { useClientQuizStore } from '@/store/useClientQuizStore';
 import { Link } from 'react-router-dom';
 
-export default function TutorialClear() {
+export default function QuizTutorialClear() {
   return (
     <TutorialClearWrapper>
       튜토리얼 클리어 축하해

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { media } from '@style/media';
 import { PROGRESS_COLORS } from '@features/learn/constants';
 interface ScrollableContainerProps {
-  $show: boolean;
-  $isLoggedIn: boolean;
+  $show?: boolean;
+  $isLoggedIn?: boolean;
 }
 
 export const ScrollableContainer = styled.div<ScrollableContainerProps>`
@@ -65,7 +65,7 @@ export const ProgressBarWrapper = styled.div`
   }
 `;
 
-export const ProgressLabel = styled.span<{ $isPart: boolean }>`
+export const ProgressLabel = styled.span<{ $isPart?: boolean }>`
   font-size: 14px;
   color: ${({ $isPart }) =>
     $isPart ? PROGRESS_COLORS.part.text : PROGRESS_COLORS.global.text};

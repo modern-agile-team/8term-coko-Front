@@ -1,6 +1,7 @@
 import * as S from '@features/learn/ui/styles';
 import { useRef, useEffect, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useElementRect } from '@features/intro/service/hooks';
 import usePopover from '@hooks/usePopover';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
@@ -64,6 +65,8 @@ export default memo(function PartItem({
 
   const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
 
+  const { getClientRectRefCallback } = useElementRect();
+
   return (
     <S.KeyboardButtonWrapper
       ref={keyboardButtonWrapperRef}
@@ -74,6 +77,8 @@ export default memo(function PartItem({
       )}
 
       <S.KeyboardButton
+        id="keycap-button"
+        ref={getClientRectRefCallback}
         onClick={handleButtonClick}
         $isLocked={isLocked}
         disabled={isLocked}
@@ -83,7 +88,15 @@ export default memo(function PartItem({
 
       {isOpen && (
         <S.SpeechBubble
-          ref={popoverRef}
+          id="quiz-popover"
+          ref={el => {
+            if (globalIndex === 0) {
+              getClientRectRefCallback(el);
+            }
+            if (popoverRef.current) {
+              popoverRef.current = el;
+            }
+          }}
           onClick={e => e.stopPropagation()}
           $bgColor={COLORS[globalIndex % 4]}
         >

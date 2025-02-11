@@ -56,10 +56,6 @@ export default function PartNavContainer({
     <>
       <S.UpperBackgroundImg />
       <S.EntireSectionContainer $isActiveBubble={isActiveBubble}>
-        <S.QuizTutorialLinkWrapper>
-          <Link to="/quiz/tutorial">퀴즈 튜토리얼</Link>
-        </S.QuizTutorialLinkWrapper>
-
         {sections.map((section, sectionIndex) => (
           <S.SectionWrapper
             key={section?.id || sectionIndex}

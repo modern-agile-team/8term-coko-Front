@@ -12,7 +12,7 @@ const quests: Quest[] = [
 
 export default function DailyQuest() {
   const location = useLocation();
-  const isLearn = location.pathname === '/learn';
+  const isLearn = location.pathname.startsWith('/learn');
   const isQuest = location.pathname === '/quest';
 
   // UI 속성을 컴포넌트와 progress에 따라 동적으로 설정 (DailyQuest)

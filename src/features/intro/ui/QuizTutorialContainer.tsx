@@ -14,10 +14,8 @@ import {
 } from '@/features/quiz/ui/styles';
 import { useElementRect } from '@/features/intro/service/hooks';
 import QuizTutorial from '@/features/intro/ui/QuizTutorial';
-
-import TutorialClear from '@/features/intro/ui/TutorialClear';
+import QuizTutorialClear from '@/features/intro/ui/QuizTutorialClear';
 import useModal from '@/hooks/useModal';
-
 import { useClientQuizStore } from '@/store/useClientQuizStore';
 import isEqualArray from '@/utils/isEqualArray';
 import { SwitchCase, useUnmount, useTimeout } from '@modern-kit/react';
@@ -26,7 +24,7 @@ import { useEffect, useState } from 'react';
 interface TutorialProps {
   quizzes: Quiz[];
 }
-function TutorialContainer({ quizzes }: TutorialProps) {
+function QuizTutorialContainer({ quizzes }: TutorialProps) {
   const {
     currentPage,
     isCorrectList,
@@ -120,7 +118,7 @@ function TutorialContainer({ quizzes }: TutorialProps) {
                 isQuizFinished={false}
               />
             ),
-            tutorialClear: <TutorialClear />,
+            tutorialClear: <QuizTutorialClear />,
           }}
         />
       </Modal>
@@ -129,4 +127,4 @@ function TutorialContainer({ quizzes }: TutorialProps) {
   );
 }
 
-export default withQuizzes(TutorialContainer);
+export default withQuizzes(QuizTutorialContainer);

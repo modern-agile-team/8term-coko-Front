@@ -13,6 +13,8 @@ import useScrollVisibility from '@hooks/useScrollVisibility';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
+import withSections from '@features/learn/hocs/withSections';
+import withUserProgress from '@features/learn/hocs/withUserProgress';
 import type { Section, Part } from '@features/learn/types';
 
 interface LearnContainerProps {
@@ -32,7 +34,7 @@ interface LearnContainerProps {
   onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
 }
 
-export default function LearnContainer({
+function LearnContainer({
   sections,
   fetchNextPage,
   hasNextPage,
@@ -123,3 +125,5 @@ export default function LearnContainer({
     </>
   );
 }
+
+export default withUserProgress(withSections(LearnContainer));

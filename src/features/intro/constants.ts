@@ -1,5 +1,6 @@
-import { Quiz } from '@/features/quiz/types';
 import { TutorialStep } from '@/features/intro/types';
+import type { Quiz } from '@/features/quiz/types';
+import type { Section } from 'features/learn/types';
 
 export const TUTORIAL_ID = 1 as const;
 
@@ -55,7 +56,7 @@ export const CATEGORY_STEP: Record<
   SHORT_ANSWER: '단답형 설명',
 } as const;
 
-export const TUTORIAL_STEP: TutorialStep[] = [
+export const QUIZ_TUTORIAL_STEP: TutorialStep[] = [
   {
     name: '진행도 설명1',
     id: 'progress-bar',
@@ -121,6 +122,92 @@ export const TUTORIAL_STEP: TutorialStep[] = [
     id: 'short-answer',
     nextStep: '',
     description: `단답형 문제는 여기에 정답을 써넣으면 돼!`,
+  },
+] as const;
+
+export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
+  {
+    name: '전체 & 파트 진행도 설명',
+    id: 'learn-progress-bar',
+    nextStep: '섹션 선택 버튼 설명',
+    description: `이건 퀴즈 전체 또는 각 파트의 몇 문제를 풀었는지 보여주는 진행바야!`,
+  },
+  {
+    name: '섹션 선택 버튼 설명',
+    id: 'select-section-button',
+    nextStep: '키캡 버튼 설명',
+    description: `이 섬은 섹션을 뜻해.
+    선택하면 해당 섹션으로 이동하게 되지!`,
+  },
+  {
+    name: '키캡 버튼 설명',
+    id: 'keycap-button',
+    nextStep: '퀴즈 팝오버 설명',
+    description: `키캡 버튼을 누르면
+            퀴즈를 풀 수 있는 화면으로 이동할 수 있어!`,
+  },
+  {
+    name: '퀴즈 팝오버 설명',
+    id: 'quiz-popover',
+    nextStep: '',
+    description: `이제 본격적으로 모험을 떠나기 전에 퀴즈를 푸는 방법에 대해 알아보자!`,
+  },
+] as const;
+
+export const LEARN_TUTORIAL_SECTIONS: Section[] = [
+  {
+    id: 2,
+    name: '변수',
+    parts: [
+      {
+        id: 10,
+        sectionId: 2,
+        name: '식별자',
+        status: 'COMPLETED',
+      },
+      {
+        id: 13,
+        sectionId: 2,
+        name: '표현식',
+        status: 'STARTED',
+      },
+      {
+        id: 4,
+        sectionId: 2,
+        name: '변수란 무엇인가?',
+        status: 'COMPLETED',
+      },
+      {
+        id: 36,
+        sectionId: 2,
+        name: '변수 선언',
+        status: 'LOCKED',
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: '자료형',
+    parts: [
+      {
+        id: 35,
+        sectionId: 3,
+        name: 'undefined 타입',
+        status: 'STARTED',
+      },
+      {
+        id: 37,
+        sectionId: 3,
+        name: '숫자 타입',
+        status: 'LOCKED',
+      },
+      {
+        id: 38,
+        sectionId: 3,
+        name: '문자 타입',
+        status: 'LOCKED',
+      },
+    ],
   },
 ] as const;
 
