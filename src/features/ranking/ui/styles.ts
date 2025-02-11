@@ -22,7 +22,6 @@ export const UserRankingListContainer = styled.div`
 export const MyRankingContainer = styled.div`
   width: 683px;
   margin-top: 62px;
-  height: 115px;
 
   ${media.mobile} {
     width: calc(100vw - 80px);
@@ -37,7 +36,6 @@ export const SortDropdownWrapper = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 27px;
-  margin-top: 27px;
 `;
 
 export const RankingItem = styled.div<{ $rank: number }>`
