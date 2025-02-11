@@ -6,12 +6,13 @@ import { useUserItemsQuery } from '@/features/user/queries';
 import { Link } from 'react-router-dom';
 import { SaveButton } from '@/features/user/ui/styles';
 import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import ProfileImage from '@/features/user/ui/ProfileImage';
 
 export default function StoreMyCharacterSection() {
   const { Modal, isShow, openModal, closeModal } = useModal();
   const { mutate: resetEquippedItemMutate } =
     useUserItemsQuery.resetEquippedItems();
-  const { isMyItemsVisible, toggleIsMyItemsVisible, resetEquippedItem } =
+  const { isMyItemsVisible, toggleIsMyItemsVisible, resetEquippedItem, query } =
     useCosmeticItemStore();
 
   return (
@@ -42,12 +43,11 @@ export default function StoreMyCharacterSection() {
           {isMyItemsVisible && <SaveButton>저장</SaveButton>}
         </div>
         <div>
-          {/* {itemQuery === 'profile' ? (
-          <ProfileImage isIcon={false} />
-        ) : (
-          <MyCharacter />
-        )} */}
-          <MyCharacter />
+          {query.mainCategoryId === 3 ? (
+            <ProfileImage isIcon={false} />
+          ) : (
+            <MyCharacter />
+          )}
         </div>
         <div>
           <StoreButton

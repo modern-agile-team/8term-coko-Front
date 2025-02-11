@@ -108,18 +108,18 @@ export const ProfileBox = styled.span<{ $isIcon: boolean }>`
   width: 150px;
   height: 150px;
   border-radius: 50%; /* 동그란 모양 만들기 */
-  overflow: hidden; /* 동그라미 영역 밖은 잘라내기 */
-  background-color: #f0f0f0; /* 배경색 설정 */
+  overflow: hidden;
+  background-color: #f0f0f0;
   > div {
-    transform: translateX(-15px) translateY(5px) scale(1.6);
+    transform: translateX(-15px) translateY(50px) scale(1.6);
   }
   ${({ $isIcon }) =>
     $isIcon &&
     css`
-      width: 30px; /* 프로필 이미지의 가로 크기 */
-      height: 30px; /* 프로필 이미지의 세로 크기 */
+      width: 30px;
+      height: 30px;
       > div {
-        transform: translateX(-70px) scale(0.35);
+        transform: translateX(-70px) translateY(-50px) scale(0.35);
       }
     `}
 `;
@@ -134,7 +134,7 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
   > img:first-child {
     position: absolute;
     z-index: 20;
-    transform: scale(1.6);
+    transform: scale(1.3);
   }
 
   ${({ $isIcon }) =>
@@ -145,7 +145,7 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
       > img:first-child {
         position: absolute;
         z-index: 20;
-        transform: scale(0.35);
+        transform: scale(0.25);
       }
     `}
 `;

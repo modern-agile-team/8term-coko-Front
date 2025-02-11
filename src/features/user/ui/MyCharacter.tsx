@@ -20,7 +20,7 @@ export default function MyCharacter() {
             <S.CharacterGlasses src={getImageUrl(equippedItems[5].image)} />
           )}
           {equippedItems[1] && (
-            <S.CharacterSetup src={getImageUrl('해적-의상.svg')} />
+            <S.CharacterSetup src={getImageUrl(equippedItems[1].image)} />
           )}
           {equippedItems[2] && (
             <S.CharacterShoes src={getImageUrl(equippedItems[2].image)} />
