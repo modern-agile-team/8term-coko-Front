@@ -110,6 +110,7 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   border-radius: 20px;
   width: 194px;
   height: 596px;
@@ -117,23 +118,30 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   box-shadow: 0 3px #e5e5e5;
   margin: 84px 47px 0 0;
   color: #fff;
-  font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0.2px;
+  line-height: 24px;
   > label {
     width: 147.003px;
     height: 28.004px;
     border-radius: 15px;
     border: 2px solid #f09900;
     background: #ffb53d;
-    color: #fff;
     text-align: center;
     font-size: 14px;
-    font-style: normal;
+    margin-top: 18px;
+  }
+  > button {
+    width: 147.003px;
+    padding: 5px 0;
+    border-radius: 15px;
+    border: 2px solid #f09900;
+    background: #ffb53d;
+    text-align: center;
+    font-size: 14px;
+    margin: 29px 0;
     font-weight: 700;
-    line-height: 24px;
+    color: #fff;
   }
 
   ${media.mobile} {
@@ -161,6 +169,8 @@ export const StoreSortDropDown = styled.ul<{ $isSelect: boolean }>`
     width: 100%;
     border: 2px solid #ff4949;
     border-width: 0 2px 2px 2px;
+    background: #f4f4f4;
+
     &:hover {
       background: #ff4949;
       color: #fff;
@@ -170,6 +180,7 @@ export const StoreSortDropDown = styled.ul<{ $isSelect: boolean }>`
     border-radius: 15px 15px 0px 0px;
     border: none;
     color: #fff;
+    background: #ff4949;
   }
   > :last-child {
     border-top: none;
@@ -198,12 +209,12 @@ export const CosmeticItemFooter = styled.div`
   gap: 3px;
 
   > label {
-    width: 73px;
     height: 20px;
-    padding: 2px 25px;
+    padding: 2px 10px;
     border-radius: 15px;
     border: 2px solid #a5ecf0;
     background: #00d9e9;
+    white-space: nowrap;
   }
 
   > img {
@@ -227,12 +238,65 @@ export const CosmeticItemCheckOutWrapper = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  > div {
-    width: 165px;
-    height: 184px;
-    border-radius: 10px;
-    background: #bbf0f3;
+  gap: 12px;
+`;
+
+export const CheckOutDetailBox = styled.div`
+  width: 165px;
+  height: 184px;
+  border-radius: 10px;
+  background: #bbf0f3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+  gap: 10px;
+
+  > p {
+    font-size: 12px;
     display: flex;
-    flex-direction: column;
+    width: 121px;
+    height: 23px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 15px;
+    border: 2px solid #ff4949;
+    background: #f4f4f4;
+    color: #ff4949;
+    font-weight: 700;
+  }
+  > li {
+    width: 144px;
+  }
+  > span {
+  }
+`;
+
+export const ConfirmButtonListWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+  > button {
+    display: flex;
+    width: 64px;
+    height: 20px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  > button:nth-child(1) {
+    border: 2px solid #e8080c;
+    background: #ff4949;
+  }
+  > button:nth-child(2) {
+    border: 2px solid #01f152;
+    background: #49ff87;
   }
 `;

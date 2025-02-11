@@ -14,24 +14,45 @@ interface ItemContainerProps {
 }
 
 function ItemContainer({ cosmeticItem }: ItemContainerProps) {
-  const [currentPage, setCurrentPage] = useState<number>();
-  const { addCosmeticItems, isMyItemsVisible, addEquippedItem } =
+  const { addCosmeticItems, isMyItemsVisible, toggleEquippedItem } =
     useCosmeticItemStore();
+
+  const [selectedItem, setSelectedItem] = useState<CosmeticItem | null>(null); // 선택된 아이템
+  const [currentPage, setCurrentPage] = useState<number>();
   const { Modal, isShow, openModal, closeModal } = useModal();
-  const [] = useState();
 
   return (
     <>
       <Modal isShow={isShow} outSideClickCallback={closeModal}>
-        <CosmeticItemCheckOut></CosmeticItemCheckOut>
+        <CosmeticItemCheckOut>
+          <CosmeticItemCheckOut.DetailBox>
+            <>
+              {selectedItem && (
+                <CosmeticItemCheckOut.StoreItem
+                  name={selectedItem.name}
+                  image={selectedItem.image}
+                  price={selectedItem.price}
+                />
+              )}
+              <p>구매할래?</p>
+            </>
+          </CosmeticItemCheckOut.DetailBox>
+          <CosmeticItemCheckOut.ConfirmButtonList
+            onAccept={() => {}}
+            onReject={() => {}}
+          />
+        </CosmeticItemCheckOut>
       </Modal>
       <S.ItemContainer>
         {cosmeticItem.map(item => (
           <StoreItem
             key={item.id}
-            onClick={() => {
-              addEquippedItem(item.mainCategoryId, item.image);
-            }}
+            onClick={() =>
+              toggleEquippedItem(
+                item.subCategoryId ?? item.mainCategoryId,
+                item.image
+              )
+            }
           >
             <StoreItem.Header name={item.name} />
             <StoreItem.Image image={item.image} />
@@ -40,13 +61,24 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
                 <EquipButton>장착</EquipButton>
               ) : (
                 <>
-                  <label>{item.price}</label>
+                  <label>{item.price} Point</label>
                   <img
                     src={getImageUrl('')}
                     alt="장바구니넣기"
-                    onClick={() => addCosmeticItems(item)}
+                    onClick={e => {
+                      e.stopPropagation();
+                      addCosmeticItems(item);
+                    }}
                   />
-                  <img src={getImageUrl('')} alt="구매" onClick={openModal} />
+                  <img
+                    src={getImageUrl('')}
+                    alt="구매"
+                    onClick={e => {
+                      setSelectedItem(item);
+                      e.stopPropagation();
+                      openModal();
+                    }}
+                  />
                 </>
               )}
             </StoreItem.Footer>

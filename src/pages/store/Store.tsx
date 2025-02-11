@@ -7,8 +7,8 @@ import ItemContainer from '@features/store/ui/ItemContainer';
 
 import { useToggle } from '@modern-kit/react';
 import {
-  ACCESSPRIES_OPTIONS,
-  BUTTION_LIST,
+  ACCESSORIES_OPTIONS,
+  BUTTON_LIST,
   CLOTHES_OPTIONS,
 } from '@/features/store/constants';
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
@@ -39,8 +39,8 @@ export default function Store() {
         <S.StoreItemListSection>
           <S.FilterListContainer>
             <StoreSortBar items={CLOTHES_OPTIONS} />
-            <StoreSortBar items={ACCESSPRIES_OPTIONS} />
-            {BUTTION_LIST.map(item => (
+            <StoreSortBar items={ACCESSORIES_OPTIONS} />
+            {BUTTON_LIST.map(item => (
               <S.FilterButton
                 key={item.label}
                 onClick={() => setQuery(item.query)}

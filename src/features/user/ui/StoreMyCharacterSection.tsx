@@ -9,8 +9,10 @@ import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 
 export default function StoreMyCharacterSection() {
   const { Modal, isShow, openModal, closeModal } = useModal();
-  const { mutate: resetEquippedItems } = useUserItemsQuery.resetEquippedItems();
-  const { isMyItemsVisible, toggleIsMyItemsVisible } = useCosmeticItemStore();
+  const { mutate: resetEquippedItemMutate } =
+    useUserItemsQuery.resetEquippedItems();
+  const { isMyItemsVisible, toggleIsMyItemsVisible, resetEquippedItem } =
+    useCosmeticItemStore();
 
   return (
     <>
@@ -30,7 +32,10 @@ export default function StoreMyCharacterSection() {
           <StoreButton
             $backgroundColor="#FF4949"
             $borderColor="#E8080C"
-            onClick={() => resetEquippedItems()}
+            onClick={() => {
+              resetEquippedItemMutate();
+              resetEquippedItem();
+            }}
           >
             초기화
           </StoreButton>

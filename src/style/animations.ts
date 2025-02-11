@@ -55,6 +55,6 @@ export const animations = {
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1); 
+    transform: translate(-50%, -50%) scale(1);
   }`,
 } as const;

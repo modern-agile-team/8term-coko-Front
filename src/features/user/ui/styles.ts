@@ -53,8 +53,8 @@ export const BadgeListItem = styled.li`
 `;
 //추후에 canvas 태그 등으로 변경
 export const MyCharacterImage = styled.img`
-  width: 171px;
-  height: 138px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   z-index: 1;
 `;
@@ -62,29 +62,45 @@ export const MyCharacterImage = styled.img`
 export const MyCharacterBox = styled.div`
   position: relative;
   width: 170px;
+  height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-export const ItemImageHead = styled.img`
-  position: absolute;
-  z-index: 10;
-  top: -20px;
+export const CharacterEquipContainer = styled.div`
+  width: 100%;
+  display: flex;
+  > img {
+    position: absolute;
+    width: 125px;
+    object-fit: contain;
+    z-index: 30;
+  }
 `;
 
-export const ItemImageBody = styled.img`
-  position: absolute;
-  z-index: 10;
-  top: 70px;
-  right: 19px;
+export const CharacterHat = styled.img`
+  left: 15px;
+  top: -15px;
 `;
 
-export const ItemImageAccessori = styled.img`
-  position: absolute;
-  z-index: 20;
-  top: 18px;
-  right: 17px;
+export const CharacterGlasses = styled.img`
+  left: 25px;
+  top: 30px;
+`;
+
+export const CharacterBeard = styled.img`
+  left: 25px;
+  top: 30px;
+`;
+
+export const CharacterSetup = styled.img`
+  left: 25px;
+  top: 72px;
+`;
+
+export const CharacterShoes = styled.img`
+  left: 25px;
+  top: 125px;
 `;
 
 export const ProfileBox = styled.span<{ $isIcon: boolean }>`

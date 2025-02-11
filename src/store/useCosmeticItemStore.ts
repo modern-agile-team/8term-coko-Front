@@ -12,7 +12,8 @@ interface Actions {
   setQuery: (query: State['query']) => void;
   addCosmeticItems: (cosmeticItem: CosmeticItem) => void;
   removeCosmeticItemById: (id: number) => void;
-  addEquippedItem: (id: number, image: string) => void;
+  toggleEquippedItem: (id: number, image: string) => void;
+  resetEquippedItem: () => void;
 }
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
@@ -44,11 +45,18 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
         item => item.id !== id
       ),
     })),
-  addEquippedItem: (id, image) =>
-    set(state => ({
-      equippedItems: {
-        ...state.equippedItems,
-        [id]: { image }, // 기존 아이템에 새로운 아이템 추가
-      },
-    })),
+  toggleEquippedItem: (id, image) =>
+    set(state => {
+      const { [id]: existingItem, ...restItems } = state.equippedItems;
+
+      return {
+        equippedItems: existingItem
+          ? restItems
+          : {
+              ...state.equippedItems,
+              [id]: { image },
+            },
+      };
+    }),
+  resetEquippedItem: () => set(() => ({ equippedItems: {} })),
 }));

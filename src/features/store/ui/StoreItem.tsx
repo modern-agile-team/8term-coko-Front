@@ -9,12 +9,12 @@ import { PropsWithChildren } from 'react';
 export default function StoreItem({
   children,
   onClick,
-}: PropsWithChildren<{ onClick?: () => void }>) {
+}: PropsWithChildren<{ onClick?: React.MouseEventHandler }>) {
   return <CosmeticItemLi onClick={onClick}>{children}</CosmeticItemLi>;
 }
 interface StoreItemHeaderProps {
   name: string;
-  onRemove?: () => void;
+  onRemove?: React.MouseEventHandler;
 }
 StoreItem.Header = ({ name, onRemove }: StoreItemHeaderProps) => (
   <CosmeticItemHeader>
