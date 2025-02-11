@@ -1,11 +1,17 @@
 import { OverRayDiv } from '@/common/layout/styles';
 import { OverRayDivProps } from '@/common/types';
 import { PropsWithChildren, useEffect } from 'react';
+import { useOutsidePointerDown } from '@modern-kit/react';
 
+interface OverRayProps {
+  overRayStyle: OverRayDivProps;
+  outSideClickCallback?: () => void;
+}
 export default function OverRay({
   children,
   overRayStyle,
-}: PropsWithChildren<{ overRayStyle: OverRayDivProps }>) {
+  outSideClickCallback,
+}: PropsWithChildren<OverRayProps>) {
   useEffect(() => {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.offsetWidth;
@@ -19,8 +25,15 @@ export default function OverRay({
     };
   }, []);
 
+  const handleClick: React.MouseEventHandler<HTMLDivElement> = e => {
+    if (e.target === e.currentTarget && outSideClickCallback) {
+      outSideClickCallback();
+    }
+  };
+
   return (
     <OverRayDiv
+      onClick={handleClick}
       $backgroundColor={overRayStyle.$backgroundColor}
       $mixBlendMode={overRayStyle.$mixBlendMode}
     >

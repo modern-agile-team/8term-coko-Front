@@ -1,8 +1,10 @@
 export interface CosmeticItem {
   id: number;
   name: string;
-  cost: number;
+  price: number;
   image: string;
+  mainCategoryId: number;
+  subCategoryId: number | null;
   category: 'clothes' | 'accessories' | 'profile' | 'color';
 }
 

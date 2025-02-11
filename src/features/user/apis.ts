@@ -9,8 +9,9 @@ import type {
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
+import { CosmeticItem } from '@/features/store/types';
 
-const usersApis = {
+export const usersApis = {
   putQuizzesProgress: ({
     quizId,
     body,
@@ -93,4 +94,11 @@ const usersApis = {
   postAttendance: async () => await api.post('/users/me/attendance'),
 };
 
-export default usersApis;
+export const userItemsApi = {
+  getItems: async (): Promise<CosmeticItem[]> => {
+    const response = await api.get('/users/me/items');
+    return response.data;
+  },
+  putResetEquippedItems: async () =>
+    await api.put('/users/me/items/reset-equipment'),
+};

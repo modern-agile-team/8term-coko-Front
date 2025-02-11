@@ -7,37 +7,43 @@ const testItem: CosmeticItem[] = [
     id: 1,
     name: '해적 베레모',
     image: '해적-베레모.svg',
-    cost: 500,
+    price: 500,
     category: 'accessories',
+    mainCategoryId: 1,
+    subCategoryId: null,
   },
   {
     id: 2,
     name: '해적 의상',
     image: '해적-의상.svg',
-    cost: 1000,
+    price: 1000,
     category: 'clothes',
+    mainCategoryId: 2,
+    subCategoryId: null,
   },
   {
     id: 3,
     name: '해초의 습격',
     image: '해초의-습격.svg',
-    cost: 500,
+    price: 500,
     category: 'profile',
+    mainCategoryId: 3,
+    subCategoryId: null,
   },
   {
     id: 4,
     name: '해적 베레모',
     image: '해적-베레모.svg',
-    cost: 500,
+    price: 500,
     category: 'color',
+    mainCategoryId: 4,
+    subCategoryId: null,
   },
 ];
-
 interface CartListProps {
-  isMobileHidden?: boolean;
+  isMobileHidden: boolean;
 }
-
-export default function CartList({ isMobileHidden = true }: CartListProps) {
+export default function CartList({ isMobileHidden }: CartListProps) {
   return (
     <>
       <S.CartListWrapper $isMobileHidden={isMobileHidden}>

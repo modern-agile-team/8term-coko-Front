@@ -4,9 +4,7 @@ import * as S from './styles';
 import Header from '@common/layout/Header';
 import MenuBar from '@common/layout/MenuBar';
 import ItemContainer from '@features/store/ui/ItemContainer';
-import CartList from '@features/store/ui/CartList';
-import MyCharacter from '@features/user/ui/MyCharacter';
-import ProfileImage from '@features/user/ui/ProfileImage';
+
 import { useToggle } from '@modern-kit/react';
 import {
   ACCESSPRIES_OPTIONS,
@@ -16,10 +14,10 @@ import {
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
 import { contains } from '@modern-kit/utils';
 import { CosmeticItemOption } from '@/features/store/types';
+import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
 
 export default function Store() {
   const [itemQuery, setItemQuery] = useState<string>('all');
-  const [isCartOpne, toggleIsCartOpen] = useToggle(true);
   const [isMyItem, toggleIsMyItem] = useToggle();
 
   const checkShouldClearLabel = (options: CosmeticItemOption[]) => {
@@ -37,40 +35,10 @@ export default function Store() {
         </globalS.LeftSection>
         <globalS.RightSection>
           <Header />
-          <CartList isMobileHidden={isCartOpne} />
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <S.MyCharacterSection>
-          <div>
-            <S.StoreButton
-              $backgroundColor="#49FF87"
-              $borderColor="#01F152"
-              onClick={toggleIsMyItem}
-            >
-              내가 구매한 아이템
-            </S.StoreButton>
-            <S.StoreButton $backgroundColor="#FF4949" $borderColor="#E8080C">
-              초기화
-            </S.StoreButton>
-          </div>
-          <div>
-            {itemQuery === 'profile' ? (
-              <ProfileImage isIcon={false} />
-            ) : (
-              <MyCharacter />
-            )}
-          </div>
-          <div>
-            <S.StoreButton
-              $backgroundColor="#FFB53D"
-              $borderColor="#F09900"
-              onClick={toggleIsCartOpen}
-            >
-              장바구니
-            </S.StoreButton>
-          </div>
-        </S.MyCharacterSection>
+        <StoreMyCharacterSection />
         <S.StoreItemListSection>
           <S.FilterListContainer>
             <StoreSortBar

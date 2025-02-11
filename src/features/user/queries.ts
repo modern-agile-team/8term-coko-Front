@@ -4,7 +4,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import usersApis from '@features/user/apis';
+import { userItemsApi, usersApis } from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
@@ -219,6 +219,14 @@ export const useUserAttendanceQuery = {
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
       },
+    });
+  },
+};
+
+export const useUserItemsQuery = {
+  resetEquippedItems: () => {
+    useMutation({
+      mutationFn: userItemsApi.putResetEquippedItems,
     });
   },
 };

@@ -146,6 +146,7 @@ export const PlaceLabel = styled.label`
 
 export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   position: absolute;
+  right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,6 +168,7 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
     left: 50%;
     transform: translateX(-50%);
     top: -50px;
+    right: 0px;
     display: ${({ $isMobileHidden }) => ($isMobileHidden ? 'none' : 'flex')};
   }
 `;
