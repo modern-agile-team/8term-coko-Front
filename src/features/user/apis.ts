@@ -99,6 +99,10 @@ export const userItemsApi = {
     const response = await api.get('/users/me/items');
     return response.data;
   },
-  putResetEquippedItems: async () =>
+  putResetEquippedItems: async (): Promise<void> =>
     await api.put('/users/me/items/reset-equipment'),
+  postPurchaseItem: async (params: { itemIds: number[] }): Promise<void> =>
+    await api.post('/users/me/items', params),
+  patchEquippedItems: async (): Promise<void> =>
+    await api.patch('/users/me/items'),
 };

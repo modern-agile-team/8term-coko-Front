@@ -5,6 +5,9 @@ import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 import { useMemo } from 'react';
 import useModal from '@/hooks/useModal';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
+import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import { isAxiosError } from 'axios';
+import toast from 'react-hot-toast';
 
 interface CartListProps {
   isMobileHidden: boolean;
@@ -12,10 +15,13 @@ interface CartListProps {
 export default function CartList({ isMobileHidden }: CartListProps) {
   const { selectedCosmeticItems, removeCosmeticItemById } =
     useCosmeticItemStore();
+
+  const { Modal, isShow, closeModal, openModal } = useModal();
+  const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
+
   const totalPoint = useMemo(() => {
     return selectedCosmeticItems.reduce((total, item) => total + item.price, 0);
   }, [selectedCosmeticItems]);
-  const { Modal, isShow, closeModal, openModal } = useModal();
 
   return (
     <>
@@ -28,8 +34,27 @@ export default function CartList({ isMobileHidden }: CartListProps) {
             </>
           </CosmeticItemCheckOut.DetailBox>
           <CosmeticItemCheckOut.ConfirmButtonList
-            onAccept={() => {}}
-            onReject={() => {}}
+            onAccept={() => {
+              purchaseItem(
+                {
+                  itemIds: selectedCosmeticItems.map(item => item.id),
+                },
+                {
+                  onSuccess: () => {
+                    toast.success('아이템 구매 성공!');
+                    closeModal();
+                  },
+                  onError: error => {
+                    if (isAxiosError(error)) {
+                      if (error.response?.status === 401) {
+                        toast.error('로그인이 필요한 작업입니다.');
+                      }
+                    }
+                  },
+                }
+              );
+            }}
+            onReject={closeModal}
           />
         </CosmeticItemCheckOut>
       </Modal>

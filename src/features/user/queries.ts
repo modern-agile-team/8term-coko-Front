@@ -37,6 +37,9 @@ export const userKeys = {
         ? ([...userKeys.progress.root(), { sectionId, partId }] as const)
         : userKeys.progress.root(),
   },
+  cosmeticItems: {
+    root: () => [...userKeys.me(), ' cosmeticItems'] as const,
+  },
 };
 
 export const useUserHpQuery = {
@@ -223,10 +226,25 @@ export const useUserAttendanceQuery = {
   },
 };
 
-export const useUserItemsQuery = {
+export const useUserCosmeticItemsQuery = {
+  getMyItems: (params: { isMyItemsVisible: boolean }) =>
+    useQuery({
+      queryKey: userKeys.cosmeticItems.root(),
+      queryFn: userItemsApi.getItems,
+      enabled: params.isMyItemsVisible,
+    }),
   resetEquippedItems: () => {
     return useMutation({
       mutationFn: userItemsApi.putResetEquippedItems,
+    });
+  },
+  purchaseItem: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: userItemsApi.postPurchaseItem,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.all });
+      },
     });
   },
 };

@@ -2,7 +2,7 @@ import CartList from '@/features/store/ui/CartList';
 import MyCharacter from '@/features/user/ui/MyCharacter';
 import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
 import useModal from './../../../hooks/useModal';
-import { useUserItemsQuery } from '@/features/user/queries';
+import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import { Link } from 'react-router-dom';
 import { SaveButton } from '@/features/user/ui/styles';
 import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
@@ -11,7 +11,7 @@ import ProfileImage from '@/features/user/ui/ProfileImage';
 export default function StoreMyCharacterSection() {
   const { Modal, isShow, openModal, closeModal } = useModal();
   const { mutate: resetEquippedItemMutate } =
-    useUserItemsQuery.resetEquippedItems();
+    useUserCosmeticItemsQuery.resetEquippedItems();
   const { isMyItemsVisible, toggleIsMyItemsVisible, resetEquippedItem, query } =
     useCosmeticItemStore();
 

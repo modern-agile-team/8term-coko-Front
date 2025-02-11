@@ -1,25 +1,21 @@
-import { useState } from 'react';
 import * as globalS from '@style/styles';
 import * as S from './styles';
 import Header from '@common/layout/Header';
 import MenuBar from '@common/layout/MenuBar';
 import ItemContainer from '@features/store/ui/ItemContainer';
-
-import { useToggle } from '@modern-kit/react';
+import { useUnmount } from '@modern-kit/react';
 import {
   ACCESSORIES_OPTIONS,
   BUTTON_LIST,
   CLOTHES_OPTIONS,
 } from '@/features/store/constants';
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
-
 import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
 import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
-import useUserStore from './../../store/useUserStore';
-import { isLoggedIn } from '@/features/user/service/authUtils';
 
 export default function Store() {
-  const { query, setQuery } = useCosmeticItemStore();
+  const { query, setQuery, resetEquippedItem } = useCosmeticItemStore();
+  useUnmount(resetEquippedItem);
 
   return (
     <>
@@ -27,14 +23,11 @@ export default function Store() {
         <globalS.LeftSection>
           <MenuBar />
         </globalS.LeftSection>
-
         <globalS.RightSection>
           <Header />
         </globalS.RightSection>
       </globalS.Wrapper>
-
       <globalS.Layout>
-        {}
         <StoreMyCharacterSection />
         <S.StoreItemListSection>
           <S.FilterListContainer>

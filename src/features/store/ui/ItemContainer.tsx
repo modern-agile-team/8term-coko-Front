@@ -8,57 +8,96 @@ import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 import { EquipButton } from '@/features/user/ui/styles';
 import useModal from '@/hooks/useModal';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
+import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import toast from 'react-hot-toast';
+import { isAxiosError } from 'axios';
 
 interface ItemContainerProps {
   cosmeticItem: CosmeticItem[];
 }
 
 function ItemContainer({ cosmeticItem }: ItemContainerProps) {
-  const { addCosmeticItems, isMyItemsVisible, toggleEquippedItem } =
-    useCosmeticItemStore();
+  const {
+    addCosmeticItems,
+    isMyItemsVisible,
+    toggleEquippedItem,
+    equippedItems,
+  } = useCosmeticItemStore();
 
-  const [selectedItem, setSelectedItem] = useState<CosmeticItem | null>(null); // 선택된 아이템
+  const [selectedItem, setSelectedItem] = useState<CosmeticItem | null>(null);
   const [currentPage, setCurrentPage] = useState<number>();
+
   const { Modal, isShow, openModal, closeModal } = useModal();
+  const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
+
+  const handleEquipPreview = (
+    e: React.MouseEvent<Element, MouseEvent>,
+    item: CosmeticItem
+  ) => {
+    if (isMyItemsVisible) {
+      if (e.currentTarget === e.target) {
+        toggleEquippedItem(
+          item.subCategoryId ?? item.mainCategoryId,
+          item.image
+        );
+      }
+      return;
+    }
+    toggleEquippedItem(item.subCategoryId ?? item.mainCategoryId, item.image);
+  };
 
   return (
     <>
       <Modal isShow={isShow} outSideClickCallback={closeModal}>
-        <CosmeticItemCheckOut>
-          <CosmeticItemCheckOut.DetailBox>
-            <>
-              {selectedItem && (
+        {selectedItem && (
+          <CosmeticItemCheckOut>
+            <CosmeticItemCheckOut.DetailBox>
+              <>
                 <CosmeticItemCheckOut.StoreItem
                   name={selectedItem.name}
                   image={selectedItem.image}
                   price={selectedItem.price}
                 />
-              )}
-              <p>구매할래?</p>
-            </>
-          </CosmeticItemCheckOut.DetailBox>
-          <CosmeticItemCheckOut.ConfirmButtonList
-            onAccept={() => {}}
-            onReject={() => {}}
-          />
-        </CosmeticItemCheckOut>
+
+                <p>구매할래?</p>
+              </>
+            </CosmeticItemCheckOut.DetailBox>
+            <CosmeticItemCheckOut.ConfirmButtonList
+              onAccept={() => {
+                purchaseItem(
+                  { itemIds: [selectedItem.id] },
+                  {
+                    onSuccess: () => {
+                      toast.success('아이템 구매 성공!');
+                      closeModal();
+                    },
+                    onError: error => {
+                      if (isAxiosError(error)) {
+                        if (error.response?.status === 401) {
+                          toast.error('로그인이 필요한 작업입니다.');
+                        }
+                      }
+                    },
+                  }
+                );
+              }}
+              onReject={closeModal}
+            />
+          </CosmeticItemCheckOut>
+        )}
       </Modal>
       <S.ItemContainer>
         {cosmeticItem.map(item => (
-          <StoreItem
-            key={item.id}
-            onClick={() =>
-              toggleEquippedItem(
-                item.subCategoryId ?? item.mainCategoryId,
-                item.image
-              )
-            }
-          >
+          <StoreItem key={item.id} onClick={e => handleEquipPreview(e, item)}>
             <StoreItem.Header name={item.name} />
             <StoreItem.Image image={item.image} />
             <StoreItem.Footer>
               {isMyItemsVisible ? (
-                <EquipButton>장착</EquipButton>
+                <EquipButton onClick={e => handleEquipPreview(e, item)}>
+                  {equippedItems[item.subCategoryId ?? item.mainCategoryId]
+                    ? '해제'
+                    : '장착'}
+                </EquipButton>
               ) : (
                 <>
                   <label>{item.price} Point</label>
