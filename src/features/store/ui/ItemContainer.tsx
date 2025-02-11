@@ -15,7 +15,7 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
     <>
       <S.ItemContainer>
         {cosmeticItem.map(item => (
-          <StoreItem key={item.id} {...item} />
+          <StoreItem key={item.id} cosmeticItem={item} isCartList={false} />
         ))}
       </S.ItemContainer>
       {/* 추후 하드코딩 수정 */}

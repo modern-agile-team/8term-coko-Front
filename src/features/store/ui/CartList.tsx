@@ -1,6 +1,7 @@
 import * as S from './styles';
 import StoreItem from './StoreItem';
 import type { CosmeticItem } from '@features/store/types';
+import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 
 const testItem: CosmeticItem[] = [
   {
@@ -44,13 +45,15 @@ interface CartListProps {
   isMobileHidden: boolean;
 }
 export default function CartList({ isMobileHidden }: CartListProps) {
+  const { selectedCosmeticItems } = useCosmeticItemStore();
+
   return (
     <>
       <S.CartListWrapper $isMobileHidden={isMobileHidden}>
         <S.CartLabel>장바구니</S.CartLabel>
         <S.CartListItemWrapper>
-          {testItem.map(item => (
-            <StoreItem key={item.id} {...item} />
+          {selectedCosmeticItems.map(item => (
+            <StoreItem key={item.id} cosmeticItem={item} isCartList />
           ))}
         </S.CartListItemWrapper>
         <S.PlaceLabel>총 1500포인트</S.PlaceLabel>

@@ -1,7 +1,7 @@
 import { media } from '@/style/media';
 import { css, styled } from 'styled-components';
 
-export const MyCharacterSection = styled.section<{ $isLoggedIn: boolean }>`
+export const MyCharacterSection = styled.section`
   display: flex;
   width: 683px;
   height: 199px;
@@ -48,30 +48,6 @@ export const MyCharacterSection = styled.section<{ $isLoggedIn: boolean }>`
       z-index: 100;
     }
   }
-  ${({ $isLoggedIn }) =>
-    !$isLoggedIn &&
-    css`
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-
-      > div {
-        filter: blur(10px);
-      }
-      > a {
-        position: absolute;
-        z-index: 100;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        display: block;
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-        border: 2px solid #ff4949;
-        background: #f4f4f4;
-        border-radius: 10px;
-      }
-    `}
 `;
 
 export const StoreItemListSection = styled.section`

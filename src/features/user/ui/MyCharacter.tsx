@@ -1,7 +1,10 @@
 import { getImageUrl } from '@utils/getImageUrl';
 import { MyCharacterImage } from './styles';
 import * as S from './styles';
+import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 export default function MyCharacter() {
+  const { selectedCosmeticItems } = useCosmeticItemStore();
+  console.log(selectedCosmeticItems);
   return (
     <>
       <S.MyCharacterBox>

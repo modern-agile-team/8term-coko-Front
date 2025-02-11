@@ -20,6 +20,7 @@ export const ItemContainer = styled.ul`
 `;
 
 export const StoreItem = styled.li`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,6 +35,10 @@ export const StoreItem = styled.li`
   line-height: 16px;
   letter-spacing: 0.2px;
   cursor: pointer;
+  span {
+    position: absolute;
+    right: 5px;
+  }
   > div {
     display: flex;
   }
@@ -61,15 +66,9 @@ export const ItemLabel = styled.label`
   font: inherit;
 `;
 
-export const ItemImage = styled.img<{ $category: CosmeticItem['category'] }>`
+export const ItemImage = styled.img`
   width: 125px;
   height: 70px;
-  ${({ $category }) =>
-    $category === 'profile' &&
-    css`
-      width: 160px;
-      height: 160px;
-    `}
 `;
 
 export const PaginationDiv = styled.div`

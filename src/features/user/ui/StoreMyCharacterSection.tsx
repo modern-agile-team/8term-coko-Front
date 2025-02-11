@@ -12,13 +12,14 @@ export default function StoreMyCharacterSection() {
   const { user } = useUserStore();
   const { Modal, isShow, openModal, closeModal } = useModal();
   const { mutate: resetEquippedItems } = useUserItemsQuery.resetEquippedItems();
+
   return (
     <>
       <Modal isShow={isShow} outSideClickCallback={closeModal}>
         <CartList isMobileHidden={false} />
       </Modal>
       <CartList isMobileHidden={true} />
-      <MyCharacterSection $isLoggedIn={isLoggedIn(user)}>
+      <MyCharacterSection>
         <div>
           <StoreButton $backgroundColor="#49FF87" $borderColor="#01F152">
             내가 구매한 아이템
