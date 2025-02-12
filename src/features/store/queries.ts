@@ -2,7 +2,7 @@ import { cosmeticItemApis } from '@/features/store/apis';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 const cosmeticItemKeys = {
-  all: ['CosmeticItem'] as const,
+  all: ['cosmeticItem'] as const,
 };
 
 export const useCosmeticItemQuery = {

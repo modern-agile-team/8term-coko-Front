@@ -234,14 +234,17 @@ export const useUserCosmeticItemsQuery = {
       queryFn: userItemsApi.getItems,
       enabled: params.isMyItemsVisible,
     }),
-  getEquippedItem: () =>
-    useQuery({
+  getEquippedItem: () => {
+    const { user } = useUserStore();
+    return useQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
       queryFn: userItemsApi.getItems,
+      enabled: isLoggedIn(user),
       select(equippedItems) {
         return equippedItems.filter(item => item.isEquipped);
       },
-    }),
+    });
+  },
   resetEquippedItems: () => {
     return useMutation({
       mutationFn: userItemsApi.putResetEquippedItems,
@@ -257,8 +260,14 @@ export const useUserCosmeticItemsQuery = {
     });
   },
   updateEquippedItems: () => {
+    const queryClient = useQueryClient();
     return useMutation({
       mutationFn: userItemsApi.patchEquippedItems,
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: userKeys.cosmeticItems.root(),
+        });
+      },
     });
   },
 };

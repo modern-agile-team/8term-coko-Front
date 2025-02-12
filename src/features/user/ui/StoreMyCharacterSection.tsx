@@ -3,23 +3,33 @@ import MyCharacter from '@/features/user/ui/MyCharacter';
 import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
 import useModal from './../../../hooks/useModal';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
-import { Link } from 'react-router-dom';
 import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 import ProfileImage from '@/features/user/ui/ProfileImage';
+import useUserStore from './../../../store/useUserStore';
+import { isLoggedIn } from '@/features/user/service/authUtils';
+import PreviewMyCharacter from '@/features/store/ui/PreviewMyCharacter';
+import PreViewProfileImage from '@/features/store/ui/PreviewMyProfileImage';
 
 export default function StoreMyCharacterSection() {
   const { Modal, isShow, openModal, closeModal } = useModal();
 
   const { mutate: resetEquippedItemMutate } =
     useUserCosmeticItemsQuery.resetEquippedItems();
+  const { user } = useUserStore();
 
-  const {
-    isMyItemsVisible,
-    toggleIsMyItemsVisible,
-    resetEquippedItem,
-    query,
-    equippedCosmeticItems,
-  } = useCosmeticItemStore();
+  const { toggleIsMyItemsVisible, resetEquippedItem, query, isMyItemsVisible } =
+    useCosmeticItemStore();
+
+  const renderCharacterPreview = () => {
+    if (query.mainCategoryId === 3) {
+      return isMyItemsVisible ? (
+        <ProfileImage isIcon={false} />
+      ) : (
+        <PreViewProfileImage />
+      );
+    }
+    return isMyItemsVisible ? <MyCharacter /> : <PreviewMyCharacter />;
+  };
 
   return (
     <>
@@ -29,13 +39,16 @@ export default function StoreMyCharacterSection() {
       <CartList isMobileHidden={true} />
       <MyCharacterSection>
         <div>
-          <StoreButton
-            $backgroundColor="#49FF87"
-            $borderColor="#01F152"
-            onClick={toggleIsMyItemsVisible}
-          >
-            내가 구매한 아이템
-          </StoreButton>
+          {isLoggedIn(user) && (
+            <StoreButton
+              $backgroundColor="#49FF87"
+              $borderColor="#01F152"
+              onClick={toggleIsMyItemsVisible}
+            >
+              내가 구매한 아이템
+            </StoreButton>
+          )}
+
           <StoreButton
             $backgroundColor="#FF4949"
             $borderColor="#E8080C"
@@ -47,13 +60,7 @@ export default function StoreMyCharacterSection() {
             초기화
           </StoreButton>
         </div>
-        <div>
-          {query.mainCategoryId === 3 ? (
-            <ProfileImage isIcon={false} />
-          ) : (
-            <MyCharacter />
-          )}
-        </div>
+        <div>{renderCharacterPreview()}</div>
         <div>
           <StoreButton
             $backgroundColor="#FFB53D"
@@ -63,7 +70,6 @@ export default function StoreMyCharacterSection() {
             장바구니
           </StoreButton>
         </div>
-        <Link to="/login">로그인 후 이용 가능합니다.</Link>
       </MyCharacterSection>
     </>
   );

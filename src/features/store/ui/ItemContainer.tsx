@@ -35,21 +35,13 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
     e: React.MouseEvent<Element, MouseEvent>,
     item: CosmeticItem
   ) => {
-    if (isMyItemsVisible) {
-      if (e.currentTarget === e.target) {
-        toggleEquippedCosmeticItems({
-          subOrMainCategoryid: item.subCategoryId ?? item.mainCategoryId,
-          image: item.image,
-          cosmeticItemId: item.id,
-        });
-      }
-      return;
+    if (!isMyItemsVisible) {
+      toggleEquippedCosmeticItems({
+        subOrMainCategoryid: item.subCategoryId ?? item.mainCategoryId,
+        image: item.image,
+        cosmeticItemId: item.id,
+      });
     }
-    toggleEquippedCosmeticItems({
-      subOrMainCategoryid: item.subCategoryId ?? item.mainCategoryId,
-      image: item.image,
-      cosmeticItemId: item.id,
-    });
   };
 
   return (
@@ -104,16 +96,13 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
             <StoreItem.Footer>
               {isMyItemsVisible ? (
                 <EquipButton
-                  onClick={e => {
-                    item.isEquipped
-                      ? updateEquippedItems({
-                          itemIds: [item.id],
-                          isEquipped: false,
-                        })
-                      : updateEquippedItems({
-                          itemIds: [item.id],
-                          isEquipped: true,
-                        });
+                  onClick={() => {
+                    if (item.isEquipped) {
+                      updateEquippedItems({
+                        itemIds: [item.id],
+                        isEquipped: !item.isEquipped,
+                      });
+                    }
                   }}
                 >
                   {item.isEquipped ? '해제' : '장착'}
