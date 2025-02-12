@@ -27,7 +27,6 @@ export default function PartNavContainer({
   // 스크롤 감지를 위한 Intersection Observer
   const { ref: targetRef } = useIntersectionObserver({
     // 무한 스크롤 트리거
-
     onIntersectStart: () => {
       if (hasNextPage && !isFetchingNextPage) {
         fetchNextPage();

@@ -159,29 +159,41 @@ export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
   {
     name: '키캡 버튼 설명2',
     id: 'keycap-button',
+    nextStep: '퀴즈 팝오버 설명1',
+    description: `버튼을 누르면 해당 파트에 맞는 말풍선이 뜨게 돼.`,
+  },
+  {
+    name: '퀴즈 팝오버 설명1',
+    id: 'quiz-popover',
     nextStep: '키캡 버튼 설명3',
+    description: `그러면 파트의 이름과 맞게.`,
+  },
+  {
+    name: '키캡 버튼 설명3',
+    id: 'keycap-button',
+    nextStep: '키캡 버튼 설명4',
     description: `버튼을 누르면 해당 파트에 맞는
     퀴즈를 풀 수 있는 화면으로 이동하게 돼!`,
   },
   {
-    name: '키캡 버튼 설명3',
+    name: '키캡 버튼 설명4',
     id: 'locked-keycap-button',
-    nextStep: '키캡 버튼 설명4',
+    nextStep: '키캡 버튼 설명5',
     description: `하지만 이렇게 버튼이
     잠겨있는 상태(LOCKED)라면`,
   },
   {
-    name: '키캡 버튼 설명4',
+    name: '키캡 버튼 설명5',
     id: 'keycap-button',
-    nextStep: '퀴즈 팝오버 설명',
+    nextStep: '퀴즈 팝오버 설명2',
     description: `꼭 이전의 파트를 풀어야 하니까
     이 점 유의해줘!`,
   },
   {
-    name: '퀴즈 팝오버 설명',
+    name: '퀴즈 팝오버 설명2',
     id: 'quiz-popover',
     nextStep: '',
-    description: `이제 본격적으로 모험을 떠나기 전에 퀴즈를 푸는 방법에 대해 알아보자!`,
+    description: `그럼 이제 이 버튼을 눌러 퀴즈를 푸는 방법에 대해 알아보자!`,
   },
 ] as const;
 
@@ -193,7 +205,7 @@ export const LEARN_TUTORIAL_SECTIONS: Section[] = [
       {
         id: 10,
         sectionId: 2,
-        name: '튜토리얼 퀴즈!',
+        name: '튜토리얼!',
         status: 'STARTED',
       },
       {

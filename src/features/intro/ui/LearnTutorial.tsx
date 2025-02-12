@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { LEARN_TUTORIAL_STEP } from '@/features/intro/constants';
-import FocusedItem from '@/features/intro/ui/FocusedItem';
-import useFunnel from '@/hooks/useFunnel';
+import { LEARN_TUTORIAL_STEP } from '@features/intro/constants';
+import FocusedItem from '@features/intro/ui/FocusedItem';
+import useFunnel from '@hooks/useFunnel';
 
 interface LearnTutorialProps {
   onStepChange?: (step: string) => void;

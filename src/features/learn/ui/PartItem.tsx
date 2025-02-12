@@ -1,6 +1,6 @@
 import * as S from '@features/learn/ui/styles';
 import { useRef, useEffect, memo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useElementRect } from '@/features/intro/service/hooks';
 import usePopover from '@hooks/usePopover';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
@@ -26,6 +26,7 @@ export default memo(function PartItem({
   onFetchProgress,
 }: PartItemProps) {
   const navigate = useNavigate();
+  const location = useLocation();
   const isLocked = part.status === 'LOCKED';
 
   const keyboardButtonWrapperRef = useRef<HTMLDivElement>(null);
@@ -42,7 +43,7 @@ export default memo(function PartItem({
     }
   }, [tutorialStep, globalIndex, openPopover, closePopover]);
 
-  // 마지막 버튼인 경우, 팝오버(말풍선) 열림/닫힘 상태가 바뀔 때만 상위에 전달
+  // 마지막 버튼인 경우, 팝오버(말풍선) 열림/닫힘 상태가 바뀔 때 상위에 전달
   useEffect(() => {
     if (isLastButton) {
       onToggleBubble(isOpen);
@@ -73,6 +74,10 @@ export default memo(function PartItem({
       ? `키캡${(globalIndex % 4) + 1}-선택.svg`
       : `키캡${(globalIndex % 4) + 1}.svg`
   );
+
+  const getQuizPath = (currentPath: string) => {
+    return currentPath === '/learn/tutorial' ? '/quiz/tutorial' : '/quiz';
+  };
 
   const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
   const { getClientRectRefCallback } = useElementRect();
@@ -115,9 +120,7 @@ export default memo(function PartItem({
             if (globalIndex === 0) {
               getClientRectRefCallback(el);
             }
-            if (popoverRef.current) {
-              popoverRef.current = el;
-            }
+            popoverRef.current = el;
           }}
           onClick={e => e.stopPropagation()}
           $bgColor={COLORS[globalIndex % 4]}
@@ -125,7 +128,8 @@ export default memo(function PartItem({
           <h3>{part.name}</h3>
           <S.GoToQuizButton
             onClick={() => {
-              navigate('/quiz', {
+              const targetPath = getQuizPath(location.pathname);
+              navigate(targetPath, {
                 state: { partId: part.id, partStatus: part.status },
               });
             }}
