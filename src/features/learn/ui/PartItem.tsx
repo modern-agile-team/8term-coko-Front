@@ -1,7 +1,7 @@
 import * as S from '@features/learn/ui/styles';
 import { useRef, useEffect, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useElementRect } from '@features/intro/service/hooks';
+import { useElementRect } from '@/features/intro/service/hooks';
 import usePopover from '@hooks/usePopover';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
@@ -12,6 +12,7 @@ interface PartItemProps {
   part: Part;
   globalIndex: number;
   isLastButton: boolean;
+  tutorialStep?: string;
   onToggleBubble: (isOpen: boolean) => void;
   onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
 }
@@ -20,6 +21,7 @@ export default memo(function PartItem({
   part,
   globalIndex,
   isLastButton,
+  tutorialStep,
   onToggleBubble,
   onFetchProgress,
 }: PartItemProps) {
@@ -27,9 +29,18 @@ export default memo(function PartItem({
   const isLocked = part.status === 'LOCKED';
 
   const keyboardButtonWrapperRef = useRef<HTMLDivElement>(null);
-  const { isOpen, togglePopover, popoverRef } = usePopover({
-    excludeRefs: [keyboardButtonWrapperRef],
-  });
+  const { isOpen, openPopover, closePopover, togglePopover, popoverRef } =
+    usePopover({
+      excludeRefs: [keyboardButtonWrapperRef],
+    });
+
+  useEffect(() => {
+    if (tutorialStep === '퀴즈 팝오버 설명' && globalIndex === 0) {
+      openPopover();
+    } else {
+      closePopover();
+    }
+  }, [tutorialStep, globalIndex, openPopover, closePopover]);
 
   // 마지막 버튼인 경우, 팝오버(말풍선) 열림/닫힘 상태가 바뀔 때만 상위에 전달
   useEffect(() => {
@@ -64,7 +75,6 @@ export default memo(function PartItem({
   );
 
   const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
-
   const { getClientRectRefCallback } = useElementRect();
 
   return (
@@ -78,7 +88,7 @@ export default memo(function PartItem({
 
       <S.KeyboardButton
         id="keycap-button"
-        ref={getClientRectRefCallback}
+        ref={globalIndex === 0 ? getClientRectRefCallback : null}
         onClick={handleButtonClick}
         $isLocked={isLocked}
         disabled={isLocked}

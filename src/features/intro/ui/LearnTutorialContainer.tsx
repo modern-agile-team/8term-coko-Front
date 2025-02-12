@@ -3,6 +3,7 @@ import * as S from '@/pages/learn/styles';
 import { useState } from 'react';
 import { useTimeout } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
+import { useNavigate } from 'react-router-dom';
 import { useElementRect } from '@/features/intro/service/hooks';
 import { SectionGroup } from '@/pages/learn/styles';
 import MenuBar from '@common/layout/MenuBar';
@@ -14,13 +15,25 @@ import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/learn/ui/PartNavContainer';
 import { PROGRESS_COLORS } from '@features/learn/constants';
 import LearnTutorial from '@features/intro/ui/LearnTutorial';
-import { LEARN_TUTORIAL_SECTIONS } from '@features/intro/constants';
+import { LEARN_TUTORIAL_SECTIONS } from '@/features/intro/constants';
 
 function LearnTutorialContainer() {
   const [showTutorial, setShowTutorial] = useState(false);
+  const [currentStep, setCurrentStep] = useState('');
+  const navigate = useNavigate();
+
   const { getClientRectRefCallback } = useElementRect();
 
   useTimeout(() => setShowTutorial(true), 100);
+
+  // LearnTutorial에서 step이 바뀔 때 호출될 함수
+  const handleStepChange = (step: string) => {
+    setCurrentStep(step);
+
+    if (step === '') {
+      navigate('/quiz/tutorial');
+    }
+  };
 
   return (
     <>
@@ -72,10 +85,12 @@ function LearnTutorialContainer() {
             hasNextPage={false}
             isFetchingNextPage={false}
             onFetchProgress={noop}
+            tutorialStep={currentStep}
           />
         </SectionGroup>
       </globalS.Layout>
-      {showTutorial && <LearnTutorial />}
+
+      {showTutorial && <LearnTutorial onStepChange={handleStepChange} />}
     </>
   );
 }

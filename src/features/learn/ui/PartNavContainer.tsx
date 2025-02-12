@@ -2,7 +2,6 @@ import * as S from '@features/learn/ui/styles';
 import PartItem from '@features/learn/ui/PartItem';
 import { useState, useMemo, useCallback } from 'react';
 import { useIntersectionObserver } from '@modern-kit/react';
-import { Link } from 'react-router-dom';
 import { LoadingSpinner } from '@common/layout/styles';
 import type { Section, Part } from '@features/learn/types';
 
@@ -12,6 +11,7 @@ interface PartNavContainerProps {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
+  tutorialStep?: string;
 }
 
 export default function PartNavContainer({
@@ -20,12 +20,14 @@ export default function PartNavContainer({
   hasNextPage,
   isFetchingNextPage,
   onFetchProgress,
+  tutorialStep,
 }: PartNavContainerProps) {
   const [isActiveBubble, setIsActiveBubble] = useState(false);
 
   // 스크롤 감지를 위한 Intersection Observer
   const { ref: targetRef } = useIntersectionObserver({
     // 무한 스크롤 트리거
+
     onIntersectStart: () => {
       if (hasNextPage && !isFetchingNextPage) {
         fetchNextPage();
@@ -47,7 +49,7 @@ export default function PartNavContainer({
     return counts;
   }, [sections]);
 
-  // 말풍선 상태를 자식에게 전달해 업데이트 받기
+  // 말풍선(팝오버) 열림/닫힘 상태를 부모(PartNavContainer)에 저장
   const handleToggleBubble = useCallback((isOpen: boolean) => {
     setIsActiveBubble(isOpen);
   }, []);
@@ -76,6 +78,7 @@ export default function PartNavContainer({
                     isLastButton={isLastButton}
                     onToggleBubble={handleToggleBubble}
                     onFetchProgress={onFetchProgress}
+                    tutorialStep={tutorialStep}
                   />
                 );
               })}

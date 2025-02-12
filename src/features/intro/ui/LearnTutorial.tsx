@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { LEARN_TUTORIAL_STEP } from '@/features/intro/constants';
 import FocusedItem from '@/features/intro/ui/FocusedItem';
 import useFunnel from '@/hooks/useFunnel';
 
-export default function LearnTutorial() {
-  const { Funnel, setStep, step } = useFunnel('전체 & 파트 진행도 설명');
-  const navigate = useNavigate();
+interface LearnTutorialProps {
+  onStepChange?: (step: string) => void;
+}
 
+export default function LearnTutorial({ onStepChange }: LearnTutorialProps) {
+  const { Funnel, setStep, step } = useFunnel('전체 & 파트 진행도 설명');
+
+  // step이 바뀔 때마다 상위로 전달
   useEffect(() => {
-    if (step === '') {
-      navigate('/quiz/tutorial');
-    }
-  }, [step]);
+    onStepChange?.(step);
+  }, [step, onStepChange]);
 
   return (
     <Funnel>
