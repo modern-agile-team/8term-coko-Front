@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { lazy } from 'react';
+import { lazy, useState, useEffect } from 'react';
 import NotFound from '@features/error/ui/NotFound';
 import QuizTutorialPage from '@/pages/quiz/tutorial/QuizTutorialPage';
 import LearnTutorialPage from '@/pages/learn/tutorial/LearnTutorialPage';
@@ -14,20 +14,28 @@ const Quiz = lazy(() => import('@/pages/quiz/Quiz'));
 const Store = lazy(() => import('@/pages/store/Store'));
 const Profile = lazy(() => import('@/pages/profile/Profile'));
 
-const getInitialRoute = () => {
-  const visited = localStorage.getItem('visited');
+const InitialRouteRedirect = () => {
+  const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
-  if (!visited) {
-    localStorage.setItem('visited', 'true');
-    return '/intro';
-  }
-  return '/learn';
+  useEffect(() => {
+    const visited = localStorage.getItem('visited');
+    if (!visited) {
+      localStorage.setItem('visited', 'true');
+      setRedirectTo('/intro');
+    } else {
+      setRedirectTo('/learn');
+    }
+  }, []);
+
+  if (!redirectTo) return null;
+
+  return <Navigate to={redirectTo} replace />;
 };
 
 export default function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to={getInitialRoute()} />} />
+      <Route path="/" element={<InitialRouteRedirect />} />
       <Route path="/learn" element={<Learn />} />
       <Route path="/quest" element={<Quest />} />
       <Route path="/ranking" element={<Ranking />} />
