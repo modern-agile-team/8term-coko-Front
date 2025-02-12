@@ -2,9 +2,12 @@ import { getImageUrl } from '@utils/getImageUrl';
 import { MyCharacterImage } from './styles';
 import * as S from './styles';
 import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 
 export default function MyCharacter() {
   const { equippedCosmeticItems } = useCosmeticItemStore();
+  const { data } = useUserCosmeticItemsQuery.getEquippedItem();
+  console.log(data);
 
   return (
     <>

@@ -39,6 +39,7 @@ export const userKeys = {
   },
   cosmeticItems: {
     root: () => [...userKeys.me(), ' cosmeticItems'] as const,
+    equipped: () => [...userKeys.cosmeticItems.root(), 'equipped'] as const,
   },
 };
 
@@ -232,6 +233,14 @@ export const useUserCosmeticItemsQuery = {
       queryKey: userKeys.cosmeticItems.root(),
       queryFn: userItemsApi.getItems,
       enabled: params.isMyItemsVisible,
+    }),
+  getEquippedItem: () =>
+    useQuery({
+      queryKey: userKeys.cosmeticItems.equipped(),
+      queryFn: userItemsApi.getItems,
+      select(equippedItems) {
+        return equippedItems.filter(item => item.isEquipped);
+      },
     }),
   resetEquippedItems: () => {
     return useMutation({
