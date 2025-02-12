@@ -35,8 +35,14 @@ export default memo(function PartItem({
       excludeRefs: [keyboardButtonWrapperRef],
     });
 
+  const tutorialSteps = new Set([
+    '퀴즈 팝오버 설명1',
+    '퀴즈 팝오버 설명2',
+    '퀴즈 팝오버 설명3',
+  ]);
+
   useEffect(() => {
-    if (tutorialStep === '퀴즈 팝오버 설명' && globalIndex === 0) {
+    if (tutorialStep && tutorialSteps.has(tutorialStep) && globalIndex === 0) {
       openPopover();
     } else {
       closePopover();
