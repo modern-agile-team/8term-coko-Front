@@ -1,4 +1,5 @@
 import { SkeletonBase } from '@/common/layout/styles';
+import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 import { useCosmeticItemQuery } from '@/features/store/queries';
 import { CosmeticItem } from '@/features/store/types';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
@@ -23,13 +24,13 @@ const withCosmeticItem = <P extends object>(
       useUserCosmeticItemsQuery.getMyItems({ isMyItemsVisible });
 
     if (isLoading || userIsLoading) {
-      return <SkeletonBase width="100px" height="100px" />;
+      return <SkeletonBase width="90%" height="80%" />;
     }
     const finalData =
       isMyItemsVisible && userCosmeticItem ? userCosmeticItem : cosmeticItem;
 
     if (!finalData) {
-      return <SkeletonBase />;
+      return <SkeletonBase width="90%" height="80%" />;
     }
 
     return <WrappedComponent {...(rest as P)} cosmeticItem={finalData} />;

@@ -6,6 +6,7 @@ export interface CosmeticItem {
   mainCategoryId: number;
   subCategoryId: number | null;
   category: 'clothes' | 'accessories' | 'profile' | 'color';
+  isEquipped?: boolean;
 }
 
 export type CosmeticItemOption = {

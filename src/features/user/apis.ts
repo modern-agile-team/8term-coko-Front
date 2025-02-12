@@ -103,6 +103,10 @@ export const userItemsApi = {
     await api.put('/users/me/items/reset-equipment'),
   postPurchaseItem: async (params: { itemIds: number[] }): Promise<void> =>
     await api.post('/users/me/items', params),
-  patchEquippedItems: async (): Promise<void> =>
-    await api.patch('/users/me/items'),
+  patchEquippedItems: async (params: {
+    itemIds: number[];
+    isEquipped: boolean;
+  }): Promise<void> => {
+    return await api.patch('/users/me/items', params);
+  },
 };

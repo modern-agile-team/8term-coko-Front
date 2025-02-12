@@ -72,20 +72,19 @@ export const CharacterEquipContainer = styled.div`
   display: flex;
   > img {
     position: absolute;
-    width: 125px;
     object-fit: contain;
     z-index: 30;
   }
 `;
 
 export const CharacterHat = styled.img`
-  left: 15px;
-  top: -15px;
+  left: 25px;
+  top: -5px;
 `;
 
 export const CharacterGlasses = styled.img`
-  left: 25px;
-  top: 30px;
+  left: 27px;
+  top: 20px;
 `;
 
 export const CharacterBeard = styled.img`

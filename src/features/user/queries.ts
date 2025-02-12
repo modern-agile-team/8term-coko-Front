@@ -247,4 +247,9 @@ export const useUserCosmeticItemsQuery = {
       },
     });
   },
+  updateEquippedItems: () => {
+    return useMutation({
+      mutationFn: userItemsApi.patchEquippedItems,
+    });
+  },
 };

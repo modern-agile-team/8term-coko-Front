@@ -12,6 +12,7 @@ import {
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
 import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
 import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 
 export default function Store() {
   const { query, setQuery, resetEquippedItem } = useCosmeticItemStore();
@@ -44,7 +45,9 @@ export default function Store() {
             ))}
           </S.FilterListContainer>
           <S.RedLine />
-          <ItemContainer />
+          <QueryErrorBoundary>
+            <ItemContainer />
+          </QueryErrorBoundary>
         </S.StoreItemListSection>
       </globalS.Layout>
     </>

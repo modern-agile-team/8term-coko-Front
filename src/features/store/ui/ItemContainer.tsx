@@ -18,10 +18,9 @@ interface ItemContainerProps {
 
 function ItemContainer({ cosmeticItem }: ItemContainerProps) {
   const {
-    addCosmeticItems,
+    cartListAddCosmeticItems,
     isMyItemsVisible,
-    toggleEquippedItem,
-    equippedItems,
+    toggleEquippedCosmeticItems,
   } = useCosmeticItemStore();
 
   const [selectedItem, setSelectedItem] = useState<CosmeticItem | null>(null);
@@ -29,6 +28,8 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
 
   const { Modal, isShow, openModal, closeModal } = useModal();
   const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
+  const { mutate: updateEquippedItems } =
+    useUserCosmeticItemsQuery.updateEquippedItems();
 
   const handleEquipPreview = (
     e: React.MouseEvent<Element, MouseEvent>,
@@ -36,14 +37,19 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
   ) => {
     if (isMyItemsVisible) {
       if (e.currentTarget === e.target) {
-        toggleEquippedItem(
-          item.subCategoryId ?? item.mainCategoryId,
-          item.image
-        );
+        toggleEquippedCosmeticItems({
+          subOrMainCategoryid: item.subCategoryId ?? item.mainCategoryId,
+          image: item.image,
+          cosmeticItemId: item.id,
+        });
       }
       return;
     }
-    toggleEquippedItem(item.subCategoryId ?? item.mainCategoryId, item.image);
+    toggleEquippedCosmeticItems({
+      subOrMainCategoryid: item.subCategoryId ?? item.mainCategoryId,
+      image: item.image,
+      cosmeticItemId: item.id,
+    });
   };
 
   return (
@@ -76,8 +82,12 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
                         if (error.response?.status === 401) {
                           toast.error('로그인이 필요한 작업입니다.');
                         }
+                        if (error.response?.status === 400) {
+                          toast.error('포인트가 부족해요!');
+                        }
                       }
                     },
+                    onSettled: () => closeModal(),
                   }
                 );
               }}
@@ -93,10 +103,20 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
             <StoreItem.Image image={item.image} />
             <StoreItem.Footer>
               {isMyItemsVisible ? (
-                <EquipButton onClick={e => handleEquipPreview(e, item)}>
-                  {equippedItems[item.subCategoryId ?? item.mainCategoryId]
-                    ? '해제'
-                    : '장착'}
+                <EquipButton
+                  onClick={e => {
+                    item.isEquipped
+                      ? updateEquippedItems({
+                          itemIds: [item.id],
+                          isEquipped: false,
+                        })
+                      : updateEquippedItems({
+                          itemIds: [item.id],
+                          isEquipped: true,
+                        });
+                  }}
+                >
+                  {item.isEquipped ? '해제' : '장착'}
                 </EquipButton>
               ) : (
                 <>
@@ -106,7 +126,7 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
                     alt="장바구니넣기"
                     onClick={e => {
                       e.stopPropagation();
-                      addCosmeticItems(item);
+                      cartListAddCosmeticItems(item);
                     }}
                   />
                   <img

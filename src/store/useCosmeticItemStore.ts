@@ -4,36 +4,47 @@ import { create } from 'zustand';
 interface State {
   isMyItemsVisible: boolean;
   query: CosmeticItemOption['query'];
-  selectedCosmeticItems: CosmeticItem[];
-  equippedItems: Record<number, { image: string }>;
+  cartListCosmeticItems: CosmeticItem[];
+  equippedCosmeticItems: Record<
+    number,
+    { image: string; cosmeticItemId: number }
+  >;
 }
 interface Actions {
   toggleIsMyItemsVisible: () => void;
   setQuery: (query: State['query']) => void;
-  addCosmeticItems: (cosmeticItem: CosmeticItem) => void;
+  cartListAddCosmeticItems: (cosmeticItem: CosmeticItem) => void;
   removeCosmeticItemById: (id: number) => void;
-  toggleEquippedItem: (id: number, image: string) => void;
+  toggleEquippedCosmeticItems: ({
+    subOrMainCategoryid,
+    image,
+    cosmeticItemId,
+  }: {
+    subOrMainCategoryid: number;
+    image: string;
+    cosmeticItemId: number;
+  }) => void;
   resetEquippedItem: () => void;
 }
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
   isMyItemsVisible: false,
   query: { mainCategoryId: 1, subCategoryId: null },
-  selectedCosmeticItems: [],
-  equippedItems: {},
+  cartListCosmeticItems: [],
+  equippedCosmeticItems: {},
 
   toggleIsMyItemsVisible: () =>
     set(state => ({ isMyItemsVisible: !state.isMyItemsVisible })),
   setQuery: query => set(() => ({ query })),
-  addCosmeticItems: cosmeticItem =>
+  cartListAddCosmeticItems: cosmeticItem =>
     set(prev => {
-      const isDuplicate = prev.selectedCosmeticItems.some(
+      const isDuplicate = prev.cartListCosmeticItems.some(
         item => item.id === cosmeticItem.id
       );
 
       if (!isDuplicate) {
         return {
-          selectedCosmeticItems: [...prev.selectedCosmeticItems, cosmeticItem],
+          cartListCosmeticItems: [...prev.cartListCosmeticItems, cosmeticItem],
         };
       }
 
@@ -41,22 +52,32 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
     }),
   removeCosmeticItemById: id =>
     set(prev => ({
-      selectedCosmeticItems: prev.selectedCosmeticItems.filter(
+      cartListCosmeticItems: prev.cartListCosmeticItems.filter(
         item => item.id !== id
       ),
     })),
-  toggleEquippedItem: (id, image) =>
+  toggleEquippedCosmeticItems: ({
+    subOrMainCategoryid,
+    image,
+    cosmeticItemId,
+  }) =>
     set(state => {
-      const { [id]: existingItem, ...restItems } = state.equippedItems;
+      const { [subOrMainCategoryid]: existingItem, ...restItems } =
+        state.equippedCosmeticItems;
+
+      if (existingItem && existingItem.cosmeticItemId === cosmeticItemId) {
+        return {
+          equippedCosmeticItems: restItems,
+        };
+      }
 
       return {
-        equippedItems: existingItem
-          ? restItems
-          : {
-              ...state.equippedItems,
-              [id]: { image },
-            },
+        equippedCosmeticItems: {
+          ...state.equippedCosmeticItems,
+          [subOrMainCategoryid]: { image, cosmeticItemId },
+        },
       };
     }),
-  resetEquippedItem: () => set(() => ({ equippedItems: {} })),
+
+  resetEquippedItem: () => set(() => ({ equippedCosmeticItems: {} })),
 }));

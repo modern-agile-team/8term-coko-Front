@@ -4,16 +4,22 @@ import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
 import useModal from './../../../hooks/useModal';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import { Link } from 'react-router-dom';
-import { SaveButton } from '@/features/user/ui/styles';
 import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
 import ProfileImage from '@/features/user/ui/ProfileImage';
 
 export default function StoreMyCharacterSection() {
   const { Modal, isShow, openModal, closeModal } = useModal();
+
   const { mutate: resetEquippedItemMutate } =
     useUserCosmeticItemsQuery.resetEquippedItems();
-  const { isMyItemsVisible, toggleIsMyItemsVisible, resetEquippedItem, query } =
-    useCosmeticItemStore();
+
+  const {
+    isMyItemsVisible,
+    toggleIsMyItemsVisible,
+    resetEquippedItem,
+    query,
+    equippedCosmeticItems,
+  } = useCosmeticItemStore();
 
   return (
     <>
@@ -40,7 +46,6 @@ export default function StoreMyCharacterSection() {
           >
             초기화
           </StoreButton>
-          {isMyItemsVisible && <SaveButton>저장</SaveButton>}
         </div>
         <div>
           {query.mainCategoryId === 3 ? (

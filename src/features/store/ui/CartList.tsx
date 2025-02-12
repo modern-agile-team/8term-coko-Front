@@ -13,15 +13,15 @@ interface CartListProps {
   isMobileHidden: boolean;
 }
 export default function CartList({ isMobileHidden }: CartListProps) {
-  const { selectedCosmeticItems, removeCosmeticItemById } =
+  const { cartListCosmeticItems, removeCosmeticItemById } =
     useCosmeticItemStore();
 
   const { Modal, isShow, closeModal, openModal } = useModal();
   const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
 
   const totalPoint = useMemo(() => {
-    return selectedCosmeticItems.reduce((total, item) => total + item.price, 0);
-  }, [selectedCosmeticItems]);
+    return cartListCosmeticItems.reduce((total, item) => total + item.price, 0);
+  }, [cartListCosmeticItems]);
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function CartList({ isMobileHidden }: CartListProps) {
             onAccept={() => {
               purchaseItem(
                 {
-                  itemIds: selectedCosmeticItems.map(item => item.id),
+                  itemIds: cartListCosmeticItems.map(item => item.id),
                 },
                 {
                   onSuccess: () => {
@@ -49,8 +49,12 @@ export default function CartList({ isMobileHidden }: CartListProps) {
                       if (error.response?.status === 401) {
                         toast.error('로그인이 필요한 작업입니다.');
                       }
+                      if (error.response?.status === 400) {
+                        toast.error('포인트가 부족해요!');
+                      }
                     }
                   },
+                  onSettled: () => closeModal(),
                 }
               );
             }}
@@ -61,7 +65,7 @@ export default function CartList({ isMobileHidden }: CartListProps) {
       <S.CartListWrapper $isMobileHidden={isMobileHidden}>
         <label>장바구니</label>
         <S.CartListItemWrapper>
-          {selectedCosmeticItems.map(item => (
+          {cartListCosmeticItems.map(item => (
             <StoreItem key={item.id}>
               <StoreItem.Header
                 name={item.name}
