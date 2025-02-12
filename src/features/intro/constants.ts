@@ -217,12 +217,6 @@ export const LEARN_TUTORIAL_SECTIONS: Section[] = [
         name: '변수란 무엇인가?',
         status: 'LOCKED',
       },
-      {
-        id: 36,
-        sectionId: 2,
-        name: '변수 선언',
-        status: 'LOCKED',
-      },
     ],
   },
   {
@@ -245,6 +239,24 @@ export const LEARN_TUTORIAL_SECTIONS: Section[] = [
         id: 38,
         sectionId: 3,
         name: '문자 타입',
+        status: 'LOCKED',
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: '연산자',
+    parts: [
+      {
+        id: 35,
+        sectionId: 3,
+        name: '할당 연산자',
+        status: 'STARTED',
+      },
+      {
+        id: 37,
+        sectionId: 3,
+        name: '논리 연산자',
         status: 'LOCKED',
       },
     ],

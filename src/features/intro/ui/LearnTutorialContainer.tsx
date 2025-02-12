@@ -1,9 +1,9 @@
 import * as globalS from '@style/styles';
 import * as S from '@/pages/learn/styles';
-import { useState, useCallback } from 'react';
+import toast from 'react-hot-toast';
+import { useState, useCallback, useMemo, memo } from 'react';
 import { useTimeout } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
-import { useNavigate } from 'react-router-dom';
 import { useElementRect } from '@/features/intro/service/hooks';
 import { SectionGroup } from '@/pages/learn/styles';
 import MenuBar from '@common/layout/MenuBar';
@@ -23,15 +23,23 @@ function LearnTutorialContainer() {
 
   const { getClientRectRefCallback } = useElementRect();
 
-  useTimeout(() => setShowTutorial(true), 100);
+  useTimeout(() => setShowTutorial(true), {
+    delay: 100,
+    enabled: !showTutorial,
+  });
 
   // LearnTutorial에서 step이 바뀔 때 호출될 함수
   const handleStepChange = useCallback(
     (step: string) => {
       setCurrentStep(step);
+      if (step === '') {
+        toast(`키캡 버튼을 눌러 '튜토리얼!' 파트를 풀어보세요!`);
+      }
     },
     [setCurrentStep]
   );
+
+  const memoizedTutorialStep = useMemo(() => currentStep, [currentStep]);
 
   return (
     <>
@@ -83,7 +91,7 @@ function LearnTutorialContainer() {
             hasNextPage={false}
             isFetchingNextPage={false}
             onFetchProgress={noop}
-            tutorialStep={currentStep}
+            tutorialStep={memoizedTutorialStep}
           />
         </SectionGroup>
       </globalS.Layout>
@@ -93,4 +101,4 @@ function LearnTutorialContainer() {
   );
 }
 
-export default LearnTutorialContainer;
+export default memo(LearnTutorialContainer);

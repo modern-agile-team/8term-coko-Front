@@ -12,6 +12,12 @@ export default function QuizTutorial({ category }: QuizTutorialProps) {
   const { Funnel, setStep, step } = useFunnel('진행도 설명1');
 
   useEffect(() => {
+    if (step === '진행도 설명1') {
+      toast.success('퀴즈 튜토리얼 이동 성공!');
+    }
+  }, [step]);
+
+  useEffect(() => {
     if (step === '' && category === 'COMBINATION') {
       toast('직접 문제를 풀어보세요!');
     }

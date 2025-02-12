@@ -1,4 +1,5 @@
 import * as S from '@features/learn/ui/styles';
+import toast from 'react-hot-toast';
 import { useRef, useEffect, memo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useElementRect } from '@/features/intro/service/hooks';
@@ -85,6 +86,27 @@ export default memo(function PartItem({
     return currentPath === '/learn/tutorial' ? '/quiz/tutorial' : '/quiz';
   };
 
+  const handleGoToQuiz = () => {
+    const isLearnTutorial = location.pathname === '/learn/tutorial';
+
+    if (isLearnTutorial && part.name !== '튜토리얼!') {
+      toast.error(`'튜토리얼!' 파트를 풀어보세요!`);
+      return;
+    }
+
+    const targetPath = getQuizPath(location.pathname);
+    navigate(targetPath, {
+      state: { partId: part.id, partStatus: part.status },
+    });
+  };
+
+  <S.GoToQuizButton
+    onClick={handleGoToQuiz}
+    $fontColor={COLORS[globalIndex % 4]}
+  >
+    시작
+  </S.GoToQuizButton>;
+
   const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
   const { getClientRectRefCallback } = useElementRect();
 
@@ -133,12 +155,7 @@ export default memo(function PartItem({
         >
           <h3>{part.name}</h3>
           <S.GoToQuizButton
-            onClick={() => {
-              const targetPath = getQuizPath(location.pathname);
-              navigate(targetPath, {
-                state: { partId: part.id, partStatus: part.status },
-              });
-            }}
+            onClick={handleGoToQuiz}
             $fontColor={COLORS[globalIndex % 4]}
           >
             시작
