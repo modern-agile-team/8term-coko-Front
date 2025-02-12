@@ -87,8 +87,20 @@ export default memo(function PartItem({
       )}
 
       <S.KeyboardButton
-        id="keycap-button"
-        ref={globalIndex === 0 ? getClientRectRefCallback : null}
+        id={
+          globalIndex === 1 && isLocked
+            ? 'locked-keycap-button'
+            : globalIndex === 0
+            ? 'keycap-button'
+            : undefined
+        }
+        ref={
+          globalIndex === 1 && isLocked
+            ? getClientRectRefCallback
+            : globalIndex === 0
+            ? getClientRectRefCallback
+            : null
+        }
         onClick={handleButtonClick}
         $isLocked={isLocked}
         disabled={isLocked}

@@ -28,7 +28,7 @@ export const TutorialPopupWrapper = styled.div<{
   $popupPosition: DOMRect | null;
 }>`
   position: absolute;
-  z-index: 1001;
+  z-index: 10001;
   pointer-events: none;
   user-select: none;
   ${({ $popupPosition }) => {
@@ -39,8 +39,10 @@ export const TutorialPopupWrapper = styled.div<{
     }
   }}
   > p {
+    color: #19191b;
     white-space: pre-line;
     position: absolute;
+    font-weight: 700;
     top: 150px;
     left: 120px;
   }
@@ -54,7 +56,7 @@ export const TutorialPopupWrapper = styled.div<{
     }
     > p {
       position: relative;
-      color: #fff;
+      background: #ffefaa;
       top: initial;
       left: initial;
     }

@@ -23,7 +23,7 @@ export const calculateTutorialPopupPosition: FindMostSpaciousDirection =
         position.top = `${topDistance - 70}px`;
         return position;
       }
-      position.top = `${topDistance + 50}px`;
+      position.top = `${topDistance + 70}px`;
       return position;
     }
     //남은 여백을 보고 위치 재조정

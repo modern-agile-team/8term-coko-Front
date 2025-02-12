@@ -1,4 +1,4 @@
-import { OverRayDiv } from '@common/layout/styles';
+import OverRay from '@common/layout/OverRay';
 import { PopupPosition } from '@features/intro/types';
 import {
   TutorialPopupWrapper,
@@ -41,12 +41,14 @@ export default function FocusedItem({
           <img src={getImageUrl('튜토리얼.svg')} />
         </TutorialPopupWrapper>
 
-        <OverRayDiv
-          $backgroundColor="rgba(0, 0, 0, 0.7)"
-          $mixBlendMode=" hard-light"
+        <OverRay
+          overRayStyle={{
+            $backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            $mixBlendMode: 'hard-light',
+          }}
         >
           <FocusedItemDiv style={computedStyle} />
-        </OverRayDiv>
+        </OverRay>
       </ModalPortal>
     </>
   );

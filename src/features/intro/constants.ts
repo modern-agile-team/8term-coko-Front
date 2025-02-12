@@ -61,7 +61,7 @@ export const QUIZ_TUTORIAL_STEP: TutorialStep[] = [
     name: '진행도 설명1',
     id: 'progress-bar',
     nextStep: '진행도 설명2',
-    description: '이건 진행바야.',
+    description: '이건 퀴즈 페이지의 진행바야.',
   },
   {
     name: '진행도 설명2',
@@ -127,24 +127,55 @@ export const QUIZ_TUTORIAL_STEP: TutorialStep[] = [
 
 export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
   {
-    name: '전체 & 파트 진행도 설명',
+    name: '전체 & 파트 진행도 설명1',
     id: 'learn-progress-bar',
-    nextStep: '섹션 선택 버튼 설명',
-    description: `이건 퀴즈 전체 또는 각 파트의 몇 문제를 풀었는지 보여주는 진행바야!`,
+    nextStep: '전체 & 파트 진행도 설명2',
+    description: `이건 학습 페이지의 진행바야!`,
   },
   {
-    name: '섹션 선택 버튼 설명',
+    name: '전체 & 파트 진행도 설명2',
+    id: 'learn-progress-bar',
+    nextStep: '섹션 선택 버튼 설명1',
+    description: `퀴즈 전체 또는 각 파트의 몇 문제를 맞혔는지 알 수 있어!`,
+  },
+  {
+    name: '섹션 선택 버튼 설명1',
     id: 'select-section-button',
-    nextStep: '키캡 버튼 설명',
-    description: `이 섬은 섹션을 뜻해.
-    선택하면 해당 섹션으로 이동하게 되지!`,
+    nextStep: '섹션 선택 버튼 설명2',
+    description: `이 섬은 섹션을 뜻해.`,
   },
   {
-    name: '키캡 버튼 설명',
+    name: '섹션 선택 버튼 설명2',
+    id: 'select-section-button',
+    nextStep: '키캡 버튼 설명1',
+    description: `원하는 섹션을 선택하면 해당 섹션으로 이동하게 되지!`,
+  },
+  {
+    name: '키캡 버튼 설명1',
+    id: 'keycap-button',
+    nextStep: '키캡 버튼 설명2',
+    description: `이 키캡은 파트 버튼이야.`,
+  },
+  {
+    name: '키캡 버튼 설명2',
+    id: 'keycap-button',
+    nextStep: '키캡 버튼 설명3',
+    description: `버튼을 누르면 해당 파트에 맞는
+    퀴즈를 풀 수 있는 화면으로 이동하게 돼!`,
+  },
+  {
+    name: '키캡 버튼 설명3',
+    id: 'locked-keycap-button',
+    nextStep: '키캡 버튼 설명4',
+    description: `하지만 이렇게 버튼이
+    잠겨있는 상태(LOCKED)라면`,
+  },
+  {
+    name: '키캡 버튼 설명4',
     id: 'keycap-button',
     nextStep: '퀴즈 팝오버 설명',
-    description: `파트(키캡) 버튼을 누르면
-            퀴즈를 풀 수 있는 화면으로 이동할 수 있어!`,
+    description: `꼭 이전의 파트를 풀어야 하니까
+    이 점 유의해줘!`,
   },
   {
     name: '퀴즈 팝오버 설명',
@@ -162,20 +193,20 @@ export const LEARN_TUTORIAL_SECTIONS: Section[] = [
       {
         id: 10,
         sectionId: 2,
-        name: '식별자',
-        status: 'COMPLETED',
+        name: '튜토리얼 퀴즈!',
+        status: 'STARTED',
       },
       {
         id: 13,
         sectionId: 2,
         name: '표현식',
-        status: 'STARTED',
+        status: 'LOCKED',
       },
       {
         id: 4,
         sectionId: 2,
         name: '변수란 무엇인가?',
-        status: 'COMPLETED',
+        status: 'LOCKED',
       },
       {
         id: 36,
