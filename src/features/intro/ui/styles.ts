@@ -24,6 +24,11 @@ export const TutorialClearWrapper = styled.div`
   box-shadow: 0 11px #e5e5e5;
 `;
 
+export const HighlightSpan = styled.span`
+  color: #ff0000;
+  font-weight: 700;
+`;
+
 export const TutorialPopupWrapper = styled.div<{
   $popupPosition: DOMRect | null;
 }>`

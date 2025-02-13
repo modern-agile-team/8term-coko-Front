@@ -130,7 +130,7 @@ export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
     name: '전체 & 파트 진행도 설명1',
     id: 'learn-progress-bar',
     nextStep: '전체 & 파트 진행도 설명2',
-    description: `이건 학습 페이지의 진행 표시줄이야!`,
+    description: `이건 **학습** 페이지의 진행 표시줄이야!`,
   },
   {
     name: '전체 & 파트 진행도 설명2',

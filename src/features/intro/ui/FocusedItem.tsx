@@ -1,6 +1,7 @@
 import OverRay from '@common/layout/OverRay';
 import { PopupPosition } from '@features/intro/types';
 import {
+  HighlightSpan,
   TutorialPopupWrapper,
   FocusedItemDiv,
 } from '@features/intro/ui/styles';
@@ -33,11 +34,20 @@ export default function FocusedItem({
       }
     : undefined;
 
+  const renderDescription = (text: string) => {
+    return text.split(/(\*\*.*?\*\*)/).map((part, index) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <HighlightSpan key={index}>{part.slice(2, -2)}</HighlightSpan>;
+      }
+      return part;
+    });
+  };
+
   return (
     <>
       <ModalPortal>
         <TutorialPopupWrapper ref={FocusedItemRef} $popupPosition={rect}>
-          <p>{description}</p>
+          <p>{renderDescription(description)}</p>
           <img src={getImageUrl('튜토리얼.svg')} />
         </TutorialPopupWrapper>
 

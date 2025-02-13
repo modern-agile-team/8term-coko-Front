@@ -1,6 +1,7 @@
 import * as globalS from '@style/styles';
 import * as S from '@/pages/learn/styles';
 import toast from 'react-hot-toast';
+import useScrollVisibility from '@hooks/useScrollVisibility';
 import { useState, useCallback, useMemo, memo } from 'react';
 import { useTimeout } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
@@ -20,6 +21,7 @@ import { LEARN_TUTORIAL_SECTIONS } from '@features/intro/constants';
 function LearnTutorialContainer() {
   const [showTutorial, setShowTutorial] = useState(false);
   const [currentStep, setCurrentStep] = useState('');
+  const showComponents = useScrollVisibility();
 
   const { getClientRectRefCallback } = useElementRect();
 
@@ -27,6 +29,8 @@ function LearnTutorialContainer() {
     delay: 100,
     enabled: !showTutorial,
   });
+
+  console.log('showTutorial', showTutorial);
 
   // LearnTutorial에서 step이 바뀔 때 호출될 함수
   const handleStepChange = useCallback(
@@ -79,7 +83,7 @@ function LearnTutorialContainer() {
         </S.ProgressBarWrapper>
 
         {/* 섹션 선택 */}
-        <S.ScrollableContainer $show={true} $isLoggedIn={true}>
+        <S.ScrollableContainer $show={showComponents} $isLoggedIn={true}>
           <SelectSection />
         </S.ScrollableContainer>
 
