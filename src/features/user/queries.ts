@@ -229,9 +229,11 @@ export const useUserAttendanceQuery = {
 
 export const useUserQuestQuery = {
   getDailyQuest: () => {
+    const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.quest.daily(),
       queryFn: usersApis.getDailyQuest,
+      enabled: isLoggedIn(user),
     });
   },
 };
