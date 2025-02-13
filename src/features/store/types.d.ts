@@ -4,12 +4,12 @@ export interface CosmeticItem {
   price: number;
   image: string;
   mainCategoryId: number;
-  subCategoryId: number | null;
+  subCategoryId: number;
   category: 'clothes' | 'accessories' | 'profile' | 'color';
   isEquipped?: boolean;
 }
 
 export type CosmeticItemOption = {
   label: string;
-  query: Pick<CosmeticItem, 'mainCategoryId' | 'subCategoryId'>;
+  query: { mainCategoryId: number; subCategoryId: number | null };
 };

@@ -246,8 +246,14 @@ export const useUserCosmeticItemsQuery = {
     });
   },
   resetEquippedItems: () => {
+    const queryClient = useQueryClient();
     return useMutation({
       mutationFn: userItemsApi.putResetEquippedItems,
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: userKeys.cosmeticItems.root(),
+        });
+      },
     });
   },
   purchaseItem: () => {

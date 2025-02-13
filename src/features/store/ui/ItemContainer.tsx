@@ -31,15 +31,11 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
   const { mutate: updateEquippedItems } =
     useUserCosmeticItemsQuery.updateEquippedItems();
 
-  const handleEquipPreview = (
-    e: React.MouseEvent<Element, MouseEvent>,
-    item: CosmeticItem
-  ) => {
+  const handleEquipPreview = (item: CosmeticItem) => {
     if (!isMyItemsVisible) {
       toggleEquippedCosmeticItems({
-        subOrMainCategoryid: item.subCategoryId ?? item.mainCategoryId,
+        subCategoryid: item.subCategoryId,
         image: item.image,
-        cosmeticItemId: item.id,
       });
     }
   };
@@ -90,19 +86,17 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
       </Modal>
       <S.ItemContainer>
         {cosmeticItem.map(item => (
-          <StoreItem key={item.id} onClick={e => handleEquipPreview(e, item)}>
+          <StoreItem key={item.id} onClick={() => handleEquipPreview(item)}>
             <StoreItem.Header name={item.name} />
             <StoreItem.Image image={item.image} />
             <StoreItem.Footer>
               {isMyItemsVisible ? (
                 <EquipButton
                   onClick={() => {
-                    if (item.isEquipped) {
-                      updateEquippedItems({
-                        itemIds: [item.id],
-                        isEquipped: !item.isEquipped,
-                      });
-                    }
+                    updateEquippedItems({
+                      itemIds: [item.id],
+                      isEquipped: !item.isEquipped,
+                    });
                   }}
                 >
                   {item.isEquipped ? '해제' : '장착'}

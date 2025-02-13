@@ -154,3 +154,23 @@ export const StyledImg = styled.img`
   width: 50px;
   height: 25px;
 `;
+
+export const LoginButton = styled.button`
+  width: 80px;
+  padding: 5px 0;
+  background-color: #49c0f8;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px #38a6dc;
+  &:hover {
+    background-color: #7fd6fa;
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(4px);
+  }
+`;

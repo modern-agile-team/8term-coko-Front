@@ -5,10 +5,7 @@ interface State {
   isMyItemsVisible: boolean;
   query: CosmeticItemOption['query'];
   cartListCosmeticItems: CosmeticItem[];
-  equippedCosmeticItems: Record<
-    number,
-    { image: string; cosmeticItemId: number }
-  >;
+  equippedCosmeticItems: Record<number, { image: string }>;
 }
 interface Actions {
   toggleIsMyItemsVisible: () => void;
@@ -16,20 +13,18 @@ interface Actions {
   cartListAddCosmeticItems: (cosmeticItem: CosmeticItem) => void;
   removeCosmeticItemById: (id: number) => void;
   toggleEquippedCosmeticItems: ({
-    subOrMainCategoryid,
+    subCategoryid,
     image,
-    cosmeticItemId,
   }: {
-    subOrMainCategoryid: number;
+    subCategoryid: number;
     image: string;
-    cosmeticItemId: number;
   }) => void;
   resetEquippedItem: () => void;
 }
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
   isMyItemsVisible: false,
-  query: { mainCategoryId: 1, subCategoryId: null },
+  query: { mainCategoryId: 1, subCategoryId: 6 },
   cartListCosmeticItems: [],
   equippedCosmeticItems: {},
 
@@ -56,16 +51,12 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
         item => item.id !== id
       ),
     })),
-  toggleEquippedCosmeticItems: ({
-    subOrMainCategoryid,
-    image,
-    cosmeticItemId,
-  }) =>
+  toggleEquippedCosmeticItems: ({ subCategoryid, image }) =>
     set(state => {
-      const { [subOrMainCategoryid]: existingItem, ...restItems } =
+      const { [subCategoryid]: existingItem, ...restItems } =
         state.equippedCosmeticItems;
 
-      if (existingItem && existingItem.cosmeticItemId === cosmeticItemId) {
+      if (existingItem && existingItem.image === image) {
         return {
           equippedCosmeticItems: restItems,
         };
@@ -74,7 +65,7 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
       return {
         equippedCosmeticItems: {
           ...state.equippedCosmeticItems,
-          [subOrMainCategoryid]: { image, cosmeticItemId },
+          [subCategoryid]: { image },
         },
       };
     }),

@@ -28,7 +28,6 @@ const characterEquipMapping: Record<
 export default function MyCharacter() {
   const { data: userEquippedItems } =
     useUserCosmeticItemsQuery.getEquippedItem();
-
   if (!userEquippedItems) {
     return <SkeletonBase />;
   }

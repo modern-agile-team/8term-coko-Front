@@ -20,10 +20,10 @@ export const BUTTON_LIST: {
 }[] = [
   {
     label: '프로필',
-    query: { mainCategoryId: 3, subCategoryId: null },
+    query: { mainCategoryId: 3, subCategoryId: 7 },
   },
   {
     label: '색상',
-    query: { mainCategoryId: 4, subCategoryId: null },
+    query: { mainCategoryId: 4, subCategoryId: 8 },
   },
 ] as const;

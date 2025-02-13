@@ -51,7 +51,11 @@ export default function Header() {
         {isLoggedIn(user) && <HeaderItemContainer user={user} />}
       </HeaderErrorBoundary>
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
-        <ProfileImage isIcon={true} />
+        {isLoggedIn(user) ? (
+          <ProfileImage isIcon={true} />
+        ) : (
+          <S.LoginButton onClick={openModal}>로그인</S.LoginButton>
+        )}
         {user && isOpen && (
           <S.ProfilePopover ref={popoverRef} onClick={e => e.stopPropagation()}>
             <S.UserNameText>{user.name}</S.UserNameText>
