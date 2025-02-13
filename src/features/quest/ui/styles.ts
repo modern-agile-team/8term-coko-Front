@@ -160,6 +160,26 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
     `}
 `;
 
+export const LoginRequiredMessage = styled.p<QuestUrlProps>`
+  ${({ $isLearn }) =>
+    $isLearn &&
+    css`
+      color: #000000;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 40px;
+    `}
+  ${({ $isQuest = true }) =>
+    $isQuest &&
+    css`
+      color: #000000;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+    `}
+`;
+
 // 진행도바 감싸는 div
 export const ProgressBarWrapper = styled.div<QuestUrlProps>`
   display: flex;

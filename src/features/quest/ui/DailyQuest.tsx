@@ -4,9 +4,12 @@ import { useLocation } from 'react-router-dom';
 import QuestSection from './QuestSection';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import { useUserQuestQuery } from '@/features/user/queries';
+import useUserStore from '@store/useUserStore';
+import { isLoggedIn } from '@features/user/service/authUtils';
 
 export default function DailyQuest() {
   const location = useLocation();
+  const { user } = useUserStore();
   const isLearn = location.pathname === '/learn';
   const isQuest = location.pathname === '/quest';
 
@@ -35,48 +38,60 @@ export default function DailyQuest() {
 
   return (
     <QuestSection title="오늘의 퀘스트" isLearn={isLearn} isQuest={isQuest}>
-      {quests &&
-        quests.map(quest => {
-          const { progressBarColor, rewardIcon, progressBarIcon } =
-            getDailyUIProps(
-              quest.conditionProgress,
-              quest.dailyQuest.condition
-            );
+      {isLoggedIn(user) ? (
+        <>
+          {quests &&
+            quests.map(quest => {
+              const { progressBarColor, rewardIcon, progressBarIcon } =
+                getDailyUIProps(
+                  quest.conditionProgress,
+                  quest.dailyQuest.condition
+                );
 
-          const isComplete =
-            quest.conditionProgress >= quest.dailyQuest.condition;
+              const isComplete =
+                quest.conditionProgress >= quest.dailyQuest.condition;
 
-          return (
-            <S.QuestWrapper key={quest.id} {...questUrlProps}>
-              <S.QuestsTitle {...questUrlProps}>
-                {quest.dailyQuest.content}
-              </S.QuestsTitle>
-              <S.ProgressBarWrapper {...questUrlProps}>
-                {progressBarIcon && (
-                  <S.ProgressBarIcon
-                    src={progressBarIcon}
-                    {...questUrlProps}
-                    alt="일일 퀘스트 도장"
-                  />
-                )}
-                <ProgressBar
-                  $progress={quest.conditionProgress}
-                  $maxProgress={quest.dailyQuest.condition}
-                  {...progressBarSizeProps}
-                  $boxBgColor="#F3F3F3"
-                  $innerBgColor={progressBarColor}
-                  $borderRadius="20px"
-                />
-                <S.RewardIconWrapper {...questUrlProps}>
-                  <S.RewardIcon
-                    src={rewardIcon}
-                    alt={isComplete ? '일일 퀘스트 보상' : '일일 퀘스트 진행'}
-                  />
-                </S.RewardIconWrapper>
-              </S.ProgressBarWrapper>
-            </S.QuestWrapper>
-          );
-        })}
+              return (
+                <S.QuestWrapper key={quest.id} {...questUrlProps}>
+                  <S.QuestsTitle {...questUrlProps}>
+                    {quest.dailyQuest.content}
+                  </S.QuestsTitle>
+                  <S.ProgressBarWrapper {...questUrlProps}>
+                    {progressBarIcon && (
+                      <S.ProgressBarIcon
+                        src={progressBarIcon}
+                        {...questUrlProps}
+                        alt="일일 퀘스트 도장"
+                      />
+                    )}
+                    <ProgressBar
+                      $progress={quest.conditionProgress}
+                      $maxProgress={quest.dailyQuest.condition}
+                      {...progressBarSizeProps}
+                      $boxBgColor="#F3F3F3"
+                      $innerBgColor={progressBarColor}
+                      $borderRadius="20px"
+                    />
+                    <S.RewardIconWrapper {...questUrlProps}>
+                      <S.RewardIcon
+                        src={rewardIcon}
+                        alt={
+                          isComplete ? '일일 퀘스트 보상' : '일일 퀘스트 진행'
+                        }
+                      />
+                    </S.RewardIconWrapper>
+                  </S.ProgressBarWrapper>
+                </S.QuestWrapper>
+              );
+            })}
+        </>
+      ) : (
+        <S.QuestWrapper {...questUrlProps}>
+          <S.LoginRequiredMessage {...questUrlProps}>
+            로그인 후 퀘스트를 확인해보세요!
+          </S.LoginRequiredMessage>
+        </S.QuestWrapper>
+      )}
     </QuestSection>
   );
 }
