@@ -28,7 +28,7 @@ const sectionsApis = {
     return response.data;
   },
 
-  // 모든 섹션 데이터 가져오기
+  // 모든 섹션 데이터 가져오기 (파트 제외)
   getAllSectionsWithoutParts: async (): Promise<SectionWithoutParts[]> => {
     const response = await api.get('/sections');
     return response.data;

@@ -1,39 +1,36 @@
+import { useRef, useState, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { getImageUrl } from '@/utils/getImageUrl';
+import * as S from '@/pages/intro/styles';
 import BadgeIntro from '@/features/intro/ui/BadgeIntro';
 import PageIntroBanner from '@/features/intro/ui/PageIntroBanner';
-import * as S from '@/pages/intro/styles';
-import { getImageUrl } from '@/utils/getImageUrl';
-import { Link } from 'react-router-dom';
 import {
   BUTTON_LIST,
   COKO_TEAM_INFO,
   PAGE_INTRO_DATA,
 } from '@/features/intro/constants';
-import { Fragment } from 'react/jsx-runtime';
 import { IntroCard } from '@/features/intro/ui/styles';
-import { useRef, useState } from 'react';
-import { Quiz } from '@/features/quiz/types';
 import { useScrollTo } from '@modern-kit/react';
+import TutorialPromptModal from '@/features/intro/ui/TutorialPromptModal';
+import useModal from '@/hooks/useModal';
 
 export default function Intro() {
-  const [activeCategory, setActiveCategory] =
-    useState<Quiz['category']>('COMBINATION');
+  const [activeCategory, setActiveCategory] = useState('COMBINATION');
+  const { isShow, openModal, closeModal, Modal } = useModal();
 
   const footerRef = useRef<HTMLDivElement | null>(null);
-  const QuizIntroRef = useRef<HTMLDivElement | null>(null);
+  const quizIntroRef = useRef<HTMLDivElement | null>(null);
   const { scrollToElement } = useScrollTo<HTMLDivElement>();
 
   const handleScrollToFooter = () => {
     if (footerRef.current) {
-      scrollToElement(footerRef.current, {
-        behavior: 'smooth',
-      });
+      scrollToElement(footerRef.current, { behavior: 'smooth' });
     }
   };
+
   const handleScrollToQuizIntro = () => {
-    if (QuizIntroRef.current) {
-      scrollToElement(QuizIntroRef.current, {
-        behavior: 'smooth',
-      });
+    if (quizIntroRef.current) {
+      scrollToElement(quizIntroRef.current, { behavior: 'smooth' });
     }
   };
 
@@ -58,11 +55,10 @@ export default function Intro() {
                 자바스크립트 학습 사이트
               </h1>
               <h2>코딩하는 코끼리, 코코</h2>
-              <Link to="/learn/tutorial">시작하기</Link>
+              <button onClick={openModal}>시작하기</button>
               <Link to="/login">로그인하기</Link>
             </div>
           </S.CokoIntroLeftDiv>
-
           <div>
             <img src={getImageUrl('메인소개.webp')} alt="메인화면 소개" />
           </div>
@@ -73,7 +69,7 @@ export default function Intro() {
           <h3>코코 사이트와 함께 다양하고, 재밌는 방식으로 공부하기</h3>
         </S.GradientCokoIntroWrapper>
 
-        <S.QuizIntroButtonList ref={QuizIntroRef}>
+        <S.QuizIntroButtonList ref={quizIntroRef}>
           {BUTTON_LIST.map(buttonOption => (
             <S.CategoryButton
               $isActive={buttonOption.category === activeCategory}
@@ -84,6 +80,7 @@ export default function Intro() {
             </S.CategoryButton>
           ))}
         </S.QuizIntroButtonList>
+
         <PageIntroBanner
           label="QUIZ"
           mainTitle={'다양한 \n문제 유형'}
@@ -92,6 +89,7 @@ export default function Intro() {
           backgroundColor="#fff"
           orderChange
         />
+
         {PAGE_INTRO_DATA.map((intro, index) =>
           index === 1 ? (
             <Fragment key={intro.label}>
@@ -101,7 +99,7 @@ export default function Intro() {
                   <h1>나만의 프로필</h1>
                   <p>뱃지를 모으며 성장해나가기.</p>
                 </IntroCard>
-                <BadgeIntro></BadgeIntro>
+                <BadgeIntro />
               </S.ProfileIntroWrapper>
               <PageIntroBanner
                 label={intro.label}
@@ -125,6 +123,7 @@ export default function Intro() {
           )
         )}
       </main>
+
       <S.BottomCokoIntroWrapper>
         <div>
           <img src={getImageUrl('앉은-코코.svg')} alt="앉아있는 코코" />
@@ -139,6 +138,7 @@ export default function Intro() {
           </div>
         </div>
       </S.BottomCokoIntroWrapper>
+
       <S.IntroFooterWrapper>
         <hr />
         <S.IntroFooter ref={footerRef}>
@@ -157,6 +157,10 @@ export default function Intro() {
           <img src={getImageUrl('인스타_아이콘.svg')} alt="인스타 아이콘" />
         </S.IntroFooter>
       </S.IntroFooterWrapper>
+
+      <Modal isShow={isShow}>
+        <TutorialPromptModal closeModal={closeModal} />
+      </Modal>
     </S.IntroWrapper>
   );
 }

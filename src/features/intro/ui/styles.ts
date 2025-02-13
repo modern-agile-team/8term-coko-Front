@@ -155,3 +155,35 @@ export const BadgeList = styled.ul`
     height: 100%;
   }
 `;
+
+export const TutorialPromptModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TutorialPromptModalContent = styled.div`
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+
+  > h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  > button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    &:hover {
+      background: #0056b3;
+    }
+  }
+`;
