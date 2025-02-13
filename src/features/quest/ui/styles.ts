@@ -168,7 +168,7 @@ export const LoginRequiredMessage = styled.p<QuestUrlProps>`
       font-size: 13px;
       font-weight: 700;
       text-align: center;
-      margin-top: 40px;
+      margin-top: 25px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
