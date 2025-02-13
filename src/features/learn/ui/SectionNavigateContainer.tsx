@@ -1,14 +1,14 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { useElementRect } from '@/features/intro/service/hooks';
-import type { Section } from '@features/learn/types';
+import type { SectionWithoutParts } from '@features/learn/types';
 
 export default function SectionNavigateContainer({
   sections,
   currentPage,
   itemsPerPage,
 }: {
-  sections: Section[];
+  sections: SectionWithoutParts[];
   currentPage: number;
   itemsPerPage: number;
 }) {

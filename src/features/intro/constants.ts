@@ -1,6 +1,6 @@
 import { TutorialStep } from '@/features/intro/types';
 import type { Quiz } from '@/features/quiz/types';
-import type { Section } from 'features/learn/types';
+import type { Section, SectionWithoutParts } from 'features/learn/types';
 
 export const TUTORIAL_ID = 1 as const;
 
@@ -194,7 +194,7 @@ export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
   },
 ] as const;
 
-export const LEARN_TUTORIAL_SECTIONS: Section[] = [
+export const LEARN_TUTORIAL_SECTIONS_PARTS: Section[] = [
   {
     id: 2,
     name: '변수',
@@ -260,6 +260,21 @@ export const LEARN_TUTORIAL_SECTIONS: Section[] = [
         status: 'LOCKED',
       },
     ],
+  },
+] as const;
+
+export const LEARN_TUTORIAL_SECTIONS: SectionWithoutParts[] = [
+  {
+    id: 1,
+    name: '변수',
+  },
+  {
+    id: 2,
+    name: '자료형',
+  },
+  {
+    id: 3,
+    name: '연산자',
   },
 ] as const;
 

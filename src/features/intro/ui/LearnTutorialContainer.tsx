@@ -16,7 +16,7 @@ import KeycapAdventureIntro from '@features/learn/ui/KeycapAdventureIntro';
 import PartNavContainer from '@features/learn/ui/PartNavContainer';
 import { PROGRESS_COLORS } from '@features/learn/constants';
 import LearnTutorial from '@features/intro/ui/LearnTutorial';
-import { LEARN_TUTORIAL_SECTIONS } from '@features/intro/constants';
+import { LEARN_TUTORIAL_SECTIONS_PARTS } from '@features/intro/constants';
 
 function LearnTutorialContainer() {
   const [showTutorial, setShowTutorial] = useState(false);
@@ -84,13 +84,13 @@ function LearnTutorialContainer() {
 
         {/* 섹션 선택 */}
         <S.ScrollableContainer $show={showComponents} $isLoggedIn={true}>
-          <SelectSection />
+          <SelectSection isTutorial={true} />
         </S.ScrollableContainer>
 
         {/* 섹션 + 파트 목록 */}
         <SectionGroup>
           <PartNavContainer
-            sections={LEARN_TUTORIAL_SECTIONS}
+            sections={LEARN_TUTORIAL_SECTIONS_PARTS}
             fetchNextPage={noop}
             hasNextPage={false}
             isFetchingNextPage={false}

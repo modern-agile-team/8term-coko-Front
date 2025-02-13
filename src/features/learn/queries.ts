@@ -37,10 +37,10 @@ export const useSectionDetailQuery = {
 };
 
 export const useSectionListQuery = {
-  getAllSections: () =>
+  getAllSectionsWithoutParts: () =>
     useSuspenseQuery({
       queryKey: sectionKeys.list(),
-      queryFn: sectionsApis.getAllSections,
+      queryFn: sectionsApis.getAllSectionsWithoutParts,
     }),
 };
 
