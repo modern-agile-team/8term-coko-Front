@@ -121,7 +121,7 @@ export const QuestWrapper = styled.div<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      margin-bottom: 15px;
+      top: 15px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&

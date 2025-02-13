@@ -65,7 +65,10 @@ export default function DailyQuest() {
                       />
                     )}
                     <ProgressBar
-                      $progress={quest.conditionProgress}
+                      $progress={Math.min(
+                        quest.conditionProgress,
+                        quest.dailyQuest.condition
+                      )}
                       $maxProgress={quest.dailyQuest.condition}
                       {...progressBarSizeProps}
                       $boxBgColor="#F3F3F3"
