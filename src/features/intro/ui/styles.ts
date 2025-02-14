@@ -61,7 +61,7 @@ export const TutorialPopupWrapper = styled.div<{
   > p {
     color: #ffffff;
     text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-    white-space: pre-line;
+    white-space: pre-wrap;
     position: absolute;
     font-weight: 700;
     top: 150px;

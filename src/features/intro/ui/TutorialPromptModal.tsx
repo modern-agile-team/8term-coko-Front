@@ -17,9 +17,11 @@ export default function TutorialPromptModal({
 
   const isQuizTutorialPage = location.pathname === '/quiz/tutorial';
 
-  const modalRef = useOutsidePointerDown<HTMLDivElement>(() => {
-    closeModal();
-  });
+  const modalRef = isQuizTutorialPage
+    ? undefined
+    : useOutsidePointerDown<HTMLDivElement>(() => {
+        closeModal();
+      });
 
   const handleGoToLearnTutorial = () => {
     navigate('/learn/tutorial');

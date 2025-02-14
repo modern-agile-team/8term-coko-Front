@@ -18,13 +18,14 @@ const InitialRouteRedirect = () => {
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   useEffect(() => {
-    const visited = localStorage.getItem('visited');
-    if (!visited) {
+    const hasVisited = localStorage.getItem('visited');
+    const redirectPath = hasVisited ? '/learn' : '/intro';
+
+    if (!hasVisited) {
       localStorage.setItem('visited', 'true');
-      setRedirectTo('/intro');
-    } else {
-      setRedirectTo('/learn');
     }
+
+    setRedirectTo(redirectPath);
   }, []);
 
   if (!redirectTo) return null;

@@ -9,6 +9,7 @@ import useOutsideClick from '@hooks/useOutsideClick';
 import ModalPortal from '@/ModalPortal';
 import { getImageUrl } from '@utils/getImageUrl';
 import { useRectStore } from '@store/useRectStore';
+import { objectKeys } from '@modern-kit/utils';
 
 interface FocusedItemProps {
   id: string;
@@ -17,7 +18,7 @@ interface FocusedItemProps {
   popupPosition?: PopupPosition;
 }
 
-const markerKeys = Object.keys(markersMap).map(m =>
+const markerKeys = objectKeys(markersMap).map(m =>
   m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 );
 const pattern = markerKeys.map(m => `${m}.*?${m}`).join('|');
@@ -25,7 +26,7 @@ const regex = new RegExp(`(${pattern})`, 'g');
 
 const renderDescription = (text: string) => {
   return text.split(regex).map((part, index) => {
-    for (const marker in markersMap) {
+    for (const marker of objectKeys(markersMap)) {
       if (part.startsWith(marker) && part.endsWith(marker)) {
         const Component = markersMap[marker];
         return (
@@ -57,22 +58,20 @@ export default function FocusedItem({
     : undefined;
 
   return (
-    <>
-      <ModalPortal>
-        <TutorialPopupWrapper ref={FocusedItemRef} $popupPosition={rect}>
-          <p>{renderDescription(description)}</p>
-          <img src={getImageUrl('튜토리얼.svg')} />
-        </TutorialPopupWrapper>
+    <ModalPortal>
+      <TutorialPopupWrapper ref={FocusedItemRef} $popupPosition={rect}>
+        <p>{renderDescription(description)}</p>
+        <img src={getImageUrl('튜토리얼.svg')} />
+      </TutorialPopupWrapper>
 
-        <OverRay
-          overRayStyle={{
-            $backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            $mixBlendMode: 'hard-light',
-          }}
-        >
-          <FocusedItemDiv style={computedStyle} />
-        </OverRay>
-      </ModalPortal>
-    </>
+      <OverRay
+        overRayStyle={{
+          $backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          $mixBlendMode: 'hard-light',
+        }}
+      >
+        <FocusedItemDiv style={computedStyle} />
+      </OverRay>
+    </ModalPortal>
   );
 }

@@ -1,6 +1,6 @@
 import * as S from '@features/learn/ui/styles';
 import PartItem from '@features/learn/ui/PartItem';
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, memo } from 'react';
 import { useIntersectionObserver } from '@modern-kit/react';
 import { LoadingSpinner } from '@common/layout/styles';
 import type { Section, Part } from '@features/learn/types';
@@ -14,7 +14,7 @@ interface PartNavContainerProps {
   tutorialStep?: string;
 }
 
-export default function PartNavContainer({
+function PartNavContainer({
   sections,
   fetchNextPage,
   hasNextPage,
@@ -98,3 +98,5 @@ export default function PartNavContainer({
     </>
   );
 }
+
+export default memo(PartNavContainer);

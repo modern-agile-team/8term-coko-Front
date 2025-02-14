@@ -2,7 +2,7 @@ import * as globalS from '@style/styles';
 import * as S from '@/pages/learn/styles';
 import toast from 'react-hot-toast';
 import useScrollVisibility from '@hooks/useScrollVisibility';
-import { useState, useCallback, useMemo, memo } from 'react';
+import { useState, useCallback } from 'react';
 import { useTimeout } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
 import { useElementRect } from '@/features/intro/service/hooks';
@@ -18,7 +18,7 @@ import { PROGRESS_COLORS } from '@features/learn/constants';
 import LearnTutorial from '@features/intro/ui/LearnTutorial';
 import { LEARN_TUTORIAL_SECTIONS_PARTS } from '@features/intro/constants';
 
-function LearnTutorialContainer() {
+export default function LearnTutorialContainer() {
   const [showTutorial, setShowTutorial] = useState(false);
   const [currentStep, setCurrentStep] = useState('');
   const showComponents = useScrollVisibility();
@@ -40,8 +40,6 @@ function LearnTutorialContainer() {
     },
     [setCurrentStep]
   );
-
-  const memoizedTutorialStep = useMemo(() => currentStep, [currentStep]);
 
   return (
     <>
@@ -96,7 +94,7 @@ function LearnTutorialContainer() {
             hasNextPage={false}
             isFetchingNextPage={false}
             onFetchProgress={noop}
-            tutorialStep={memoizedTutorialStep}
+            tutorialStep={currentStep}
           />
         </SectionGroup>
       </globalS.Layout>
@@ -105,5 +103,3 @@ function LearnTutorialContainer() {
     </>
   );
 }
-
-export default memo(LearnTutorialContainer);

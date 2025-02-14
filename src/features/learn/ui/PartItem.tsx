@@ -1,6 +1,6 @@
 import * as S from '@features/learn/ui/styles';
 import toast from 'react-hot-toast';
-import { useRef, useEffect, memo } from 'react';
+import { useRef, useEffect, useCallback, memo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useElementRect } from '@/features/intro/service/hooks';
 import usePopover from '@hooks/usePopover';
@@ -19,7 +19,7 @@ interface PartItemProps {
   onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
 }
 
-export default memo(function PartItem({
+function PartItem({
   part,
   globalIndex,
   isLastButton,
@@ -99,15 +99,28 @@ export default memo(function PartItem({
     });
   };
 
-  <S.GoToQuizButton
-    onClick={handleGoToQuiz}
-    $fontColor={COLORS[globalIndex % 4]}
-  >
-    시작
-  </S.GoToQuizButton>;
-
   const { gridColumn, gridRow } = getPartGridPosition(globalIndex);
+
   const { getClientRectRefCallback } = useElementRect();
+
+  const quizPopoverCallbackRef = useCallback((el: HTMLDivElement) => {
+    if (globalIndex === 0) {
+      getClientRectRefCallback<HTMLDivElement>(el);
+    }
+    popoverRef.current = el;
+  }, []);
+
+  const getKeyboardButtonId = () => {
+    if (globalIndex === 1 && isLocked) return 'locked-keycap-button';
+    if (globalIndex === 0) return 'keycap-button';
+    return undefined;
+  };
+
+  const getKeyboardButtonRef = () => {
+    if (globalIndex === 1 && isLocked) return getClientRectRefCallback;
+    if (globalIndex === 0) return getClientRectRefCallback;
+    return null;
+  };
 
   return (
     <S.KeyboardButtonWrapper
@@ -119,20 +132,8 @@ export default memo(function PartItem({
       )}
 
       <S.KeyboardButton
-        id={
-          globalIndex === 1 && isLocked
-            ? 'locked-keycap-button'
-            : globalIndex === 0
-            ? 'keycap-button'
-            : undefined
-        }
-        ref={
-          globalIndex === 1 && isLocked
-            ? getClientRectRefCallback
-            : globalIndex === 0
-            ? getClientRectRefCallback
-            : null
-        }
+        id={getKeyboardButtonId()}
+        ref={getKeyboardButtonRef()}
         onClick={handleButtonClick}
         $isLocked={isLocked}
         disabled={isLocked}
@@ -143,12 +144,7 @@ export default memo(function PartItem({
       {isOpen && (
         <S.SpeechBubble
           id="quiz-popover"
-          ref={el => {
-            if (globalIndex === 0) {
-              getClientRectRefCallback(el);
-            }
-            popoverRef.current = el;
-          }}
+          ref={quizPopoverCallbackRef}
           onClick={e => e.stopPropagation()}
           $bgColor={COLORS[globalIndex % 4]}
         >
@@ -163,4 +159,6 @@ export default memo(function PartItem({
       )}
     </S.KeyboardButtonWrapper>
   );
-});
+}
+
+export default memo(PartItem);
