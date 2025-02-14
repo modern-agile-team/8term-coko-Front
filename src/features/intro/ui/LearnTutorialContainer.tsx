@@ -30,8 +30,6 @@ function LearnTutorialContainer() {
     enabled: !showTutorial,
   });
 
-  console.log('showTutorial', showTutorial);
-
   // LearnTutorial에서 step이 바뀔 때 호출될 함수
   const handleStepChange = useCallback(
     (step: string) => {
@@ -60,7 +58,10 @@ function LearnTutorialContainer() {
       </globalS.Wrapper>
 
       <globalS.Layout>
-        <S.ScreenReaderOnlyTitle id="start" ref={getClientRectRefCallback}>
+        <S.ScreenReaderOnlyTitle
+          id="screen-reader-start"
+          ref={getClientRectRefCallback}
+        >
           코코와 함께 튜토리얼 진행하기!
         </S.ScreenReaderOnlyTitle>
 

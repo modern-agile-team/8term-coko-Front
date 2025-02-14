@@ -146,17 +146,18 @@ export const QUIZ_TUTORIAL_STEP: TutorialStep[] = [
 export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
   {
     name: '코코 자기소개1',
-    id: 'start',
+    id: 'screen-reader-start',
     nextStep: '코코 자기소개2',
     description: `안녕!
     나는 *B*코코*B*야!`,
   },
   {
     name: '코코 자기소개2',
-    id: 'start',
+    id: 'screen-reader-start',
     nextStep: '전체 & 파트 진행도 설명1',
     description: `지금부터 내가
-    우리 *Y*'코코'사이트'*Y*에 대해 설명 해줄게!`,
+    우리의 *B*'코코'*B* *Y*사이트*Y*에 대해
+    설명 해줄게!`,
   },
   {
     name: '전체 & 파트 진행도 설명1',
