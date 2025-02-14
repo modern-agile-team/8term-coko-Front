@@ -4,6 +4,7 @@ import { create } from 'zustand';
 interface State {
   isMyItemsVisible: boolean;
   query: CosmeticItemOption['query'];
+  currentPage: number;
   cartListCosmeticItems: CosmeticItem[];
   equippedCosmeticItems: Record<number, { image: string }>;
 }
@@ -20,6 +21,7 @@ interface Actions {
     image: string;
   }) => void;
   resetEquippedItem: () => void;
+  setCurrentPage: (currentPage: number) => void;
 }
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
@@ -27,6 +29,7 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
   query: { mainCategoryId: 1, subCategoryId: 6 },
   cartListCosmeticItems: [],
   equippedCosmeticItems: {},
+  currentPage: 0,
 
   toggleIsMyItemsVisible: () =>
     set(state => ({ isMyItemsVisible: !state.isMyItemsVisible })),
@@ -71,4 +74,5 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
     }),
 
   resetEquippedItem: () => set(() => ({ equippedCosmeticItems: {} })),
+  setCurrentPage: currentPage => set(() => ({ currentPage })),
 }));

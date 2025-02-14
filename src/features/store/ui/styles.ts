@@ -55,6 +55,7 @@ export const ItemImage = styled.img`
 export const PaginationDiv = styled.div`
   width: 276px;
   display: flex;
+  justify-content: center;
   gap: 57px;
   color: #a5ecf0;
   font-size: 15px;

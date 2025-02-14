@@ -12,6 +12,7 @@ import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import toast from 'react-hot-toast';
 import { isAxiosError } from 'axios';
 import PurchaseModal from '@/features/store/ui/PurchaseModal';
+import PageNavBar from '@/features/store/ui/PageNavBar';
 
 interface ItemContainerProps {
   cosmeticItem: CosmeticItem[];
@@ -26,7 +27,6 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
 
   const [selectedItem, setSelectedItem] = useState<CosmeticItem | null>(null);
   const [isShowModal, setIsShowModal] = useState(false);
-  const [currentPage, setCurrentPage] = useState<number>();
 
   const { mutate: updateEquippedItems } =
     useUserCosmeticItemsQuery.updateEquippedItems();
@@ -94,18 +94,7 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
           </StoreItem>
         ))}
       </S.ItemContainer>
-      {/* 추후 하드코딩 수정 */}
-      <S.PaginationDiv>
-        {[1, 2, 3, 4, 5].map(page => (
-          <S.PaginationButton
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            $isSelect={page === currentPage}
-          >
-            {page}
-          </S.PaginationButton>
-        ))}
-      </S.PaginationDiv>
+      <PageNavBar />
     </>
   );
 }

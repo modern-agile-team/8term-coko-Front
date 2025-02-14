@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { CombinationSection, TextBlockButton } from './styles';
 import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useDnDStore } from '@store/useDnDStore';
-import compact from '@utils/compact';
 import type { Quiz } from '@features/quiz/types';
 import { useElementRect } from '@/features/tutorial/service/hooks';
+import { compact } from '@modern-kit/utils';
 
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];
