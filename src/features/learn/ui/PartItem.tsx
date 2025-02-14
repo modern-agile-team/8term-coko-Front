@@ -6,7 +6,7 @@ import { useElementRect } from '@/features/intro/service/hooks';
 import usePopover from '@hooks/usePopover';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
-import { COLORS } from '@features/learn/constants';
+import { COLORS, TUTORIAL_STEPS } from '@features/learn/constants';
 import type { Part, Section } from '@features/learn/types';
 
 interface PartItemProps {
@@ -36,14 +36,8 @@ export default memo(function PartItem({
       excludeRefs: [keyboardButtonWrapperRef],
     });
 
-  const tutorialSteps = new Set([
-    '퀴즈 팝오버 설명1',
-    '퀴즈 팝오버 설명2',
-    '퀴즈 팝오버 설명3',
-  ]);
-
   useEffect(() => {
-    if (tutorialStep && tutorialSteps.has(tutorialStep) && globalIndex === 0) {
+    if (tutorialStep && TUTORIAL_STEPS.has(tutorialStep) && globalIndex === 0) {
       openPopover();
     } else {
       closePopover();

@@ -41,3 +41,9 @@ export const PROGRESS_COLORS = {
     icon: '📌',
   },
 } as const;
+
+export const TUTORIAL_STEPS = new Set([
+  '퀴즈 팝오버 설명1',
+  '퀴즈 팝오버 설명2',
+  '퀴즈 팝오버 설명3',
+]);
