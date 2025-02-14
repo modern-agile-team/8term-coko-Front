@@ -24,8 +24,23 @@ export const TutorialClearWrapper = styled.div`
   box-shadow: 0 11px #e5e5e5;
 `;
 
-export const HighlightSpan = styled.span`
-  color: #ff0000;
+export const RedHighlight = styled.span`
+  color: #fe0f0f;
+  font-weight: 700;
+`;
+
+export const BlueHighlight = styled.span`
+  color: #00dbe8;
+  font-weight: 700;
+`;
+
+export const GreenHighlight = styled.span`
+  color: #2ad363;
+  font-weight: 700;
+`;
+
+export const YellowHighlight = styled.span`
+  color: #ffb53d;
   font-weight: 700;
 `;
 
@@ -44,7 +59,8 @@ export const TutorialPopupWrapper = styled.div<{
     }
   }}
   > p {
-    color: #19191b;
+    color: #ffffff;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
     white-space: pre-line;
     position: absolute;
     font-weight: 700;
@@ -61,7 +77,6 @@ export const TutorialPopupWrapper = styled.div<{
     }
     > p {
       position: relative;
-      background: #ffefaa;
       top: initial;
       left: initial;
     }
