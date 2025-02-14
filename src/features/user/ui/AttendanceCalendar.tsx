@@ -4,13 +4,15 @@ import {
   getDayFromDate,
   getCurrentMonth,
   getCurrentYear,
+  getCurrentDay,
 } from '@/features/user/service/utils';
 import {
   AttendanceCalendarBoard,
   AttendanceDayCell,
+  AttendanceStamp,
 } from '@/features/user/ui/styles';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function AttendanceCalendar() {
@@ -24,12 +26,15 @@ export default function AttendanceCalendar() {
   const { mutate: recordAttendance } =
     useUserAttendanceQuery.recordAttendance();
 
+  const [isTodayAttendance, setIsTodayAttendance] = useState(false);
+
   const days = generateDaysInMonth();
 
   useEffect(() => {
     if (!isUserAttendance) {
       recordAttendance(undefined, {
         onSuccess: () => {
+          setIsTodayAttendance(true);
           toast('출석체크 성공!');
         },
       });
@@ -49,7 +54,12 @@ export default function AttendanceCalendar() {
     <AttendanceCalendarBoard>
       {days.map(day => (
         <AttendanceDayCell key={day}>
-          {stampDaysMap[day] && <img src={getImageUrl('출석체크도장.svg')} />}
+          {stampDaysMap[day] && (
+            <AttendanceStamp
+              src={getImageUrl('출석체크도장.svg')}
+              $isTodayAttendance={isTodayAttendance}
+            />
+          )}
           <p>{day}</p>
         </AttendanceDayCell>
       ))}
