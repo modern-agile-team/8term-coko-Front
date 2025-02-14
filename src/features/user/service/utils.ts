@@ -8,12 +8,6 @@ export const getCurrentMonth = () => {
   return today.getMonth() + 1;
 };
 
-export const getCurrentDay = () => {
-  const today = new Date();
-
-  return Number(String(today.getDate()).padStart(2, '0'));
-};
-
 export const getLastDayOfMonth = (): number => {
   const targetYear = getCurrentYear();
   const targetMonth = getCurrentMonth();

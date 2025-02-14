@@ -4,7 +4,6 @@ import {
   getDayFromDate,
   getCurrentMonth,
   getCurrentYear,
-  getCurrentDay,
 } from '@/features/user/service/utils';
 import {
   AttendanceCalendarBoard,
