@@ -8,7 +8,7 @@ interface LearnTutorialProps {
 }
 
 export default function LearnTutorial({ onStepChange }: LearnTutorialProps) {
-  const { Funnel, setStep, step } = useFunnel('전체 & 파트 진행도 설명1');
+  const { Funnel, setStep, step } = useFunnel('코코 자기소개1');
 
   // step이 바뀔 때마다 상위로 전달
   useEffect(() => {

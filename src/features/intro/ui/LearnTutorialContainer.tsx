@@ -60,7 +60,7 @@ function LearnTutorialContainer() {
       </globalS.Wrapper>
 
       <globalS.Layout>
-        <S.ScreenReaderOnlyTitle>
+        <S.ScreenReaderOnlyTitle id="start" ref={getClientRectRefCallback}>
           코코와 함께 튜토리얼 진행하기!
         </S.ScreenReaderOnlyTitle>
 
