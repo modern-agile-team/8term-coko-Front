@@ -1,23 +1,24 @@
-import ProgressBar from '@/features/progress/ui/ProgressBar';
-import withQuizzes from '@/features/quiz/hocs/withQuizzes';
-import { Quiz } from '@/features/quiz/types';
-import Combination from '@/features/quiz/ui/Combination';
-import MultipleChoice from '@/features/quiz/ui/MultipleChoice';
-import OXSelector from '@/features/quiz/ui/OXSelector';
-import Question from '@/features/quiz/ui/Question';
-import Result from '@/features/quiz/ui/Result';
-import ShortAnswer from '@/features/quiz/ui/ShortAnswer';
+import ProgressBar from '@features/progress/ui/ProgressBar';
+import withQuizzes from '@features/quiz/hocs/withQuizzes';
+import { Quiz } from '@features/quiz/types';
+import Combination from '@features/quiz/ui/Combination';
+import MultipleChoice from '@features/quiz/ui/MultipleChoice';
+import OXSelector from '@features/quiz/ui/OXSelector';
+import Question from '@features/quiz/ui/Question';
+import Result from '@features/quiz/ui/Result';
+import ShortAnswer from '@features/quiz/ui/ShortAnswer';
 import {
   ProgressSection,
   ResponseButton,
   SubmitSection,
-} from '@/features/quiz/ui/styles';
-import { useElementRect } from '@/features/intro/service/hooks';
-import QuizTutorial from '@/features/intro/ui/QuizTutorial';
-import QuizTutorialClear from '@/features/intro/ui/QuizTutorialClear';
-import useModal from '@/hooks/useModal';
-import { useClientQuizStore } from '@/store/useClientQuizStore';
-import isEqualArray from '@/utils/isEqualArray';
+} from '@features/quiz/ui/styles';
+import { useElementRect } from '@features/intro/service/hooks';
+import QuizTutorial from '@features/intro/ui/QuizTutorial';
+import QuizTutorialClear from '@features/intro/ui/QuizTutorialClear';
+import TutorialPromptModal from '@features/intro/ui/TutorialPromptModal';
+import useModal from '@hooks/useModal';
+import { useClientQuizStore } from '@store/useClientQuizStore';
+import isEqualArray from '@utils/isEqualArray';
 import { SwitchCase, useUnmount, useTimeout } from '@modern-kit/react';
 import { useEffect, useState } from 'react';
 
@@ -37,17 +38,19 @@ function QuizTutorialContainer({ quizzes }: TutorialProps) {
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
   const isQuizFinished = isCorrectList.length === quizzes.length;
-  const [caseName, setCaseName] = useState<'result' | 'tutorialClear'>(
-    'result'
-  );
+  const [caseName, setCaseName] = useState<
+    'result' | 'tutorialPrompt' | 'tutorialClear'
+  >('result');
   const [showTutorial, setShowTutorial] = useState(false);
 
   useTimeout(() => setShowTutorial(true), 100);
+
   useEffect(() => {
     if (isQuizFinished) {
-      setCaseName('tutorialClear');
+      setCaseName('tutorialPrompt');
     }
   }, [isCorrectList]);
+
   useUnmount(() => reset());
   const { Modal, closeModal, isShow, openModal } = useModal();
   const { getClientRectRefCallback } = useElementRect();
@@ -116,6 +119,13 @@ function QuizTutorialContainer({ quizzes }: TutorialProps) {
                 answer={answer}
                 closeModal={closeModal}
                 isQuizFinished={false}
+              />
+            ),
+            tutorialPrompt: (
+              <TutorialPromptModal
+                closeModal={() => {
+                  setCaseName('tutorialClear');
+                }}
               />
             ),
             tutorialClear: <QuizTutorialClear />,

@@ -180,6 +180,11 @@ export const TutorialPromptModalWrapper = styled.div`
 `;
 
 export const TutorialPromptModalContent = styled.div`
+  animation: ${animations.fadeInScaleUpForCenter} 0.7s ease-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
   border-radius: 10px;
