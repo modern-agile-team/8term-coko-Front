@@ -1,3 +1,4 @@
+import { animations } from '@/style/animations';
 import { media } from '@/style/media';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
@@ -169,17 +170,25 @@ export const AttendanceCalendarBoard = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 
-  > img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
   ${media.mobile} {
     padding: 2px 3px 0 3px;
     height: 200px;
     gap: 5px;
   }
+`;
+
+export const AttendanceStamp = styled.img<{ $isTodayAttendance: boolean }>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  ${({ $isTodayAttendance }) =>
+    $isTodayAttendance &&
+    css`
+      animation: ${animations.slamDown} 0.7s ease-out;
+    `}
 `;
 
 export const AttendanceDayCell = styled.span`

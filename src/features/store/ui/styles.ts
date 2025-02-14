@@ -12,6 +12,7 @@ export const ItemContainer = styled.ul<{ $category: CosmeticItem['category'] }>`
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
+
   ${({ $category }) =>
     $category === 'profile' &&
     css`
