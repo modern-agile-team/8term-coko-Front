@@ -1,5 +1,6 @@
 import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
+import { getImageNameFromUrl } from '@utils/getImageNameFromUrl';
 import { useLocation } from 'react-router-dom';
 import QuestSection from './QuestSection';
 import ProgressBar from '@features/progress/ui/ProgressBar';
@@ -18,12 +19,15 @@ export default function DailyQuest() {
   // UI 속성을 컴포넌트와 progress에 따라 동적으로 설정 (DailyQuest)
   const getDailyUIProps = (progress: number, maxProgress: number) => {
     const isComplete = progress >= maxProgress;
+    const rewardIcon = getImageUrl(
+      isComplete ? '노랑-퀘스트-보상.svg' : '노랑-퀘스트-진행.svg'
+    );
     return {
       progressBarColor: '#FFD100',
-      rewardIcon: getImageUrl(
-        isComplete ? '노랑-퀘스트-보상.svg' : '노랑-퀘스트-진행.svg'
-      ),
+      rewardIcon,
       progressBarIcon: getImageUrl('노랑-도장.svg'),
+      rewardAlt: getImageNameFromUrl(rewardIcon),
+      progressBarAlt: getImageNameFromUrl(getImageUrl('노랑-도장.svg')),
     };
   };
 
@@ -42,14 +46,16 @@ export default function DailyQuest() {
         <>
           {quests &&
             quests.map(quest => {
-              const { progressBarColor, rewardIcon, progressBarIcon } =
-                getDailyUIProps(
-                  quest.conditionProgress,
-                  quest.dailyQuest.condition
-                );
-
-              const isComplete =
-                quest.conditionProgress >= quest.dailyQuest.condition;
+              const {
+                progressBarColor,
+                rewardIcon,
+                progressBarIcon,
+                rewardAlt,
+                progressBarAlt,
+              } = getDailyUIProps(
+                quest.conditionProgress,
+                quest.dailyQuest.condition
+              );
 
               return (
                 <S.QuestWrapper key={quest.id} {...questUrlProps}>
@@ -61,7 +67,7 @@ export default function DailyQuest() {
                       <S.ProgressBarIcon
                         src={progressBarIcon}
                         {...questUrlProps}
-                        alt="일일 퀘스트 도장"
+                        alt={progressBarAlt}
                       />
                     )}
                     <ProgressBar
@@ -76,12 +82,7 @@ export default function DailyQuest() {
                       $borderRadius="20px"
                     />
                     <S.RewardIconWrapper {...questUrlProps}>
-                      <S.RewardIcon
-                        src={rewardIcon}
-                        alt={
-                          isComplete ? '일일 퀘스트 보상' : '일일 퀘스트 진행'
-                        }
-                      />
+                      <S.RewardIcon src={rewardIcon} alt={rewardAlt} />
                     </S.RewardIconWrapper>
                   </S.ProgressBarWrapper>
                 </S.QuestWrapper>

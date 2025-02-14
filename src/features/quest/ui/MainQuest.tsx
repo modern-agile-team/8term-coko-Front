@@ -1,5 +1,6 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
+import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import QuestSection from './QuestSection';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { MainQuest } from '@features/quest/types';
@@ -13,12 +14,15 @@ export default function MainQuest() {
   // UI 속성을 컴포넌트와 progress에 따라 동적으로 설정 (MainQuest)
   const getMainUIProps = (progress: number, maxProgress: number) => {
     const isComplete = progress >= maxProgress;
+    const rewardIcon = getImageUrl(
+      isComplete ? '빨강-퀘스트-보상.svg' : '빨강-퀘스트-진행.svg'
+    );
     return {
       progressBarColor: '#F9012F',
-      rewardIcon: getImageUrl(
-        isComplete ? '빨강-퀘스트-보상.svg' : '빨강-퀘스트-진행.svg'
-      ),
+      rewardIcon,
       progressBarIcon: getImageUrl('빨강-도장.svg'),
+      rewardAlt: getImageNameFromUrl(rewardIcon),
+      progressBarAlt: getImageNameFromUrl(getImageUrl('빨강-도장.svg')),
     };
   };
 
@@ -27,10 +31,13 @@ export default function MainQuest() {
   return (
     <QuestSection title="메인 퀘스트" isLearn={false} isQuest={true}>
       {quests.map(quest => {
-        const { progressBarColor, rewardIcon, progressBarIcon } =
-          getMainUIProps(quest.progress, quest.maxProgress);
-
-        const isComplete = quest.progress >= quest.maxProgress;
+        const {
+          progressBarColor,
+          rewardIcon,
+          progressBarIcon,
+          rewardAlt,
+          progressBarAlt,
+        } = getMainUIProps(quest.progress, quest.maxProgress);
 
         return (
           <S.QuestWrapper key={quest.id} {...questUrlProps}>
@@ -40,7 +47,7 @@ export default function MainQuest() {
                 <S.ProgressBarIcon
                   src={progressBarIcon}
                   {...questUrlProps}
-                  alt="메인 퀘스트 도장"
+                  alt={progressBarAlt}
                 />
               )}
               <ProgressBar
@@ -53,10 +60,7 @@ export default function MainQuest() {
                 $borderRadius="20px"
               />
               <S.RewardIconWrapper {...questUrlProps}>
-                <S.RewardIcon
-                  src={rewardIcon}
-                  alt={isComplete ? '메인 퀘스트 보상' : '메인 퀘스트 진행'}
-                />
+                <S.RewardIcon src={rewardIcon} alt={rewardAlt} />
               </S.RewardIconWrapper>
             </S.ProgressBarWrapper>
           </S.QuestWrapper>
