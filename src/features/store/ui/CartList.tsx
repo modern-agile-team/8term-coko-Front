@@ -1,7 +1,7 @@
 import * as S from './styles';
 import StoreItem from './StoreItem';
 import type { CosmeticItem } from '@features/store/types';
-import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { useMemo } from 'react';
 import useModal from '@/hooks/useModal';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';

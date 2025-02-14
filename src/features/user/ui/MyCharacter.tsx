@@ -1,5 +1,5 @@
 import { getImageUrl } from '@utils/getImageUrl';
-import { MyCharacterImage } from './styles';
+
 import * as S from './styles';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import { SkeletonBase } from '@/common/layout/styles';
@@ -23,11 +23,13 @@ const characterEquipMapping: Record<
   3: S.CharacterHat,
   4: S.CharacterGlasses,
   5: S.CharacterBeard,
-};
+  8: S.MyCharacterImage,
+} as const;
 
 export default function MyCharacter() {
   const { data: userEquippedItems } =
     useUserCosmeticItemsQuery.getEquippedItem();
+
   if (!userEquippedItems) {
     return <SkeletonBase />;
   }
@@ -50,7 +52,6 @@ export default function MyCharacter() {
 
   return (
     <S.MyCharacterBox>
-      <MyCharacterImage src={getImageUrl('벗은코코.svg')} />
       <S.CharacterEquipContainer>
         {renderEquipItems()}
       </S.CharacterEquipContainer>

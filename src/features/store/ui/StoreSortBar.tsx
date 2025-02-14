@@ -1,7 +1,7 @@
 import { CosmeticItemOption } from '@/features/store/types';
 import { StoreSortDropDown } from '@/features/store/ui/styles';
 import { FilterButton } from '@/pages/store/styles';
-import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { useOutsidePointerDown, useToggle } from '@modern-kit/react';
 import { useEffect, useState } from 'react';
 

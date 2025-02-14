@@ -3,7 +3,7 @@ import MyCharacter from '@/features/user/ui/MyCharacter';
 import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
 import useModal from './../../../hooks/useModal';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
-import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import ProfileImage from '@/features/user/ui/ProfileImage';
 import useUserStore from './../../../store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
@@ -31,6 +31,14 @@ export default function StoreMyCharacterSection() {
     return isMyItemsVisible ? <MyCharacter /> : <PreviewMyCharacter />;
   };
 
+  const handleRest = () => {
+    if (isMyItemsVisible) {
+      resetEquippedItemMutate();
+      return;
+    }
+    resetEquippedItem();
+  };
+
   return (
     <>
       <Modal isShow={isShow} outSideClickCallback={closeModal}>
@@ -52,10 +60,7 @@ export default function StoreMyCharacterSection() {
           <StoreButton
             $backgroundColor="#FF4949"
             $borderColor="#E8080C"
-            onClick={() => {
-              resetEquippedItemMutate();
-              resetEquippedItem();
-            }}
+            onClick={handleRest}
           >
             초기화
           </StoreButton>

@@ -3,7 +3,7 @@ import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 import { useCosmeticItemQuery } from '@/features/store/queries';
 import { CosmeticItem } from '@/features/store/types';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
-import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { SubtractInjectedProps } from '@/types';
 import { FC } from 'react';
 

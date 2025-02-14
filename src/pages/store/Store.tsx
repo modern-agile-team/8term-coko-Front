@@ -11,7 +11,7 @@ import {
 } from '@/features/store/constants';
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
 import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
-import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 
 export default function Store() {

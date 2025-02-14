@@ -1,5 +1,5 @@
 import { getImageUrl } from '@utils/getImageUrl';
-import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import * as S from '@/features/user/ui/styles';
 
 export default function PreviewMyCharacter() {
@@ -8,7 +8,13 @@ export default function PreviewMyCharacter() {
   return (
     <>
       <S.MyCharacterBox>
-        <S.MyCharacterImage src={getImageUrl('벗은코코.svg')} />
+        {equippedCosmeticItems[8] ? (
+          <S.MyCharacterImage
+            src={getImageUrl(equippedCosmeticItems[8].image)}
+          />
+        ) : (
+          <S.MyCharacterImage src={getImageUrl('벗은코코.svg')} />
+        )}
         <S.CharacterEquipContainer>
           {equippedCosmeticItems[3] && (
             <S.CharacterHat src={getImageUrl(equippedCosmeticItems[3].image)} />

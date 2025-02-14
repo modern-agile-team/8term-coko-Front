@@ -4,13 +4,14 @@ import StoreItem from './StoreItem';
 import { CosmeticItem } from '@/features/store/types';
 import withCosmeticItem from '@/features/store/hocs/withCosmeticItem';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { useCosmeticItemStore } from '@/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { EquipButton } from '@/features/user/ui/styles';
 import useModal from '@/hooks/useModal';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import toast from 'react-hot-toast';
 import { isAxiosError } from 'axios';
+import PurchaseModal from '@/features/store/ui/PurchaseModal';
 
 interface ItemContainerProps {
   cosmeticItem: CosmeticItem[];
@@ -24,10 +25,9 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
   } = useCosmeticItemStore();
 
   const [selectedItem, setSelectedItem] = useState<CosmeticItem | null>(null);
+  const [isShowModal, setIsShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>();
 
-  const { Modal, isShow, openModal, closeModal } = useModal();
-  const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
   const { mutate: updateEquippedItems } =
     useUserCosmeticItemsQuery.updateEquippedItems();
 
@@ -42,48 +42,15 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
 
   return (
     <>
-      <Modal isShow={isShow} outSideClickCallback={closeModal}>
-        {selectedItem && (
-          <CosmeticItemCheckOut>
-            <CosmeticItemCheckOut.DetailBox>
-              <>
-                <CosmeticItemCheckOut.StoreItem
-                  name={selectedItem.name}
-                  image={selectedItem.image}
-                  price={selectedItem.price}
-                />
-
-                <p>구매할래?</p>
-              </>
-            </CosmeticItemCheckOut.DetailBox>
-            <CosmeticItemCheckOut.ConfirmButtonList
-              onAccept={() => {
-                purchaseItem(
-                  { itemIds: [selectedItem.id] },
-                  {
-                    onSuccess: () => {
-                      toast.success('아이템 구매 성공!');
-                      closeModal();
-                    },
-                    onError: error => {
-                      if (isAxiosError(error)) {
-                        if (error.response?.status === 401) {
-                          toast.error('로그인이 필요한 작업입니다.');
-                        }
-                        if (error.response?.status === 400) {
-                          toast.error('포인트가 부족해요!');
-                        }
-                      }
-                    },
-                    onSettled: () => closeModal(),
-                  }
-                );
-              }}
-              onReject={closeModal}
-            />
-          </CosmeticItemCheckOut>
-        )}
-      </Modal>
+      {selectedItem && (
+        <PurchaseModal
+          closeModal={() => {
+            setIsShowModal(false);
+          }}
+          isShow={isShowModal}
+          selectCosmeticItem={selectedItem}
+        />
+      )}
       <S.ItemContainer>
         {cosmeticItem.map(item => (
           <StoreItem key={item.id} onClick={() => handleEquipPreview(item)}>
@@ -118,7 +85,7 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
                     onClick={e => {
                       setSelectedItem(item);
                       e.stopPropagation();
-                      openModal();
+                      setIsShowModal(true);
                     }}
                   />
                 </>
