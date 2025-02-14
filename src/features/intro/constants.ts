@@ -237,6 +237,12 @@ export const LEARN_TUTORIAL_STEP: TutorialStep[] = [
   },
 ] as const;
 
+export const LEARN_TUTORIAL_POPOVER_STEPS = new Set([
+  '퀴즈 팝오버 설명1',
+  '퀴즈 팝오버 설명2',
+  '퀴즈 팝오버 설명3',
+]);
+
 export const LEARN_TUTORIAL_SECTIONS_PARTS: Section[] = [
   {
     id: 2,

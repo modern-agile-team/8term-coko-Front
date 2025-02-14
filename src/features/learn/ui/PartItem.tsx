@@ -6,7 +6,8 @@ import { useElementRect } from '@/features/intro/service/hooks';
 import usePopover from '@hooks/usePopover';
 import getPartGridPosition from '@features/learn/service/getPartGridPosition';
 import { getImageUrl } from '@utils/getImageUrl';
-import { COLORS, TUTORIAL_STEPS } from '@features/learn/constants';
+import { COLORS } from '@features/learn/constants';
+import { LEARN_TUTORIAL_POPOVER_STEPS } from '@features/intro/constants';
 import type { Part, Section } from '@features/learn/types';
 
 interface PartItemProps {
@@ -37,7 +38,11 @@ export default memo(function PartItem({
     });
 
   useEffect(() => {
-    if (tutorialStep && TUTORIAL_STEPS.has(tutorialStep) && globalIndex === 0) {
+    if (
+      tutorialStep &&
+      LEARN_TUTORIAL_POPOVER_STEPS.has(tutorialStep) &&
+      globalIndex === 0
+    ) {
       openPopover();
     } else {
       closePopover();
