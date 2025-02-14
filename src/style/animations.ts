@@ -57,4 +57,9 @@ export const animations = {
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0); }
 `,
+  slamDown: keyframes`
+  0% { transform: translateY(-100%) scale(0.9); opacity: 0;}
+  70% { transform: translateY(0) scale(1.2); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+`,
 } as const;
