@@ -22,12 +22,10 @@ export default function TutorialPromptModal({
   });
 
   const handleGoToLearnTutorial = () => {
-    // closeModal();
     navigate('/learn/tutorial');
   };
 
   const handleGoToLearn = () => {
-    // closeModal();
     navigate('/learn');
   };
 
