@@ -1,7 +1,6 @@
-import { PropsWithChildren, useEffect } from 'react';
-import ModalPortal from '../../ModalPortal';
-import { OverRayDiv } from '@/common/layout/styles';
-import OverRay from '@/common/layout/OverRay';
+import { PropsWithChildren } from 'react';
+import ModalPortal from '@/ModalPortal';
+import OverRay from '@common/layout/OverRay';
 
 interface ModalProps {
   isShow: boolean;
@@ -16,7 +15,7 @@ export default function Modal({
       {isShow && (
         <OverRay
           overRayStyle={{
-            $backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            $backgroundColor: 'rgba(0, 0, 0, 0.4)',
             $mixBlendMode: 'normal',
           }}
         >

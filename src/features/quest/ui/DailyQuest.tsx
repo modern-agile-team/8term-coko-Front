@@ -11,7 +11,7 @@ import { isLoggedIn } from '@features/user/service/authUtils';
 export default function DailyQuest() {
   const location = useLocation();
   const { user } = useUserStore();
-  const isLearn = location.pathname === '/learn';
+  const isLearn = location.pathname.startsWith('/learn');
   const isQuest = location.pathname === '/quest';
 
   const { data: quests } = useUserQuestQuery.getDailyQuest();

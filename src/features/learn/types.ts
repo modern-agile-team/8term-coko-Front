@@ -4,6 +4,8 @@ export interface Section {
   parts: Part[];
 }
 
+export type SectionWithoutParts = Omit<Section, 'parts'>;
+
 export interface SectionPagination {
   sections: Section[];
   nextCursor: number | null;

@@ -70,8 +70,8 @@ export const SectionButton = styled.button`
   height: 120px;
 
   img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 120px;
 
     ${media.mobile} {
       width: calc((100vw - 80px) * 0.15);

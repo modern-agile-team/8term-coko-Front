@@ -3,7 +3,7 @@ import { BadgeContainer, BadgeList } from '@/features/intro/ui/styles';
 import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { useHover } from '@modern-kit/react';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback } from 'react';
 
 export default function BadgeIntro() {
   const { ref: containerRef, isHovered } = useHover<HTMLDivElement>({

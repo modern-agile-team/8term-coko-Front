@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { media } from '@style/media';
 import { PROGRESS_COLORS } from '@features/learn/constants';
 interface ScrollableContainerProps {
-  $show: boolean;
-  $isLoggedIn: boolean;
+  $show?: boolean;
+  $isLoggedIn?: boolean;
 }
 
 export const ScrollableContainer = styled.div<ScrollableContainerProps>`
@@ -50,9 +50,7 @@ export const ScreenReaderOnlyTitle = styled.h1`
 export const ProgressBarWrapper = styled.div`
   position: fixed;
   top: 20px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  left: calc(100vw / 2 - 319.5px);
   width: 639px;
   display: flex;
   flex-direction: column;
@@ -60,12 +58,14 @@ export const ProgressBarWrapper = styled.div`
 
   ${media.mobile} {
     top: 35px;
-    margin: 0 50px;
-    width: calc(100% - 100px);
+    width: calc(100vw - 100px);
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 639px;
   }
 `;
 
-export const ProgressLabel = styled.span<{ $isPart: boolean }>`
+export const ProgressLabel = styled.span<{ $isPart?: boolean }>`
   font-size: 14px;
   color: ${({ $isPart }) =>
     $isPart ? PROGRESS_COLORS.part.text : PROGRESS_COLORS.global.text};

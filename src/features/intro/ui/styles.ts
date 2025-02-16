@@ -24,11 +24,31 @@ export const TutorialClearWrapper = styled.div`
   box-shadow: 0 11px #e5e5e5;
 `;
 
+export const RedHighlight = styled.span`
+  color: #fe0f0f;
+  font-weight: 700;
+`;
+
+export const BlueHighlight = styled.span`
+  color: #00dbe8;
+  font-weight: 700;
+`;
+
+export const GreenHighlight = styled.span`
+  color: #2ad363;
+  font-weight: 700;
+`;
+
+export const YellowHighlight = styled.span`
+  color: #ffb53d;
+  font-weight: 700;
+`;
+
 export const TutorialPopupWrapper = styled.div<{
   $popupPosition: DOMRect | null;
 }>`
   position: absolute;
-  z-index: 1001;
+  z-index: 10001;
   pointer-events: none;
   user-select: none;
   ${({ $popupPosition }) => {
@@ -39,8 +59,11 @@ export const TutorialPopupWrapper = styled.div<{
     }
   }}
   > p {
-    white-space: pre-line;
+    color: #ffffff;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    white-space: pre-wrap;
     position: absolute;
+    font-weight: 700;
     top: 150px;
     left: 120px;
   }
@@ -54,7 +77,6 @@ export const TutorialPopupWrapper = styled.div<{
     }
     > p {
       position: relative;
-      color: #fff;
       top: initial;
       left: initial;
     }
@@ -146,5 +168,42 @@ export const BadgeList = styled.ul`
   img {
     width: 100%;
     height: 100%;
+  }
+`;
+
+export const TutorialPromptModalWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TutorialPromptModalContent = styled.div`
+  animation: ${animations.fadeInScaleUpForCenter} 0.7s ease-out;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+
+  > h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  > button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    &:hover {
+      background: #0056b3;
+    }
   }
 `;

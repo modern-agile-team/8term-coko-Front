@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useRectStore } from './../../../store/useRectStore';
+import { useRectStore } from '@store/useRectStore';
 
 export const useElementRect = () => {
   const { setRect } = useRectStore();

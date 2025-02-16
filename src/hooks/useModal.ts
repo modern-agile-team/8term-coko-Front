@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Modal from '../common/layout/Modal';
+import Modal from '@common/layout/Modal';
 /**
  * @description 모달을 쉽게 띄우기 위해 만들어진 커스텀 훅 입니다.
  *
