@@ -9,7 +9,7 @@ import type {
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
-import { CosmeticItem } from '@/features/store/types';
+import { CosmeticItem, CosmeticItemOption } from '@/features/store/types';
 
 export const usersApis = {
   putQuizzesProgress: ({
@@ -95,8 +95,19 @@ export const usersApis = {
 };
 
 export const userItemsApi = {
-  getItems: async (): Promise<CosmeticItem[]> => {
-    const response = await api.get('/users/me/items');
+  getItems: async (
+    params?: CosmeticItemOption['query'] & {
+      page: number;
+      limit: number;
+    }
+  ): Promise<{
+    totalCount: number;
+    totalPage: number;
+    currentPage: number;
+    contents: CosmeticItem[];
+  }> => {
+    const response = await api.get('/users/me/items', { params });
+    console.log(response);
     return response.data;
   },
   putResetEquippedItems: async (): Promise<void> =>

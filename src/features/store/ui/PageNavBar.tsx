@@ -4,17 +4,17 @@ import { generatePaginationPages } from '@/utils/generatePaginationPages';
 import { useMediaQuery } from '@modern-kit/react';
 import { isNumber } from '@modern-kit/utils';
 
-export default function PageNavBar() {
+interface PageNavBarProps {
+  totalPage: number;
+}
+export default function PageNavBar({ totalPage }: PageNavBarProps) {
   const { currentPage, setCurrentPage, query } = useCosmeticItemStore();
-  const isMobile = useMediaQuery('(min-width: 768px)');
-  const limit = isMobile ? 8 : 4;
-  console.log({ ...query, currentPage, limit });
 
   return (
     <PaginationDiv>
       {generatePaginationPages({
         currentPage,
-        totalPage: 300,
+        totalPage,
       }).map(page => {
         if (isNumber(page)) {
           return (
@@ -27,6 +27,7 @@ export default function PageNavBar() {
             </PaginationButton>
           );
         }
+
         return page;
       })}
     </PaginationDiv>

@@ -6,19 +6,23 @@ import withCosmeticItem from '@/features/store/hocs/withCosmeticItem';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { EquipButton } from '@/features/user/ui/styles';
-import useModal from '@/hooks/useModal';
-import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
-import toast from 'react-hot-toast';
-import { isAxiosError } from 'axios';
 import PurchaseModal from '@/features/store/ui/PurchaseModal';
 import PageNavBar from '@/features/store/ui/PageNavBar';
 
 interface ItemContainerProps {
-  cosmeticItem: CosmeticItem[];
+  totalCount: number;
+  totalPage: number;
+  currentPage: number;
+  contents: CosmeticItem[];
 }
 
-function ItemContainer({ cosmeticItem }: ItemContainerProps) {
+function ItemContainer({
+  totalCount,
+  totalPage,
+  currentPage,
+  contents,
+}: ItemContainerProps) {
   const {
     cartListAddCosmeticItems,
     isMyItemsVisible,
@@ -34,7 +38,7 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
   const handleEquipPreview = (item: CosmeticItem) => {
     if (!isMyItemsVisible) {
       toggleEquippedCosmeticItems({
-        subCategoryid: item.subCategoryId,
+        subCategoryId: item.subCategoryId,
         image: item.image,
       });
     }
@@ -52,7 +56,7 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
         />
       )}
       <S.ItemContainer>
-        {cosmeticItem.map(item => (
+        {contents.map(item => (
           <StoreItem key={item.id} onClick={() => handleEquipPreview(item)}>
             <StoreItem.Header name={item.name} />
             <StoreItem.Image image={item.image} />
@@ -94,7 +98,7 @@ function ItemContainer({ cosmeticItem }: ItemContainerProps) {
           </StoreItem>
         ))}
       </S.ItemContainer>
-      <PageNavBar />
+      <PageNavBar totalPage={totalPage} />
     </>
   );
 }

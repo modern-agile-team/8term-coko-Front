@@ -6,9 +6,13 @@ import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { SubtractInjectedProps } from '@/types';
 import { FC } from 'react';
+import { useMediaQuery } from '@modern-kit/react';
 
 interface InjectedProps {
-  cosmeticItem: CosmeticItem[];
+  totalCount: number;
+  totalPage: number;
+  currentPage: number;
+  contents: CosmeticItem[];
 }
 
 const withCosmeticItem = <P extends object>(
@@ -17,11 +21,22 @@ const withCosmeticItem = <P extends object>(
   const ComponentWithCosmeticItem: FC<
     SubtractInjectedProps<P, InjectedProps>
   > = ({ ...rest }) => {
-    const { isMyItemsVisible } = useCosmeticItemStore();
+    const { isMyItemsVisible, currentPage, query } = useCosmeticItemStore();
+
+    const isMobile = useMediaQuery('(min-width: 768px)');
+    const limit = isMobile ? 8 : 4;
+
     const { data: cosmeticItem, isLoading } =
-      useCosmeticItemQuery.getCosmeticItemByPage(!isMyItemsVisible);
+      useCosmeticItemQuery.getCosmeticItemByPage({
+        isFetching: !isMyItemsVisible,
+        params: { page: currentPage, ...query, limit },
+      });
+
     const { data: userCosmeticItem, isLoading: userIsLoading } =
-      useUserCosmeticItemsQuery.getMyItems({ isMyItemsVisible });
+      useUserCosmeticItemsQuery.getMyItems({
+        isFetching: isMyItemsVisible,
+        params: { page: currentPage, ...query, limit },
+      });
 
     if (isLoading || userIsLoading) {
       return <SkeletonBase width="90%" height="80%" />;
@@ -32,8 +47,15 @@ const withCosmeticItem = <P extends object>(
     if (!finalData) {
       return <SkeletonBase width="90%" height="80%" />;
     }
-
-    return <WrappedComponent {...(rest as P)} cosmeticItem={finalData} />;
+    return (
+      <WrappedComponent
+        {...(rest as P)}
+        contents={finalData.contents}
+        currentPage={finalData.currentPage}
+        totalPage={finalData.totalPage}
+        totalCount={finalData.totalCount}
+      />
+    );
   };
   return ComponentWithCosmeticItem;
 };

@@ -10,6 +10,7 @@ import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
+import { CosmeticItemOption } from '@/features/store/types';
 
 export const userKeys = {
   all: ['users'] as const,
@@ -228,20 +229,30 @@ export const useUserAttendanceQuery = {
 };
 
 export const useUserCosmeticItemsQuery = {
-  getMyItems: (params: { isMyItemsVisible: boolean }) =>
+  getMyItems: ({
+    params,
+    isFetching,
+  }: {
+    params: CosmeticItemOption['query'] & {
+      page: number;
+      limit: number;
+    };
+    isFetching: boolean;
+  }) =>
     useQuery({
       queryKey: userKeys.cosmeticItems.root(),
-      queryFn: userItemsApi.getItems,
-      enabled: params.isMyItemsVisible,
+      queryFn: () => userItemsApi.getItems(params),
+      enabled: isFetching,
     }),
   getEquippedItem: () => {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
-      queryFn: userItemsApi.getItems,
+      queryFn: () => userItemsApi.getItems(),
       enabled: isLoggedIn(user),
       select(equippedItems) {
-        return equippedItems.filter(item => item.isEquipped);
+        console.log(equippedItems);
+        return equippedItems.contents.filter(item => item.isEquipped);
       },
     });
   },

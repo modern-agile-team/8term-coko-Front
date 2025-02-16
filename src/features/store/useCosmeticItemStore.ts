@@ -14,10 +14,10 @@ interface Actions {
   cartListAddCosmeticItems: (cosmeticItem: CosmeticItem) => void;
   removeCosmeticItemById: (id: number) => void;
   toggleEquippedCosmeticItems: ({
-    subCategoryid,
+    subCategoryId,
     image,
   }: {
-    subCategoryid: number;
+    subCategoryId: number;
     image: string;
   }) => void;
   resetEquippedItem: () => void;
@@ -26,10 +26,10 @@ interface Actions {
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
   isMyItemsVisible: false,
-  query: { mainCategoryId: 1, subCategoryId: 6 },
+  query: { mainCategoryId: 1, subCategoryId: null },
   cartListCosmeticItems: [],
   equippedCosmeticItems: {},
-  currentPage: 0,
+  currentPage: 1,
 
   toggleIsMyItemsVisible: () =>
     set(state => ({ isMyItemsVisible: !state.isMyItemsVisible })),
@@ -54,9 +54,9 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
         item => item.id !== id
       ),
     })),
-  toggleEquippedCosmeticItems: ({ subCategoryid, image }) =>
+  toggleEquippedCosmeticItems: ({ subCategoryId, image }) =>
     set(state => {
-      const { [subCategoryid]: existingItem, ...restItems } =
+      const { [subCategoryId]: existingItem, ...restItems } =
         state.equippedCosmeticItems;
 
       if (existingItem && existingItem.image === image) {
@@ -68,7 +68,7 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
       return {
         equippedCosmeticItems: {
           ...state.equippedCosmeticItems,
-          [subCategoryid]: { image },
+          [subCategoryId]: { image },
         },
       };
     }),
