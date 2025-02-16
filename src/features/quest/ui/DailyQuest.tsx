@@ -59,7 +59,7 @@ export default function DailyQuest() {
 
               return (
                 <S.QuestWrapper key={quest.id} {...questUrlProps}>
-                  <S.QuestsTitle {...questUrlProps}>
+                  <S.QuestsTitle as={isLearn ? 'p' : 'h2'} {...questUrlProps}>
                     {quest.dailyQuest.content}
                   </S.QuestsTitle>
                   <S.ProgressBarWrapper {...questUrlProps}>

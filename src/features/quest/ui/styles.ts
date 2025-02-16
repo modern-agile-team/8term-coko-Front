@@ -121,7 +121,7 @@ export const QuestWrapper = styled.div<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      top: 15px;
+      top: 25px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
@@ -139,11 +139,13 @@ export const QuestWrapper = styled.div<QuestUrlProps>`
 
 // 퀘스트 제목
 export const QuestsTitle = styled.h2<QuestUrlProps>`
+  font-weight: 700;
+
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      font-size: 13px;
       color: #b8b8b8;
+      font-size: 13px;
       text-align: start;
       margin-left: 37px;
     `}
@@ -152,7 +154,6 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
     css`
       color: #9f9f9f;
       font-size: 15px;
-      font-weight: 700;
       position: absolute;
       top: 35px;
       left: 125px;
@@ -161,22 +162,20 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
 `;
 
 export const LoginRequiredMessage = styled.p<QuestUrlProps>`
+  color: #000000;
+  text-align: center;
+  font-weight: 700;
+
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      color: #000000;
       font-size: 13px;
-      font-weight: 700;
-      text-align: center;
-      margin-top: 25px;
+      margin-top: 15px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
     css`
-      color: #000000;
       font-size: 15px;
-      font-weight: 700;
-      text-align: center;
     `}
 `;
 
