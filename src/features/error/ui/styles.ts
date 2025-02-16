@@ -20,7 +20,9 @@ export const NotFoundWrapper = styled.div`
   background-color: #ffffff;
 `;
 
-export const MobileVisibleTitle = styled.h1`
+export const MobileVisibleTitle = styled.h1.attrs({
+  'aria-label': '404 Not Found',
+})`
   position: fixed;
   width: 1px;
   height: 1px;
