@@ -1,19 +1,30 @@
 import {
-  GoToMainLink,
+  NotFoundWrapper,
+  MobileVisibleTitle,
   NotFoundDescription,
   NotFoundHeading,
   NotFoundImage,
-  NotFoundWrapper,
+  GoToMainLink,
 } from '@/features/error/ui/styles';
-import { getImageUrl } from '@/utils/getImageUrl';
+import { getImageUrl } from '@utils/getImageUrl';
+import { getImageNameFromUrl } from '@utils/getImageNameFromUrl';
+import { useMediaQuery } from '@modern-kit/react';
+import { mediaQueryMap } from '@style/mediaQueryMap';
 
 export default function NotFound() {
+  const isMobile = useMediaQuery(mediaQueryMap.mobile);
+  const notFoundImg = isMobile ? '404이미지-모바일.svg' : '404이미지.webp';
+
   return (
     <NotFoundWrapper>
+      <MobileVisibleTitle>404</MobileVisibleTitle>
       <NotFoundHeading>
-        여기가 어디야? 아무래도 길을 잃어버렸나봐 ! 
+        여기가 어디야? 아무래도 길을 잃어버렸나봐 !
       </NotFoundHeading>
-      <NotFoundImage src={getImageUrl('404이미지.webp')} />
+      <NotFoundImage
+        src={getImageUrl(notFoundImg)}
+        alt={getImageNameFromUrl(notFoundImg)}
+      />
       <NotFoundDescription>
         죄송합니다. 페이지를 찾을 수 없습니다. <br />
         존재하지 않는 주소를 입력하셨거나 요청하신 페이지의 주소가 변경,
