@@ -51,7 +51,7 @@ export const BadgeListItem = styled.li`
     text-transform: lowercase;
   }
 `;
-//추후에 canvas 태그 등으로 변경
+
 export const MyCharacterImage = styled.img`
   width: 100%;
   height: 100%;
@@ -61,44 +61,41 @@ export const MyCharacterImage = styled.img`
 
 export const MyCharacterBox = styled.div`
   position: relative;
-  width: 170px;
-  height: 140px;
+  width: 171px;
+  height: 138px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 export const CharacterEquipContainer = styled.div`
-  width: 100%;
   display: flex;
+  width: 171px;
+  height: 138px;
   > img {
     position: absolute;
     object-fit: contain;
     z-index: 30;
+    left: 27px;
   }
 `;
 
 export const CharacterHat = styled.img`
-  left: 25px;
-  top: -5px;
+  top: -22px;
 `;
 
 export const CharacterGlasses = styled.img`
-  left: 27px;
-  top: 20px;
+  top: 18px;
 `;
 
 export const CharacterBeard = styled.img`
-  left: 25px;
   top: 30px;
 `;
 
 export const CharacterSetup = styled.img`
-  left: 25px;
   top: 72px;
 `;
 
 export const CharacterShoes = styled.img`
-  left: 25px;
   top: 125px;
 `;
 
