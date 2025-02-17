@@ -53,6 +53,7 @@ export default function Question({ title, question, category }: QuestionProps) {
         <p>{title}</p>
       </S.Title>
       <S.Pre id="question" ref={getClientRectRefCallback}>
+        <S.VerticalLine />
         <S.Code>{parse(dompurify.sanitize(addLineNumberCode), options)}</S.Code>
       </S.Pre>
     </S.QuestionSection>

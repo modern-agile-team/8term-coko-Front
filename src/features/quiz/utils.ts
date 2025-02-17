@@ -22,7 +22,7 @@ import { PartStatus } from '@features/learn/types';
 export const addLineNumbersToCode = (code: string) => {
   const splittedCode = code.split('\n');
   const lineAttachedCode = splittedCode
-    .map((code, i) => `<span>${i + 1} |</span> ${code}`)
+    .map((code, i) => `<span class="line-number">${i + 1}</span> ${code}`)
     .join('\n');
   return lineAttachedCode;
 };

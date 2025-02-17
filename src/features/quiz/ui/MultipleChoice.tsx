@@ -35,7 +35,7 @@ export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
               onClick={() => setUserResponseAnswer(value)}
               $isClick={userResponseAnswer[0] === value}
             >
-              {index + 1} : {value}
+              {value}
             </MultipleChoiceButton>
           ))}
         </MultipleChoiceButtonDiv>

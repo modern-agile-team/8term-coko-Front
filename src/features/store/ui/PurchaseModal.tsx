@@ -6,6 +6,7 @@ import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import useFunnel from './../../../hooks/useFunnel';
 import { useState } from 'react';
+import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 
 interface PurchaseModalProps {
   selectCosmeticItem: CosmeticItem;
@@ -23,6 +24,7 @@ export default function PurchaseModal({
   const { mutate: updateEquippedItems } =
     useUserCosmeticItemsQuery.updateEquippedItems();
   const [isSuccess, setIsSuccess] = useState(false);
+  const { toggleIsMyItemsVisible } = useCosmeticItemStore();
 
   const handleAccept = () => {
     if (isSuccess) {
@@ -39,6 +41,7 @@ export default function PurchaseModal({
         onSuccess: () => {
           toast.success('아이템 구매 성공!');
           setIsSuccess(true);
+          toggleIsMyItemsVisible();
         },
         onError: error => {
           if (isAxiosError(error)) {

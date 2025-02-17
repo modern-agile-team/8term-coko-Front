@@ -480,6 +480,7 @@ export const Img = styled.img<{ $width: string; $height: string }>`
 `;
 
 export const Pre = styled.pre`
+  position: relative;
   padding: 20px 0 0 20px;
   line-height: 1.5;
 `;
@@ -566,4 +567,15 @@ export const ResponseButton = styled.button<{ $disabled?: boolean }>`
       border-color: #ffe8c7;
       color: #e6e6e6;
     `}
+`;
+
+export const VerticalLine = styled.div`
+  position: absolute;
+  top: 5px;
+  left: 40px;
+  border-left: thick solid gray;
+  height: 25vh;
+  ${media.mobile} {
+    height: 40vh;
+  }
 `;
