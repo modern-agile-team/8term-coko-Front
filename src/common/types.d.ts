@@ -1,4 +1,4 @@
-export interface OverRayDivProps {
+export interface OverlayDivProps {
   $backgroundColor: string;
   $mixBlendMode: string;
 }

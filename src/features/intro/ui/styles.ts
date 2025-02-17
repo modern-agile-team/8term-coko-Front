@@ -1,6 +1,5 @@
 import { calculateTutorialPopupPosition } from '@/features/intro/service/utils';
-import { animations } from '@/style/animations';
-import { media } from '@/style/media';
+import { MEDIA, ANIMATIONS, Z_INDEX } from '@/style/constants';
 import { css, styled } from 'styled-components';
 
 export const FocusedItemDiv = styled.div`
@@ -9,7 +8,7 @@ export const FocusedItemDiv = styled.div`
 `;
 
 export const TutorialClearWrapper = styled.div`
-  animation: ${animations.fadeInScaleUpForCenter} 0.7s ease-out;
+  animation: ${ANIMATIONS.fadeInScaleUpForCenter} 0.7s ease-out;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -48,7 +47,7 @@ export const TutorialPopupWrapper = styled.div<{
   $popupPosition: DOMRect | null;
 }>`
   position: absolute;
-  z-index: 10001;
+  z-index: ${Z_INDEX.tutorial};
   pointer-events: none;
   user-select: none;
   ${({ $popupPosition }) => {
@@ -71,7 +70,7 @@ export const TutorialPopupWrapper = styled.div<{
     width: 300px;
     height: 280px;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     > img {
       display: none;
     }
@@ -111,7 +110,7 @@ export const PageIntroWrapper = styled.section<{
   ${({ $isVisible }) =>
     $isVisible &&
     css`
-      animation: ${animations.slideIn} 1s ease-out;
+      animation: ${ANIMATIONS.slideIn} 1s ease-out;
     `}
 `;
 
@@ -180,7 +179,7 @@ export const TutorialPromptModalWrapper = styled.div`
 `;
 
 export const TutorialPromptModalContent = styled.div`
-  animation: ${animations.fadeInScaleUpForCenter} 0.7s ease-out;
+  animation: ${ANIMATIONS.fadeInScaleUpForCenter} 0.7s ease-out;
   position: absolute;
   top: 50%;
   left: 50%;

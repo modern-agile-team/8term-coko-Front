@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-import { animations } from '@/style/animations';
-import { OverRayDivProps } from '@/common/types';
-import { media } from '@/style/media';
+import { MEDIA, ANIMATIONS, Z_INDEX } from '@style/constants';
+import { OverlayDivProps } from '@/common/types';
 
 interface BaseStyleProps {
   $width?: string;
@@ -31,12 +30,12 @@ export const MenuBox = styled.nav`
   flex-direction: column;
   gap: 40px;
   position: fixed;
-  z-index: 100;
+  z-index: ${Z_INDEX.menu};
   background-color: #fff1d9;
   border-right: 7px solid #ffe8c7;
   height: 100%;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     flex-direction: row;
     gap: 12px;
     bottom: 0;
@@ -56,7 +55,7 @@ export const HeaderBox = styled.header`
   display: flex;
   justify-content: flex-end;
   position: fixed;
-  z-index: 1;
+  z-index: ${Z_INDEX.header};
   gap: 20px;
   align-items: center;
   width: 294px;
@@ -69,12 +68,12 @@ export const LogoBox = styled.div`
   margin-top: 26px;
   align-self: center;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
 
-export const OverRayDiv = styled.div<OverRayDivProps>`
+export const OverlayDiv = styled.div<OverlayDivProps>`
   position: fixed;
   right: 0;
   bottom: 0;
@@ -82,7 +81,7 @@ export const OverRayDiv = styled.div<OverRayDivProps>`
   height: 100%;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
   mix-blend-mode: ${({ $mixBlendMode }) => $mixBlendMode};
-  z-index: 100;
+  z-index: ${Z_INDEX.overlay};
 `;
 
 export const SortContainer = styled.div`
@@ -168,7 +167,7 @@ export const LoadingWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: ${Z_INDEX.loading};
 `;
 
 export const LoadingSpinner = styled.div`
@@ -195,7 +194,7 @@ export const FlexContainer = styled.section`
 `;
 
 export const PromptContainer = styled.section`
-  animation: ${animations.fadeInScaleUp} 0.7s ease-out;
+  animation: ${ANIMATIONS.fadeInScaleUp} 0.7s ease-out;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -277,7 +276,7 @@ export const SkeletonBase = styled.div<{
 }>`
   background: linear-gradient(90deg, #d6d6d6 25%, #f0f0f0 50%, #d6d6d6 75%);
   background-size: 200% 100%;
-  animation: ${animations.shimmerLoading} 2s infinite linear;
+  animation: ${ANIMATIONS.shimmerLoading} 2s infinite linear;
 
   ${({ width, height }) => css`
     width: ${width || '100%'};

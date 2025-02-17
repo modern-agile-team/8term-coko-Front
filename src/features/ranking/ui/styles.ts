@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
-import { media } from '@style/media';
+import { MEDIA } from '@style/constants';
 
 interface MedalContainerProps {
   $rank: number;
@@ -12,7 +12,7 @@ export const UserRankingListContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: calc(100vw - 80px);
     max-width: 683px;
     min-width: 340px;
@@ -23,7 +23,7 @@ export const MyRankingContainer = styled.div`
   width: 683px;
   margin-top: 62px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: calc(100vw - 80px);
     max-width: 683px;
     min-width: 340px;
@@ -118,7 +118,7 @@ export const MedalContainer = styled.div<MedalContainerProps>`
       background-image: url(${getImageUrl('나의-순위.svg')});
     `}
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 82px;
     height: 102px;
     margin-left: 15px;
@@ -159,7 +159,7 @@ export const RankText = styled.p`
   margin-left: 15px;
   margin-right: 30px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     position: absolute;
     font-size: 30px;
     margin-left: 48px;
@@ -180,7 +180,7 @@ export const UserInfo = styled.div`
     font-weight: 700;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     position: absolute;
     margin-left: 110px;
 
@@ -209,7 +209,7 @@ export const ProfileWrapper = styled.div`
     height: 64.75px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -220,7 +220,7 @@ export const Container = styled.div`
   align-items: center;
   margin: 0 37px 0 auto;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     margin: 0 25px 0 auto;
   }
 `;
@@ -249,7 +249,7 @@ export const RankIconWrapper = styled.div`
     margin-right: 10px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     max-width: 130px;
 
     img {
@@ -280,7 +280,7 @@ export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
   color: #d37744;
   margin: 0 15px 0 15px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     margin: 0 8px 0 8px;
   }
 

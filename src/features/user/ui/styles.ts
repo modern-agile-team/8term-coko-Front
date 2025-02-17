@@ -1,7 +1,7 @@
-import { animations } from '@/style/animations';
-import { media } from '@/style/media';
+import { MEDIA, ANIMATIONS } from '@style/constants';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
+
 export const BadgeWrapper = styled.div`
   display: flex;
   margin-top: 39px;
@@ -145,7 +145,7 @@ export const AttendanceCheckButton = styled.button`
     height: 24px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     position: fixed;
     left: 30px;
     bottom: 100px;
@@ -170,7 +170,7 @@ export const AttendanceCalendarBoard = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     padding: 2px 3px 0 3px;
     height: 200px;
     gap: 5px;
@@ -187,7 +187,7 @@ export const AttendanceStamp = styled.img<{ $isTodayAttendance: boolean }>`
   ${({ $isTodayAttendance }) =>
     $isTodayAttendance &&
     css`
-      animation: ${animations.slamDown} 0.7s ease-out;
+      animation: ${ANIMATIONS.slamDown} 0.7s ease-out;
     `}
 `;
 
@@ -210,7 +210,7 @@ export const AttendanceDayCell = styled.span`
     height: 100%;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 10px;
   }
 `;
@@ -239,7 +239,7 @@ export const AttendanceCalendarWrapper = styled.div`
     height: 67px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 280px;
     height: 230px;
 
