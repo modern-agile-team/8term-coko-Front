@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { MEDIA, Z_INDEX } from '@style/constants';
-import { ANIMATIONS } from '@style/constants';
+import { MEDIA, ANIMATIONS, Z_INDEX } from '@style/constants';
 import { Link } from 'react-router-dom';
 
 interface UserInfoButtonProps {
