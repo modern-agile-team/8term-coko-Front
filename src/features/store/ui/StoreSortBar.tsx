@@ -13,9 +13,10 @@ export default function StoreSortBar({ items }: StoreSortBarProps) {
   const [isOpen, toggleIsOpen] = useToggle();
   const dropDownRef = useOutsidePointerDown<HTMLUListElement>(toggleIsOpen);
   const [currentLabel, setCurrentLabel] = useState<string | null>(null);
-  const { query, setQuery } = useCosmeticItemStore();
+  const { query, setQuery, setCurrentPage } = useCosmeticItemStore();
 
   const handleItemClick = (item: CosmeticItemOption) => {
+    setCurrentPage(1);
     setQuery(item.query);
     setCurrentLabel(item.label);
     toggleIsOpen();

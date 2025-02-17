@@ -8,7 +8,7 @@ interface PageNavBarProps {
   totalPage: number;
 }
 export default function PageNavBar({ totalPage }: PageNavBarProps) {
-  const { currentPage, setCurrentPage, query } = useCosmeticItemStore();
+  const { currentPage, setCurrentPage } = useCosmeticItemStore();
 
   return (
     <PaginationDiv>

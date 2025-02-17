@@ -5,13 +5,12 @@ import { CosmeticItem } from '@/features/store/types';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { SubtractInjectedProps } from '@/types';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useMediaQuery } from '@modern-kit/react';
+import { ItemContainer } from '@/features/store/ui/styles';
 
 interface InjectedProps {
-  totalCount: number;
   totalPage: number;
-  currentPage: number;
   contents: CosmeticItem[];
 }
 
@@ -25,6 +24,7 @@ const withCosmeticItem = <P extends object>(
 
     const isMobile = useMediaQuery('(min-width: 768px)');
     const limit = isMobile ? 8 : 4;
+    const limitArray = Array.from({ length: limit }, (_, i) => i + 1);
 
     const { data: cosmeticItem, isLoading } =
       useCosmeticItemQuery.getCosmeticItemByPage({
@@ -33,27 +33,38 @@ const withCosmeticItem = <P extends object>(
       });
 
     const { data: userCosmeticItem, isLoading: userIsLoading } =
-      useUserCosmeticItemsQuery.getMyItems({
+      useUserCosmeticItemsQuery.getMyCosmeticItemByPage({
         isFetching: isMyItemsVisible,
         params: { page: currentPage, ...query, limit },
       });
 
     if (isLoading || userIsLoading) {
-      return <SkeletonBase width="90%" height="80%" />;
+      return (
+        <ItemContainer>
+          {limitArray.map(value => (
+            <SkeletonBase width="100%" height="100%" key={value} />
+          ))}
+        </ItemContainer>
+      );
     }
     const finalData =
       isMyItemsVisible && userCosmeticItem ? userCosmeticItem : cosmeticItem;
-
+    console.log(finalData);
     if (!finalData) {
-      return <SkeletonBase width="90%" height="80%" />;
+      return (
+        <ItemContainer>
+          {limitArray.map(value => (
+            <SkeletonBase width="100%" height="100%" key={value} />
+          ))}
+        </ItemContainer>
+      );
     }
+
     return (
       <WrappedComponent
         {...(rest as P)}
         contents={finalData.contents}
-        currentPage={finalData.currentPage}
         totalPage={finalData.totalPage}
-        totalCount={finalData.totalCount}
       />
     );
   };

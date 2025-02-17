@@ -10,7 +10,9 @@ export default function PreviewMyCharacter() {
       <S.MyCharacterBox>
         {equippedCosmeticItems[8] ? (
           <S.MyCharacterImage
-            src={getImageUrl(equippedCosmeticItems[8].image)}
+            src={getImageUrl(
+              `${equippedCosmeticItems[8].image.slice(0, 2)}-코코.svg`
+            )}
           />
         ) : (
           <S.MyCharacterImage src={getImageUrl('벗은코코.svg')} />

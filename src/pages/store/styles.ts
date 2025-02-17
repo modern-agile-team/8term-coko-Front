@@ -68,7 +68,7 @@ export const StoreItemListSection = styled.section`
 
 export const FilterListContainer = styled.div`
   display: flex;
-  align-self: flex-end;
+  width: 100%;
   gap: 23px;
   align-items: center;
   justify-content: flex-end;
@@ -78,6 +78,9 @@ export const FilterListContainer = styled.div`
   line-height: 20px;
   color: #ff4949;
   text-transform: lowercase;
+  > button:nth-child(1) {
+    margin: 0 auto 0 32px;
+  }
   ${media.mobile} {
     gap: 5px;
     padding: 18px 0 19px 0;

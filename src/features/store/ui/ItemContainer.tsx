@@ -11,18 +11,11 @@ import PurchaseModal from '@/features/store/ui/PurchaseModal';
 import PageNavBar from '@/features/store/ui/PageNavBar';
 
 interface ItemContainerProps {
-  totalCount: number;
   totalPage: number;
-  currentPage: number;
   contents: CosmeticItem[];
 }
 
-function ItemContainer({
-  totalCount,
-  totalPage,
-  currentPage,
-  contents,
-}: ItemContainerProps) {
+function ItemContainer({ totalPage, contents }: ItemContainerProps) {
   const {
     cartListAddCosmeticItems,
     isMyItemsVisible,
@@ -76,7 +69,7 @@ function ItemContainer({
                 <>
                   <label>{item.price} Point</label>
                   <img
-                    src={getImageUrl('')}
+                    src={getImageUrl('체크.svg')}
                     alt="장바구니넣기"
                     onClick={e => {
                       e.stopPropagation();
@@ -84,7 +77,7 @@ function ItemContainer({
                     }}
                   />
                   <img
-                    src={getImageUrl('')}
+                    src={getImageUrl('플러스.svg')}
                     alt="구매"
                     onClick={e => {
                       setSelectedItem(item);

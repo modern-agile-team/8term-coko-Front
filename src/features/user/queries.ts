@@ -41,6 +41,27 @@ export const userKeys = {
   cosmeticItems: {
     root: () => [...userKeys.me(), ' cosmeticItems'] as const,
     equipped: () => [...userKeys.cosmeticItems.root(), 'equipped'] as const,
+    categoryOnly: () => [...userKeys.cosmeticItems.root(), 'category'] as const,
+    category: (category: CosmeticItemOption['query']) =>
+      [...userKeys.cosmeticItems.categoryOnly(), category] as const,
+
+    paginationOnly: (page: number, limit: number) =>
+      [
+        ...userKeys.cosmeticItems.root(),
+        'pagination',
+        { page, limit },
+      ] as const,
+    paginationWithCategory: (
+      params: CosmeticItemOption['query'] & { page: number; limit: number }
+    ) =>
+      [
+        ...userKeys.cosmeticItems.category({
+          mainCategoryId: params.mainCategoryId,
+          subCategoryId: params.subCategoryId,
+        }),
+        'pagination',
+        { page: params.page, limit: params.limit },
+      ] as const,
   },
 };
 
@@ -229,7 +250,7 @@ export const useUserAttendanceQuery = {
 };
 
 export const useUserCosmeticItemsQuery = {
-  getMyItems: ({
+  getMyCosmeticItemByPage: ({
     params,
     isFetching,
   }: {
@@ -243,15 +264,16 @@ export const useUserCosmeticItemsQuery = {
       queryKey: userKeys.cosmeticItems.root(),
       queryFn: () => userItemsApi.getItems(params),
       enabled: isFetching,
+      gcTime: 5,
+      staleTime: 1,
     }),
   getEquippedItem: () => {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
       queryFn: () => userItemsApi.getItems(),
-      enabled: isLoggedIn(user),
+      enabled: false,
       select(equippedItems) {
-        console.log(equippedItems);
         return equippedItems.contents.filter(item => item.isEquipped);
       },
     });

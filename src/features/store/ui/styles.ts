@@ -34,6 +34,10 @@ export const CosmeticItemLi = styled.li`
   line-height: 16px;
   letter-spacing: 0.2px;
 
+  img {
+    cursor: pointer;
+  }
+
   &:hover {
     border-radius: 8px;
     border: 2px solid #00b6c0;

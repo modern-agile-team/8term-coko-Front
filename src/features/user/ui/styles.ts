@@ -68,23 +68,26 @@ export const MyCharacterBox = styled.div`
   align-items: center;
 `;
 export const CharacterEquipContainer = styled.div`
+  position: relative;
   display: flex;
   width: 171px;
   height: 138px;
-  > img {
-    position: absolute;
-    object-fit: contain;
-    z-index: 30;
-    left: 27px;
-  }
 `;
 
 export const CharacterHat = styled.img`
+  position: absolute;
+  object-fit: contain;
+  z-index: 30;
+  left: 26px;
   top: -22px;
 `;
 
 export const CharacterGlasses = styled.img`
+  position: absolute;
+  object-fit: contain;
   top: 18px;
+  z-index: 30;
+  left: 28px;
 `;
 
 export const CharacterBeard = styled.img`
@@ -92,11 +95,19 @@ export const CharacterBeard = styled.img`
 `;
 
 export const CharacterSetup = styled.img`
+  position: absolute;
+  object-fit: contain;
+  left: 26px;
+  z-index: 30;
   top: 72px;
 `;
 
 export const CharacterShoes = styled.img`
-  top: 125px;
+  position: absolute;
+  object-fit: contain;
+  left: 26px;
+  z-index: 20;
+  top: 120px;
 `;
 
 export const ProfileBox = styled.span<{ $isIcon: boolean }>`

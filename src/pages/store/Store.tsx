@@ -13,13 +13,23 @@ import StoreSortBar from '@/features/store/ui/StoreSortBar';
 import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
 import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
+import { ErrorBoundary } from 'react-error-boundary';
+import ItemFallback from '@/features/error/ui/ItemFallback';
+import { CosmeticItemOption } from '@/features/store/types';
 
 export default function Store() {
-  const { query, setQuery, resetEquippedItem } = useCosmeticItemStore();
+  const { query, setQuery, resetEquippedItem, setCurrentPage } =
+    useCosmeticItemStore();
   useUnmount(resetEquippedItem);
+
+  const handleFilter = (query: CosmeticItemOption['query']) => {
+    setCurrentPage(1);
+    setQuery(query);
+  };
 
   return (
     <>
+      <title>코코 상점</title>
       <globalS.Wrapper>
         <globalS.LeftSection>
           <MenuBar />
@@ -32,12 +42,20 @@ export default function Store() {
         <StoreMyCharacterSection />
         <S.StoreItemListSection>
           <S.FilterListContainer>
+            <S.FilterButton
+              $isSelect={query.mainCategoryId === 0}
+              onClick={() =>
+                handleFilter({ mainCategoryId: 0, subCategoryId: 0 })
+              }
+            >
+              전체
+            </S.FilterButton>
             <StoreSortBar items={CLOTHES_OPTIONS} />
             <StoreSortBar items={ACCESSORIES_OPTIONS} />
             {BUTTON_LIST.map(item => (
               <S.FilterButton
                 key={item.label}
-                onClick={() => setQuery(item.query)}
+                onClick={() => handleFilter(item.query)}
                 $isSelect={query.mainCategoryId === item.query.mainCategoryId}
               >
                 {item.label}
@@ -46,7 +64,9 @@ export default function Store() {
           </S.FilterListContainer>
           <S.RedLine />
           <QueryErrorBoundary>
-            <ItemContainer />
+            <ErrorBoundary FallbackComponent={ItemFallback}>
+              <ItemContainer />
+            </ErrorBoundary>
           </QueryErrorBoundary>
         </S.StoreItemListSection>
       </globalS.Layout>

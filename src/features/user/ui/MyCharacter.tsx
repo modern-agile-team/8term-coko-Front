@@ -45,7 +45,11 @@ export default function MyCharacter() {
       return (
         <EquipComponent
           key={item.subCategoryId}
-          src={getImageUrl(item.image)}
+          src={
+            item.subCategoryId === 8
+              ? getImageUrl(`${item.image.slice(0, 2)}-코코.svg`)
+              : getImageUrl(item.image)
+          }
         />
       );
     });

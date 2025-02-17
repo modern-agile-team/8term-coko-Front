@@ -29,7 +29,7 @@ export default function CartList({ isMobileHidden }: CartListProps) {
         <CosmeticItemCheckOut>
           <CosmeticItemCheckOut.DetailBox>
             <>
-              <StoreItem>총 금액 ㅁㄴㅇㅁㄴㅇㄴㅇㅁ포인트</StoreItem>
+              <StoreItem>총 금액 {totalPoint}포인트</StoreItem>
               <p>구매할래?</p>
             </>
           </CosmeticItemCheckOut.DetailBox>

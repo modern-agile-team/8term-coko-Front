@@ -21,7 +21,7 @@ interface StoreItemHeaderProps {
 StoreItem.Header = ({ name, onRemove }: StoreItemHeaderProps) => (
   <CosmeticItemHeader>
     <label>{name}</label>
-    {onRemove && <span onClick={onRemove}>X</span>}
+    {onRemove && <img onClick={onRemove} src={getImageUrl('엑스.svg')} />}
   </CosmeticItemHeader>
 );
 interface StoreItemImageProps {

@@ -82,7 +82,7 @@ export const OverRayDiv = styled.div<OverRayDivProps>`
   height: 100%;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
   mix-blend-mode: ${({ $mixBlendMode }) => $mixBlendMode};
-  z-index: 10000;
+  z-index: 100;
 `;
 
 export const SortContainer = styled.div`
