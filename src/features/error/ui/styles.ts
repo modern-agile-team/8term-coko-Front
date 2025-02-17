@@ -65,7 +65,7 @@ export const NotFoundImage = styled.img`
   }
 `;
 
-export const NotFoundDescription = styled.h3`
+export const NotFoundDescription = styled.p`
   font-family: Pretendard;
   margin: 45px 0 59px 0;
   padding: 0 30px;
