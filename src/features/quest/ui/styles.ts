@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
-import { media } from '@style/media';
+import { MEDIA } from '@style/constants';
 
 interface QuestUrlProps {
   $isLearn?: boolean;
@@ -14,7 +14,7 @@ export const QuestContainer = styled.div<QuestUrlProps>`
       width: 270px;
       margin-right: 28px;
 
-      ${media.mobile} {
+      ${MEDIA.mobile} {
         display: none;
       }
     `}

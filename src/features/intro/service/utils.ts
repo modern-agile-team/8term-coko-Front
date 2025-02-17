@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@modern-kit/react';
-import { mediaQueryMap } from '@style/mediaQueryMap';
+import { MEDIA_QUERY_MAP } from '@/style/constants';
 
 type Position = {
   top: string;
@@ -10,7 +10,7 @@ type FindMostSpaciousDirection = (rect: DOMRect) => Position;
 
 export const calculateTutorialPopupPosition: FindMostSpaciousDirection =
   rect => {
-    const isMobile = useMediaQuery(mediaQueryMap.mobile);
+    const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
 
     const leftDistance = rect.left;
     const rightDistance = window.innerWidth - rect.right;

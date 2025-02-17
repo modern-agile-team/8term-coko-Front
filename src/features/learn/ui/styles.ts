@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { media } from '@style/media';
 import { getImageUrl } from '@utils/getImageUrl';
-import { animations } from '@style/animations';
+import { MEDIA, ANIMATIONS, Z_INDEX } from '@/style/constants';
 
 export const SectionBoxWrapper = styled.div`
   display: flex;
@@ -9,7 +8,7 @@ export const SectionBoxWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     margin-top: 65px;
     gap: 5px;
   }
@@ -24,7 +23,7 @@ export const SelectSectionBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: calc(100vw - 80px);
     max-width: 599px;
     height: calc((100vw - 80px) * 0.33);
@@ -54,7 +53,7 @@ export const SectionButtonContainer = styled.div`
   height: 100%;
   z-index: 2;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
   }
 `;
 
@@ -73,7 +72,7 @@ export const SectionButton = styled.button`
     width: 100px;
     height: 120px;
 
-    ${media.mobile} {
+    ${MEDIA.mobile} {
       width: calc((100vw - 80px) * 0.15);
       height: calc((100vw - 80px) * 0.15);
       min-width: 40px;
@@ -88,7 +87,7 @@ export const SectionButton = styled.button`
     font-size: 14px;
     color: #333;
 
-    ${media.mobile} {
+    ${MEDIA.mobile} {
       font-size: 12px;
     }
   }
@@ -110,7 +109,7 @@ export const ArrowButton = styled.button<{
   visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
   pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 18px;
     height: 18px;
     margin-top: 50px;
@@ -120,7 +119,7 @@ export const ArrowButton = styled.button<{
     width: 25px;
     height: 25px;
 
-    ${media.mobile} {
+    ${MEDIA.mobile} {
       width: 18px;
       height: 18px;
     }
@@ -134,7 +133,7 @@ export const CompassText = styled.p<{ $isHidden: boolean }>`
   visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
   pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -148,7 +147,7 @@ export const LegendKeycapMessageImg = styled.img`
   margin-right: 72px;
   transition: opacity 0.3s ease;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -161,7 +160,7 @@ export const HandsUpCokoImg = styled.img`
   margin-bottom: 30px;
   margin-right: 72px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -174,7 +173,7 @@ export const UpperBackgroundImg = styled.div`
   display: flex;
   align-items: end;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -188,7 +187,7 @@ export const EntireSectionContainer = styled.div<{
     $isActiveBubble ? '80px' : '0px'};
   transition: margin-bottom 0.3s ease;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     background-image: none;
     padding-bottom: ${({ $isActiveBubble }) =>
       $isActiveBubble ? '160px' : '60px'};
@@ -217,7 +216,7 @@ export const SectionTitle = styled.h2`
   align-items: center;
   justify-content: center;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     color: #5f5f5f;
     font-size: 20px;
     max-width: 693px;
@@ -233,7 +232,7 @@ export const SectionTitle = styled.h2`
     margin: 0 55px;
     max-width: 200px;
 
-    ${media.mobile} {
+    ${MEDIA.mobile} {
       background: #5f5f5f;
       margin: 0 35px;
       max-width: 120px;
@@ -245,7 +244,7 @@ export const SectionTitle = styled.h2`
 export const ButtonGrid = styled.section`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,7 +260,7 @@ export const SittingCoko = styled.img`
   z-index: 5;
   width: 147px;
   height: 120px;
-  animation: ${animations.fadeInAndDrop} 0.3s ease-out forwards;
+  animation: ${ANIMATIONS.fadeInAndDrop} 0.3s ease-out forwards;
 `;
 
 export const KeyboardButtonWrapper = styled.div`
@@ -296,7 +295,7 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
   width: 110px;
   color: #ffffff;
   text-align: center;
-  z-index: 5;
+  z-index: ${Z_INDEX.popover};
   gap: 0.5em;
   display: flex;
   flex-direction: column;
@@ -321,7 +320,7 @@ export const SpeechBubble = styled.div<{ $bgColor: string }>`
     font-weight: 300;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 110px;
     padding: 0.6em 0.8em;
     top: calc(90%);

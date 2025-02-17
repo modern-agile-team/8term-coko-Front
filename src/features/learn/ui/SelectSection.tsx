@@ -4,7 +4,7 @@ import NavigationControl from './NavigationControl';
 import SectionNavigateContainer from './SectionNavigateContainer';
 import { useSectionListQuery } from '@features/learn/queries';
 import { useMediaQuery } from '@modern-kit/react';
-import { mediaQueryMap } from '@style/mediaQueryMap';
+import { MEDIA_QUERY_MAP } from '@style/constants';
 import { LEARN_TUTORIAL_SECTIONS } from '@features/intro/constants';
 
 interface SelectSectionProps {
@@ -20,7 +20,7 @@ export default function SelectSection({
   const sectionList = isTutorial ? LEARN_TUTORIAL_SECTIONS : apiSections ?? [];
 
   const [currentPage, setCurrentPage] = useState(0);
-  const isMobile = useMediaQuery(mediaQueryMap.mobile);
+  const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
   const itemsPerPage = isMobile ? 3 : 5;
 
   // 전체 페이지 수 계산

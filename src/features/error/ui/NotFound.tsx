@@ -9,10 +9,10 @@ import {
 import { getImageUrl } from '@utils/getImageUrl';
 import { getImageNameFromUrl } from '@utils/getImageNameFromUrl';
 import { useMediaQuery } from '@modern-kit/react';
-import { mediaQueryMap } from '@style/mediaQueryMap';
+import { MEDIA_QUERY_MAP } from '@style/constants';
 
 export default function NotFound() {
-  const isMobile = useMediaQuery(mediaQueryMap.mobile);
+  const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
   const notFoundImg = isMobile ? '404이미지-모바일.svg' : '404이미지.webp';
 
   return (

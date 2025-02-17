@@ -1,11 +1,11 @@
-import { OverRayDiv } from '@/common/layout/styles';
-import { OverRayDivProps } from '@/common/types';
+import { OverlayDiv } from '@/common/layout/styles';
+import { OverlayDivProps } from '@/common/types';
 import { PropsWithChildren, useEffect } from 'react';
 
-export default function OverRay({
+export default function Overlay({
   children,
-  overRayStyle,
-}: PropsWithChildren<{ overRayStyle: OverRayDivProps }>) {
+  overlayStyle,
+}: PropsWithChildren<{ overlayStyle: OverlayDivProps }>) {
   useEffect(() => {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.offsetWidth;
@@ -20,11 +20,11 @@ export default function OverRay({
   }, []);
 
   return (
-    <OverRayDiv
-      $backgroundColor={overRayStyle.$backgroundColor}
-      $mixBlendMode={overRayStyle.$mixBlendMode}
+    <OverlayDiv
+      $backgroundColor={overlayStyle.$backgroundColor}
+      $mixBlendMode={overlayStyle.$mixBlendMode}
     >
       {children}
-    </OverRayDiv>
+    </OverlayDiv>
   );
 }

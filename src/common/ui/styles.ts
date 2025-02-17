@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { media } from '@style/media';
-import { animations } from '@/style/animations';
+import { MEDIA, Z_INDEX } from '@style/constants';
+import { ANIMATIONS } from '@style/constants';
 import { Link } from 'react-router-dom';
 
 interface UserInfoButtonProps {
@@ -19,7 +19,7 @@ export const MenuLink = styled(Link)`
   height: 42px;
   margin: 0 16px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 48px;
     height: 48px;
     margin: 0;
@@ -41,7 +41,7 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
   padding-left: 30px;
   gap: 25px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 0;
     padding: 0;
     gap: 0;
@@ -57,7 +57,7 @@ export const MenuIcon = styled.img`
   width: 27px;
   height: 26px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 40px;
     height: 40px;
   }
@@ -102,6 +102,7 @@ export const ProfilePopover = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
+  z-index: ${Z_INDEX.popover};
   margin-top: 3px;
   right: 0;
   cursor: default;
@@ -110,7 +111,7 @@ export const ProfilePopover = styled.div`
   background-color: #fff;
   border-radius: 15px;
   border: 3px solid #ffb53d;
-  animation: ${animations.slideIn} 0.3s ease-out;
+  animation: ${ANIMATIONS.slideIn} 0.3s ease-out;
 `;
 
 export const UserNameText = styled.p`
