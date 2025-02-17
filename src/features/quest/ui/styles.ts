@@ -70,6 +70,12 @@ export const QuestContent = styled.div<QuestUrlProps>`
       background: #ffb53d;
       box-shadow: 0 5px #f09900;
       height: 36px;
+
+      ${MEDIA.mobile} {
+        width: calc(100vw - 80px);
+        max-width: 683px;
+        min-width: 340px;
+      }
     `}
 `;
 
@@ -133,7 +139,12 @@ export const QuestWrapper = styled.div<QuestUrlProps>`
       justify-content: center;
       margin-top: 20px;
       box-shadow: 0 3px #e5e5e5;
-      z-index: -1;
+
+      ${MEDIA.mobile} {
+        width: calc(100vw - 80px);
+        max-width: 683px;
+        min-width: 340px;
+      }
     `}
 `;
 
@@ -158,6 +169,10 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
       top: 35px;
       left: 125px;
       text-align: left;
+
+      ${MEDIA.mobile} {
+        left: 110px;
+      }
     `}
 `;
 
@@ -194,6 +209,8 @@ export const ProgressBarWrapper = styled.div<QuestUrlProps>`
     $isQuest &&
     css`
       gap: 15px;
+      padding-left: 25px;
+      padding-right: 25px;
     `}
 `;
 
@@ -230,6 +247,10 @@ export const RewardIconWrapper = styled.div<QuestUrlProps>`
     css`
       width: 74px;
       height: 78px;
+
+      ${MEDIA.mobile} {
+        display: none;
+      }
     `}
 `;
 
