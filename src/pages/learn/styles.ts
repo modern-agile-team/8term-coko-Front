@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media } from '@style/media';
+import { MEDIA } from '@style/constants';
 import { PROGRESS_COLORS } from '@features/learn/constants';
 interface ScrollableContainerProps {
   $show?: boolean;
@@ -17,7 +17,7 @@ export const ScrollableContainer = styled.div<ScrollableContainerProps>`
   align-items: center;
   margin-top: ${({ $isLoggedIn }) => ($isLoggedIn ? '45px' : '25px')};
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     margin-top: ${({ $isLoggedIn }) => ($isLoggedIn ? '0' : '-20px')};
   }
 `;
@@ -27,7 +27,7 @@ export const SectionGroup = styled.div`
   margin-top: 270px;
   border: none;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 100%;
     max-width: 693px;
     padding: 0 20px;
@@ -56,7 +56,7 @@ export const ProgressBarWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     top: 35px;
     width: calc(100vw - 100px);
     left: 50%;
@@ -82,7 +82,7 @@ export const ProgressLabel = styled.span<{ $isPart?: boolean }>`
     font-size: 16px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 13px;
   }
 `;
@@ -92,7 +92,7 @@ export const ProgressText = styled.span`
   color: ${PROGRESS_COLORS.global.text};
   text-align: right;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 11px;
   }
 `;

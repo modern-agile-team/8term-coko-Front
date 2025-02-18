@@ -1,6 +1,6 @@
 import { keyframes } from 'styled-components';
 
-export const animations = {
+export const ANIMATIONS = {
   fadeIn: keyframes`
     0% { opacity: 0; }
     100% { opacity: 1; }
@@ -62,4 +62,25 @@ export const animations = {
   70% { transform: translateY(0) scale(1.2); opacity: 1; }
   100% { transform: translateY(0) scale(1); }
 `,
+} as const;
+
+export const Z_INDEX = {
+  overlay: 10000,
+  tutorial: 10001,
+  menu: 99,
+  header: 100,
+  popover: 101,
+  loading: 9999,
+} as const;
+
+export const MEDIA = {
+  desktop: '@media (min-width: 1280px)',
+  tablet: '@media (min-width: 768px) and (max-width: 1279px)',
+  mobile: '@media (max-width: 767px)',
+} as const;
+
+export const MEDIA_QUERY_MAP = {
+  mobile: '(max-width: 768px)',
+  tablet: '(min-width: 769px) and (max-width: 1279px)',
+  desktop: '(min-width: 1280px)',
 } as const;

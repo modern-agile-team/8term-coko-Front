@@ -1,5 +1,6 @@
-import { animations } from '@/style/animations';
+import { ANIMATIONS } from '@style/constants';
 import styled, { css } from 'styled-components';
+
 export const IntroWrapper = styled.div`
   overflow-x: hidden;
 
@@ -88,7 +89,7 @@ export const TopCokoIntroWrapper = styled.div`
   > div:nth-child(2) {
     flex: 1;
     > img {
-      animation: ${animations.float} 5s ease-in-out infinite;
+      animation: ${ANIMATIONS.float} 5s ease-in-out infinite;
       position: absolute;
       width: 984px;
       height: 600px;

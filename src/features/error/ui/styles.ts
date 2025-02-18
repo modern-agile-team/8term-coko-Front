@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { media } from '@style/media';
+import { MEDIA } from '@style/constants';
 
 export const FallbackWrapper = styled.div`
   width: 100vw;
@@ -31,7 +31,7 @@ export const MobileVisibleTitle = styled.h1.attrs({
   clip-path: inset(50%);
   white-space: nowrap;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     position: static;
     width: auto;
     height: auto;
@@ -48,7 +48,7 @@ export const NotFoundHeading = styled.h2`
   margin-bottom: 74px;
   font-size: 24px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 16px;
     margin-top: 20px;
     margin-bottom: 40px;
@@ -59,7 +59,7 @@ export const NotFoundImage = styled.img`
   width: 1095px;
   height: 367px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 275px;
     height: 227px;
   }
@@ -72,7 +72,7 @@ export const NotFoundDescription = styled.p`
   text-align: center;
   font-size: 20px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 14px;
     margin: 30px 0 30px 0;
   }

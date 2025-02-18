@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { media } from '@/style/media';
+import { MEDIA } from '@style/constants';
 
 export const BarrelTopCokoImg = styled.img`
   width: 171px;
@@ -8,7 +8,7 @@ export const BarrelTopCokoImg = styled.img`
   margin: 99px 87px;
   position: fixed;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -39,7 +39,7 @@ export const BarrelContainer = styled.div<{ $rank: number | null }>`
       background-image: url(${getImageUrl('동통.svg')});
     `}
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -51,7 +51,7 @@ export const BoatSayImg = styled.img`
   margin: 0 65px 240px;
   position: fixed;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -63,7 +63,7 @@ export const BoatImg = styled.img`
   position: fixed;
   bottom: 0;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     display: none;
   }
 `;
@@ -99,7 +99,7 @@ export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
 `;
 
 export const MobileOnlyUserRankingMargin = styled.div`
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     margin-top: 80px;
   }
 `;
