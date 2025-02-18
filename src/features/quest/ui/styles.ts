@@ -22,8 +22,8 @@ export const QuestContainer = styled.div<QuestUrlProps>`
   ${({ $isQuest = true }) =>
     $isQuest &&
     css`
-      width: 683px;
-      margin-top: 40px;
+      max-width: 683px;
+      margin-top: 50px;
     `}
 `;
 
