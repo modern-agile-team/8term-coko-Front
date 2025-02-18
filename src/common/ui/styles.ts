@@ -47,7 +47,7 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
     justify-content: center;
     border: 2px solid
       ${({ $activeStyle }) => ($activeStyle ? '#754F00;' : '#FFF1D9')};
-    background: ${({ $activeStyle }) => ($activeStyle ? '#F0D8A7' : '#FFF1D9')};
+    background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#FFF1D9')};
   }
 
   strong {
