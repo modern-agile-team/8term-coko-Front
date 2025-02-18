@@ -12,6 +12,7 @@ import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { Quiz } from '@features/quiz/types';
 import type { PartStatus } from '@features/learn/types';
 import { isCompleted } from '@/features/quiz/utils';
+import MyCharacter from '@/features/user/ui/MyCharacter';
 
 interface TotalResultProps {
   onNext: () => void;
@@ -70,12 +71,7 @@ export default function TotalResults({
       <S.DashLineHr $color="#00DCE8" />
       <S.TotalResultsRewardDiv>
         <S.ImageDescriptionDiv>
-          <S.Img
-            $width="201px"
-            $height="159px"
-            src={getImageUrl('레벨1코코.svg')}
-            alt="레벨업 이미지"
-          />
+          <MyCharacter />
           <p>Level.{userExperience.level}</p>
         </S.ImageDescriptionDiv>
         <S.TotalResultProgressDiv>

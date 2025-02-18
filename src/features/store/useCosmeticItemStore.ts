@@ -26,7 +26,7 @@ interface Actions {
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
   isMyItemsVisible: false,
-  query: { mainCategoryId: 1, subCategoryId: null },
+  query: { mainCategoryId: 0, subCategoryId: null },
   cartListCosmeticItems: [],
   equippedCosmeticItems: {},
   currentPage: 1,

@@ -19,14 +19,29 @@ export const QuestionSection = styled.section<{
   $category: Quiz['category'];
 }>`
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   margin-top: 37px;
   width: 60vw;
-  height: 35vh;
+  height: 50vh;
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
   font-size: 18px;
   background-color: #fff;
   font-weight: 700;
+  &::-webkit-scrollbar {
+    padding-left: 5px;
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #a5ecf0;
+    border-radius: 4px;
+  }
   > div:nth-last-child(1) {
     display: flex;
     flex-wrap: wrap;
@@ -552,7 +567,7 @@ export const SubmitSection = styled.section`
 //응답 버튼
 export const ResponseButton = styled.button<{ $disabled?: boolean }>`
   width: 130px;
-  height: 40px;
+  height: 35px;
   border: 2px solid #ffe8c7;
   gap: 6px;
   border-radius: 24px;
@@ -574,7 +589,7 @@ export const VerticalLine = styled.div`
   top: 5px;
   left: 40px;
   border-left: thick solid gray;
-  height: 25vh;
+  height: 100%;
   ${media.mobile} {
     height: 40vh;
   }
