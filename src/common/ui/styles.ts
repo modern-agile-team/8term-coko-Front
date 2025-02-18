@@ -32,7 +32,7 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
   color: #fff;
   border-radius: 8px;
   border: 2px solid
-    ${({ $activeStyle }) => ($activeStyle ? '#A69782' : '#FFE8C7')};
+    ${({ $activeStyle }) => ($activeStyle ? '#754F00;' : '#FFE8C7')};
   background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#F0D8A7')};
   display: flex;
   align-items: center;
@@ -45,6 +45,9 @@ export const MenuButton = styled.button<{ $activeStyle: boolean }>`
     padding: 0;
     gap: 0;
     justify-content: center;
+    border: 2px solid
+      ${({ $activeStyle }) => ($activeStyle ? '#754F00;' : '#FFF1D9')};
+    background: ${({ $activeStyle }) => ($activeStyle ? '#D5B779' : '#FFF1D9')};
   }
 
   strong {
