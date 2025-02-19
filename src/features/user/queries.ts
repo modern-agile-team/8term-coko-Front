@@ -4,7 +4,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import usersApis from '@features/user/apis';
+import { userHpApi, usersApis } from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
@@ -47,22 +47,15 @@ export const useUserHpQuery = {
   getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
-      queryFn: usersApis.getHp,
+      queryFn: userHpApi.getHp,
       retry: 0,
     });
   },
-  getHpWhenLoggedIn: () => {
-    const { user } = useUserStore();
-    return useQuery({
-      queryKey: userKeys.hp(),
-      queryFn: usersApis.getHp,
-      enabled: isLoggedIn(user),
-    });
-  },
+
   updateHp: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.patchHp,
+      mutationFn: userHpApi.patchHp,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.hp() });
       },

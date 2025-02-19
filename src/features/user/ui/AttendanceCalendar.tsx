@@ -4,6 +4,7 @@ import {
   getDayFromDate,
   getCurrentMonth,
   getCurrentYear,
+  getCurrentDay,
 } from '@/features/user/service/utils';
 import {
   AttendanceCalendarBoard,
@@ -32,7 +33,8 @@ export default function AttendanceCalendar() {
   useEffect(() => {
     if (!isUserAttendance) {
       recordAttendance(undefined, {
-        onSuccess: () => {
+        onSuccess: data => {
+          console.log(data);
           setIsTodayAttendance(true);
           toast.success('출석체크 성공!');
         },
@@ -56,7 +58,7 @@ export default function AttendanceCalendar() {
           {stampDaysMap[day] && (
             <AttendanceStamp
               src={getImageUrl('출석체크도장.svg')}
-              $isTodayAttendance={isTodayAttendance}
+              $isTodayAttendance={isTodayAttendance && day === getCurrentDay()}
             />
           )}
           <p>{day}</p>

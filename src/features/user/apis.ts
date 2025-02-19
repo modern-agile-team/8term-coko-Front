@@ -11,7 +11,7 @@ import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
 import type { DailyQuestResponse } from '@features/quest/types';
 
-const usersApis = {
+export const usersApis = {
   putQuizzesProgress: ({
     quizId,
     body,
@@ -65,14 +65,6 @@ const usersApis = {
     await api.patch(`/users/me/parts/${params.partId}/status/completed`);
   },
 
-  getHp: async (): Promise<UserHp> => {
-    const response = await api.get('users/me/hp');
-    return response.data;
-  },
-
-  patchHp: async (params: Omit<UserHp, 'id'>): Promise<void> =>
-    await api.patch('/users/me/hp', params),
-
   getRanking: async (params: {
     sort: RankingSort;
   }): Promise<PersonalRanking> => {
@@ -101,4 +93,14 @@ const usersApis = {
   },
 };
 
-export default usersApis;
+export const userHpApi = {
+  getHp: async (): Promise<UserHp> => {
+    const response = await api.get('users/me/hp');
+    return response.data;
+  },
+
+  patchHp: async (): Promise<UserHp> => {
+    const response = await api.patch('/users/me/hp');
+    return response.data;
+  },
+};
