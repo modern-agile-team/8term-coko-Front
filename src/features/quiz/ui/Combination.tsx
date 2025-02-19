@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { CombinationSection, TextBlockButton } from './styles';
-import { useClientQuizStore } from '@store/useClientQuizStore';
 import { useDnDStore } from '@store/useDnDStore';
 import compact from '@utils/compact';
 import type { Quiz } from '@features/quiz/types';
 import { useElementRect } from '@/features/intro/service/hooks';
+import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
 
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];

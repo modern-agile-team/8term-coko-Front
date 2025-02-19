@@ -1,7 +1,7 @@
 import { isMobile } from '@modern-kit/utils';
 import { AnswerDiv, NextPageButton, ScoreSection } from './styles';
 import { useUserProgressQuery } from '@features/user/queries';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
 import useUserStore from '@store/useUserStore';
 import type { PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';

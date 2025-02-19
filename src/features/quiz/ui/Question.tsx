@@ -1,7 +1,7 @@
 import * as S from './styles';
 import './styles.css';
 import 'highlight.js/styles/github.css';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
 import { useDnDStore } from '@store/useDnDStore';
 import dompurify from 'dompurify';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
@@ -48,11 +48,12 @@ export default function Question({ title, question, category }: QuestionProps) {
         }
       }}
     >
-      <S.Title $category={category}>
+      <S.TitleWrapper $category={category}>
         <p>문제{currentPage + 1}.</p>
         <p>{title}</p>
-      </S.Title>
+      </S.TitleWrapper>
       <S.Pre id="question" ref={getClientRectRefCallback}>
+        <S.VerticalLine />
         <S.Code>{parse(dompurify.sanitize(addLineNumberCode), options)}</S.Code>
       </S.Pre>
     </S.QuestionSection>

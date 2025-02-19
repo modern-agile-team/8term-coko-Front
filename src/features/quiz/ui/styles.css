@@ -24,3 +24,8 @@
 .drag-start {
   opacity: 50%;
 }
+.line-number {
+  position: relative;
+  margin-right: 20px;
+  color: gray;
+}

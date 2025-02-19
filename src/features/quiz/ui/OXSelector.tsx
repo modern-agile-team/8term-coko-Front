@@ -1,5 +1,5 @@
 import { Img, OXButtonSection } from './styles';
-import { useClientQuizStore } from '../../../store/useClientQuizStore';
+import { useClientQuizStore } from '../useClientQuizStore';
 import { useElementRect } from '@/features/intro/service/hooks';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 

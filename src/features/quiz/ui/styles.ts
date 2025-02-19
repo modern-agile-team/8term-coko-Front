@@ -18,15 +18,30 @@ const categoryColor: Record<
 export const QuestionSection = styled.section<{
   $category: Quiz['category'];
 }>`
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   margin-top: 37px;
   width: 60vw;
-  height: 35vh;
+  height: 50vh;
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
   font-size: 18px;
   background-color: #fff;
   font-weight: 700;
+
+  &::-webkit-scrollbar {
+    padding-left: 5px;
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #a5ecf0;
+    border-radius: 4px;
+  }
+
   > div:nth-last-child(1) {
     display: flex;
     flex-wrap: wrap;
@@ -38,7 +53,7 @@ export const QuestionSection = styled.section<{
     height: 50vh;
   }
 `;
-export const Title = styled.h3<{
+export const TitleWrapper = styled.div<{
   $category: Quiz['category'];
 }>`
   display: flex;
@@ -50,6 +65,7 @@ export const Title = styled.h3<{
   background-color: ${({ $category }) => categoryColor[$category].background};
   line-height: 24px;
   padding-left: 17px;
+
   > p:nth-child(1) {
     white-space: nowrap;
   }
@@ -480,6 +496,7 @@ export const Img = styled.img<{ $width: string; $height: string }>`
 `;
 
 export const Pre = styled.pre`
+  position: relative;
   padding: 20px 0 0 20px;
   line-height: 1.5;
 `;
@@ -566,4 +583,15 @@ export const ResponseButton = styled.button<{ $disabled?: boolean }>`
       border-color: #ffe8c7;
       color: #e6e6e6;
     `}
+`;
+
+export const VerticalLine = styled.div`
+  position: absolute;
+  top: 5px;
+  left: 40px;
+  border-left: thick solid gray;
+  height: 100%;
+  ${MEDIA.mobile} {
+    height: 40vh;
+  }
 `;

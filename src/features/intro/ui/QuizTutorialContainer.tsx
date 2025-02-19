@@ -17,7 +17,7 @@ import QuizTutorial from '@features/intro/ui/QuizTutorial';
 import QuizTutorialClear from '@features/intro/ui/QuizTutorialClear';
 import TutorialPromptModal from '@features/intro/ui/TutorialPromptModal';
 import useModal from '@hooks/useModal';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
 import isEqualArray from '@utils/isEqualArray';
 import { SwitchCase, useUnmount, useTimeout } from '@modern-kit/react';
 import { useEffect, useState } from 'react';

@@ -1,7 +1,7 @@
 import * as S from '@features/quiz/ui/styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import useUserStore from '@store/useUserStore';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
 import { useNavigate } from 'react-router-dom';
 import { useTimeout } from '@modern-kit/react';
 import {

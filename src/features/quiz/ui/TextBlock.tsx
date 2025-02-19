@@ -1,4 +1,4 @@
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
 import * as S from './styles';
 import { useDnDStore } from '@store/useDnDStore';
 interface TextBlockProps {

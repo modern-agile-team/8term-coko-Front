@@ -4,7 +4,7 @@ import {
   MultipleChoiceButtonDiv,
   Img,
 } from './styles';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
 import type { Quiz } from '@features/quiz/types';
 import { useElementRect } from '@/features/intro/service/hooks';
 import { getImageUrl } from '@/utils/getImageUrl';
@@ -35,7 +35,7 @@ export default function MultipleChoice({ answerChoice }: MultipleChoiceProps) {
               onClick={() => setUserResponseAnswer(value)}
               $isClick={userResponseAnswer[0] === value}
             >
-              {index + 1} : {value}
+              {Number(value) === index + 1 ? value : `${index + 1} : ${value}`}
             </MultipleChoiceButton>
           ))}
         </MultipleChoiceButtonDiv>
