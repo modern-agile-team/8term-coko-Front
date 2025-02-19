@@ -1,3 +1,7 @@
+export const getCurrentDay = (): number => {
+  return new Date().getDate();
+};
+
 export const getCurrentYear = () => {
   const today = new Date();
   return today.getFullYear();
