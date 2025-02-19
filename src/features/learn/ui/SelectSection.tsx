@@ -35,13 +35,11 @@ export default function SelectSection({
   const itemsPerPage = isMobile ? 3 : 5;
 
   // sectionsWithoutParts(파트X)와 paginatedSections(파트O)를 병합 (중복 제거)
-  const mergedSections = useMemo(() => {
-    const sectionMap = new Map();
-    [...sectionsWithoutParts, ...paginatedSections].forEach(section =>
-      sectionMap.set(section.id, section)
-    );
-    return Array.from(sectionMap.values());
-  }, [sectionsWithoutParts, paginatedSections]);
+  const sectionMap = new Map();
+  [...sectionsWithoutParts, ...paginatedSections].forEach(section =>
+    sectionMap.set(section.id, section)
+  );
+  const mergedSections = Array.from(sectionMap.values());
 
   // 전체 페이지 수 계산
   const totalPages = Math.ceil(mergedSections.length / itemsPerPage);
