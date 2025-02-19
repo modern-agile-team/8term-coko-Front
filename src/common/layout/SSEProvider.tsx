@@ -29,10 +29,13 @@ export default function SSEProvider({ children }: PropsWithChildren) {
     newEventSource.onmessage = (event: MessageEvent) => {
       try {
         const parsedData: SSEResponse = JSON.parse(event.data);
-        queryClient.invalidateQueries({ queryKey: userKeys.hp() });
-        toast.success(parsedData.message, {
-          icon: <HeaderIcon src={getImageUrl('과일바구니.svg')} />,
-        });
+
+        if (parsedData.type === 'hp_refilled') {
+          queryClient.invalidateQueries({ queryKey: userKeys.hp() });
+          toast.success(parsedData.message, {
+            icon: <HeaderIcon src={getImageUrl('과일바구니.svg')} />,
+          });
+        }
       } catch (err) {
         console.error('SSE 데이터 파싱 실패:');
         toast.error('SSE 데이터 처리 중 오류 발생');
