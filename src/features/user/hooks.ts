@@ -7,26 +7,20 @@ import { useNavigate } from 'react-router-dom';
 
 type useHpUpdate = (isCorrect: boolean | undefined) => void;
 export const useHpUpdate: useHpUpdate = isCorrect => {
-  const { mutate: hpUpdate } = useUserHpQuery.updateHp();
-  const { data: userHp } = useUserHpQuery.getHpWhenLoggedIn();
+  const { mutate: hpUpdate, data: userHp } = useUserHpQuery.updateHp();
   const { user } = useUserStore();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (Number(userHp?.hp) === 0) {
-      toast('목숨이 다 소진되었습니다.');
-      navigate('/');
+    if (userHp?.hp === 0) {
+      toast.error('생명력이 소진되었어요!');
+      navigate('/learn');
     }
-
     if (isCorrect === undefined) return;
-
     if (isCorrect) return;
 
-    if (isLoggedIn(user) && userHp) {
-      hpUpdate({
-        hp: Number(userHp.hp) - 1,
-        hpStorage: userHp.hpStorage,
-      });
+    if (isLoggedIn(user)) {
+      hpUpdate();
     }
   }, [isCorrect]);
 };
