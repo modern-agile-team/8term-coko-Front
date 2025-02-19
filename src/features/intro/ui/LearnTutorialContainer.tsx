@@ -83,7 +83,11 @@ export default function LearnTutorialContainer() {
 
         {/* 섹션 선택 */}
         <S.ScrollableContainer $show={showComponents} $isLoggedIn={true}>
-          <SelectSection isTutorial={true} />
+          <SelectSection
+            isTutorial={true}
+            fetchNextPage={noop}
+            hasNextPage={false}
+          />
         </S.ScrollableContainer>
 
         {/* 섹션 + 파트 목록 */}
