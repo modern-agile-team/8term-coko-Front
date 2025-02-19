@@ -19,6 +19,7 @@ export const QuestionSection = styled.section<{
   $category: Quiz['category'];
 }>`
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   margin-top: 37px;
@@ -46,6 +47,7 @@ export const QuestionSection = styled.section<{
     display: flex;
     flex-wrap: wrap;
     padding: 26px 0 0 80px;
+    max-width: 100%;
   }
   ${MEDIA.mobile} {
     width: 90vw;
@@ -59,7 +61,8 @@ export const TitleWrapper = styled.div<{
   display: flex;
   align-items: center;
   gap: 15px;
-  height: 60px;
+  height: auto;
+  min-height: 60px;
   border-bottom: 2px solid ${({ $category }) => categoryColor[$category].border};
   color: #ffffff;
   background-color: ${({ $category }) => categoryColor[$category].background};
@@ -70,9 +73,7 @@ export const TitleWrapper = styled.div<{
     white-space: nowrap;
   }
 `;
-//question 스타일
 
-//
 export const OXButtonSection = styled.section`
   margin-top: 23px;
   display: flex;

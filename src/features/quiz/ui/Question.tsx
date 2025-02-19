@@ -13,6 +13,7 @@ import {
 } from '@/features/quiz/utils';
 import { useCodeHighlight } from '@/features/quiz/hooks';
 import { useElementRect } from '@/features/intro/service/hooks';
+import { useMemo } from 'react';
 
 interface QuestionProps {
   title: Quiz['title'];
@@ -24,10 +25,12 @@ export default function Question({ title, question, category }: QuestionProps) {
   const { setOutsideDropZone } = useDnDStore();
 
   const { getClientRectRefCallback } = useElementRect();
-
   const highlightCode = useCodeHighlight(question, [question, currentPage]);
-  const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
-  const addLineNumberCode = addLineNumbersToCode(replaceEmptyCode);
+
+  const addLineNumberCode = useMemo(() => {
+    const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
+    return addLineNumbersToCode(replaceEmptyCode);
+  }, [highlightCode]);
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
