@@ -251,7 +251,7 @@ export const QuizIntroButtonList = styled.div`
   padding: 50px 0;
   ${MEDIA.mobile} {
     gap: 10px;
-    padding: 0 5px;
+    padding: 0 5px 20px 5px;
   }
 `;
 
@@ -354,7 +354,6 @@ export const BottomCokoIntroWrapper = styled.section`
   display: flex;
   align-items: center;
   gap: 100px;
-
   > div {
     display: flex;
     justify-content: flex-end;
@@ -398,6 +397,33 @@ export const BottomCokoIntroWrapper = styled.section`
         font-weight: 400;
         line-height: 50px; /* 250% */
         text-decoration: none;
+      }
+    }
+  }
+  ${MEDIA.mobile} {
+    gap: 0px;
+    > div {
+      flex: 1.5;
+      > img {
+        width: 134px;
+        height: 125px;
+      }
+    }
+
+    > div:nth-child(2) {
+      flex: 2;
+      > div {
+        align-items: flex-start;
+        > p {
+          font-size: 15px;
+        }
+        > a {
+          align-self: flex-end;
+          font-size: 10px;
+          width: 126px;
+          height: 19px;
+          line-height: 20px; /* 250% */
+        }
       }
     }
   }

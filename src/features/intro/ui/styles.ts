@@ -121,13 +121,13 @@ export const PageIntroWrapper = styled.section<{
       position: absolute;
       width: 100%;
       height: 300px;
-
+      left: ${({ $orderChange }) => ($orderChange ? '20%' : '-20%')};
       ${({ $orderChange }) =>
         $orderChange &&
         css`
           align-items: flex-start;
           text-align: start;
-        `}
+        `};
     }
     > div {
       width: 80%;

@@ -126,7 +126,7 @@ export default function Intro() {
 
       <S.BottomCokoIntroWrapper>
         <div>
-          <img src={getImageUrl('앉은-코코.svg')} alt="앉아있는 코코" />
+          <img src={getImageUrl('소개-코코.svg')} alt="소개 코코" />
         </div>
         <div>
           <div>
