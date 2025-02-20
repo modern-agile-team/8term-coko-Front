@@ -13,8 +13,9 @@ interface PageIntroProps {
   mainTitle: string;
   description: string;
   image: string;
-  orderChange?: boolean;
+  orderChange: boolean;
   backgroundColor: string;
+  centerImageOnMobile?: boolean;
 }
 
 export default function PageIntroBanner({
@@ -24,6 +25,7 @@ export default function PageIntroBanner({
   image,
   orderChange,
   backgroundColor,
+  centerImageOnMobile = false,
 }: PageIntroProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -42,6 +44,7 @@ export default function PageIntroBanner({
       $backgroundColor={backgroundColor}
       ref={targetRef}
       $isVisible={isVisible}
+      $centerImageOnMobile={centerImageOnMobile}
     >
       <IntroCard $alignItems="flex-start">
         <h3>{label}</h3>

@@ -92,9 +92,10 @@ export const IntroImage = styled.img`
 `;
 
 export const PageIntroWrapper = styled.section<{
-  $orderChange?: boolean;
+  $orderChange: boolean;
   $backgroundColor: string;
   $isVisible: boolean;
+  $centerImageOnMobile?: boolean;
 }>`
   width: 100vw;
   height: 100vh;
@@ -121,8 +122,10 @@ export const PageIntroWrapper = styled.section<{
       position: absolute;
       width: 100%;
       height: 300px;
-      left: ${({ $orderChange }) =>
-        $orderChange !== undefined ? ($orderChange ? '20%' : '-20%') : 'unset'};
+      left: ${({ $orderChange, $centerImageOnMobile }) => {
+        if ($centerImageOnMobile) return 'unset';
+        return $orderChange ? '20%' : '-20%';
+      }};
 
       ${({ $orderChange }) =>
         $orderChange &&
