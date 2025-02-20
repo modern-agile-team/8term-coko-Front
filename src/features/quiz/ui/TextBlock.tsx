@@ -1,6 +1,9 @@
-import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
+import {
+  useClientQuizStore,
+  useDragAndDropStore,
+} from '@/features/quiz/stores';
 import * as S from './styles';
-import { useDnDStore } from '@store/useDnDStore';
+
 interface TextBlockProps {
   text: string;
   index: number;
@@ -17,7 +20,7 @@ export default function TextBlock({ text, index }: TextBlockProps) {
     drop,
     isOutsideDropZone,
     setOutsideDropZone,
-  } = useDnDStore();
+  } = useDragAndDropStore();
 
   const handleEmptyDivDragEnter = () => {
     setOutsideDropZone(false);

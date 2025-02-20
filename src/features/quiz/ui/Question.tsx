@@ -1,8 +1,10 @@
 import * as S from './styles';
 import './styles.css';
 import 'highlight.js/styles/github.css';
-import { useClientQuizStore } from '@/features/quiz/useClientQuizStore';
-import { useDnDStore } from '@store/useDnDStore';
+import {
+  useClientQuizStore,
+  useDragAndDropStore,
+} from '@/features/quiz/stores';
 import dompurify from 'dompurify';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import TextBlock from './TextBlock';
@@ -21,7 +23,7 @@ interface QuestionProps {
 }
 export default function Question({ title, question, category }: QuestionProps) {
   const { currentPage, userResponseAnswer } = useClientQuizStore();
-  const { setOutsideDropZone } = useDnDStore();
+  const { setOutsideDropZone } = useDragAndDropStore();
 
   const { getClientRectRefCallback } = useElementRect();
 
