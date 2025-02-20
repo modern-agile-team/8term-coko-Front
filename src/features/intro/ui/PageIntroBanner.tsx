@@ -13,7 +13,7 @@ interface PageIntroProps {
   mainTitle: string;
   description: string;
   image: string;
-  orderChange: boolean;
+  orderChange?: boolean;
   backgroundColor: string;
 }
 

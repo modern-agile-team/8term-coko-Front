@@ -87,7 +87,6 @@ export default function Intro() {
           description={'다양한 문제 유형으로\n코딩 문제를 쉽고, 재밌게.'}
           image={`${activeCategory}-소개.svg`}
           backgroundColor="#fff"
-          orderChange
         />
 
         {PAGE_INTRO_DATA.map((intro, index) =>
