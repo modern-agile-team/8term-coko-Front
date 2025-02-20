@@ -226,6 +226,8 @@ export const useUserQuestQuery = {
     return useQuery({
       queryKey: userKeys.quest.daily(),
       queryFn: usersApis.getDailyQuest,
+      gcTime: 0,
+      staleTime: 0,
       enabled: isLoggedIn(user),
     });
   },
