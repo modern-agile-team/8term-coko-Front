@@ -4,7 +4,7 @@ import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
 import { SwitchCase, useUnmount } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/stores';
 import useUserStore from '@store/useUserStore';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import LoginPrompt from '@/features/auth/ui/LoginPrompt';
