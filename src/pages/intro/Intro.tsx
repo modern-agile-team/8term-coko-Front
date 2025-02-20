@@ -48,17 +48,17 @@ export default function Intro() {
       </S.IntroHeader>
       <main>
         <S.TopCokoIntroWrapper>
-          <S.CokoIntroLeftDiv>
-            <div>
-              <h1>
-                재밌고 쉽게 푸는 <br />
-                자바스크립트 학습 사이트
-              </h1>
-              <h2>코딩하는 코끼리, 코코</h2>
-              <button onClick={openModal}>시작하기</button>
-              <Link to="/login">로그인하기</Link>
-            </div>
-          </S.CokoIntroLeftDiv>
+          <div>
+            <h1>
+              재밌고 쉽게 푸는 <br />
+              자바스크립트 학습 사이트
+            </h1>
+            <h2>코딩하는 코끼리, 코코</h2>
+          </div>
+          <div>
+            <button onClick={openModal}>시작하기</button>
+            <Link to="/login">로그인하기</Link>
+          </div>
           <div>
             <img src={getImageUrl('메인소개.webp')} alt="메인화면 소개" />
           </div>

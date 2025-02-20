@@ -1,4 +1,4 @@
-import { ANIMATIONS } from '@style/constants';
+import { ANIMATIONS, MEDIA } from '@style/constants';
 import styled, { css } from 'styled-components';
 
 export const IntroWrapper = styled.div`
@@ -36,7 +36,28 @@ export const IntroWrapper = styled.div`
     font-weight: 400;
     line-height: 10px;
   }
+  ${MEDIA.mobile} {
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+
+    h3 {
+      font-size: 13px;
+    }
+
+    h4 {
+      font-family: 'goorm Sans OTF';
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 10px;
+    }
+  }
 `;
+
 export const IntroHeader = styled.header`
   width: 100vw;
   height: 79px;
@@ -46,18 +67,19 @@ export const IntroHeader = styled.header`
   padding: 0 52px 0 61px;
   justify-content: space-between;
   box-shadow: 0px 4px #e5e5e5;
-  > a {
-    > img {
-      width: 65px;
-      height: 52px;
-      cursor: pointer;
-    }
+
+  img {
+    width: 65px;
+    height: 52px;
+    cursor: pointer;
   }
+
   > div {
     display: flex;
     gap: 40px;
 
     > button {
+      background: #fff;
       color: #00d9e9;
       text-align: center;
       font-family: 'goorm Sans OTF';
@@ -73,54 +95,50 @@ export const IntroHeader = styled.header`
       color: #000;
     }
   }
+  ${MEDIA.mobile} {
+    img {
+      display: none;
+    }
+  }
 `;
 
 export const TopCokoIntroWrapper = styled.div`
-  position: relative;
   margin-top: 4px;
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
   background: #00edff;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
   padding-top: 100px;
-
-  > div:nth-child(2) {
-    flex: 1;
-    > img {
-      animation: ${ANIMATIONS.float} 5s ease-in-out infinite;
-      position: absolute;
-      width: 984px;
-      height: 600px;
-    }
-  }
-`;
-export const CokoIntroLeftDiv = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-
-  > div {
+  align-items: center;
+  > div:nth-child(1) {
+    width: 600px;
+    justify-self: flex-end;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    grid-column: 1;
+    grid-row: 1;
     > h1,
     h2 {
       color: #fff;
       font-family: 'Wanted Sans';
       line-height: 60px;
     }
-    > h1 {
-      font-size: 50px;
-    }
     > h2 {
       margin-top: 19px;
-      font-size: 40px;
     }
+  }
 
+  > div:nth-child(2) {
+    width: 600px;
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-self: flex-end;
     > button,
     a {
       width: 326px;
@@ -135,9 +153,66 @@ export const CokoIntroLeftDiv = styled.div`
       font-size: 20px;
       font-weight: 400;
       line-height: 50px;
-      margin-top: 73px;
       text-decoration: none;
     }
+    a {
+      margin-top: 22px;
+      background: #00d9e9;
+      box-shadow: 0 3px #00b6c0;
+    }
+  }
+
+  > div:nth-child(3) {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1/3;
+    align-self: flex-start;
+
+    > img {
+      animation: ${ANIMATIONS.float} 5s ease-in-out infinite;
+      position: absolute;
+      width: 984px;
+      height: 600px;
+    }
+  }
+  ${MEDIA.mobile} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    > div:nth-child(1) {
+      justify-self: flex-start;
+      margin-left: 22px;
+      grid-column: 1;
+      grid-row: 1;
+      margin-bottom: 30px;
+    }
+    > div:nth-child(2) {
+      width: 100vw;
+      align-items: center;
+      grid-column: 1;
+      justify-self: flex-start;
+      grid-row: 3;
+    }
+    > div:nth-child(3) {
+      grid-column: 1;
+      grid-row: 2;
+      width: 512px;
+      height: 313px;
+      > img {
+        position: absolute;
+        width: 512px;
+        height: 313px;
+      }
+    }
+  }
+`;
+export const CokoIntroLeftDiv = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+
+  > div {
     > button,
     a:nth-child(4) {
       background: #00d9e9;
@@ -174,6 +249,10 @@ export const QuizIntroButtonList = styled.div`
   justify-content: center;
   background-color: #fff;
   padding: 50px 0;
+  ${MEDIA.mobile} {
+    gap: 10px;
+    padding: 0 5px;
+  }
 `;
 
 export const CategoryButton = styled.button<{ $isActive: boolean }>`
@@ -213,6 +292,11 @@ export const IntroFooterWrapper = styled.section`
     height: 1px;
     border: none;
   }
+  ${MEDIA.mobile} {
+    > hr {
+      width: 90%;
+    }
+  }
 `;
 
 export const IntroFooter = styled.footer`
@@ -224,6 +308,9 @@ export const IntroFooter = styled.footer`
     width: 29px;
     height: 29px;
     flex-shrink: 0;
+  }
+  ${MEDIA.mobile} {
+    width: 90%;
   }
 `;
 export const TeamIntroWrapper = styled.div`
@@ -239,6 +326,9 @@ export const TeamIntroWrapper = styled.div`
       font-size: 12px;
       list-style: none;
     }
+  }
+  ${MEDIA.mobile} {
+    gap: 10px;
   }
 `;
 
