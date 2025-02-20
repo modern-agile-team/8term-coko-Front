@@ -1,5 +1,5 @@
 import { useElementRect } from '@/features/intro/service/hooks';
-import { useClientQuizStore } from '../../../store/useClientQuizStore';
+import { useClientQuizStore } from '../stores';
 import { ShortAnswerSection, ShortAnswerInput, Img } from './styles';
 const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL;
 

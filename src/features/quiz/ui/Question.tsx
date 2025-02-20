@@ -1,8 +1,10 @@
 import * as S from './styles';
 import './styles.css';
 import 'highlight.js/styles/github.css';
-import { useClientQuizStore } from '@store/useClientQuizStore';
-import { useDnDStore } from '@store/useDnDStore';
+import {
+  useClientQuizStore,
+  useDragAndDropStore,
+} from '@/features/quiz/stores';
 import dompurify from 'dompurify';
 import parse, { HTMLReactParserOptions, Element } from 'html-react-parser';
 import TextBlock from './TextBlock';
@@ -13,6 +15,7 @@ import {
 } from '@/features/quiz/utils';
 import { useCodeHighlight } from '@/features/quiz/hooks';
 import { useElementRect } from '@/features/intro/service/hooks';
+import { useMemo } from 'react';
 
 interface QuestionProps {
   title: Quiz['title'];
@@ -21,13 +24,15 @@ interface QuestionProps {
 }
 export default function Question({ title, question, category }: QuestionProps) {
   const { currentPage, userResponseAnswer } = useClientQuizStore();
-  const { setOutsideDropZone } = useDnDStore();
+  const { setOutsideDropZone } = useDragAndDropStore();
 
   const { getClientRectRefCallback } = useElementRect();
-
   const highlightCode = useCodeHighlight(question, [question, currentPage]);
-  const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
-  const addLineNumberCode = addLineNumbersToCode(replaceEmptyCode);
+
+  const addLineNumberCode = useMemo(() => {
+    const replaceEmptyCode = replaceEmptyWithHTMLElement(highlightCode);
+    return addLineNumbersToCode(replaceEmptyCode);
+  }, [highlightCode]);
 
   const options: HTMLReactParserOptions = {
     replace(domNode) {
@@ -48,11 +53,12 @@ export default function Question({ title, question, category }: QuestionProps) {
         }
       }}
     >
-      <S.Title $category={category}>
+      <S.TitleWrapper $category={category}>
         <p>문제{currentPage + 1}.</p>
         <p>{title}</p>
-      </S.Title>
+      </S.TitleWrapper>
       <S.Pre id="question" ref={getClientRectRefCallback}>
+        <S.VerticalLine />
         <S.Code>{parse(dompurify.sanitize(addLineNumberCode), options)}</S.Code>
       </S.Pre>
     </S.QuestionSection>
