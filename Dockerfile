@@ -13,10 +13,13 @@ WORKDIR /app
 RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env 
 
+# Corepack 활성화 및 Yarn 최신 버전 적용
+RUN corepack enable && corepack prepare yarn@stable --activate
+
 # 패키지 파일 복사
 COPY package.json yarn.lock ./ 
 
-# 의존성 설치 
+# 의존성 설치 (yarn berry)
 RUN yarn install --immutable
 
 # 애플리케이션 소스 복사
