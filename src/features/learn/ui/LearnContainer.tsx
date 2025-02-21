@@ -108,7 +108,11 @@ function LearnContainer({
           $show={showComponents}
           $isLoggedIn={isLoggedIn(user)}
         >
-          <SelectSection />
+          <SelectSection
+            sections={sections}
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+          />
         </S.ScrollableContainer>
 
         {/* 섹션 + 파트 목록 */}

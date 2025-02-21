@@ -211,6 +211,7 @@ export const SectionTitle = styled.h2`
   width: 693px;
   font-size: 20px;
   color: #ffffff;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
   text-align: center;
   display: flex;
   align-items: center;
@@ -218,6 +219,7 @@ export const SectionTitle = styled.h2`
 
   ${MEDIA.mobile} {
     color: #5f5f5f;
+    text-shadow: none;
     font-size: 20px;
     max-width: 693px;
     width: 100%;
