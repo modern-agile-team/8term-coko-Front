@@ -2,7 +2,7 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, issue/#171/Migration_from_NPM_to_Yarn_Berry]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
