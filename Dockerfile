@@ -15,8 +15,7 @@ RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 
 # Corepack 활성화 및 Yarn 최신 버전 적용
 RUN corepack enable \
-    && corepack prepare yarn@stable --activate \
-    && yarn --version
+    && corepack prepare yarn@stable --activate
 
 # 패키지 파일 복사
 COPY package.json yarn.lock ./
