@@ -5,6 +5,7 @@ import QuizTutorialPage from '@/pages/quiz/tutorial/QuizTutorialPage';
 import LearnTutorialPage from '@/pages/learn/tutorial/LearnTutorialPage';
 import QuizErrorBoundary from '@/features/error/ui/QuizErrorBoundary';
 import Intro from '@/pages/intro/Intro';
+import TermsOfService from '@/pages/terms-of-service/TermsOfService';
 
 const LoginPage = lazy(() => import('@/pages/login/LoginPage'));
 const Learn = lazy(() => import('@/pages/learn/Learn'));
@@ -54,6 +55,7 @@ export default function Router() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/quiz/tutorial" element={<QuizTutorialPage />} />
       <Route path="/learn/tutorial" element={<LearnTutorialPage />} />
+      <Route path="/terms-of-service" element={<TermsOfService />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

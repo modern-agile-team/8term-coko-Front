@@ -44,6 +44,14 @@ export const userKeys = {
 };
 
 export const useUserHpQuery = {
+  getHp: () => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.hp(),
+      queryFn: userHpApi.getHp,
+      enabled: isLoggedIn(user),
+    });
+  },
   getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
