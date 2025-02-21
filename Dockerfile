@@ -14,16 +14,18 @@ RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env 
 
 # Corepack 활성화 및 Yarn 최신 버전 적용
-RUN corepack enable && corepack prepare yarn@stable --activate
+RUN corepack enable \
+    && corepack prepare yarn@stable --activate \
+    && yarn --version
 
 # 패키지 파일 복사
-COPY package.json yarn.lock .yarnrc.yml ./
+COPY package.json yarn.lock ./
 
 # nodeLinker 설정 (node-modules 방식 강제)
 RUN yarn config set nodeLinker node-modules
 
-# 의존성 설치 (Yarn 사용) & node_modules 강제 생성
-RUN yarn install --immutable && yarn workspaces focus --all
+# 의존성 설치 (Yarn 사용)
+RUN yarn install --immutable
 
 # 애플리케이션 소스 복사
 COPY . . 
