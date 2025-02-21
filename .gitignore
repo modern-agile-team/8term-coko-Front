@@ -6,12 +6,18 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+
+# Environment variables
 .env
+*.local
+
+# Node modules
 node_modules
+
+# Build outputs
 dist
 dist-ssr
-*.local
-.env
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,5 +28,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# TypeScript build info files
 /tsconfig.app.tsbuildinfo
 /tsconfig.node.tsbuildinfo
+
+# Yarn Berry
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
