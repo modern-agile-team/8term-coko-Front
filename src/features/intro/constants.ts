@@ -235,7 +235,7 @@ export const LEARN_TUTORIAL_POPOVER_STEPS = new Set([
 
 export const LEARN_TUTORIAL_SECTIONS_PARTS: Section[] = [
   {
-    id: 2,
+    id: 1,
     name: '변수',
     parts: [
       {
@@ -259,7 +259,7 @@ export const LEARN_TUTORIAL_SECTIONS_PARTS: Section[] = [
     ],
   },
   {
-    id: 3,
+    id: 2,
     name: '자료형',
     parts: [
       {
@@ -283,7 +283,7 @@ export const LEARN_TUTORIAL_SECTIONS_PARTS: Section[] = [
     ],
   },
   {
-    id: 4,
+    id: 3,
     name: '연산자',
     parts: [
       {
