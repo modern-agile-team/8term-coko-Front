@@ -317,5 +317,5 @@ export const BottomCokoIntroWrapper = styled.section`
 export const LinkToTermsOfService = styled(Link)`
   color: black;
   text-decoration: none;
-  margin-top: 20px;
+  margin: 20px 50px 0 auto;
 `;
