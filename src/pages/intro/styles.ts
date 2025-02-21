@@ -1,4 +1,5 @@
 import { ANIMATIONS } from '@style/constants';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const IntroWrapper = styled.div`
@@ -311,4 +312,10 @@ export const BottomCokoIntroWrapper = styled.section`
       }
     }
   }
+`;
+
+export const LinkToTermsOfService = styled(Link)`
+  color: black;
+  text-decoration: none;
+  margin-top: 20px;
 `;

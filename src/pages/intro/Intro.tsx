@@ -156,6 +156,9 @@ export default function Intro() {
           </S.TeamIntroWrapper>
           <img src={getImageUrl('인스타_아이콘.svg')} alt="인스타 아이콘" />
         </S.IntroFooter>
+        <S.LinkToTermsOfService to="/terms-of-service">
+          이용약관/개인정보 처리방침
+        </S.LinkToTermsOfService>
       </S.IntroFooterWrapper>
 
       <Modal isShow={isShow}>
