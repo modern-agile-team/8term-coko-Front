@@ -95,10 +95,12 @@ export const PageIntroWrapper = styled.section<{
   $orderChange: boolean;
   $backgroundColor: string;
   $isVisible: boolean;
+  $centerImageOnMobile?: boolean;
 }>`
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
@@ -112,6 +114,40 @@ export const PageIntroWrapper = styled.section<{
     css`
       animation: ${ANIMATIONS.slideIn} 1s ease-out;
     `}
+  ${MEDIA.mobile} {
+    position: relative;
+    gap: 0px;
+    flex-direction: column;
+    > img {
+      position: absolute;
+      width: 100%;
+      height: 300px;
+      left: ${({ $orderChange, $centerImageOnMobile }) => {
+        if ($centerImageOnMobile) return 'unset';
+        return $orderChange ? '20%' : '-20%';
+      }};
+
+      ${({ $orderChange }) =>
+        $orderChange &&
+        css`
+          align-items: flex-start;
+          text-align: start;
+        `};
+    }
+    > div {
+      width: 80%;
+      height: 100vh;
+      order: -1;
+      align-items: flex-end;
+      text-align: end;
+      ${({ $orderChange }) =>
+        !$orderChange &&
+        css`
+          align-items: flex-start;
+          text-align: start;
+        `}
+    }
+  }
 `;
 
 export const IntroCard = styled.div<{ $alignItems: string }>`
