@@ -13,17 +13,24 @@ WORKDIR /app
 RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env 
 
-# 패키지 파일 복사
-COPY package.json package-lock.json ./ 
+# Corepack 활성화 및 Yarn 최신 버전 적용
+RUN corepack enable \
+    && corepack prepare yarn@stable --activate
 
-# 의존성 설치
-RUN npm install
+# 패키지 파일 복사
+COPY package.json yarn.lock ./
+
+# nodeLinker 설정 (node-modules 방식 강제)
+RUN yarn config set nodeLinker node-modules
+
+# 의존성 설치 (Yarn 사용)
+RUN yarn install --immutable
 
 # 애플리케이션 소스 복사
 COPY . . 
 
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
-RUN npm run build
+RUN yarn build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
 FROM nginx:1.25.1-alpine3.17-slim
