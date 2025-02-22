@@ -1,5 +1,5 @@
 # 1. Node.js 기반으로 빌드를 먼저 진행
-FROM node:22-alpine AS build-stage  
+FROM node:22-alpine AS build-stage 
 
 ARG VITE_IMG_BASE_URL
 ARG VITE_BASE_URL
@@ -19,18 +19,16 @@ RUN corepack enable \
 
 # Yarn Zero-Installs 설정
 COPY .yarn .yarn
-COPY .pnp.cjs .pnp.cjs
-COPY .pnp.loader.mjs .pnp.loader.mjs
 COPY .yarnrc.yml ./
 COPY package.json yarn.lock ./
 
-# PnP 환경을 강제 적용하여 패키지 해석 문제 방지
-RUN yarn install --immutable
+# .pnp.cjs 파일 복사
+COPY .pnp.cjs .pnp.cjs
+COPY .pnp.loader.mjs .pnp.loader.mjs
 
-# 디버깅용 로그 추가 (빌드 실패 원인 파악)
-RUN ls -al /app
-RUN cat /app/.pnp.cjs || echo "No .pnp.cjs found"
-RUN yarn workspaces list
+# Zero-Installs을 사용하지만, PnP 환경 보장을 위해 `yarn install` 실행
+RUN yarn install --immutable
+RUN yarn rebuild
 
 # 애플리케이션 소스 복사
 COPY . . 
