@@ -10,11 +10,15 @@ ENV VITE_BASE_URL=${VITE_BASE_URL}
 # 작업 디렉토리 설정
 WORKDIR /app
 
+# Corepack 활성화 및 Yarn 최신 버전 적용
 RUN corepack enable && corepack prepare yarn@4.6.0 --activate
 
 # Yarn PnP 환경 설정을 위한 파일 복사
 COPY .yarn/ .yarn/
-COPY .pnp.cjs .yarnrc.yml package.json yarn.lock ./
+COPY .pnp.cjs .pnp.loader.mjs .yarnrc.yml package.json yarn.lock ./
+
+# Yarn 버전 확인 (디버깅용)
+RUN yarn --version
 
 # 의존성 설치 (PnP 모드)
 RUN yarn install --immutable
@@ -26,8 +30,12 @@ RUN yarn add -D @yarnpkg/sdks \
 # 애플리케이션 소스 복사
 COPY . .
 
-# PnP 환경에서 TypeScript 컴파일러를 실행하여 빌드
-RUN yarn build
+# PnP 환경에서 TypeScript 컴파일러 실행
+ENV NODE_OPTIONS="--require /app/.pnp.cjs"
+RUN yarn exec tsc
+
+# 애플리케이션 빌드 실행 (Pnp 환경 적용)
+RUN NODE_OPTIONS="--require /app/.pnp.cjs" yarn build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
 FROM nginx:1.25.1-alpine3.17-slim
