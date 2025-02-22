@@ -17,13 +17,19 @@ RUN corepack enable \
 # package.json과 yarn.lock만 먼저 복사
 COPY package.json yarn.lock ./
 
-# 의존성 설치
-RUN yarn install --frozen-lockfile
+# 의존성 설치 (PnP 모드)
+RUN yarn install --immutable
+
+# PnP SDK 설치 (TypeScript 실행 가능하도록 설정)
+RUN yarn dlx @yarnpkg/sdks vscode
 
 # 애플리케이션 소스 복사
 COPY . .
 
-# 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
+# PnP 환경 설정
+ENV NODE_OPTIONS="--require /app/.pnp.cjs"
+
+# 빌드 명령어 실행 (PnP 환경에서 TypeScript 실행)
 RUN yarn build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
