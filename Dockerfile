@@ -14,10 +14,10 @@ RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 
 # Corepack 활성화 및 Yarn 최신 버전 적용
-RUN corepack enable && corepack prepare yarn@stable --activate && yarn set version stable
+RUN corepack enable && yarn set version stable
 
 # 패키지 파일 복사 (PnP 환경 유지)
-COPY package.json yarn.lock .yarnrc.yml .pnp.cjs .pnp.loader.mjs .yarn/ ./
+COPY package.json yarn.lock .yarnrc.yml .yarn/ ./
 
 # nodeLinker 설정 (pnp 방식 강제)
 RUN yarn config set nodeLinker pnp
@@ -29,7 +29,7 @@ RUN yarn install --immutable
 COPY . .
 
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
-RUN yarn node .yarn/releases/yarn-*.cjs build
+RUN yarn run build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
 FROM nginx:1.25.1-alpine3.17-slim
