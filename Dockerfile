@@ -28,8 +28,8 @@ RUN if [ -d ".yarn/cache" ]; then echo "Using Zero-Install Cache"; else yarn ins
 # 애플리케이션 소스 복사
 COPY . .
 
-# TypeScript 실행을 위한 PnPify 적용
-RUN yarn dlx @yarnpkg/pnpify --sdk vscode
+# TypeScript 실행을 위한 SDK 설정
+RUN yarn dlx @yarnpkg/sdks vscode
 
 # TypeScript 검사 실행 (빌드 전에 확인)
 RUN yarn exec tsc --noEmit
