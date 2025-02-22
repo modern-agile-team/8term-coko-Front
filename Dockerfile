@@ -19,11 +19,19 @@ RUN corepack enable \
 
 # Yarn Zero-Installs 설정
 COPY .yarn .yarn
+COPY .pnp.cjs .pnp.cjs
+COPY .pnp.loader.mjs .pnp.loader.mjs
 COPY .yarnrc.yml ./
 COPY package.json yarn.lock ./
 
-# 애플리케이션 소스 복사
-COPY . . 
+# Zero-Installs을 사용하지만, PnP 환경 보장을 위해 install 실행
+RUN yarn install --immutable
+
+# 디버깅용 로그 추가
+RUN yarn --version
+RUN yarn workspaces list
+RUN ls -al /app
+RUN cat /app/.pnp.cjs
 
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
 RUN yarn build
