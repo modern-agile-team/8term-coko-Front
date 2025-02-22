@@ -1735,10 +1735,6 @@ const RAW_RUNTIME_STATE =
       "npm:4.0.0"\
     ],\
     [\
-      "yarn",\
-      "npm:1.22.22"\
-    ],\
-    [\
       "yocto-queue",\
       "npm:0.1.0"\
     ],\
@@ -1788,7 +1784,6 @@ const RAW_RUNTIME_STATE =
           ["vite", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:6.1.1"],\
           ["vite-plugin-mkcert", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:1.17.6"],\
           ["vite-tsconfig-paths", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.1.4"],\
-          ["yarn", "npm:1.22.22"],\
           ["zustand", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.0.3"]\
         ],\
         "linkType": "SOFT"\
@@ -1835,7 +1830,6 @@ const RAW_RUNTIME_STATE =
           ["vite", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:6.1.1"],\
           ["vite-plugin-mkcert", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:1.17.6"],\
           ["vite-tsconfig-paths", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.1.4"],\
-          ["yarn", "npm:1.22.22"],\
           ["zustand", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.0.3"]\
         ],\
         "linkType": "SOFT"\
@@ -7181,15 +7175,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/yallist-npm-5.0.0-8732dd9f1c-10c0.zip/node_modules/yallist/",\
         "packageDependencies": [\
           ["yallist", "npm:5.0.0"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["yarn", [\
-      ["npm:1.22.22", {\
-        "packageLocation": "./.yarn/unplugged/yarn-npm-1.22.22-cb63c707fe/node_modules/yarn/",\
-        "packageDependencies": [\
-          ["yarn", "npm:1.22.22"]\
         ],\
         "linkType": "HARD"\
       }]\

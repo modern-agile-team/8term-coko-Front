@@ -45,7 +45,6 @@ __metadata:
     vite: "npm:^6.0.7"
     vite-plugin-mkcert: "npm:^1.17.6"
     vite-tsconfig-paths: "npm:^5.1.4"
-    yarn: "npm:^1.22.22"
     zustand: "npm:^5.0.3"
   languageName: unknown
   linkType: soft
@@ -4472,16 +4471,6 @@ __metadata:
   version: 5.0.0
   resolution: "yallist@npm:5.0.0"
   checksum: 10c0/a499c81ce6d4a1d260d4ea0f6d49ab4da09681e32c3f0472dee16667ed69d01dae63a3b81745a24bd78476ec4fcf856114cb4896ace738e01da34b2c42235416
-  languageName: node
-  linkType: hard
-
-"yarn@npm:^1.22.22":
-  version: 1.22.22
-  resolution: "yarn@npm:1.22.22"
-  bin:
-    yarn: bin/yarn.js
-    yarnpkg: bin/yarn.js
-  checksum: 10c0/8c77198c93d7542e7f4e131c63b66de357b7076ecfbcfe709ec0d674115c2dd9edaa45196e5510e6e9366d368707a802579e3402071002e1c9d9a99d491478de
   languageName: node
   linkType: hard
 
