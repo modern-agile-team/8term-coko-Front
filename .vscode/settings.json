@@ -1,5 +1,9 @@
 {
-  "cSpell.words": ["Coko", "cokoedu", "Maplestory"],
+  "cSpell.words": [
+    "Coko",
+    "cokoedu",
+    "Maplestory"
+  ],
   "search.exclude": {
     "**/.yarn": true,
     "**/.pnp.*": true
