@@ -24,7 +24,7 @@ RUN yarn install --immutable
 COPY . .
 
 # PnP 환경에서 TypeScript 컴파일러를 실행하여 빌드
-RUN yarn dlx tsc && yarn build
+RUN yarn exec tsc && yarn build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
 FROM nginx:1.25.1-alpine3.17-slim
