@@ -31,7 +31,7 @@ COPY . .
 
 # PnP 환경에서 TypeScript 컴파일러 실행
 ENV NODE_OPTIONS="--require /app/.pnp.cjs"
-RUN yarn node .yarn/sdks/typescript/bin/tsc
+RUN yarn dlx typescript tsc
 
 # 애플리케이션 빌드 실행 (PnP 환경 적용)
 RUN NODE_OPTIONS="--require /app/.pnp.cjs" yarn build
