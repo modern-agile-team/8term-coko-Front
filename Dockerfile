@@ -22,11 +22,14 @@ COPY package.json yarn.lock .yarnrc.yml .pnp.cjs .pnp.loader.mjs .yarn/ ./
 # nodeLinker 설정 (pnp 방식 강제)
 RUN yarn config set nodeLinker pnp
 
-# Zero Install 사용 → `.yarn/cache`가 있어도 `yarn install --immutable` 실행 (필수!)
-RUN yarn install --immutable
+# Zero Install 유지 → `.yarn/cache` 포함 여부 확인 후 install 실행
+RUN if [ -d ".yarn/cache" ]; then echo "Using Zero-Install Cache"; else yarn install --immutable; fi
 
 # 애플리케이션 소스 복사
 COPY . .
+
+# TypeScript 검사 실행 (빌드 전에 확인)
+RUN yarn exec tsc --noEmit
 
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
 RUN yarn build
