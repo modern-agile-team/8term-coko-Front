@@ -1,4 +1,3 @@
-# 1. Node.js 기반으로 빌드를 먼저 진행
 FROM node:22-alpine AS build-stage
 
 ARG VITE_IMG_BASE_URL
@@ -21,7 +20,7 @@ COPY .pnp.cjs .pnp.loader.mjs .yarnrc.yml package.json yarn.lock ./
 RUN yarn --version
 
 # 의존성 설치 (PnP 모드)
-RUN yarn install --immutable
+RUN yarn install --immutable --mode=skip-build
 
 # PnP SDK 설치 (TypeScript 및 ESLint 등 개발 도구 지원)
 RUN yarn add -D @yarnpkg/sdks \
@@ -32,9 +31,9 @@ COPY . .
 
 # PnP 환경에서 TypeScript 컴파일러 실행
 ENV NODE_OPTIONS="--require /app/.pnp.cjs"
-RUN yarn exec tsc
+RUN yarn node .yarn/sdks/typescript/bin/tsc
 
-# 애플리케이션 빌드 실행 (Pnp 환경 적용)
+# 애플리케이션 빌드 실행 (PnP 환경 적용)
 RUN NODE_OPTIONS="--require /app/.pnp.cjs" yarn build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
