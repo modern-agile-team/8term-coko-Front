@@ -17,18 +17,7 @@ RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 RUN corepack enable \
     && corepack prepare yarn@stable --activate
 
-# Yarn Zero-Installs 설정
-COPY .yarn .yarn
-COPY .yarnrc.yml ./
-COPY package.json yarn.lock ./
-
-# .pnp.cjs 파일 복사
-COPY .pnp.cjs .pnp.cjs
-COPY .pnp.loader.mjs .pnp.loader.mjs
-
-# Zero-Installs을 사용하지만, PnP 환경 보장을 위해 `yarn install` 실행
-RUN yarn install --immutable
-RUN yarn rebuild
+RUN yarn install 
 
 # 애플리케이션 소스 복사
 COPY . . 
