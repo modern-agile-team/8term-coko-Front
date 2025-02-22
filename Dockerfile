@@ -5,7 +5,7 @@ ARG VITE_IMG_BASE_URL
 ARG VITE_BASE_URL
 
 ENV VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}
-ENV VITE_BASE_URL=${VITE_BASE_URL} 
+ENV VITE_BASE_URL=${VITE_BASE_URL}
 
 # 작업 디렉토리 설정
 WORKDIR /app
@@ -17,14 +17,10 @@ RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 RUN corepack enable \
     && corepack prepare yarn@stable --activate
 
-# 패키지 파일 복사
+# Yarn Zero-Installs 설정
+COPY .yarn .yarn
+COPY .yarnrc.yml ./
 COPY package.json yarn.lock ./
-
-# nodeLinker 설정 (node-modules 방식 강제)
-RUN yarn config set nodeLinker node-modules
-
-# 의존성 설치 (Yarn 사용)
-RUN yarn install --immutable
 
 # 애플리케이션 소스 복사
 COPY . . 
