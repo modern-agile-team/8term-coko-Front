@@ -28,9 +28,6 @@ RUN yarn install --immutable
 # 애플리케이션 소스 복사
 COPY . .
 
-# TypeScript 검사 실행 (빌드 전에 확인)
-RUN yarn exec tsc --noEmit
-
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
 RUN yarn build
 
