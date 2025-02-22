@@ -19,19 +19,18 @@ COPY .pnp.cjs .pnp.loader.mjs .yarnrc.yml package.json yarn.lock ./
 # Yarn 버전 확인 (디버깅용)
 RUN yarn --version
 
-# 의존성 설치 (PnP 모드)
-RUN yarn install --immutable --mode=skip-build
+# 의존성 설치 (PnP 모드) + typescript 강제 재설치
+RUN yarn add -D typescript && yarn install --immutable --mode=skip-build
 
 # PnP SDK 설치 (TypeScript 및 ESLint 등 개발 도구 지원)
-RUN yarn add -D @yarnpkg/sdks \
-    && yarn dlx @yarnpkg/sdks vscode
+RUN yarn dlx @yarnpkg/sdks vscode
 
 # 애플리케이션 소스 복사
 COPY . .
 
 # PnP 환경에서 TypeScript 컴파일러 실행
 ENV NODE_OPTIONS="--require /app/.pnp.cjs"
-RUN yarn run tsc
+RUN yarn node $(yarn bin tsc)
 
 # 애플리케이션 빌드 실행 (PnP 환경 적용)
 RUN NODE_OPTIONS="--require /app/.pnp.cjs" yarn build
