@@ -26,11 +26,11 @@ RUN yarn dlx @yarnpkg/sdks vscode
 # 애플리케이션 소스 복사
 COPY . .
 
-# PnP 환경 설정
+# PnP 환경 설정 (TypeScript 실행이 정상적으로 되도록 경로 지정)
 ENV NODE_OPTIONS="--require /app/.pnp.cjs"
 
-# 빌드 명령어 실행 (PnP 환경에서 TypeScript 실행)
-RUN yarn build
+# TypeScript 실행 명확히 지정 후 빌드
+RUN yarn exec tsc && yarn build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
 FROM nginx:1.25.1-alpine3.17-slim
