@@ -10,6 +10,8 @@ ENV VITE_BASE_URL=${VITE_BASE_URL}
 # 작업 디렉토리 설정
 WORKDIR /app
 
+RUN corepack enable && corepack prepare yarn@4.6.0 --activate
+
 # Yarn PnP 환경 설정을 위한 파일 복사
 COPY .yarn/ .yarn/
 COPY .pnp.cjs .yarnrc.yml package.json yarn.lock ./
