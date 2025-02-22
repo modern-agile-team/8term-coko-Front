@@ -16,20 +16,26 @@ RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 # Corepack 활성화 및 Yarn 최신 버전 적용
 RUN corepack enable && yarn set version stable
 
-# 패키지 파일 복사 (PnP 환경 유지)
-COPY package.json yarn.lock .yarnrc.yml .yarn/ ./
+# 패키지 파일 복사 (PnP 환경 유지 + Zero Install 지원)
+COPY package.json yarn.lock .yarnrc.yml .pnp.cjs .pnp.loader.mjs .yarn/ ./
 
 # nodeLinker 설정 (pnp 방식 강제)
 RUN yarn config set nodeLinker pnp
 
-# 의존성 설치 (Yarn 사용)
-RUN yarn install --immutable
+# Zero Install 사용 → .yarn/cache 존재 여부 확인 후 install
+RUN if [ -d ".yarn/cache" ]; then echo "Using Zero-Install Cache"; else yarn install --immutable; fi
 
 # 애플리케이션 소스 복사
 COPY . .
 
+# TypeScript 실행을 위한 PnPify 적용
+RUN yarn dlx @yarnpkg/pnpify --sdk vscode
+
+# TypeScript 검사 실행 (빌드 전에 확인)
+RUN yarn exec tsc --noEmit
+
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
-RUN yarn run build
+RUN yarn build
 
 # 2. Nginx 이미지 설정 (실제 배포용)
 FROM nginx:1.25.1-alpine3.17-slim
