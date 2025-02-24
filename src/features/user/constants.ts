@@ -9,6 +9,9 @@ export const OPINIONS_OPTIONS = {
   '기능 추가': {
     dataField: 'feature',
   },
+  퀴즈: {
+    dataField: 'quiz',
+  },
   '직접 입력': {
     dataField: 'etc',
   },
