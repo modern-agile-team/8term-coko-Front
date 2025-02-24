@@ -690,6 +690,10 @@ const RAW_RUNTIME_STATE =
       "npm:4.1.3"\
     ],\
     [\
+      "@yarnpkg/sdks",\
+      "npm:3.2.0"\
+    ],\
+    [\
       "@yarnpkg/shell",\
       "npm:4.1.1"\
     ],\
@@ -818,6 +822,10 @@ const RAW_RUNTIME_STATE =
       "npm:1.0.8"\
     ],\
     [\
+      "comment-json",\
+      "npm:2.4.2"\
+    ],\
+    [\
       "concat-map",\
       "npm:0.0.1"\
     ],\
@@ -828,6 +836,10 @@ const RAW_RUNTIME_STATE =
     [\
       "cookie",\
       "npm:1.0.2"\
+    ],\
+    [\
+      "core-util-is",\
+      "npm:1.0.3"\
     ],\
     [\
       "cross-spawn",\
@@ -1104,6 +1116,10 @@ const RAW_RUNTIME_STATE =
     [\
       "has-flag",\
       "npm:4.0.0"\
+    ],\
+    [\
+      "has-own-prop",\
+      "npm:2.0.0"\
     ],\
     [\
       "highlight.js",\
@@ -1478,6 +1494,10 @@ const RAW_RUNTIME_STATE =
       "npm:0.14.1"\
     ],\
     [\
+      "repeat-string",\
+      "npm:1.6.1"\
+    ],\
+    [\
       "resolve-alpn",\
       "npm:1.2.1"\
     ],\
@@ -1763,6 +1783,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:4.3.4"],\
           ["@vitejs/plugin-react-swc", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:3.8.0"],\
           ["@yarnpkg/pnpify", "npm:4.1.3"],\
+          ["@yarnpkg/sdks", "npm:3.2.0"],\
           ["axios", "npm:1.7.9"],\
           ["dompurify", "npm:3.2.4"],\
           ["eslint", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:9.18.0"],\
@@ -1809,6 +1830,7 @@ const RAW_RUNTIME_STATE =
           ["@vitejs/plugin-react", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:4.3.4"],\
           ["@vitejs/plugin-react-swc", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:3.8.0"],\
           ["@yarnpkg/pnpify", "npm:4.1.3"],\
+          ["@yarnpkg/sdks", "npm:3.2.0"],\
           ["axios", "npm:1.7.9"],\
           ["dompurify", "npm:3.2.4"],\
           ["eslint", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:9.18.0"],\
@@ -3899,6 +3921,23 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@yarnpkg/sdks", [\
+      ["npm:3.2.0", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@yarnpkg-sdks-npm-3.2.0-03b1f3c8a8-10c0.zip/node_modules/@yarnpkg/sdks/",\
+        "packageDependencies": [\
+          ["@yarnpkg/sdks", "npm:3.2.0"],\
+          ["@yarnpkg/core", "npm:4.2.0"],\
+          ["@yarnpkg/fslib", "npm:3.1.1"],\
+          ["@yarnpkg/parsers", "npm:3.0.2"],\
+          ["chalk", "npm:3.0.0"],\
+          ["clipanion", "virtual:e74e0c7face772469c5d9d70719bbd83a0b053c4a74b651bfc2a4f7de3d205468e1258219594675d4ae727005789cab9cdeba038300276cac6c939326b4ca52c#npm:4.0.0-rc.4"],\
+          ["comment-json", "npm:2.4.2"],\
+          ["lodash", "npm:4.17.21"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@yarnpkg/shell", [\
       ["npm:4.1.1", {\
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/@yarnpkg-shell-npm-4.1.1-e74e0c7fac-10c0.zip/node_modules/@yarnpkg/shell/",\
@@ -4305,6 +4344,19 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["comment-json", [\
+      ["npm:2.4.2", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/comment-json-npm-2.4.2-ad40caa02b-10c0.zip/node_modules/comment-json/",\
+        "packageDependencies": [\
+          ["comment-json", "npm:2.4.2"],\
+          ["core-util-is", "npm:1.0.3"],\
+          ["esprima", "npm:4.0.1"],\
+          ["has-own-prop", "npm:2.0.0"],\
+          ["repeat-string", "npm:1.6.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["concat-map", [\
       ["npm:0.0.1", {\
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/concat-map-npm-0.0.1-85a921b7ee-10c0.zip/node_modules/concat-map/",\
@@ -4328,6 +4380,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/cookie-npm-1.0.2-7a4273d897-10c0.zip/node_modules/cookie/",\
         "packageDependencies": [\
           ["cookie", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["core-util-is", [\
+      ["npm:1.0.3", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/core-util-is-npm-1.0.3-ca74b76c90-10c0.zip/node_modules/core-util-is/",\
+        "packageDependencies": [\
+          ["core-util-is", "npm:1.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5200,6 +5261,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/has-flag-npm-4.0.0-32af9f0536-10c0.zip/node_modules/has-flag/",\
         "packageDependencies": [\
           ["has-flag", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["has-own-prop", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/has-own-prop-npm-2.0.0-d895adfe8c-10c0.zip/node_modules/has-own-prop/",\
+        "packageDependencies": [\
+          ["has-own-prop", "npm:2.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6311,6 +6381,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/regenerator-runtime-npm-0.14.1-a6c97c609a-10c0.zip/node_modules/regenerator-runtime/",\
         "packageDependencies": [\
           ["regenerator-runtime", "npm:0.14.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["repeat-string", [\
+      ["npm:1.6.1", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/repeat-string-npm-1.6.1-bc8e388655-10c0.zip/node_modules/repeat-string/",\
+        "packageDependencies": [\
+          ["repeat-string", "npm:1.6.1"]\
         ],\
         "linkType": "HARD"\
       }]\
