@@ -39,8 +39,6 @@ tsconfig.*.tsbuildinfo
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-.pnp.cjs
-.pnp.loader.mjs
 
 # Vite cache
 vite_cache/
