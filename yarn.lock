@@ -39,6 +39,7 @@ __metadata:
     react-hot-toast: "npm:^2.5.1"
     react-router-dom: "npm:^7.1.1"
     styled-components: "npm:^6.1.14"
+    supports-color: "npm:^10.0.0"
     typescript: "npm:^5.7.3"
     typescript-eslint: "npm:^8.19.1"
     vite: "npm:^6.0.7"
@@ -4077,6 +4078,13 @@ __metadata:
   version: 4.3.2
   resolution: "stylis@npm:4.3.2"
   checksum: 10c0/0410e1404cbeee3388a9e17587875211ce2f014c8379af0d1e24ca55878867c9f1ccc7b0ce9a156ca53f5d6e301391a82b0645522a604674a378b3189a4a1994
+  languageName: node
+  linkType: hard
+
+"supports-color@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "supports-color@npm:10.0.0"
+  checksum: 10c0/0e7884dfd02a07b3c6e0b235346f58c19f0201f1e44f7807583581761b354688c8577378785b5a4e3b03110809786c4c808e0e086cd91911f7b8bc59132703a8
   languageName: node
   linkType: hard
 

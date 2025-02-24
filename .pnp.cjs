@@ -1613,7 +1613,7 @@ const RAW_RUNTIME_STATE =
     ],\
     [\
       "supports-color",\
-      "npm:7.2.0"\
+      "npm:10.0.0"\
     ],\
     [\
       "tar",\
@@ -1778,6 +1778,7 @@ const RAW_RUNTIME_STATE =
           ["react-hot-toast", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:2.5.1"],\
           ["react-router-dom", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:7.1.1"],\
           ["styled-components", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:6.1.14"],\
+          ["supports-color", "npm:10.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:8.19.1"],\
           ["vite", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:6.1.1"],\
@@ -1823,6 +1824,7 @@ const RAW_RUNTIME_STATE =
           ["react-hot-toast", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:2.5.1"],\
           ["react-router-dom", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:7.1.1"],\
           ["styled-components", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:6.1.14"],\
+          ["supports-color", "npm:10.0.0"],\
           ["typescript", "patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:8.19.1"],\
           ["vite", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:6.1.1"],\
@@ -6693,6 +6695,13 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["supports-color", [\
+      ["npm:10.0.0", {\
+        "packageLocation": "../../AppData/Local/Yarn/Berry/cache/supports-color-npm-10.0.0-6cd1bb42a6-10c0.zip/node_modules/supports-color/",\
+        "packageDependencies": [\
+          ["supports-color", "npm:10.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:7.2.0", {\
         "packageLocation": "../../AppData/Local/Yarn/Berry/cache/supports-color-npm-7.2.0-606bfcf7da-10c0.zip/node_modules/supports-color/",\
         "packageDependencies": [\
