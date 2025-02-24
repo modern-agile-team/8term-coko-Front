@@ -5,6 +5,7 @@ import type {
   UserHp,
   PersonalRanking,
   UserAttendance,
+  Opinions,
 } from '@features/user/types';
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
@@ -103,4 +104,9 @@ export const userHpApi = {
     const response = await api.patch('/users/me/hp');
     return response.data;
   },
+};
+
+export const userOpinionsApi = {
+  postOpinions: async (parmas: Opinions): Promise<void> =>
+    await api.post('/users/me/opinions', parmas),
 };

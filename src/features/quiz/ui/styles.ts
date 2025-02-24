@@ -22,7 +22,7 @@ export const QuestionSection = styled.section<{
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  margin-top: 37px;
+  margin-top: 10px;
   width: 60vw;
   height: 50vh;
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
@@ -595,4 +595,10 @@ export const VerticalLine = styled.div`
   ${MEDIA.mobile} {
     height: 40vh;
   }
+`;
+
+export const RightAlignedBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 60vw;
 `;

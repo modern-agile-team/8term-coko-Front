@@ -4,7 +4,7 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import { userHpApi, usersApis } from '@features/user/apis';
+import { userHpApi, userOpinionsApi, usersApis } from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
@@ -238,5 +238,11 @@ export const useUserQuestQuery = {
       staleTime: 0,
       enabled: isLoggedIn(user),
     });
+  },
+};
+
+export const useUserOpinionsQuery = {
+  createOpinions: () => {
+    return useMutation({ mutationFn: userOpinionsApi.postOpinions });
   },
 };
