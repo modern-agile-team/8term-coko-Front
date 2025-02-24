@@ -8,6 +8,20 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 3000,
   },
-  plugins: [tsconfigPaths(), react(), mkcert()],
+  plugins: [
+    tsconfigPaths(),
+    react({
+      plugins: [
+        [
+          '@swc/plugin-styled-components',
+          {
+            displayName: true,
+            ssr: false,
+          },
+        ],
+      ],
+    }),
+    mkcert(),
+  ],
   cacheDir: 'vite_cache',
 });

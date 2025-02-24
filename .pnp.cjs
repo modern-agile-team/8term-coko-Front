@@ -507,7 +507,7 @@ const RAW_RUNTIME_STATE =
     ],\
     [\
       "@swc/plugin-styled-components",\
-      "npm:6.0.3"\
+      "npm:7.0.0"\
     ],\
     [\
       "@swc/types",\
@@ -1753,7 +1753,7 @@ const RAW_RUNTIME_STATE =
           ["@modern-kit/types", "npm:1.7.0"],\
           ["@modern-kit/utils", "npm:1.26.2"],\
           ["@swc/core", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:1.10.18"],\
-          ["@swc/plugin-styled-components", "npm:6.0.3"],\
+          ["@swc/plugin-styled-components", "npm:7.0.0"],\
           ["@tanstack/react-query", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.64.1"],\
           ["@tanstack/react-query-devtools", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.64.1"],\
           ["@types/dompurify", "npm:3.2.0"],\
@@ -1799,7 +1799,7 @@ const RAW_RUNTIME_STATE =
           ["@modern-kit/types", "npm:1.7.0"],\
           ["@modern-kit/utils", "npm:1.26.2"],\
           ["@swc/core", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:1.10.18"],\
-          ["@swc/plugin-styled-components", "npm:6.0.3"],\
+          ["@swc/plugin-styled-components", "npm:7.0.0"],\
           ["@tanstack/react-query", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.64.1"],\
           ["@tanstack/react-query-devtools", "virtual:17a11af292bb77433babd578d8d2f39d7ed8acae50f76593713fc2840ef27ae547e08173d2a5326d79b5f8704e49bfd43a14f62e54dc66015f7c41db171cb7d2#npm:5.64.1"],\
           ["@types/dompurify", "npm:3.2.0"],\
@@ -3207,10 +3207,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["@swc/plugin-styled-components", [\
-      ["npm:6.0.3", {\
-        "packageLocation": "./.yarn/unplugged/@swc-plugin-styled-components-npm-6.0.3-509ed380c6/node_modules/@swc/plugin-styled-components/",\
+      ["npm:7.0.0", {\
+        "packageLocation": "./.yarn/unplugged/@swc-plugin-styled-components-npm-7.0.0-9dd5aefcaf/node_modules/@swc/plugin-styled-components/",\
         "packageDependencies": [\
-          ["@swc/plugin-styled-components", "npm:6.0.3"],\
+          ["@swc/plugin-styled-components", "npm:7.0.0"],\
           ["@swc/counter", "npm:0.1.3"]\
         ],\
         "linkType": "HARD"\
