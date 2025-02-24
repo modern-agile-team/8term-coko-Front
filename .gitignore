@@ -38,3 +38,7 @@ dist-ssr
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/install-state.gz
+
+# Vite cache
+.vite-cache
+vite_cache
