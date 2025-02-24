@@ -31,7 +31,7 @@ FROM base AS builder
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 의존성 및 소스 코드 복사
+# 의존성 및 소스 코드 복사 (의존성은 deps 단계에서 가져옴)
 COPY --from=deps /app /app
 COPY . .
 
@@ -40,12 +40,7 @@ RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 
 # ESLint와 SDK 설정을 위한 PnP 환경 초기화
-# RUN yarn rebuild
-# RUN yarn cache clean
-# RUN yarn install --immutable
-
-# ESLint, TypeScript SDK 설치 (PnP 환경에서 TypeScript를 인식시키기 위함)
-RUN yarn dlx @yarnpkg/sdks vscode
+RUN yarn rebuild
 
 # React 애플리케이션 빌드
 RUN yarn build
