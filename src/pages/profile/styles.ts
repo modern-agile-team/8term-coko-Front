@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { MEDIA } from '@/style/constants';
 
 export const ProfileSection = styled.section`
   display: flex;
@@ -11,7 +12,15 @@ export const ProfileSection = styled.section`
   background-color: #ffff;
   border-radius: 20px;
   box-shadow: 0 3px #e5e5e5;
+
+  ${MEDIA.mobile} {
+    width: calc(100% - 60px);
+    height: auto;
+    flex-direction: column;
+    margin-top: 20px;
+  }
 `;
+
 export const BadgeSection = styled.section`
   height: 306px;
   width: 50vw;
@@ -19,7 +28,14 @@ export const BadgeSection = styled.section`
   background-color: #ffff;
   border-radius: 20px;
   box-shadow: 0 3px #e5e5e5;
+
+  ${MEDIA.mobile} {
+    width: calc(100% - 60px);
+    height: auto;
+    margin-top: 20px;
+  }
 `;
+
 export const LevelDiv = styled.div`
   position: absolute;
   display: flex;
@@ -30,7 +46,12 @@ export const LevelDiv = styled.div`
   border-radius: 20px;
   box-shadow: 0 3px #e5e5e5;
   margin: 68px 28px 0 0;
+
+  ${MEDIA.mobile} {
+    display: none;
+  }
 `;
+
 export const MyProgressDiv = styled.div`
   position: relative;
   display: flex;
@@ -45,6 +66,7 @@ export const MyProgressDiv = styled.div`
   justify-content: center;
   border: 2px solid #bfd683;
   background: #e3f3b8;
+
   > p:nth-child(1) {
     position: absolute;
     top: -6px;
@@ -72,7 +94,25 @@ export const MyProgressDiv = styled.div`
     line-height: 24px; /* 200% */
     text-transform: lowercase;
   }
+
+  ${MEDIA.mobile} {
+    margin-left: 0;
+    width: 90%;
+    height: auto;
+    min-width: auto;
+    background: none;
+    border: none;
+    padding: 10px 0 20px 0;
+
+    > p:nth-child(1) {
+      top: -160px;
+    }
+    > img {
+      top: -190px;
+    }
+  }
 `;
+
 export const MyQuizInfoDiv = styled.div`
   display: flex;
   align-items: center;
@@ -91,7 +131,12 @@ export const MyQuizInfoDiv = styled.div`
   span {
     color: #85705f;
   }
+
+  ${MEDIA.mobile} {
+    margin-top: 10px;
+  }
 `;
+
 export const UserNameLabel = styled.label`
   display: block;
   text-align: center;
@@ -105,6 +150,7 @@ export const UserNameLabel = styled.label`
   line-height: 20px; /* 142.857% */
   text-transform: lowercase;
 `;
+
 export const JoinDateLabel = styled.label`
   display: block;
   color: #cbcbcb;
@@ -116,6 +162,7 @@ export const JoinDateLabel = styled.label`
   line-height: 24px; /* 200% */
   text-transform: lowercase;
 `;
+
 export const BadgeLabel = styled.label`
   display: block;
   text-align: center;
@@ -131,6 +178,7 @@ export const BadgeLabel = styled.label`
   text-transform: lowercase;
   margin: 27px auto 0 40px;
 `;
+
 export const LevelList = styled.ol`
   position: absolute;
   display: flex;
@@ -148,6 +196,7 @@ export const LevelList = styled.ol`
     color: #ffb53d;
   }
 `;
+
 export const LevelLabel = styled.label`
   display: block;
   margin: 0 0 21px 70px;
@@ -165,6 +214,7 @@ export const LevelLabel = styled.label`
   line-height: 24px; /* 160% */
   letter-spacing: 0.2px;
 `;
+
 export const MyCharacterImage = styled.img`
   width: 115px;
   height: 92px;
