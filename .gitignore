@@ -39,6 +39,7 @@ tsconfig.*.tsbuildinfo
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+!.yarn/install-state.gz
 
 # Vite cache
 vite_cache/

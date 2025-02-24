@@ -8,5 +8,4 @@ node_modules/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-!.pnp.cjs
-!.pnp.loader.mjs
+!.yarn/install-state.gz
