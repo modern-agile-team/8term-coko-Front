@@ -17,7 +17,7 @@ RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 RUN corepack enable && yarn set version stable
 
 # 패키지 파일 복사 (PnP 환경 유지 + Zero Install 지원)
-COPY package.json yarn.lock .yarnrc.yml .pnp.cjs .pnp.loader.mjs .yarn/ ./
+COPY package.json yarn.lock .yarnrc.yml .yarn/ ./ 
 
 # nodeLinker 설정 (pnp 방식 강제)
 RUN yarn config set nodeLinker pnp
@@ -25,14 +25,17 @@ RUN yarn config set nodeLinker pnp
 # Zero Install 유지 → `.yarn/cache` 포함 여부 확인 후 install 실행
 RUN yarn install --immutable
 
-# 애플리케이션 소스 복사
-COPY . .
+# TypeScript 및 SDK 추가
+RUN yarn add -D typescript @yarnpkg/sdks
 
 # TypeScript SDK 설치 (Pnpify 문제 해결)
-RUN yarn dlx @yarnpkg/sdks vscode
+RUN yarn run @yarnpkg/sdks vscode
 
 # TypeScript 검사 실행 (빌드 전에 확인)
 RUN yarn run tsc --noEmit
+
+# 애플리케이션 소스 복사
+COPY . .
 
 # 빌드 명령어 실행 (정적 파일을 dist 폴더에 생성)
 RUN yarn build
