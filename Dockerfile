@@ -54,17 +54,16 @@ FROM nginx:1.25.1-alpine3.17-slim
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 기본 Nginx 설정 제거 및 새로운 설정 복사
-RUN rm /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# 빌드된 정적 파일만 복사 (최적화)
+# 빌드된 정적 파일 복사 (이 부분은 첫 번째 단계에서 생성된 dist 폴더)
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# 환경 변수 파일도 포함 (클라이언트에서 사용 가능)
+# Nginx 설정 파일 복사
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Nginx 설정 파일에 환경 변수로 전달
 COPY --from=build-stage /app/.env /usr/share/nginx/html/.env
 
-# Nginx 포트 노출
+# Nginx의 기본 포트를 노출
 EXPOSE 80
 
 # Nginx 실행
