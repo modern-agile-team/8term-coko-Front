@@ -2,7 +2,7 @@ name: CI/CD Docker
 
 on:
   push:
-    branches: [main, develop, setting/#173/Migrate_to_Yarn_PnP]
+    branches: [main, develop]
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.actor }}/react-auto-deploy
