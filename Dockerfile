@@ -40,10 +40,9 @@ RUN echo "VITE_IMG_BASE_URL=${VITE_IMG_BASE_URL}" > /app/.env
 RUN echo "VITE_BASE_URL=${VITE_BASE_URL}" >> /app/.env
 
 # TypeScript SDK 설치 (PnP 환경에서 TypeScript를 인식시키기 위함)
-RUN ls -la /app
-RUN ls -la /app/.yarn
-RUN ls -la /app/.pnp.cjs
-RUN yarn sdks vscode
+RUN yarn cache clean
+RUN yarn why @yarnpkg/sdks
+RUN yarn dlx @yarnpkg/sdks vscode
 
 # React 애플리케이션 빌드
 RUN yarn build
