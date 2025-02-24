@@ -28,8 +28,8 @@ RUN yarn install --immutable
 # TypeScript 및 SDK 추가
 RUN yarn add -D typescript @yarnpkg/sdks
 
-# TypeScript SDK 설치 (Pnpify 문제 해결)
-RUN yarn run @yarnpkg/sdks vscode
+# TypeScript SDK 설치 (PnPify 문제 해결)
+RUN yarn dlx @yarnpkg/sdks vscode
 
 # TypeScript 검사 실행 (빌드 전에 확인)
 RUN yarn run tsc --noEmit
