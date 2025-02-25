@@ -48,9 +48,9 @@ export const MyProgressDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90%; /* 기존 width: 383px 대신 유동적인 크기 */
-  max-width: 383px; /* 최대 크기 제한 */
-  min-width: 250px; /* 너무 작아지는 것 방지 */
+  width: 90%;
+  max-width: 383px;
+  min-width: 250px;
   height: 198px;
   margin-left: 45px;
   padding-top: 80px;
