@@ -8,19 +8,66 @@ export const FocusedItemDiv = styled.div`
 `;
 
 export const TutorialClearWrapper = styled.div`
+  width: 608px;
+  height: 255px;
   animation: ${ANIMATIONS.fadeInScaleUpForCenter} 0.7s ease-out;
   position: fixed;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 747.42px;
-  height: 372.04px;
-  background: #fff;
+  background: #eacfa4;
   border-radius: 40px;
-  box-shadow: 0 11px #e5e5e5;
+  padding: 20px;
+
+  ${MEDIA.mobile} {
+    width: 85%;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+
+    ${MEDIA.mobile} {
+      margin-left: 0;
+    }
+  }
+
+  > img {
+    width: 232px;
+    height: 187px;
+
+    ${MEDIA.mobile} {
+      display: none;
+    }
+  }
+
+  > div > p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+    text-align: center;
+    white-space: pre-line;
+    margin-bottom: 20px;
+  }
+
+  > div > button {
+    width: 210px;
+    height: 40px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #ffffff;
+    border-radius: 10px;
+    background: #00dbe8;
+    border: none;
+    border-bottom: 3px solid #00c6d2;
+  }
 `;
 
 export const RedHighlight = styled.span`
