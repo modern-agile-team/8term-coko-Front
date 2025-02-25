@@ -13,26 +13,17 @@ export const ProfileSection = styled.section`
   border-radius: 20px;
   box-shadow: 0 3px #e5e5e5;
 
+  > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
   ${MEDIA.mobile} {
     width: calc(100% - 60px);
     height: auto;
     flex-direction: column;
-    margin-top: 20px;
-  }
-`;
-
-export const BadgeSection = styled.section`
-  height: 306px;
-  width: 50vw;
-  margin-top: 21px;
-  background-color: #ffff;
-  border-radius: 20px;
-  box-shadow: 0 3px #e5e5e5;
-
-  ${MEDIA.mobile} {
-    width: calc(100% - 60px);
-    height: auto;
-    margin-top: 20px;
+    margin-top: 120px;
   }
 `;
 
@@ -57,8 +48,9 @@ export const MyProgressDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 350px;
-  width: 383px;
+  width: 90%; /* 기존 width: 383px 대신 유동적인 크기 */
+  max-width: 383px; /* 최대 크기 제한 */
+  min-width: 250px; /* 너무 작아지는 것 방지 */
   height: 198px;
   margin-left: 45px;
   padding-top: 80px;
@@ -78,37 +70,45 @@ export const MyProgressDiv = styled.div`
       font-size: 13px;
     }
   }
+
   > img {
     position: absolute;
     top: -38px;
   }
+
   > div {
     display: flex;
     color: #9f9f9f;
-    justify-content: space-around;
     gap: 20px;
     text-align: center;
     font-size: 12px;
-    font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 200% */
-    text-transform: lowercase;
+    line-height: 24px;
+    white-space: nowrap;
+    width: 90%;
   }
 
   ${MEDIA.mobile} {
     margin-left: 0;
     width: 90%;
+    max-width: 300px;
     height: auto;
-    min-width: auto;
     background: none;
     border: none;
     padding: 10px 0 20px 0;
+    z-index: 30;
 
     > p:nth-child(1) {
-      top: -160px;
+      top: -300px;
     }
+
     > img {
-      top: -190px;
+      top: -330px;
+    }
+
+    > div {
+      width: 100%;
+      max-width: 270px;
     }
   }
 `;
@@ -116,39 +116,38 @@ export const MyProgressDiv = styled.div`
 export const MyQuizInfoDiv = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 24px;
+  justify-content: space-between;
+  margin-top: 16px;
   border-radius: 8px;
   background: #cbd2a1;
-  width: 362px;
+  width: 90%;
+  max-width: 363px;
   height: 37px;
   color: #9f9f9f;
   text-align: center;
   font-size: 12px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 200% */
-  text-transform: lowercase;
+  padding: 0 10px;
+
   span {
     color: #85705f;
   }
 
   ${MEDIA.mobile} {
-    margin-top: 10px;
+    width: 100%;
   }
 `;
-
 export const UserNameLabel = styled.label`
-  display: block;
   text-align: center;
   border-radius: 15px;
   border: 2px solid #f09900;
   background: #ffb53d;
   color: #fff;
-  font-size: 14px;
-  font-style: normal;
+  padding: 3px 16px 3px 16px;
+  z-index: 30px;
+  font-size: 16px;
+  margin-top: 20px;
   font-weight: 700;
-  line-height: 20px; /* 142.857% */
-  text-transform: lowercase;
 `;
 
 export const JoinDateLabel = styled.label`
@@ -156,11 +155,28 @@ export const JoinDateLabel = styled.label`
   color: #cbcbcb;
   margin-top: 5px;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 200% */
+  line-height: 24px;
   text-transform: lowercase;
+`;
+
+export const BadgeSection = styled.section`
+  height: 306px;
+  width: 50vw;
+  margin-top: 21px;
+  background-color: #ffff;
+  border-radius: 20px;
+  box-shadow: 0 3px #e5e5e5;
+
+  ${MEDIA.mobile} {
+    position: relative;
+    width: calc(100% - 60px);
+    height: auto;
+    padding-bottom: 30px;
+    margin-bottom: 100px;
+  }
 `;
 
 export const BadgeLabel = styled.label`
@@ -174,9 +190,13 @@ export const BadgeLabel = styled.label`
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
-  line-height: 20px; /* 142.857% */
+  line-height: 20px;
   text-transform: lowercase;
   margin: 27px auto 0 40px;
+
+  ${MEDIA.mobile} {
+    margin: 27px auto 0 auto;
+  }
 `;
 
 export const LevelList = styled.ol`
@@ -211,7 +231,7 @@ export const LevelLabel = styled.label`
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
-  line-height: 24px; /* 160% */
+  line-height: 24px;
   letter-spacing: 0.2px;
 `;
 
