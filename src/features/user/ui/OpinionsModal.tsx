@@ -1,7 +1,7 @@
 import SortDropdown from '@/common/layout/SortDropdown';
 import { OPINIONS_OPTIONS } from '@/features/user/constants';
 import { useUserOpinionsQuery } from '@/features/user/queries';
-import { OpinionsFormWrapper } from '@/features/user/ui/styles';
+import { ErrorMessage, OpinionsFormWrapper } from '@/features/user/ui/styles';
 import { RefObject, useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -24,9 +24,15 @@ export default function OpinionsModal({
   const handleSubmit = () => {
     if (selectedOption === '직접 입력' && !customTitle) {
       setError('문의 제목은 필수 입력 사항입니다.');
+      return;
     }
     if (!content) {
       setError('내용은 필수 입력 사항입니다.');
+      return;
+    }
+    if (content.length <= 10) {
+      setError('내용은 10자 이상 입력해주세요.');
+      return;
     }
     const title = selectedOption === '직접 입력' ? customTitle : selectedOption;
     createOpinions(
@@ -83,7 +89,7 @@ export default function OpinionsModal({
         <textarea value={content} onChange={e => setContent(e.target.value)} />
       </div>
       <button onClick={handleSubmit}>제출하기</button>
-      <div role="alert">{error}</div>
+      <ErrorMessage>{error}</ErrorMessage>
     </OpinionsFormWrapper>
   );
 }

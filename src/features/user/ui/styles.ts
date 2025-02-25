@@ -254,9 +254,18 @@ export const AttendanceCalendarWrapper = styled.div`
 `;
 
 export const OpinionsButton = styled.button`
-  min-width: 50px;
+  min-width: 60px;
   background-color: #00edff;
-  border: none;
+  border-radius: 24px;
+  border: 2px solid #00dce8;
+  background: #70f5ff;
+  padding: 2px 5px;
+  color: #fff;
+  &:hover {
+    border-radius: 24px;
+    border: 2px solid #00868d;
+    background: #00d9e9;
+  }
 `;
 
 export const OpinionsFormWrapper = styled.div`
@@ -335,4 +344,10 @@ export const OpinionsFormWrapper = styled.div`
   ${MEDIA.mobile} {
     width: 90vw;
   }
+`;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
 `;
