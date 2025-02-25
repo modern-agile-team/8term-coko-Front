@@ -7,6 +7,7 @@ import ProgressBar from '@features/progress/ui/ProgressBar';
 import { getImageUrl } from '@/utils/getImageUrl';
 import BadgeContainer from '@features/user/ui/BadgeContainer';
 import React from 'react';
+
 const levelList = [60, 50, 40, 30, 20, 10];
 export default function Profile() {
   return (
@@ -17,6 +18,7 @@ export default function Profile() {
         </globalS.LeftSection>
         <globalS.RightSection>
           <Header />
+          {/* PC일 때만 보이는 세로 레벨바 */}
           <S.LevelDiv>
             <div>
               <S.MyCharacterImage src={getImageUrl('테스트캐릭터.svg')} />
@@ -50,6 +52,8 @@ export default function Profile() {
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
+        {/* 모바일에서는 아래가 전체 폭으로 세로 배치되어
+            두 번째 이미지처럼 보입니다. */}
         <S.ProfileSection>
           <div>
             <ProfileImage isIcon={false} />
@@ -60,7 +64,7 @@ export default function Profile() {
             <p>
               코코에 접속한 지 벌써 <span>20</span>일이 됐어요 !
             </p>
-            <img src={getImageUrl('출석일수.svg')}></img>
+            <img src={getImageUrl('출석일수.svg')} />
             <div>
               <p>진행도</p>
               <ProgressBar

@@ -67,8 +67,9 @@ export const ANIMATIONS = {
 export const Z_INDEX = {
   overlay: 10000,
   tutorial: 10001,
+  learnHeader: 1000,
   menu: 99,
-  header: 100,
+  header: 1001,
   popover: 101,
   loading: 9999,
 } as const;

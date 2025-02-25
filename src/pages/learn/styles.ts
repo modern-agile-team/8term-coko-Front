@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MEDIA } from '@style/constants';
+import { MEDIA, Z_INDEX } from '@style/constants';
 import { PROGRESS_COLORS } from '@features/learn/constants';
 interface ScrollableContainerProps {
   $show?: boolean;
@@ -15,6 +15,7 @@ export const ScrollableContainer = styled.div<ScrollableContainerProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: ${Z_INDEX.learnHeader};
   margin-top: ${({ $isLoggedIn }) => ($isLoggedIn ? '45px' : '25px')};
 
   ${MEDIA.mobile} {
@@ -55,6 +56,7 @@ export const ProgressBarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  z-index: ${Z_INDEX.learnHeader};
 
   ${MEDIA.mobile} {
     top: 35px;
