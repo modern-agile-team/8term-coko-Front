@@ -1,6 +1,9 @@
 import { calculateTutorialPopupPosition } from '@/features/intro/service/utils';
+import Select from '@/features/intro/ui/Select';
 import { MEDIA, ANIMATIONS, Z_INDEX } from '@/style/constants';
+import { Link } from 'react-router-dom';
 import { css, styled } from 'styled-components';
+import { relative } from 'path';
 
 export const FocusedItemDiv = styled.div`
   position: absolute;
@@ -240,5 +243,69 @@ export const TutorialPromptModalContent = styled.div`
     &:hover {
       background: #0056b3;
     }
+  }
+`;
+
+export const IntroHeaderWrapper = styled.header`
+  width: 100vw;
+  height: 79px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 52px 0 61px;
+  justify-content: space-between;
+  box-shadow: 0px 4px #e5e5e5;
+
+  img {
+    width: 65px;
+    height: 52px;
+    cursor: pointer;
+  }
+
+  > div {
+    display: flex;
+    gap: 40px;
+  }
+  ${MEDIA.mobile} {
+    img {
+      display: none;
+    }
+  }
+`;
+
+export const IntroHeaderLink = styled(Link)<{ $active: boolean }>`
+  background: #fff;
+  color: #00d9e9;
+  text-align: center;
+  font-family: 'goorm Sans OTF';
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px; /* 200% */
+  letter-spacing: 0.16px;
+  border: none;
+  background-color: inherit;
+  text-decoration: none;
+  color: ${({ $active }) => ($active ? '#00D9E9' : '#000')};
+  font-weight: ${({ $active }) => ($active ? 'bold' : 'normal')};
+`;
+
+export const SelectWrapper = styled.div`
+  position: relative;
+  width: 100px;
+  button {
+    width: 100%;
+    height: 100%;
+  }
+  ul {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 `;

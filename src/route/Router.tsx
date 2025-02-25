@@ -14,6 +14,7 @@ const Ranking = lazy(() => import('@/pages/ranking/Ranking'));
 const Quiz = lazy(() => import('@/pages/quiz/Quiz'));
 const Store = lazy(() => import('@/pages/store/Store'));
 const Profile = lazy(() => import('@/pages/profile/Profile'));
+const Creators = lazy(() => import('@/pages/creators/Creators'));
 
 const InitialRouteRedirect = () => {
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
@@ -43,6 +44,7 @@ export default function Router() {
       <Route path="/ranking" element={<Ranking />} />
       <Route path="/intro" element={<Intro />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/intro/creators" element={<Creators />} />
       <Route
         path="/quiz"
         element={

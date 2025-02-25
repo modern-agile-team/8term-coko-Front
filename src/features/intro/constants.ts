@@ -385,3 +385,35 @@ export const BADGE_IMAGE_LIST = [
   '뱃지-14일출석.svg',
   '뱃지-30일출석.svg',
 ] as const;
+
+export const MEMBER_DETAILS: Record<
+  string,
+  { team: string; description: string }
+> = {
+  홍대경: {
+    team: 'BACKEND',
+    description:
+      'API 설계부터 성능 최적화까지! 백엔드 개발을 책임지고 있습니다.',
+  },
+  이건우: {
+    team: 'BACKEND',
+    description: '데이터베이스와 서버 로직을 튼튼하게! 백엔드 개발자입니다.',
+  },
+  전희나: {
+    team: 'BACKEND',
+    description: '안정적인 서비스 운영을 목표로 백엔드를 개발하고 있어요.',
+  },
+  구도윤: {
+    team: 'FRONTEND',
+    description:
+      '멋진 UI와 부드러운 UX를 위해 끊임없이 고민하는 프론트엔드 개발자!',
+  },
+  신현성: {
+    team: 'FRONTEND',
+    description: '사용자 경험을 최우선으로 생각하는 프론트엔드 개발자입니다.',
+  },
+  이채영: {
+    team: 'DESIGNER',
+    description: '감각적인 디자인과 트렌디한 UI를 만들어가는 디자이너입니다.',
+  },
+};

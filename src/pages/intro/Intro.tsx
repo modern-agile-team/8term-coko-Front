@@ -10,9 +10,9 @@ import {
   PAGE_INTRO_DATA,
 } from '@/features/intro/constants';
 import { IntroCard } from '@/features/intro/ui/styles';
-import { useScrollTo } from '@modern-kit/react';
 import TutorialPromptModal from '@/features/intro/ui/TutorialPromptModal';
 import useModal from '@/hooks/useModal';
+import IntroHeader from '@/features/intro/ui/IntroHeader';
 
 export default function Intro() {
   const [activeCategory, setActiveCategory] = useState('COMBINATION');
@@ -20,32 +20,11 @@ export default function Intro() {
 
   const footerRef = useRef<HTMLDivElement | null>(null);
   const quizIntroRef = useRef<HTMLDivElement | null>(null);
-  const { scrollToElement } = useScrollTo<HTMLDivElement>();
-
-  const handleScrollToFooter = () => {
-    if (footerRef.current) {
-      scrollToElement(footerRef.current, { behavior: 'smooth' });
-    }
-  };
-
-  const handleScrollToQuizIntro = () => {
-    if (quizIntroRef.current) {
-      scrollToElement(quizIntroRef.current, { behavior: 'smooth' });
-    }
-  };
 
   return (
     <S.IntroWrapper>
       <title>코코-자바스크립트 학습 사이트</title>
-      <S.IntroHeader>
-        <Link to="/learn">
-          <img src={getImageUrl('로고.svg')} alt="사이트 로고" />
-        </Link>
-        <div>
-          <button onClick={handleScrollToQuizIntro}>사이트 소개</button>
-          <button onClick={handleScrollToFooter}>만든 사람들</button>
-        </div>
-      </S.IntroHeader>
+      <IntroHeader />
       <main>
         <S.TopCokoIntroWrapper>
           <div>
