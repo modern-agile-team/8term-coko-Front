@@ -58,7 +58,7 @@ export const TutorialClearWrapper = styled.div`
     margin-bottom: 20px;
   }
 
-  > div > button {
+  > div > a {
     width: 210px;
     height: 40px;
     font-size: 17px;
@@ -66,7 +66,10 @@ export const TutorialClearWrapper = styled.div`
     color: #ffffff;
     border-radius: 10px;
     background: #49c0f8;
-    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     box-shadow: 0 4px #38a6dc;
 
     &:hover {
