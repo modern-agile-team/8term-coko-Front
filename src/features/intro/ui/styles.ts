@@ -23,6 +23,7 @@ export const TutorialClearWrapper = styled.div`
   border-bottom: 6px solid #d4b383;
   border-radius: 40px;
   padding: 20px;
+  font-weight: 700;
 
   ${MEDIA.mobile} {
     width: 85%;
@@ -51,7 +52,6 @@ export const TutorialClearWrapper = styled.div`
 
   > div > p {
     font-size: 20px;
-    font-weight: 700;
     color: #000000;
     text-align: center;
     white-space: pre-line;
@@ -62,7 +62,6 @@ export const TutorialClearWrapper = styled.div`
     width: 210px;
     height: 40px;
     font-size: 17px;
-    font-weight: 700;
     color: #ffffff;
     border-radius: 10px;
     background: #49c0f8;
