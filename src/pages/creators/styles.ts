@@ -9,6 +9,7 @@ export const CreatorsWrapper = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 180vh;
+  margin-top: 4px;
 
   background: linear-gradient(to bottom, #00edff, #ffffff 95%);
   * {

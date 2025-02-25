@@ -52,7 +52,7 @@ export default function Creators() {
               <hr />
               <div>
                 {MEMBER_DETAILS[member]?.sns.map(({ icon, url }) => (
-                  <Link to={url}>
+                  <Link to={url} key={icon}>
                     <img src={getImageUrl(icon)} alt={icon} />
                   </Link>
                 ))}

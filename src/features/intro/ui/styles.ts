@@ -271,6 +271,9 @@ export const IntroHeaderWrapper = styled.header`
     img {
       display: none;
     }
+    > div {
+      gap: 10px;
+    }
   }
 `;
 
