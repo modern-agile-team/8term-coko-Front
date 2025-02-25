@@ -288,7 +288,7 @@ export const OpinionsFormWrapper = styled.div`
   border-radius: 40px;
   box-shadow: 0 5px #e5e5e5;
 
-  div {
+  > div {
     width: 80%;
     margin: 10px 0;
     display: flex;
@@ -350,4 +350,24 @@ export const ErrorMessage = styled.p`
   color: red;
   font-size: 14px;
   margin-top: 4px;
+`;
+
+export const ContentWrapper = styled.div<{ $isMaxLength: boolean }>`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  > textarea {
+    width: 100%;
+  }
+  > p {
+    align-self: flex-end;
+    color: #c8c8c8;
+    ${({ $isMaxLength }) =>
+      $isMaxLength &&
+      css`
+        > span {
+          color: red;
+        }
+      `}
+  }
 `;
