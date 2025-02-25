@@ -275,13 +275,12 @@ export const IntroHeaderWrapper = styled.header`
 
 export const IntroHeaderLink = styled(Link)<{ $active: boolean }>`
   background: #fff;
-  color: #00d9e9;
   text-align: center;
   font-family: 'goorm Sans OTF';
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
-  line-height: 30px; /* 200% */
+  line-height: 30px;
   letter-spacing: 0.16px;
   border: none;
   background-color: inherit;

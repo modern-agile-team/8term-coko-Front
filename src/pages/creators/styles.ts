@@ -1,3 +1,4 @@
+import { MEDIA, Z_INDEX } from '@/style/constants';
 import styled from 'styled-components';
 
 export const CreatorsWrapper = styled.div`
@@ -41,6 +42,23 @@ export const CreatorsWrapper = styled.div`
       white-space: pre-line;
     }
   }
+  ${MEDIA.mobile} {
+    h1 {
+      font-size: 27px;
+    }
+    h2 {
+      font-size: 15px;
+    }
+    h3 {
+      font-size: 15px;
+    }
+    h4 {
+      font-size: 15px;
+    }
+    p {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const TeamButtonList = styled.div`
@@ -50,6 +68,7 @@ export const TeamButtonList = styled.div`
   align-items: center;
   justify-content: center;
   gap: 99px;
+  flex-wrap: wrap;
   * {
     font-family: 'goorm Sans OTF';
     font-size: 20px;
@@ -80,6 +99,7 @@ export const TeamButtonList = styled.div`
     background: #00d9e9;
     display: flex;
     flex-direction: column;
+    z-index: ${Z_INDEX.menu};
   }
   li {
     color: #fff;
@@ -94,6 +114,12 @@ export const TeamButtonList = styled.div`
   li:nth-last-child(1) {
     border: none;
   }
+  ${MEDIA.mobile} {
+    margin-top: 50px;
+    align-items: flex-start;
+    min-height: 400px;
+    gap: 0px;
+  }
 `;
 
 export const MemberCardWrapper = styled.div`
@@ -105,10 +131,15 @@ export const MemberCardWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${MEDIA.mobile} {
+    width: 95%;
+    height: 507px;
+  }
 `;
 
 export const MemberCard = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 90%;
 
   gap: 53px;
@@ -131,6 +162,20 @@ export const MemberCard = styled.div`
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
+    }
+  }
+  ${MEDIA.mobile} {
+    justify-content: center;
+    gap: 0px;
+    > div {
+      width: 100%;
+      align-items: center;
+      > hr {
+        width: 95%;
+      }
+      > div {
+        width: 95%;
+      }
     }
   }
 `;
@@ -160,6 +205,21 @@ export const CoKoIntroWraper = styled.div`
       font-size: 20px;
       color: #fff;
       margin-top: 20px;
+    }
+  }
+  ${MEDIA.mobile} {
+    gap: 0px;
+    > img {
+      width: 130.027px;
+      height: 114.916px;
+    }
+    > div {
+      width: 200px;
+      > button {
+        font-size: 10px;
+        width: 126px;
+        height: 19px;
+      }
     }
   }
 `;

@@ -7,6 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 export default function IntroHeader() {
   const location = useLocation();
+  console.log(location.pathname, location.pathname === '/intro');
   return (
     <IntroHeaderWrapper>
       <Link to="/learn">

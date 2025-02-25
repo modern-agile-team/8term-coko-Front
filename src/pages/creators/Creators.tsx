@@ -1,4 +1,3 @@
-import SortDropdown from '@/common/layout/SortDropdown';
 import { COKO_TEAM_INFO, MEMBER_DETAILS } from '@/features/intro/constants';
 import IntroHeader from '@/features/intro/ui/IntroHeader';
 import Select from '@/features/intro/ui/Select';
@@ -9,11 +8,16 @@ import { useState } from 'react';
 export default function Creators() {
   const [member, setMember] = useState('홍대경');
 
+  const handleSetMember: (value: string) => void = value => {
+    if (!COKO_TEAM_INFO.some(team => team.label === value)) {
+      setMember(value);
+    }
+  };
+
   return (
     <>
       <S.CreatorsWrapper>
         <IntroHeader />
-
         <S.TeamButtonList>
           {COKO_TEAM_INFO.map((team, index) => {
             if (index === 0) return null;
@@ -23,7 +27,7 @@ export default function Creators() {
                 buttonName={`${
                   team.createBy.includes(member) ? member : team.label
                 } ▲`}
-                onChange={setMember}
+                onChange={handleSetMember}
               >
                 <Select.Option value={team.label} label={`${team.label} ▼`} />
                 {team.createBy.map(member => (
@@ -42,10 +46,7 @@ export default function Creators() {
               <p>{MEMBER_DETAILS[member]?.description}</p>
               <hr />
               <div>
-                <img
-                  src={getImageUrl('인스타_아이콘.svg')}
-                  alt="인스타 아이콘"
-                />
+                <img src={getImageUrl('파랑_인스타.svg')} alt="인스타 아이콘" />
               </div>
             </div>
           </S.MemberCard>
