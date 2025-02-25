@@ -273,20 +273,121 @@ export const TutorialPromptModalWrapper = styled.div`
   align-items: center;
 `;
 
+const quizModalStyles = css`
+  width: 456px;
+  height: 227px;
+  background: #eacfa4;
+  border-radius: 30px;
+  border-bottom: 6px solid #d4b383;
+`;
+
+const defaultModalStyles = css`
+  width: 562px;
+  height: 341px;
+  background: #fff;
+  border-radius: 25px;
+  border-bottom: 6px solid #e5e5e5;
+`;
+
+const quizTitleStyles = css`
+  font-size: 24px;
+  font-family: Maplestory;
+  color: #000000;
+
+  ${MEDIA.mobile} {
+    font-size: 22px;
+  }
+`;
+
+const defaultTitleStyles = css`
+  font-size: 30px;
+  font-family: goorm Sans;
+  color: #00dbe8;
+
+  ${MEDIA.mobile} {
+    font-size: 28px;
+  }
+`;
+
+const quizButtonStyles = css`
+  width: 102px;
+  height: 40px;
+  font-size: 17px;
+  font-family: Maplestory;
+  border-radius: 10px;
+
+  ${MEDIA.mobile} {
+    font-size: 15px;
+    width: 102px;
+  }
+`;
+
+const defaultButtonStyles = css`
+  width: 326px;
+  height: 50px;
+  font-size: 20px;
+  font-family: goorm Sans;
+  border-radius: 20px;
+
+  ${MEDIA.mobile} {
+    font-size: 18px;
+    width: min(70vw, 326px);
+  }
+`;
+
+const quizFirstButtonStyles = css`
+  background: #ff3f3d;
+  box-shadow: 0 4px #eb0000;
+  color: #fff;
+  &:hover {
+    background: #ff6b69;
+  }
+`;
+
+const defaultFirstButtonStyles = css`
+  background: #fff;
+  box-shadow: 0 4px #e5e5e5;
+  color: #000;
+  &:hover {
+    background: #f0f0f0;
+  }
+`;
+
+const quizSecondButtonStyles = css`
+  background: #2ad363;
+  box-shadow: 0 4px #00bc37;
+  color: #fff;
+  &:hover {
+    background: #4ce387;
+  }
+`;
+
+const defaultSecondButtonStyles = css`
+  background: #00d9e9;
+  box-shadow: 0 4px #00b6c0;
+  color: #fff;
+  &:hover {
+    background: #33e0f0;
+  }
+`;
+
+const quizContentDivStyles = css`
+  flex-direction: row;
+  gap: 60px;
+  margin-top: 20px;
+`;
+
+const defaultContentDivStyles = css`
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+`;
+
 export const TutorialPromptModalContent = styled.div<{
   $isQuizTutorialPage: boolean;
 }>`
-  width: ${({ $isQuizTutorialPage }) =>
-    $isQuizTutorialPage ? '456px' : '562px'};
-  height: ${({ $isQuizTutorialPage }) =>
-    $isQuizTutorialPage ? '227px' : '341px'};
-  background: ${({ $isQuizTutorialPage }) =>
-    $isQuizTutorialPage ? '#EACFA4;' : '#FFF'};
-  border-radius: ${({ $isQuizTutorialPage }) =>
-    $isQuizTutorialPage ? '30px' : '25px'};
-  border-bottom: 6px solid
-    ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '#d4b383' : '#e5e5e5;'};
+  ${({ $isQuizTutorialPage }) =>
+    $isQuizTutorialPage ? quizModalStyles : defaultModalStyles};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -305,78 +406,33 @@ export const TutorialPromptModalContent = styled.div<{
     font-weight: 700;
     margin-top: 60px;
     line-height: 30px;
-    font-size: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '24px' : '30px'};
-    font-family: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? 'Maplestory' : 'goorm Sans'};
-    color: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '#000000' : '#00dbe8'};
-
-    ${MEDIA.mobile} {
-      font-size: ${({ $isQuizTutorialPage }) =>
-        $isQuizTutorialPage ? '22px' : '28px'};
-    }
+    ${({ $isQuizTutorialPage }) =>
+      $isQuizTutorialPage ? quizTitleStyles : defaultTitleStyles};
   }
 
   > div {
     display: flex;
-    flex-direction: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? 'row' : 'column'};
-    gap: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '60px' : '20px'};
-    margin-top: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '20px' : '40px'};
+    ${({ $isQuizTutorialPage }) =>
+      $isQuizTutorialPage ? quizContentDivStyles : defaultContentDivStyles};
   }
 
   > div > button {
     margin: 5px 0;
     border: none;
     font-weight: 700;
-    width: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '102px' : '326px'};
-    height: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '40px' : '50px'};
-    font-size: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '17px' : '20px'};
-    font-family: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? 'Maplestory' : 'goorm Sans'};
-    border-radius: ${({ $isQuizTutorialPage }) =>
-      $isQuizTutorialPage ? '10px' : '20px'};
-
-    ${MEDIA.mobile} {
-      font-size: ${({ $isQuizTutorialPage }) =>
-        $isQuizTutorialPage ? '15px' : '18px'};
-      width: ${({ $isQuizTutorialPage }) =>
-        $isQuizTutorialPage ? '102px' : 'min(70vw, 326px)'};
-    }
+    ${({ $isQuizTutorialPage }) =>
+      $isQuizTutorialPage ? quizButtonStyles : defaultButtonStyles};
 
     &:nth-child(1) {
-      background: ${({ $isQuizTutorialPage }) =>
-        $isQuizTutorialPage ? '#FF3F3D' : '#FFF'};
-      box-shadow: 0 4px
-        ${({ $isQuizTutorialPage }) =>
-          $isQuizTutorialPage ? '#EB0000' : '#E5E5E5'};
-      color: ${({ $isQuizTutorialPage }) =>
-        $isQuizTutorialPage ? '#FFF' : '#000'};
-
-      &:hover {
-        background: ${({ $isQuizTutorialPage }) =>
-          $isQuizTutorialPage ? '#FF6B69' : '#f0f0f0'};
-      }
+      ${({ $isQuizTutorialPage }) =>
+        $isQuizTutorialPage ? quizFirstButtonStyles : defaultFirstButtonStyles};
     }
 
     &:nth-child(2) {
-      background: ${({ $isQuizTutorialPage }) =>
-        $isQuizTutorialPage ? '#2AD363' : '#00D9E9'};
-      box-shadow: 0 4px
-        ${({ $isQuizTutorialPage }) =>
-          $isQuizTutorialPage ? '#00BC37' : '#00B6C0'};
-      color: #fff;
-
-      &:hover {
-        background: ${({ $isQuizTutorialPage }) =>
-          $isQuizTutorialPage ? '#4ce387' : '#33e0f0'};
-      }
+      ${({ $isQuizTutorialPage }) =>
+        $isQuizTutorialPage
+          ? quizSecondButtonStyles
+          : defaultSecondButtonStyles};
     }
 
     &:active {
