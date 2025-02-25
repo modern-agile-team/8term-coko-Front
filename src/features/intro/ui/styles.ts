@@ -20,6 +20,7 @@ export const TutorialClearWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background: #eacfa4;
+  border-bottom: 6px solid #d4b383;
   border-radius: 40px;
   padding: 20px;
 
@@ -64,9 +65,18 @@ export const TutorialClearWrapper = styled.div`
     font-weight: 700;
     color: #ffffff;
     border-radius: 10px;
-    background: #00dbe8;
+    background: #49c0f8;
     border: none;
-    border-bottom: 3px solid #00c6d2;
+    box-shadow: 0 4px #38a6dc;
+
+    &:hover {
+      background: #7fd6fa;
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(3px);
+    }
   }
 `;
 
@@ -272,6 +282,9 @@ export const TutorialPromptModalContent = styled.div<{
     $isQuizTutorialPage ? '#EACFA4;' : '#FFF'};
   border-radius: ${({ $isQuizTutorialPage }) =>
     $isQuizTutorialPage ? '30px' : '25px'};
+  border-bottom: 6px solid
+    ${({ $isQuizTutorialPage }) =>
+      $isQuizTutorialPage ? '#d4b383' : '#e5e5e5;'};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -338,20 +351,35 @@ export const TutorialPromptModalContent = styled.div<{
     &:nth-child(1) {
       background: ${({ $isQuizTutorialPage }) =>
         $isQuizTutorialPage ? '#FF3F3D' : '#FFF'};
-      border-bottom: 4px solid
+      box-shadow: 0 4px
         ${({ $isQuizTutorialPage }) =>
           $isQuizTutorialPage ? '#EB0000' : '#E5E5E5'};
       color: ${({ $isQuizTutorialPage }) =>
         $isQuizTutorialPage ? '#FFF' : '#000'};
+
+      &:hover {
+        background: ${({ $isQuizTutorialPage }) =>
+          $isQuizTutorialPage ? '#FF6B69' : '#f0f0f0'};
+      }
     }
 
     &:nth-child(2) {
       background: ${({ $isQuizTutorialPage }) =>
         $isQuizTutorialPage ? '#2AD363' : '#00D9E9'};
-      border-bottom: 4px solid
+      box-shadow: 0 4px
         ${({ $isQuizTutorialPage }) =>
           $isQuizTutorialPage ? '#00BC37' : '#00B6C0'};
       color: #fff;
+
+      &:hover {
+        background: ${({ $isQuizTutorialPage }) =>
+          $isQuizTutorialPage ? '#4ce387' : '#33e0f0'};
+      }
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(3px);
     }
   }
 `;
