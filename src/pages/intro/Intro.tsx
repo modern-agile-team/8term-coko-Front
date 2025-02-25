@@ -114,7 +114,7 @@ export default function Intro() {
               전설의 키캡을 찾아 나서는
               <br /> 해적 코코의 여정을 함께해요 !
             </p>
-            <Link to="/learn">모험 떠나러 가기</Link>
+            <button onClick={openModal}>모험 떠나러 가기</button>
           </div>
         </div>
       </S.BottomCokoIntroWrapper>

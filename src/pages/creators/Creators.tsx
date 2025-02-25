@@ -1,12 +1,17 @@
 import { COKO_TEAM_INFO, MEMBER_DETAILS } from '@/features/intro/constants';
 import IntroHeader from '@/features/intro/ui/IntroHeader';
 import Select from '@/features/intro/ui/Select';
+import TutorialPromptModal from '@/features/intro/ui/TutorialPromptModal';
+import useModal from '@/hooks/useModal';
 import * as S from '@/pages/creators/styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Creators() {
   const [member, setMember] = useState('홍대경');
+
+  const { isShow, openModal, closeModal, Modal } = useModal();
 
   const handleSetMember: (value: string) => void = value => {
     if (!COKO_TEAM_INFO.some(team => team.label === value)) {
@@ -16,8 +21,8 @@ export default function Creators() {
 
   return (
     <>
+      <IntroHeader />
       <S.CreatorsWrapper>
-        <IntroHeader />
         <S.TeamButtonList>
           {COKO_TEAM_INFO.map((team, index) => {
             if (index === 0) return null;
@@ -46,7 +51,11 @@ export default function Creators() {
               <p>{MEMBER_DETAILS[member]?.description}</p>
               <hr />
               <div>
-                <img src={getImageUrl('파랑_인스타.svg')} alt="인스타 아이콘" />
+                {MEMBER_DETAILS[member]?.sns.map(({ icon, url }) => (
+                  <Link to={url}>
+                    <img src={getImageUrl(icon)} alt={icon} />
+                  </Link>
+                ))}
               </div>
             </div>
           </S.MemberCard>
@@ -56,10 +65,13 @@ export default function Creators() {
           <div>
             <h2>재밌고 쉽게 푸는 자바스크립트 학습 사이트</h2>
             <h3>코딩하는 코끼리, 코코</h3>
-            <button>시작하기</button>
+            <button onClick={openModal}>시작하기</button>
           </div>
         </S.CoKoIntroWraper>
       </S.CreatorsWrapper>
+      <Modal isShow={isShow}>
+        <TutorialPromptModal closeModal={closeModal} />
+      </Modal>
     </>
   );
 }

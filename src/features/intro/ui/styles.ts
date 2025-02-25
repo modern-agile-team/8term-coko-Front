@@ -1,9 +1,7 @@
 import { calculateTutorialPopupPosition } from '@/features/intro/service/utils';
-import Select from '@/features/intro/ui/Select';
 import { MEDIA, ANIMATIONS, Z_INDEX } from '@/style/constants';
 import { Link } from 'react-router-dom';
 import { css, styled } from 'styled-components';
-import { relative } from 'path';
 
 export const FocusedItemDiv = styled.div`
   position: absolute;
@@ -186,14 +184,17 @@ export const BadgeContainer = styled.div`
     display: none;
   }
 `;
-export const BadgeList = styled.ul`
+export const BadgeList = styled.ul<{ $isPaused: boolean }>`
   display: flex;
-  gap: 43px;
+  animation: ${ANIMATIONS.scrollAnimation} 18s linear infinite;
+  animation-play-state: ${({ $isPaused }) =>
+    $isPaused ? 'paused' : 'running'};
   ::-webkit-scrollbar {
     display: none;
   }
 
   > li {
+    margin: 0 21px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -247,7 +248,7 @@ export const TutorialPromptModalContent = styled.div`
 `;
 
 export const IntroHeaderWrapper = styled.header`
-  width: 100vw;
+  width: 100%;
   height: 79px;
   background: #fff;
   display: flex;

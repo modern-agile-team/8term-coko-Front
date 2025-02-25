@@ -339,7 +339,7 @@ export const BottomCokoIntroWrapper = styled.section`
         font-weight: 700;
         line-height: 40px;
       }
-      > a {
+      > button {
         border-radius: 20px;
         background: #00d9e9;
         border: none;

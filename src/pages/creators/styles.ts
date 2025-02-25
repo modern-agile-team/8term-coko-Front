@@ -162,6 +162,10 @@ export const MemberCard = styled.div`
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
+      img {
+        width: 29px;
+        height: 29px;
+      }
     }
   }
   ${MEDIA.mobile} {
