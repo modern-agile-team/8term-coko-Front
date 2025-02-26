@@ -1,5 +1,5 @@
-import quizzesApis from '@features/quiz/apis';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { partApis, quizzesApis } from '@features/quiz/apis';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 const quizKeys = {
   all: ['quizzes'],
@@ -8,11 +8,20 @@ const quizKeys = {
   part: (partId: number) => [...quizKeys.parts(), partId] as const,
 };
 
-export const quizzesQuery = {
+export const useQuizzesQuery = {
   getQuizzes: ({ partId }: { partId: number }) => {
     return useSuspenseQuery({
       queryKey: quizKeys.part(partId),
-      queryFn: () => quizzesApis.get({ partId }),
+      queryFn: () => quizzesApis.getQuizzes({ partId }),
+    });
+  },
+};
+
+export const usePartQuery = {
+  getParts: ({ partId }: { partId: number }) => {
+    return useQuery({
+      queryKey: quizKeys.parts(),
+      queryFn: () => partApis.getParts({ partId }),
     });
   },
 };
