@@ -23,6 +23,7 @@ const testBadgeList = [
     badgeTitle: '왕대대왕',
   },
 ];
+
 export default function BadgeContainer() {
   return (
     <>

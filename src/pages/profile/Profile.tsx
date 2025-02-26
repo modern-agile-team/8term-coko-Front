@@ -56,7 +56,9 @@ export default function Profile() {
             두 번째 이미지처럼 보입니다. */}
         <S.ProfileSection>
           <div>
-            <ProfileImage isIcon={false} />
+            <div style={{ marginTop: '50px' }}>
+              <ProfileImage isIcon={false} />
+            </div>
             <S.UserNameLabel>유저 이름</S.UserNameLabel>
             <S.JoinDateLabel>2024.10.01</S.JoinDateLabel>
           </div>
@@ -73,9 +75,7 @@ export default function Profile() {
                 $height="20px"
                 $innerBgColor="#BFD683"
                 $boxBgColor="#85705F"
-                style={{
-                  width: '283px',
-                }}
+                style={{ width: '283px' }}
               />
             </div>
             <S.MyQuizInfoDiv>
