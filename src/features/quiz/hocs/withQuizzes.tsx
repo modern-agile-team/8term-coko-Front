@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { quizzesQuery } from '@features/quiz/queries';
+import { useQuizzesQuery } from '@features/quiz/queries';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import useUserStore from '@store/useUserStore';
 import type { Quiz } from '@features/quiz/types';
@@ -32,7 +32,7 @@ const withQuizzes = <P extends object>(
     }
     //일반적으로는 모든 퀴즈를 제공
     if (partStatus !== 'IN_PROGRESS' && partStatus !== 'TUTORIAL') {
-      const { data: quizzes } = quizzesQuery.getQuizzes({ partId });
+      const { data: quizzes } = useQuizzesQuery.getQuizzes({ partId });
 
       return (
         <WrappedComponent
