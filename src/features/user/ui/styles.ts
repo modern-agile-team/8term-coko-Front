@@ -338,6 +338,7 @@ export const EquipButton = styled.button`
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.2px;
+`;
 
 export const OpinionsButton = styled.button`
   min-width: 60px;

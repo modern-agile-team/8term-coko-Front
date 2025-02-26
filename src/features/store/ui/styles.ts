@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { media } from '@/style/media';
+import { MEDIA } from '@style/constants';
 
 export const ItemContainer = styled.ul`
   margin: 18px 0 27px 0;
@@ -13,7 +13,7 @@ export const ItemContainer = styled.ul`
   font-weight: 700;
   line-height: 24px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     grid-template-columns: repeat(2, 144px);
   }
 `;
@@ -149,7 +149,7 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
     color: #fff;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     left: 50%;
     transform: translateX(-50%);
     top: -50px;

@@ -6,7 +6,11 @@ import { useOutsidePointerDown } from '@modern-kit/react';
 export default function Overlay({
   children,
   overlayStyle,
-}: PropsWithChildren<{ overlayStyle: OverlayDivProps }>) {
+  outSideClickCallback,
+}: PropsWithChildren<{
+  overlayStyle: OverlayDivProps;
+  outSideClickCallback?: () => void;
+}>) {
   useEffect(() => {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.offsetWidth;
@@ -19,15 +23,13 @@ export default function Overlay({
       document.body.style.paddingRight = `0px`;
     };
   }, []);
-
-  const handleClick: React.MouseEventHandler<HTMLDivElement> = e => {
-    if (e.target === e.currentTarget && outSideClickCallback) {
-      outSideClickCallback();
-    }
-  };
+  const overlayRef = useOutsidePointerDown<HTMLDivElement>(
+    outSideClickCallback ?? (() => {})
+  );
 
   return (
     <OverlayDiv
+      ref={overlayRef}
       $backgroundColor={overlayStyle.$backgroundColor}
       $mixBlendMode={overlayStyle.$mixBlendMode}
     >

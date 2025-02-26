@@ -29,31 +29,22 @@ export const QuestionSection = styled.section<{
   font-size: 18px;
   background-color: #fff;
   font-weight: 700;
-  <<<<<<<
-    HEAD
-    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
-    &::-webkit-scrollbar {
+
+  &::-webkit-scrollbar {
     padding-left: 5px;
     width: 8px;
   }
-  <<<<<<<
-    HEAD
-    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
-    &::-webkit-scrollbar-track {
+
+  &::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
   }
-  <<<<<<<
-    HEAD
-    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
-    &::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background: #a5ecf0;
     border-radius: 4px;
   }
-  <<<<<<<
-    HEAD
-    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
-    > div:nth-last-child(1) {
+
+  > div:nth-last-child(1) {
     display: flex;
     flex-wrap: wrap;
     padding: 26px 0 0 80px;
@@ -65,6 +56,7 @@ export const QuestionSection = styled.section<{
     height: 50vh;
   }
 `;
+
 export const TitleWrapper = styled.div<{
   $category: Quiz['category'];
 }>`
