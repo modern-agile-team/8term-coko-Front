@@ -41,8 +41,11 @@ export default function StoreMyCharacterSection() {
 
   return (
     <>
-      <Modal isShow={isShow} outSideClickCallback={closeModal}>
-        <CartList isMobileHidden={false} />
+      <Modal isShow={isShow}>
+        <CartList
+          isMobileHidden={false}
+          mobileCartListCloseModal={closeModal}
+        />
       </Modal>
       <CartList isMobileHidden={true} />
       <MyCharacterSection>

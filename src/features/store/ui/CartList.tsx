@@ -1,6 +1,5 @@
 import * as S from './styles';
 import StoreItem from './StoreItem';
-import type { CosmeticItem } from '@features/store/types';
 import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
 import { useMemo } from 'react';
 import useModal from '@/hooks/useModal';
@@ -8,11 +7,16 @@ import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
+import { useOutsidePointerDown } from '@modern-kit/react';
 
 interface CartListProps {
   isMobileHidden: boolean;
+  mobileCartListCloseModal?: () => void;
 }
-export default function CartList({ isMobileHidden }: CartListProps) {
+export default function CartList({
+  isMobileHidden,
+  mobileCartListCloseModal = () => {},
+}: CartListProps) {
   const { cartListCosmeticItems, removeCosmeticItemById } =
     useCosmeticItemStore();
 
@@ -23,9 +27,11 @@ export default function CartList({ isMobileHidden }: CartListProps) {
     return cartListCosmeticItems.reduce((total, item) => total + item.price, 0);
   }, [cartListCosmeticItems]);
 
+  const cartListRef = useOutsidePointerDown(mobileCartListCloseModal);
+
   return (
     <>
-      <Modal isShow={isShow} outSideClickCallback={closeModal}>
+      <Modal isShow={isShow}>
         <CosmeticItemCheckOut>
           <CosmeticItemCheckOut.DetailBox>
             <>
@@ -50,7 +56,7 @@ export default function CartList({ isMobileHidden }: CartListProps) {
                         toast.error('로그인이 필요한 작업입니다.');
                       }
                       if (error.response?.status === 400) {
-                        toast.error('포인트가 부족해요!');
+                        toast.error(error.response.data.message);
                       }
                     }
                   },
@@ -62,7 +68,7 @@ export default function CartList({ isMobileHidden }: CartListProps) {
           />
         </CosmeticItemCheckOut>
       </Modal>
-      <S.CartListWrapper $isMobileHidden={isMobileHidden}>
+      <S.CartListWrapper $isMobileHidden={isMobileHidden} ref={cartListRef}>
         <label>장바구니</label>
         <S.CartListItemWrapper>
           {cartListCosmeticItems.map(item => (

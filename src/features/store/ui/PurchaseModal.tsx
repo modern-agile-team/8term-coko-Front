@@ -58,7 +58,7 @@ export default function PurchaseModal({
   };
 
   return (
-    <Modal isShow={isShow} outSideClickCallback={closeModal}>
+    <Modal isShow={isShow}>
       <CosmeticItemCheckOut>
         <CosmeticItemCheckOut.DetailBox>
           <>
