@@ -9,11 +9,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Creators() {
-  const [member, setMember] = useState('홍대경');
+  const [member, setMember] = useState<keyof typeof MEMBER_DETAILS>('홍대경');
 
   const { isShow, openModal, closeModal, Modal } = useModal();
 
-  const handleSetMember: (value: string) => void = value => {
+  const handleSetMember = (value: keyof typeof MEMBER_DETAILS) => {
     if (!COKO_TEAM_INFO.some(team => team.label === value)) {
       setMember(value);
     }
@@ -32,7 +32,9 @@ export default function Creators() {
                 buttonName={`${
                   team.createBy.includes(member) ? member : team.label
                 } ▲`}
-                onChange={handleSetMember}
+                onChange={value =>
+                  handleSetMember(value as keyof typeof MEMBER_DETAILS)
+                }
               >
                 <Select.Option value={team.label} label={`${team.label} ▼`} />
                 {team.createBy.map(member => (

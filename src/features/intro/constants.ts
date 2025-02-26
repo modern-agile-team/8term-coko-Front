@@ -386,10 +386,7 @@ export const BADGE_IMAGE_LIST = [
   '뱃지-30일출석.svg',
 ] as const;
 
-export const MEMBER_DETAILS: Record<
-  string,
-  { team: string; description: string; sns: { icon: string; url: string }[] }
-> = {
+export const MEMBER_DETAILS = {
   홍대경: {
     team: 'BACKEND',
     description:
@@ -422,4 +419,4 @@ export const MEMBER_DETAILS: Record<
     description: '감각적인 디자인과 트렌디한 UI를 만들어가는 디자이너입니다.',
     sns: [{ icon: 'fa-instagram', url: 'https://instagram.com/chaeyounglee' }],
   },
-};
+} as const;
