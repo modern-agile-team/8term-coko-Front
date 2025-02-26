@@ -6,6 +6,7 @@ import {
 } from '@features/user/queries';
 import { getImageUrl } from '@utils/getImageUrl';
 import { DEFAULT_POINT } from '@/features/user/constants';
+import { usePartQuery } from '@/features/quiz/queries';
 interface PartClearProps {
   partId: number;
 }
@@ -14,6 +15,8 @@ export default function PartClear({ partId }: PartClearProps) {
     useUserPointQuery.updatePoint();
   const { mutate: updatePartStatus, isIdle: isProgressIdle } =
     useUserPartStatusQuery.updateCompletedPartStatus();
+
+  const { data: part } = usePartQuery.getParts({ partId });
   const navigate = useNavigate();
   const handleNavigateToLearn = () => {
     updatePoint({ point: DEFAULT_POINT });
@@ -29,7 +32,7 @@ export default function PartClear({ partId }: PartClearProps) {
     <>
       <S.CompensationSection $backgroundColor="#F0DAAB" $boxShadow="#E5C892">
         <S.PartClearTextDiv>
-          축하해!&nbsp;<p>파트 {partId}</p>&nbsp;을 다 깼구나!
+          축하해!&nbsp;<p> {part?.name} </p> &nbsp;파트&nbsp;을(를)다 깼구나!
         </S.PartClearTextDiv>
         <S.DashLineHr $color="#fff" />
         <S.PartClearImageBox>
