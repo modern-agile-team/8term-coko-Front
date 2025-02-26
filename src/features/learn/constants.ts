@@ -41,3 +41,5 @@ export const PROGRESS_COLORS = {
     icon: '📌',
   },
 } as const;
+
+export const MAX_ATTEMPTS = 5 as const;

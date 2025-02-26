@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from 'styled-components';
-import { media } from '@style/media';
+import { MEDIA } from '@style/constants';
 import { getImageUrl } from '@utils/getImageUrl';
 import type { Quiz } from '@features/quiz/types';
 
@@ -18,60 +18,72 @@ const categoryColor: Record<
 export const QuestionSection = styled.section<{
   $category: Quiz['category'];
 }>`
+  overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   overflow-y: auto;
   flex-direction: column;
-  margin-top: 37px;
   width: 60vw;
   height: 50vh;
   border: 2px solid ${({ $category }) => categoryColor[$category].border};
   font-size: 18px;
   background-color: #fff;
   font-weight: 700;
-  &::-webkit-scrollbar {
+  <<<<<<<
+    HEAD
+    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
+    &::-webkit-scrollbar {
     padding-left: 5px;
     width: 8px;
   }
-
-  &::-webkit-scrollbar-track {
+  <<<<<<<
+    HEAD
+    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
+    &::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
   }
-
-  &::-webkit-scrollbar-thumb {
+  <<<<<<<
+    HEAD
+    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
+    &::-webkit-scrollbar-thumb {
     background: #a5ecf0;
     border-radius: 4px;
   }
-  > div:nth-last-child(1) {
+  <<<<<<<
+    HEAD
+    =======>>>>>>>3917ba32464ba3b6889d84edca76813f7b4449
+    > div:nth-last-child(1) {
     display: flex;
     flex-wrap: wrap;
     padding: 26px 0 0 80px;
+    max-width: 100%;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 90vw;
     font-size: 18px;
     height: 50vh;
   }
 `;
-export const Title = styled.h3<{
+export const TitleWrapper = styled.div<{
   $category: Quiz['category'];
 }>`
   display: flex;
   align-items: center;
   gap: 15px;
-  height: 60px;
+  height: auto;
+  min-height: 60px;
   border-bottom: 2px solid ${({ $category }) => categoryColor[$category].border};
   color: #ffffff;
   background-color: ${({ $category }) => categoryColor[$category].background};
   line-height: 24px;
   padding-left: 17px;
+
   > p:nth-child(1) {
     white-space: nowrap;
   }
 `;
-//question 스타일
 
-//
 export const OXButtonSection = styled.section`
   margin-top: 23px;
   display: flex;
@@ -82,7 +94,7 @@ export const OXButtonSection = styled.section`
     background-color: transparent;
     border-color: transparent;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     > img {
       display: none; /* 예시로 테두리 설정 */
     }
@@ -96,7 +108,7 @@ export const MultipleChoiceSection = styled.section`
   gap: 20px;
   flex-wrap: wrap;
   align-items: center;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     > img {
       display: none;
     }
@@ -109,7 +121,7 @@ export const MultipleChoiceButtonDiv = styled.div`
   grid-template-rows: 43px 43px;
   grid-row-gap: 15px;
   grid-column-gap: 20px;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     grid-template-columns: 286px;
     grid-template-rows: repeat(4, 43px);
     margin-top: 34px;
@@ -142,7 +154,7 @@ export const ShortAnswerSection = styled.section`
   :nth-child(1) {
     align-self: flex-end;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     height: 30vh;
     > img {
       display: none;
@@ -187,7 +199,7 @@ export const CombinationSection = styled.section`
   :nth-last-child(1) {
     margin-right: auto;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     img {
       display: none;
     }
@@ -255,7 +267,7 @@ export const ScoreSection = styled.section<{ $isCorrect: boolean }>`
   position: absolute;
   bottom: 0;
   animation: ${fadeIn} 0.7s ease-out;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     background-image: ${({ $isCorrect }) =>
       `url(${getImageUrl(
         $isCorrect ? '정답_모바일.svg' : '오답_모바일.svg'
@@ -289,7 +301,7 @@ export const NextPageButton = styled.button<{ $isAnswer: boolean }>`
         border-color: #e8080c;
       }
     `}
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 343px;
     height: 33px;
     margin: 0 0 30px 0;
@@ -320,7 +332,7 @@ export const AnswerDiv = styled.div`
   top: 90px;
   right: 40%;
   /* margin: 0 350px 58px 0; */
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 18px;
     margin: 0;
     right: 8%;
@@ -355,7 +367,7 @@ export const CompensationSection = styled.section<{
   background: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: 40px;
   box-shadow: 0 11px ${({ $boxShadow }) => $boxShadow};
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 100%;
     height: 50%;
     > hr {
@@ -398,13 +410,13 @@ export const CompensationTextDiv = styled.div`
     font-size: 26px;
     color: #ff4949;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 18px;
   }
 `;
 export const TotalResultsRewardDiv = styled.div`
   display: flex;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
@@ -422,7 +434,7 @@ export const ImageDescriptionDiv = styled.div`
     color: #d30000;
     font-size: 10px;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     margin: 0;
     > p {
       display: block;
@@ -477,7 +489,7 @@ export const TotalResultProgressDiv = styled.div`
     position: relative;
     top: -10%;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     > img {
       display: none;
     }
@@ -515,7 +527,7 @@ export const PartClearTextDiv = styled.div`
 export const PartClearImageBox = styled.div`
   display: flex;
   margin-top: 15px;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     > img:nth-child(1),
     img:nth-child(3) {
       display: none;
@@ -546,7 +558,7 @@ export const ProgressSection = styled.section`
   display: flex;
   border: 2px solid #00b6c0;
   background: #00d9e9;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 85vw;
   }
 `;
@@ -559,7 +571,7 @@ export const SubmitSection = styled.section`
   justify-content: space-between;
   margin-top: 48px;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 85vw;
   }
 `;
@@ -590,7 +602,15 @@ export const VerticalLine = styled.div`
   left: 40px;
   border-left: thick solid gray;
   height: 100%;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     height: 40vh;
   }
+`;
+
+export const RightAlignedBox = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 60vw;
+  height: 30px;
 `;

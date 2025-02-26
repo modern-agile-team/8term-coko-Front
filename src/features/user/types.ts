@@ -3,6 +3,7 @@ export interface User {
   name: string;
   level: number;
   point: number;
+  totalAttendance: number;
   createdAt: string;
 }
 
@@ -34,4 +35,9 @@ export interface UserProgress {
 export interface UserAttendance {
   id: number;
   date: string;
+}
+
+export interface Opinions {
+  title: string;
+  content: string;
 }

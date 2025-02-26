@@ -1,27 +1,44 @@
-import { media } from '@/style/media';
+import { MEDIA, ANIMATIONS } from '@style/constants';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
+
 export const BadgeWrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
   margin-top: 39px;
-  width: 100%;
-  gap: 12px;
-  justify-content: space-between;
-  padding: 0 17px;
+
   > ul {
     display: flex;
-    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  ${MEDIA.mobile} {
     gap: 25px;
+    > ul {
+      display: flex;
+      justify-content: center;
+
+      > li:not(:first-child) {
+        display: none;
+      }
+    }
   }
 `;
 export const PaginationIcon = styled.img<{ $rotate?: string }>`
   width: 9px;
   height: 20px;
   transform: rotate(${({ $rotate }) => $rotate || 0});
+
+  ${MEDIA.mobile} {
+    width: 20px;
+    height: 20px;
+  }
 `;
 export const PaginationButton = styled.button`
-  border: 0;
-  background-color: transparent;
+  background: none;
+  border: none;
 `;
 export const BadgeListItem = styled.li`
   display: flex;
@@ -47,8 +64,15 @@ export const BadgeListItem = styled.li`
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px; /* 266.667% */
+    line-height: 24px;
     text-transform: lowercase;
+  }
+
+  ${MEDIA.mobile} {
+    > div {
+      width: 160px;
+      height: 165px;
+    }
   }
 `;
 
@@ -167,7 +191,7 @@ export const AttendanceCheckButton = styled.button`
     height: 24px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     position: fixed;
     left: 30px;
     bottom: 100px;
@@ -192,17 +216,25 @@ export const AttendanceCalendarBoard = styled.div`
   background-position: center;
   background-repeat: no-repeat;
 
-  > img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     padding: 2px 3px 0 3px;
     height: 200px;
     gap: 5px;
   }
+`;
+
+export const AttendanceStamp = styled.img<{ $isTodayAttendance: boolean }>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  ${({ $isTodayAttendance }) =>
+    $isTodayAttendance &&
+    css`
+      animation: ${ANIMATIONS.slamDown} 0.7s ease-out;
+    `}
 `;
 
 export const AttendanceDayCell = styled.span`
@@ -224,7 +256,7 @@ export const AttendanceDayCell = styled.span`
     height: 100%;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 10px;
   }
 `;
@@ -253,7 +285,7 @@ export const AttendanceCalendarWrapper = styled.div`
     height: 67px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 280px;
     height: 230px;
 
@@ -306,4 +338,122 @@ export const EquipButton = styled.button`
   font-weight: 700;
   line-height: 16px;
   letter-spacing: 0.2px;
+
+export const OpinionsButton = styled.button`
+  min-width: 60px;
+  background-color: #00edff;
+  border-radius: 24px;
+  border: 2px solid #00dce8;
+  background: #70f5ff;
+  padding: 2px 5px;
+  color: #fff;
+  &:hover {
+    border-radius: 24px;
+    border: 2px solid #00868d;
+    background: #00d9e9;
+  }
+`;
+
+export const OpinionsFormWrapper = styled.div`
+  *,
+  *::before,
+  *::after {
+    font-family: pretandard;
+  }
+  position: relative;
+  width: 40vw;
+  height: 75vh;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 40px;
+  box-shadow: 0 5px #e5e5e5;
+
+  > div {
+    width: 80%;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  label {
+    width: 20%;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    > span {
+      color: red;
+    }
+  }
+  textarea,
+  input {
+    width: 80%;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f8f8f8;
+    resize: none;
+
+    &:focus {
+      outline: none;
+      border-color: #00e1ec;
+    }
+  }
+  input {
+    height: 40px;
+  }
+  > button {
+    width: 80%;
+    padding: 12px;
+    background-color: #00e1ec;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    margin-top: 16px;
+    box-shadow: 0 3px #00b6c0;
+
+    &:hover {
+      background-color: #00b6c0;
+    }
+  }
+
+  ${MEDIA.mobile} {
+    width: 90vw;
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-top: 4px;
+`;
+
+export const ContentWrapper = styled.div<{ $isMaxLength: boolean }>`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  > textarea {
+    width: 100%;
+  }
+  > p {
+    align-self: flex-end;
+    color: #c8c8c8;
+    ${({ $isMaxLength }) =>
+      $isMaxLength &&
+      css`
+        > span {
+          color: red;
+        }
+      `}
+  }
 `;

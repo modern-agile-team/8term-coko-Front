@@ -52,6 +52,7 @@ export default function Ranking() {
           selectedOption={selectedOption}
           onOptionChange={setSelectedOption}
         />
+        <S.MobileOnlyUserRankingMargin />
       </globalS.Layout>
     </>
   );

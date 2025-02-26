@@ -1,33 +1,57 @@
 import * as S from './styles';
-import { useState, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef } from 'react';
 import NavigationControl from './NavigationControl';
 import SectionNavigateContainer from './SectionNavigateContainer';
+import { MAX_ATTEMPTS } from '@features/learn/constants';
 import { useSectionListQuery } from '@features/learn/queries';
 import { useMediaQuery } from '@modern-kit/react';
-import { mediaQueryMap } from '@style/mediaQueryMap';
+import { MEDIA_QUERY_MAP } from '@style/constants';
+import { LEARN_TUTORIAL_SECTIONS } from '@features/intro/constants';
 import type { Section } from '@features/learn/types';
+import { useTimeout } from '@modern-kit/react';
 
-export default function SelectSection() {
-  const { data: sections } = useSectionListQuery.getAllSections();
+interface SelectSectionProps {
+  isTutorial?: boolean;
+  sections?: Section[];
+  fetchNextPage: () => void;
+  hasNextPage: boolean;
+}
+
+export default function SelectSection({
+  isTutorial = false,
+  sections: paginatedSections = [],
+  fetchNextPage,
+  hasNextPage,
+}: SelectSectionProps) {
+  const { data: apiSections = [] } =
+    useSectionListQuery.getAllSectionsWithoutParts();
+
+  const sectionsWithoutParts = isTutorial
+    ? LEARN_TUTORIAL_SECTIONS
+    : apiSections ?? [];
+
   const [currentPage, setCurrentPage] = useState(0);
-  const isMobile = useMediaQuery(mediaQueryMap.mobile);
+  const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
   const itemsPerPage = isMobile ? 3 : 5;
-  const sectionList = (sections as Section[]) || []; // 섹션 데이터를 Section 타입 배열로 변환 (섹션 리스트)
+
+  // sectionsWithoutParts(파트X)와 paginatedSections(파트O)를 병합 (중복 제거)
+  const sectionMap = new Map();
+  [...sectionsWithoutParts, ...paginatedSections].forEach(section =>
+    sectionMap.set(section.id, section)
+  );
+  const mergedSections = Array.from(sectionMap.values());
 
   // 전체 페이지 수 계산
-  const totalPages = useMemo(
-    () => Math.ceil(sectionList.length / itemsPerPage),
-    [sectionList, itemsPerPage]
-  );
+  const totalPages = Math.ceil(mergedSections.length / itemsPerPage);
 
   // 현재 페이지에 보여줄 섹션 리스트 계산
   const currentSections = useMemo(
     () =>
-      sectionList.slice(
+      mergedSections.slice(
         currentPage * itemsPerPage,
         (currentPage + 1) * itemsPerPage
       ),
-    [currentPage, sectionList, itemsPerPage]
+    [currentPage, mergedSections, itemsPerPage]
   );
 
   const goToPreviousPage = () => {
@@ -37,6 +61,36 @@ export default function SelectSection() {
   const goToNextPage = () => {
     if (currentPage < totalPages - 1) setCurrentPage(prev => prev + 1);
   };
+
+  const { set: retryScroll } = useTimeout(() => {
+    if (lastRequestedSectionId.current !== null) {
+      scrollToSection(lastRequestedSectionId.current, lastAttempt.current + 1);
+    }
+  }, 100);
+
+  // 마지막 요청된 섹션 ID와 시도 횟수 추적
+  const lastRequestedSectionId = useRef<number | null>(null);
+  const lastAttempt = useRef(0);
+
+  const scrollToSection = useCallback(
+    (sectionId: number, attempts = 0) => {
+      if (attempts >= MAX_ATTEMPTS) return;
+
+      const targetSection = document.getElementById(`section-${sectionId}`);
+
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else if (hasNextPage) {
+        lastRequestedSectionId.current = sectionId;
+        lastAttempt.current = attempts;
+
+        // fetchNextPage가 완료될 때까지 기다리도록 변경 (중복 요청 방지)
+        fetchNextPage();
+        retryScroll();
+      }
+    },
+    [fetchNextPage, hasNextPage, retryScroll]
+  );
 
   return (
     <S.SectionBoxWrapper>
@@ -51,6 +105,7 @@ export default function SelectSection() {
           sections={currentSections}
           currentPage={currentPage}
           itemsPerPage={itemsPerPage}
+          scrollToSection={scrollToSection}
         />
       </S.SelectSectionBox>
       <NavigationControl

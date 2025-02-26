@@ -5,11 +5,13 @@ import type {
   UserHp,
   PersonalRanking,
   UserAttendance,
+  Opinions,
 } from '@features/user/types';
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
 import { CosmeticItem, CosmeticItemOption } from '@/features/store/types';
+import type { DailyQuestResponse } from '@features/quest/types';
 
 export const usersApis = {
   putQuizzesProgress: ({
@@ -60,17 +62,10 @@ export const usersApis = {
       status: partStatus,
     });
   },
+
   patchCompletedPartStatus: async (params: { partId: Quiz['partId'] }) => {
     await api.patch(`/users/me/parts/${params.partId}/status/completed`);
   },
-
-  getHp: async (): Promise<UserHp> => {
-    const response = await api.get('users/me/hp');
-    return response.data;
-  },
-
-  patchHp: async (params: Omit<UserHp, 'id'>): Promise<void> =>
-    await api.patch('/users/me/hp', params),
 
   getRanking: async (params: {
     sort: RankingSort;
@@ -91,7 +86,13 @@ export const usersApis = {
     const response = await api.get('/users/me/attendance/today');
     return response.data;
   },
+
   postAttendance: async () => await api.post('/users/me/attendance'),
+
+  getDailyQuest: async (): Promise<DailyQuestResponse[]> => {
+    const response = await api.get('/users/me/quests/daily');
+    return response.data;
+  },
 };
 
 export const userItemsApi = {
@@ -120,4 +121,21 @@ export const userItemsApi = {
   }): Promise<void> => {
     return await api.patch('/users/me/items', params);
   },
+};
+
+export const userHpApi = {
+  getHp: async (): Promise<UserHp> => {
+    const response = await api.get('users/me/hp');
+    return response.data;
+  },
+
+  patchHp: async (): Promise<UserHp> => {
+    const response = await api.patch('/users/me/hp');
+    return response.data;
+  },
+};
+
+export const userOpinionsApi = {
+  postOpinions: async (parmas: Opinions): Promise<void> =>
+    await api.post('/users/me/opinions', parmas),
 };

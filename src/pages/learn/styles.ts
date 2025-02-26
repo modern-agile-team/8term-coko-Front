@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { media } from '@style/media';
+import { MEDIA, Z_INDEX } from '@style/constants';
 import { PROGRESS_COLORS } from '@features/learn/constants';
 interface ScrollableContainerProps {
-  $show: boolean;
-  $isLoggedIn: boolean;
+  $show?: boolean;
+  $isLoggedIn?: boolean;
 }
 
 export const ScrollableContainer = styled.div<ScrollableContainerProps>`
@@ -15,9 +15,10 @@ export const ScrollableContainer = styled.div<ScrollableContainerProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: ${Z_INDEX.learnHeader};
   margin-top: ${({ $isLoggedIn }) => ($isLoggedIn ? '45px' : '25px')};
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     margin-top: ${({ $isLoggedIn }) => ($isLoggedIn ? '0' : '-20px')};
   }
 `;
@@ -27,7 +28,7 @@ export const SectionGroup = styled.div`
   margin-top: 270px;
   border: none;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 100%;
     max-width: 693px;
     padding: 0 20px;
@@ -50,22 +51,23 @@ export const ScreenReaderOnlyTitle = styled.h1`
 export const ProgressBarWrapper = styled.div`
   position: fixed;
   top: 20px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  left: calc(100vw / 2 - 319.5px);
   width: 639px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  z-index: ${Z_INDEX.learnHeader};
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     top: 35px;
-    margin: 0 50px;
-    width: calc(100% - 100px);
+    width: calc(100vw - 100px);
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 639px;
   }
 `;
 
-export const ProgressLabel = styled.span<{ $isPart: boolean }>`
+export const ProgressLabel = styled.span<{ $isPart?: boolean }>`
   font-size: 14px;
   color: ${({ $isPart }) =>
     $isPart ? PROGRESS_COLORS.part.text : PROGRESS_COLORS.global.text};
@@ -82,7 +84,7 @@ export const ProgressLabel = styled.span<{ $isPart: boolean }>`
     font-size: 16px;
   }
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 13px;
   }
 `;
@@ -92,7 +94,7 @@ export const ProgressText = styled.span`
   color: ${PROGRESS_COLORS.global.text};
   text-align: right;
 
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     font-size: 11px;
   }
 `;

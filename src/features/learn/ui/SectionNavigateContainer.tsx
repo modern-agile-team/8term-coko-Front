@@ -1,22 +1,22 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
+import { useElementRect } from '@/features/intro/service/hooks';
 import type { Section } from '@features/learn/types';
+
+interface SectionNavigateContainerProps {
+  sections: Section[];
+  currentPage: number;
+  itemsPerPage: number;
+  scrollToSection: (sectionId: number) => void;
+}
 
 export default function SectionNavigateContainer({
   sections,
   currentPage,
   itemsPerPage,
-}: {
-  sections: Section[];
-  currentPage: number;
-  itemsPerPage: number;
-}) {
-  const scrollToSection = (sectionId: number) => {
-    const targetSection = document.getElementById(`section-${sectionId}`);
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  scrollToSection,
+}: SectionNavigateContainerProps) {
+  const { getClientRectRefCallback } = useElementRect();
 
   return (
     <>
@@ -29,6 +29,8 @@ export default function SectionNavigateContainer({
           const globalIndex = currentPage * itemsPerPage + index;
           return (
             <S.SectionButton
+              id="select-section-button"
+              ref={index === 0 ? getClientRectRefCallback : null}
               key={section.id}
               onClick={() => scrollToSection(section.id)}
             >

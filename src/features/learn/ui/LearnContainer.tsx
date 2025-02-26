@@ -13,6 +13,8 @@ import useScrollVisibility from '@hooks/useScrollVisibility';
 import usePreloadImages from '@hooks/usePreloadImages';
 import useUserStore from '@store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
+import withSections from '@features/learn/hocs/withSections';
+import withUserProgress from '@features/learn/hocs/withUserProgress';
 import type { Section, Part } from '@features/learn/types';
 
 interface LearnContainerProps {
@@ -32,7 +34,7 @@ interface LearnContainerProps {
   onFetchProgress: (partId?: Part['id'], sectionId?: Section['id']) => void;
 }
 
-export default function LearnContainer({
+function LearnContainer({
   sections,
   fetchNextPage,
   hasNextPage,
@@ -56,7 +58,7 @@ export default function LearnContainer({
           <MenuBar />
         </globalS.LeftSection>
         <globalS.RightSection>
-          <title>코코- 자바스크립트 코딩 문제풀이</title>
+          <title>코코 - 자바스크립트 코딩 문제풀이</title>
           <Header />
           <DailyQuest />
           <KeycapAdventureIntro />
@@ -106,7 +108,11 @@ export default function LearnContainer({
           $show={showComponents}
           $isLoggedIn={isLoggedIn(user)}
         >
-          <SelectSection />
+          <SelectSection
+            sections={sections}
+            fetchNextPage={fetchNextPage}
+            hasNextPage={hasNextPage}
+          />
         </S.ScrollableContainer>
 
         {/* 섹션 + 파트 목록 */}
@@ -123,3 +129,5 @@ export default function LearnContainer({
     </>
   );
 }
+
+export default withUserProgress(withSections(LearnContainer));

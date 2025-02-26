@@ -4,7 +4,7 @@ import useModal from '@hooks/useModal';
 import usePreloadImages from '@hooks/usePreloadImages';
 import { SwitchCase, useUnmount } from '@modern-kit/react';
 import { noop } from '@modern-kit/utils';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/stores';
 import useUserStore from '@store/useUserStore';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import LoginPrompt from '@/features/auth/ui/LoginPrompt';
@@ -29,10 +29,12 @@ import {
   GoBackButtonWrapper,
   ProgressSection,
   ResponseButton,
+  RightAlignedBox,
   SubmitSection,
 } from '@/features/quiz/ui/styles';
 import withQuizzes from '@/features/quiz/hocs/withQuizzes';
-import { useHpUpdate } from '@/features/user/hooks';
+import { useCheckHp, useHpUpdate } from '@/features/user/hooks';
+import OpinionsModalTrigger from '@/features/user/ui/OpinionsModalTrigger';
 
 interface QuizProps {
   partStatus: PartStatus;
@@ -77,6 +79,7 @@ function QuizContainer({
     enabled: !isQuizFinished,
   });
   useHpUpdate(isCorrectList[currentPage]);
+  useCheckHp();
 
   const { id, title, question, category, answerChoice, answer } =
     quizzes[currentPage];
@@ -110,6 +113,9 @@ function QuizContainer({
           $boxBgColor="#F4F4F4"
         />
       </ProgressSection>
+      <RightAlignedBox>
+        <OpinionsModalTrigger />
+      </RightAlignedBox>
       <Question title={title} question={question} category={category} />
       <SwitchCase
         value={category}

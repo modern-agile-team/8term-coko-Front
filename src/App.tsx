@@ -5,6 +5,7 @@ import QueryErrorBoundary from '@features/error/ui/QueryErrorBoundary';
 import { Suspense } from 'react';
 import Loader from '@common/layout/Loader';
 import Router from '@/route/Router';
+import SSEProvider from '@/common/layout/SSEProvider';
 
 function App() {
   useUserInitializer();
@@ -14,7 +15,9 @@ function App() {
       <Toaster position="top-right" />
       <QueryErrorBoundary>
         <Suspense fallback={<Loader />}>
-          <Router />
+          <SSEProvider>
+            <Router />
+          </SSEProvider>
         </Suspense>
       </QueryErrorBoundary>
     </>

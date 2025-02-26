@@ -4,7 +4,12 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import { userItemsApi, usersApis } from '@features/user/apis';
+import {
+  userItemsApi,
+  userHpApi,
+  userOpinionsApi,
+  usersApis,
+} from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
@@ -23,6 +28,10 @@ export const userKeys = {
   attendance: {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
+  },
+  quest: {
+    daily: () => [...userKeys.me(), 'quest', 'daily'] as const,
+    main: () => [...userKeys.me(), 'quest', 'main'] as const,
   },
   sections: {
     paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
@@ -66,25 +75,26 @@ export const userKeys = {
 };
 
 export const useUserHpQuery = {
-  getHpWithSuspense: () => {
-    return useSuspenseQuery({
-      queryKey: userKeys.hp(),
-      queryFn: usersApis.getHp,
-      retry: 0,
-    });
-  },
-  getHpWhenLoggedIn: () => {
+  getHp: () => {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.hp(),
-      queryFn: usersApis.getHp,
+      queryFn: userHpApi.getHp,
       enabled: isLoggedIn(user),
     });
   },
+  getHpWithSuspense: () => {
+    return useSuspenseQuery({
+      queryKey: userKeys.hp(),
+      queryFn: userHpApi.getHp,
+      retry: 0,
+    });
+  },
+
   updateHp: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.patchHp,
+      mutationFn: userHpApi.patchHp,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.hp() });
       },
@@ -308,5 +318,23 @@ export const useUserCosmeticItemsQuery = {
         });
       },
     });
+  },
+};
+export const useUserQuestQuery = {
+  getDailyQuest: () => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.quest.daily(),
+      queryFn: usersApis.getDailyQuest,
+      gcTime: 0,
+      staleTime: 0,
+      enabled: isLoggedIn(user),
+    });
+  },
+};
+
+export const useUserOpinionsQuery = {
+  createOpinions: () => {
+    return useMutation({ mutationFn: userOpinionsApi.postOpinions });
   },
 };

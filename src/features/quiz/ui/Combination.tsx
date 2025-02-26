@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { CombinationSection, TextBlockButton } from './styles';
-import { useClientQuizStore } from '@store/useClientQuizStore';
-import { useDnDStore } from '@store/useDnDStore';
+import compact from '@utils/compact';
 import type { Quiz } from '@features/quiz/types';
-import { useElementRect } from '@/features/tutorial/service/hooks';
-import { compact } from '@modern-kit/utils';
+import { useElementRect } from '@/features/intro/service/hooks';
+import {
+  useClientQuizStore,
+  useDragAndDropStore,
+} from '@/features/quiz/stores';
 
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];
@@ -17,7 +19,7 @@ export default function Combination({
 }: CombinationProps) {
   const { userResponseAnswer, pushUserResponseAnswer, setUserResponseAtIndex } =
     useClientQuizStore();
-  const { setDragStartItem, drop } = useDnDStore();
+  const { setDragStartItem, drop } = useDragAndDropStore();
   const { getClientRectRefCallback } = useElementRect();
 
   useEffect(() => {

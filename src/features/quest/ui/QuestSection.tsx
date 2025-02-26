@@ -26,7 +26,9 @@ export default function QuestSection({
               {...questUrlProps}
               alt="폭탄 아이콘"
             />
-            <S.QuestHeading {...questUrlProps}>{title}</S.QuestHeading>
+            <S.QuestHeading as={isLearn ? 'p' : 'h1'} {...questUrlProps}>
+              {title}
+            </S.QuestHeading>
           </S.QuestContent>
           {children}
         </S.QuestContentWrapper>

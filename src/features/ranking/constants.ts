@@ -7,6 +7,10 @@ export const RANKING_OPTIONS = {
     icon: '포인트.svg',
     dataField: 'point', // 포인트 기준
   },
+  '총 출석일순': {
+    icon: '출석.svg',
+    dataField: 'totalAttendance', // 총 출석일수 기준
+  },
 } as const;
 
 export const PRELOAD_IMAGES = ['금통.svg', '은통.svg', '동통.svg'];

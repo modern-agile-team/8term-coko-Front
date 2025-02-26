@@ -1,5 +1,9 @@
 import api from '@/axios/instance';
-import type { Section, SectionPagination } from '@features/learn/types';
+import type {
+  Section,
+  SectionWithoutParts,
+  SectionPagination,
+} from '@features/learn/types';
 
 // 공통 함수: 페이지네이션 섹션 데이터 가져오기 (무한 스크롤)
 const createGetSectionsByPage = (endpoint: string) => {
@@ -24,8 +28,8 @@ const sectionsApis = {
     return response.data;
   },
 
-  // 모든 섹션 데이터 가져오기
-  getAllSections: async (): Promise<Section[]> => {
+  // 모든 섹션 데이터 가져오기 (파트 제외)
+  getAllSectionsWithoutParts: async (): Promise<SectionWithoutParts[]> => {
     const response = await api.get('/sections');
     return response.data;
   },

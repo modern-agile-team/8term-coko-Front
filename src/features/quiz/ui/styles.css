@@ -24,9 +24,13 @@
 .drag-start {
   opacity: 50%;
 }
-
 .line-number {
-  position: relative;
-  margin-right: 20px;
+  position: absolute;
   color: gray;
+}
+
+.pre-wrap {
+  margin-left: 30px;
+  white-space: pre-wrap;
+  word-break: break-word;
 }

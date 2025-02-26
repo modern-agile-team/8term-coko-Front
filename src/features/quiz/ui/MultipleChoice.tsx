@@ -4,9 +4,9 @@ import {
   MultipleChoiceButtonDiv,
   Img,
 } from './styles';
-import { useClientQuizStore } from '@store/useClientQuizStore';
+import { useClientQuizStore } from '@/features/quiz/stores';
 import type { Quiz } from '@features/quiz/types';
-import { useElementRect } from '@/features/tutorial/service/hooks';
+import { useElementRect } from '@/features/intro/service/hooks';
 import { getImageUrl } from '@/utils/getImageUrl';
 
 interface MultipleChoiceProps {

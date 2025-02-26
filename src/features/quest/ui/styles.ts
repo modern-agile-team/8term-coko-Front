@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
-import { media } from '@style/media';
+import { MEDIA } from '@style/constants';
 
 interface QuestUrlProps {
   $isLearn?: boolean;
@@ -14,7 +14,7 @@ export const QuestContainer = styled.div<QuestUrlProps>`
       width: 270px;
       margin-right: 28px;
 
-      ${media.mobile} {
+      ${MEDIA.mobile} {
         display: none;
       }
     `}
@@ -22,8 +22,8 @@ export const QuestContainer = styled.div<QuestUrlProps>`
   ${({ $isQuest = true }) =>
     $isQuest &&
     css`
-      width: 683px;
-      margin-top: 40px;
+      max-width: 683px;
+      margin-top: 50px;
     `}
 `;
 
@@ -70,6 +70,12 @@ export const QuestContent = styled.div<QuestUrlProps>`
       background: #ffb53d;
       box-shadow: 0 5px #f09900;
       height: 36px;
+
+      ${MEDIA.mobile} {
+        width: calc(100vw - 80px);
+        max-width: 683px;
+        min-width: 340px;
+      }
     `}
 `;
 
@@ -121,7 +127,7 @@ export const QuestWrapper = styled.div<QuestUrlProps>`
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      margin-bottom: 15px;
+      top: 25px;
     `}
   ${({ $isQuest = true }) =>
     $isQuest &&
@@ -133,17 +139,24 @@ export const QuestWrapper = styled.div<QuestUrlProps>`
       justify-content: center;
       margin-top: 20px;
       box-shadow: 0 3px #e5e5e5;
-      z-index: -1;
+
+      ${MEDIA.mobile} {
+        width: calc(100vw - 80px);
+        max-width: 683px;
+        min-width: 340px;
+      }
     `}
 `;
 
 // 퀘스트 제목
 export const QuestsTitle = styled.h2<QuestUrlProps>`
+  font-weight: 700;
+
   ${({ $isLearn }) =>
     $isLearn &&
     css`
-      font-size: 13px;
       color: #b8b8b8;
+      font-size: 13px;
       text-align: start;
       margin-left: 37px;
     `}
@@ -152,11 +165,32 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
     css`
       color: #9f9f9f;
       font-size: 15px;
-      font-weight: 700;
       position: absolute;
       top: 35px;
       left: 125px;
       text-align: left;
+
+      ${MEDIA.mobile} {
+        left: 110px;
+      }
+    `}
+`;
+
+export const LoginRequiredMessage = styled.p<QuestUrlProps>`
+  color: #000000;
+  text-align: center;
+  font-weight: 700;
+
+  ${({ $isLearn }) =>
+    $isLearn &&
+    css`
+      font-size: 13px;
+      margin-top: 15px;
+    `}
+  ${({ $isQuest = true }) =>
+    $isQuest &&
+    css`
+      font-size: 15px;
     `}
 `;
 
@@ -175,6 +209,8 @@ export const ProgressBarWrapper = styled.div<QuestUrlProps>`
     $isQuest &&
     css`
       gap: 15px;
+      padding-left: 25px;
+      padding-right: 25px;
     `}
 `;
 
@@ -211,6 +247,10 @@ export const RewardIconWrapper = styled.div<QuestUrlProps>`
     css`
       width: 74px;
       height: 78px;
+
+      ${MEDIA.mobile} {
+        display: none;
+      }
     `}
 `;
 
