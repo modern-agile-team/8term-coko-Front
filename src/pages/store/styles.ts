@@ -1,5 +1,5 @@
-import { media } from '@/style/media';
 import { css, styled } from 'styled-components';
+import { MEDIA } from './../../style/constants';
 
 export const MyCharacterSection = styled.section`
   display: flex;
@@ -29,7 +29,7 @@ export const MyCharacterSection = styled.section`
   > div:nth-last-of-type(1) {
     display: none;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 90%;
     gap: 0px;
     height: 284px;
@@ -60,7 +60,7 @@ export const StoreItemListSection = styled.section`
   background: #fff;
   margin: 26px 0 0 0;
   box-shadow: 0 3px #e5e5e5;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 90%;
     margin-bottom: 90px;
   }
@@ -81,7 +81,7 @@ export const FilterListContainer = styled.div`
   > button:nth-child(1) {
     margin: 0 auto 0 32px;
   }
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     gap: 5px;
     padding: 18px 0 19px 0;
     align-self: center;
@@ -108,7 +108,7 @@ export const RedLine = styled.hr`
   width: 632px;
   height: 2px;
   border-color: #ff4949;
-  ${media.mobile} {
+  ${MEDIA.mobile} {
     width: 90%;
   }
 `;
