@@ -8,19 +8,78 @@ export const FocusedItemDiv = styled.div`
 `;
 
 export const TutorialClearWrapper = styled.div`
+  width: 608px;
+  height: 255px;
   animation: ${ANIMATIONS.fadeInScaleUpForCenter} 0.7s ease-out;
   position: fixed;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 747.42px;
-  height: 372.04px;
-  background: #fff;
+  background: #eacfa4;
+  border-bottom: 6px solid #d4b383;
   border-radius: 40px;
-  box-shadow: 0 11px #e5e5e5;
+  padding: 20px;
+  font-weight: 700;
+
+  ${MEDIA.mobile} {
+    width: 85%;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+
+    ${MEDIA.mobile} {
+      margin-left: 0;
+    }
+  }
+
+  > img {
+    width: 232px;
+    height: 187px;
+
+    ${MEDIA.mobile} {
+      display: none;
+    }
+  }
+
+  > div > p {
+    font-size: 20px;
+    color: #000000;
+    text-align: center;
+    white-space: pre-line;
+    margin-bottom: 20px;
+  }
+
+  > div > a {
+    width: 210px;
+    height: 40px;
+    font-size: 17px;
+    color: #ffffff;
+    border-radius: 10px;
+    background: #49c0f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px #38a6dc;
+
+    &:hover {
+      background: #7fd6fa;
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(3px);
+    }
+  }
 `;
 
 export const RedHighlight = styled.span`
@@ -214,31 +273,171 @@ export const TutorialPromptModalWrapper = styled.div`
   align-items: center;
 `;
 
-export const TutorialPromptModalContent = styled.div`
-  animation: ${ANIMATIONS.fadeInScaleUpForCenter} 0.7s ease-out;
+const quizModalStyles = css`
+  width: 456px;
+  height: 227px;
+  background: #eacfa4;
+  border-radius: 30px;
+  border-bottom: 6px solid #d4b383;
+`;
+
+const defaultModalStyles = css`
+  width: 562px;
+  height: 341px;
+  background: #fff;
+  border-radius: 25px;
+  border-bottom: 6px solid #e5e5e5;
+`;
+
+const quizTitleStyles = css`
+  font-size: 24px;
+  font-family: Maplestory;
+  color: #000000;
+
+  ${MEDIA.mobile} {
+    font-size: 22px;
+  }
+`;
+
+const defaultTitleStyles = css`
+  font-size: 30px;
+  font-family: goorm Sans;
+  color: #00dbe8;
+
+  ${MEDIA.mobile} {
+    font-size: 28px;
+  }
+`;
+
+const quizButtonStyles = css`
+  width: 102px;
+  height: 40px;
+  font-size: 17px;
+  font-family: Maplestory;
+  border-radius: 10px;
+
+  ${MEDIA.mobile} {
+    font-size: 15px;
+    width: 102px;
+  }
+`;
+
+const defaultButtonStyles = css`
+  width: 326px;
+  height: 50px;
+  font-size: 20px;
+  font-family: goorm Sans;
+  border-radius: 20px;
+
+  ${MEDIA.mobile} {
+    font-size: 18px;
+    width: min(70vw, 326px);
+  }
+`;
+
+const quizFirstButtonStyles = css`
+  background: #ff3f3d;
+  box-shadow: 0 4px #eb0000;
+  color: #fff;
+  &:hover {
+    background: #ff6b69;
+  }
+`;
+
+const defaultFirstButtonStyles = css`
+  background: #fff;
+  box-shadow: 0 4px #e5e5e5;
+  color: #000;
+  &:hover {
+    background: #f0f0f0;
+  }
+`;
+
+const quizSecondButtonStyles = css`
+  background: #2ad363;
+  box-shadow: 0 4px #00bc37;
+  color: #fff;
+  &:hover {
+    background: #4ce387;
+  }
+`;
+
+const defaultSecondButtonStyles = css`
+  background: #00d9e9;
+  box-shadow: 0 4px #00b6c0;
+  color: #fff;
+  &:hover {
+    background: #33e0f0;
+  }
+`;
+
+const quizContentDivStyles = css`
+  flex-direction: row;
+  gap: 60px;
+  margin-top: 20px;
+`;
+
+const defaultContentDivStyles = css`
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+`;
+
+export const TutorialPromptModalContent = styled.div<{
+  $isQuizTutorialPage: boolean;
+}>`
+  ${({ $isQuizTutorialPage }) =>
+    $isQuizTutorialPage ? quizModalStyles : defaultModalStyles};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
   text-align: center;
+  animation: ${ANIMATIONS.fadeInScaleUpForCenter} 0.7s ease-out;
 
-  > h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+  ${MEDIA.mobile} {
+    width: 85%;
   }
 
-  > button {
-    margin: 10px;
-    padding: 10px 20px;
+  > h2 {
+    font-weight: 700;
+    margin-top: 60px;
+    line-height: 30px;
+    ${({ $isQuizTutorialPage }) =>
+      $isQuizTutorialPage ? quizTitleStyles : defaultTitleStyles};
+  }
+
+  > div {
+    display: flex;
+    ${({ $isQuizTutorialPage }) =>
+      $isQuizTutorialPage ? quizContentDivStyles : defaultContentDivStyles};
+  }
+
+  > div > button {
+    margin: 5px 0;
     border: none;
-    border-radius: 5px;
-    background: #007bff;
-    color: white;
-    &:hover {
-      background: #0056b3;
+    font-weight: 700;
+    ${({ $isQuizTutorialPage }) =>
+      $isQuizTutorialPage ? quizButtonStyles : defaultButtonStyles};
+
+    &:nth-child(1) {
+      ${({ $isQuizTutorialPage }) =>
+        $isQuizTutorialPage ? quizFirstButtonStyles : defaultFirstButtonStyles};
+    }
+
+    &:nth-child(2) {
+      ${({ $isQuizTutorialPage }) =>
+        $isQuizTutorialPage
+          ? quizSecondButtonStyles
+          : defaultSecondButtonStyles};
+    }
+
+    &:active {
+      box-shadow: none;
+      transform: translateY(3px);
     }
   }
 `;
