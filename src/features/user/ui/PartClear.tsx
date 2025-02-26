@@ -16,7 +16,7 @@ export default function PartClear({ partId }: PartClearProps) {
   const { mutate: updatePartStatus, isIdle: isProgressIdle } =
     useUserPartStatusQuery.updateCompletedPartStatus();
 
-  const { data: part } = usePartQuery.getParts({ partId });
+  const { data: part } = usePartQuery.getPart({ partId });
   const navigate = useNavigate();
   const handleNavigateToLearn = () => {
     updatePoint({ point: DEFAULT_POINT });
