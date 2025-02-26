@@ -18,10 +18,10 @@ export const useQuizzesQuery = {
 };
 
 export const usePartQuery = {
-  getParts: ({ partId }: { partId: number }) => {
+  getPart: ({ partId }: { partId: number }) => {
     return useQuery({
       queryKey: quizKeys.parts(),
-      queryFn: () => partApis.getParts({ partId }),
+      queryFn: () => partApis.getPart({ partId }),
     });
   },
 };

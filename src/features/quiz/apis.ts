@@ -13,7 +13,9 @@ export const quizzesApis = {
 };
 
 export const partApis = {
-  getParts: async (params: { partId: number }): Promise<Part> => {
+  getPart: async (params: {
+    partId: number;
+  }): Promise<Omit<Part, 'status'>> => {
     const response = await api.get(`/parts/${params.partId}`);
     return response.data;
   },
