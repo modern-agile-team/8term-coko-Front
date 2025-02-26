@@ -146,7 +146,6 @@ function QuizContainer({
         >
           제출
         </ResponseButton>
-        <PartClear partId={partId} />
       </SubmitSection>
       <Modal isShow={isShow}>
         <SwitchCase
