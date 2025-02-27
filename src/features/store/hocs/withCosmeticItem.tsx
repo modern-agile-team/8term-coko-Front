@@ -49,7 +49,6 @@ const withCosmeticItem = <P extends object>(
     }
     const finalData =
       isMyItemsVisible && userCosmeticItem ? userCosmeticItem : cosmeticItem;
-    console.log(finalData);
     if (!finalData) {
       return (
         <ItemContainer>

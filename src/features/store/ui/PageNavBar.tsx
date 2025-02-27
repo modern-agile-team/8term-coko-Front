@@ -15,7 +15,6 @@ export default function PageNavBar({ totalPage }: PageNavBarProps) {
       {generatePaginationPages({
         currentPage,
         totalPage,
-        maxVisible: 4,
       }).map(page => {
         if (isNumber(page)) {
           return (
