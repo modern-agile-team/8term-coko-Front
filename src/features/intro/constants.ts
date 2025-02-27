@@ -389,33 +389,39 @@ export const BADGE_IMAGE_LIST = [
 export const MEMBER_DETAILS = {
   홍대경: {
     team: 'BACKEND',
+    profile: '대경님.svg',
     description:
       'API 설계부터 성능 최적화까지! 백엔드 개발을 책임지고 있습니다.',
     sns: [{ icon: '깃허브_검정.svg', url: 'https://github.com/hongdaekyung' }],
   },
   이건우: {
     team: 'BACKEND',
+    profile: '건우님.svg',
     description: '데이터베이스와 서버 로직을 튼튼하게! 백엔드 개발자입니다.',
     sns: [{ icon: '깃허브_검정.svg', url: 'https://github.com/gwgw123' }],
   },
   전희나: {
     team: 'BACKEND',
+    profile: '희나님.svg',
     description: '안정적인 서비스 운영을 목표로 백엔드를 개발하고 있어요.',
     sns: [{ icon: '깃허브_검정.svg', url: 'https://github.com/jeonheena' }],
   },
   구도윤: {
     team: 'FRONTEND',
+    profile: '도윤님.svg',
     description:
       '멋진 UI와 부드러운 UX를 위해 끊임없이 고민하는 프론트엔드 개발자!',
     sns: [{ icon: '깃허브_검정.svg', url: 'https://github.com/rhehfl' }],
   },
   신현성: {
     team: 'FRONTEND',
+    profile: '현성님.svg',
     description: '사용자 경험을 최우선으로 생각하는 프론트엔드 개발자입니다.',
     sns: [{ icon: '깃허브_검정.svg', url: 'https://github.com/bluetree7878' }],
   },
   이채영: {
     team: 'DESIGNER',
+    profile: '채영.svg',
     description: '감각적인 디자인과 트렌디한 UI를 만들어가는 디자이너입니다.',
     sns: [{ icon: 'fa-instagram', url: 'https://instagram.com/chaeyounglee' }],
   },
