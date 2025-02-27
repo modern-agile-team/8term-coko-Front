@@ -59,50 +59,6 @@ export const IntroWrapper = styled.div`
   }
 `;
 
-export const IntroHeader = styled.header`
-  width: 100vw;
-  height: 79px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  padding: 0 52px 0 61px;
-  justify-content: space-between;
-  box-shadow: 0px 4px #e5e5e5;
-
-  img {
-    width: 65px;
-    height: 52px;
-    cursor: pointer;
-  }
-
-  > div {
-    display: flex;
-    gap: 40px;
-
-    > button {
-      background: #fff;
-      color: #00d9e9;
-      text-align: center;
-      font-family: 'goorm Sans OTF';
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 30px; /* 200% */
-      letter-spacing: 0.16px;
-      border: none;
-      background-color: inherit;
-    }
-    > button:nth-child(2) {
-      color: #000;
-    }
-  }
-  ${MEDIA.mobile} {
-    img {
-      display: none;
-    }
-  }
-`;
-
 export const TopCokoIntroWrapper = styled.div`
   margin-top: 4px;
   box-sizing: border-box;
@@ -383,7 +339,7 @@ export const BottomCokoIntroWrapper = styled.section`
         font-weight: 700;
         line-height: 40px;
       }
-      > a {
+      > button {
         border-radius: 20px;
         background: #00d9e9;
         border: none;

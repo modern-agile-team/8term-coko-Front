@@ -1,5 +1,6 @@
 import { calculateTutorialPopupPosition } from '@/features/intro/service/utils';
 import { MEDIA, ANIMATIONS, Z_INDEX } from '@/style/constants';
+import { Link } from 'react-router-dom';
 import { css, styled } from 'styled-components';
 
 export const FocusedItemDiv = styled.div`
@@ -242,14 +243,17 @@ export const BadgeContainer = styled.div`
     display: none;
   }
 `;
-export const BadgeList = styled.ul`
+export const BadgeList = styled.ul<{ $isPaused: boolean }>`
   display: flex;
-  gap: 43px;
+  animation: ${ANIMATIONS.scrollAnimation} 18s linear infinite;
+  animation-play-state: ${({ $isPaused }) =>
+    $isPaused ? 'paused' : 'running'};
   ::-webkit-scrollbar {
     display: none;
   }
 
   > li {
+    margin: 0 21px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -439,5 +443,71 @@ export const TutorialPromptModalContent = styled.div<{
       box-shadow: none;
       transform: translateY(3px);
     }
+  }
+`;
+
+export const IntroHeaderWrapper = styled.header`
+  width: 100%;
+  height: 79px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 52px 0 61px;
+  justify-content: space-between;
+  box-shadow: 0px 4px #e5e5e5;
+
+  img {
+    width: 65px;
+    height: 52px;
+    cursor: pointer;
+  }
+
+  > div {
+    display: flex;
+    gap: 40px;
+  }
+  ${MEDIA.mobile} {
+    img {
+      display: none;
+    }
+    > div {
+      gap: 10px;
+    }
+  }
+`;
+
+export const IntroHeaderLink = styled(Link)<{ $active: boolean }>`
+  background: #fff;
+  text-align: center;
+  font-family: 'goorm Sans OTF';
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0.16px;
+  border: none;
+  background-color: inherit;
+  text-decoration: none;
+  color: ${({ $active }) => ($active ? '#00D9E9' : '#000')};
+  font-weight: ${({ $active }) => ($active ? 'bold' : 'normal')};
+`;
+
+export const SelectWrapper = styled.div`
+  position: relative;
+  width: 100px;
+  button {
+    width: 100%;
+    height: 100%;
+  }
+  ul {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 `;
