@@ -2,18 +2,26 @@ import { BADGE_IMAGE_LIST } from '@/features/intro/constants';
 import { BadgeContainer, BadgeList } from '@/features/intro/ui/styles';
 import { getImageNameFromUrl } from '@/utils/getImageNameFromUrl';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { useHover } from '@modern-kit/react';
-import { useCallback } from 'react';
+import {
+  useHover,
+  useInterval,
+  useTimeout,
+  useToggle,
+} from '@modern-kit/react';
+import { useCallback, useState } from 'react';
 
 export default function BadgeIntro() {
   const { ref: containerRef, isHovered } = useHover<HTMLDivElement>({
     onEnter: () => {
+      toggleIsPaused();
       document.addEventListener('wheel', blockScroll, { passive: false });
     },
     onLeave: () => {
+      toggleIsPaused();
       document.removeEventListener('wheel', blockScroll);
     },
   });
+  const [isPaused, toggleIsPaused] = useToggle(false);
 
   const blockScroll = useCallback((e: WheelEvent) => {
     e.preventDefault();
@@ -30,7 +38,12 @@ export default function BadgeIntro() {
   return (
     <>
       <BadgeContainer ref={containerRef} onWheel={handleWheel}>
-        <BadgeList>
+        <BadgeList $isPaused={isPaused}>
+          {BADGE_IMAGE_LIST.map(image => (
+            <li key={image}>
+              <img src={getImageUrl(image)} alt={getImageNameFromUrl(image)} />
+            </li>
+          ))}
           {BADGE_IMAGE_LIST.map(image => (
             <li key={image}>
               <img src={getImageUrl(image)} alt={getImageNameFromUrl(image)} />

@@ -25,6 +25,7 @@ export default function TutorialPromptModal({
 
   const handleGoToLearnTutorial = () => {
     navigate('/learn/tutorial');
+    window.scrollTo(0, 0);
   };
 
   const handleGoToLearn = () => {

@@ -62,6 +62,10 @@ export const ANIMATIONS = {
   70% { transform: translateY(0) scale(1.2); opacity: 1; }
   100% { transform: translateY(0) scale(1); }
 `,
+  scrollAnimation: keyframes`
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+`,
 } as const;
 
 export const Z_INDEX = {

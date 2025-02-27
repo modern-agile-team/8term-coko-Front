@@ -114,7 +114,7 @@ function QuizContainer({
         />
       </ProgressSection>
       <RightAlignedBox>
-        <OpinionsModalTrigger />
+        <OpinionsModalTrigger quizzes={quizzes} />
       </RightAlignedBox>
       <Question title={title} question={question} category={category} />
       <SwitchCase
