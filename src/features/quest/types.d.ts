@@ -28,3 +28,28 @@ export interface DailyQuestResponse extends Quest {
 export interface MainQuestResponse extends Quest {
   mainQuest: MainQuest;
 }
+
+export interface ChallengeApiResponse {
+  totalCount: number;
+  totalPage: number;
+  currentPage: number;
+  limit: number;
+  contents: ChallengeItem[];
+}
+
+export interface ChallengeItem {
+  id: number;
+  userId: number;
+  challengeId: number;
+  completed: boolean;
+  completedDate: string;
+  challenge: {
+    id: number;
+    content: string;
+    point: number;
+    experience: number;
+    challengeType: string;
+    condition: number;
+    badgeName: string;
+  };
+}

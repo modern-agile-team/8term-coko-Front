@@ -29,6 +29,7 @@ export default function SSEProvider({ children }: PropsWithChildren) {
     newEventSource.onmessage = (event: MessageEvent) => {
       try {
         const parsedData: SSEResponse = JSON.parse(event.data);
+        // console.log('🚀 ~ connectSSE ~ parsedData:', parsedData);
 
         if (parsedData.type === 'hp_refilled') {
           queryClient.invalidateQueries({ queryKey: userKeys.hp() });

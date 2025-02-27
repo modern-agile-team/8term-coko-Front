@@ -4,7 +4,13 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import { userHpApi, userOpinionsApi, usersApis } from '@features/user/apis';
+import {
+  usersApis,
+  usersHpApi,
+  usersOpinionsApi,
+  userQuestApi,
+  userChallengesApi,
+} from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
@@ -16,16 +22,14 @@ export const userKeys = {
   me: () => [...userKeys.all, 'me'] as const,
   hp: () => [...userKeys.me(), 'hp'] as const,
   experience: () => [...userKeys.me(), 'experience'] as const,
-  quizzes: () => [...userKeys.me(), 'quizzes'],
+  quizzes: () => [...userKeys.me(), 'quizzes'] as const,
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
+  daily: () => [...userKeys.me(), 'daily'] as const,
+  challenges: () => [...userKeys.me(), 'challenges'] as const,
   attendance: {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
-  },
-  quest: {
-    daily: () => [...userKeys.me(), 'quest', 'daily'] as const,
-    main: () => [...userKeys.me(), 'quest', 'main'] as const,
   },
   sections: {
     paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
@@ -48,14 +52,14 @@ export const useUserHpQuery = {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.hp(),
-      queryFn: userHpApi.getHp,
+      queryFn: usersHpApi.getHp,
       enabled: isLoggedIn(user),
     });
   },
   getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
-      queryFn: userHpApi.getHp,
+      queryFn: usersHpApi.getHp,
       retry: 0,
     });
   },
@@ -63,7 +67,7 @@ export const useUserHpQuery = {
   updateHp: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: userHpApi.patchHp,
+      mutationFn: usersHpApi.patchHp,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.hp() });
       },
@@ -232,8 +236,8 @@ export const useUserQuestQuery = {
   getDailyQuest: () => {
     const { user } = useUserStore();
     return useQuery({
-      queryKey: userKeys.quest.daily(),
-      queryFn: usersApis.getDailyQuest,
+      queryKey: userKeys.daily(),
+      queryFn: userQuestApi.getDailyQuest,
       gcTime: 0,
       staleTime: 0,
       enabled: isLoggedIn(user),
@@ -241,8 +245,19 @@ export const useUserQuestQuery = {
   },
 };
 
+export const useUserChallengesQuery = {
+  getChallenges: () => {
+    const { user } = useUserStore();
+    return useQuery({
+      queryKey: userKeys.challenges(),
+      queryFn: userChallengesApi.getChallenges,
+      enabled: isLoggedIn(user),
+    });
+  },
+};
+
 export const useUserOpinionsQuery = {
   createOpinions: () => {
-    return useMutation({ mutationFn: userOpinionsApi.postOpinions });
+    return useMutation({ mutationFn: usersOpinionsApi.postOpinions });
   },
 };

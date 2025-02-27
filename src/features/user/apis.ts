@@ -10,7 +10,10 @@ import type {
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
-import type { DailyQuestResponse } from '@features/quest/types';
+import type {
+  DailyQuestResponse,
+  ChallengeApiResponse,
+} from '@features/quest/types';
 
 export const usersApis = {
   putQuizzesProgress: ({
@@ -87,14 +90,23 @@ export const usersApis = {
   },
 
   postAttendance: async () => await api.post('/users/me/attendance'),
+};
 
+export const userQuestApi = {
   getDailyQuest: async (): Promise<DailyQuestResponse[]> => {
     const response = await api.get('/users/me/quests/daily');
     return response.data;
   },
 };
 
-export const userHpApi = {
+export const userChallengesApi = {
+  getChallenges: async (): Promise<ChallengeApiResponse> => {
+    const response = await api.get('/users/me/challenges');
+    return response.data;
+  },
+};
+
+export const usersHpApi = {
   getHp: async (): Promise<UserHp> => {
     const response = await api.get('users/me/hp');
     return response.data;
@@ -106,7 +118,7 @@ export const userHpApi = {
   },
 };
 
-export const userOpinionsApi = {
-  postOpinions: async (parmas: Opinions): Promise<void> =>
-    await api.post('/users/me/opinions', parmas),
+export const usersOpinionsApi = {
+  postOpinions: async (prams: Opinions): Promise<void> =>
+    await api.post('/users/me/opinions', prams),
 };

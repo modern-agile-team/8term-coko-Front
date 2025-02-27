@@ -4,7 +4,8 @@ import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import MenuBar from '@common/layout/MenuBar';
 import DailyQuest from '@features/quest/ui/DailyQuest';
-import MainQuest from '@/features/quest/ui/MainQuest';
+// import MainQuest from '@/features/quest/ui/MainQuest';
+import Challenge from '@/features/quest/ui/Challenges';
 import Header from '@common/layout/Header';
 
 export default function Quest() {
@@ -34,7 +35,7 @@ export default function Quest() {
       </globalS.Wrapper>
       <globalS.Layout>
         <DailyQuest />
-        <MainQuest />
+        <Challenge />
       </globalS.Layout>
     </>
   );

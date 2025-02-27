@@ -259,3 +259,27 @@ export const RewardIcon = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+export const ChallengeGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+  padding: 20px;
+  justify-items: center;
+`;
+
+export const BadgeItem = styled.div<{ $completed?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${({ $completed }) => `
+    opacity: ${$completed ? 1 : 0.5};
+    filter: ${$completed ? 'none' : 'grayscale(100%)'};
+  `}
+`;
+
+export const BadgeName = styled.p`
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+`;
