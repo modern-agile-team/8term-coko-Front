@@ -508,11 +508,11 @@ export const SelectWrapper = styled.div`
     position: absolute;
     left: 0px;
     top: 0px;
+    z-index: ${Z_INDEX.popover};
   }
   li {
     width: 100%;
     display: flex;
-    border: 1px solid #000;
     align-items: center;
     justify-content: center;
     cursor: pointer;

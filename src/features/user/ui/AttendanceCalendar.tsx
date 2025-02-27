@@ -34,7 +34,6 @@ export default function AttendanceCalendar() {
     if (!isUserAttendance) {
       recordAttendance(undefined, {
         onSuccess: data => {
-          console.log(data);
           setIsTodayAttendance(true);
           toast.success('출석체크 성공!');
         },
