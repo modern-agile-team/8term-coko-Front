@@ -9,7 +9,7 @@ export default function Quiz() {
   return (
     <AlignCenter>
       <HeaderSection>
-        <title>파트{partId}퀴즈-coko</title>
+        <title>퀴즈-coko</title>
         <Header />
       </HeaderSection>
       <QuizWithQuizzes partId={partId} partStatus={partStatus} />

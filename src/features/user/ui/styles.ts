@@ -400,3 +400,26 @@ export const ContentWrapper = styled.div<{ $isMaxLength: boolean }>`
       `}
   }
 `;
+
+export const SelectWrapper = styled.div`
+  button,
+  ul {
+    width: 120px;
+  }
+  button {
+    border-radius: 15px;
+    height: 30px;
+  }
+  ul {
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+  }
+  li {
+    border: none;
+    border-radius: 15px;
+    &:hover {
+      background-color: gray;
+    }
+  }
+`;
