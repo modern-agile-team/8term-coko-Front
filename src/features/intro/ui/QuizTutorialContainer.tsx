@@ -10,6 +10,7 @@ import ShortAnswer from '@features/quiz/ui/ShortAnswer';
 import {
   ProgressSection,
   ResponseButton,
+  RightAlignedBox,
   SubmitSection,
 } from '@features/quiz/ui/styles';
 import { useElementRect } from '@features/intro/service/hooks';
@@ -21,6 +22,7 @@ import { useClientQuizStore } from '@/features/quiz/stores';
 import isEqualArray from '@utils/isEqualArray';
 import { SwitchCase, useUnmount, useTimeout } from '@modern-kit/react';
 import { useEffect, useState } from 'react';
+import OpinionsModalTrigger from '@/features/user/ui/OpinionsModalTrigger';
 
 interface TutorialProps {
   quizzes: Quiz[];
@@ -67,6 +69,9 @@ function QuizTutorialContainer({ quizzes }: TutorialProps) {
           $boxBgColor="#F4F4F4"
         />
       </ProgressSection>
+      <RightAlignedBox>
+        <OpinionsModalTrigger />
+      </RightAlignedBox>
       <Question title={title} question={question} category={category} />
       <SwitchCase
         value={category}

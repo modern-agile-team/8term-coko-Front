@@ -277,17 +277,23 @@ export const AttendanceCalendarWrapper = styled.div`
 `;
 
 export const OpinionsButton = styled.button`
-  min-width: 60px;
-  background-color: #00edff;
-  border-radius: 24px;
-  border: 2px solid #00dce8;
-  background: #70f5ff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 75px;
+  height: 22px;
+  border-radius: 9px;
+  background: #00e5ee;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
   padding: 2px 5px;
   color: #fff;
+  box-shadow: 0 2px #68fcff;
+
   &:hover {
-    border-radius: 24px;
-    border: 2px solid #00868d;
     background: #00d9e9;
+    box-shadow: 0 1px #68fcff;
   }
 `;
 
