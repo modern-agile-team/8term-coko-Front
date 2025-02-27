@@ -1,5 +1,5 @@
 import { getImageUrl } from '@utils/getImageUrl';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 import * as S from '@/features/user/ui/styles';
 
 export default function PreviewMyCharacter() {

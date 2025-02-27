@@ -1,5 +1,5 @@
 import { PaginationButton, PaginationDiv } from '@/features/store/ui/styles';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 import { generatePaginationPages } from '@/utils/generatePaginationPages';
 import { useMediaQuery } from '@modern-kit/react';
 import { isNumber } from '@modern-kit/utils';

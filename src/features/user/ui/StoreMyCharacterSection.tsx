@@ -3,7 +3,7 @@ import MyCharacter from '@/features/user/ui/MyCharacter';
 import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
 import useModal from './../../../hooks/useModal';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 import ProfileImage from '@/features/user/ui/ProfileImage';
 import useUserStore from './../../../store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';

@@ -9,7 +9,6 @@ export const ACCESSORIES_OPTIONS: CosmeticItemOption[] = [
   { label: '악세사리', query: { mainCategoryId: 2, subCategoryId: null } },
   { label: '모자', query: { mainCategoryId: 2, subCategoryId: 3 } },
   { label: '안경', query: { mainCategoryId: 2, subCategoryId: 4 } },
-  { label: '턱수염', query: { mainCategoryId: 2, subCategoryId: 5 } },
   { label: '스카프', query: { mainCategoryId: 2, subCategoryId: 6 } },
 ];
 

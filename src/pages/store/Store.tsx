@@ -11,7 +11,7 @@ import {
 } from '@/features/store/constants';
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
 import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 import { ErrorBoundary } from 'react-error-boundary';
 import ItemFallback from '@/features/error/ui/ItemFallback';

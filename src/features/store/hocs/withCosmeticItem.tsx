@@ -3,7 +3,7 @@ import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 import { useCosmeticItemQuery } from '@/features/store/queries';
 import { CosmeticItem } from '@/features/store/types';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 import { SubtractInjectedProps } from '@/types';
 import { FC, useEffect } from 'react';
 import { useMediaQuery } from '@modern-kit/react';

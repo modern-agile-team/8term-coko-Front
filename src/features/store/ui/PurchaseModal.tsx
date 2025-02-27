@@ -6,7 +6,7 @@ import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import useFunnel from './../../../hooks/useFunnel';
 import { useState } from 'react';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 
 interface PurchaseModalProps {
   selectCosmeticItem: CosmeticItem;

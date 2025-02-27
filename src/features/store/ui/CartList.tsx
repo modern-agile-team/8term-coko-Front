@@ -1,6 +1,6 @@
 import * as S from './styles';
 import StoreItem from './StoreItem';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 import { useMemo } from 'react';
 import useModal from '@/hooks/useModal';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
@@ -23,9 +23,10 @@ export default function CartList({
   const { Modal, isShow, closeModal, openModal } = useModal();
   const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
 
-  const totalPoint = useMemo(() => {
-    return cartListCosmeticItems.reduce((total, item) => total + item.price, 0);
-  }, [cartListCosmeticItems]);
+  const totalPoint = cartListCosmeticItems.reduce(
+    (total, item) => total + item.price,
+    0
+  );
 
   const cartListRef = useOutsidePointerDown(mobileCartListCloseModal);
 

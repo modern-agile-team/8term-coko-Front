@@ -4,7 +4,7 @@ import StoreItem from './StoreItem';
 import { CosmeticItem } from '@/features/store/types';
 import withCosmeticItem from '@/features/store/hocs/withCosmeticItem';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 import { EquipButton } from '@/features/user/ui/styles';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import PurchaseModal from '@/features/store/ui/PurchaseModal';

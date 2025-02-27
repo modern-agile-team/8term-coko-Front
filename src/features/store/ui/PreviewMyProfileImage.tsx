@@ -1,7 +1,7 @@
 import { getImageUrl } from '@/utils/getImageUrl';
 import * as S from '@/features/user/ui/styles';
 import PreviewMyCharacter from '@/features/store/ui/PreviewMyCharacter';
-import { useCosmeticItemStore } from '@/features/store/useCosmeticItemStore';
+import { useCosmeticItemStore } from '@/features/store/store';
 
 export default function PreViewProfileImage() {
   const { equippedCosmeticItems } = useCosmeticItemStore();
