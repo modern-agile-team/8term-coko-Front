@@ -1,13 +1,17 @@
 import SortDropdown from '@/common/layout/SortDropdown';
+import Select from '@/features/intro/ui/Select';
+import { useLocationQuizState } from '@/features/quiz/hooks';
 import { OPINIONS_OPTIONS } from '@/features/user/constants';
 import { useUserOpinionsQuery } from '@/features/user/queries';
 import {
   ContentWrapper,
   ErrorMessage,
   OpinionsFormWrapper,
+  SelectWrapper,
 } from '@/features/user/ui/styles';
-import { RefObject, useState } from 'react';
+import { RefObject, use, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useLocation } from 'react-router-dom';
 
 interface OpinionsModalProps {
   modalRef: RefObject<HTMLDivElement | null>;
@@ -18,11 +22,17 @@ export default function OpinionsModal({
   modalRef,
   closeModal,
 }: OpinionsModalProps) {
-  const [selectedOption, setSelectedOption] =
-    useState<keyof typeof OPINIONS_OPTIONS>('버그 제보');
+  const [selectedOption, setSelectedOption] = useState<
+    (typeof OPINIONS_OPTIONS)[number]['label'] | '현재 퀴즈'
+  >('버그 제보');
+
   const [customTitle, setCustomTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
+
+  const isQuizPage = useLocation().pathname === '/quiz';
+  const { partId } = useLocationQuizState();
+  console.log(partId);
   const { mutate: createOpinions } = useUserOpinionsQuery.createOpinions();
 
   const handleSubmit = () => {
@@ -39,6 +49,7 @@ export default function OpinionsModal({
       return;
     }
     const title = selectedOption === '직접 입력' ? customTitle : selectedOption;
+
     createOpinions(
       {
         title,
@@ -56,25 +67,32 @@ export default function OpinionsModal({
   return (
     <OpinionsFormWrapper ref={modalRef}>
       <h1>문의하기</h1>
+
       <div>
         <label>제목</label>
-        <SortDropdown
-          options={OPINIONS_OPTIONS}
-          onSelectOption={setSelectedOption}
-          selectedOption={selectedOption}
-          width="200px"
-          height="30px"
-          iconSize="10px"
-          iconRight="15px"
-          fontSize="12px"
-          ulFontColor="#000"
-          liFontColor="#000"
-          ulBackgroundColor="#fff"
-          liBackgroundColor="#fff"
-          borderColor="#000"
-        />
+        <SelectWrapper>
+          <Select
+            buttonName={selectedOption}
+            onChange={value =>
+              setSelectedOption(
+                value as (typeof OPINIONS_OPTIONS)[number]['label']
+              )
+            }
+          >
+            {OPINIONS_OPTIONS.map(option => (
+              <Select.Option
+                value={option.label}
+                label={option.label}
+                key={option.id}
+              />
+            ))}
+            {isQuizPage && (
+              <Select.Option value="현재 퀴즈" label="현재 퀴즈" />
+            )}
+          </Select>
+        </SelectWrapper>
       </div>
-      {OPINIONS_OPTIONS[selectedOption].dataField === 'etc' && (
+      {selectedOption === '직접 입력' && (
         <div>
           <label>
             직접 입력<span>{!!customTitle || '*'}</span>
@@ -86,6 +104,17 @@ export default function OpinionsModal({
           />
         </div>
       )}
+      {selectedOption === '현재 퀴즈' && (
+        <div>
+          <label>현재 퀴즈</label>
+          <input
+            type="text"
+            value={customTitle}
+            onChange={e => setCustomTitle(e.target.value)}
+          />
+        </div>
+      )}
+
       <div>
         <label>
           내용<span>{!!content || '*'}</span>

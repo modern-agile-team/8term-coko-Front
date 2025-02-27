@@ -495,17 +495,24 @@ export const IntroHeaderLink = styled(Link)<{ $active: boolean }>`
 export const SelectWrapper = styled.div`
   position: relative;
   width: 100px;
+  height: 20px;
   button {
     width: 100%;
     height: 100%;
   }
   ul {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     position: absolute;
     left: 0px;
     top: 0px;
   }
   li {
+    width: 100%;
     display: flex;
+    border: 1px solid #000;
     align-items: center;
     justify-content: center;
     cursor: pointer;
