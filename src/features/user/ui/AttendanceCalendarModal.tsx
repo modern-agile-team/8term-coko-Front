@@ -26,7 +26,7 @@ export default function AttendanceCalendarModal() {
         </Suspense>
       </Modal>
       <AttendanceCheckButton onClick={openModal}>
-        <img src={getImageUrl('출석체크-아이콘.svg')} />
+        <img src={getImageUrl('출석체크.svg')} />
       </AttendanceCheckButton>
     </>
   );
