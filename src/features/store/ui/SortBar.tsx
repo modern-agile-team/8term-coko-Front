@@ -35,18 +35,20 @@ export default function SortBar() {
   };
   return (
     <FilterListContainer>
+      {/* 전체 요청 */}
       <FilterButton
         $isSelect={query.mainCategoryId === 0}
         onClick={() => handleFilter({ mainCategoryId: 0, subCategoryId: 0 })}
       >
         전체
       </FilterButton>
+      {/* 의상 셀렉트박스 */}
       <SelectWrapper $isSelect={query.mainCategoryId === 1}>
         <Select
           buttonName={
             CLOTHES_OPTIONS.some(value => value.label === buttonLabel)
-              ? buttonLabel
-              : '의상'
+              ? buttonLabel + ' ▲'
+              : '의상 ▲'
           }
           onChange={value => {
             const [subId, label] = value.split(',');
@@ -59,6 +61,7 @@ export default function SortBar() {
             });
           }}
         >
+          <Select.Option value="0,의상" label="의상 ▼" />
           {CLOTHES_OPTIONS.map(item => (
             <Select.Option
               key={item.label}
@@ -68,12 +71,13 @@ export default function SortBar() {
           ))}
         </Select>
       </SelectWrapper>
+      {/* 액세서리 셀렉트박스 */}
       <SelectWrapper $isSelect={query.mainCategoryId === 2}>
         <Select
           buttonName={
             ACCESSORIES_OPTIONS.some(value => value.label === buttonLabel)
-              ? buttonLabel
-              : '액세서리'
+              ? buttonLabel + ' ▲'
+              : '액세서리 ▲'
           }
           onChange={value => {
             const [subId, label] = value.split(',');
@@ -86,6 +90,7 @@ export default function SortBar() {
             });
           }}
         >
+          <Select.Option value="0,액세서리" label="액세서리 ▼" />
           {ACCESSORIES_OPTIONS.map(item => (
             <Select.Option
               key={item.label}
@@ -95,6 +100,7 @@ export default function SortBar() {
           ))}
         </Select>
       </SelectWrapper>
+      {/* 프로필, 색상 선택 박스 */}
       {BUTTON_LIST.map(item => (
         <FilterButton
           key={item.label}

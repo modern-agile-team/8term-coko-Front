@@ -4,7 +4,6 @@ import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import useModal from '@/hooks/useModal';
 import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
-import useFunnel from './../../../hooks/useFunnel';
 import { useState } from 'react';
 import { useCosmeticItemStore } from '@/features/store/store';
 
