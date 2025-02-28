@@ -94,6 +94,7 @@ export const TeamButtonList = styled.div`
     }
   }
   ul {
+    width: 235px;
     text-align: center;
     box-shadow: 0 3px #00b6c0;
     border-radius: 20px;
