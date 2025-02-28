@@ -262,16 +262,34 @@ export const RewardIcon = styled.img`
 
 export const ChallengeGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  width: 683px;
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 0 3px #e5e5e5;
+  background: #fff;
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   padding: 20px;
   justify-items: center;
+
+  ${MEDIA.mobile} {
+    width: calc(100vw - 80px);
+    max-width: 683px;
+    min-width: 340px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 100px;
+  }
 `;
 
 export const BadgeItem = styled.div<{ $completed?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 8px;
+  border: 2px solid #ffe161;
+  background: #ffefaa;
+  width: 133px;
+  height: 141px;
   ${({ $completed }) => `
     opacity: ${$completed ? 1 : 0.5};
     filter: ${$completed ? 'none' : 'grayscale(100%)'};
