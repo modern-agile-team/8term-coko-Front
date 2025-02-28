@@ -24,16 +24,6 @@ const withCosmeticItem = <P extends object>(
       isMyItemsVisible,
     });
 
-    // if (isLoading || userIsLoading) {
-    //   return (
-    //     <ItemContainer>
-    //       {limitArray.map(value => (
-    //         <SkeletonBase width="100%" height="100%" key={value} />
-    //       ))}
-    //     </ItemContainer>
-    //   );
-    // }
-
     return (
       <WrappedComponent
         {...(rest as P)}

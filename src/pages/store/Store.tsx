@@ -17,7 +17,6 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ItemFallback from '@/features/error/ui/ItemFallback';
 import { CosmeticItemOption } from '@/features/store/types';
 import { Suspense } from 'react';
-import { SkeletonBase } from '@/common/layout/styles';
 import ItemSkeleton from '@/features/store/ui/ItemSkeleton';
 
 export default function Store() {
