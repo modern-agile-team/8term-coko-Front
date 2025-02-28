@@ -3,21 +3,9 @@ import { getImageUrl } from '@utils/getImageUrl';
 import * as S from './styles';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
 import { SkeletonBase } from '@/common/layout/styles';
-import { FastOmit, IStyledComponentBase } from 'styled-components/dist/types';
 
-const characterEquipMapping: Record<
-  number,
-  IStyledComponentBase<
-    'web',
-    FastOmit<
-      React.DetailedHTMLProps<
-        React.ImgHTMLAttributes<HTMLImageElement>,
-        HTMLImageElement
-      >,
-      never
-    >
-  >
-> = {
+//백엔드 내가 입은 아이템 api 나오면 COSMETIC_COMPONENTS로 수정
+const characterEquipMapping = {
   1: S.CharacterSetup,
   2: S.CharacterShoes,
   3: S.CharacterHat,
@@ -39,7 +27,10 @@ export default function MyCharacter() {
       if (!item.subCategoryId) {
         return null;
       }
-      const EquipComponent = characterEquipMapping[item.subCategoryId];
+      const EquipComponent =
+        characterEquipMapping[
+          item.subCategoryId as keyof typeof characterEquipMapping
+        ];
       if (!EquipComponent) return null;
 
       return (

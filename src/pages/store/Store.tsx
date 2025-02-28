@@ -3,7 +3,7 @@ import * as S from './styles';
 import Header from '@common/layout/Header';
 import MenuBar from '@common/layout/MenuBar';
 import ItemContainer from '@features/store/ui/ItemContainer';
-import { useUnmount } from '@modern-kit/react';
+import { useMediaQuery, useUnmount } from '@modern-kit/react';
 import {
   ACCESSORIES_OPTIONS,
   BUTTON_LIST,
@@ -16,6 +16,9 @@ import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 import { ErrorBoundary } from 'react-error-boundary';
 import ItemFallback from '@/features/error/ui/ItemFallback';
 import { CosmeticItemOption } from '@/features/store/types';
+import { Suspense } from 'react';
+import { SkeletonBase } from '@/common/layout/styles';
+import ItemSkeleton from '@/features/store/ui/ItemSkeleton';
 
 export default function Store() {
   const { query, setQuery, resetEquippedItem, setCurrentPage } =
@@ -26,6 +29,8 @@ export default function Store() {
     setCurrentPage(1);
     setQuery(query);
   };
+  const isMobile = useMediaQuery('(min-width: 768px)');
+  const limit = isMobile ? 8 : 4;
 
   return (
     <>
@@ -65,7 +70,9 @@ export default function Store() {
           <S.RedLine />
           <QueryErrorBoundary>
             <ErrorBoundary FallbackComponent={ItemFallback}>
-              <ItemContainer />
+              <Suspense fallback={<ItemSkeleton limit={limit} />}>
+                <ItemContainer limit={limit} />
+              </Suspense>
             </ErrorBoundary>
           </QueryErrorBoundary>
         </S.StoreItemListSection>

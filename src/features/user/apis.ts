@@ -10,7 +10,12 @@ import type {
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
-import { CosmeticItem, CosmeticItemOption } from '@/features/store/types';
+import {
+  CosmeticItem,
+  CosmeticItemOption,
+  CosmeticItemsQueryParams,
+  PaginationCosmeticItem,
+} from '@/features/store/types';
 import type { DailyQuestResponse } from '@features/quest/types';
 
 export const usersApis = {
@@ -97,18 +102,9 @@ export const usersApis = {
 
 export const userItemsApi = {
   getItems: async (
-    params?: CosmeticItemOption['query'] & {
-      page: number;
-      limit: number;
-    }
-  ): Promise<{
-    totalCount: number;
-    totalPage: number;
-    currentPage: number;
-    contents: CosmeticItem[];
-  }> => {
+    params?: CosmeticItemsQueryParams
+  ): Promise<PaginationCosmeticItem> => {
     const response = await api.get('/users/me/items', { params });
-    console.log(response);
     return response.data;
   },
   putResetEquippedItems: async (): Promise<void> =>

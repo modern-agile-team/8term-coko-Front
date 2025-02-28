@@ -1,7 +1,6 @@
 import { OverlayDiv } from '@/common/layout/styles';
 import { OverlayDivProps } from '@/common/types';
 import { PropsWithChildren, useEffect } from 'react';
-import { useOutsidePointerDown } from '@modern-kit/react';
 
 export default function Overlay({
   children,

@@ -1,6 +1,10 @@
 import { cosmeticItemApis } from '@/features/store/apis';
-import { CosmeticItemOption } from '@/features/store/types';
-import { useQuery } from '@tanstack/react-query';
+import {
+  CosmeticItemOption,
+  CosmeticItemsQueryParams,
+} from '@/features/store/types';
+import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
 const cosmeticItemKeys = {
   all: ['cosmeticItem'] as const,
@@ -10,9 +14,7 @@ const cosmeticItemKeys = {
 
   paginationOnly: (page: number, limit: number) =>
     [...cosmeticItemKeys.all, 'pagination', { page, limit }] as const,
-  paginationWithCategory: (
-    params: CosmeticItemOption['query'] & { page: number; limit: number }
-  ) =>
+  paginationWithCategory: (params: CosmeticItemsQueryParams) =>
     [
       ...cosmeticItemKeys.category({
         mainCategoryId: params.mainCategoryId,
@@ -24,19 +26,18 @@ const cosmeticItemKeys = {
 };
 
 export const useCosmeticItemQuery = {
-  getCosmeticItemByPage: ({
-    params,
-    isFetching,
-  }: {
-    params: CosmeticItemOption['query'] & {
-      page: number;
-      limit: number;
-    };
-    isFetching: boolean;
-  }) =>
-    useQuery({
+  getCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
+    useSuspenseQuery({
       queryKey: cosmeticItemKeys.paginationWithCategory(params),
       queryFn: () => cosmeticItemApis.getCosmeticItemByPage(params),
-      enabled: isFetching,
     }),
+  getCosmeticItem: (
+    params: CosmeticItemsQueryParams & { isMyItemsVisible: boolean }
+  ) => {
+    const { isMyItemsVisible, ...restProps } = params;
+    const useCosmeticItemQueryToUse = isMyItemsVisible
+      ? useUserCosmeticItemsQuery.getMyCosmeticItemByPage
+      : useCosmeticItemQuery.getCosmeticItemByPage;
+    return useCosmeticItemQueryToUse(restProps);
+  },
 };

@@ -1,7 +1,6 @@
 import * as S from './styles';
 import StoreItem from './StoreItem';
 import { useCosmeticItemStore } from '@/features/store/store';
-import { useMemo } from 'react';
 import useModal from '@/hooks/useModal';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
 import { useUserCosmeticItemsQuery } from '@/features/user/queries';
@@ -30,6 +29,31 @@ export default function CartList({
 
   const cartListRef = useOutsidePointerDown(mobileCartListCloseModal);
 
+  const handelAccept = () => {
+    purchaseItem(
+      {
+        itemIds: cartListCosmeticItems.map(item => item.id),
+      },
+      {
+        onSuccess: () => {
+          toast.success('아이템 구매 성공!');
+          closeModal();
+        },
+        onError: error => {
+          if (isAxiosError(error)) {
+            if (error.response?.status === 401) {
+              toast.error('로그인이 필요한 작업입니다.');
+            }
+            if (error.response?.status === 400) {
+              toast.error(error.response.data.message);
+            }
+          }
+        },
+        onSettled: () => closeModal(),
+      }
+    );
+  };
+
   return (
     <>
       <Modal isShow={isShow}>
@@ -41,30 +65,7 @@ export default function CartList({
             </>
           </CosmeticItemCheckOut.DetailBox>
           <CosmeticItemCheckOut.ConfirmButtonList
-            onAccept={() => {
-              purchaseItem(
-                {
-                  itemIds: cartListCosmeticItems.map(item => item.id),
-                },
-                {
-                  onSuccess: () => {
-                    toast.success('아이템 구매 성공!');
-                    closeModal();
-                  },
-                  onError: error => {
-                    if (isAxiosError(error)) {
-                      if (error.response?.status === 401) {
-                        toast.error('로그인이 필요한 작업입니다.');
-                      }
-                      if (error.response?.status === 400) {
-                        toast.error(error.response.data.message);
-                      }
-                    }
-                  },
-                  onSettled: () => closeModal(),
-                }
-              );
-            }}
+            onAccept={handelAccept}
             onReject={closeModal}
           />
         </CosmeticItemCheckOut>

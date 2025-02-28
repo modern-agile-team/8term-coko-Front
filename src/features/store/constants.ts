@@ -1,4 +1,11 @@
 import { CosmeticItemOption } from '@/features/store/types';
+import {
+  CharacterBeard,
+  CharacterGlasses,
+  CharacterHat,
+  CharacterSetup,
+  CharacterShoes,
+} from '@/features/user/ui/styles';
 
 export const CLOTHES_OPTIONS: CosmeticItemOption[] = [
   { label: '의상', query: { mainCategoryId: 1, subCategoryId: null } },
@@ -22,3 +29,11 @@ export const BUTTON_LIST: CosmeticItemOption[] = [
     query: { mainCategoryId: 4, subCategoryId: 8 },
   },
 ];
+
+export const COSMETIC_COMPONENTS = {
+  1: CharacterSetup,
+  2: CharacterShoes,
+  3: CharacterHat,
+  4: CharacterGlasses,
+  5: CharacterBeard,
+} as const;

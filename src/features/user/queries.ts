@@ -15,7 +15,10 @@ import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
-import { CosmeticItemOption } from '@/features/store/types';
+import {
+  CosmeticItemOption,
+  CosmeticItemsQueryParams,
+} from '@/features/store/types';
 
 export const userKeys = {
   all: ['users'] as const,
@@ -260,25 +263,12 @@ export const useUserAttendanceQuery = {
 };
 
 export const useUserCosmeticItemsQuery = {
-  getMyCosmeticItemByPage: ({
-    params,
-    isFetching,
-  }: {
-    params: CosmeticItemOption['query'] & {
-      page: number;
-      limit: number;
-    };
-    isFetching: boolean;
-  }) =>
-    useQuery({
+  getMyCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
+    useSuspenseQuery({
       queryKey: userKeys.cosmeticItems.root(),
       queryFn: () => userItemsApi.getItems(params),
-      enabled: isFetching,
-      gcTime: 5,
-      staleTime: 1,
     }),
   getEquippedItem: () => {
-    const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
       queryFn: () => userItemsApi.getItems(),

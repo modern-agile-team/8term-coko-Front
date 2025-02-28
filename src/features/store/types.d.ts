@@ -13,3 +13,15 @@ export type CosmeticItemOption = {
   label: string;
   query: { mainCategoryId: number; subCategoryId: number | null };
 };
+
+export interface PaginationCosmeticItem {
+  totalCount: number;
+  totalPage: number;
+  currentPage: number;
+  contents: CosmeticItem[];
+}
+
+type CosmeticItemsQueryParams = CosmeticItemOption['query'] & {
+  page: number;
+  limit: number;
+};
