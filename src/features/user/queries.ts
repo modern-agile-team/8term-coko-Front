@@ -4,19 +4,28 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from '@tanstack/react-query';
-import { userHpApi, userOpinionsApi, usersApis } from '@features/user/apis';
+import {
+  userItemsApi,
+  userHpApi,
+  userOpinionsApi,
+  usersApis,
+} from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
+import {
+  CosmeticItemOption,
+  CosmeticItemsQueryParams,
+} from '@/features/store/types';
 
 export const userKeys = {
   all: ['users'] as const,
   me: () => [...userKeys.all, 'me'] as const,
   hp: () => [...userKeys.me(), 'hp'] as const,
   experience: () => [...userKeys.me(), 'experience'] as const,
-  quizzes: () => [...userKeys.me(), 'quizzes'],
+  quizzes: () => [...userKeys.me(), 'quizzes'] as const,
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
   attendance: {
@@ -40,6 +49,31 @@ export const userKeys = {
       sectionId || partId
         ? ([...userKeys.progress.root(), { sectionId, partId }] as const)
         : userKeys.progress.root(),
+  },
+  cosmeticItems: {
+    root: () => [...userKeys.me(), ' cosmeticItems'] as const,
+    equipped: () => [...userKeys.cosmeticItems.root(), 'equipped'] as const,
+    categoryOnly: () => [...userKeys.cosmeticItems.root(), 'category'] as const,
+    category: (category: CosmeticItemOption['query']) =>
+      [...userKeys.cosmeticItems.categoryOnly(), category] as const,
+
+    paginationOnly: (page: number, limit: number) =>
+      [
+        ...userKeys.cosmeticItems.root(),
+        'pagination',
+        { page, limit },
+      ] as const,
+    paginationWithCategory: (
+      params: CosmeticItemOption['query'] & { page: number; limit: number }
+    ) =>
+      [
+        ...userKeys.cosmeticItems.category({
+          mainCategoryId: params.mainCategoryId,
+          subCategoryId: params.subCategoryId,
+        }),
+        'pagination',
+        { page: params.page, limit: params.limit },
+      ] as const,
   },
 };
 
@@ -228,6 +262,54 @@ export const useUserAttendanceQuery = {
   },
 };
 
+export const useUserCosmeticItemsQuery = {
+  getMyCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
+    useSuspenseQuery({
+      queryKey: userKeys.cosmeticItems.root(),
+      queryFn: () => userItemsApi.getItems(params),
+    }),
+  getEquippedItem: () => {
+    return useQuery({
+      queryKey: userKeys.cosmeticItems.equipped(),
+      queryFn: () => userItemsApi.getItems(),
+      enabled: false,
+      select(equippedItems) {
+        return equippedItems.contents.filter(item => item.isEquipped);
+      },
+    });
+  },
+  resetEquippedItems: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: userItemsApi.putResetEquippedItems,
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: userKeys.cosmeticItems.root(),
+        });
+      },
+    });
+  },
+  purchaseItem: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: userItemsApi.postPurchaseItem,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.all });
+      },
+    });
+  },
+  updateEquippedItems: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: userItemsApi.patchEquippedItems,
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: userKeys.cosmeticItems.root(),
+        });
+      },
+    });
+  },
+};
 export const useUserQuestQuery = {
   getDailyQuest: () => {
     const { user } = useUserStore();
