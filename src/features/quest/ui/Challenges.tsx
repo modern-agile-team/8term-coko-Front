@@ -1,42 +1,54 @@
-import QuestSection from './QuestSection';
 import * as S from './styles';
+import QuestSection from '@features/quest/ui/QuestSection';
+import ChallengeBadge from '@features/quest/ui/ChallengeBadge';
+import { useState } from 'react';
+import { objectKeys } from '@modern-kit/utils';
 import { useUserChallengesQuery } from '@/features/user/queries';
-import { ChallengeItem } from '@/features/quest/types';
-import { getImageUrl } from '@utils/getImageUrl';
+import {
+  CHALLENGE_TYPE_COLORS,
+  CHALLENGE_TYPE_LABELS,
+} from '@/features/quest/constants';
+import type { ChallengeType } from '@/features/quest/types';
 
 export default function Challenge() {
-  const { data, isLoading, error } = useUserChallengesQuery.getChallenges(
-    1,
-    1000
+  const [selectedType, setSelectedType] = useState<ChallengeType | undefined>(
+    undefined
   );
 
-  if (isLoading) return <div>로딩중...</div>;
+  const { data, isLoading, error } = useUserChallengesQuery.getChallenges({
+    page: 1,
+    limit: 1000,
+    challengeType: selectedType,
+  });
+
+  if (isLoading) return <div>로딩 중...</div>;
   if (error) return <div>에러가 발생했습니다.</div>;
   if (!data) return null;
 
-  const { contents } = data;
-
   return (
-    <QuestSection title="도전과제" isLearn={false} isQuest={true}>
+    <QuestSection title="도전과제" isLearn={false} isQuest>
+      <S.FilterContainer>
+        {objectKeys(CHALLENGE_TYPE_LABELS).map(challengeType => (
+          <S.FilterButton
+            key={challengeType}
+            $active={selectedType === challengeType}
+            onClick={() =>
+              setSelectedType(
+                selectedType === challengeType ? undefined : challengeType
+              )
+            }
+            $color={CHALLENGE_TYPE_COLORS[challengeType].border}
+          >
+            {CHALLENGE_TYPE_LABELS[challengeType]}
+          </S.FilterButton>
+        ))}
+      </S.FilterContainer>
+
       <S.ChallengeGrid>
-        {contents.map((item: ChallengeItem) => (
+        {data.contents.map(item => (
           <ChallengeBadge key={item.id} challengeItem={item} />
         ))}
       </S.ChallengeGrid>
     </QuestSection>
-  );
-}
-
-function ChallengeBadge({ challengeItem }: { challengeItem: ChallengeItem }) {
-  const { challenge, completed } = challengeItem;
-  const { badgeName, content } = challenge;
-
-  const badgeUrl = getImageUrl(`뱃지-${badgeName}.svg`);
-
-  return (
-    <S.BadgeItem $completed={completed}>
-      <img src={badgeUrl} alt={badgeName} />
-      <S.BadgeName>{content}</S.BadgeName>
-    </S.BadgeItem>
   );
 }

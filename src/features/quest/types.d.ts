@@ -57,10 +57,9 @@ export interface ChallengeItem {
 export type ChallengeType =
   | 'SECTION_CLEAR'
   | 'LEVEL_CLEAR'
-  | 'LESSON_CLEAR'
+  | 'ALL_SECTIONS_CLEAR'
   | 'ATTENDANCE_STREAK'
-  | 'RANKING_CHALLENGE'
+  | 'RANKING_ATTAIN'
   | 'FIRST_ITEM_PURCHASE'
   | 'FIRST_WRONG_ANSWER'
-  | 'FIRST_ITEM_UPGRADE'
   | 'FIRST_404_VISIT';

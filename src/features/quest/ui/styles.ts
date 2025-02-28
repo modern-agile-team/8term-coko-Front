@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 import { MEDIA } from '@style/constants';
+import { ChallengeType } from '../types';
+import { CHALLENGE_TYPE_COLORS } from '@features/quest/constants';
 
 interface QuestUrlProps {
   $isLearn?: boolean;
@@ -171,7 +173,7 @@ export const QuestsTitle = styled.h2<QuestUrlProps>`
       text-align: left;
 
       ${MEDIA.mobile} {
-        left: 110px;
+        left: 30px;
       }
     `}
 `;
@@ -227,6 +229,10 @@ export const ProgressBarIcon = styled.img<QuestUrlProps>`
       left: 20px;
       width: 66px;
       height: 69px;
+
+      ${MEDIA.mobile} {
+        display: none;
+      }
     `}
 `;
 
@@ -247,10 +253,6 @@ export const RewardIconWrapper = styled.div<QuestUrlProps>`
     css`
       width: 74px;
       height: 78px;
-
-      ${MEDIA.mobile} {
-        display: none;
-      }
     `}
 `;
 
@@ -260,10 +262,31 @@ export const RewardIcon = styled.img`
   height: 100%;
 `;
 
+export const FilterContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+`;
+
+export const FilterButton = styled.button<{ $active: boolean; $color: string }>`
+  padding: 8px 12px;
+  border: none;
+  border-radius: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: ${({ $color }) => $color};
+  opacity: ${({ $active }) => ($active ? 1 : 0.5)};
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
 export const ChallengeGrid = styled.div`
   display: grid;
   width: 683px;
-  margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 20px;
   box-shadow: 0 3px #e5e5e5;
@@ -282,19 +305,24 @@ export const ChallengeGrid = styled.div`
   }
 `;
 
-export const BadgeItem = styled.div<{ $completed?: boolean }>`
+export const BadgeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const BadgeItem = styled.div<{ $completed: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
   border: 2px solid #ffe161;
   background: #ffefaa;
   width: 133px;
   height: 141px;
-  ${({ $completed }) => `
-    opacity: ${$completed ? 1 : 0.5};
-    filter: ${$completed ? 'none' : 'grayscale(100%)'};
-  `}
+  opacity: ${({ $completed }) => ($completed ? 1 : 0.5)};
+  filter: ${({ $completed }) => ($completed ? 'none' : 'grayscale(100%)')};
 
   img {
     width: 104px;
@@ -302,8 +330,18 @@ export const BadgeItem = styled.div<{ $completed?: boolean }>`
   }
 `;
 
-export const BadgeName = styled.p`
+export const BadgeName = styled.p<{ $type: ChallengeType }>`
   margin-top: 8px;
   font-size: 14px;
   font-weight: 700;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 8px;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+  background: ${({ $type }) => CHALLENGE_TYPE_COLORS[$type].border};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

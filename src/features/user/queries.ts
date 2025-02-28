@@ -248,11 +248,15 @@ export const useUserQuestQuery = {
 };
 
 export const useUserChallengesQuery = {
-  getChallenges: (
-    page: number = 1,
-    limit: number = 5,
-    challengeType?: ChallengeType
-  ) => {
+  getChallenges: ({
+    page = 1,
+    limit = 5,
+    challengeType,
+  }: {
+    page?: number;
+    limit?: number;
+    challengeType?: ChallengeType;
+  }) => {
     const { user } = useUserStore();
 
     return useQuery({
