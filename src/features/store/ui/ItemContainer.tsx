@@ -1,64 +1,99 @@
 import * as S from './styles';
 import { useState } from 'react';
 import StoreItem from './StoreItem';
-import type { CosmeticItem } from '@features/store/types';
-
-const testItem: CosmeticItem[] = [
-  {
-    id: 1,
-    name: '해적 베레모',
-    image: '해적-베레모.svg',
-    cost: 500,
-    category: 'accessories',
-  },
-  {
-    id: 2,
-    name: '해적 의상',
-    image: '해적-의상.svg',
-    cost: 1000,
-    category: 'clothes',
-  },
-  {
-    id: 3,
-    name: '해초의 습격',
-    image: '해초의-습격.svg',
-    cost: 500,
-    category: 'profile',
-  },
-  {
-    id: 4,
-    name: '해적 베레모',
-    image: '해적-베레모.svg',
-    cost: 500,
-    category: 'color',
-  },
-];
+import { CosmeticItem } from '@/features/store/types';
+import withCosmeticItem from '@/features/store/hocs/withCosmeticItem';
+import { getImageUrl } from '@/utils/getImageUrl';
+import { useCosmeticItemStore } from '@/features/store/store';
+import { EquipButton } from '@/features/user/ui/styles';
+import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import PurchaseModal from '@/features/store/ui/PurchaseModal';
+import PageNavBar from '@/features/store/ui/PageNavBar';
 
 interface ItemContainerProps {
-  query: CosmeticItem['category'];
+  totalPage: number;
+  contents: CosmeticItem[];
 }
-export default function ItemContainer({ query }: ItemContainerProps) {
-  //스타일링을 위함 추후 수정 예정
-  const [currentPage, setCurrentPage] = useState<number>();
+
+function ItemContainer({ totalPage, contents }: ItemContainerProps) {
+  const {
+    cartListAddCosmeticItems,
+    isMyItemsVisible,
+    toggleEquippedCosmeticItems,
+  } = useCosmeticItemStore();
+
+  const [selectedItem, setSelectedItem] = useState<CosmeticItem | null>(null);
+  const [isShowModal, setIsShowModal] = useState(false);
+
+  const { mutate: updateEquippedItems } =
+    useUserCosmeticItemsQuery.updateEquippedItems();
+
+  const handleEquipPreview = (item: CosmeticItem) => {
+    if (!isMyItemsVisible) {
+      toggleEquippedCosmeticItems({
+        subCategoryId: item.subCategoryId,
+        image: item.image,
+      });
+    }
+  };
+
   return (
     <>
-      <S.ItemContainer $category={query}>
-        {testItem.map(item => (
-          <StoreItem key={item.id} {...item} />
+      {selectedItem && (
+        <PurchaseModal
+          closeModal={() => {
+            setIsShowModal(false);
+          }}
+          isShow={isShowModal}
+          selectCosmeticItem={selectedItem}
+        />
+      )}
+      <S.ItemContainer>
+        {contents.map(item => (
+          <StoreItem key={item.id} onClick={() => handleEquipPreview(item)}>
+            <StoreItem.Header name={item.name} />
+            <StoreItem.Image image={item.image} />
+            <StoreItem.Footer>
+              {isMyItemsVisible ? (
+                <EquipButton
+                  onClick={() => {
+                    updateEquippedItems({
+                      itemIds: [item.id],
+                      isEquipped: !item.isEquipped,
+                    });
+                  }}
+                >
+                  {item.isEquipped ? '해제' : '장착'}
+                </EquipButton>
+              ) : (
+                <>
+                  <label>{item.price} Point</label>
+                  <img
+                    src={getImageUrl('체크.svg')}
+                    alt="장바구니넣기"
+                    onClick={e => {
+                      e.stopPropagation();
+                      cartListAddCosmeticItems(item);
+                    }}
+                  />
+                  <img
+                    src={getImageUrl('플러스.svg')}
+                    alt="구매"
+                    onClick={e => {
+                      setSelectedItem(item);
+                      e.stopPropagation();
+                      setIsShowModal(true);
+                    }}
+                  />
+                </>
+              )}
+            </StoreItem.Footer>
+          </StoreItem>
         ))}
       </S.ItemContainer>
-      {/* 추후 하드코딩 수정 */}
-      <S.PaginationDiv>
-        {[1, 2, 3, 4, 5].map(page => (
-          <S.PaginationButton
-            key={page}
-            onClick={() => setCurrentPage(page)}
-            $isSelect={page === currentPage}
-          >
-            {page}
-          </S.PaginationButton>
-        ))}
-      </S.PaginationDiv>
+      <PageNavBar totalPage={totalPage} />
     </>
   );
 }
+
+export default withCosmeticItem(ItemContainer);

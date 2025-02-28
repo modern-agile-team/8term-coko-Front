@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { CombinationSection, TextBlockButton } from './styles';
-import compact from '@utils/compact';
 import type { Quiz } from '@features/quiz/types';
 import { useElementRect } from '@/features/intro/service/hooks';
 import {
   useClientQuizStore,
   useDragAndDropStore,
 } from '@/features/quiz/stores';
+import { compact } from '@modern-kit/utils';
 
 interface CombinationProps {
   answerChoice: Quiz['answerChoice'];

@@ -4,6 +4,7 @@ import { useSectionPaginationQuery } from '@features/learn/queries';
 import useUserStore from '@store/useUserStore';
 import { flatMap } from '@modern-kit/utils';
 import type { Section } from '@features/learn/types';
+import { SubtractInjectedProps } from '@/types';
 
 export interface WithSectionsInjectedProps {
   sections: Section[];
@@ -11,9 +12,6 @@ export interface WithSectionsInjectedProps {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
 }
-
-// 타입에서 HOC 주입 props를 제거하는 헬퍼 타입
-type SubtractInjectedProps<P, Injected> = Omit<P, keyof Injected>;
 
 // HOC: 섹션 목록 + 무한스크롤 로직을 주입
 export default function withSections<P extends WithSectionsInjectedProps>(

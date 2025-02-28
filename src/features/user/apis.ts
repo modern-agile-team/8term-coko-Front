@@ -10,6 +10,12 @@ import type {
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
+import {
+  CosmeticItem,
+  CosmeticItemOption,
+  CosmeticItemsQueryParams,
+  PaginationCosmeticItem,
+} from '@/features/store/types';
 import type {
   DailyQuestResponse,
   ChallengeApiResponse,
@@ -97,6 +103,28 @@ export const userQuestApi = {
   getDailyQuest: async (): Promise<DailyQuestResponse[]> => {
     const response = await api.get('/users/me/quests/daily');
     return response.data;
+  },
+};
+
+export const usersItemsApi = {
+  getItems: async (
+    params?: CosmeticItemsQueryParams
+  ): Promise<PaginationCosmeticItem> => {
+    const response = await api.get('/users/me/items', { params });
+    return response.data;
+  },
+
+  putResetEquippedItems: async (): Promise<void> =>
+    await api.put('/users/me/items/reset-equipment'),
+
+  postPurchaseItem: async (params: { itemIds: number[] }): Promise<void> =>
+    await api.post('/users/me/items', params),
+
+  patchEquippedItems: async (params: {
+    itemIds: number[];
+    isEquipped: boolean;
+  }): Promise<void> => {
+    return await api.patch('/users/me/items', params);
   },
 };
 

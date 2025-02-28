@@ -5,7 +5,9 @@ import { PropsWithChildren, useEffect } from 'react';
 export default function Overlay({
   children,
   overlayStyle,
-}: PropsWithChildren<{ overlayStyle: OverlayDivProps }>) {
+}: PropsWithChildren<{
+  overlayStyle: OverlayDivProps;
+}>) {
   useEffect(() => {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.offsetWidth;

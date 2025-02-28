@@ -10,12 +10,17 @@ import {
   usersOpinionsApi,
   userQuestApi,
   userChallengesApi,
+  usersItemsApi,
 } from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
+import {
+  CosmeticItemOption,
+  CosmeticItemsQueryParams,
+} from '@/features/store/types';
 import { ChallengeType } from '@features/quest/types';
 
 export const userKeys = {
@@ -46,6 +51,31 @@ export const userKeys = {
       sectionId || partId
         ? ([...userKeys.progress.root(), { sectionId, partId }] as const)
         : userKeys.progress.root(),
+  },
+  cosmeticItems: {
+    root: () => [...userKeys.me(), ' cosmeticItems'] as const,
+    equipped: () => [...userKeys.cosmeticItems.root(), 'equipped'] as const,
+    categoryOnly: () => [...userKeys.cosmeticItems.root(), 'category'] as const,
+    category: (category: CosmeticItemOption['query']) =>
+      [...userKeys.cosmeticItems.categoryOnly(), category] as const,
+
+    paginationOnly: (page: number, limit: number) =>
+      [
+        ...userKeys.cosmeticItems.root(),
+        'pagination',
+        { page, limit },
+      ] as const,
+    paginationWithCategory: (
+      params: CosmeticItemOption['query'] & { page: number; limit: number }
+    ) =>
+      [
+        ...userKeys.cosmeticItems.category({
+          mainCategoryId: params.mainCategoryId,
+          subCategoryId: params.subCategoryId,
+        }),
+        'pagination',
+        { page: params.page, limit: params.limit },
+      ] as const,
   },
 };
 
@@ -234,9 +264,59 @@ export const useUserAttendanceQuery = {
   },
 };
 
+export const useUserCosmeticItemsQuery = {
+  getMyCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
+    useSuspenseQuery({
+      queryKey: userKeys.cosmeticItems.root(),
+      queryFn: () => usersItemsApi.getItems(params),
+    }),
+  getEquippedItem: () => {
+    return useQuery({
+      queryKey: userKeys.cosmeticItems.equipped(),
+      queryFn: () => usersItemsApi.getItems(),
+      enabled: false,
+      select(equippedItems) {
+        return equippedItems.contents.filter(item => item.isEquipped);
+      },
+    });
+  },
+  resetEquippedItems: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersItemsApi.putResetEquippedItems,
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: userKeys.cosmeticItems.root(),
+        });
+      },
+    });
+  },
+  purchaseItem: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersItemsApi.postPurchaseItem,
+      onSettled: () => {
+        queryClient.invalidateQueries({ queryKey: userKeys.all });
+      },
+    });
+  },
+  updateEquippedItems: () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: usersItemsApi.patchEquippedItems,
+      onSettled: () => {
+        queryClient.invalidateQueries({
+          queryKey: userKeys.cosmeticItems.root(),
+        });
+      },
+    });
+  },
+};
+
 export const useUserQuestQuery = {
   getDailyQuest: () => {
     const { user } = useUserStore();
+
     return useQuery({
       queryKey: userKeys.daily(),
       queryFn: userQuestApi.getDailyQuest,

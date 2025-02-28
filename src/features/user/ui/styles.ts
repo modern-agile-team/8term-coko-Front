@@ -75,40 +75,63 @@ export const BadgeListItem = styled.li`
     }
   }
 `;
-//추후에 canvas 태그 등으로 변경
+
 export const MyCharacterImage = styled.img`
-  width: 171px;
-  height: 138px;
+  width: 100%;
+  height: 100%;
   position: absolute;
   z-index: 1;
 `;
 
 export const MyCharacterBox = styled.div`
   position: relative;
-  width: 170px;
+  width: 171px;
+  height: 138px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-export const ItemImageHead = styled.img`
-  position: absolute;
-  z-index: 10;
-  top: -20px;
+export const CharacterEquipContainer = styled.div`
+  position: relative;
+  display: flex;
+  width: 171px;
+  height: 138px;
 `;
 
-export const ItemImageBody = styled.img`
+export const CharacterHat = styled.img`
   position: absolute;
-  z-index: 10;
-  top: 70px;
-  right: 19px;
+  object-fit: contain;
+  z-index: 30;
+  left: 26px;
+  top: -22px;
 `;
 
-export const ItemImageAccessori = styled.img`
+export const CharacterGlasses = styled.img`
   position: absolute;
-  z-index: 20;
+  object-fit: contain;
   top: 18px;
-  right: 17px;
+  z-index: 30;
+  left: 28px;
+`;
+
+export const CharacterBeard = styled.img`
+  top: 30px;
+`;
+
+export const CharacterSetup = styled.img`
+  position: absolute;
+  object-fit: contain;
+  left: 26px;
+  z-index: 30;
+  top: 72px;
+`;
+
+export const CharacterShoes = styled.img`
+  position: absolute;
+  object-fit: contain;
+  left: 26px;
+  z-index: 20;
+  top: 120px;
 `;
 
 export const ProfileBox = styled.span<{ $isIcon: boolean }>`
@@ -116,18 +139,18 @@ export const ProfileBox = styled.span<{ $isIcon: boolean }>`
   width: 150px;
   height: 150px;
   border-radius: 50%; /* 동그란 모양 만들기 */
-  overflow: hidden; /* 동그라미 영역 밖은 잘라내기 */
-  background-color: #f0f0f0; /* 배경색 설정 */
+  overflow: hidden;
+  background-color: #f0f0f0;
   > div {
-    transform: translateX(-15px) translateY(5px) scale(1.6);
+    transform: translateX(-15px) translateY(50px) scale(1.6);
   }
   ${({ $isIcon }) =>
     $isIcon &&
     css`
-      width: 30px; /* 프로필 이미지의 가로 크기 */
-      height: 30px; /* 프로필 이미지의 세로 크기 */
+      width: 30px;
+      height: 30px;
       > div {
-        transform: translateX(-70px) scale(0.35);
+        transform: translateX(-70px) translateY(-50px) scale(0.35);
       }
     `}
 `;
@@ -142,7 +165,7 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
   > img:first-child {
     position: absolute;
     z-index: 20;
-    transform: scale(1.6);
+    transform: scale(1.3);
   }
 
   ${({ $isIcon }) =>
@@ -153,7 +176,7 @@ export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
       > img:first-child {
         position: absolute;
         z-index: 20;
-        transform: scale(0.35);
+        transform: scale(0.25);
       }
     `}
 `;
@@ -274,6 +297,47 @@ export const AttendanceCalendarWrapper = styled.div`
       height: 28px;
     }
   }
+`;
+export const SaveButton = styled.button`
+  display: flex;
+  width: 65px;
+  height: 23px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 15px;
+  border: 2px solid #f09900;
+  background: #ffb53d;
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  align-self: center;
+  margin: auto 0 10px 0;
+`;
+
+export const EquipButton = styled.button`
+  display: flex;
+  width: 100px;
+  height: 20px;
+  padding: 4px 12px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  border: 2px solid #f09900;
+  background: #ffb53d;
+  color: var(--white, #fff);
+  font-family: Maplestory;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.2px;
 `;
 
 export const OpinionsButton = styled.button`
