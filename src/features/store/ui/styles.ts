@@ -270,3 +270,16 @@ export const ConfirmButtonListWrapper = styled.div`
     background: #49ff87;
   }
 `;
+
+export const TotalPriceBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 144px;
+  height: 125px;
+  border-radius: 8px;
+  border: 2px solid #a5ecf0;
+  background: #f4f4f4;
+  color: #1fe3ed;
+  text-align: center;
+`;

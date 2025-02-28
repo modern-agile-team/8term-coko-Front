@@ -1,4 +1,3 @@
-import { CosmeticItemOption } from '@/features/store/types';
 import {
   CharacterBeard,
   CharacterGlasses,
@@ -14,7 +13,6 @@ export const CLOTHES_OPTIONS = [
 export const ACCESSORIES_OPTIONS = [
   { label: '모자', query: { mainCategoryId: 2, subCategoryId: 3 } },
   { label: '안경', query: { mainCategoryId: 2, subCategoryId: 4 } },
-  { label: '스카프', query: { mainCategoryId: 2, subCategoryId: 6 } },
 ] as const;
 
 export const BUTTON_LIST = [

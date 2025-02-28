@@ -33,6 +33,7 @@ export default function SortBar() {
     setButtonLabel(label);
     setQuery(value);
   };
+
   return (
     <FilterListContainer>
       {/* 전체 요청 */}

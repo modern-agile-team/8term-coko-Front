@@ -40,7 +40,6 @@ export default function PurchaseModal({
         onSuccess: () => {
           toast.success('아이템 구매 성공!');
           setIsSuccess(true);
-          toggleIsMyItemsVisible();
         },
         onError: error => {
           if (isAxiosError(error)) {

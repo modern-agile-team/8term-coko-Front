@@ -59,10 +59,12 @@ export default function CartList({
       <Modal isShow={isShow}>
         <CosmeticItemCheckOut>
           <CosmeticItemCheckOut.DetailBox>
-            <>
-              <StoreItem>총 금액 {totalPoint}포인트</StoreItem>
-              <p>구매할래?</p>
-            </>
+            <S.TotalPriceBox>
+              <p>
+                총 금액 {totalPoint}포인트 <br />
+                결제하시겠습니까?
+              </p>
+            </S.TotalPriceBox>
           </CosmeticItemCheckOut.DetailBox>
           <CosmeticItemCheckOut.ConfirmButtonList
             onAccept={handelAccept}
