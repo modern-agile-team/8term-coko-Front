@@ -6,6 +6,7 @@ import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useCosmeticItemStore } from '@/features/store/store';
+import { useToggle } from '@modern-kit/react';
 
 interface PurchaseModalProps {
   selectCosmeticItem: CosmeticItem;
@@ -22,9 +23,8 @@ export default function PurchaseModal({
   const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
   const { mutate: updateEquippedItems } =
     useUserCosmeticItemsQuery.updateEquippedItems();
-  const [isSuccess, setIsSuccess] = useState(false);
   const { toggleIsMyItemsVisible } = useCosmeticItemStore();
-
+  const [isSuccess, toggleIsSuccess] = useToggle(false);
   const handleAccept = () => {
     if (isSuccess) {
       updateEquippedItems({
@@ -32,6 +32,8 @@ export default function PurchaseModal({
         isEquipped: true,
       });
       closeModal();
+      toggleIsMyItemsVisible();
+      toggleIsSuccess();
       return;
     }
     purchaseItem(
@@ -39,7 +41,7 @@ export default function PurchaseModal({
       {
         onSuccess: () => {
           toast.success('아이템 구매 성공!');
-          setIsSuccess(true);
+          toggleIsSuccess();
         },
         onError: error => {
           if (isAxiosError(error)) {
@@ -66,7 +68,7 @@ export default function PurchaseModal({
               price={selectCosmeticItem.price}
             />
 
-            <p>{isSuccess ? '바로 장착할래?' : '구매할래?'}</p>
+            <p>{isSuccess ? '바로 장착하기' : `구매하기`}</p>
           </>
         </CosmeticItemCheckOut.DetailBox>
         <CosmeticItemCheckOut.ConfirmButtonList
