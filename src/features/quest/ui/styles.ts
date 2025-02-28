@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
-import { MEDIA } from '@style/constants';
+import { MEDIA, Z_INDEX } from '@style/constants';
 import { ChallengeType } from '../types';
 import { CHALLENGE_TYPE_COLORS } from '@features/quest/constants';
 
@@ -306,6 +306,7 @@ export const ChallengeGrid = styled.div`
 `;
 
 export const BadgeWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -344,4 +345,59 @@ export const BadgeName = styled.p<{ $type: ChallengeType }>`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const BadgePopover = styled.div`
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  z-index: ${Z_INDEX.popover};
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+  }
+
+  img {
+    width: 104px;
+    height: 104px;
+  }
+`;
+
+export const BadgePopoverContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+`;
+
+export const BadgeLabel = styled.div<{ $type: ChallengeType }>`
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  background: ${({ $type }) => CHALLENGE_TYPE_COLORS[$type].border};
+  padding: 4px 8px;
+  border-radius: 12px;
+  text-align: center;
+`;
+
+export const BadgeDescription = styled.p`
+  font-size: 12px;
+  color: gray;
+  text-align: left;
 `;
