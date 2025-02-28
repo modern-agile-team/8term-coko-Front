@@ -53,3 +53,14 @@ export interface ChallengeItem {
     badgeName: string;
   };
 }
+
+export type ChallengeType =
+  | 'SECTION_CLEAR'
+  | 'LEVEL_CLEAR'
+  | 'LESSON_CLEAR'
+  | 'ATTENDANCE_STREAK'
+  | 'RANKING_CHALLENGE'
+  | 'FIRST_ITEM_PURCHASE'
+  | 'FIRST_WRONG_ANSWER'
+  | 'FIRST_ITEM_UPGRADE'
+  | 'FIRST_404_VISIT';

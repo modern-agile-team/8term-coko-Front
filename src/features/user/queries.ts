@@ -16,6 +16,7 @@ import type { Section, Part } from '@features/learn/types';
 import type { RankingSort } from '@features/ranking/types';
 import useUserStore from '@/store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
+import { ChallengeType } from '@features/quest/types';
 
 export const userKeys = {
   all: ['users'] as const,
@@ -26,7 +27,8 @@ export const userKeys = {
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
   daily: () => [...userKeys.me(), 'daily'] as const,
-  challenges: () => [...userKeys.me(), 'challenges'] as const,
+  challenges: (page: number, challengeType?: ChallengeType) =>
+    [...userKeys.me(), 'challenges', page, challengeType] as const,
   attendance: {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
@@ -246,11 +248,17 @@ export const useUserQuestQuery = {
 };
 
 export const useUserChallengesQuery = {
-  getChallenges: () => {
+  getChallenges: (
+    page: number = 1,
+    limit: number = 5,
+    challengeType?: ChallengeType
+  ) => {
     const { user } = useUserStore();
+
     return useQuery({
-      queryKey: userKeys.challenges(),
-      queryFn: userChallengesApi.getChallenges,
+      queryKey: userKeys.challenges(page, challengeType),
+      queryFn: () =>
+        userChallengesApi.getChallenges({ page, limit, challengeType }),
       enabled: isLoggedIn(user),
     });
   },

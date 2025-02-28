@@ -264,6 +264,7 @@ export const ChallengeGrid = styled.div`
   display: grid;
   width: 683px;
   margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 20px;
   box-shadow: 0 3px #e5e5e5;
   background: #fff;
@@ -294,10 +295,15 @@ export const BadgeItem = styled.div<{ $completed?: boolean }>`
     opacity: ${$completed ? 1 : 0.5};
     filter: ${$completed ? 'none' : 'grayscale(100%)'};
   `}
+
+  img {
+    width: 104px;
+    height: 104px;
+  }
 `;
 
 export const BadgeName = styled.p`
   margin-top: 8px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 `;

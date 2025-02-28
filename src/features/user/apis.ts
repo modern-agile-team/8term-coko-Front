@@ -13,6 +13,7 @@ import type { RankingSort } from '@features/ranking/types';
 import type {
   DailyQuestResponse,
   ChallengeApiResponse,
+  ChallengeType,
 } from '@features/quest/types';
 
 export const usersApis = {
@@ -100,8 +101,12 @@ export const userQuestApi = {
 };
 
 export const userChallengesApi = {
-  getChallenges: async (): Promise<ChallengeApiResponse> => {
-    const response = await api.get('/users/me/challenges');
+  getChallenges: async (params: {
+    page: number;
+    limit: number;
+    challengeType?: ChallengeType;
+  }): Promise<ChallengeApiResponse> => {
+    const response = await api.get('/users/me/challenges', { params });
     return response.data;
   },
 };

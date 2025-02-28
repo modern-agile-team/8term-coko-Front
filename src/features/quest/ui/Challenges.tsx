@@ -5,7 +5,10 @@ import { ChallengeItem } from '@/features/quest/types';
 import { getImageUrl } from '@utils/getImageUrl';
 
 export default function Challenge() {
-  const { data, isLoading, error } = useUserChallengesQuery.getChallenges();
+  const { data, isLoading, error } = useUserChallengesQuery.getChallenges(
+    1,
+    1000
+  );
 
   if (isLoading) return <div>로딩중...</div>;
   if (error) return <div>에러가 발생했습니다.</div>;
