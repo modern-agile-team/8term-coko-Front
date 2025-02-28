@@ -58,9 +58,18 @@ export default function OpinionsModal({
         return;
       }
     }
+    let title = '';
+    if (selectedOption === '직접 입력') {
+      title = customTitle;
+    } else if (selectedOption === '퀴즈') {
+      title = quizInfo;
+    } else {
+      title = selectedOption;
+    }
+
     createOpinions(
       {
-        title: customTitle,
+        title,
         content,
       },
       {
@@ -70,7 +79,6 @@ export default function OpinionsModal({
         },
       }
     );
-    return;
   };
 
   return (
