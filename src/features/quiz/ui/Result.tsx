@@ -36,11 +36,22 @@ export default function Result({
   const handleOnClick = () => {
     resetUserResponseAnswer();
     closeModal();
-    if (isLoggedIn(user) && !isCompleted(partStatus)) {
-      progressUpdate({
-        quizId,
-        body: { isCorrect },
-      });
+    //1. 사용자가 로그인 되어있는지 확인
+    if (isLoggedIn(user)) {
+      //2. 사용자의 파트 상태 확인
+      if (isCompleted(partStatus)) {
+        //3. 사용자의 파트 상태가 완료 상태라면 정답 상태 true로 업데이트
+        progressUpdate({
+          quizId,
+          body: { isCorrect: true },
+        });
+      } else {
+        //4. 사용자의 파트 상태가 완료 상태가 아니라면 정답 상태에 따라 업데이트
+        progressUpdate({
+          quizId,
+          body: { isCorrect },
+        });
+      }
     }
     if (isQuizFinished) {
       onNext();
