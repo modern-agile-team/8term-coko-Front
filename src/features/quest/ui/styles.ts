@@ -397,6 +397,12 @@ export const BadgeLabel = styled.div<{ $type: ChallengeType }>`
 `;
 
 export const BadgeDescription = styled.p`
+  font-size: 14px;
+  color: #000000;
+  text-align: left;
+`;
+
+export const BadgeEarnedDate = styled.p`
   font-size: 12px;
   color: gray;
   text-align: left;

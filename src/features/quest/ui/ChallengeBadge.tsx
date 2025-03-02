@@ -1,5 +1,6 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
+import formatDate from '@utils/formatDate';
 import { useHover } from '@modern-kit/react';
 import { CHALLENGE_TYPE_LABELS } from '@features/quest/constants';
 import type { ChallengeItem, ChallengeType } from '@features/quest/types';
@@ -9,7 +10,7 @@ export default function ChallengeBadge({
 }: {
   challengeItem: ChallengeItem;
 }) {
-  const { challenge, completed } = challengeItem;
+  const { challenge, completed, completedDate } = challengeItem;
   const { badgeName, content } = challenge;
   const challengeType = challenge.challengeType as ChallengeType;
 
@@ -32,6 +33,7 @@ export default function ChallengeBadge({
               {CHALLENGE_TYPE_LABELS[challengeType]}
             </S.BadgeLabel>
             <S.BadgeDescription>{content}</S.BadgeDescription>
+            <S.BadgeEarnedDate>{formatDate(completedDate)}</S.BadgeEarnedDate>
           </S.BadgePopoverContent>
         </S.BadgePopover>
       )}
