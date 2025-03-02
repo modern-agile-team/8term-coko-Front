@@ -53,7 +53,7 @@ export const userKeys = {
         : userKeys.progress.root(),
   },
   cosmeticItems: {
-    root: () => [...userKeys.me(), ' cosmeticItems'] as const,
+    root: () => [...userKeys.me(), 'cosmeticItems'] as const,
     equipped: () => [...userKeys.cosmeticItems.root(), 'equipped'] as const,
     categoryOnly: () => [...userKeys.cosmeticItems.root(), 'category'] as const,
     category: (category: CosmeticItemOption['query']) =>
@@ -220,9 +220,11 @@ export const useUserProgressQuery = {
     sectionId?: Section['id'];
     partId?: Part['id'];
   }) => {
+    const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.progress.detail(params?.sectionId, params?.partId),
       queryFn: () => usersApis.getProgress(params),
+      enabled: isLoggedIn(user),
     });
   },
   updateQuizProgress: () => {

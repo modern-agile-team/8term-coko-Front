@@ -34,11 +34,37 @@ export default function SSEProvider({ children }: PropsWithChildren) {
       try {
         const parsedData: SSEResponse = JSON.parse(event.data);
 
-        if (parsedData.type === 'hp_refilled') {
-          queryClient.invalidateQueries({ queryKey: userKeys.hp() });
-          toast.success(parsedData.message, {
-            icon: <HeaderIcon src={getImageUrl('과일바구니.svg')} />,
-          });
+        switch (parsedData.type) {
+          case 'hp_refilled':
+            queryClient.invalidateQueries({ queryKey: userKeys.hp() });
+            toast.success(parsedData.message, {
+              icon: <HeaderIcon src={getImageUrl('과일바구니.svg')} />,
+            });
+            break;
+          case 'partStatus.completed':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
+          case 'user.levelUp':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
+          case 'attendance.streak':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
+          case 'levelRanking.attain':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
         }
       } catch (err) {
         console.error('SSE 데이터 파싱 실패:', err);
@@ -47,7 +73,7 @@ export default function SSEProvider({ children }: PropsWithChildren) {
     };
 
     newEventSource.onerror = () => {
-      console.error(`서버 연결 실패`);
+      console.error('서버 연결 실패');
       toast.error('서버 연결에 문제가 발생했습니다.');
 
       newEventSource.close();
@@ -74,7 +100,6 @@ export default function SSEProvider({ children }: PropsWithChildren) {
     if (isLoggedIn(user)) {
       connectSSE();
     }
-
     return () => {
       console.log('SSE 연결 해제');
       eventSourceRef.current?.close();

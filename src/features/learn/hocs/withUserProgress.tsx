@@ -32,12 +32,10 @@ export default function withUserProgress<P extends object>(
     >(null);
 
     // 로그인된 경우에만 user(자신)와 progress의 관계 데이터를 가져오기
-    const { data: progressData } = isLoggedIn(user)
-      ? useUserProgressQuery.getProgress({
-          partId: selectedPartId ?? undefined,
-          sectionId: selectedSectionId ?? undefined,
-        })
-      : { data: null };
+    const { data: progressData } = useUserProgressQuery.getProgress({
+      partId: selectedPartId ?? undefined,
+      sectionId: selectedSectionId ?? undefined,
+    });
 
     // 선택된 partId/sectionId를 변경하는 함수
     const onFetchProgress = useCallback(
