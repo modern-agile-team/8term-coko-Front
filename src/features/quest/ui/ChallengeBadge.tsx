@@ -11,8 +11,7 @@ export default function ChallengeBadge({
   challengeItem: ChallengeItem;
 }) {
   const { challenge, completed, completedDate } = challengeItem;
-  const { badgeName, content } = challenge;
-  const challengeType = challenge.challengeType as ChallengeType;
+  const { badgeName, content, challengeType } = challenge;
 
   const badgeUrl = getImageUrl(`뱃지-${badgeName}.svg`);
   const { ref, isHovered } = useHover<HTMLDivElement>();

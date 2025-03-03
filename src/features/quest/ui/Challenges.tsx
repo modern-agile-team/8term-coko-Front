@@ -27,6 +27,12 @@ export default function Challenge() {
   if (error) return <div>에러가 발생했습니다.</div>;
   if (!data) return null;
 
+  const toggleSelectedType = (challengeType: ChallengeType) => {
+    setSelectedType(prev =>
+      prev === challengeType ? undefined : challengeType
+    );
+  };
+
   return (
     <QuestSection title="도전과제" isLearn={false} isQuest>
       <S.FilterContainer>
@@ -34,11 +40,7 @@ export default function Challenge() {
           <S.FilterButton
             key={challengeType}
             $active={selectedType === challengeType}
-            onClick={() =>
-              setSelectedType(
-                selectedType === challengeType ? undefined : challengeType
-              )
-            }
+            onClick={() => toggleSelectedType(challengeType)}
             $color={CHALLENGE_TYPE_COLORS[challengeType].border}
           >
             {CHALLENGE_TYPE_LABELS[challengeType]}

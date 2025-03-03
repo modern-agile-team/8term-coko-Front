@@ -48,7 +48,7 @@ export interface ChallengeItem {
     content: string;
     point: number;
     experience: number;
-    challengeType: string;
+    challengeType: ChallengeType;
     condition: number;
     badgeName: string;
   };

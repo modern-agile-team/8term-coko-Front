@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
-import { MEDIA, Z_INDEX } from '@style/constants';
+import { MEDIA, Z_INDEX, ANIMATIONS } from '@style/constants';
 import { ChallengeType } from '../types';
 import { CHALLENGE_TYPE_COLORS } from '@features/quest/constants';
 
@@ -361,6 +361,7 @@ export const BadgePopover = styled.div`
   gap: 12px;
   white-space: nowrap;
   z-index: ${Z_INDEX.popover};
+  animation: ${ANIMATIONS.fadeInSlideUp} 0.5s forwards;
 
   &:before {
     content: '';
