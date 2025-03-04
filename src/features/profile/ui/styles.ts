@@ -204,8 +204,10 @@ export const LevelList = styled.ol`
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  top: 20px;
+  height: 600px;
+  align-items: end;
+  gap: 81px;
+  top: 10px;
   left: 120px;
   list-style: none;
   color: #ffefaa;

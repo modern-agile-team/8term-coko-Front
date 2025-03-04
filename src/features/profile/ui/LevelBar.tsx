@@ -1,4 +1,3 @@
-import React from 'react';
 import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 import ProgressBar from '@features/progress/ui/ProgressBar';
@@ -23,6 +22,7 @@ export default function LevelBar({
         />
         <S.LevelLabel>Level.{userLevel}</S.LevelLabel>
       </div>
+
       <S.LevelList>
         {steps.map(stepValue => (
           <li key={stepValue}>

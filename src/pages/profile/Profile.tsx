@@ -11,13 +11,11 @@ export default function Profile() {
   const userLevel = user?.level || 1;
   const cycleLength = 60;
 
-  const { steps, progress, positionInCycle, cycle } = useCycleProgress({
+  const { steps, progress } = useCycleProgress({
     value: userLevel,
     cycleLength,
     step: 10,
   });
-
-  console.log(steps, progress, positionInCycle, cycle);
 
   return (
     <>
