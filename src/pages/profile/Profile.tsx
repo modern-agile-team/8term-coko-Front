@@ -5,10 +5,15 @@ import useUserStore from '@store/useUserStore';
 import LevelBar from '@features/profile/ui/LevelBar';
 import ProfileDetails from '@features/profile/ui/ProfileDetails';
 import useCycleProgress from '@hooks/useCycleProgress';
+import { useUserProgressQuery } from '@features/user/queries';
 
 export default function Profile() {
   const { user } = useUserStore();
   const userLevel = user?.level || 1;
+  const userName = user?.name || '사용자 이름 (로그인 필요)';
+  const userJoinDate = user?.createdAt || '2025.01.01.';
+  const userTotalAttendance = user?.totalAttendance || 1;
+
   const cycleLength = 60;
 
   const { steps, progress } = useCycleProgress({
@@ -16,6 +21,16 @@ export default function Profile() {
     cycleLength,
     step: 10,
   });
+
+  const { data: progressData } = useUserProgressQuery.getProgress();
+
+  const currentProgress = progressData?.correctUserProgressCount || 0;
+  const maxProgress = progressData?.totalQuizCount || 1;
+  const solvedCount = progressData?.totalUserProgressCount || 0;
+  const incorrectCount = progressData?.inCorrectUserProgressCount || 0;
+  const unsolvedCount =
+    (progressData?.totalQuizCount || 0) -
+    (progressData?.totalUserProgressCount || 0);
 
   return (
     <>
@@ -31,7 +46,16 @@ export default function Profile() {
       </globalS.Wrapper>
 
       <globalS.Layout>
-        <ProfileDetails />
+        <ProfileDetails
+          userName={userName}
+          userJoinDate={userJoinDate}
+          userTotalAttendance={userTotalAttendance}
+          currentProgress={currentProgress}
+          maxProgress={maxProgress}
+          solvedCount={solvedCount}
+          incorrectCount={incorrectCount}
+          unsolvedCount={unsolvedCount}
+        />
       </globalS.Layout>
     </>
   );

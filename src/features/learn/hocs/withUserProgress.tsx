@@ -1,7 +1,5 @@
 import { FC, useState, useCallback } from 'react';
 import { useUserProgressQuery } from '@features/user/queries';
-import { isLoggedIn } from '@features/user/service/authUtils';
-import useUserStore from '@store/useUserStore';
 import type { Part, Section } from '@features/learn/types';
 
 interface WithUserProgressInjectedProps {
@@ -21,8 +19,6 @@ export default function withUserProgress<P extends object>(
   WrappedComponent: FC<P & WithUserProgressInjectedProps>
 ) {
   const ComponentWithUserProgress: FC<P> = props => {
-    const { user } = useUserStore();
-
     // 어떤 Part/Section을 선택했는지 HOC 내부에서 state로 관리
     const [selectedPartId, setSelectedPartId] = useState<Part['id'] | null>(
       null
