@@ -1,3 +1,4 @@
+import React, { useMemo } from 'react';
 import MenuBar from '@common/layout/MenuBar';
 import * as globalS from '@style/styles';
 import Header from '@common/layout/Header';
@@ -6,10 +7,38 @@ import ProfileImage from '@features/user/ui/ProfileImage';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import { getImageUrl } from '@/utils/getImageUrl';
 import BadgeContainer from '@features/user/ui/BadgeContainer';
-import React from 'react';
+import useUserStore from '@store/useUserStore';
 
-const levelList = [60, 50, 40, 30, 20, 10];
+/**
+ * 커스텀 훅: userLevel에 따른 사이클, 사이클 내 레벨, 진행도, 레벨 라벨 배열을 계산
+ */
+function useLevelInfo(userLevel: number) {
+  return useMemo(() => {
+    // 사이클 계산: 1~60: cycle 1, 61~120: cycle 2, ...
+    const cycle = Math.floor((userLevel - 1) / 60) + 1;
+    const start = (cycle - 1) * 60 + 1; // 구간 시작 레벨 (inclusive)
+    const end = cycle * 60; // 구간 끝 레벨 (inclusive)
+
+    // 10레벨 간격으로 (end → start) 내려가며 배열 생성
+    const levelLabels: number[] = [];
+    for (let lv = end; lv >= start; lv -= 10) {
+      levelLabels.push(lv);
+    }
+
+    // 사이클 내 레벨 (예: userLevel=70 → 70이 속한 사이클에서의 레벨은 10)
+    const cycleLevel = ((userLevel - 1) % 60) + 1;
+    // 진행도 (%)
+    const cycleProgress = (cycleLevel / 60) * 100;
+
+    return { cycle, levelLabels, cycleLevel, cycleProgress };
+  }, [userLevel]);
+}
+
 export default function Profile() {
+  const { user } = useUserStore();
+  const userLevel = user?.level || 1;
+  const { levelLabels, cycleProgress } = useLevelInfo(userLevel);
+
   return (
     <>
       <globalS.Wrapper>
@@ -22,23 +51,23 @@ export default function Profile() {
           <S.LevelDiv>
             <div>
               <S.MyCharacterImage src={getImageUrl('테스트캐릭터.svg')} />
-              <S.LevelLabel>Level.1</S.LevelLabel>
+              <S.LevelLabel>Level.{userLevel}</S.LevelLabel>
             </div>
             <S.LevelList>
-              {levelList.map(level => (
+              {levelLabels.map(level => (
                 <React.Fragment key={level}>
                   <li>
-                    <span>Level.{level} </span> -
+                    <span>Level.{level}</span> -
                   </li>
                   <li>&mdash;</li>
                 </React.Fragment>
               ))}
             </S.LevelList>
             <ProgressBar
-              $progress={40}
+              $progress={cycleProgress}
               $maxProgress={100}
               $height="20px"
-              $innerBgColor="#FFD100;"
+              $innerBgColor="#FFD100"
               $boxBgColor="#FFEFAA"
               style={{
                 width: '600px',
@@ -51,9 +80,9 @@ export default function Profile() {
           </S.LevelDiv>
         </globalS.RightSection>
       </globalS.Wrapper>
+
       <globalS.Layout>
-        {/* 모바일에서는 아래가 전체 폭으로 세로 배치되어
-            두 번째 이미지처럼 보입니다. */}
+        {/* 모바일에서는 아래가 전체 폭으로 세로 배치 */}
         <S.ProfileSection>
           <div>
             <div style={{ marginTop: '50px' }}>
@@ -66,9 +95,10 @@ export default function Profile() {
             <p>
               코코에 접속한 지 벌써 <span>20</span>일이 됐어요 !
             </p>
-            <img src={getImageUrl('출석일수.svg')} />
+            <img src={getImageUrl('출석일수.svg')} alt="출석일수" />
             <div>
               <p>진행도</p>
+              {/* 이 부분은 문제 풀이 진행도라면 별도 로직으로 계산 */}
               <ProgressBar
                 $progress={40}
                 $maxProgress={100}

@@ -3,7 +3,7 @@ import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
 import { useHover } from '@modern-kit/react';
 import { CHALLENGE_TYPE_LABELS } from '@features/quest/constants';
-import type { ChallengeItem, ChallengeType } from '@features/quest/types';
+import type { ChallengeItem } from '@features/quest/types';
 
 export default function ChallengeBadge({
   challengeItem,
