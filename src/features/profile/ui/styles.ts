@@ -27,22 +27,6 @@ export const ProfileSection = styled.section`
   }
 `;
 
-export const LevelDiv = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: flex-end;
-  width: 249px;
-  height: 629px;
-  background-color: #ffff;
-  border-radius: 20px;
-  box-shadow: 0 3px #e5e5e5;
-  margin: 68px 28px 0 0;
-
-  ${MEDIA.mobile} {
-    display: none;
-  }
-`;
-
 export const MyProgressDiv = styled.div`
   position: relative;
   display: flex;
@@ -137,6 +121,7 @@ export const MyQuizInfoDiv = styled.div`
     width: 100%;
   }
 `;
+
 export const UserNameLabel = styled.label`
   text-align: center;
   border-radius: 15px;
@@ -199,6 +184,22 @@ export const BadgeLabel = styled.label`
   }
 `;
 
+export const LevelDiv = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  width: 249px;
+  height: 629px;
+  background-color: #ffff;
+  border-radius: 20px;
+  box-shadow: 0 3px #e5e5e5;
+  margin: 68px 28px 0 0;
+
+  ${MEDIA.mobile} {
+    display: none;
+  }
+`;
+
 export const LevelList = styled.ol`
   position: absolute;
   display: flex;
@@ -208,7 +209,8 @@ export const LevelList = styled.ol`
   left: 120px;
   list-style: none;
   color: #ffefaa;
-  :nth-child(even) {
+
+  li:nth-child(even) {
     text-align: right;
     font-weight: 700;
   }
