@@ -26,6 +26,14 @@ export const BadgeWrapper = styled.div`
     }
   }
 `;
+
+export const PaginationButton = styled.button<{ $isHidden: boolean }>`
+  background: none;
+  border: none;
+  visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
+  pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
+`;
+
 export const PaginationIcon = styled.img<{ $rotate?: string }>`
   width: 9px;
   height: 20px;
@@ -36,10 +44,7 @@ export const PaginationIcon = styled.img<{ $rotate?: string }>`
     height: 20px;
   }
 `;
-export const PaginationButton = styled.button`
-  background: none;
-  border: none;
-`;
+
 export const BadgeListItem = styled.li`
   display: flex;
   flex-direction: column;
@@ -138,7 +143,7 @@ export const ProfileBox = styled.span<{ $isIcon: boolean }>`
   position: absolute;
   width: 150px;
   height: 150px;
-  border-radius: 50%; /* 동그란 모양 만들기 */
+  border-radius: 50%;
   overflow: hidden;
   background-color: #f0f0f0;
   > div {

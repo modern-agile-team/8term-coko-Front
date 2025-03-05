@@ -3,6 +3,7 @@ import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import LevelBar from '@features/profile/ui/LevelBar';
 import ProfileDetails from '@features/profile/ui/ProfileDetails';
+import { useState } from 'react';
 import useUserStore from '@store/useUserStore';
 import useCycleProgress from '@hooks/useCycleProgress';
 import {
@@ -18,7 +19,6 @@ export default function Profile() {
   const userTotalAttendance = user?.totalAttendance || 1;
 
   const cycleLength = 60;
-
   const { steps, progress } = useCycleProgress({
     value: userLevel,
     cycleLength,
@@ -26,7 +26,6 @@ export default function Profile() {
   });
 
   const { data: progressData } = useUserProgressQuery.getProgress();
-
   const currentProgress = progressData?.correctUserProgressCount || 0;
   const maxProgress = progressData?.totalQuizCount || 1;
   const solvedCount = progressData?.totalUserProgressCount || 0;
@@ -35,13 +34,17 @@ export default function Profile() {
     (progressData?.totalQuizCount || 0) -
     (progressData?.totalUserProgressCount || 0);
 
+  const [page, setPage] = useState(1);
+
   const { data: challengesData } = useUserChallengesQuery.getChallenges({
-    page: 1,
+    page,
     limit: 5,
     completed: true,
   });
 
   const completedChallenges = challengesData?.contents || [];
+  const totalPage = challengesData?.totalPage ?? 1;
+  const currentPage = challengesData?.currentPage ?? page;
 
   return (
     <>
@@ -67,6 +70,9 @@ export default function Profile() {
           incorrectCount={incorrectCount}
           unsolvedCount={unsolvedCount}
           completedChallenges={completedChallenges}
+          page={currentPage}
+          setPage={setPage}
+          totalPage={totalPage}
         />
       </globalS.Layout>
     </>

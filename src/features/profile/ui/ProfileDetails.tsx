@@ -5,6 +5,7 @@ import formatDate from '@utils/formatDate';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import BadgeContainer from '@features/user/ui/BadgeContainer';
 import type { ChallengeItem } from '@features/quest/types';
+import { Dispatch, SetStateAction } from 'react';
 
 interface ProfileDetailsProps {
   userName: string;
@@ -16,6 +17,9 @@ interface ProfileDetailsProps {
   incorrectCount: number;
   unsolvedCount: number;
   completedChallenges: ChallengeItem[];
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  totalPage: number;
 }
 
 export default function ProfileDetails({
@@ -28,6 +32,9 @@ export default function ProfileDetails({
   incorrectCount,
   unsolvedCount,
   completedChallenges,
+  page,
+  setPage,
+  totalPage,
 }: ProfileDetailsProps) {
   return (
     <>
@@ -69,9 +76,15 @@ export default function ProfileDetails({
           </S.MyQuizInfoDiv>
         </S.MyProgressDiv>
       </S.ProfileSection>
+
       <S.BadgeSection>
         <S.BadgeLabel>나의 뱃지</S.BadgeLabel>
-        <BadgeContainer completedChallenges={completedChallenges} />
+        <BadgeContainer
+          completedChallenges={completedChallenges}
+          page={page}
+          setPage={setPage}
+          totalPage={totalPage}
+        />
       </S.BadgeSection>
     </>
   );
