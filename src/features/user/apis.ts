@@ -1,4 +1,6 @@
 import api from '@/axios/instance';
+import { flatMap } from '@modern-kit/utils';
+import { EVENT_CHALLENGE_TYPES } from '@features/quest/constants';
 import type {
   ExperiencedUser,
   UserProgress,
@@ -11,8 +13,6 @@ import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
 import {
-  CosmeticItem,
-  CosmeticItemOption,
   CosmeticItemsQueryParams,
   PaginationCosmeticItem,
 } from '@/features/store/types';
@@ -135,6 +135,26 @@ export const userChallengesApi = {
     challengeType?: ChallengeType;
     completed?: boolean;
   }): Promise<ChallengeApiResponse> => {
+    if (params.challengeType === 'EVENT') {
+      const responses = await Promise.all(
+        EVENT_CHALLENGE_TYPES.map(type =>
+          api.get('/users/me/challenges', {
+            params: { ...params, challengeType: type },
+          })
+        )
+      );
+
+      const combinedContents = flatMap(responses, res => res.data.contents);
+
+      return {
+        totalCount: combinedContents.length,
+        totalPage: 1,
+        currentPage: 1,
+        limit: combinedContents.length,
+        contents: combinedContents,
+      };
+    }
+
     const response = await api.get('/users/me/challenges', { params });
     return response.data;
   },

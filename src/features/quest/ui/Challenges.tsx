@@ -7,8 +7,9 @@ import { useUserChallengesQuery } from '@/features/user/queries';
 import {
   CHALLENGE_TYPE_COLORS,
   CHALLENGE_TYPE_LABELS,
+  EVENT_CHALLENGE_TYPES,
 } from '@/features/quest/constants';
-import type { ChallengeType } from '@/features/quest/types';
+import type { ChallengeType, EventChallengeType } from '@/features/quest/types';
 
 export default function Challenge() {
   const [selectedType, setSelectedType] = useState<ChallengeType | undefined>(
@@ -36,16 +37,23 @@ export default function Challenge() {
   return (
     <QuestSection title="도전과제" isLearn={false} isQuest>
       <S.FilterContainer>
-        {objectKeys(CHALLENGE_TYPE_LABELS).map(challengeType => (
-          <S.FilterButton
-            key={challengeType}
-            $active={selectedType === challengeType}
-            onClick={() => toggleSelectedType(challengeType)}
-            $color={CHALLENGE_TYPE_COLORS[challengeType].border}
-          >
-            {CHALLENGE_TYPE_LABELS[challengeType]}
-          </S.FilterButton>
-        ))}
+        {objectKeys(CHALLENGE_TYPE_LABELS)
+          .filter(
+            challengeType =>
+              !EVENT_CHALLENGE_TYPES.includes(
+                challengeType as EventChallengeType
+              )
+          )
+          .map(challengeType => (
+            <S.FilterButton
+              key={challengeType}
+              $active={selectedType === challengeType}
+              onClick={() => toggleSelectedType(challengeType)}
+              $color={CHALLENGE_TYPE_COLORS[challengeType].border}
+            >
+              {CHALLENGE_TYPE_LABELS[challengeType]}
+            </S.FilterButton>
+          ))}
       </S.FilterContainer>
 
       <S.ChallengeGrid>
