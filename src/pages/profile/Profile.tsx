@@ -38,7 +38,7 @@ export default function Profile() {
 
   const { data: challengesData } = useUserChallengesQuery.getChallenges({
     page,
-    limit: 5,
+    limit: 4,
     completed: true,
   });
 

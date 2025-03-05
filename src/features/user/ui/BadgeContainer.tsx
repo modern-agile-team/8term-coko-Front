@@ -2,6 +2,7 @@ import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 import type { ChallengeItem } from '@/features/quest/types';
 import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface BadgeContainerProps {
   completedChallenges: ChallengeItem[];
@@ -16,6 +17,8 @@ export default function BadgeContainer({
   setPage,
   totalPage,
 }: BadgeContainerProps) {
+  const navigate = useNavigate();
+
   const handlePrevPage = () => {
     if (page > 1) {
       setPage(page - 1);
@@ -38,19 +41,31 @@ export default function BadgeContainer({
         <S.PaginationIcon src={getImageUrl('뱃지-다음버튼.svg')} />
       </S.PaginationButton>
 
-      <ul>
-        {completedChallenges.map(item => (
-          <S.BadgeListItem key={item.id}>
-            <div>
-              <img
-                src={getImageUrl(`뱃지-${item.challenge.badgeName}.svg`)}
-                alt={item.challenge.content}
-              />
-            </div>
-            <h5>{item.challenge.content}</h5>
-          </S.BadgeListItem>
-        ))}
-      </ul>
+      {completedChallenges.length > 0 ? (
+        <ul>
+          {completedChallenges.map(item => (
+            <S.BadgeListItem key={item.id}>
+              <div>
+                <img
+                  src={getImageUrl(`뱃지-${item.challenge.badgeName}.svg`)}
+                  alt={item.challenge.content}
+                />
+              </div>
+              <h5>{item.challenge.content}</h5>
+            </S.BadgeListItem>
+          ))}
+        </ul>
+      ) : (
+        <S.EmptyBadgeContainer>
+          <p>아직 획득한 뱃지가 없습니다.</p>
+          <S.BadgeGuideText>
+            도전과제를 완료하고 다양한 뱃지를 모아보세요!
+          </S.BadgeGuideText>
+          <S.GoToQuestButton onClick={() => navigate('/quest')}>
+            도전과제 보러가기
+          </S.GoToQuestButton>
+        </S.EmptyBadgeContainer>
+      )}
 
       <S.PaginationButton
         onClick={handleNextPage}
