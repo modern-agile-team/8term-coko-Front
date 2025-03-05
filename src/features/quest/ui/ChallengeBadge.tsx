@@ -2,8 +2,15 @@ import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
 import { useHover } from '@modern-kit/react';
-import { CHALLENGE_TYPE_LABELS } from '@features/quest/constants';
-import type { ChallengeItem } from '@features/quest/types';
+import {
+  CHALLENGE_TYPE_LABELS,
+  EVENT_CHALLENGE_GROUP,
+} from '@features/quest/constants';
+import type {
+  ChallengeItem,
+  BaseChallengeType,
+  EventChallengeType,
+} from '@features/quest/types';
 
 export default function ChallengeBadge({
   challengeItem,
@@ -16,20 +23,25 @@ export default function ChallengeBadge({
   const badgeUrl = getImageUrl(`뱃지-${badgeName}.svg`);
   const { ref, isHovered } = useHover<HTMLDivElement>();
 
+  const displayChallengeType: BaseChallengeType =
+    EVENT_CHALLENGE_GROUP.includes(challengeType as EventChallengeType)
+      ? 'EVENT'
+      : (challengeType as BaseChallengeType);
+
   return (
     <S.BadgeWrapper ref={ref}>
       <S.BadgeItem $completed={completed}>
         <img src={badgeUrl} alt={badgeName} />
       </S.BadgeItem>
 
-      <S.BadgeName $type={challengeType}>{content}</S.BadgeName>
+      <S.BadgeName $type={displayChallengeType}>{content}</S.BadgeName>
 
       {isHovered && (
         <S.BadgePopover>
           <img src={badgeUrl} alt={badgeName} />
           <S.BadgePopoverContent>
-            <S.BadgeLabel $type={challengeType}>
-              {CHALLENGE_TYPE_LABELS[challengeType]}
+            <S.BadgeLabel $type={displayChallengeType}>
+              {CHALLENGE_TYPE_LABELS[displayChallengeType]}
             </S.BadgeLabel>
             <S.BadgeDescription>{content}</S.BadgeDescription>
             <S.BadgeEarnedDate>{formatDate(completedDate)}</S.BadgeEarnedDate>

@@ -36,13 +36,13 @@ export interface ChallengeItem {
     content: string;
     point: number;
     experience: number;
-    challengeType: ChallengeType;
+    challengeType: BaseChallengeType;
     condition: number;
     badgeName: string;
   };
 }
 
-export type ChallengeType =
+export type BaseChallengeType =
   | 'SECTION_CLEAR'
   | 'LEVEL_CLEAR'
   | 'ATTENDANCE_STREAK'
@@ -50,14 +50,12 @@ export type ChallengeType =
   | 'POINT_RANKING_ATTAIN'
   | 'ATTENDANCE_RANKING_ATTAIN'
   | 'CORRECT_ANSWER_RANKING_ATTAIN'
-  | 'EVENT'
-  | 'ALL_SECTIONS_CLEAR'
-  | 'FIRST_ITEM_PURCHASE'
-  | 'FIRST_WRONG_ANSWER'
-  | 'FIRST_404_VISIT';
+  | 'EVENT';
 
 export type EventChallengeType =
   | 'ALL_SECTIONS_CLEAR'
   | 'FIRST_ITEM_PURCHASE'
   | 'FIRST_WRONG_ANSWER'
   | 'FIRST_404_VISIT';
+
+export type ChallengeType = BaseChallengeType | EventChallengeType;

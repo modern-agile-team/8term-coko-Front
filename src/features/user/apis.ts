@@ -1,6 +1,6 @@
 import api from '@/axios/instance';
 import { flatMap } from '@modern-kit/utils';
-import { EVENT_CHALLENGE_TYPES } from '@features/quest/constants';
+import { EVENT_CHALLENGE_GROUP } from '@features/quest/constants';
 import type {
   ExperiencedUser,
   UserProgress,
@@ -137,7 +137,7 @@ export const userChallengesApi = {
   }): Promise<ChallengeApiResponse> => {
     if (params.challengeType === 'EVENT') {
       const responses = await Promise.all(
-        EVENT_CHALLENGE_TYPES.map(type =>
+        EVENT_CHALLENGE_GROUP.map(type =>
           api.get('/users/me/challenges', {
             params: { ...params, challengeType: type },
           })

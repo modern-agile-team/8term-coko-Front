@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 import { MEDIA, Z_INDEX, ANIMATIONS } from '@style/constants';
-import { ChallengeType } from '../types';
 import { CHALLENGE_TYPE_COLORS } from '@features/quest/constants';
+import type { ChallengeType, BaseChallengeType } from '@features/quest/types';
 
 interface QuestUrlProps {
   $isLearn?: boolean;
@@ -331,7 +331,7 @@ export const BadgeItem = styled.div<{ $completed: boolean }>`
   }
 `;
 
-export const BadgeName = styled.p<{ $type: ChallengeType }>`
+export const BadgeName = styled.p<{ $type: BaseChallengeType }>`
   margin-top: 8px;
   font-size: 14px;
   font-weight: 700;
@@ -387,7 +387,7 @@ export const BadgePopoverContent = styled.div`
   gap: 8px;
 `;
 
-export const BadgeLabel = styled.div<{ $type: ChallengeType }>`
+export const BadgeLabel = styled.div<{ $type: BaseChallengeType }>`
   font-size: 12px;
   font-weight: 700;
   color: white;

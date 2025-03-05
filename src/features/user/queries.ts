@@ -21,7 +21,7 @@ import {
   CosmeticItemOption,
   CosmeticItemsQueryParams,
 } from '@/features/store/types';
-import { ChallengeType } from '@features/quest/types';
+import { BaseChallengeType } from '@features/quest/types';
 
 export const userKeys = {
   all: ['users'] as const,
@@ -34,7 +34,7 @@ export const userKeys = {
   daily: () => [...userKeys.me(), 'daily'] as const,
   challenges: (
     page: number,
-    challengeType?: ChallengeType,
+    challengeType?: BaseChallengeType,
     completed?: boolean
   ) =>
     [...userKeys.me(), 'challenges', page, challengeType, completed] as const,
@@ -342,7 +342,7 @@ export const useUserChallengesQuery = {
   }: {
     page?: number;
     limit?: number;
-    challengeType?: ChallengeType;
+    challengeType?: BaseChallengeType;
     completed?: boolean;
   }) => {
     const { user } = useUserStore();
