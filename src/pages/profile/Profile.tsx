@@ -1,11 +1,14 @@
 import * as globalS from '@style/styles';
 import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
-import useUserStore from '@store/useUserStore';
 import LevelBar from '@features/profile/ui/LevelBar';
 import ProfileDetails from '@features/profile/ui/ProfileDetails';
+import useUserStore from '@store/useUserStore';
 import useCycleProgress from '@hooks/useCycleProgress';
-import { useUserProgressQuery } from '@features/user/queries';
+import {
+  useUserProgressQuery,
+  useUserChallengesQuery,
+} from '@features/user/queries';
 
 export default function Profile() {
   const { user } = useUserStore();
@@ -32,6 +35,14 @@ export default function Profile() {
     (progressData?.totalQuizCount || 0) -
     (progressData?.totalUserProgressCount || 0);
 
+  const { data: challengesData } = useUserChallengesQuery.getChallenges({
+    page: 1,
+    limit: 5,
+    completed: true,
+  });
+
+  const completedChallenges = challengesData?.contents || [];
+
   return (
     <>
       <globalS.Wrapper>
@@ -55,6 +66,7 @@ export default function Profile() {
           solvedCount={solvedCount}
           incorrectCount={incorrectCount}
           unsolvedCount={unsolvedCount}
+          completedChallenges={completedChallenges}
         />
       </globalS.Layout>
     </>

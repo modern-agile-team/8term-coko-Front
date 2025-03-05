@@ -4,6 +4,7 @@ import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import BadgeContainer from '@features/user/ui/BadgeContainer';
+import type { ChallengeItem } from '@features/quest/types';
 
 interface ProfileDetailsProps {
   userName: string;
@@ -14,6 +15,7 @@ interface ProfileDetailsProps {
   solvedCount: number;
   incorrectCount: number;
   unsolvedCount: number;
+  completedChallenges: ChallengeItem[];
 }
 
 export default function ProfileDetails({
@@ -25,6 +27,7 @@ export default function ProfileDetails({
   solvedCount,
   incorrectCount,
   unsolvedCount,
+  completedChallenges,
 }: ProfileDetailsProps) {
   return (
     <>
@@ -68,7 +71,7 @@ export default function ProfileDetails({
       </S.ProfileSection>
       <S.BadgeSection>
         <S.BadgeLabel>나의 뱃지</S.BadgeLabel>
-        <BadgeContainer />
+        <BadgeContainer completedChallenges={completedChallenges} />
       </S.BadgeSection>
     </>
   );

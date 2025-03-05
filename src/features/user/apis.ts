@@ -133,6 +133,7 @@ export const userChallengesApi = {
     page: number;
     limit: number;
     challengeType?: ChallengeType;
+    completed?: boolean;
   }): Promise<ChallengeApiResponse> => {
     const response = await api.get('/users/me/challenges', { params });
     return response.data;

@@ -32,8 +32,12 @@ export const userKeys = {
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
   daily: () => [...userKeys.me(), 'daily'] as const,
-  challenges: (page: number, challengeType?: ChallengeType) =>
-    [...userKeys.me(), 'challenges', page, challengeType] as const,
+  challenges: (
+    page: number,
+    challengeType?: ChallengeType,
+    completed?: boolean
+  ) =>
+    [...userKeys.me(), 'challenges', page, challengeType, completed] as const,
   attendance: {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
@@ -334,17 +338,24 @@ export const useUserChallengesQuery = {
     page = 1,
     limit = 5,
     challengeType,
+    completed,
   }: {
     page?: number;
     limit?: number;
     challengeType?: ChallengeType;
+    completed?: boolean;
   }) => {
     const { user } = useUserStore();
 
     return useQuery({
-      queryKey: userKeys.challenges(page, challengeType),
+      queryKey: userKeys.challenges(page, challengeType, completed),
       queryFn: () =>
-        userChallengesApi.getChallenges({ page, limit, challengeType }),
+        userChallengesApi.getChallenges({
+          page,
+          limit,
+          challengeType,
+          completed,
+        }),
       enabled: isLoggedIn(user),
     });
   },
