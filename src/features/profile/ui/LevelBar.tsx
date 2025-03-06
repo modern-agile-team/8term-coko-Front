@@ -1,6 +1,9 @@
+import MyCharacter from '@/features/user/ui/MyCharacter';
 import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
 import ProgressBar from '@features/progress/ui/ProgressBar';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
+import { MyCharacterWrapper } from './styles';
 
 interface LevelBarProps {
   userLevel: number;
@@ -13,13 +16,13 @@ export default function LevelBar({
   steps,
   progress,
 }: LevelBarProps) {
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
   return (
     <S.LevelDiv>
       <div>
-        <S.MyCharacterImage
-          src={getImageUrl('테스트캐릭터.svg')}
-          alt="캐릭터 이미지"
-        />
+        <MyCharacterWrapper>
+          <MyCharacter equippedItems={equippedItems} />
+        </MyCharacterWrapper>
         <S.LevelLabel>Level.{userLevel}</S.LevelLabel>
       </div>
 

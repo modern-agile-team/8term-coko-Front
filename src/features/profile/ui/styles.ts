@@ -239,8 +239,11 @@ export const LevelLabel = styled.label`
   letter-spacing: 0.2px;
 `;
 
-export const MyCharacterImage = styled.img`
-  width: 115px;
-  height: 92px;
-  margin: 0 0 10px 10px;
+export const MyCharacterWrapper = styled.div`
+  div {
+    padding-right: 40px;
+    > img:first-child {
+    }
+    transform: scale(0.8);
+  }
 `;

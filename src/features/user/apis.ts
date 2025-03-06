@@ -1,5 +1,4 @@
 import api from '@/axios/instance';
-import { flatMap } from '@modern-kit/utils';
 import { EVENT_CHALLENGE_GROUP } from '@features/user/constants';
 import type {
   ExperiencedUser,
@@ -20,6 +19,7 @@ import {
   PaginationCosmeticItem,
 } from '@/features/store/types';
 import type { DailyQuestResponse } from '@features/quest/types';
+import { flatMap } from '@modern-kit/utils';
 
 export const usersApis = {
   putQuizzesProgress: ({
