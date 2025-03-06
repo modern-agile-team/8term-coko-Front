@@ -21,16 +21,21 @@ export default function StoreMyCharacterSection() {
 
   const { toggleIsMyItemsVisible, resetEquippedItem, query, isMyItemsVisible } =
     useCosmeticItemStore();
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
 
   const renderCharacterPreview = () => {
     if (query.mainCategoryId === 3) {
       return isMyItemsVisible ? (
-        <ProfileImage isIcon={false} />
+        <ProfileImage size="lg" equippedItems={equippedItems} />
       ) : (
         <PreViewProfileImage />
       );
     }
-    return isMyItemsVisible ? <MyCharacter /> : <PreviewMyCharacter />;
+    return isMyItemsVisible ? (
+      <MyCharacter equippedItems={equippedItems} />
+    ) : (
+      <PreviewMyCharacter />
+    );
   };
 
   const handleRest = () => {

@@ -8,11 +8,11 @@ export default function PreViewProfileImage() {
 
   return (
     <>
-      <S.ProfileBorderBox $isIcon={false}>
+      <S.ProfileBorderBox $size="lg">
         {equippedCosmeticItems['7'] && (
           <img src={getImageUrl(equippedCosmeticItems['7'].image)} />
         )}
-        <S.ProfileBox $isIcon={false}>
+        <S.ProfileBox $size="lg">
           <PreviewMyCharacter />
         </S.ProfileBox>
       </S.ProfileBorderBox>

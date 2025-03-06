@@ -24,3 +24,5 @@ type CosmeticItemsQueryParams = CosmeticItemOption['query'] & {
   page: number;
   limit: number;
 };
+
+export type ProfileImageSize = 'lg' | 'md' | 'sm';

@@ -7,6 +7,7 @@ import { useTimeout } from '@modern-kit/react';
 import {
   useUserExperienceQuery,
   useUserPartStatusQuery,
+  userCosmeticItemsQuery,
 } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { Quiz } from '@features/quiz/types';
@@ -27,7 +28,7 @@ export default function TotalResults({
   partStatus,
 }: TotalResultProps) {
   const { isCorrectList } = useClientQuizStore();
-
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
   const { data: userExperience, isSuccess } =
     useUserExperienceQuery.getExperience();
   const { mutate: experienceUpdate, isIdle: isExperienceIdle } =
@@ -72,7 +73,7 @@ export default function TotalResults({
       <S.DashLineHr $color="#00DCE8" />
       <S.TotalResultsRewardDiv>
         <S.ImageDescriptionDiv>
-          <MyCharacter />
+          <MyCharacter equippedItems={equippedItems} />
           <p>Level.{userExperience.level}</p>
         </S.ImageDescriptionDiv>
         <S.TotalResultProgressDiv>
