@@ -11,7 +11,7 @@ interface RankingItemProps {
   selectedOption: keyof typeof RANKING_OPTIONS;
   value: number;
   isMyRank?: boolean;
-  equippedItems: CosmeticItem[];
+  equippedItems?: CosmeticItem[];
 }
 
 export default function RankingItem({

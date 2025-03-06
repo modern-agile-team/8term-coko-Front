@@ -4,10 +4,10 @@ import { COSMETIC_COMPONENTS } from '@/features/store/constants';
 import { CosmeticItem } from '@/features/store/types';
 
 interface MyCharacterProps {
-  equippedItems: CosmeticItem[];
+  equippedItems?: CosmeticItem[];
 }
 
-export default function MyCharacter({ equippedItems }: MyCharacterProps) {
+export default function MyCharacter({ equippedItems = [] }: MyCharacterProps) {
   const equippedItemMap = equippedItems.reduce<{ [key: number]: string }>(
     (prev, item) => {
       prev[item.subCategoryId] = item.image;

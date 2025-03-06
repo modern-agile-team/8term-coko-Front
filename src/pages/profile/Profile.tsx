@@ -57,7 +57,7 @@ export default function Profile() {
         <S.ProfileSection>
           <div>
             <div style={{ marginTop: '50px' }}>
-              <ProfileImage isIcon={false} />
+              <ProfileImage size="lg" />
             </div>
             <S.UserNameLabel>유저 이름</S.UserNameLabel>
             <S.JoinDateLabel>2024.10.01</S.JoinDateLabel>

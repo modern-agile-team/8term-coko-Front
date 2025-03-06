@@ -1,12 +1,11 @@
 import { getImageUrl } from '@/utils/getImageUrl';
 import * as S from './styles';
 import MyCharacter from '@/features/user/ui/MyCharacter';
-import { userCosmeticItemsQuery } from '@/features/user/queries';
 import { CosmeticItem, ProfileImageSize } from '@/features/store/types';
 
 interface ProfileImageProps {
   size: ProfileImageSize;
-  equippedItems: CosmeticItem[];
+  equippedItems?: CosmeticItem[];
 }
 export default function ProfileImage({
   size,

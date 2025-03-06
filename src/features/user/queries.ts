@@ -269,9 +269,11 @@ export const userCosmeticItemsQuery = {
       queryFn: () => userItemsApi.getItems(params),
     }),
   useGetEquippedItem: () => {
-    return useSuspenseQuery({
+    const { user } = useUserStore();
+    return useQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
       queryFn: () => userItemsApi.getEquippedItems(),
+      enabled: isLoggedIn(user),
     });
   },
   useResetEquippedItems: () => {
