@@ -21,7 +21,7 @@ import {
   CosmeticItemOption,
   CosmeticItemsQueryParams,
 } from '@/features/store/types';
-import { BaseChallengeType } from '@features/quest/types';
+import { BaseChallengeType } from '@features/user/types';
 
 export const userKeys = {
   all: ['users'] as const,

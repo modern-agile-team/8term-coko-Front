@@ -1,6 +1,6 @@
 import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
-import type { ChallengeItem } from '@/features/quest/types';
+import type { ChallengeItem } from '@features/user/types';
 import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 

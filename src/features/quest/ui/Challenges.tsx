@@ -8,8 +8,8 @@ import { useUserChallengesQuery } from '@/features/user/queries';
 import {
   CHALLENGE_TYPE_COLORS,
   CHALLENGE_TYPE_LABELS,
-} from '@/features/quest/constants';
-import type { BaseChallengeType } from '@/features/quest/types';
+} from '@/features/user/constants';
+import type { BaseChallengeType } from '@/features/user/types';
 import useUserStore from '@/store/useUserStore';
 
 export default function Challenge() {

@@ -5,12 +5,12 @@ import { useHover } from '@modern-kit/react';
 import {
   CHALLENGE_TYPE_LABELS,
   EVENT_CHALLENGE_GROUP,
-} from '@features/quest/constants';
+} from '@features/user/constants';
 import type {
   ChallengeItem,
   BaseChallengeType,
   EventChallengeType,
-} from '@features/quest/types';
+} from '@features/user/types';
 
 export default function ChallengeBadge({
   challengeItem,

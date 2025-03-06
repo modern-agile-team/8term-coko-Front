@@ -4,8 +4,8 @@ import { getImageUrl } from '@utils/getImageUrl';
 import formatDate from '@utils/formatDate';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import BadgeContainer from '@features/user/ui/BadgeContainer';
-import type { ChallengeItem } from '@features/quest/types';
 import { Dispatch, SetStateAction } from 'react';
+import type { ChallengeItem } from '@features/user/types';
 
 interface ProfileDetailsProps {
   userName: string;

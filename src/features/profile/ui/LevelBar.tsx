@@ -1,6 +1,5 @@
 import * as S from './styles';
 import { getImageUrl } from '@/utils/getImageUrl';
-import { isLoggedIn } from '@/features/user/service/authUtils';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 
 interface LevelBarProps {

@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 import { MEDIA, Z_INDEX, ANIMATIONS } from '@style/constants';
-import { CHALLENGE_TYPE_COLORS } from '@features/quest/constants';
-import type { BaseChallengeType } from '@features/quest/types';
+import { CHALLENGE_TYPE_COLORS } from '@features/user/constants';
+import type { BaseChallengeType } from '@features/user/types';
 
 interface QuestUrlProps {
   $isLearn?: boolean;

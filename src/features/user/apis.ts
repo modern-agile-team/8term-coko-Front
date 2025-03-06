@@ -1,6 +1,6 @@
 import api from '@/axios/instance';
 import { flatMap } from '@modern-kit/utils';
-import { EVENT_CHALLENGE_GROUP } from '@features/quest/constants';
+import { EVENT_CHALLENGE_GROUP } from '@features/user/constants';
 import type {
   ExperiencedUser,
   UserProgress,
@@ -8,6 +8,8 @@ import type {
   PersonalRanking,
   UserAttendance,
   Opinions,
+  ChallengeResponse,
+  ChallengeType,
 } from '@features/user/types';
 import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
@@ -16,11 +18,7 @@ import {
   CosmeticItemsQueryParams,
   PaginationCosmeticItem,
 } from '@/features/store/types';
-import type {
-  DailyQuestResponse,
-  ChallengeApiResponse,
-  ChallengeType,
-} from '@features/quest/types';
+import type { DailyQuestResponse } from '@features/quest/types';
 
 export const usersApis = {
   putQuizzesProgress: ({
@@ -134,7 +132,7 @@ export const userChallengesApi = {
     limit: number;
     challengeType?: ChallengeType;
     completed?: boolean;
-  }): Promise<ChallengeApiResponse> => {
+  }): Promise<ChallengeResponse> => {
     if (params.challengeType === 'EVENT') {
       const responses = await Promise.all(
         EVENT_CHALLENGE_GROUP.map(type =>
