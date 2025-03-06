@@ -73,7 +73,6 @@ export default function SSEProvider({ children }: PropsWithChildren) {
     };
 
     newEventSource.onerror = () => {
-      console.error('서버 연결 실패');
       toast.error('서버 연결에 문제가 발생했습니다.');
 
       newEventSource.close();

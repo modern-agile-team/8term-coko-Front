@@ -173,6 +173,6 @@ export const usersHpApi = {
 };
 
 export const usersOpinionsApi = {
-  postOpinions: async (prams: Opinions): Promise<void> =>
-    await api.post('/users/me/opinions', prams),
+  postOpinions: async (params: Opinions): Promise<void> =>
+    await api.post('/users/me/opinions', params),
 };
