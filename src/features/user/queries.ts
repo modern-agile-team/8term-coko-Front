@@ -5,10 +5,12 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 import {
-  userItemsApi,
-  userHpApi,
-  userOpinionsApi,
   usersApis,
+  usersHpApi,
+  usersOpinionsApi,
+  userQuestApi,
+  userChallengesApi,
+  usersItemsApi,
 } from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
 import type { Section, Part } from '@features/learn/types';
@@ -19,6 +21,7 @@ import {
   CosmeticItemOption,
   CosmeticItemsQueryParams,
 } from '@/features/store/types';
+import { BaseChallengeType } from '@features/user/types';
 
 export const userKeys = {
   all: ['users'] as const,
@@ -28,13 +31,24 @@ export const userKeys = {
   quizzes: () => [...userKeys.me(), 'quizzes'] as const,
   partQuizzes: (partId: number) => [...userKeys.quizzes(), partId],
   ranking: (sort: RankingSort) => [...userKeys.me(), sort] as const,
+  daily: () => [...userKeys.me(), 'daily'] as const,
+  challenges: (
+    page: number,
+    limit?: number,
+    challengeType?: BaseChallengeType,
+    completed?: boolean
+  ) =>
+    [
+      ...userKeys.me(),
+      'challenges',
+      page,
+      limit,
+      challengeType,
+      completed,
+    ] as const,
   attendance: {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
-  },
-  quest: {
-    daily: () => [...userKeys.me(), 'quest', 'daily'] as const,
-    main: () => [...userKeys.me(), 'quest', 'main'] as const,
   },
   sections: {
     paginated: () => [...userKeys.me(), 'sections', 'paginated'] as const,
@@ -51,7 +65,7 @@ export const userKeys = {
         : userKeys.progress.root(),
   },
   cosmeticItems: {
-    root: () => [...userKeys.me(), ' cosmeticItems'] as const,
+    root: () => [...userKeys.me(), 'cosmeticItems'] as const,
     equipped: () => [...userKeys.cosmeticItems.root(), 'equipped'] as const,
     categoryOnly: () => [...userKeys.cosmeticItems.root(), 'category'] as const,
     category: (category: CosmeticItemOption['query']) =>
@@ -82,14 +96,14 @@ export const useUserHpQuery = {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.hp(),
-      queryFn: userHpApi.getHp,
+      queryFn: usersHpApi.getHp,
       enabled: isLoggedIn(user),
     });
   },
   getHpWithSuspense: () => {
     return useSuspenseQuery({
       queryKey: userKeys.hp(),
-      queryFn: userHpApi.getHp,
+      queryFn: usersHpApi.getHp,
       retry: 0,
     });
   },
@@ -97,7 +111,7 @@ export const useUserHpQuery = {
   updateHp: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: userHpApi.patchHp,
+      mutationFn: usersHpApi.patchHp,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.hp() });
       },
@@ -218,9 +232,11 @@ export const useUserProgressQuery = {
     sectionId?: Section['id'];
     partId?: Part['id'];
   }) => {
+    const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.progress.detail(params?.sectionId, params?.partId),
       queryFn: () => usersApis.getProgress(params),
+      enabled: isLoggedIn(user),
     });
   },
   updateQuizProgress: () => {
@@ -266,20 +282,20 @@ export const userCosmeticItemsQuery = {
   useGetMyCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
     useSuspenseQuery({
       queryKey: userKeys.cosmeticItems.paginationWithCategory(params),
-      queryFn: () => userItemsApi.getItems(params),
+      queryFn: () => usersItemsApi.getItems(params),
     }),
   useGetEquippedItem: () => {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
-      queryFn: () => userItemsApi.getEquippedItems(),
+      queryFn: () => usersItemsApi.getEquippedItems(),
       enabled: isLoggedIn(user),
     });
   },
   useResetEquippedItems: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: userItemsApi.putResetEquippedItems,
+      mutationFn: usersItemsApi.putResetEquippedItems,
       onSettled: () => {
         queryClient.invalidateQueries({
           queryKey: userKeys.cosmeticItems.root(),
@@ -290,7 +306,7 @@ export const userCosmeticItemsQuery = {
   usePurchaseItem: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: userItemsApi.postPurchaseItem,
+      mutationFn: usersItemsApi.postPurchaseItem,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.all });
       },
@@ -299,7 +315,7 @@ export const userCosmeticItemsQuery = {
   useUpdateEquippedItems: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: userItemsApi.patchEquippedItems,
+      mutationFn: usersItemsApi.patchEquippedItems,
       onSettled: () => {
         queryClient.invalidateQueries({
           queryKey: userKeys.cosmeticItems.root(),
@@ -308,12 +324,14 @@ export const userCosmeticItemsQuery = {
     });
   },
 };
+
 export const useUserQuestQuery = {
   getDailyQuest: () => {
     const { user } = useUserStore();
+
     return useQuery({
-      queryKey: userKeys.quest.daily(),
-      queryFn: usersApis.getDailyQuest,
+      queryKey: userKeys.daily(),
+      queryFn: userQuestApi.getDailyQuest,
       gcTime: 0,
       staleTime: 0,
       enabled: isLoggedIn(user),
@@ -321,8 +339,36 @@ export const useUserQuestQuery = {
   },
 };
 
+export const useUserChallengesQuery = {
+  getChallenges: ({
+    page = 1,
+    limit = 5,
+    challengeType,
+    completed,
+  }: {
+    page?: number;
+    limit?: number;
+    challengeType?: BaseChallengeType;
+    completed?: boolean;
+  }) => {
+    const { user } = useUserStore();
+
+    return useQuery({
+      queryKey: userKeys.challenges(page, limit, challengeType, completed),
+      queryFn: () =>
+        userChallengesApi.getChallenges({
+          page,
+          limit,
+          challengeType,
+          completed,
+        }),
+      enabled: isLoggedIn(user),
+    });
+  },
+};
+
 export const userOpinionsQuery = {
   useCreateOpinions: () => {
-    return useMutation({ mutationFn: userOpinionsApi.postOpinions });
+    return useMutation({ mutationFn: usersOpinionsApi.postOpinions });
   },
 };

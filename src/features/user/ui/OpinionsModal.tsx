@@ -1,8 +1,6 @@
-import SortDropdown from '@/common/layout/SortDropdown';
 import Select from '@/features/intro/ui/Select';
-import { useLocationQuizState } from '@/features/quiz/hooks';
 import { Quiz } from '@/features/quiz/types';
-import { OPINIONS_OPTIONS } from '@/features/user/constants';
+import { ERROR_MESSAGES, OPINIONS_OPTIONS } from '@/features/user/constants';
 import { userOpinionsQuery } from '@/features/user/queries';
 import {
   ContentWrapper,
@@ -37,30 +35,53 @@ export default function OpinionsModal({
 
   const { mutate: createOpinions } = userOpinionsQuery.useCreateOpinions();
 
-  const handleSubmit = () => {
+  const getTitle = () => {
+    const titleMap: Record<string, string> = {
+      '직접 입력': customTitle,
+      퀴즈: quizInfo,
+    };
+
+    return titleMap[selectedOption] || selectedOption;
+  };
+
+  const getErrorMessage = () => {
     if (!content) {
-      setError('내용은 필수 입력 사항입니다.');
-      return;
+      return ERROR_MESSAGES.REQUIRED_CONTENT;
     }
     if (content.length >= 255) {
-      setError('내용은 255자 이하로 입력해주세요.');
-      return;
+      return ERROR_MESSAGES.CONTENT_TOO_LONG;
     }
 
-    if (selectedOption === '직접 입력') {
-      if (!customTitle) {
-        setError('제목을 입력해주세요.');
-        return;
-      }
-    } else if (selectedOption === '퀴즈') {
-      if (!quizInfo) {
-        setError('퀴즈를 선택해주세요.');
-        return;
-      }
+    if (selectedOption === '직접 입력' && !customTitle) {
+      return ERROR_MESSAGES.REQUIRED_TITLE;
     }
+
+    if (selectedOption === '퀴즈' && !quizInfo) {
+      return ERROR_MESSAGES.REQUIRED_QUIZ;
+    }
+
+    return null;
+  };
+
+  const validation = () => {
+    const errorMessage = getErrorMessage();
+
+    if (errorMessage) {
+      setError(errorMessage);
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = () => {
+    if (!validation()) {
+      return;
+    }
+    const title = getTitle();
+
     createOpinions(
       {
-        title: customTitle,
+        title,
         content,
       },
       {
@@ -70,7 +91,6 @@ export default function OpinionsModal({
         },
       }
     );
-    return;
   };
 
   return (
