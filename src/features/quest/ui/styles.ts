@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { getImageUrl } from '@utils/getImageUrl';
 import { MEDIA, Z_INDEX, ANIMATIONS } from '@style/constants';
 import { CHALLENGE_TYPE_COLORS } from '@features/quest/constants';
-import type { ChallengeType, BaseChallengeType } from '@features/quest/types';
+import type { BaseChallengeType } from '@features/quest/types';
 
 interface QuestUrlProps {
   $isLearn?: boolean;
@@ -264,8 +264,14 @@ export const RewardIcon = styled.img`
 
 export const FilterContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin: 20px 0;
+
+  ${MEDIA.mobile} {
+    justify-content: center;
+    gap: 8px 6px;
+  }
 `;
 
 export const FilterButton = styled.button<{ $active: boolean; $color: string }>`
@@ -341,7 +347,7 @@ export const BadgeName = styled.p<{ $type: BaseChallengeType }>`
   text-align: center;
   color: #ffffff;
   text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
-  background: ${({ $type }) => CHALLENGE_TYPE_COLORS[$type].border};
+  background: ${({ $type }) => CHALLENGE_TYPE_COLORS[$type]};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -391,7 +397,7 @@ export const BadgeLabel = styled.div<{ $type: BaseChallengeType }>`
   font-size: 12px;
   font-weight: 700;
   color: white;
-  background: ${({ $type }) => CHALLENGE_TYPE_COLORS[$type].border};
+  background: ${({ $type }) => CHALLENGE_TYPE_COLORS[$type]};
   padding: 4px 8px;
   border-radius: 12px;
   text-align: center;

@@ -4,6 +4,8 @@ import Header from '@common/layout/Header';
 import LevelBar from '@features/profile/ui/LevelBar';
 import ProfileDetails from '@features/profile/ui/ProfileDetails';
 import { useState } from 'react';
+import { useMediaQuery } from '@modern-kit/react';
+import { MEDIA_QUERY_MAP } from '@style/constants';
 import useUserStore from '@store/useUserStore';
 import useCycleProgress from '@hooks/useCycleProgress';
 import {
@@ -36,9 +38,12 @@ export default function Profile() {
 
   const [page, setPage] = useState(1);
 
+  const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
+  const limit = isMobile ? 1 : 4;
+
   const { data: challengesData } = useUserChallengesQuery.getChallenges({
     page,
-    limit: 4,
+    limit,
     completed: true,
   });
 

@@ -10,14 +10,14 @@ export const CHALLENGE_TYPE_LABELS = {
 } as const;
 
 export const CHALLENGE_TYPE_COLORS = {
-  SECTION_CLEAR: { border: '#73d2ff', background: '#e0f7ff' },
-  LEVEL_CLEAR: { border: '#ffdf4a', background: '#fff5c1' },
-  ATTENDANCE_STREAK: { border: '#ff6b6b', background: '#ffdfdf' },
-  LEVEL_RANKING_ATTAIN: { border: '#ff9800', background: '#ffe0b2' },
-  POINT_RANKING_ATTAIN: { border: '#4caf50', background: '#c8e6c9' },
-  ATTENDANCE_RANKING_ATTAIN: { border: '#9c27b0', background: '#e1bee7' },
-  CORRECT_ANSWER_RANKING_ATTAIN: { border: '#3f51b5', background: '#c5cae9' },
-  EVENT: { border: '#795548', background: '#d7ccc8' },
+  SECTION_CLEAR: '#73d2ff', // 밝은 하늘색
+  LEVEL_CLEAR: '#ffdf4a', // 노란색
+  ATTENDANCE_STREAK: '#ff6b6b', // 빨간색
+  LEVEL_RANKING_ATTAIN: '#ff9800', // 주황색
+  POINT_RANKING_ATTAIN: '#4caf50', // 초록색
+  ATTENDANCE_RANKING_ATTAIN: '#9c27b0', // 보라색
+  CORRECT_ANSWER_RANKING_ATTAIN: '#3f51b5', // 남색
+  EVENT: '#795548', // 갈색
 } as const;
 
 export const EVENT_CHALLENGE_GROUP = [

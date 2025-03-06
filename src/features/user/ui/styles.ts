@@ -19,10 +19,6 @@ export const BadgeWrapper = styled.div`
     > ul {
       display: flex;
       justify-content: center;
-
-      > li:not(:first-child) {
-        display: none;
-      }
     }
   }
 `;

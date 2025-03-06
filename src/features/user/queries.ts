@@ -34,10 +34,18 @@ export const userKeys = {
   daily: () => [...userKeys.me(), 'daily'] as const,
   challenges: (
     page: number,
+    limit: number,
     challengeType?: BaseChallengeType,
     completed?: boolean
   ) =>
-    [...userKeys.me(), 'challenges', page, challengeType, completed] as const,
+    [
+      ...userKeys.me(),
+      'challenges',
+      page,
+      limit,
+      challengeType,
+      completed,
+    ] as const,
   attendance: {
     root: () => [...userKeys.me(), 'attendance'] as const,
     list: () => [...userKeys.attendance.root(), 'list'] as const,
@@ -348,7 +356,7 @@ export const useUserChallengesQuery = {
     const { user } = useUserStore();
 
     return useQuery({
-      queryKey: userKeys.challenges(page, challengeType, completed),
+      queryKey: userKeys.challenges(page, limit, challengeType, completed),
       queryFn: () =>
         userChallengesApi.getChallenges({
           page,
