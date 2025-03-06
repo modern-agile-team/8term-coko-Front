@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useMediaQuery } from '@modern-kit/react';
 import { MEDIA_QUERY_MAP } from '@style/constants';
 import useUserStore from '@store/useUserStore';
-import useCycleProgress from '@hooks/useCycleProgress';
+import calculateCycleProgress from '@utils/calculateCycleProgress';
 import {
   useUserProgressQuery,
   useUserChallengesQuery,
@@ -21,7 +21,7 @@ export default function Profile() {
   const userTotalAttendance = user?.totalAttendance || 1;
 
   const cycleLength = 60;
-  const { steps, progress } = useCycleProgress({
+  const { steps, progress } = calculateCycleProgress({
     value: userLevel,
     cycleLength,
     step: 10,
