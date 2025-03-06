@@ -1,6 +1,5 @@
 import { css, styled } from 'styled-components';
 import { MEDIA } from './../../style/constants';
-import { Fragment } from 'react/jsx-runtime';
 
 export const MyCharacterSection = styled.section`
   display: flex;

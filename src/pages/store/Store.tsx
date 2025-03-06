@@ -33,9 +33,7 @@ export default function Store() {
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <Suspense fallback={<div>safjsdkajfsadkl;fjsdlk;</div>}>
-          <StoreMyCharacterSection />
-        </Suspense>
+        <StoreMyCharacterSection />
         <S.StoreItemListSection>
           <SortBar />
           <S.RedLine />

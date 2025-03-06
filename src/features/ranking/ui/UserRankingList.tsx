@@ -43,7 +43,6 @@ export default function UserRankingList({
   };
 
   const limit = 5;
-  console.log(data);
 
   return (
     <S.UserRankingListContainer>
