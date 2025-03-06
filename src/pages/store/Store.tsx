@@ -12,6 +12,7 @@ import ItemFallback from '@/features/error/ui/ItemFallback';
 import { Suspense } from 'react';
 import ItemSkeleton from '@/features/store/ui/ItemSkeleton';
 import SortBar from '@/features/store/ui/SortBar';
+import Skeleton from '@/common/layout/Skeleton';
 
 export default function Store() {
   const { resetEquippedItem } = useCosmeticItemStore();
@@ -32,7 +33,9 @@ export default function Store() {
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <StoreMyCharacterSection />
+        <Suspense fallback={<div>safjsdkajfsadkl;fjsdlk;</div>}>
+          <StoreMyCharacterSection />
+        </Suspense>
         <S.StoreItemListSection>
           <SortBar />
           <S.RedLine />

@@ -13,6 +13,7 @@ import { Suspense } from 'react';
 import { SkeletonBase } from '@/common/layout/styles';
 
 export default function StoreMyCharacterSection() {
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
   const { Modal, isShow, openModal, closeModal } = useModal();
 
   const { mutate: resetEquippedItemMutate } =
@@ -21,7 +22,6 @@ export default function StoreMyCharacterSection() {
 
   const { toggleIsMyItemsVisible, resetEquippedItem, query, isMyItemsVisible } =
     useCosmeticItemStore();
-  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
 
   const renderCharacterPreview = () => {
     if (query.mainCategoryId === 3) {

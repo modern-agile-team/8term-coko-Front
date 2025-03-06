@@ -19,7 +19,9 @@ export default function ProfileImage({
   return (
     <>
       <S.ProfileBorderBox $size={size}>
-        {profile && <img src={getImageUrl(profile[0].image)} />}
+        {profile && profile.length !== 0 && (
+          <img src={getImageUrl(profile[0].image)} />
+        )}
         <S.ProfileBox $size={size}>
           <MyCharacter equippedItems={equippedItems} />
         </S.ProfileBox>

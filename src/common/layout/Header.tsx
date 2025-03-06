@@ -1,7 +1,7 @@
 import * as S from '@common/ui/styles';
 import { HeaderBox } from './styles';
 import formatDate from '@utils/formatDate';
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useModal from '@hooks/useModal';
 import usePopover from '@hooks/usePopover';

@@ -23,24 +23,26 @@ export default function PurchaseModal({
   const { mutate: updateEquippedItems } =
     userCosmeticItemsQuery.useUpdateEquippedItems();
   const { toggleIsMyItemsVisible } = useCosmeticItemStore();
-  const [isSuccess, toggleIsSuccess] = useToggle(false);
-  const handleAccept = () => {
-    if (isSuccess) {
-      updateEquippedItems({
-        itemIds: [selectCosmeticItem.id],
-        isEquipped: true,
-      });
-      closeModal();
-      toggleIsMyItemsVisible();
-      toggleIsSuccess();
-      return;
-    }
+
+  const [isPurchaseSuccess, toggleIsPurchaseSuccess] = useToggle(false);
+
+  const equipItem = () => {
+    updateEquippedItems({
+      itemIds: [selectCosmeticItem.id],
+      isEquipped: true,
+    });
+    closeModal();
+    toggleIsMyItemsVisible();
+    toggleIsPurchaseSuccess();
+  };
+
+  const purchaseItemAction = () => {
     purchaseItem(
       { itemIds: [selectCosmeticItem.id] },
       {
         onSuccess: () => {
           toast.success('아이템 구매 성공!');
-          toggleIsSuccess();
+          toggleIsPurchaseSuccess();
         },
         onError: error => {
           if (isAxiosError(error)) {
@@ -56,6 +58,14 @@ export default function PurchaseModal({
     );
   };
 
+  const handleAccept = () => {
+    if (isPurchaseSuccess) {
+      equipItem();
+    } else {
+      purchaseItemAction();
+    }
+  };
+
   return (
     <Modal isShow={isShow}>
       <CosmeticItemCheckOut>
@@ -67,9 +77,10 @@ export default function PurchaseModal({
               price={selectCosmeticItem.price}
             />
 
-            <p>{isSuccess ? '바로 장착하기' : `구매하기`}</p>
+            <p>{isPurchaseSuccess ? '바로 장착하기' : `구매하기`}</p>
           </>
         </CosmeticItemCheckOut.DetailBox>
+        ㅌ
         <CosmeticItemCheckOut.ConfirmButtonList
           onAccept={handleAccept}
           onReject={closeModal}
