@@ -1,4 +1,4 @@
-import { useCosmeticItemQuery } from '@/features/store/queries';
+import { cosmeticItemQuery } from '@/features/store/queries';
 import { CosmeticItem } from '@/features/store/types';
 import { useCosmeticItemStore } from '@/features/store/store';
 import { SubtractInjectedProps } from '@/types';
@@ -16,8 +16,7 @@ const withCosmeticItem = <P extends object>(
     SubtractInjectedProps<P, InjectedProps> & { limit: number }
   > = ({ limit, ...rest }) => {
     const { isMyItemsVisible, currentPage, query } = useCosmeticItemStore();
-
-    const { data: cosmeticItem } = useCosmeticItemQuery.getCosmeticItem({
+    const { data: cosmeticItem } = cosmeticItemQuery.useGetCosmeticItem({
       page: currentPage,
       ...query,
       limit,

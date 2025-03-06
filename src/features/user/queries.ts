@@ -262,23 +262,19 @@ export const useUserAttendanceQuery = {
   },
 };
 
-export const useUserCosmeticItemsQuery = {
-  getMyCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
+export const userCosmeticItemsQuery = {
+  useGetMyCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
     useSuspenseQuery({
       queryKey: userKeys.cosmeticItems.root(),
       queryFn: () => userItemsApi.getItems(params),
     }),
-  getEquippedItem: () => {
+  useGetEquippedItem: () => {
     return useQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
-      queryFn: () => userItemsApi.getItems(),
-      enabled: false,
-      select(equippedItems) {
-        return equippedItems.contents.filter(item => item.isEquipped);
-      },
+      queryFn: () => userItemsApi.getEquippedItems(),
     });
   },
-  resetEquippedItems: () => {
+  useResetEquippedItems: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: userItemsApi.putResetEquippedItems,
@@ -289,7 +285,7 @@ export const useUserCosmeticItemsQuery = {
       },
     });
   },
-  purchaseItem: () => {
+  usePurchaseItem: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: userItemsApi.postPurchaseItem,
@@ -298,7 +294,7 @@ export const useUserCosmeticItemsQuery = {
       },
     });
   },
-  updateEquippedItems: () => {
+  useUpdateEquippedItems: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: userItemsApi.patchEquippedItems,
@@ -323,8 +319,8 @@ export const useUserQuestQuery = {
   },
 };
 
-export const useUserOpinionsQuery = {
-  createOpinions: () => {
+export const userOpinionsQuery = {
+  useCreateOpinions: () => {
     return useMutation({ mutationFn: userOpinionsApi.postOpinions });
   },
 };

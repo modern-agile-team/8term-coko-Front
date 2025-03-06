@@ -44,8 +44,9 @@ export default function TotalResults({
   useTimeout(
     () => {
       experienceUpdate({ experience });
-      !isCompleted(partStatus) &&
+      if (!isCompleted(partStatus)) {
         updatePartStatus({ partId, partStatus: 'IN_PROGRESS' });
+      }
     },
     { delay: 1000, enabled: isSuccess }
   );

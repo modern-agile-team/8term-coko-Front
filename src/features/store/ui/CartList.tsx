@@ -3,7 +3,7 @@ import StoreItem from './StoreItem';
 import { useCosmeticItemStore } from '@/features/store/store';
 import useModal from '@/hooks/useModal';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
-import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
 import { useOutsidePointerDown } from '@modern-kit/react';
@@ -20,7 +20,7 @@ export default function CartList({
     useCosmeticItemStore();
 
   const { Modal, isShow, closeModal, openModal } = useModal();
-  const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
+  const { mutate: purchaseItem } = userCosmeticItemsQuery.usePurchaseItem();
 
   const totalPoint = cartListCosmeticItems.reduce(
     (total, item) => total + item.price,

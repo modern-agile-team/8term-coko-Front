@@ -12,7 +12,6 @@ import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
 import {
   CosmeticItem,
-  CosmeticItemOption,
   CosmeticItemsQueryParams,
   PaginationCosmeticItem,
 } from '@/features/store/types';
@@ -105,6 +104,10 @@ export const userItemsApi = {
     params?: CosmeticItemsQueryParams
   ): Promise<PaginationCosmeticItem> => {
     const response = await api.get('/users/me/items', { params });
+    return response.data;
+  },
+  getEquippedItems: async (): Promise<CosmeticItem[]> => {
+    const response = await api.get('/users/me/items/equipped');
     return response.data;
   },
   putResetEquippedItems: async (): Promise<void> =>

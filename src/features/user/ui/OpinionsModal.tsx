@@ -3,7 +3,7 @@ import Select from '@/features/intro/ui/Select';
 import { useLocationQuizState } from '@/features/quiz/hooks';
 import { Quiz } from '@/features/quiz/types';
 import { OPINIONS_OPTIONS } from '@/features/user/constants';
-import { useUserOpinionsQuery } from '@/features/user/queries';
+import { userOpinionsQuery } from '@/features/user/queries';
 import {
   ContentWrapper,
   ErrorMessage,
@@ -35,7 +35,7 @@ export default function OpinionsModal({
 
   const isQuizPage = useLocation().pathname === '/quiz';
 
-  const { mutate: createOpinions } = useUserOpinionsQuery.createOpinions();
+  const { mutate: createOpinions } = userOpinionsQuery.useCreateOpinions();
 
   const handleSubmit = () => {
     if (!content) {

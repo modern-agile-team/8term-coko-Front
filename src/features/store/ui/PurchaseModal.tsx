@@ -1,10 +1,9 @@
 import { CosmeticItem } from '@/features/store/types';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
-import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 import useModal from '@/hooks/useModal';
 import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
 import { useCosmeticItemStore } from '@/features/store/store';
 import { useToggle } from '@modern-kit/react';
 
@@ -20,9 +19,9 @@ export default function PurchaseModal({
   isShow,
 }: PurchaseModalProps) {
   const { Modal } = useModal();
-  const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
+  const { mutate: purchaseItem } = userCosmeticItemsQuery.usePurchaseItem();
   const { mutate: updateEquippedItems } =
-    useUserCosmeticItemsQuery.updateEquippedItems();
+    userCosmeticItemsQuery.useUpdateEquippedItems();
   const { toggleIsMyItemsVisible } = useCosmeticItemStore();
   const [isSuccess, toggleIsSuccess] = useToggle(false);
   const handleAccept = () => {

@@ -5,7 +5,6 @@ export interface CosmeticItem {
   image: string;
   mainCategoryId: number;
   subCategoryId: number;
-  category: 'clothes' | 'accessories' | 'profile' | 'color';
   isEquipped?: boolean;
 }
 

@@ -2,7 +2,7 @@ import CartList from '@/features/store/ui/CartList';
 import MyCharacter from '@/features/user/ui/MyCharacter';
 import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
 import useModal from './../../../hooks/useModal';
-import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 import { useCosmeticItemStore } from '@/features/store/store';
 import ProfileImage from '@/features/user/ui/ProfileImage';
 import useUserStore from './../../../store/useUserStore';
@@ -14,7 +14,7 @@ export default function StoreMyCharacterSection() {
   const { Modal, isShow, openModal, closeModal } = useModal();
 
   const { mutate: resetEquippedItemMutate } =
-    useUserCosmeticItemsQuery.resetEquippedItems();
+    userCosmeticItemsQuery.useResetEquippedItems();
   const { user } = useUserStore();
 
   const { toggleIsMyItemsVisible, resetEquippedItem, query, isMyItemsVisible } =
