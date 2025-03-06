@@ -9,6 +9,8 @@ import useUserStore from './../../../store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 import PreviewMyCharacter from '@/features/store/ui/PreviewMyCharacter';
 import PreViewProfileImage from '@/features/store/ui/PreviewMyProfileImage';
+import { Suspense } from 'react';
+import { SkeletonBase } from '@/common/layout/styles';
 
 export default function StoreMyCharacterSection() {
   const { Modal, isShow, openModal, closeModal } = useModal();
@@ -68,7 +70,13 @@ export default function StoreMyCharacterSection() {
             초기화
           </StoreButton>
         </div>
-        <div>{renderCharacterPreview()}</div>
+        <div>
+          {
+            <Suspense fallback={<SkeletonBase width="100px" height="100px" />}>
+              {renderCharacterPreview()}
+            </Suspense>
+          }
+        </div>
         <div>
           <StoreButton
             $backgroundColor="#FFB53D"

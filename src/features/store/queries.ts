@@ -36,8 +36,8 @@ export const cosmeticItemQuery = {
   ) => {
     const { isMyItemsVisible, ...restProps } = params;
     const useCosmeticItemQueryToUse = isMyItemsVisible
-      ? cosmeticItemQuery.useGetCosmeticItemByPage
-      : userCosmeticItemsQuery.useGetMyCosmeticItemByPage;
+      ? userCosmeticItemsQuery.useGetMyCosmeticItemByPage
+      : cosmeticItemQuery.useGetCosmeticItemByPage;
 
     return useCosmeticItemQueryToUse(restProps);
   },

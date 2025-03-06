@@ -265,11 +265,11 @@ export const useUserAttendanceQuery = {
 export const userCosmeticItemsQuery = {
   useGetMyCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
     useSuspenseQuery({
-      queryKey: userKeys.cosmeticItems.root(),
+      queryKey: userKeys.cosmeticItems.paginationWithCategory(params),
       queryFn: () => userItemsApi.getItems(params),
     }),
   useGetEquippedItem: () => {
-    return useQuery({
+    return useSuspenseQuery({
       queryKey: userKeys.cosmeticItems.equipped(),
       queryFn: () => userItemsApi.getEquippedItems(),
     });

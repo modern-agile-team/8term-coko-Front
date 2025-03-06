@@ -14,6 +14,7 @@ export default function MyCharacter() {
     },
     {}
   );
+
   const renderEquipItems = () => {
     if (myItemMap) {
       return Object.entries(COSMETIC_COMPONENTS).map(([key, Component]) => {
@@ -22,15 +23,15 @@ export default function MyCharacter() {
       });
     }
   };
-  console.log(userEquippedItems);
+
+  const colorImage = myItemMap[8]
+    ? `${myItemMap[8].slice(0, 2)}-코코.svg`
+    : '파랑-코코.svg';
+
   return (
     <S.MyCharacterBox>
       <S.CharacterEquipContainer>
-        {myItemMap && (
-          <S.MyCharacterImage
-            src={getImageUrl(`${myItemMap[8].slice(0, 2)}-코코.svg`)}
-          />
-        )}
+        {<S.MyCharacterImage src={getImageUrl(colorImage)} />}
         {renderEquipItems()}
       </S.CharacterEquipContainer>
     </S.MyCharacterBox>
