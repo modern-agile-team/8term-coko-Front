@@ -10,8 +10,8 @@ const rankingKeys = {
     [...rankingKeys.all, sort, page] as const,
 };
 
-export const useRankingPaginationQuery = {
-  getRankingByPage: (
+export const rankingPaginationQuery = {
+  useGetRankingByPage: (
     sort: RankingSort = 'level',
     page: number,
     limit: number = 5

@@ -1,7 +1,7 @@
 import * as S from './styles';
 import SortDropdown from '@common/layout/SortDropdown';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
-import { useRankingPaginationQuery } from '@features/ranking/queries';
+import { rankingPaginationQuery } from '@features/ranking/queries';
 import UserRankingListSkeleton from './UserRankingListSkeleton';
 import { generatePaginationPages } from '@utils/generatePaginationPages';
 import RankingItem from './RankingItem';
@@ -20,11 +20,10 @@ export default function UserRankingList({
   onOptionChange,
 }: UserRankingListProps) {
   // 전체 유저 랭킹 정보 (페이지네이션)
-  const { data, isLoading } = useRankingPaginationQuery.getRankingByPage(
+  const { data, isLoading } = rankingPaginationQuery.useGetRankingByPage(
     RANKING_OPTIONS[selectedOption].dataField,
     currentPage
   );
-
   const totalPage = data?.totalPage ?? 1;
   const pages = generatePaginationPages({
     currentPage,
@@ -44,6 +43,7 @@ export default function UserRankingList({
   };
 
   const limit = 5;
+  console.log(data);
 
   return (
     <S.UserRankingListContainer>
@@ -72,6 +72,9 @@ export default function UserRankingList({
       ) : (
         data?.contents.map((user, index) => {
           const rank = (currentPage - 1) * limit + (index + 1);
+          const equippedItems = data.equippedItems[index].map(
+            item => item.item
+          );
           return (
             <RankingItem
               key={user.id}
@@ -79,6 +82,7 @@ export default function UserRankingList({
               level={user.level}
               name={user.name}
               selectedOption={selectedOption}
+              equippedItems={equippedItems}
               value={user[RANKING_OPTIONS[selectedOption].dataField]}
             />
           );

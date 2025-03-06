@@ -80,7 +80,6 @@ export default function PurchaseModal({
             <p>{isPurchaseSuccess ? '바로 장착하기' : `구매하기`}</p>
           </>
         </CosmeticItemCheckOut.DetailBox>
-        ㅌ
         <CosmeticItemCheckOut.ConfirmButtonList
           onAccept={handleAccept}
           onReject={closeModal}

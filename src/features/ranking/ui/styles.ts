@@ -197,18 +197,6 @@ export const UserInfo = styled.div`
 export const ProfileWrapper = styled.div`
   position: relative;
 
-  img:first-of-type {
-    width: 64.287px;
-    height: 64.75px;
-    position: absolute;
-    z-index: 1;
-  }
-
-  img:last-of-type {
-    width: 64.287px;
-    height: 64.75px;
-  }
-
   ${MEDIA.mobile} {
     display: none;
   }

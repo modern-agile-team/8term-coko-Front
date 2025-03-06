@@ -10,11 +10,9 @@ interface ProfileImageProps {
 }
 export default function ProfileImage({
   size,
-  equippedItems,
+  equippedItems = [],
 }: ProfileImageProps) {
-  const { data: userEquippedItems } =
-    userCosmeticItemsQuery.useGetEquippedItem();
-  const profile = userEquippedItems?.filter(item => item.subCategoryId === 7);
+  const profile = equippedItems.filter(item => item.subCategoryId === 7);
 
   return (
     <>

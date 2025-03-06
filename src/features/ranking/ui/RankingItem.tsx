@@ -1,6 +1,8 @@
 import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
+import { CosmeticItem } from '@/features/store/types';
+import ProfileImage from '@/features/user/ui/ProfileImage';
 
 interface RankingItemProps {
   rank: number;
@@ -9,6 +11,7 @@ interface RankingItemProps {
   selectedOption: keyof typeof RANKING_OPTIONS;
   value: number;
   isMyRank?: boolean;
+  equippedItems: CosmeticItem[];
 }
 
 export default function RankingItem({
@@ -18,6 +21,7 @@ export default function RankingItem({
   selectedOption,
   value,
   isMyRank = false,
+  equippedItems,
 }: RankingItemProps) {
   return (
     <S.RankingItem $rank={rank}>
@@ -31,8 +35,7 @@ export default function RankingItem({
       </S.MedalContainer>
       {!isMyRank && <S.RankText>{rank}</S.RankText>}
       <S.ProfileWrapper>
-        <img src={getImageUrl('테두리.svg')} />
-        <img src={getImageUrl('코코-프로필.svg')} />
+        <ProfileImage equippedItems={equippedItems} size="md" />
       </S.ProfileWrapper>
       <S.UserInfo>
         <p>LV.{level}</p>
