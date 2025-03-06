@@ -34,7 +34,7 @@ export const userKeys = {
   daily: () => [...userKeys.me(), 'daily'] as const,
   challenges: (
     page: number,
-    limit: number,
+    limit?: number,
     challengeType?: BaseChallengeType,
     completed?: boolean
   ) =>
