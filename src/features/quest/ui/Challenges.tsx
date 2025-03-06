@@ -60,7 +60,9 @@ export default function Challenge() {
         </>
       ) : (
         <S.QuestWrapper>
-          <S.LoginRequiredMessage>로그인이 필요합니다.</S.LoginRequiredMessage>
+          <S.LoginRequiredMessage>
+            로그인 후 도전과제를 확인해보세요!
+          </S.LoginRequiredMessage>
         </S.QuestWrapper>
       )}
     </QuestSection>
