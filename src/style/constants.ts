@@ -13,6 +13,10 @@ export const ANIMATIONS = {
     0% { opacity: 0; transform: scale(0.9); }
     100% { opacity: 1; transform: scale(1); }
   `,
+  fadeInSlideUp: keyframes`
+    0% { opacity: 0; transform: translate(-50%, 10px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+  `,
   slideInFromLeft: keyframes`
     0% { transform: translateX(-100%); opacity: 0; }
     100% { transform: translateX(0); opacity: 1; }
@@ -72,10 +76,14 @@ export const Z_INDEX = {
   overlay: 10000,
   tutorial: 10001,
   learnHeader: 1000,
+  AttendanceDayCell: 1000,
   menu: 99,
   header: 1001,
   popover: 101,
   loading: 9999,
+  defaultCosmeticItem: 30,
+  footwear: 20,
+  frame: 20,
 } as const;
 
 export const MEDIA = {

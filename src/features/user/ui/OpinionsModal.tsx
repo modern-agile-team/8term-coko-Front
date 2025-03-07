@@ -1,44 +1,84 @@
-import SortDropdown from '@/common/layout/SortDropdown';
-import { OPINIONS_OPTIONS } from '@/features/user/constants';
-import { useUserOpinionsQuery } from '@/features/user/queries';
+import Select from '@/features/intro/ui/Select';
+import { Quiz } from '@/features/quiz/types';
+import { ERROR_MESSAGES, OPINIONS_OPTIONS } from '@/features/user/constants';
+import { userOpinionsQuery } from '@/features/user/queries';
 import {
   ContentWrapper,
   ErrorMessage,
   OpinionsFormWrapper,
+  SelectWrapper,
 } from '@/features/user/ui/styles';
 import { RefObject, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useLocation } from 'react-router-dom';
 
 interface OpinionsModalProps {
   modalRef: RefObject<HTMLDivElement | null>;
   closeModal: () => void;
+  quizzes: Quiz[];
 }
 
 export default function OpinionsModal({
   modalRef,
   closeModal,
+  quizzes,
 }: OpinionsModalProps) {
-  const [selectedOption, setSelectedOption] =
-    useState<keyof typeof OPINIONS_OPTIONS>('버그 제보');
+  const [selectedOption, setSelectedOption] = useState<
+    (typeof OPINIONS_OPTIONS)[number]['label'] | '퀴즈'
+  >('버그 제보');
   const [customTitle, setCustomTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
-  const { mutate: createOpinions } = useUserOpinionsQuery.createOpinions();
+  const [quizInfo, setQuizInfo] = useState('');
 
-  const handleSubmit = () => {
-    if (selectedOption === '직접 입력' && !customTitle) {
-      setError('문의 제목은 필수 입력 사항입니다.');
-      return;
-    }
+  const isQuizPage = useLocation().pathname === '/quiz';
+
+  const { mutate: createOpinions } = userOpinionsQuery.useCreateOpinions();
+
+  const getTitle = () => {
+    const titleMap: Record<string, string> = {
+      '직접 입력': customTitle,
+      퀴즈: quizInfo,
+    };
+
+    return titleMap[selectedOption] || selectedOption;
+  };
+
+  const getErrorMessage = () => {
     if (!content) {
-      setError('내용은 필수 입력 사항입니다.');
-      return;
+      return ERROR_MESSAGES.REQUIRED_CONTENT;
     }
     if (content.length >= 255) {
-      setError('내용은 255자 이하로 입력해주세요.');
+      return ERROR_MESSAGES.CONTENT_TOO_LONG;
+    }
+
+    if (selectedOption === '직접 입력' && !customTitle) {
+      return ERROR_MESSAGES.REQUIRED_TITLE;
+    }
+
+    if (selectedOption === '퀴즈' && !quizInfo) {
+      return ERROR_MESSAGES.REQUIRED_QUIZ;
+    }
+
+    return null;
+  };
+
+  const validation = () => {
+    const errorMessage = getErrorMessage();
+
+    if (errorMessage) {
+      setError(errorMessage);
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = () => {
+    if (!validation()) {
       return;
     }
-    const title = selectedOption === '직접 입력' ? customTitle : selectedOption;
+    const title = getTitle();
+
     createOpinions(
       {
         title,
@@ -58,23 +98,27 @@ export default function OpinionsModal({
       <h1>문의하기</h1>
       <div>
         <label>제목</label>
-        <SortDropdown
-          options={OPINIONS_OPTIONS}
-          onSelectOption={setSelectedOption}
-          selectedOption={selectedOption}
-          width="200px"
-          height="30px"
-          iconSize="10px"
-          iconRight="15px"
-          fontSize="12px"
-          ulFontColor="#000"
-          liFontColor="#000"
-          ulBackgroundColor="#fff"
-          liBackgroundColor="#fff"
-          borderColor="#000"
-        />
+        <SelectWrapper>
+          <Select
+            buttonName={selectedOption}
+            onChange={value =>
+              setSelectedOption(
+                value as (typeof OPINIONS_OPTIONS)[number]['label']
+              )
+            }
+          >
+            {OPINIONS_OPTIONS.map(option => (
+              <Select.Option
+                value={option.label}
+                label={option.label}
+                key={option.id}
+              />
+            ))}
+            {isQuizPage && <Select.Option value="퀴즈" label="퀴즈" />}
+          </Select>
+        </SelectWrapper>
       </div>
-      {OPINIONS_OPTIONS[selectedOption].dataField === 'etc' && (
+      {selectedOption === '직접 입력' && (
         <div>
           <label>
             직접 입력<span>{!!customTitle || '*'}</span>
@@ -86,6 +130,28 @@ export default function OpinionsModal({
           />
         </div>
       )}
+      {selectedOption === '퀴즈' && (
+        <div>
+          <label>퀴즈</label>
+          <SelectWrapper>
+            <Select
+              buttonName={quizInfo.match(/문제 \d+/)?.[0] || '문제 선택'}
+              onChange={setQuizInfo}
+            >
+              {quizzes.map((quiz, index) => (
+                <Select.Option
+                  value={`파트Id ${quiz.partId} 문제Id ${quiz.id} 문제 ${
+                    index + 1
+                  }`}
+                  label={`문제 ${index + 1}`}
+                  key={quiz.id}
+                />
+              ))}
+            </Select>
+          </SelectWrapper>
+        </div>
+      )}
+
       <div>
         <label>
           내용<span>{!!content || '*'}</span>

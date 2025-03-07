@@ -1,18 +1,37 @@
-import * as S from './styles';
+import {
+  CosmeticItemFooter,
+  CosmeticItemHeader,
+  CosmeticItemLi,
+  ItemImage,
+} from '@/features/store/ui/styles';
 import { getImageUrl } from '@utils/getImageUrl';
-import type { CosmeticItem } from '@features/store/types';
-
+import { PropsWithChildren } from 'react';
 export default function StoreItem({
-  name,
-  image,
-  category,
-  cost,
-}: CosmeticItem) {
-  return (
-    <S.StoreItem>
-      <S.ItemLabel>{name}</S.ItemLabel>
-      <S.ItemImage $category={category} src={getImageUrl(image)} />
-      <S.ItemLabel>{cost} Point</S.ItemLabel>
-    </S.StoreItem>
-  );
+  children,
+  onClick,
+}: PropsWithChildren<{ onClick?: React.MouseEventHandler }>) {
+  return <CosmeticItemLi onClick={onClick}>{children}</CosmeticItemLi>;
 }
+
+interface StoreItemHeaderProps {
+  name: string;
+  onRemove?: React.MouseEventHandler;
+}
+
+StoreItem.Header = ({ name, onRemove }: StoreItemHeaderProps) => (
+  <CosmeticItemHeader>
+    <label>{name}</label>
+    {onRemove && <img onClick={onRemove} src={getImageUrl('엑스.svg')} />}
+  </CosmeticItemHeader>
+);
+interface StoreItemImageProps {
+  image: string;
+}
+
+StoreItem.Image = ({ image }: StoreItemImageProps) => (
+  <ItemImage src={getImageUrl(image)} />
+);
+
+StoreItem.Footer = ({ children }: PropsWithChildren) => (
+  <CosmeticItemFooter>{children}</CosmeticItemFooter>
+);

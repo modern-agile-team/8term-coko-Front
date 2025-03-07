@@ -1,6 +1,7 @@
-import { MEDIA, ANIMATIONS } from '@style/constants';
+import { MEDIA, ANIMATIONS, Z_INDEX } from '@style/constants';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
+import { ProfileImageSize } from '@/features/store/types';
 
 export const BadgeWrapper = styled.div`
   display: flex;
@@ -19,13 +20,17 @@ export const BadgeWrapper = styled.div`
     > ul {
       display: flex;
       justify-content: center;
-
-      > li:not(:first-child) {
-        display: none;
-      }
     }
   }
 `;
+
+export const PaginationButton = styled.button<{ $isHidden: boolean }>`
+  background: none;
+  border: none;
+  visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
+  pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
+`;
+
 export const PaginationIcon = styled.img<{ $rotate?: string }>`
   width: 9px;
   height: 20px;
@@ -36,14 +41,12 @@ export const PaginationIcon = styled.img<{ $rotate?: string }>`
     height: 20px;
   }
 `;
-export const PaginationButton = styled.button`
-  background: none;
-  border: none;
-`;
+
 export const BadgeListItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 11px;
+
   > div {
     display: flex;
     justify-content: center;
@@ -55,11 +58,13 @@ export const BadgeListItem = styled.li`
     border: 2px solid #ffe161;
     background: #ffefaa;
   }
+
   > h5 {
     border-radius: 8px;
     border: 2px solid #ffefaa;
     background: #ffe161;
-    color: #fff;
+    color: #ffffff;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
     text-align: center;
     font-size: 12px;
     font-style: normal;
@@ -75,87 +80,186 @@ export const BadgeListItem = styled.li`
     }
   }
 `;
-//추후에 canvas 태그 등으로 변경
+
+export const EmptyBadgeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: #666;
+  font-size: 16px;
+
+  ${MEDIA.mobile} {
+    padding: 0;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+`;
+
+export const BadgeGuideText = styled.p`
+  margin-top: 10px;
+  font-size: 14px;
+  color: #888;
+
+  ${MEDIA.mobile} {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+`;
+
+export const GoToQuestButton = styled.button`
+  margin-top: 14px;
+  padding: 10px 18px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #ffb53d;
+  border: 2px solid #f09900;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 700;
+
+  &:hover {
+    background-color: #e09e2b;
+  }
+
+  ${MEDIA.mobile} {
+    padding: 8px 16px;
+    font-size: 14px;
+    margin-top: 12px;
+    border-radius: 6px;
+  }
+`;
+
 export const MyCharacterImage = styled.img`
-  width: 171px;
-  height: 138px;
+  width: 100%;
+  height: 100%;
   position: absolute;
-  z-index: 1;
 `;
 
 export const MyCharacterBox = styled.div`
   position: relative;
-  width: 170px;
+  width: 171px;
+  height: 138px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
-export const ItemImageHead = styled.img`
-  position: absolute;
-  z-index: 10;
-  top: -20px;
+export const CharacterEquipContainer = styled.div`
+  position: relative;
+  display: flex;
+  width: 171px;
+  height: 138px;
 `;
 
-export const ItemImageBody = styled.img`
+export const CharacterHat = styled.img`
   position: absolute;
-  z-index: 10;
-  top: 70px;
-  right: 19px;
+  object-fit: contain;
+  z-index: ${Z_INDEX.defaultCosmeticItem};
+  left: 26px;
+  top: -22px;
 `;
 
-export const ItemImageAccessori = styled.img`
+export const CharacterGlasses = styled.img`
   position: absolute;
-  z-index: 20;
+  object-fit: contain;
   top: 18px;
-  right: 17px;
+  z-index: ${Z_INDEX.defaultCosmeticItem};
+  left: 28px;
 `;
 
-export const ProfileBox = styled.span<{ $isIcon: boolean }>`
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%; /* 동그란 모양 만들기 */
-  overflow: hidden; /* 동그라미 영역 밖은 잘라내기 */
-  background-color: #f0f0f0; /* 배경색 설정 */
-  > div {
-    transform: translateX(-15px) translateY(5px) scale(1.6);
-  }
-  ${({ $isIcon }) =>
-    $isIcon &&
-    css`
-      width: 30px; /* 프로필 이미지의 가로 크기 */
-      height: 30px; /* 프로필 이미지의 세로 크기 */
-      > div {
-        transform: translateX(-70px) scale(0.35);
-      }
-    `}
+export const CharacterBeard = styled.img`
+  top: 30px;
 `;
-export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
-  width: 150px;
-  height: 150px;
+
+export const CharacterSetup = styled.img`
+  position: absolute;
+  object-fit: contain;
+  left: 26px;
+  z-index: ${Z_INDEX.defaultCosmeticItem};
+  top: 72px;
+`;
+
+export const CharacterShoes = styled.img`
+  position: absolute;
+  object-fit: contain;
+  left: 26px;
+  z-index: ${Z_INDEX.footwear};
+  top: 120px;
+`;
+
+export const ProfileBox = styled.span<{ $size: ProfileImageSize }>`
+  position: absolute;
+  border-radius: 50%; /* 동그란 모양 만들기 */
+  overflow: hidden;
+  background-color: #f0f0f0;
+  ${({ $size }) => {
+    switch ($size) {
+      case 'lg':
+        return css`
+          width: 150px;
+          height: 150px;
+        `;
+      case 'md':
+        return css`
+          width: 65px;
+          height: 65px;
+        `;
+      case 'sm':
+        return css`
+          width: 30px;
+          height: 30px;
+        `;
+    }
+  }}
+`;
+
+export const ProfileBorderBox = styled.div<{ $size: ProfileImageSize }>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-
   > img:first-child {
     position: absolute;
-    z-index: 20;
-    transform: scale(1.6);
+    z-index: ${Z_INDEX.frame};
   }
-
-  ${({ $isIcon }) =>
-    $isIcon &&
-    css`
-      width: 30px;
-      height: 30px;
-      > img:first-child {
-        position: absolute;
-        z-index: 20;
-        transform: scale(0.35);
-      }
-    `}
+  ${({ $size }) => {
+    switch ($size) {
+      case 'lg':
+        return css`
+          width: 150px;
+          height: 150px;
+          > span > div {
+            transform: translateX(-15px) translateY(40px) scale(1.5);
+          }
+          > img:first-child {
+            transform: scale(1.3);
+          }
+        `;
+      case 'md':
+        return css`
+          width: 65px;
+          height: 65px;
+          > span > div {
+            transform: translateX(-60px) translateY(-20px) scale(0.8);
+          }
+          > img:first-child {
+            transform: scale(0.55);
+          }
+        `;
+      case 'sm':
+        return css`
+          width: 30px;
+          height: 30px;
+          > span > div {
+            transform: translateX(-70px) translateY(-45px) scale(0.35);
+          }
+          > img:first-child {
+            transform: scale(0.25);
+          }
+        `;
+    }
+  }}
 `;
 
 export const AttendanceCheckButton = styled.button`
@@ -221,7 +325,7 @@ export const AttendanceDayCell = styled.span`
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  z-index: 1000;
+  z-index: ${Z_INDEX.AttendanceDayCell};
 
   > p {
     position: absolute;
@@ -274,6 +378,47 @@ export const AttendanceCalendarWrapper = styled.div`
       height: 28px;
     }
   }
+`;
+export const SaveButton = styled.button`
+  display: flex;
+  width: 65px;
+  height: 23px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 15px;
+  border: 2px solid #f09900;
+  background: #ffb53d;
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  align-self: center;
+  margin: auto 0 10px 0;
+`;
+
+export const EquipButton = styled.button`
+  display: flex;
+  width: 100px;
+  height: 20px;
+  padding: 4px 12px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  border: 2px solid #f09900;
+  background: #ffb53d;
+  color: var(--white, #fff);
+  font-family: Maplestory;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0.2px;
 `;
 
 export const OpinionsButton = styled.button`
@@ -398,5 +543,28 @@ export const ContentWrapper = styled.div<{ $isMaxLength: boolean }>`
           color: red;
         }
       `}
+  }
+`;
+
+export const SelectWrapper = styled.div`
+  button,
+  ul {
+    width: 120px;
+  }
+  button {
+    border-radius: 15px;
+    height: 30px;
+  }
+  ul {
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+  }
+  li {
+    border: none;
+    border-radius: 15px;
+    &:hover {
+      background-color: gray;
+    }
   }
 `;

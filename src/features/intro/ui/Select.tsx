@@ -55,8 +55,8 @@ Select.Option = function Option({
 
   const { isOpen, toggleIsOpen, onChange } = context;
   const handleOnClick = () => {
-    toggleIsOpen();
     onChange(value);
+    toggleIsOpen();
   };
   return isOpen && <li onClick={handleOnClick}>{label}</li>;
 };

@@ -12,10 +12,12 @@ import { authQuery } from '@features/auth/queries';
 import HeaderItemContainer from '@/common/layout/HeaderItemContainer';
 import HeaderErrorBoundary from '@/features/error/ui/HeaderErrorBoundary';
 import { isLoggedIn } from '@/features/user/service/authUtils';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 
 export default function Header() {
   const { user, clearUser } = useUserStore();
   const { mutate: logout } = authQuery.logout();
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
 
   const { isShow, openModal, closeModal, Modal } = useModal();
   const navigate = useNavigate();
@@ -51,7 +53,11 @@ export default function Header() {
         {isLoggedIn(user) && <HeaderItemContainer user={user} />}
       </HeaderErrorBoundary>
       <S.ProfileWrapper ref={profileRef} onClick={handleProfileClick}>
-        <ProfileImage isIcon={true} />
+        {isLoggedIn(user) ? (
+          <ProfileImage size="sm" equippedItems={equippedItems} />
+        ) : (
+          <S.LoginButton onClick={openModal}>로그인</S.LoginButton>
+        )}
         {user && isOpen && (
           <S.ProfilePopover ref={popoverRef} onClick={e => e.stopPropagation()}>
             <S.UserNameText>{user.name}</S.UserNameText>

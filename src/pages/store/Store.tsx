@@ -1,75 +1,48 @@
-import { useState } from 'react';
 import * as globalS from '@style/styles';
 import * as S from './styles';
 import Header from '@common/layout/Header';
 import MenuBar from '@common/layout/MenuBar';
 import ItemContainer from '@features/store/ui/ItemContainer';
-import CartList from '@features/store/ui/CartList';
-import MyCharacter from '@features/user/ui/MyCharacter';
-import ProfileImage from '@features/user/ui/ProfileImage';
-import type { CosmeticItem } from '@features/store/types';
+import { useMediaQuery, useUnmount } from '@modern-kit/react';
+import StoreMyCharacterSection from '@/features/store/ui/StoreMyCharacterSection';
+import { useCosmeticItemStore } from '@/features/store/store';
+import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
+import { ErrorBoundary } from 'react-error-boundary';
+import ItemFallback from '@/features/error/ui/ItemFallback';
+import { Suspense } from 'react';
+import ItemSkeleton from '@/features/store/ui/ItemSkeleton';
+import StoreSortBar from '@/features/store/ui/StoreSortBar';
 
-const buttonList: { label: string; name: CosmeticItem['category'] }[] = [
-  {
-    label: '의상',
-    name: 'clothes',
-  },
-  {
-    label: '악세사리',
-    name: 'accessories',
-  },
-  {
-    label: '프로필',
-    name: 'profile',
-  },
-  {
-    label: '색상',
-    name: 'color',
-  },
-] as const;
 export default function Store() {
-  const [itemQuery, setItemQuery] =
-    useState<CosmeticItem['category']>('clothes');
+  const { resetEquippedItem } = useCosmeticItemStore();
+  useUnmount(resetEquippedItem);
+
+  const isMobile = useMediaQuery('(min-width: 768px)');
+  const limit = isMobile ? 8 : 4;
+
   return (
     <>
+      <title>코코 상점</title>
       <globalS.Wrapper>
         <globalS.LeftSection>
           <MenuBar />
         </globalS.LeftSection>
         <globalS.RightSection>
           <Header />
-          <S.CartListWrapper>
-            <S.CartLabel>장바구니</S.CartLabel>
-            <CartList />
-          </S.CartListWrapper>
         </globalS.RightSection>
       </globalS.Wrapper>
       <globalS.Layout>
-        <S.MyCharacterSection>
-          <div>
-            <S.Button>내가 구매한 아이템</S.Button>
-            <S.Button>초기화</S.Button>
-          </div>
-          {itemQuery === 'profile' ? (
-            <ProfileImage isIcon={false} />
-          ) : (
-            <MyCharacter />
-          )}
-        </S.MyCharacterSection>
+        <StoreMyCharacterSection />
         <S.StoreItemListSection>
-          <S.FilterListContainer>
-            {buttonList.map(item => (
-              <S.FilterButton
-                key={item.name}
-                onClick={() => setItemQuery(item.name)}
-                $isSelect={itemQuery === item.name}
-              >
-                {item.label}
-              </S.FilterButton>
-            ))}
-          </S.FilterListContainer>
+          <StoreSortBar />
           <S.RedLine />
-          <ItemContainer query={itemQuery} />
+          <QueryErrorBoundary>
+            <ErrorBoundary FallbackComponent={ItemFallback}>
+              <Suspense fallback={<ItemSkeleton limit={limit} />}>
+                <ItemContainer limit={limit} />
+              </Suspense>
+            </ErrorBoundary>
+          </QueryErrorBoundary>
         </S.StoreItemListSection>
       </globalS.Layout>
     </>

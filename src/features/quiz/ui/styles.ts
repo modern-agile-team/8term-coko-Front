@@ -21,6 +21,7 @@ export const QuestionSection = styled.section<{
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   width: 60vw;
   height: 50vh;
@@ -33,6 +34,7 @@ export const QuestionSection = styled.section<{
     padding-left: 5px;
     width: 8px;
   }
+
   &::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
@@ -54,6 +56,7 @@ export const QuestionSection = styled.section<{
     height: 50vh;
   }
 `;
+
 export const TitleWrapper = styled.div<{
   $category: Quiz['category'];
 }>`
@@ -568,7 +571,7 @@ export const SubmitSection = styled.section`
 //응답 버튼
 export const ResponseButton = styled.button<{ $disabled?: boolean }>`
   width: 130px;
-  height: 40px;
+  height: 35px;
   border: 2px solid #ffe8c7;
   gap: 6px;
   border-radius: 24px;

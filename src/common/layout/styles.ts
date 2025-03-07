@@ -284,3 +284,15 @@ export const SkeletonBase = styled.div<{
     border-radius: 4px;
   `}
 `;
+
+export const LoginButton = styled.button`
+  width: 200px;
+  padding: 10px 20px;
+  background-color: #49c0f8;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 4px #38a6dc;
+`;

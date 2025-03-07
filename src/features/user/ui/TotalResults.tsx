@@ -7,11 +7,13 @@ import { useTimeout } from '@modern-kit/react';
 import {
   useUserExperienceQuery,
   useUserPartStatusQuery,
+  userCosmeticItemsQuery,
 } from '@features/user/queries';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import type { Quiz } from '@features/quiz/types';
 import type { PartStatus } from '@features/learn/types';
 import { isCompleted } from '@/features/quiz/utils';
+import MyCharacter from '@/features/user/ui/MyCharacter';
 
 interface TotalResultProps {
   onNext: () => void;
@@ -26,7 +28,7 @@ export default function TotalResults({
   partStatus,
 }: TotalResultProps) {
   const { isCorrectList } = useClientQuizStore();
-
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
   const { data: userExperience, isSuccess } =
     useUserExperienceQuery.getExperience();
   const { mutate: experienceUpdate, isIdle: isExperienceIdle } =
@@ -43,8 +45,9 @@ export default function TotalResults({
   useTimeout(
     () => {
       experienceUpdate({ experience });
-      !isCompleted(partStatus) &&
+      if (!isCompleted(partStatus)) {
         updatePartStatus({ partId, partStatus: 'IN_PROGRESS' });
+      }
     },
     { delay: 1000, enabled: isSuccess }
   );
@@ -70,12 +73,7 @@ export default function TotalResults({
       <S.DashLineHr $color="#00DCE8" />
       <S.TotalResultsRewardDiv>
         <S.ImageDescriptionDiv>
-          <S.Img
-            $width="201px"
-            $height="159px"
-            src={getImageUrl('레벨1코코.svg')}
-            alt="레벨업 이미지"
-          />
+          <MyCharacter equippedItems={equippedItems} />
           <p>Level.{userExperience.level}</p>
         </S.ImageDescriptionDiv>
         <S.TotalResultProgressDiv>
