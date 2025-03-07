@@ -13,7 +13,7 @@ import {
 } from '@/pages/store/styles';
 import { useState } from 'react';
 
-export default function SortBar() {
+export default function StoreSortBar() {
   const { query, setQuery, setCurrentPage } = useCosmeticItemStore();
   const [buttonLabel, setButtonLabel] = useState('전체');
 

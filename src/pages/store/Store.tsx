@@ -4,15 +4,14 @@ import Header from '@common/layout/Header';
 import MenuBar from '@common/layout/MenuBar';
 import ItemContainer from '@features/store/ui/ItemContainer';
 import { useMediaQuery, useUnmount } from '@modern-kit/react';
-import StoreMyCharacterSection from '@/features/user/ui/StoreMyCharacterSection';
+import StoreMyCharacterSection from '@/features/store/ui/StoreMyCharacterSection';
 import { useCosmeticItemStore } from '@/features/store/store';
 import QueryErrorBoundary from '@/features/error/ui/QueryErrorBoundary';
 import { ErrorBoundary } from 'react-error-boundary';
 import ItemFallback from '@/features/error/ui/ItemFallback';
 import { Suspense } from 'react';
 import ItemSkeleton from '@/features/store/ui/ItemSkeleton';
-import SortBar from '@/features/store/ui/SortBar';
-import Skeleton from '@/common/layout/Skeleton';
+import StoreSortBar from '@/features/store/ui/StoreSortBar';
 
 export default function Store() {
   const { resetEquippedItem } = useCosmeticItemStore();
@@ -35,7 +34,7 @@ export default function Store() {
       <globalS.Layout>
         <StoreMyCharacterSection />
         <S.StoreItemListSection>
-          <SortBar />
+          <StoreSortBar />
           <S.RedLine />
           <QueryErrorBoundary>
             <ErrorBoundary FallbackComponent={ItemFallback}>
