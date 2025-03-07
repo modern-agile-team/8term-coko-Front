@@ -63,7 +63,7 @@ export default function StoreMyCharacterSection() {
               $borderColor="#01F152"
               onClick={toggleIsMyItemsVisible}
             >
-              내가 구매한 아이템
+              {isMyItemsVisible ? '아이템 미리보기' : '내가 구매한 아이템'}
             </StoreButton>
           )}
 
