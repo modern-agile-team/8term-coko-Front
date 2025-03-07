@@ -158,41 +158,6 @@ export const CartListWrapper = styled.section<{ $isMobileHidden: boolean }>`
   }
 `;
 
-export const StoreSortDropDown = styled.ul<{ $isSelect: boolean }>`
-  border-radius: 15px 15px 0px 0px;
-  width: 79px;
-  height: 23px;
-  background: #ff4949;
-  position: relative;
-  list-style: none;
-  text-align: center;
-  cursor: pointer;
-  z-index: 100;
-
-  > li {
-    margin: 0;
-    width: 100%;
-    border: 2px solid #ff4949;
-    border-width: 0 2px 2px 2px;
-    background: #f4f4f4;
-
-    &:hover {
-      background: #ff4949;
-      color: #fff;
-    }
-  }
-  > :first-child {
-    border-radius: 15px 15px 0px 0px;
-    border: none;
-    color: #fff;
-    background: #ff4949;
-  }
-  > :last-child {
-    border-top: none;
-    border-radius: 0px 0px 15px 15px;
-  }
-`;
-
 export const CosmeticItemHeader = styled.div`
   label {
     width: 73px;
@@ -304,4 +269,17 @@ export const ConfirmButtonListWrapper = styled.div`
     border: 2px solid #01f152;
     background: #49ff87;
   }
+`;
+
+export const TotalPriceBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 144px;
+  height: 125px;
+  border-radius: 8px;
+  border: 2px solid #a5ecf0;
+  background: #f4f4f4;
+  color: #1fe3ed;
+  text-align: center;
 `;

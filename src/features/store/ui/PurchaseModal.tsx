@@ -1,12 +1,11 @@
 import { CosmeticItem } from '@/features/store/types';
 import CosmeticItemCheckOut from '@/features/store/ui/CosmeticItemCheckOut';
-import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 import useModal from '@/hooks/useModal';
 import { isAxiosError } from 'axios';
 import toast from 'react-hot-toast';
-import useFunnel from './../../../hooks/useFunnel';
-import { useState } from 'react';
 import { useCosmeticItemStore } from '@/features/store/store';
+import { useToggle } from '@modern-kit/react';
 
 interface PurchaseModalProps {
   selectCosmeticItem: CosmeticItem;
@@ -20,28 +19,30 @@ export default function PurchaseModal({
   isShow,
 }: PurchaseModalProps) {
   const { Modal } = useModal();
-  const { mutate: purchaseItem } = useUserCosmeticItemsQuery.purchaseItem();
+  const { mutate: purchaseItem } = userCosmeticItemsQuery.usePurchaseItem();
   const { mutate: updateEquippedItems } =
-    useUserCosmeticItemsQuery.updateEquippedItems();
-  const [isSuccess, setIsSuccess] = useState(false);
+    userCosmeticItemsQuery.useUpdateEquippedItems();
   const { toggleIsMyItemsVisible } = useCosmeticItemStore();
 
-  const handleAccept = () => {
-    if (isSuccess) {
-      updateEquippedItems({
-        itemIds: [selectCosmeticItem.id],
-        isEquipped: true,
-      });
-      closeModal();
-      return;
-    }
+  const [isPurchaseSuccess, toggleIsPurchaseSuccess] = useToggle(false);
+
+  const equipItem = () => {
+    updateEquippedItems({
+      itemIds: [selectCosmeticItem.id],
+      isEquipped: true,
+    });
+    closeModal();
+    toggleIsMyItemsVisible();
+    toggleIsPurchaseSuccess();
+  };
+
+  const purchaseItemAction = () => {
     purchaseItem(
       { itemIds: [selectCosmeticItem.id] },
       {
         onSuccess: () => {
           toast.success('아이템 구매 성공!');
-          setIsSuccess(true);
-          toggleIsMyItemsVisible();
+          toggleIsPurchaseSuccess();
         },
         onError: error => {
           if (isAxiosError(error)) {
@@ -57,6 +58,14 @@ export default function PurchaseModal({
     );
   };
 
+  const handleAccept = () => {
+    if (isPurchaseSuccess) {
+      equipItem();
+    } else {
+      purchaseItemAction();
+    }
+  };
+
   return (
     <Modal isShow={isShow}>
       <CosmeticItemCheckOut>
@@ -68,7 +77,7 @@ export default function PurchaseModal({
               price={selectCosmeticItem.price}
             />
 
-            <p>{isSuccess ? '바로 장착할래?' : '구매할래?'}</p>
+            <p>{isPurchaseSuccess ? '바로 장착하기' : `구매하기`}</p>
           </>
         </CosmeticItemCheckOut.DetailBox>
         <CosmeticItemCheckOut.ConfirmButtonList

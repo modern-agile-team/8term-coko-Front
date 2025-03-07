@@ -1,5 +1,4 @@
 import api from '@/axios/instance';
-import { flatMap } from '@modern-kit/utils';
 import { EVENT_CHALLENGE_GROUP } from '@features/user/constants';
 import type {
   ExperiencedUser,
@@ -15,10 +14,12 @@ import type { Section, Part, PartStatus } from '@features/learn/types';
 import type { Quiz } from '@features/quiz/types';
 import type { RankingSort } from '@features/ranking/types';
 import {
+  CosmeticItem,
   CosmeticItemsQueryParams,
   PaginationCosmeticItem,
 } from '@/features/store/types';
 import type { DailyQuestResponse } from '@features/quest/types';
+import { flatMap } from '@modern-kit/utils';
 
 export const usersApis = {
   putQuizzesProgress: ({
@@ -109,6 +110,10 @@ export const usersItemsApi = {
     params?: CosmeticItemsQueryParams
   ): Promise<PaginationCosmeticItem> => {
     const response = await api.get('/users/me/items', { params });
+    return response.data;
+  },
+  getEquippedItems: async (): Promise<CosmeticItem[]> => {
+    const response = await api.get('/users/me/items/equipped');
     return response.data;
   },
 

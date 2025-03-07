@@ -3,7 +3,7 @@ import {
   CosmeticItemOption,
   CosmeticItemsQueryParams,
 } from '@/features/store/types';
-import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 const cosmeticItemKeys = {
@@ -25,19 +25,20 @@ const cosmeticItemKeys = {
     ] as const,
 };
 
-export const useCosmeticItemQuery = {
-  getCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
+export const cosmeticItemQuery = {
+  useGetCosmeticItemByPage: (params: CosmeticItemsQueryParams) =>
     useSuspenseQuery({
       queryKey: cosmeticItemKeys.paginationWithCategory(params),
       queryFn: () => cosmeticItemApis.getCosmeticItemByPage(params),
     }),
-  getCosmeticItem: (
+  useGetCosmeticItem: (
     params: CosmeticItemsQueryParams & { isMyItemsVisible: boolean }
   ) => {
     const { isMyItemsVisible, ...restProps } = params;
     const useCosmeticItemQueryToUse = isMyItemsVisible
-      ? useUserCosmeticItemsQuery.getMyCosmeticItemByPage
-      : useCosmeticItemQuery.getCosmeticItemByPage;
+      ? userCosmeticItemsQuery.useGetMyCosmeticItemByPage
+      : cosmeticItemQuery.useGetCosmeticItemByPage;
+
     return useCosmeticItemQueryToUse(restProps);
   },
 };

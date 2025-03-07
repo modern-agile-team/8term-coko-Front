@@ -16,7 +16,7 @@ export default function PreviewMyCharacter() {
             )}
           />
         ) : (
-          <S.MyCharacterImage src={getImageUrl('벗은코코.svg')} />
+          <S.MyCharacterImage src={getImageUrl('파랑-코코.svg')} />
         )}
         <S.CharacterEquipContainer>
           {Object.entries(COSMETIC_COMPONENTS).map(([key, Component]) => {

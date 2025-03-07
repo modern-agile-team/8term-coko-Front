@@ -1,6 +1,9 @@
 import * as S from './styles';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
-import { useUserRankingQuery } from '@features/user/queries';
+import {
+  useUserRankingQuery,
+  userCosmeticItemsQuery,
+} from '@features/user/queries';
 import useUserStore from '@store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
 import MyRankSkeleton from './MyRankSkeleton';
@@ -22,6 +25,7 @@ export default function MyRank({
   const { data, isLoading } = useUserRankingQuery.getRanking(
     RANKING_OPTIONS[selectedOption].dataField
   );
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
 
   const { user } = useUserStore();
 
@@ -64,6 +68,7 @@ export default function MyRank({
         selectedOption={selectedOption}
         value={user?.[RANKING_OPTIONS[selectedOption].dataField] ?? 0}
         isMyRank
+        equippedItems={equippedItems}
       />
     </S.MyRankingContainer>
   );

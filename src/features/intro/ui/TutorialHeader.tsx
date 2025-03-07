@@ -20,7 +20,7 @@ export default function TutorialHeader() {
         />
       </>
       <ProfileWrapper>
-        <ProfileImage isIcon={true} />
+        <ProfileImage size="sm" />
       </ProfileWrapper>
     </HeaderBox>
   );

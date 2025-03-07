@@ -1,54 +1,39 @@
 import { getImageUrl } from '@utils/getImageUrl';
-
 import * as S from './styles';
-import { useUserCosmeticItemsQuery } from '@/features/user/queries';
-import { SkeletonBase } from '@/common/layout/styles';
+import { COSMETIC_COMPONENTS } from '@/features/store/constants';
+import { CosmeticItem } from '@/features/store/types';
 
-//백엔드 내가 입은 아이템 api 나오면 COSMETIC_COMPONENTS로 수정
-const characterEquipMapping = {
-  1: S.CharacterSetup,
-  2: S.CharacterShoes,
-  3: S.CharacterHat,
-  4: S.CharacterGlasses,
-  5: S.CharacterBeard,
-  8: S.MyCharacterImage,
-} as const;
+interface MyCharacterProps {
+  equippedItems?: CosmeticItem[];
+}
 
-export default function MyCharacter() {
-  const { data: userEquippedItems } =
-    useUserCosmeticItemsQuery.getEquippedItem();
+export default function MyCharacter({ equippedItems = [] }: MyCharacterProps) {
+  const equippedItemMap = equippedItems.reduce<{ [key: number]: string }>(
+    (prev, item) => {
+      prev[item.subCategoryId] = item.image;
+      return prev;
+    },
+    {}
+  );
 
-  if (!userEquippedItems) {
-    return <SkeletonBase />;
-  }
+  const renderEquippedItems = () => {
+    if (equippedItemMap) {
+      return Object.entries(COSMETIC_COMPONENTS).map(([key, Component]) => {
+        const item = equippedItemMap[Number(key)];
+        return item && <Component key={key} src={getImageUrl(item)} />;
+      });
+    }
+  };
 
-  const renderEquipItems = () =>
-    userEquippedItems.map(item => {
-      if (!item.subCategoryId) {
-        return null;
-      }
-      const EquipComponent =
-        characterEquipMapping[
-          item.subCategoryId as keyof typeof characterEquipMapping
-        ];
-      if (!EquipComponent) return null;
-
-      return (
-        <EquipComponent
-          key={item.subCategoryId}
-          src={
-            item.subCategoryId === 8
-              ? getImageUrl(`${item.image.slice(0, 2)}-코코.svg`)
-              : getImageUrl(item.image)
-          }
-        />
-      );
-    });
+  const characterColorImage = equippedItemMap[8]
+    ? `${equippedItemMap[8].slice(0, 2)}-코코.svg`
+    : '파랑-코코.svg';
 
   return (
     <S.MyCharacterBox>
       <S.CharacterEquipContainer>
-        {renderEquipItems()}
+        {<S.MyCharacterImage src={getImageUrl(characterColorImage)} />}
+        {renderEquippedItems()}
       </S.CharacterEquipContainer>
     </S.MyCharacterBox>
   );

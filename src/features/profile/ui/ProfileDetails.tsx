@@ -6,6 +6,7 @@ import ProgressBar from '@features/progress/ui/ProgressBar';
 import BadgeContainer from '@features/user/ui/BadgeContainer';
 import { Dispatch, SetStateAction } from 'react';
 import type { ChallengeItem } from '@features/user/types';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 
 interface ProfileDetailsProps {
   userName: string;
@@ -36,12 +37,13 @@ export default function ProfileDetails({
   setPage,
   totalPage,
 }: ProfileDetailsProps) {
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
   return (
     <>
       <S.ProfileSection>
         <div>
           <div style={{ marginTop: '50px' }}>
-            <ProfileImage isIcon={false} />
+            <ProfileImage equippedItems={equippedItems} size="lg" />
           </div>
           <S.UserNameLabel>{userName}</S.UserNameLabel>
           <S.JoinDateLabel>{formatDate(userJoinDate)}</S.JoinDateLabel>

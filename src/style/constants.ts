@@ -76,10 +76,14 @@ export const Z_INDEX = {
   overlay: 10000,
   tutorial: 10001,
   learnHeader: 1000,
+  AttendanceDayCell: 1000,
   menu: 99,
   header: 1001,
   popover: 101,
   loading: 9999,
+  defaultCosmeticItem: 30,
+  footwear: 20,
+  frame: 20,
 } as const;
 
 export const MEDIA = {

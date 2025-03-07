@@ -5,7 +5,6 @@ export interface CosmeticItem {
   image: string;
   mainCategoryId: number;
   subCategoryId: number;
-  category: 'clothes' | 'accessories' | 'profile' | 'color';
   isEquipped?: boolean;
 }
 
@@ -25,3 +24,5 @@ type CosmeticItemsQueryParams = CosmeticItemOption['query'] & {
   page: number;
   limit: number;
 };
+
+export type ProfileImageSize = 'lg' | 'md' | 'sm';

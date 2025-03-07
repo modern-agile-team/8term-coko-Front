@@ -1,20 +1,23 @@
 import CartList from '@/features/store/ui/CartList';
 import MyCharacter from '@/features/user/ui/MyCharacter';
 import { MyCharacterSection, StoreButton } from '@/pages/store/styles';
-import useModal from './../../../hooks/useModal';
-import { useUserCosmeticItemsQuery } from '@/features/user/queries';
+import useModal from '../../../hooks/useModal';
+import { userCosmeticItemsQuery } from '@/features/user/queries';
 import { useCosmeticItemStore } from '@/features/store/store';
 import ProfileImage from '@/features/user/ui/ProfileImage';
-import useUserStore from './../../../store/useUserStore';
+import useUserStore from '../../../store/useUserStore';
 import { isLoggedIn } from '@/features/user/service/authUtils';
 import PreviewMyCharacter from '@/features/store/ui/PreviewMyCharacter';
 import PreViewProfileImage from '@/features/store/ui/PreviewMyProfileImage';
+import { Suspense } from 'react';
+import { SkeletonBase } from '@/common/layout/styles';
 
 export default function StoreMyCharacterSection() {
+  const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
   const { Modal, isShow, openModal, closeModal } = useModal();
 
   const { mutate: resetEquippedItemMutate } =
-    useUserCosmeticItemsQuery.resetEquippedItems();
+    userCosmeticItemsQuery.useResetEquippedItems();
   const { user } = useUserStore();
 
   const { toggleIsMyItemsVisible, resetEquippedItem, query, isMyItemsVisible } =
@@ -23,12 +26,16 @@ export default function StoreMyCharacterSection() {
   const renderCharacterPreview = () => {
     if (query.mainCategoryId === 3) {
       return isMyItemsVisible ? (
-        <ProfileImage isIcon={false} />
+        <ProfileImage size="lg" equippedItems={equippedItems} />
       ) : (
         <PreViewProfileImage />
       );
     }
-    return isMyItemsVisible ? <MyCharacter /> : <PreviewMyCharacter />;
+    return isMyItemsVisible ? (
+      <MyCharacter equippedItems={equippedItems} />
+    ) : (
+      <PreviewMyCharacter />
+    );
   };
 
   const handleRest = () => {
@@ -68,7 +75,13 @@ export default function StoreMyCharacterSection() {
             초기화
           </StoreButton>
         </div>
-        <div>{renderCharacterPreview()}</div>
+        <div>
+          {
+            <Suspense fallback={<SkeletonBase width="100px" height="100px" />}>
+              {renderCharacterPreview()}
+            </Suspense>
+          }
+        </div>
         <div>
           <StoreButton
             $backgroundColor="#FFB53D"

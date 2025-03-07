@@ -125,3 +125,40 @@ export const StoreButton = styled.button<StoreButtonProps>`
   color: inherit;
   font: inherit;
 `;
+
+export const SelectWrapper = styled.div<{ $isSelect: boolean }>`
+  width: 79px;
+  > div {
+    width: 100%;
+  }
+  button {
+    height: 23px;
+    border-radius: 15px;
+    border: 2px solid #ff4949;
+    background: ${({ $isSelect }) => ($isSelect ? '#FF4949' : '#f4f4f4')};
+    color: ${({ $isSelect }) => ($isSelect ? '#fff' : 'inherit')};
+    font: inherit;
+  }
+  ul {
+    width: 79px;
+    border-radius: 15px;
+    background: #f4f4f4;
+  }
+  li {
+    border: 2px solid #e8080c;
+    border-bottom: none;
+    &:first-child {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    &:last-child {
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      border-bottom: 2px solid #e8080c;
+    }
+    &:hover {
+      color: #fff;
+      background: #ff4949;
+    }
+  }
+`;

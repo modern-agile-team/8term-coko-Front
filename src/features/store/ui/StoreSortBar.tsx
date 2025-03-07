@@ -1,52 +1,116 @@
-import { CosmeticItemOption } from '@/features/store/types';
-import { StoreSortDropDown } from '@/features/store/ui/styles';
-import { FilterButton } from '@/pages/store/styles';
+import Select from '@/features/intro/ui/Select';
+import {
+  CLOTHES_OPTIONS,
+  ACCESSORIES_OPTIONS,
+  BUTTON_LIST,
+} from '@/features/store/constants';
 import { useCosmeticItemStore } from '@/features/store/store';
-import { useOutsidePointerDown, useToggle } from '@modern-kit/react';
-import { useEffect, useState } from 'react';
+import { CosmeticItemOption } from '@/features/store/types';
+import {
+  FilterButton,
+  FilterListContainer,
+  SelectWrapper,
+} from '@/pages/store/styles';
+import { useState } from 'react';
 
-interface StoreSortBarProps {
-  items: CosmeticItemOption[];
-}
-
-export default function StoreSortBar({ items }: StoreSortBarProps) {
-  const [isOpen, toggleIsOpen] = useToggle();
-  const dropDownRef = useOutsidePointerDown<HTMLUListElement>(toggleIsOpen);
-  const [currentLabel, setCurrentLabel] = useState<string | null>(null);
+export default function StoreSortBar() {
   const { query, setQuery, setCurrentPage } = useCosmeticItemStore();
+  const [buttonLabel, setButtonLabel] = useState('전체');
 
-  const handleItemClick = (item: CosmeticItemOption) => {
+  const handleFilter = (query: CosmeticItemOption['query']) => {
     setCurrentPage(1);
-    setQuery(item.query);
-    setCurrentLabel(item.label);
-    toggleIsOpen();
+    setQuery(query);
   };
 
-  useEffect(() => {
-    if (items[0].query.mainCategoryId !== query.mainCategoryId) {
-      setCurrentLabel(null);
-    }
-  }, [query]);
-
-  if (isOpen) {
-    return (
-      <StoreSortDropDown $isSelect={isOpen} ref={dropDownRef}>
-        {items.map((item, index) => (
-          <li key={item.label} onClick={() => handleItemClick(item)}>
-            {item.label}
-            {index === 0 && '  ▼'}
-          </li>
-        ))}
-      </StoreSortDropDown>
-    );
-  }
+  const handleSelect = ({
+    value,
+    label,
+  }: {
+    value: CosmeticItemOption['query'];
+    label: string;
+  }) => {
+    setCurrentPage(1);
+    setButtonLabel(label);
+    setQuery(value);
+  };
 
   return (
-    <FilterButton
-      $isSelect={items[0].query.mainCategoryId === query.mainCategoryId}
-      onClick={toggleIsOpen}
-    >
-      {currentLabel || items[0].label} ▲
-    </FilterButton>
+    <FilterListContainer>
+      {/* 전체 요청 */}
+      <FilterButton
+        $isSelect={query.mainCategoryId === 0}
+        onClick={() => handleFilter({ mainCategoryId: 0, subCategoryId: 0 })}
+      >
+        전체
+      </FilterButton>
+      {/* 의상 셀렉트박스 */}
+      <SelectWrapper $isSelect={query.mainCategoryId === 1}>
+        <Select
+          buttonName={
+            CLOTHES_OPTIONS.some(value => value.label === buttonLabel)
+              ? buttonLabel + ' ▲'
+              : '의상 ▲'
+          }
+          onChange={value => {
+            const [subId, label] = value.split(',');
+            handleSelect({
+              value: {
+                mainCategoryId: 1,
+                subCategoryId: Number(subId),
+              },
+              label,
+            });
+          }}
+        >
+          <Select.Option value="0,의상" label="의상 ▼" />
+          {CLOTHES_OPTIONS.map(item => (
+            <Select.Option
+              key={item.label}
+              value={`${item.query.subCategoryId},${item.label}`}
+              label={item.label}
+            />
+          ))}
+        </Select>
+      </SelectWrapper>
+      {/* 액세서리 셀렉트박스 */}
+      <SelectWrapper $isSelect={query.mainCategoryId === 2}>
+        <Select
+          buttonName={
+            ACCESSORIES_OPTIONS.some(value => value.label === buttonLabel)
+              ? buttonLabel + ' ▲'
+              : '액세서리 ▲'
+          }
+          onChange={value => {
+            const [subId, label] = value.split(',');
+            handleSelect({
+              value: {
+                mainCategoryId: 2,
+                subCategoryId: Number(subId),
+              },
+              label,
+            });
+          }}
+        >
+          <Select.Option value="0,액세서리" label="액세서리 ▼" />
+          {ACCESSORIES_OPTIONS.map(item => (
+            <Select.Option
+              key={item.label}
+              value={`${item.query.subCategoryId},${item.label}`}
+              label={item.label}
+            />
+          ))}
+        </Select>
+      </SelectWrapper>
+      {/* 프로필, 색상 선택 박스 */}
+      {BUTTON_LIST.map(item => (
+        <FilterButton
+          key={item.label}
+          onClick={() => handleFilter(item.query)}
+          $isSelect={query.mainCategoryId === item.query.mainCategoryId}
+        >
+          {item.label}
+        </FilterButton>
+      ))}
+    </FilterListContainer>
   );
 }

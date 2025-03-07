@@ -1,6 +1,7 @@
-import { MEDIA, ANIMATIONS } from '@style/constants';
+import { MEDIA, ANIMATIONS, Z_INDEX } from '@style/constants';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { css, styled } from 'styled-components';
+import { ProfileImageSize } from '@/features/store/types';
 
 export const BadgeWrapper = styled.div`
   display: flex;
@@ -134,7 +135,6 @@ export const MyCharacterImage = styled.img`
   width: 100%;
   height: 100%;
   position: absolute;
-  z-index: 1;
 `;
 
 export const MyCharacterBox = styled.div`
@@ -155,7 +155,7 @@ export const CharacterEquipContainer = styled.div`
 export const CharacterHat = styled.img`
   position: absolute;
   object-fit: contain;
-  z-index: 30;
+  z-index: ${Z_INDEX.defaultCosmeticItem};
   left: 26px;
   top: -22px;
 `;
@@ -164,7 +164,7 @@ export const CharacterGlasses = styled.img`
   position: absolute;
   object-fit: contain;
   top: 18px;
-  z-index: 30;
+  z-index: ${Z_INDEX.defaultCosmeticItem};
   left: 28px;
 `;
 
@@ -176,7 +176,7 @@ export const CharacterSetup = styled.img`
   position: absolute;
   object-fit: contain;
   left: 26px;
-  z-index: 30;
+  z-index: ${Z_INDEX.defaultCosmeticItem};
   top: 72px;
 `;
 
@@ -184,55 +184,82 @@ export const CharacterShoes = styled.img`
   position: absolute;
   object-fit: contain;
   left: 26px;
-  z-index: 20;
+  z-index: ${Z_INDEX.footwear};
   top: 120px;
 `;
 
-export const ProfileBox = styled.span<{ $isIcon: boolean }>`
+export const ProfileBox = styled.span<{ $size: ProfileImageSize }>`
   position: absolute;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+  border-radius: 50%; /* 동그란 모양 만들기 */
   overflow: hidden;
   background-color: #f0f0f0;
-  > div {
-    transform: translateX(-15px) translateY(50px) scale(1.6);
-  }
-  ${({ $isIcon }) =>
-    $isIcon &&
-    css`
-      width: 30px;
-      height: 30px;
-      > div {
-        transform: translateX(-70px) translateY(-50px) scale(0.35);
-      }
-    `}
+  ${({ $size }) => {
+    switch ($size) {
+      case 'lg':
+        return css`
+          width: 150px;
+          height: 150px;
+        `;
+      case 'md':
+        return css`
+          width: 65px;
+          height: 65px;
+        `;
+      case 'sm':
+        return css`
+          width: 30px;
+          height: 30px;
+        `;
+    }
+  }}
 `;
-export const ProfileBorderBox = styled.div<{ $isIcon: boolean }>`
-  width: 150px;
-  height: 150px;
+
+export const ProfileBorderBox = styled.div<{ $size: ProfileImageSize }>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-
   > img:first-child {
     position: absolute;
-    z-index: 20;
-    transform: scale(1.3);
+    z-index: ${Z_INDEX.frame};
   }
-
-  ${({ $isIcon }) =>
-    $isIcon &&
-    css`
-      width: 30px;
-      height: 30px;
-      > img:first-child {
-        position: absolute;
-        z-index: 20;
-        transform: scale(0.25);
-      }
-    `}
+  ${({ $size }) => {
+    switch ($size) {
+      case 'lg':
+        return css`
+          width: 150px;
+          height: 150px;
+          > span > div {
+            transform: translateX(-15px) translateY(40px) scale(1.5);
+          }
+          > img:first-child {
+            transform: scale(1.3);
+          }
+        `;
+      case 'md':
+        return css`
+          width: 65px;
+          height: 65px;
+          > span > div {
+            transform: translateX(-60px) translateY(-20px) scale(0.8);
+          }
+          > img:first-child {
+            transform: scale(0.55);
+          }
+        `;
+      case 'sm':
+        return css`
+          width: 30px;
+          height: 30px;
+          > span > div {
+            transform: translateX(-70px) translateY(-45px) scale(0.35);
+          }
+          > img:first-child {
+            transform: scale(0.25);
+          }
+        `;
+    }
+  }}
 `;
 
 export const AttendanceCheckButton = styled.button`
@@ -298,7 +325,7 @@ export const AttendanceDayCell = styled.span`
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  z-index: 1000;
+  z-index: ${Z_INDEX.AttendanceDayCell};
 
   > p {
     position: absolute;
