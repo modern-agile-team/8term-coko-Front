@@ -69,13 +69,13 @@ export default function Header() {
             >
               프로필
             </S.UserInfoButton>
-            <S.UserInfoButton
+            {/* <S.UserInfoButton
               $backgroundColor="#3DFF4A"
               $boxShadow="0 2px #00EB6A"
               onClick={() => navigate('/setting')}
             >
               설정
-            </S.UserInfoButton>
+            </S.UserInfoButton> */}
             <S.UserInfoButton
               $backgroundColor="#FF3F3D"
               $boxShadow="0 2px #EB0000"
