@@ -228,8 +228,8 @@ export const useUserPartStatusQuery = {
   },
 };
 
-export const useUserProgressQuery = {
-  getProgress: (params?: {
+export const usersProgressQuery = {
+  useGetProgress: (params?: {
     sectionId?: Section['id'];
     partId?: Part['id'];
   }) => {
@@ -240,7 +240,7 @@ export const useUserProgressQuery = {
       enabled: isLoggedIn(user),
     });
   },
-  updateQuizProgress: () => {
+  useUpdateQuizProgress: () => {
     return useMutation({ mutationFn: usersApi.putQuizzesProgress });
   },
 };

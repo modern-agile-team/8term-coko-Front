@@ -9,8 +9,8 @@ import { MEDIA_QUERY_MAP } from '@style/constants';
 import useUserStore from '@store/useUserStore';
 import calculateCycleProgress from '@utils/calculateCycleProgress';
 import {
-  useUserProgressQuery,
-  useUserChallengesQuery,
+  usersProgressQuery,
+  usersChallengesQuery,
 } from '@features/user/queries';
 
 export default function Profile() {
@@ -27,7 +27,7 @@ export default function Profile() {
     step: 10,
   });
 
-  const { data: progressData } = useUserProgressQuery.getProgress();
+  const { data: progressData } = usersProgressQuery.useGetProgress();
   const currentProgress = progressData?.correctUserProgressCount || 0;
   const maxProgress = progressData?.totalQuizCount || 1;
   const solvedCount = progressData?.totalUserProgressCount || 0;
@@ -41,7 +41,7 @@ export default function Profile() {
   const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
   const limit = isMobile ? 1 : 4;
 
-  const { data: challengesData } = useUserChallengesQuery.getChallenges({
+  const { data: challengesData } = usersChallengesQuery.useGetChallenges({
     page,
     limit,
     completed: true,
