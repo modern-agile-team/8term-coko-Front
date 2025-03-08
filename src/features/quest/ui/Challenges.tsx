@@ -1,16 +1,17 @@
 import * as S from './styles';
 import QuestSection from '@features/quest/ui/QuestSection';
 import ChallengeBadge from '@features/quest/ui/ChallengeBadge';
+import ChallengeBadgeSkeleton from '@features/quest/ui/ChallengeBadgeSkeleton';
 import { useState } from 'react';
 import { objectKeys } from '@modern-kit/utils';
 import { isLoggedIn } from '@features/user/service/authUtils';
+import useUserStore from '@/store/useUserStore';
 import { usersChallengesQuery } from '@/features/user/queries';
 import {
   CHALLENGE_TYPE_COLORS,
   CHALLENGE_TYPE_LABELS,
 } from '@/features/user/constants';
 import type { BaseChallengeType } from '@/features/user/types';
-import useUserStore from '@/store/useUserStore';
 
 export default function Challenge() {
   const { user } = useUserStore();
@@ -50,7 +51,7 @@ export default function Challenge() {
 
           <S.ChallengeGrid>
             {isLoading ? (
-              <div>로딩 중...</div>
+              <ChallengeBadgeSkeleton />
             ) : (
               data?.contents.map(item => (
                 <ChallengeBadge key={item.id} challengeItem={item} />
