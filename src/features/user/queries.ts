@@ -22,6 +22,7 @@ import {
   CosmeticItemsQueryParams,
 } from '@/features/store/types';
 import { BaseChallengeType } from '@features/user/types';
+import { rankingKeys } from '@/features/ranking/queries';
 
 export const userKeys = {
   all: ['users'] as const,
@@ -319,6 +320,9 @@ export const userCosmeticItemsQuery = {
       onSettled: () => {
         queryClient.invalidateQueries({
           queryKey: userKeys.cosmeticItems.root(),
+        });
+        queryClient.invalidateQueries({
+          queryKey: rankingKeys.all,
         });
       },
     });

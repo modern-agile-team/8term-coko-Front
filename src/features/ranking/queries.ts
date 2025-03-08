@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import rankingApis from './apis';
 import type { RankingSort } from './types';
 
-const rankingKeys = {
+export const rankingKeys = {
   all: ['rankings'] as const,
   personal: (sort: RankingSort) =>
     ['users', 'me', ...rankingKeys.all, sort] as const,
