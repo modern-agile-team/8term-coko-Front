@@ -5,11 +5,11 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 import {
-  usersApis,
+  usersApi,
   usersHpApi,
   usersOpinionsApi,
-  userQuestApi,
-  userChallengesApi,
+  usersQuestApi,
+  usersChallengesApi,
   usersItemsApi,
 } from '@features/user/apis';
 import type { ExperiencedUser } from '@features/user/types';
@@ -124,7 +124,7 @@ export const useUserExperienceQuery = {
   getExperience: () => {
     return useQuery({
       queryKey: userKeys.experience(),
-      queryFn: () => usersApis.getExperience(),
+      queryFn: () => usersApi.getExperience(),
       gcTime: 0,
       staleTime: 0,
     });
@@ -132,7 +132,7 @@ export const useUserExperienceQuery = {
   updateExperience: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.patchExperience,
+      mutationFn: usersApi.patchExperience,
       onMutate: async newExperience => {
         await queryClient.cancelQueries({
           queryKey: userKeys.experience(),
@@ -180,7 +180,7 @@ export const useUserQuizzesQuery = {
   getQuizzes: ({ partId }: { partId: number }) => {
     return useSuspenseQuery({
       queryKey: userKeys.partQuizzes(partId),
-      queryFn: () => usersApis.getQuizzes({ partId }),
+      queryFn: () => usersApi.getQuizzes({ partId }),
       gcTime: 0,
       staleTime: 0,
     });
@@ -191,7 +191,7 @@ export const useUserPointQuery = {
   updatePoint: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.patchPoint,
+      mutationFn: usersApi.patchPoint,
       onSettled: () => {
         queryClient.invalidateQueries({
           queryKey: userKeys.all,
@@ -205,7 +205,7 @@ export const useUserPartStatusQuery = {
   updatePartStatus: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.patchPartStatus,
+      mutationFn: usersApi.patchPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
         queryClient.invalidateQueries({
@@ -217,7 +217,7 @@ export const useUserPartStatusQuery = {
   updateCompletedPartStatus: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.patchCompletedPartStatus,
+      mutationFn: usersApi.patchCompletedPartStatus,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.progress.root() });
         queryClient.invalidateQueries({
@@ -236,12 +236,12 @@ export const useUserProgressQuery = {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.progress.detail(params?.sectionId, params?.partId),
-      queryFn: () => usersApis.getProgress(params),
+      queryFn: () => usersApi.getProgress(params),
       enabled: isLoggedIn(user),
     });
   },
   updateQuizProgress: () => {
-    return useMutation({ mutationFn: usersApis.putQuizzesProgress });
+    return useMutation({ mutationFn: usersApi.putQuizzesProgress });
   },
 };
 
@@ -250,7 +250,7 @@ export const useUserRankingQuery = {
     const { user } = useUserStore();
     return useQuery({
       queryKey: userKeys.ranking(sort),
-      queryFn: () => usersApis.getRanking({ sort }),
+      queryFn: () => usersApi.getRanking({ sort }),
       enabled: isLoggedIn(user),
     });
   },
@@ -260,18 +260,18 @@ export const useUserAttendanceQuery = {
   getAttendanceList: (params: { year: number; month: number }) => {
     return useSuspenseQuery({
       queryKey: userKeys.attendance.list(),
-      queryFn: () => usersApis.getAttendanceList(params),
+      queryFn: () => usersApi.getAttendanceList(params),
     });
   },
   getAttendance: () =>
     useSuspenseQuery({
       queryKey: userKeys.attendance.root(),
-      queryFn: usersApis.getAttendance,
+      queryFn: usersApi.getAttendance,
     }),
   recordAttendance: () => {
     const queryClient = useQueryClient();
     return useMutation({
-      mutationFn: usersApis.postAttendance,
+      mutationFn: usersApi.postAttendance,
       onSettled: () => {
         queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
       },
@@ -329,13 +329,13 @@ export const userCosmeticItemsQuery = {
   },
 };
 
-export const useUserQuestQuery = {
-  getDailyQuest: () => {
+export const usersQuestQuery = {
+  useGetDailyQuest: () => {
     const { user } = useUserStore();
 
     return useQuery({
       queryKey: userKeys.daily(),
-      queryFn: userQuestApi.getDailyQuest,
+      queryFn: usersQuestApi.getDailyQuest,
       gcTime: 0,
       staleTime: 0,
       enabled: isLoggedIn(user),
@@ -343,8 +343,8 @@ export const useUserQuestQuery = {
   },
 };
 
-export const useUserChallengesQuery = {
-  getChallenges: ({
+export const usersChallengesQuery = {
+  useGetChallenges: ({
     page = 1,
     limit = 5,
     challengeType,
@@ -360,7 +360,7 @@ export const useUserChallengesQuery = {
     return useQuery({
       queryKey: userKeys.challenges(page, limit, challengeType, completed),
       queryFn: () =>
-        userChallengesApi.getChallenges({
+        usersChallengesApi.getChallenges({
           page,
           limit,
           challengeType,

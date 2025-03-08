@@ -4,7 +4,7 @@ import ChallengeBadge from '@features/quest/ui/ChallengeBadge';
 import { useState } from 'react';
 import { objectKeys } from '@modern-kit/utils';
 import { isLoggedIn } from '@features/user/service/authUtils';
-import { useUserChallengesQuery } from '@/features/user/queries';
+import { usersChallengesQuery } from '@/features/user/queries';
 import {
   CHALLENGE_TYPE_COLORS,
   CHALLENGE_TYPE_LABELS,
@@ -19,7 +19,7 @@ export default function Challenge() {
     BaseChallengeType | undefined
   >(undefined);
 
-  const { data, isLoading } = useUserChallengesQuery.getChallenges({
+  const { data, isLoading } = usersChallengesQuery.useGetChallenges({
     page: 1,
     limit: 1000,
     challengeType: selectedType,

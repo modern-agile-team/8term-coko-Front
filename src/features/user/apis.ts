@@ -21,7 +21,7 @@ import {
 import type { DailyQuestResponse } from '@features/quest/types';
 import { flatMap } from '@modern-kit/utils';
 
-export const usersApis = {
+export const usersApi = {
   putQuizzesProgress: ({
     quizId,
     body,
@@ -98,7 +98,7 @@ export const usersApis = {
   postAttendance: async () => await api.post('/users/me/attendance'),
 };
 
-export const userQuestApi = {
+export const usersQuestApi = {
   getDailyQuest: async (): Promise<DailyQuestResponse[]> => {
     const response = await api.get('/users/me/quests/daily');
     return response.data;
@@ -131,7 +131,7 @@ export const usersItemsApi = {
   },
 };
 
-export const userChallengesApi = {
+export const usersChallengesApi = {
   getChallenges: async (params: {
     page: number;
     limit: number;
