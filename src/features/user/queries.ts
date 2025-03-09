@@ -355,9 +355,7 @@ export const usersChallengesQuery = {
     challengeType?: BaseChallengeType;
     completed?: boolean;
   }) => {
-    const { user } = useUserStore();
-
-    return useQuery({
+    return useSuspenseQuery({
       queryKey: userKeys.challenges(page, limit, challengeType, completed),
       queryFn: () =>
         usersChallengesApi.getChallenges({
@@ -366,7 +364,6 @@ export const usersChallengesQuery = {
           challengeType,
           completed,
         }),
-      enabled: isLoggedIn(user),
     });
   },
 };

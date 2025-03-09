@@ -3,7 +3,7 @@ import * as S from './styles';
 import { getImageUrl } from '@utils/getImageUrl';
 import MenuBar from '@common/layout/MenuBar';
 import DailyQuest from '@features/quest/ui/DailyQuest';
-import Challenge from '@/features/quest/ui/Challenges';
+import ChallengeList from '@/features/quest/ui/ChallengeList';
 import Header from '@common/layout/Header';
 import { useToggle } from '@modern-kit/react';
 
@@ -30,7 +30,7 @@ export default function Quest() {
       </globalS.Wrapper>
       <globalS.Layout>
         <DailyQuest />
-        <Challenge />
+        <ChallengeList />
       </globalS.Layout>
     </>
   );
