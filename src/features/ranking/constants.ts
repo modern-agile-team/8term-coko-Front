@@ -8,8 +8,12 @@ export const RANKING_OPTIONS = {
     dataField: 'point', // 포인트 기준
   },
   '총 출석일순': {
-    icon: '출석.svg',
+    icon: '출석체크.svg',
     dataField: 'totalAttendance', // 총 출석일수 기준
+  },
+  '총 정답수순': {
+    icon: '정답.svg',
+    dataField: 'totalCorrectAnswer', // 총 정답수 기준
   },
 } as const;
 

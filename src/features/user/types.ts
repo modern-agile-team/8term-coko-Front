@@ -4,6 +4,7 @@ export interface User {
   level: number;
   point: number;
   totalAttendance: number;
+  totalCorrectAnswer: number;
   createdAt: string;
 }
 
