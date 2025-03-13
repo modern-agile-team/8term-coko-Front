@@ -79,7 +79,15 @@ export default function SelectSection({
       const targetSection = document.getElementById(`section-${sectionId}`);
 
       if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const offset = 100; // 위쪽 마진 100px 추가
+
+        const top =
+          targetSection.getBoundingClientRect().top + window.scrollY - offset;
+
+        window.scrollTo({
+          top,
+          behavior: 'smooth',
+        });
       } else if (hasNextPage) {
         lastRequestedSectionId.current = sectionId;
         lastAttempt.current = attempts;

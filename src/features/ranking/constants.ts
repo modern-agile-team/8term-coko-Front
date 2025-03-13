@@ -12,7 +12,7 @@ export const RANKING_OPTIONS = {
     dataField: 'totalAttendance', // 총 출석일수 기준
   },
   '총 정답수순': {
-    icon: '정답.svg',
+    icon: '정답수.svg',
     dataField: 'totalCorrectAnswer', // 총 정답수 기준
   },
 } as const;
