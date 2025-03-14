@@ -7,7 +7,7 @@ export default function RankingTimer() {
   const [timeLeft, setTimeLeft] = useState<string>('');
 
   const updateCountdown = useCallback(() => {
-    if (!data) return;
+    if (!data?.seasonEndTime) return;
 
     const endTime = new Date(data.seasonEndTime).getTime();
     const now = new Date().getTime();
@@ -34,8 +34,10 @@ export default function RankingTimer() {
   });
 
   useEffect(() => {
-    updateCountdown();
-  }, [updateCountdown]);
+    if (data?.seasonEndTime) {
+      updateCountdown();
+    }
+  }, [data, updateCountdown]);
 
   return <div>{timeLeft}</div>;
 }
