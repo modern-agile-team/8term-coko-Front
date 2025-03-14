@@ -1,4 +1,4 @@
-import { useUserAttendanceQuery } from '@/features/user/queries';
+import { userAttendanceQuery } from '@/features/user/queries';
 import {
   generateDaysInMonth,
   getDayFromDate,
@@ -16,15 +16,15 @@ import { useEffect, useMemo, useState } from 'react';
 import toast from 'react-hot-toast';
 
 export default function AttendanceCalendar() {
-  const { data: userAttendanceList } = useUserAttendanceQuery.getAttendanceList(
+  const { data: userAttendanceList } = userAttendanceQuery.useGetAttendanceList(
     {
       year: getCurrentYear(),
       month: getCurrentMonth(),
     }
   );
-  const { data: isUserAttendance } = useUserAttendanceQuery.getAttendance();
+  const { data: isUserAttendance } = userAttendanceQuery.useGetAttendance();
   const { mutate: recordAttendance } =
-    useUserAttendanceQuery.recordAttendance();
+    userAttendanceQuery.useRecordAttendance();
 
   const [isTodayAttendance, setIsTodayAttendance] = useState(false);
 
