@@ -65,6 +65,30 @@ export default function SSEProvider({ children }: PropsWithChildren) {
             });
             toast.success(parsedData.message);
             break;
+          case 'pointRanking.attain':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
+          case 'correctAnswerRanking.attain':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
+          case 'item.buy':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
+          case 'progress.updated':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.daily(),
+            });
+            toast.success(parsedData.message);
+            break;
         }
       } catch (err) {
         console.error('SSE 데이터 파싱 실패:', err);
