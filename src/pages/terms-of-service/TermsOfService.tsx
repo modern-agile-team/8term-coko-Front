@@ -278,7 +278,7 @@ export default function TermsOfService() {
         <Section>
           <Subtitle>제6조 (회원가입)</Subtitle>
           <Paragraph>
-            네이버, 카카오, 구글 등의 외부 서비스와 연동하여 이용계약을 신청할
+            깃허브, 카카오, 구글 등의 외부 서비스와 연동하여 이용계약을 신청할
             경우, 본 약관과 개인정보처리방침을 확인하고, 외부 서비스 계정 정보
             접근 및 활용에 동의하거나 확인 버튼을 누르면 이용계약이 성립됩니다.
           </Paragraph>
