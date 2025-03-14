@@ -46,7 +46,7 @@ export default function Creators() {
         </S.TeamButtonList>
         <S.MemberCardWrapper>
           <S.MemberCard>
-            <img />
+            <img src={getImageUrl(MEMBER_DETAILS[member]?.profile)} />
             <div>
               <h4>{MEMBER_DETAILS[member]?.team}</h4>
               <h1>{member}</h1>
