@@ -1,5 +1,5 @@
-import { Suspense, useState } from 'react';
 import * as S from './styles';
+import { Suspense, useState } from 'react';
 import QuestSection from '@features/quest/ui/QuestSection';
 import ChallengeListContent from '@features/quest/ui/ChallengeListContent';
 import ChallengeListContentSkeleton from '@/features/quest/ui/ChallengeListContentSkeleton';

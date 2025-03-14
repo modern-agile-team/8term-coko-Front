@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import ProfileImage from '@features/user/ui/ProfileImage';
 import ProgressBar from '@features/progress/ui/ProgressBar';
 import BadgeContainer from '@/features/profile/ui/BadgeContainer';
-import BadgeContainerSkeleton from './BadgeContainerSkeleton';
+import BadgeContainerSkeleton from '@features/profile/ui/BadgeContainerSkeleton';
 import formatDate from '@utils/formatDate';
 import { userCosmeticItemsQuery } from '@/features/user/queries';
 
