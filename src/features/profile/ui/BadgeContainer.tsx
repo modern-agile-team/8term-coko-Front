@@ -1,15 +1,14 @@
 import * as S from './styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { usersChallengesQuery } from '@/features/user/queries';
 import useUserStore from '@store/useUserStore';
-import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@modern-kit/react';
 import { MEDIA_QUERY_MAP } from '@style/constants';
 import { isLoggedIn } from '@features/user/service/authUtils';
 
 export default function BadgeContainer() {
-  const navigate = useNavigate();
   const [page, setPage] = useState(1);
 
   const { user } = useUserStore();
@@ -26,7 +25,7 @@ export default function BadgeContainer() {
           <S.BadgeGuideText>
             뱃지를 보려면 먼저 로그인해주세요.
           </S.BadgeGuideText>
-          <button onClick={() => navigate('/login')}>로그인하기</button>
+          <Link to="/login">로그인하기</Link>
         </S.EmptyBadgeContainer>
       </S.BadgeWrapper>
     );
@@ -81,7 +80,7 @@ export default function BadgeContainer() {
           <S.BadgeGuideText>
             도전과제를 완료하고 다양한 뱃지를 모아보세요!
           </S.BadgeGuideText>
-          <button onClick={() => navigate('/quest')}>도전과제 보러가기</button>
+          <Link to="/quest">도전과제 보러가기</Link>
         </S.EmptyBadgeContainer>
       )}
 

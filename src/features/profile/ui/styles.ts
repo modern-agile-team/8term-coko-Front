@@ -94,7 +94,8 @@ export const EmptyBadgeContainer = styled.div`
     margin-bottom: 10px;
   }
 
-  > button {
+  > a {
+    text-decoration: none;
     margin-top: 14px;
     padding: 10px 18px;
     font-size: 16px;
