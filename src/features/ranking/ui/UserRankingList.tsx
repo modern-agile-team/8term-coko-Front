@@ -47,8 +47,9 @@ export default function UserRankingList({
 
   return (
     <S.UserRankingListContainer>
-      {/* 정렬 드롭다운 */}
+      {/* 시즌 종료까지 남은 시간 */}
       <RankingTimer />
+      {/* 정렬 드롭다운 */}
       <S.SortDropdownWrapper>
         <SortDropdown
           options={RANKING_OPTIONS}
