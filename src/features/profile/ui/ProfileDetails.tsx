@@ -1,11 +1,11 @@
 import * as S from './styles';
-import ProfileImage from '@features/user/ui/ProfileImage';
 import { getImageUrl } from '@utils/getImageUrl';
-import formatDate from '@utils/formatDate';
+import { Suspense } from 'react';
+import ProfileImage from '@features/user/ui/ProfileImage';
 import ProgressBar from '@features/progress/ui/ProgressBar';
-import BadgeContainer from '@features/user/ui/BadgeContainer';
-import { Dispatch, SetStateAction } from 'react';
-import type { ChallengeItem } from '@features/user/types';
+import BadgeContainer from '@/features/profile/ui/BadgeContainer';
+import BadgeContainerSkeleton from './BadgeContainerSkeleton';
+import formatDate from '@utils/formatDate';
 import { userCosmeticItemsQuery } from '@/features/user/queries';
 
 interface ProfileDetailsProps {
@@ -17,10 +17,6 @@ interface ProfileDetailsProps {
   solvedCount: number;
   incorrectCount: number;
   unsolvedCount: number;
-  completedChallenges: ChallengeItem[];
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
-  totalPage: number;
 }
 
 export default function ProfileDetails({
@@ -32,12 +28,9 @@ export default function ProfileDetails({
   solvedCount,
   incorrectCount,
   unsolvedCount,
-  completedChallenges,
-  page,
-  setPage,
-  totalPage,
 }: ProfileDetailsProps) {
   const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
+
   return (
     <>
       <S.ProfileSection>
@@ -50,8 +43,7 @@ export default function ProfileDetails({
         </div>
         <S.MyProgressDiv>
           <p>
-            코코에 접속한 지 벌써 <span>{userTotalAttendance}</span>일이 됐어요
-            !
+            코코에 접속한 지 벌써 <span>{userTotalAttendance}</span>일이 됐어요!
           </p>
           <img src={getImageUrl('출석일수.svg')} alt="출석일수" />
           <div>
@@ -81,12 +73,9 @@ export default function ProfileDetails({
 
       <S.BadgeSection>
         <S.BadgeLabel>나의 뱃지</S.BadgeLabel>
-        <BadgeContainer
-          completedChallenges={completedChallenges}
-          page={page}
-          setPage={setPage}
-          totalPage={totalPage}
-        />
+        <Suspense fallback={<BadgeContainerSkeleton />}>
+          <BadgeContainer />
+        </Suspense>
       </S.BadgeSection>
     </>
   );

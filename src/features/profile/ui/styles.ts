@@ -1,6 +1,134 @@
 import { styled } from 'styled-components';
 import { MEDIA } from '@/style/constants';
 
+export const BadgeWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  margin-top: 39px;
+
+  > ul {
+    display: flex;
+    gap: 20px;
+  }
+
+  ${MEDIA.mobile} {
+    gap: 25px;
+    > ul {
+      display: flex;
+      justify-content: center;
+    }
+  }
+`;
+
+export const PaginationButton = styled.button<{ $isHidden: boolean }>`
+  background: none;
+  border: none;
+  visibility: ${({ $isHidden }) => ($isHidden ? 'hidden' : 'visible')};
+  pointer-events: ${({ $isHidden }) => ($isHidden ? 'none' : 'auto')};
+`;
+
+export const PaginationIcon = styled.img<{ $rotate?: string }>`
+  width: 9px;
+  height: 20px;
+  transform: rotate(${({ $rotate }) => $rotate || 0});
+
+  ${MEDIA.mobile} {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+export const BadgeListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 133px;
+    height: 141px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 2px solid #ffe161;
+    background: #ffefaa;
+  }
+
+  > h5 {
+    border-radius: 8px;
+    border: 2px solid #ffefaa;
+    background: #ffe161;
+    color: #ffffff;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    text-align: center;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    text-transform: lowercase;
+  }
+
+  ${MEDIA.mobile} {
+    > div {
+      width: 160px;
+      height: 165px;
+    }
+  }
+`;
+
+export const EmptyBadgeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: #666;
+  font-size: 16px;
+
+  ${MEDIA.mobile} {
+    padding: 0;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  > button {
+    margin-top: 14px;
+    padding: 10px 18px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #ffb53d;
+    border: 2px solid #f09900;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 700;
+
+    &:hover {
+      background-color: #e09e2b;
+    }
+
+    ${MEDIA.mobile} {
+      padding: 8px 16px;
+      font-size: 14px;
+      margin-top: 12px;
+      border-radius: 6px;
+    }
+  }
+`;
+
+export const BadgeGuideText = styled.p`
+  margin-top: 10px;
+  font-size: 14px;
+  color: #888;
+
+  ${MEDIA.mobile} {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+`;
+
 export const ProfileSection = styled.section`
   display: flex;
   flex-wrap: wrap;

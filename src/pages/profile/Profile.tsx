@@ -3,15 +3,9 @@ import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import LevelBar from '@features/profile/ui/LevelBar';
 import ProfileDetails from '@features/profile/ui/ProfileDetails';
-import { useState } from 'react';
-import { useMediaQuery } from '@modern-kit/react';
-import { MEDIA_QUERY_MAP } from '@style/constants';
 import useUserStore from '@store/useUserStore';
 import calculateCycleProgress from '@utils/calculateCycleProgress';
-import {
-  usersProgressQuery,
-  usersChallengesQuery,
-} from '@features/user/queries';
+import { usersProgressQuery } from '@features/user/queries';
 
 export default function Profile() {
   const { user } = useUserStore();
@@ -36,21 +30,6 @@ export default function Profile() {
     (progressData?.totalQuizCount || 0) -
     (progressData?.totalUserProgressCount || 0);
 
-  const [page, setPage] = useState(1);
-
-  const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
-  const limit = isMobile ? 1 : 4;
-
-  const { data: challengesData } = usersChallengesQuery.useGetChallenges({
-    page,
-    limit,
-    completed: true,
-  });
-
-  const completedChallenges = challengesData?.contents || [];
-  const totalPage = challengesData?.totalPage ?? 1;
-  const currentPage = challengesData?.currentPage ?? page;
-
   return (
     <>
       <globalS.Wrapper>
@@ -74,10 +53,6 @@ export default function Profile() {
           solvedCount={solvedCount}
           incorrectCount={incorrectCount}
           unsolvedCount={unsolvedCount}
-          completedChallenges={completedChallenges}
-          page={currentPage}
-          setPage={setPage}
-          totalPage={totalPage}
         />
       </globalS.Layout>
     </>
