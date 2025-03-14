@@ -329,7 +329,7 @@ export const PAGE_INTRO_DATA: {
     label: 'QUEST',
     mainTitle: '매일 달라지는\n미션들',
     description: '공부에 의욕을 더해주는 미션들.',
-    image: '소개-퀘스트.svg',
+    image: '미션예시.svg',
     orderChange: false,
     backgroundColor: '#fff',
   },
@@ -337,7 +337,7 @@ export const PAGE_INTRO_DATA: {
     label: 'RANKING',
     mainTitle: '다른 회원들과\n실력 겨루기',
     description: '성취감과 성장을 도와주는\n다른 회원들과의 선의의 경쟁.',
-    image: '소개-랭킹.svg',
+    image: '랭킹예시.svg',
     orderChange: false,
     backgroundColor: '#F7F7F7',
   },
@@ -345,7 +345,7 @@ export const PAGE_INTRO_DATA: {
     label: 'STORE',
     mainTitle: '나만의\n캐릭터',
     description: '캐릭터를 자신만의 스타일로\n꾸밀 수 있는 상점까지.',
-    image: '소개-상점.svg',
+    image: '캐릭터예시.svg',
     orderChange: true,
     backgroundColor: '#F7F7F7',
   },
@@ -392,7 +392,7 @@ export const MEMBER_DETAILS = {
     profile: '대경님.svg',
     description:
       'API 설계부터 성능 최적화까지! 백엔드 개발을 책임지고 있습니다.',
-    sns: [{ icon: '깃허브_검정.svg', url: 'https://github.com/hongdaekyung' }],
+    sns: [{ icon: '깃허브_검정.svg', url: 'https://github.com/dg1418' }],
   },
   이건우: {
     team: 'BACKEND',
@@ -423,6 +423,6 @@ export const MEMBER_DETAILS = {
     team: 'DESIGNER',
     profile: '채영.svg',
     description: '감각적인 디자인과 트렌디한 UI를 만들어가는 디자이너입니다.',
-    sns: [{ icon: 'fa-instagram', url: 'https://instagram.com/chaeyounglee' }],
+    sns: [{ icon: '비핸스.png', url: 'https://www.behance.net/010works' }],
   },
 } as const;
