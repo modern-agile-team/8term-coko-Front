@@ -1,5 +1,5 @@
 import * as S from './styles';
-import EmptyMessage from '@features/profile/ui/EmptyMessage';
+import AuthRequiredNotice from '@/features/profile/ui/AuthRequiredNotice';
 import { useState } from 'react';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { usersChallengesQuery } from '@/features/user/queries';
@@ -16,7 +16,7 @@ export default function BadgeContainer() {
 
   if (!isLoggedIn(user)) {
     return (
-      <EmptyMessage
+      <AuthRequiredNotice
         title="로그인이 필요합니다."
         description="뱃지를 보려면 먼저 로그인해주세요."
         linkTo="/login"
@@ -69,7 +69,7 @@ export default function BadgeContainer() {
           ))}
         </ul>
       ) : (
-        <EmptyMessage
+        <AuthRequiredNotice
           title="아직 획득한 뱃지가 없습니다."
           description="도전과제를 완료하고 다양한 뱃지를 모아보세요!"
           linkTo="/quest"

@@ -1,7 +1,7 @@
 import * as S from './styles';
 import { Link } from 'react-router-dom';
 
-export default function EmptyMessage({
+export default function AuthRequiredNotice({
   title,
   description,
   linkTo,
