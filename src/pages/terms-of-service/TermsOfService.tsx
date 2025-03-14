@@ -72,10 +72,10 @@ export default function TermsOfService() {
           <Subtitle>제 4조 개인정보의 위탁처리</Subtitle>
           <List>
             <ListItem>
-              <Strong>수탁업체:</Strong> (주)네이버, (주)카카오, 구글
+              <Strong>수탁업체:</Strong>(주)카카오, 구글, 깃허브
             </ListItem>
             <ListItem>
-              <Strong>위탁업무:</Strong> 서비스 제공을 위한, 이미지,
+              <Strong>위탁업무:</Strong> 서비스 제공을 위한, 이미지,이메일,
               이름(닉네임), 고유식별번호 수집
             </ListItem>
             <ListItem>
@@ -86,14 +86,10 @@ export default function TermsOfService() {
         <Section>
           <Subtitle>제 5조 정보 주체의 권리, 의무 및 행사방법</Subtitle>
           <Paragraph>
-            정보 주체는 “회사”의 모던월드 홈페이지(modern-world.kr)에서 언제든지
-            다음 각호의 개인정보 보호 관련 권리를 행사할 수 있습니다.
+            정보 주체는 “회사”의 코코 홈페이지(cokoedu.com)에서 언제든지 다음
+            각호의 개인정보 보호 관련 권리를 행사할 수 있습니다.
           </Paragraph>
           <List>
-            <ListItem>
-              <Strong>개인정보 조회, 수정 및 삭제:</Strong> 마이페이지 우측
-              프로필 사진 클릭 &gt; 프로필 업데이트 소셜 프로필 업데이트 가능
-            </ListItem>
             <ListItem>
               <Strong>회원 탈퇴:</Strong> 담당자에게 요청
             </ListItem>
@@ -108,12 +104,12 @@ export default function TermsOfService() {
             </ListItem>
             <ListItem>
               <Strong style={{ marginLeft: '25px' }}>회원 가입:</Strong> 필수
-              항목: 성명, 이미지 (프로필 사진)
+              항목: 성명, 이미지 (프로필 사진),이메일
             </ListItem>
             <ListItem>
               <Strong style={{ marginLeft: '25px' }}>
                 인터넷 서비스 이용과정에서 수집되는 개인정보 항목:
-              </Strong>{' '}
+              </Strong>
               쿠키, 서비스 이용 기록, 불량 이용 기록 등
             </ListItem>
           </List>
@@ -227,12 +223,12 @@ export default function TermsOfService() {
             </ListItem>
             <ListItem>
               <Strong>“회원”:</Strong> 서비스를 이용하기 위해 약관에 동의하거나
-              네이버, 구글, 카카오 등의 연동 서비스를 통해 회사와 이용 계약을
+              깃허브, 구글, 카카오 등의 연동 서비스를 통해 회사와 이용 계약을
               체결한 자를 의미합니다.
             </ListItem>
             <ListItem>
-              <Strong>“닉네임”:</Strong> 회원이 가입 시 설정한 이름으로, 회원의
-              식별 및 서비스 이용을 위하여 사용됩니다.
+              <Strong>“닉네임”:</Strong> 회원가입 시 소셜로그인에 닉네임에
+              해당하는 닉네임을 의미합니다.
             </ListItem>
             <ListItem>
               <Strong>“비회원”:</Strong> 회원 가입 없이 회사를 통해 제공하는
