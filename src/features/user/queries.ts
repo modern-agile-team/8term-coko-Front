@@ -256,24 +256,24 @@ export const useUserRankingQuery = {
   },
 };
 
-export const useUserAttendanceQuery = {
-  getAttendanceList: (params: { year: number; month: number }) => {
+export const userAttendanceQuery = {
+  useGetAttendanceList: (params: { year: number; month: number }) => {
     return useSuspenseQuery({
       queryKey: userKeys.attendance.list(),
       queryFn: () => usersApi.getAttendanceList(params),
     });
   },
-  getAttendance: () =>
+  useGetAttendance: () =>
     useSuspenseQuery({
       queryKey: userKeys.attendance.root(),
       queryFn: usersApi.getAttendance,
     }),
-  recordAttendance: () => {
+  useRecordAttendance: () => {
     const queryClient = useQueryClient();
     return useMutation({
       mutationFn: usersApi.postAttendance,
       onSettled: () => {
-        queryClient.invalidateQueries({ queryKey: userKeys.attendance.root() });
+        queryClient.invalidateQueries({ queryKey: userKeys.all });
       },
     });
   },
