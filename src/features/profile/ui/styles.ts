@@ -45,7 +45,7 @@ export const BadgeListItem = styled.li`
   flex-direction: column;
   gap: 11px;
 
-  > div {
+  > span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,7 +72,7 @@ export const BadgeListItem = styled.li`
   }
 
   ${MEDIA.mobile} {
-    > div {
+    > span {
       width: 160px;
       height: 165px;
     }

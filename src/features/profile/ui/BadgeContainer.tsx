@@ -63,12 +63,12 @@ export default function BadgeContainer() {
         <ul>
           {completedChallenges.map(item => (
             <S.BadgeListItem key={item.id}>
-              <div>
+              <span>
                 <img
                   src={getImageUrl(`뱃지-${item.challenge.badgeName}.svg`)}
                   alt={item.challenge.content}
                 />
-              </div>
+              </span>
               <h5>{item.challenge.content}</h5>
             </S.BadgeListItem>
           ))}
