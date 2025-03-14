@@ -51,13 +51,15 @@ export default function BadgeContainer() {
 
   return (
     <S.BadgeWrapper>
-      <S.PaginationButton
-        onClick={handlePrevPage}
-        disabled={page <= 1}
-        $isHidden={page === 1}
-      >
-        <S.PaginationIcon src={getImageUrl('뱃지-다음버튼.svg')} />
-      </S.PaginationButton>
+      {completedChallenges.length > 0 && (
+        <S.PaginationButton
+          onClick={handlePrevPage}
+          disabled={page <= 1}
+          $isHidden={page === 1}
+        >
+          <S.PaginationIcon src={getImageUrl('뱃지-다음버튼.svg')} />
+        </S.PaginationButton>
+      )}
 
       {completedChallenges.length > 0 ? (
         <ul>
@@ -83,16 +85,18 @@ export default function BadgeContainer() {
         </S.EmptyBadgeContainer>
       )}
 
-      <S.PaginationButton
-        onClick={handleNextPage}
-        disabled={page >= totalPage}
-        $isHidden={page === totalPage}
-      >
-        <S.PaginationIcon
-          src={getImageUrl('뱃지-다음버튼.svg')}
-          $rotate="180deg"
-        />
-      </S.PaginationButton>
+      {completedChallenges.length > 0 && (
+        <S.PaginationButton
+          onClick={handleNextPage}
+          disabled={page >= totalPage}
+          $isHidden={page === totalPage}
+        >
+          <S.PaginationIcon
+            src={getImageUrl('뱃지-다음버튼.svg')}
+            $rotate="180deg"
+          />
+        </S.PaginationButton>
+      )}
     </S.BadgeWrapper>
   );
 }
