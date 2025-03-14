@@ -1,5 +1,6 @@
 import * as S from './styles';
 import SortDropdown from '@common/layout/SortDropdown';
+import RankingTimer from './RankingTimer';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
 import { rankingPaginationQuery } from '@features/ranking/queries';
 import UserRankingListSkeleton from './UserRankingListSkeleton';
@@ -47,6 +48,7 @@ export default function UserRankingList({
   return (
     <S.UserRankingListContainer>
       {/* 정렬 드롭다운 */}
+      <RankingTimer />
       <S.SortDropdownWrapper>
         <SortDropdown
           options={RANKING_OPTIONS}
