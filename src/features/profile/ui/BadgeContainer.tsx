@@ -1,6 +1,6 @@
 import * as S from './styles';
+import EmptyMessage from '@features/profile/ui/EmptyMessage';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getImageUrl } from '@/utils/getImageUrl';
 import { usersChallengesQuery } from '@/features/user/queries';
 import useUserStore from '@store/useUserStore';
@@ -10,24 +10,18 @@ import { isLoggedIn } from '@features/user/service/authUtils';
 
 export default function BadgeContainer() {
   const [page, setPage] = useState(1);
-
   const { user } = useUserStore();
-  const loggedIn = isLoggedIn(user);
-
   const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
   const limit = isMobile ? 1 : 4;
 
-  if (!loggedIn) {
+  if (!isLoggedIn(user)) {
     return (
-      <S.BadgeWrapper>
-        <S.EmptyBadgeContainer>
-          <p>로그인이 필요합니다.</p>
-          <S.BadgeGuideText>
-            뱃지를 보려면 먼저 로그인해주세요.
-          </S.BadgeGuideText>
-          <Link to="/login">로그인하기</Link>
-        </S.EmptyBadgeContainer>
-      </S.BadgeWrapper>
+      <EmptyMessage
+        title="로그인이 필요합니다."
+        description="뱃지를 보려면 먼저 로그인해주세요."
+        linkTo="/login"
+        linkText="로그인하기"
+      />
     );
   }
 
@@ -75,13 +69,12 @@ export default function BadgeContainer() {
           ))}
         </ul>
       ) : (
-        <S.EmptyBadgeContainer>
-          <p>아직 획득한 뱃지가 없습니다.</p>
-          <S.BadgeGuideText>
-            도전과제를 완료하고 다양한 뱃지를 모아보세요!
-          </S.BadgeGuideText>
-          <Link to="/quest">도전과제 보러가기</Link>
-        </S.EmptyBadgeContainer>
+        <EmptyMessage
+          title="아직 획득한 뱃지가 없습니다."
+          description="도전과제를 완료하고 다양한 뱃지를 모아보세요!"
+          linkTo="/quest"
+          linkText="도전과제 보러가기"
+        />
       )}
 
       {completedChallenges.length > 0 && (
