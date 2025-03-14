@@ -1,5 +1,5 @@
 import { FC, useState, useCallback } from 'react';
-import { useUserProgressQuery } from '@features/user/queries';
+import { usersProgressQuery } from '@features/user/queries';
 import type { Part, Section } from '@features/learn/types';
 
 interface WithUserProgressInjectedProps {
@@ -28,7 +28,7 @@ export default function withUserProgress<P extends object>(
     >(null);
 
     // 로그인된 경우에만 user(자신)와 progress의 관계 데이터를 가져오기
-    const { data: progressData } = useUserProgressQuery.getProgress({
+    const { data: progressData } = usersProgressQuery.useGetProgress({
       partId: selectedPartId ?? undefined,
       sectionId: selectedSectionId ?? undefined,
     });

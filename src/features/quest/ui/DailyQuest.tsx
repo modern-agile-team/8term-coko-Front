@@ -4,7 +4,7 @@ import { getImageNameFromUrl } from '@utils/getImageNameFromUrl';
 import { useLocation } from 'react-router-dom';
 import QuestSection from './QuestSection';
 import ProgressBar from '@features/progress/ui/ProgressBar';
-import { useUserQuestQuery } from '@/features/user/queries';
+import { usersQuestQuery } from '@/features/user/queries';
 import useUserStore from '@store/useUserStore';
 import { isLoggedIn } from '@features/user/service/authUtils';
 
@@ -14,7 +14,7 @@ export default function DailyQuest() {
   const isLearn = location.pathname.startsWith('/learn');
   const isQuest = location.pathname === '/quest';
 
-  const { data: quests } = useUserQuestQuery.getDailyQuest();
+  const { data: quests } = usersQuestQuery.useGetDailyQuest();
 
   // UI 속성을 컴포넌트와 progress에 따라 동적으로 설정 (DailyQuest)
   const getDailyUIProps = (progress: number, maxProgress: number) => {

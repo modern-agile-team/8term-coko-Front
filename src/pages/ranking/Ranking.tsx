@@ -17,6 +17,11 @@ export default function Ranking() {
   const [myRanking, setMyRanking] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleOptionChange = (option: keyof typeof RANKING_OPTIONS) => {
+    setSelectedOption(option);
+    setCurrentPage(1);
+  };
+
   usePreloadImages({ imageUrls: PRELOAD_IMAGES });
 
   return (
@@ -50,8 +55,9 @@ export default function Ranking() {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           selectedOption={selectedOption}
-          onOptionChange={setSelectedOption}
+          onOptionChange={handleOptionChange}
         />
+
         <S.MobileOnlyUserRankingMargin />
       </globalS.Layout>
     </>

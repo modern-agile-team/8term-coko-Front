@@ -8,7 +8,7 @@ import { useMediaQuery } from '@modern-kit/react';
 import { MEDIA_QUERY_MAP } from '@style/constants';
 import { LEARN_TUTORIAL_SECTIONS } from '@features/intro/constants';
 import type { Section } from '@features/learn/types';
-import { useTimeout } from '@modern-kit/react';
+import { useTimeout, useScrollTo } from '@modern-kit/react';
 
 interface SelectSectionProps {
   isTutorial?: boolean;
@@ -68,6 +68,7 @@ export default function SelectSection({
     }
   }, 100);
 
+  const { scrollToElement } = useScrollTo();
   // 마지막 요청된 섹션 ID와 시도 횟수 추적
   const lastRequestedSectionId = useRef<number | null>(null);
   const lastAttempt = useRef(0);
@@ -79,7 +80,7 @@ export default function SelectSection({
       const targetSection = document.getElementById(`section-${sectionId}`);
 
       if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        scrollToElement(targetSection, { offsetY: -100, behavior: 'smooth' });
       } else if (hasNextPage) {
         lastRequestedSectionId.current = sectionId;
         lastAttempt.current = attempts;
@@ -89,7 +90,7 @@ export default function SelectSection({
         retryScroll();
       }
     },
-    [fetchNextPage, hasNextPage, retryScroll]
+    [fetchNextPage, hasNextPage, retryScroll, scrollToElement]
   );
 
   return (

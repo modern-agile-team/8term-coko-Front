@@ -12,4 +12,8 @@ export interface RankingPagination {
   equippedItems: EquippedItems[];
 }
 
-export type RankingSort = 'level' | 'point' | 'totalAttendance';
+export type RankingSort =
+  | 'level'
+  | 'point'
+  | 'totalAttendance'
+  | 'totalCorrectAnswer';

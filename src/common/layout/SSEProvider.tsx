@@ -35,33 +35,29 @@ export default function SSEProvider({ children }: PropsWithChildren) {
         const parsedData: SSEResponse = JSON.parse(event.data);
 
         switch (parsedData.type) {
+          case 'partStatus.completed':
+          case 'user.levelUp':
+          case 'attendance.streak':
+          case 'levelRanking.attain':
+          case 'pointRanking.attain':
+          case 'correctAnswerRanking.attain':
+          case 'item.buy':
+            queryClient.invalidateQueries({
+              queryKey: userKeys.challenges(1),
+            });
+            toast.success(parsedData.message);
+            break;
+
           case 'hp_refilled':
             queryClient.invalidateQueries({ queryKey: userKeys.hp() });
             toast.success(parsedData.message, {
               icon: <HeaderIcon src={getImageUrl('과일바구니.svg')} />,
             });
             break;
-          case 'partStatus.completed':
+
+          case 'progress.updated':
             queryClient.invalidateQueries({
-              queryKey: userKeys.challenges(1),
-            });
-            toast.success(parsedData.message);
-            break;
-          case 'user.levelUp':
-            queryClient.invalidateQueries({
-              queryKey: userKeys.challenges(1),
-            });
-            toast.success(parsedData.message);
-            break;
-          case 'attendance.streak':
-            queryClient.invalidateQueries({
-              queryKey: userKeys.challenges(1),
-            });
-            toast.success(parsedData.message);
-            break;
-          case 'levelRanking.attain':
-            queryClient.invalidateQueries({
-              queryKey: userKeys.challenges(1),
+              queryKey: userKeys.daily(),
             });
             toast.success(parsedData.message);
             break;

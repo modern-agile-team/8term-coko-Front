@@ -3,15 +3,9 @@ import MenuBar from '@common/layout/MenuBar';
 import Header from '@common/layout/Header';
 import LevelBar from '@features/profile/ui/LevelBar';
 import ProfileDetails from '@features/profile/ui/ProfileDetails';
-import { useState } from 'react';
-import { useMediaQuery } from '@modern-kit/react';
-import { MEDIA_QUERY_MAP } from '@style/constants';
 import useUserStore from '@store/useUserStore';
 import calculateCycleProgress from '@utils/calculateCycleProgress';
-import {
-  useUserProgressQuery,
-  useUserChallengesQuery,
-} from '@features/user/queries';
+import { usersProgressQuery } from '@features/user/queries';
 
 export default function Profile() {
   const { user } = useUserStore();
@@ -27,7 +21,7 @@ export default function Profile() {
     step: 10,
   });
 
-  const { data: progressData } = useUserProgressQuery.getProgress();
+  const { data: progressData } = usersProgressQuery.useGetProgress();
   const currentProgress = progressData?.correctUserProgressCount || 0;
   const maxProgress = progressData?.totalQuizCount || 1;
   const solvedCount = progressData?.totalUserProgressCount || 0;
@@ -35,21 +29,6 @@ export default function Profile() {
   const unsolvedCount =
     (progressData?.totalQuizCount || 0) -
     (progressData?.totalUserProgressCount || 0);
-
-  const [page, setPage] = useState(1);
-
-  const isMobile = useMediaQuery(MEDIA_QUERY_MAP.mobile);
-  const limit = isMobile ? 1 : 4;
-
-  const { data: challengesData } = useUserChallengesQuery.getChallenges({
-    page,
-    limit,
-    completed: true,
-  });
-
-  const completedChallenges = challengesData?.contents || [];
-  const totalPage = challengesData?.totalPage ?? 1;
-  const currentPage = challengesData?.currentPage ?? page;
 
   return (
     <>
@@ -74,10 +53,6 @@ export default function Profile() {
           solvedCount={solvedCount}
           incorrectCount={incorrectCount}
           unsolvedCount={unsolvedCount}
-          completedChallenges={completedChallenges}
-          page={currentPage}
-          setPage={setPage}
-          totalPage={totalPage}
         />
       </globalS.Layout>
     </>
