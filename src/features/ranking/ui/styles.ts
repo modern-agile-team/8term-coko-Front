@@ -30,9 +30,9 @@ export const MyRankingContainer = styled.div`
   }
 `;
 
-export const SortDropdownWrapper = styled.div`
+export const RankingControlsWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   margin-bottom: 27px;
