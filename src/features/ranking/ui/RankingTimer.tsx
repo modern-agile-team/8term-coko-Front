@@ -4,7 +4,7 @@ import { rankingSeasonQuery } from '@features/ranking/queries';
 
 export default function RankingTimer() {
   const { data } = rankingSeasonQuery.useGetSeasonEndTime();
-  const [timeLeft, setTimeLeft] = useState<string>('');
+  const [timeLeft, setTimeLeft] = useState('');
 
   const updateCountdown = useCallback(() => {
     if (!data?.seasonEndTime) return;
