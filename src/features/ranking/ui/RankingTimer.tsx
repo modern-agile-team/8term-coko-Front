@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useInterval } from '@modern-kit/react';
 import { rankingSeasonQuery } from '@features/ranking/queries';
 
@@ -32,12 +32,6 @@ export default function RankingTimer() {
     delay: 1000,
     enabled: !!data,
   });
-
-  useEffect(() => {
-    if (data?.seasonEndTime) {
-      updateCountdown();
-    }
-  }, [data, updateCountdown]);
 
   return <div>{timeLeft}</div>;
 }
