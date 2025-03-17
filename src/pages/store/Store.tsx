@@ -14,8 +14,8 @@ import ItemSkeleton from '@/features/store/ui/ItemSkeleton';
 import StoreSortBar from '@/features/store/ui/StoreSortBar';
 
 export default function Store() {
-  const { resetEquippedItem } = useCosmeticItemStore();
-  useUnmount(resetEquippedItem);
+  const { allReset } = useCosmeticItemStore();
+  useUnmount(allReset);
 
   const isMobile = useMediaQuery('(min-width: 768px)');
   const limit = isMobile ? 8 : 4;

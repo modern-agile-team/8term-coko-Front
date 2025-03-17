@@ -22,7 +22,7 @@ export default function PurchaseModal({
   const { mutate: purchaseItem } = userCosmeticItemsQuery.usePurchaseItem();
   const { mutate: updateEquippedItems } =
     userCosmeticItemsQuery.useUpdateEquippedItems();
-  const { toggleIsMyItemsVisible } = useCosmeticItemStore();
+  const { toggleIsMyItemsVisible, setCurrentPage } = useCosmeticItemStore();
 
   const [isPurchaseSuccess, toggleIsPurchaseSuccess] = useToggle(false);
 
@@ -31,6 +31,7 @@ export default function PurchaseModal({
       itemIds: [selectCosmeticItem.id],
       isEquipped: true,
     });
+    setCurrentPage(1);
     closeModal();
     toggleIsMyItemsVisible();
     toggleIsPurchaseSuccess();

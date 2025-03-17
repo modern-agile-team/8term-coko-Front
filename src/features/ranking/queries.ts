@@ -25,6 +25,8 @@ export const rankingPaginationQuery = {
           page,
           limit,
         }),
+      staleTime: 3 * 60 * 1000,
+      gcTime: 3 * 60 * 1000,
     });
   },
 };
