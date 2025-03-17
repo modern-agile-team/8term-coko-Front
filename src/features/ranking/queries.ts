@@ -4,6 +4,7 @@ import type { RankingSort } from './types';
 
 export const rankingKeys = {
   all: ['rankings'] as const,
+  season: ['rankings', 'season'] as const,
   personal: (sort: RankingSort) =>
     ['users', 'me', ...rankingKeys.all, sort] as const,
   paginated: (sort: RankingSort, page: number) =>
@@ -24,6 +25,17 @@ export const rankingPaginationQuery = {
           page,
           limit,
         }),
+      staleTime: 3 * 60 * 1000,
+      gcTime: 3 * 60 * 1000,
+    });
+  },
+};
+
+export const rankingSeasonQuery = {
+  useGetSeasonEndTime: () => {
+    return useQuery({
+      queryKey: rankingKeys.season,
+      queryFn: () => rankingApis.getSeasonEndTime(),
     });
   },
 };
