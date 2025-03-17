@@ -57,8 +57,9 @@ export default function SSEProvider({ children }: PropsWithChildren) {
 
           case 'progress.updated':
             queryClient.invalidateQueries({
-              queryKey: userKeys.daily(),
+              queryKey: userKeys.me(),
             });
+
             toast.success(parsedData.message);
             break;
         }
