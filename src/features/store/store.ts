@@ -23,6 +23,7 @@ interface Actions {
   resetEquippedItem: () => void;
   setCurrentPage: (currentPage: number) => void;
   resetCartList: () => void;
+  allReset: () => void;
 }
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
@@ -77,4 +78,14 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
 
   resetEquippedItem: () => set(() => ({ equippedCosmeticItems: {} })),
   setCurrentPage: currentPage => set(() => ({ currentPage })),
+  allReset: () =>
+    set(() => {
+      return {
+        isMyItemsVisible: false,
+        query: { mainCategoryId: 0, subCategoryId: null },
+        cartListCosmeticItems: [],
+        equippedCosmeticItems: {},
+        currentPage: 1,
+      };
+    }),
 }));
