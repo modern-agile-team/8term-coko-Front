@@ -1,5 +1,6 @@
 import * as S from './styles';
 import SortDropdown from '@common/layout/SortDropdown';
+import RankingTimer from './RankingTimer';
 import { RANKING_OPTIONS } from '@features/ranking/constants';
 import { rankingPaginationQuery } from '@features/ranking/queries';
 import UserRankingListSkeleton from './UserRankingListSkeleton';
@@ -46,8 +47,10 @@ export default function UserRankingList({
 
   return (
     <S.UserRankingListContainer>
-      {/* 정렬 드롭다운 */}
-      <S.SortDropdownWrapper>
+      <S.RankingControlsWrapper>
+        {/* 시즌 종료까지 남은 시간 */}
+        <RankingTimer />
+        {/* 정렬 드롭다운 */}
         <SortDropdown
           options={RANKING_OPTIONS}
           selectedOption={selectedOption}
@@ -63,7 +66,7 @@ export default function UserRankingList({
           liBackgroundColor="#fff3c0"
           borderColor="#c26b3b"
         />
-      </S.SortDropdownWrapper>
+      </S.RankingControlsWrapper>
 
       {/* 전체 유저 랭킹 리스트 */}
       {isLoading ? (

@@ -17,3 +17,7 @@ export type RankingSort =
   | 'point'
   | 'totalAttendance'
   | 'totalCorrectAnswer';
+
+export type RankingSeasonResponse = {
+  seasonEndTime: string;
+};
