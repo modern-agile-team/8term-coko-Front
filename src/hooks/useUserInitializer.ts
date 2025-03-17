@@ -4,7 +4,7 @@ import { authQuery } from '@features/auth/queries';
 
 const useUserInitializer = () => {
   const { setUser, clearUser } = useUserStore();
-  const { data: user, isError } = authQuery.verify();
+  const { data: user, isError } = authQuery.useVerify();
 
   useEffect(() => {
     if (user) setUser(user);

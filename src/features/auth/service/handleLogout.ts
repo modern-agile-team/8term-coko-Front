@@ -1,7 +1,7 @@
 import { authQuery } from '@features/auth/queries';
 
 export const handleLogout = () => {
-  const { mutate: logout } = authQuery.logout();
+  const { mutate: logout } = authQuery.useLogout();
 
   return () =>
     logout(undefined, {
