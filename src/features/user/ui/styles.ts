@@ -271,7 +271,7 @@ export const SaveButton = styled.button`
   margin: auto 0 10px 0;
 `;
 
-export const EquipButton = styled.button`
+export const EquipButton = styled.button<{ $isEquipped: boolean }>`
   display: flex;
   width: 100px;
   height: 20px;
@@ -282,8 +282,9 @@ export const EquipButton = styled.button`
   gap: 6px;
   flex-shrink: 0;
   border-radius: 15px;
-  border: 2px solid #f09900;
-  background: #ffb53d;
+  border: 2px solid
+    ${({ $isEquipped }) => ($isEquipped ? '#A5ECF0' : '#f09900')};
+  background: ${({ $isEquipped }) => ($isEquipped ? '#00D9E9' : '#ffb53d')};
   color: var(--white, #fff);
   font-family: Maplestory;
   font-size: 10px;
