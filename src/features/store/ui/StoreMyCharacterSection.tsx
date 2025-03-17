@@ -20,8 +20,13 @@ export default function StoreMyCharacterSection() {
     userCosmeticItemsQuery.useResetEquippedItems();
   const { user } = useUserStore();
 
-  const { toggleIsMyItemsVisible, resetEquippedItem, query, isMyItemsVisible } =
-    useCosmeticItemStore();
+  const {
+    toggleIsMyItemsVisible,
+    resetEquippedItem,
+    query,
+    isMyItemsVisible,
+    setCurrentPage,
+  } = useCosmeticItemStore();
 
   const renderCharacterPreview = () => {
     if (query.mainCategoryId === 3) {
@@ -37,8 +42,11 @@ export default function StoreMyCharacterSection() {
       <PreviewMyCharacter />
     );
   };
-
-  const handleRest = () => {
+  const toggleMyItemButton = () => {
+    toggleIsMyItemsVisible();
+    setCurrentPage(1);
+  };
+  const handleResetButton = () => {
     if (isMyItemsVisible) {
       resetEquippedItemMutate();
       return;
@@ -61,7 +69,7 @@ export default function StoreMyCharacterSection() {
             <StoreButton
               $backgroundColor="#49FF87"
               $borderColor="#01F152"
-              onClick={toggleIsMyItemsVisible}
+              onClick={toggleMyItemButton}
             >
               {isMyItemsVisible ? '아이템 미리보기' : '내가 구매한 아이템'}
             </StoreButton>
@@ -70,7 +78,7 @@ export default function StoreMyCharacterSection() {
           <StoreButton
             $backgroundColor="#FF4949"
             $borderColor="#E8080C"
-            onClick={handleRest}
+            onClick={handleResetButton}
           >
             초기화
           </StoreButton>
