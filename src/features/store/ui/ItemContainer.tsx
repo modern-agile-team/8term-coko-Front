@@ -9,6 +9,7 @@ import { EquipButton } from '@/features/user/ui/styles';
 import { userCosmeticItemsQuery } from '@/features/user/queries';
 import PurchaseModal from '@/features/store/ui/PurchaseModal';
 import PageNavBar from '@/features/store/ui/PageNavBar';
+import { isEquippedDefined } from '@/features/store/utils';
 
 interface ItemContainerProps {
   totalPage: number;
@@ -54,8 +55,9 @@ function ItemContainer({ totalPage, contents }: ItemContainerProps) {
             <StoreItem.Header name={item.name} />
             <StoreItem.Image image={item.image} />
             <StoreItem.Footer>
-              {isMyItemsVisible ? (
+              {isMyItemsVisible && isEquippedDefined(item) ? (
                 <EquipButton
+                  $isEquipped={item.isEquipped}
                   onClick={() => {
                     updateEquippedItems({
                       itemIds: [item.id],
