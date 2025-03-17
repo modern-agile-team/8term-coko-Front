@@ -284,3 +284,32 @@ export const RankingPaginationButton = styled.button<{ $isSelected?: boolean }>`
       border-radius: 5px;
     `}
 `;
+
+export const TimerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 250px;
+  height: 30px;
+  padding: 8px 16px;
+  border-radius: 15px;
+  border: 2px solid #ce0000;
+  background: #d80000;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+
+  > img {
+    width: 18px;
+    height: 17px;
+  }
+
+  > span {
+    white-space: nowrap;
+
+    ${MEDIA.mobile} {
+      white-space: normal;
+    }
+  }
+`;

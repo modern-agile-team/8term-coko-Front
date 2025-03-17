@@ -1,6 +1,8 @@
+import * as S from './styles';
 import { useState, useCallback } from 'react';
 import { useInterval } from '@modern-kit/react';
 import { rankingSeasonQuery } from '@features/ranking/queries';
+import { getImageUrl } from '@/utils/getImageUrl';
 
 export default function RankingTimer() {
   const { data } = rankingSeasonQuery.useGetSeasonEndTime();
@@ -33,5 +35,10 @@ export default function RankingTimer() {
     enabled: !!data,
   });
 
-  return <div>{timeLeft}</div>;
+  return (
+    <S.TimerContainer>
+      <img src={getImageUrl('알림.svg')} alt="랭킹 시즌 종료 알림" />
+      <span>{timeLeft}</span>
+    </S.TimerContainer>
+  );
 }
