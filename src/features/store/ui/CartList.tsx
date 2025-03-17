@@ -16,7 +16,7 @@ export default function CartList({
   isMobileHidden,
   mobileCartListCloseModal = () => {},
 }: CartListProps) {
-  const { cartListCosmeticItems, removeCosmeticItemById } =
+  const { cartListCosmeticItems, removeCosmeticItemById, resetCartList } =
     useCosmeticItemStore();
 
   const { Modal, isShow, closeModal, openModal } = useModal();
@@ -37,6 +37,7 @@ export default function CartList({
       {
         onSuccess: () => {
           toast.success('아이템 구매 성공!');
+          resetCartList();
           closeModal();
         },
         onError: error => {
@@ -49,7 +50,9 @@ export default function CartList({
             }
           }
         },
-        onSettled: () => closeModal(),
+        onSettled: () => {
+          closeModal();
+        },
       }
     );
   };

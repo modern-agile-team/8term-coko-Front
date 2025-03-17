@@ -22,6 +22,7 @@ interface Actions {
   }) => void;
   resetEquippedItem: () => void;
   setCurrentPage: (currentPage: number) => void;
+  resetCartList: () => void;
 }
 
 export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
@@ -48,6 +49,7 @@ export const useCosmeticItemStore = create<State & Actions>((set, get) => ({
 
       return prev;
     }),
+  resetCartList: () => set(() => ({ cartListCosmeticItems: [] })),
   removeCosmeticItemById: id =>
     set(prev => ({
       cartListCosmeticItems: prev.cartListCosmeticItems.filter(
