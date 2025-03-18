@@ -16,7 +16,7 @@ import { userCosmeticItemsQuery } from '@/features/user/queries';
 
 export default function Header() {
   const { user, clearUser } = useUserStore();
-  const { mutate: logout } = authQuery.logout();
+  const { mutate: logout } = authQuery.useLogout();
   const { data: equippedItems } = userCosmeticItemsQuery.useGetEquippedItem();
 
   const { isShow, openModal, closeModal, Modal } = useModal();
