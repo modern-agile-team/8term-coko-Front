@@ -16,7 +16,7 @@
     "@tanstack/react-query": "^5.64.1",
     "@tanstack/react-query-devtools": "^5.64.1",
     "@types/dompurify": "^3.2.0",
-    "axios": "^1.7.9",
+    "axios": "^1.8.3",
     "dompurify": "^3.2.3",
     "highlight.js": "^11.11.1",
     "html-react-parser": "^5.2.2",
@@ -48,7 +48,7 @@
     "globals": "^15.14.0",
     "typescript": "5.4.3",
     "typescript-eslint": "^8.19.1",
-    "vite": "^6.0.7",
+    "vite": "^6.2.2",
     "vite-plugin-mkcert": "^1.17.6"
   },
   "packageManager": "yarn@4.7.0"
