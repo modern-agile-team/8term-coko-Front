@@ -2,7 +2,7 @@ name: Dev CI/CD Vercel
 
 on:
   push:
-    branches: [develop, docs/#219/Update_README_md]
+    branches: [develop]
 
 jobs:
   build:
