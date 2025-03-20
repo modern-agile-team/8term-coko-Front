@@ -27,7 +27,7 @@ jobs:
           destination-github-username: 'bluetree7878'
           destination-repository-name: '8term-coko-front'
           user-email: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_EMAIL || secrets.rhehfl_EMAIL }}
-          commit-message: ${{ fromJson(toJson(github.event.commits))[-1].message }}
+          commit-message: ${{ github.event.head_commit.message }}
           target-branch: develop
 
       - name: Test get variable exported by push-to-another-repository
