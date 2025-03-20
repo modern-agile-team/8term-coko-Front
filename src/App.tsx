@@ -7,6 +7,7 @@ import Loader from '@common/layout/Loader';
 import Router from '@/route/Router';
 import SSEProvider from '@/common/layout/SSEProvider';
 
+// 파일 체크용 주석
 function App() {
   useUserInitializer();
   return (
