@@ -2,7 +2,7 @@ name: Dev CI/CD Vercel
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, docs/#219/Update_README_md]
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
         with:
-          source-directory: 'output'
+          source-directory: '.'
           destination-github-username: 'bluetree7878'
           destination-repository-name: '8term-coko-front'
           user-email: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_EMAIL || secrets.rhehfl_EMAIL }}
