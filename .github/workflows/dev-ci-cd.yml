@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    if: github.repository == 'modern-agile-team/8term-coko-Front'
     runs-on: ubuntu-latest
     container: pandoc/latex
     steps:
