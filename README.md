@@ -4,6 +4,32 @@
 
 ---
 
+## 👥 8기 팀원
+
+### 🖥️ Front-end
+
+| <img src="https://github.com/rhehfl.png" width="100" /> | <img src="https://github.com/bluetree7878.png" width="100" /> |
+|:--:|:--:|
+| **구도윤** <br> 팀장 | **신현성** <br> 팀원 |
+
+---
+
+### 🧠 Back-end
+
+| <img src="https://github.com/dg1418.png" width="100" /> | <img src="https://github.com/gwgw123.png" width="100" /> | <img src="https://github.com/jeonheena.png" width="100" /> |
+|:--:|:--:|:--:|
+| **홍대경** <br> 회장 | **이건우** <br> 팀장 | **전희나** <br> 팀원 |
+
+---
+
+### 🎨 Design
+
+| <img src="https://github.com/010lcy.png" width="100" /> |
+|:--:|
+| **이채영** <br> 팀장 |
+
+---
+
 ## 🌟 프로젝트 소개
 
 **코코(Coko)** 는 **프로그래밍 언어를 게임처럼 가볍고 재밌게 학습할 수 있는 웹 서비스**입니다.
