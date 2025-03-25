@@ -25,7 +25,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
         with:
           source-directory: '.'
-          destination-github-username: 'bluetree7878'
+          destination-github-username: ${{ github.actor == 'bluetree7878' && 'bluetree7878' || 'rhehfl' }}
           destination-repository-name: '8term-coko-front'
           user-email: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_EMAIL || secrets.rhehfl_EMAIL }}
           commit-message: ${{ github.event.head_commit.message }}
