@@ -50,27 +50,27 @@
 
 ---
 
-## 🖼️ 주요 화면
+## 🖼️ 주요 화면 (페이지)
 
-| 소개 페이지                 | 만든 사람들 페이지                  |
+| 소개                        | 만든 사람들                  |
 | --------------------------- | ----------------------------------- |
-| ![소개](./assets/intro.png) | ![만든 사람들](./assets/makers.png) |
+| ![소개](https://github.com/user-attachments/assets/93ca7aa4-4db7-4c6f-bb0c-ca9f5000fab9) | ![만든 사람들](https://github.com/user-attachments/assets/e29c0e3a-19d2-40b0-8d09-80c7360fc39d) |
 
-| 학습 튜토리얼 페이지                          | 퀴즈 튜토리얼 페이지                         |
+| 학습 튜토리얼                                 | 퀴즈 튜토리얼                                 |
 | --------------------------------------------- | -------------------------------------------- |
-| ![학습 튜토리얼](./assets/learn-tutorial.png) | ![퀴즈 튜토리얼](./assets/quiz-tutorial.png) |
+| ![학습 튜토리얼](https://github.com/user-attachments/assets/59be6cc3-06cd-477c-86dc-80810c3feba5)| ![퀴즈 튜토리얼](https://github.com/user-attachments/assets/9c6b5213-7d8b-4e47-a2a1-6fe833271ce1) |
 
-| 학습 페이지                 | 퀴즈 페이지                |
+| 학습                        | 퀴즈                       |
 | --------------------------- | -------------------------- |
-| ![학습](./assets/learn.png) | ![퀴즈](./assets/quiz.png) |
+| ![학습](https://github.com/user-attachments/assets/4d05530b-af90-4e29-b3fb-8a528cbdf7eb) | ![퀴즈](https://github.com/user-attachments/assets/2041d54a-cbab-4c31-a452-f0b3eac26aa2) |
 
-| 퀘스트 페이지                 | 랭킹 페이지                   |
+| 퀘스트                        | 랭킹                          |
 | ----------------------------- | ----------------------------- |
-| ![퀘스트](./assets/quest.png) | ![랭킹](./assets/ranking.png) |
+| ![퀘스트](https://github.com/user-attachments/assets/98846630-9ccc-462a-b304-2492cac37ea0) | ![랭킹](https://github.com/user-attachments/assets/141219a8-47ed-4265-8118-0505cfc9cd45) |
 
-| 프로필 페이지                   | 상점 페이지                |
+| 프로필                          | 상점                       |
 | ------------------------------- | -------------------------- |
-| ![프로필](./assets/profile.png) | ![상점](./assets/shop.png) |
+| ![프로필](https://github.com/user-attachments/assets/4065dc1b-f4bc-4917-8df8-f66d317a78e2) | ![상점](https://github.com/user-attachments/assets/9f76e0c1-612c-4b14-a517-dd3a56a4177d) |
 
 ---
 
