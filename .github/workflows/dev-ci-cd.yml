@@ -1,0 +1,35 @@
+name: Dev CI/CD Vercel
+
+on:
+  push:
+    branches: [develop]
+
+jobs:
+  build:
+    if: github.repository == 'modern-agile-team/8term-coko-Front'
+    runs-on: ubuntu-latest
+    container: pandoc/latex
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install mustache (to update the date)
+        run: apk add ruby && gem install mustache
+
+      - name: Creates output
+        run: sh ./dev-build.sh
+
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_GHCR_TOKEN || secrets.rhehfl_ghcr_token }}
+        with:
+          source-directory: '.'
+          destination-github-username: ${{ github.actor == 'bluetree7878' && 'bluetree7878' || 'rhehfl' }}
+          destination-repository-name: '8term-coko-front'
+          user-email: ${{ github.actor == 'bluetree7878' && secrets.bluetree7878_EMAIL || secrets.rhehfl_EMAIL }}
+          commit-message: ${{ github.event.head_commit.message }}
+          target-branch: develop
+
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
